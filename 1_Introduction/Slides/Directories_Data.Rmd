@@ -1,0 +1,200 @@
+---
+title: "Directories & Scientific Reproducibility"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["xaringan-themer.css", "slide-style.css"]
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: '16:9'
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+library(tidyverse)
+```
+
+```{r xaringan-themer, include=FALSE}
+library(xaringanthemer)
+style_duo(
+  primary_color = "#26116c",
+  secondary_color = "#fd5e53",
+  title_slide_text_color = "#fff8e7",
+  header_font_google = google_font("Roboto"),
+  text_font_google   = google_font("Roboto Condensed"),
+  code_font_google   = google_font("Droid Mono")
+)
+```
+
+## Principles of Reproducibility
+
+.large[
+The idea:  You should be able to send your project to someone else, and they can jump in and start working right away.
+
+1. Files are organized and well-named.
+
+2. References to data and code work for everyone.
+
+3. Package dependency is clear.
+
+4. Code will run the same every time, even if data values change.
+
+5. Analysis process is well-explained and easy to read.
+
+]
+```{r, include = FALSE}
+library(tidyverse)
+```
+
+---
+
+# Dealing with Directories
+
+</br>
+
+## What is a directory?
+
+- A **directory** is just a fancy name for a folder.
+
+- Your **working directory** is the folder that `R` "thinks" it lives in at the moment.
+
+```{r getwd}
+getwd()
+```
+
+- If you save things you have created, they save to your working directory by default.
+
+---
+
+class: center, middle
+
+# Manage your Class Directory
+
+Is it in a place you can easily find it?
+
+--
+
+Does it have an informative name?
+
+--
+
+Are the files inside it well-organized?
+
+---
+
+class: middle 
+
+## Paths
+
+- A **path** describes where a certain file or directory lives.
+
+```{r getwd2}
+getwd()
+```
+
+This file lives in my user files `Users/`, 
+
+on my account `atheobol/` 
+
+in my Documents `Documents` 
+
+in a series of organized folders
+
+---
+
+class: center
+
+</br>
+</br>
+</br>
+</br>
+
+.huge-text[Try it!]
+
+Find the **path** to your class directory.
+
+---
+
+## The Beauty of R Projects
+
+An **R Project** is basically a "flag" planted in a certain directory.
+
+When you double click a **.Rproj** file, it does two things:
+
+1. Open RStudio
+
+2. Set the working directory to be wherever the .Rproj file lives.
+
+3. Link to GitHub, if setup (more on that later!)
+
+---
+
+class: center
+
+# RStudio Projects & Reproducibility
+
+</br> 
+
+.bitlarger[This is great for reproducibility!]
+
+</br>
+
+.bitlarger[Anyone can copy your directory, and the .Rproj will open properly on their computer.]
+
+---
+
+class: middle
+
+# Setting up an RStudio Project
+
+---
+
+class: middle 
+
+# Good practice
+
+- Organize your folders carefully, and name them meaningfully:
+  * `/User/atheobold/Stat331/lab1/` rather than `Desktop/stuff/`
+    
+- Use **R Projects** liberally - put one in the "main" folder for each project
+
+    * I have a project for every class I teach.
+    * I have a project for every data analysis I do.
+    * I **never** open RStudio, except by clicking on a project.
+
+---
+
+# Bad practice
+
+If you put something like this at the top of your .Rmd file, I will set your computer on fire:
+
+```{r setwd, eval = FALSE}
+setwd("/User/reginageorge/Desktop/R_Class/Lab_1/")
+```
+
+- Setting working directory by hand = BAD!  
+
+--
+
+- That directory is specific to you!
+
+--
+
+- R Markdown files ignore this code when knitting! 
+
+---
+
+class: middle, inverse
+
+# Do this right now:
+
+### 1. Create a R Project in your class directory.
+
+### 2. Add a folder to the directory called "Week 1" or "Lab 1"

@@ -1,0 +1,12 @@
+name: pa_solution
+title: PA_solution
+username: atheobold
+account: atheobold
+server: rstudio.csm.calpoly.edu
+hostUrl: https://rstudio.csm.calpoly.edu/__api__
+appId: 258
+bundleId: 538
+url: https://rstudio.csm.calpoly.edu/content/258/
+when: 1617566085.70923
+asMultiple: FALSE
+asStatic: TRUE

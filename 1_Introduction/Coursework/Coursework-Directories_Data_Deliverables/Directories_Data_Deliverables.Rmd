@@ -1,0 +1,110 @@
+---
+title: "Reproducibility: Directories and Deliverables"
+author: ""
+output:
+  prettydoc::html_pretty:
+    theme: tactile
+    highlight: github
+    css: styles.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options("couRsework-img_path" = "../../Images/icons") 
+### change this if icons local
+```
+
+```{r, include = FALSE}
+library(tidyverse)
+```
+
+The theme of this lesson is good management of your files and data.
+
+You will learn how to:
+
+* Identify **folders** and **paths**.
+
+* Create and use **R Projects**.
+
+* **Load data** into R from files.
+
+* Deal with package challenges.
+
+* Create R Markdown documents with good **reproducible principles**.
+
+---
+
+`r emo::ji("play button")` Watch Videos: 45 min
+
+`r emo::ji("book")` Readings: 15 minutes 
+
+`r emo::ji("computer")` Activities: 10 min 
+
+`r emo::ji("check")` Check-ins: 1 (part of the whole)
+
+---
+
+## Principles of Reproducibility
+
+`r emo::ji("play button")` [Required Video: Directories, Paths, Projects](http://somup.com/creu0fbzyn)
+
+`r emo::ji("book")` [Required Reading: Workflow and Projects](https://r4ds.had.co.nz/workflow-projects.html) 
+
+---
+
+## Reproducible Deliverables
+
+`r emo::ji("play button")` [Required Video: R Markdown Documents for Reproducibility](https://www.youtube.com/watch?v=lNWVQ2oxNho)
+
+`r emo::ji("play button")` [Required Video: Reproducible Deliverables in R Markdown](https://www.youtube.com/watch?v=w_HV_RI1lN8)
+
+---
+
+# `r emo::ji("question")` Extra Resources
+
+* [Project Managment with RStudio](http://swcarpentry.github.io/r-novice-gapminder/02-project-intro/index.html)
+
+---
+
+`r emo::ji("check")` Check-in: R, RStudio, R Markdown, and RStudio Projects
+
+**Question 5:** Take a screenshot of your class directory, showing the **R Project** and the folder organization, including a **Week 1** or **Practice Activity** folder.
+
+---
+
+# Introduction to R Markdown
+
+`r emo::ji("play button")` [Required Video: Introduction to R Markdown by Dr. Kelly Bodwin](https://www.youtube.com/embed/Zt6MJ2m2bNk)
+
+`r emo::ji("book")` [Required Reading: Intro to R Markdown](https://r4ds.had.co.nz/r-markdown.html)
+
+---
+
+`r emo::ji("check")` Check-in: R, RStudio, R Markdown, and RStudio Projects
+
+**Question 4:** Correct the following sentences, so that they make sense.
+
+1. "I wrote RStudio code to make a beautiful plot."
+
+2. "I used Markdown to put R code in my report."
+
+3. "I can't get R to open!"
+
+4. "Can I send you my RStudio so you can check out if my R Markdown code is 
+correct?  I can't get R to knit."
+
+---
+
+`r emo::ji("check")` Check-in: Reproducibility
+
+Categorize each description as either "reproducibility" or "replicability". If you'd like additional information on the differences between reproducibiity and replicability see [this video](https://www.youtube.com/watch?v=Y6hhJvIZhls). 
+
+---
+
+# `r emo::ji("question")` Extra Resources
+
+* [Click Here](https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf) 
+to download a cheatsheet for R Markdown.
+
+* [This website](https://holtzy.github.io/Pimp-my-rmd/) has some tips for making your
+R Markdown documents more beautiful.

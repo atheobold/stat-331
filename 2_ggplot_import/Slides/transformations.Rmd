@@ -1,0 +1,101 @@
+---
+title: ".hand[What is being plotted?]"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["xaringan-themer.css", "slide-style.css"]
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: '16:9'
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+---
+
+```{r setup, include = FALSE}
+library(tidyverse)
+library(gridExtra)
+library(flair)
+
+knitr::opts_chunk$set(fig.align = "center", 
+                      message = FALSE, 
+                      warning = FALSE)
+```
+
+.hand-medium[In a scatterplot, the points *are* the observations in the data!]
+
+```{r, echo = FALSE, fig.width = 6, fig.height = 6, fig.align = 'center'}
+ggplot(data = mpg, 
+       mapping = aes(x = displ,
+                     y = hwy)) + 
+  geom_point()
+```
+
+---
+
+.hand-medium[But what about a histogram?]
+
+```{r, echo = FALSE, fig.width = 6, fig.height = 6, message=FALSE}
+ggplot(data = mpg, 
+       mapping = aes(x = hwy)) + 
+  geom_histogram()
+
+```
+
+---
+
+.hand-medium[But what about a boxplot?]
+
+```{r, echo = FALSE, fig.width = 6, fig.height = 6, message=FALSE}
+ggplot(data = mpg, 
+       mapping = aes(x = hwy)) + 
+  geom_boxplot()
+
+```
+
+---
+
+.hand-medium[But what about a bar plot?]
+
+```{r, echo = FALSE, fig.width = 6, fig.height = 6, message=FALSE}
+ggplot(data = mpg, 
+       mapping = aes(x = class)) + 
+  geom_bar()
+
+```
+
+---
+
+.larger[Statistical transformations]
+
+.larger[
+.pull-left[
+
+
+- Each of these plots **does not** plot the *raw* data. 
+
+- Instead, they plot some transformation of the data. 
+
+- Each `geom` uses a specific `stat` to calculate the summaries that are plotted.
+]
+]
+
+.large[
+.pull-right[
+
+</br>
+</br>
+
+- `geom_histogram()` uses `stat_bin()`
+
+- `geom_boxplot()` uses `stat_boxplot()`
+
+- `geom_bar()` uses `stat_count()`
+
+- `geom_smooth()` uses `stat_smooth()`
+]
+]

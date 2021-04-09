@@ -1,0 +1,203 @@
+---
+title: "Recap of R Markdown"
+date: "April 1, 2021"
+author: "Dr. Allison Theobold"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["xaringan-themer.css", "slide-style.css"]
+    nature:
+      highlightStyle: solarized-light
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+library(tidyverse)
+```
+
+
+```{r xaringan-themer, include=FALSE}
+library(xaringanthemer)
+style_duo_accent(
+  primary_color      = "#0F4C81", # pantone classic blue
+  secondary_color    = "#B6CADA", # pantone baby blue
+  header_font_google = google_font("Raleway"),
+  text_font_google   = google_font("Raleway", "300", "300i"),
+  code_font_google   = google_font("Source Code Pro"),
+  text_font_size     = "30px"
+)
+```
+
+# What is Markdown?
+
+**Markdown** (without the "R") is a *markup language*.  This means special
+symbols and formatting to pretty documents.
+
+--
+
+Markdown files have the **.md** extension.
+
+---
+
+![](https://d33wubrfki0l68.cloudfront.net/59f29676ef5e4d74685e14f801bbc10c2dbd3cef/c0688/lesson-images/markdown-1-markup.png)
+
+---
+
+# What is R Markdown?
+
+**R Markdown** (with the "R") uses regular Markdown, plus it can run and display
+**R** code.  (Other languages, too!)
+
+--
+
+R Markdown files have the **.Rmd** extension.
+
+---
+
+![](https://d33wubrfki0l68.cloudfront.net/ece57b678854545e6602a23daede51ad72da2170/21cca/lesson-images/outputs-1-word.png)
+
+---
+
+# Why Use R Markdown? 
+
+<center>
+
+```{r, echo = FALSE, out.width = "50%"}
+knitr::include_graphics("copy-paste.PNG")
+```
+
+---
+
+# Creating a Report 
+
+.pull-left[
+
+```{r, echo = FALSE}
+knitr::include_graphics("no.PNG")
+```
+]
+
+.pull-right[
+
+```{r, echo = FALSE, out.width = "80%"}
+knitr::include_graphics("yes.PNG")
+```
+]
+
+---
+
+# Components of an R Markdown 
+
+![](https://miro.medium.com/max/1200/1*jL-whKGBhuUlU7Q2oevz9w.png)
+
+---
+
+# YAML
+
+![](yaml.png)
+
+---
+class: center 
+
+# Issues in YAML 
+
+</br>
+</br> 
+
+Error in yaml::yaml.load(..., eval.expr = TRUE) : 
+  Scanner error: while scanning a quoted scalar at line 1, column 8 found unexpected end of stream at line 10, column 20
+Calls: <Anonymous> ... parse_yaml_front_matter -> yaml_load -> <Anonymous>
+Execution halted
+
+---
+
+# Markdown 
+
+**Markdown** (without the "R") is a *markup language*.  This means special
+symbols and formatting to pretty documents.
+
+\*text\* -- makes italics 
+
+\*\*text\*\* -- makes bold text
+
+\# -- makes headers 
+
+\!\[ \]( ) -- includes images or HTML links
+
+< > -- embeds URLs
+
+---
+
+class: middle
+
+# R Code 
+
+- Begins with three ` ``` ` characters 
+- Then a curly brace `{`
+- Then a letter `r` 
+- Then an (optional) name 
+- Then specifications for the code chunk 
+- Closes with three ` ``` ` characters  
+
+</br> 
+
+````
+```{r libraries, echo = FALSE}`r ''`
+library(tidyverse)
+```
+````
+
+---
+
+class: middle 
+
+# Knitting
+
+To convert your R Markdown file to a beautiful document, click **Knit**.
+
+![](https://rstudioblog.files.wordpress.com/2014/06/r-markdown-formats.png)
+
+---
+
+# Knitting a Document
+
+![](knitting_process.png)
+
+---
+
+# Knitting
+
+When you click **knit**, here is what happens:
+
+--
+
+- Your file is saved.
+
+--
+
+- The R code written in your *.Rmd* file gets run.
+
+    + Any code you ran already doesn't "count"; we start from scratch.
+    + The code is run *in order*.
+
+--
+
+- A new file is created.
+
+    + If your R Markdown file is called "Lab1.Rmd", then a file called "Lab1.html" will be created.
+    + This will save in the same folder as "Lab1.Rmd".
+    
+---
+
+class: center, middle, invert
+
+# Let's try it!
+

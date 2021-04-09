@@ -1,0 +1,141 @@
+---
+title: ".hand[Global versus local **aes**thetics]"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["xaringan-themer.css", "slide-style.css"]
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: '16:9'
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+---
+
+```{r setup, include = FALSE}
+library(tidyverse)
+library(gridExtra)
+library(flair)
+```
+
+.larger[Before...]
+
+```{r, eval = FALSE}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy))
+```
+
+---
+
+.larger[But then we added more `geom`s]
+
+```{r, eval = FALSE}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) + 
+  geom_smooth(mapping = aes(x = displ, y = hwy))
+```
+
+--
+
+.larger[
+
+.alert[
+This could cause issues if we need to make changes! 
+
+]
+]
+
+---
+
+class: inverse
+
+.larger[Now...]
+
+.pull-left[
+```{r, eval = FALSE}
+ggplot(data = mpg, 
+       mapping = aes(x = displ, y = hwy)) + 
+  geom_point() + 
+  geom_smooth()
+```
+]
+
+.pull-right[
+```{r, echo = FALSE, message = FALSE, fig.width = 6, fig.height = 6}
+ggplot(data = mpg, 
+       mapping = aes(x = displ, y = hwy)) + 
+  geom_point() + 
+  geom_smooth()
+```
+]
+
+---
+
+.hand-medium[But what if I want to color my points and have a smoother for every observation?]
+
+.large[
+Well, then you'll need to:
+
+- set global `aes`thetics for what is *shared* for the **entire** plot
+- set local `aes`thetics for what is *unique* for individual layers
+
+]
+
+---
+
+.larger[Let's try it out!]
+
+.pull-left[
+```{r, eval = FALSE, message = FALSE}
+ggplot(data = mpg, 
+       mapping = aes(x = displ,
+                     y = hwy,
+                     color = class)) + 
+  geom_point() + 
+  geom_smooth()
+
+```
+]
+
+.pull-right[
+```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.width = 6, fig.height = 6}
+ggplot(data = mpg, 
+       mapping = aes(x = displ, 
+                     y = hwy, 
+                     color = class)) + 
+  geom_point() + 
+  geom_smooth()
+```
+]
+
+---
+
+.larger[Take two!]
+
+.pull-left[
+```{r, eval = FALSE, message = FALSE, fig.width = 6, fig.height = 6}
+ggplot(data = mpg, 
+       mapping = aes(x = displ,
+                     y = hwy)) + 
+  geom_point(mapping = aes(color = class)) + 
+  geom_smooth()
+
+```
+]
+
+.pull-right[
+```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.width = 6, fig.height = 6}
+ggplot(data = mpg, 
+       mapping = aes(x = displ,
+                     y = hwy)) + 
+  geom_point(mapping = aes(color = class)) + 
+  geom_smooth()
+```
+]
+
+
+

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Directories &amp; Scientific Reproducibility</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="slide-style.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Directories &amp; Scientific Reproducibility
+
+---
+
+
+
+
+
+
+## Principles of Reproducibility
+
+.large[
+The idea:  You should be able to send your project to someone else, and they can jump in and start working right away.
+
+1. Files are organized and well-named.
+
+2. References to data and code work for everyone.
+
+3. Package dependency is clear.
+
+4. Code will run the same every time, even if data values change.
+
+5. Analysis process is well-explained and easy to read.
+
+]
+
+
+---
+
+# Dealing with Directories
+
+&lt;/br&gt;
+
+## What is a directory?
+
+- A **directory** is just a fancy name for a folder.
+
+- Your **working directory** is the folder that `R` "thinks" it lives in at the moment.
+
+
+```r
+getwd()
+```
+
+```
+## [1] "/Users/atheobol/Documents/Teaching/Stat 331/STAT-331-Online/1_Introduction/Coursework/Coursework-Directories_Data_Deliverables/Slides"
+```
+
+- If you save things you have created, they save to your working directory by default.
+
+---
+
+class: center, middle
+
+# Manage your Class Directory
+
+Is it in a place you can easily find it?
+
+--
+
+Does it have an informative name?
+
+--
+
+Are the files inside it well-organized?
+
+---
+
+class: middle 
+
+## Paths
+
+- A **path** describes where a certain file or directory lives.
+
+
+```r
+getwd()
+```
+
+```
+## [1] "/Users/atheobol/Documents/Teaching/Stat 331/STAT-331-Online/1_Introduction/Coursework/Coursework-Directories_Data_Deliverables/Slides"
+```
+
+This file lives in my user files `Users/`, 
+
+on my account `atheobol/` 
+
+in my Documents `Documents` 
+
+in a series of organized folders
+
+---
+
+class: center
+
+&lt;/br&gt;
+&lt;/br&gt;
+&lt;/br&gt;
+&lt;/br&gt;
+
+.huge-text[Try it!]
+
+Find the **path** to your class directory.
+
+---
+
+## The Beauty of R Projects
+
+An **R Project** is basically a "flag" planted in a certain directory.
+
+When you double click a **.Rproj** file, it does two things:
+
+1. Open RStudio
+
+2. Set the working directory to be wherever the .Rproj file lives.
+
+3. Link to GitHub, if setup (more on that later!)
+
+---
+
+class: center
+
+# RStudio Projects &amp; Reproducibility
+
+&lt;/br&gt; 
+
+.bitlarger[This is great for reproducibility!]
+
+&lt;/br&gt;
+
+.bitlarger[Anyone can copy your directory, and the .Rproj will open properly on their computer.]
+
+---
+
+class: middle
+
+# Setting up an RStudio Project
+
+---
+
+class: middle 
+
+# Good practice
+
+- Organize your folders carefully, and name them meaningfully:
+  * `/User/atheobold/Stat331/lab1/` rather than `Desktop/stuff/`
+    
+- Use **R Projects** liberally - put one in the "main" folder for each project
+
+    * I have a project for every class I teach.
+    * I have a project for every data analysis I do.
+    * I **never** open RStudio, except by clicking on a project.
+
+---
+
+# Bad practice
+
+If you put something like this at the top of your .Rmd file, I will set your computer on fire:
+
+
+```r
+setwd("/User/reginageorge/Desktop/R_Class/Lab_1/")
+```
+
+- Setting working directory by hand = BAD!  
+
+--
+
+- That directory is specific to you!
+
+--
+
+- R Markdown files ignore this code when knitting! 
+
+---
+
+class: middle, inverse
+
+# Do this right now:
+
+### 1. Create a R Project in your class directory.
+
+### 2. Add a folder to the directory called "Week 1" or "Lab 1"
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9",
+"slideNumberFormat": "<div class=\"progress-bar-container\">\n  <div class=\"progress-bar\" style=\"width: calc(%current% / %total% * 100%);\">\n  </div>\n</div>"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

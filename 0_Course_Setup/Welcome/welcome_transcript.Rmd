@@ -1,0 +1,81 @@
+---
+title: "Welcome Video"
+author: ""
+output:
+  prettydoc::html_pretty:
+    theme: tactile
+    highlight: github
+    css: styles.css
+---
+
+# Welcome to Stat 331! 
+
+---
+
+# What you can expect
+
+3 unit because R has a variety of uses
+
+- Unit 1: R for Data Science
+
+- Unit 2: R for Developers
+
+- Unit 3: Statistical Computing 
+
+---
+
+# Coding Classes
+
+- Everyone is coming from a different background 
+
+- Different aspects of the course will be difficult to different people 
+
+- Use your peers to support your learning 
+
+---
+
+# Learning a new language
+
+- Start with words, memorize common words and meanings
+
+- Language is more than a set of words
+
+- Learning a language comes from using it, watching others use it, and reading
+
+---
+
+# Course Structure 
+
+I will record videos like this to teach you a set of "words" / skills each week. 
+
+- These are the general ideas and the foundational skills (think common words)
+
+Cannot teach you every word / function -- I don't know them all! 
+
+It would be a disservice to teach you specifics rather than problem solving. 
+
+--- 
+
+# What did Google say? 
+
+- Use external resources when you are stuck
+
+- Develop skills to solve problems 
+
+- Learn by Doing! 
+
+---
+
+# Don't get stuck in a pit 
+
+- If you've been working on the same issue for over 30 minutes, take a break. 
+  * Go outside
+  * Send me a message on Discord
+  * Reach out to a team member or peer
+  
+- Ask questions early
+
+- Explain your code to someone 
+  * Rubber ducky debugging
+
+

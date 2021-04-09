@@ -1,0 +1,48 @@
+---
+title: "Importing Data with RStudio Projects and the here Package"
+date: "April 8, 2021"
+author: "Dr. Allison Theobold"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["xaringan-themer.css", "slide-style.css"]
+    nature:
+      highlightStyle: solarized-light
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+---
+
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.width = 8, fig.height = 6}
+knitr::opts_chunk$set(message = FALSE, 
+                      warning = FALSE, 
+                      fig.align = "center")
+```
+
+class: inverse
+
+.larger[R Projects!]
+
+- Flag where R should look for files 
+
+--
+
+- Allow for us to *easily* use `here()` to find files
+
+--
+
+- Should be how you open RStudio **every time**
+
+---
+
+![](here_data_load.jpeg)
+
+---
+
+.larger[Your turn!]

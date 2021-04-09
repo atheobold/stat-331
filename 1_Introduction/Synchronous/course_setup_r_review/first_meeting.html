@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Welcome to Stat 331 &amp; R Review</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dr. Allison Theobold" />
+    <meta name="date" content="2021-03-30" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="slide-style.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Welcome to Stat 331 &amp; R Review
+### Dr. Allison Theobold
+### March 30, 2021
+
+---
+
+
+
+
+
+
+
+
+# Welcome to Stat 331!
+
+This course will teach you the fundamentals of R Statistical Software and of
+statistical computing principles, extending your knowledge to more "intermediate"
+topics, such as: 
+
+* data wrangling
+* data visualization
+* data summaries 
+* reproducible presentations 
+* writing efficient and well-documented `R` code
+* programming simulations
+
+---
+
+# Data Science 
+
+&gt;Data science is an inter-disciplinary field that uses scientific methods, processes, algorithms and systems to extract &gt;knowledge and insights from structured and unstructured data.
+
+Wikepedia 
+
+&lt;/br&gt; 
+
+&gt;The ability to take data — to be able to understand it, to process it, to extract value from it, to visualize it, to communicate it. 
+&gt;
+
+Hal Varian, chief economist at Google and UC Berkeley professor of information sciences, business, and economics
+
+---
+
+# What Data Science Is To Me 
+
+&lt;/br&gt;
+&lt;/br&gt;
+
+![](cycle.png)
+
+---
+
+class: middle 
+
+# Course Components 
+
+- Coursework
+- Check-ins
+- Practice Activities
+- Lab Assignments 
+- Challenges 
+- Think Out Loud Recordings
+
+---
+
+.large[**Group Norms:**]
+
+- Zero tolerance for: racism, sexism, homophobia, transphobia, ageism, ableism 
+- Do not make generalizations -- Use "I" statements
+
+- Respect one another
+
+- Intent and impact *both* matter
+
+- Non-judgmental 
+
+- Take space, make space -- Share the air (page) 
+
+- Embrace discomfort
+
+- Make decisions by consensus
+
+---
+
+.larger[Team-based Learning]
+
+*Team-based learning* is a structured form of small-group learning
+
+- Emphasizes student preparation out of class
+- Application of knowledge in class
+- Diverse teams of 5-6 students
+
+---
+
+.large[Mastery-based Grading]
+
+Score   | Justification
+--------|--------------
+4       | __Master__ -- Outstanding work that exhibits comprehensive and thoughtful understanding of the content of the question, with an individualized perspective. Errors do not occur in the assignment.
+3       | __Practitioner__ -- Work reflects a solid understanding of the content of the question. Work may not exhibit original perspectives. Several errors may occur in the question. 
+R       | __Redo (Required)__ -- Work satisfies the requirements of the assignment while missing the spirit of the assignment. May be an incomplete rendering of the assignment. The work may contain inconsistencies or demonstrate limited understanding of the content. May be incoherent or poorly written. 
+1       | __Novice__ -- The work shows a lack of understanding of the assignment.
+
+---
+
+.huge-text[But I haven't used R in...]
+
+---
+
+.larger[Let's start at the very beginning] 
+
+
+An "object" in `R` is where we attach / map a value onto a name. 
+
+
+```r
+x &lt;- 12
+```
+
+---
+
+.bitlarger[The fundamental structure in `R` is a vector]
+
+
+```r
+y &lt;- c(1, 2, 3, 4)
+```
+
+- The `c()` function binds a list of numbers or letters into a vector
+
+&lt;/br&gt;
+
+.hand[How could you create a vector of numbers 1 to 100 without typing them all?]
+
+---
+
+.bitlarger[Data Types &amp; Vectors]
+
+- We also could have created a vector of characters 
+
+
+```r
+letters &lt;- c("a", "b", "c", "d", "e")
+```
+
+.hand[How many data types can a vector contain?]
+
+&lt;/br&gt;
+&lt;/br&gt;
+
+
+```r
+letters_numbers &lt;- c("a", "b", "c", 1)
+letters_numbers
+```
+
+```
+## [1] "a" "b" "c" "1"
+```
+
+
+---
+
+.larger[Components of a Function]
+
+
+```r
+sqrt()
+
+plot()
+```
+
+- function name / call
+- input(s) / arguments 
+- output / return
+
+---
+
+.bitlarger[Most functions in `R` expect a vector as the input]
+
+
+```r
+sqrt(2)
+```
+
+```
+## [1] 1.414214
+```
+
+
+
+```r
+sqrt(y)
+```
+
+```
+## [1] 1.000000 1.414214 1.732051 2.000000
+```
+
+---
+
+.bitlarger[Creating New Objects from Old Objects]
+
+- Make a new object from using an existing object as an input to a function
+
+
+```r
+y_sqrt &lt;- sqrt(y)
+```
+
+&lt;/br&gt;
+
+- Overwrite / Update an existing object 
+
+
+```r
+y &lt;- sqrt(y)
+```
+
+
+---
+
+.larger[A Matrix]
+
+- A two-dimensional set of vectors
+
+- All elements must have **same** data type
+
+
+```r
+matrix(y, nrow = 2, ncol = 2)
+```
+
+```
+##          [,1]     [,2]
+## [1,] 1.000000 1.732051
+## [2,] 1.414214 2.000000
+```
+
+---
+
+.large[Extracting Elements from a Matrix]
+
+
+```
+##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    1    5    9   13   17
+## [2,]    2    6   10   14   18
+## [3,]    3    7   11   15   19
+## [4,]    4    8   12   16   20
+```
+
+- Dimensions are noted by `[rows, columns]`
+  * Extract rows using: `[rows, ]`
+  * Extract columns using: `[ , columns]`
+
+.hand[How would you extract the second row of `mat`?]
+
+.hand[How would you extract the third column of `mat`?]
+
+.hand[How would you extract rows 1-3 and columns 2-4?]
+
+---
+
+.larger[A List]
+
+.pull-left[
+
+![](lists.jfif)
+
+]
+
+.pull-right[
+
+- Each bin is an element of a list 
+- Each bin can have different contents
+- The contents of one bin have to be the same
+]
+
+---
+
+# Extracting Elements from a List
+
+.pull-left[
+
+```
+## $num
+## [1] 1 2 3 4
+## 
+## $letters
+## [1] "A" "B" "C" "D"
+## 
+## $animals
+## [1] "dog"  "cat"  "bird" "fish"
+```
+]
+
+.pull-right[
+-Elements are by `$`
+  * Extract elements with `$` or `[[]]`
+
+- Items are noted by `[]`
+  * Extract items with `[]` **after** `$` or `[[]]`
+] 
+
+&lt;center&gt;
+
+
+```r
+list1$a
+list1$a[1]
+
+list1[[1]]
+list1[[1]][1]
+```
+
+---
+
+# Extracting Elements from a Dataframe
+
+.pull-left[
+
+```
+##   num letters animals
+## 1   1       A     dog
+## 2   2       B     cat
+## 3   3       C    bird
+## 4   4       D    fish
+```
+]
+
+.pull-right[
+- Extract elements with `$`
+
+- Extract items with `[]` **after** `$`
+] 
+
+&lt;/br&gt;
+
+&lt;center&gt;
+
+
+```r
+df$a
+df$a[1]
+```
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "solarized-light",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9",
+"slideNumberFormat": "<div class=\"progress-bar-container\">\n  <div class=\"progress-bar\" style=\"width: calc(%current% / %total% * 100%);\">\n  </div>\n</div>"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
