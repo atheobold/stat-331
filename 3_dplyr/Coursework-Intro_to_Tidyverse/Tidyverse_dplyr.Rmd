@@ -26,8 +26,6 @@ When you are finished with the readings and videos, you should be able to...
 
 * Describe to someone what the *tidyverse* is
 
-* Use the pipe operator (`%>%`) to chain together data wrangling operations
-
 * Use the five main dplyr verbs:
 
   * `filter()`
@@ -42,6 +40,9 @@ When you are finished with the readings and videos, you should be able to...
 
 * Use `group_by()` to perform groupwise operations
 
+* Use the pipe operator (`%>%`) to chain together data wrangling operations
+
+---
 
 `r emo::ji("play button")` Watch Videos: 40 minutes  
 
@@ -82,7 +83,10 @@ When you are finished with the readings and videos, you should be able to...
 `r emo::ji("check")` Check-in: 
 
 
-**Question 1:**  Suppose we would like to study how the ratio of penguin body mass to flipper size differs across the species.  Rearrange the following steps in the pipeline into an order that accomplishes this goal.
+**Question 1:**  Suppose we would like to study how the ratio of penguin body
+mass to flipper size differs across the species.  Rearrange the following steps
+into an order that accomplishes this goal (assuming the steps are connected with
+a `%>%`).
 
 ```{r, include = FALSE}
 penguins %>%
@@ -132,9 +136,11 @@ Consider the base R code below.
 mean(penguins[penguins$species == "Adelie", "body_mass_g"])
 ```
 
+<!-- Mean of Adelie specied body mass!  -->
+
 For each of the following `dplyr` pipelines, indicate if it
 
-(i) Returns the exact same thing as the Base R code;
+(i) Returns the exact same thing as the (above) base R code;
 (ii) Returns the correct information, but the wrong object type;
 (iii) Returns incorrect information; or
 (iv) Returns an error
@@ -179,6 +185,17 @@ penguins %>%
   summarize(mean(body_mass_g))
 ```
 
+<!-- A = incorrect filter statement -> Error -->
+
+<!-- B = correct information but a tibble not a vector -->
+
+<!-- C = cannot filter when species is gone -> Error  -->
+
+<!-- D = doesn't return a correct value, no input to mean()  -->
+
+<!-- E = same as base R, vector output -->
+
+<!-- F = flipped filter and select -> Error  -->
 
 ---
 
