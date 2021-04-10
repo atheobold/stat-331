@@ -3,14 +3,15 @@
   <head>
     <title>Intro to the Tidyverse</title>
     <meta charset="utf-8" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="slide-style.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
 # Intro to the Tidyverse
-## Week 2
 
 ---
 
@@ -31,7 +32,9 @@ The `tidyverse` is a collection of packages that follow a (somewhat) consistent 
 
 The term `base R` is sometimes used as an alternative, to refer to only R's built-in packages.
 
-A brief history:
+---
+
+# A brief history
 
 --
 
@@ -52,6 +55,7 @@ A brief history:
 **Today:** A paid team of 20-ish developers maintains a huge number of packages.  (https://www.tidyverse.org/)
 
 ---
+
 # The tidyverse
 
 * One philosophy of the **tidyverse** is building **pipe-friendly** functions.
@@ -73,6 +77,7 @@ penguins[penguins$species == "Adelie",]
 
 
 ---
+
 # The tidyverse
 
 **Pros:**
@@ -159,10 +164,10 @@ class: center, middle, inverse
 
 ---
 
-&lt;img src="C:/Users/kbodwin/Dropbox/Teaching/STAT-331-Online/Images/other/ceci_pipe.jpeg" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="/Users/atheobol/Documents/Teaching/Stat 331/stat-331-allison/Images/other/ceci_pipe.jpeg" width="70%" style="display: block; margin: auto;" /&gt;
 
 ---
-&lt;img src="C:/Users/kbodwin/Dropbox/Teaching/STAT-331-Online/Images/other/magrittr_hex.png" width="50%" style="display: block; margin: auto;" /&gt;
+&lt;img src="/Users/atheobol/Documents/Teaching/Stat 331/stat-331-allison/Images/other/magrittr_hex.png" width="50%" style="display: block; margin: auto;" /&gt;
 
 ---
 # Prerequisite: The Pipe
@@ -179,7 +184,7 @@ class: center, middle, inverse
 
 --
 
-&lt;img src="C:/Users/kbodwin/Dropbox/Teaching/STAT-331-Online/Images/other/diagram_sentence.jpg" style="display: block; margin: auto;" /&gt;
+&lt;img src="/Users/atheobol/Documents/Teaching/Stat 331/stat-331-allison/Images/other/diagram_sentence.jpg" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -201,19 +206,19 @@ dr_bodwin %&gt;%
 
 ---
 
-&lt;img src="C:/Users/kbodwin/Dropbox/Teaching/STAT-331-Online/Images/silly_gifs/pipe.png" width="30%" style="display: block; margin: auto;" /&gt;
+&lt;img src="/Users/atheobol/Documents/Teaching/Stat 331/stat-331-allison/Images/silly_gifs/pipe.png" width="30%" style="display: block; margin: auto;" /&gt;
 
 ---
 
 # The Pipe
 
 
-&lt;code class ='r hljs remark-code'&gt;penguins &lt;span style='background-color:#ffff7f'&gt;%&gt;%&lt;/span&gt; &lt;span style='color:teal'&gt;summary&lt;/span&gt;()&lt;/code&gt;
+&lt;code class ='r hljs remark-code'&gt;penguins &lt;span style="background-color:#ffff7f"&gt;%&gt;%&lt;/span&gt; &lt;span style="color:teal"&gt;summary&lt;/span&gt;()&lt;/code&gt;
 
 is the same as
 
 
-&lt;code class ='r hljs remark-code'&gt;&lt;span style='color:teal'&gt;summary&lt;/span&gt;(penguins)&lt;/code&gt;
+&lt;code class ='r hljs remark-code'&gt;&lt;span style="color:teal"&gt;summary&lt;/span&gt;(penguins)&lt;/code&gt;
 
 ---
 # The Pipe
@@ -240,20 +245,20 @@ penguins %&gt;%
 ```
 
 ```
-## # A tibble: 152 x 7
-##    species island bill_length_mm bill_depth_mm flipper_length_~ body_mass_g
-##    &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;int&gt;       &lt;int&gt;
-##  1 Adelie  Biscoe           36.5          16.6              181        2850
-##  2 Adelie  Biscoe           36.4          17.1              184        2850
-##  3 Adelie  Biscoe           34.5          18.1              187        2900
-##  4 Adelie  Dream            33.1          16.1              178        2900
-##  5 Adelie  Torge~           38.6          17                188        2900
-##  6 Adelie  Biscoe           37.9          18.6              193        2925
-##  7 Adelie  Dream            37.5          18.9              179        2975
-##  8 Adelie  Dream            37            16.9              185        3000
-##  9 Adelie  Dream            37.3          16.8              192        3000
-## 10 Adelie  Torge~           35.9          16.6              190        3050
-## # ... with 142 more rows, and 1 more variable: sex &lt;fct&gt;
+## # A tibble: 152 x 8
+##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
+##  1 Adelie  Biscoe              36.5          16.6               181        2850
+##  2 Adelie  Biscoe              36.4          17.1               184        2850
+##  3 Adelie  Biscoe              34.5          18.1               187        2900
+##  4 Adelie  Dream               33.1          16.1               178        2900
+##  5 Adelie  Torgersen           38.6          17                 188        2900
+##  6 Adelie  Biscoe              37.9          18.6               193        2925
+##  7 Adelie  Dream               37.5          18.9               179        2975
+##  8 Adelie  Dream               37            16.9               185        3000
+##  9 Adelie  Dream               37.3          16.8               192        3000
+## 10 Adelie  Torgersen           35.9          16.6               190        3050
+## # … with 142 more rows, and 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;
 ```
 
 ---
@@ -274,7 +279,7 @@ penguins %&gt;%
 # Summarizing
 
 
-&lt;code class ='r hljs remark-code'&gt;penguins %&gt;%&lt;br&gt;&amp;nbsp;&amp;nbsp;summar&lt;span style='background-color:#ffff7f'&gt;y(&lt;/span&gt;)&lt;/code&gt;
+&lt;code class ='r hljs remark-code'&gt;penguins %&gt;%&lt;br&gt;&amp;nbsp;&amp;nbsp;summar&lt;span style="background-color:#ffff7f"&gt;y(&lt;/span&gt;)&lt;/code&gt;
 
 ```
 
@@ -286,13 +291,13 @@ penguins %&gt;%
 ##                                  3rd Qu.:48.50   3rd Qu.:18.70  
 ##                                  Max.   :59.60   Max.   :21.50  
 ##                                  NA's   :2       NA's   :2      
-##  flipper_length_mm  body_mass_g       sex     
-##  Min.   :172.0     Min.   :2700   female:165  
-##  1st Qu.:190.0     1st Qu.:3550   male  :168  
-##  Median :197.0     Median :4050   NA's  : 11  
-##  Mean   :200.9     Mean   :4202               
-##  3rd Qu.:213.0     3rd Qu.:4750               
-##  Max.   :231.0     Max.   :6300               
+##  flipper_length_mm  body_mass_g       sex           year     
+##  Min.   :172.0     Min.   :2700   female:165   Min.   :2007  
+##  1st Qu.:190.0     1st Qu.:3550   male  :168   1st Qu.:2007  
+##  Median :197.0     Median :4050   NA's  : 11   Median :2008  
+##  Mean   :200.9     Mean   :4202                Mean   :2008  
+##  3rd Qu.:213.0     3rd Qu.:4750                3rd Qu.:2009  
+##  Max.   :231.0     Max.   :6300                Max.   :2009  
 ##  NA's   :2         NA's   :2
 
 ```
@@ -327,13 +332,13 @@ penguins %&gt;% summary()
 ##                                  Mean   :43.99   Mean   :17.16  
 ##                                  3rd Qu.:48.60   3rd Qu.:18.70  
 ##                                  Max.   :59.60   Max.   :21.50  
-##  flipper_length_mm  body_mass_g       sex     
-##  Min.   :172       Min.   :2700   female:165  
-##  1st Qu.:190       1st Qu.:3550   male  :168  
-##  Median :197       Median :4050               
-##  Mean   :201       Mean   :4207               
-##  3rd Qu.:213       3rd Qu.:4775               
-##  Max.   :231       Max.   :6300
+##  flipper_length_mm  body_mass_g       sex           year     
+##  Min.   :172       Min.   :2700   female:165   Min.   :2007  
+##  1st Qu.:190       1st Qu.:3550   male  :168   1st Qu.:2007  
+##  Median :197       Median :4050                Median :2008  
+##  Mean   :201       Mean   :4207                Mean   :2008  
+##  3rd Qu.:213       3rd Qu.:4775                3rd Qu.:2009  
+##  Max.   :231       Max.   :6300                Max.   :2009
 ```
 
 
@@ -341,7 +346,7 @@ penguins %&gt;% summary()
 # Summarizing specifics
 
 
-&lt;code class ='r hljs remark-code'&gt;penguins %&gt;%&lt;br&gt;&amp;nbsp;&amp;nbsp;summar&lt;span style='background-color:#ffff7f'&gt;ize(&lt;/span&gt;&lt;span style='color:teal'&gt;mean&lt;/span&gt;_mass = &lt;span style='color:teal'&gt;mean&lt;/span&gt;(&lt;span style='color:cornflowerblue'&gt;body_mass_g&lt;/span&gt;))&lt;/code&gt;
+&lt;code class ='r hljs remark-code'&gt;penguins %&gt;%&lt;br&gt;&amp;nbsp;&amp;nbsp;summar&lt;span style="background-color:#ffff7f"&gt;ize(&lt;/span&gt;&lt;span style="color:teal"&gt;mean&lt;/span&gt;_mass = &lt;span style="color:teal"&gt;mean&lt;/span&gt;(&lt;span style="color:cornflowerblue"&gt;body_mass_g&lt;/span&gt;))&lt;/code&gt;
 
 ```
 
@@ -364,7 +369,7 @@ penguins %&gt;% summary()
 ## No problemo
 
 
-&lt;code class ='r hljs remark-code'&gt;penguins %&gt;%&lt;br&gt;&amp;nbsp;&amp;nbsp;summarize(&lt;span style='background-color:#ffff7f'&gt;across&lt;/span&gt;(c(&lt;span style='color:cornflowerblue'&gt;body_mass_g&lt;/span&gt;, &lt;span style='color:cornflowerblue'&gt;flipper_length_mm&lt;/span&gt;),&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span style='color:darkred'&gt;list&lt;/span&gt;(&lt;span style='color:teal'&gt;mean&lt;/span&gt;, &lt;span style='color:teal'&gt;median&lt;/span&gt;)))&lt;/code&gt;
+&lt;code class ='r hljs remark-code'&gt;penguins %&gt;%&lt;br&gt;&amp;nbsp;&amp;nbsp;summarize(&lt;span style="background-color:#ffff7f"&gt;across&lt;/span&gt;(c(&lt;span style="color:cornflowerblue"&gt;body_mass_g&lt;/span&gt;, &lt;span style="color:cornflowerblue"&gt;flipper_length_mm&lt;/span&gt;),&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span style="color:darkred"&gt;list&lt;/span&gt;(&lt;span style="color:teal"&gt;mean&lt;/span&gt;, &lt;span style="color:teal"&gt;median&lt;/span&gt;)))&lt;/code&gt;
 
 ```
 
@@ -395,7 +400,7 @@ Verb: `mutate()`
 The dataset gets *mutated* to include a new variable.
 
 
-&lt;code class ='r hljs remark-code'&gt;penguins %&gt;%&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style='background-color:#ffff7f'&gt;mutate&lt;/span&gt;(&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span style='color:teal'&gt;bill_size&lt;/span&gt; = bill_length_mm * bill_depth_mm&lt;br&gt;&amp;nbsp;&amp;nbsp;) %&gt;%&lt;br&gt;&amp;nbsp;&amp;nbsp;summary()&lt;/code&gt;
+&lt;code class ='r hljs remark-code'&gt;penguins %&gt;%&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style="background-color:#ffff7f"&gt;mutate&lt;/span&gt;(&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span style="color:teal"&gt;bill_size&lt;/span&gt; = bill_length_mm * bill_depth_mm&lt;br&gt;&amp;nbsp;&amp;nbsp;) %&gt;%&lt;br&gt;&amp;nbsp;&amp;nbsp;summary()&lt;/code&gt;
 
 ```
 
@@ -406,13 +411,13 @@ The dataset gets *mutated* to include a new variable.
 ##                                  Mean   :43.99   Mean   :17.16  
 ##                                  3rd Qu.:48.60   3rd Qu.:18.70  
 ##                                  Max.   :59.60   Max.   :21.50  
-##  flipper_length_mm  body_mass_g       sex        bill_size     
-##  Min.   :172       Min.   :2700   female:165   Min.   : 497.6  
-##  1st Qu.:190       1st Qu.:3550   male  :168   1st Qu.: 669.6  
-##  Median :197       Median :4050                Median : 731.6  
-##  Mean   :201       Mean   :4207                Mean   : 752.7  
-##  3rd Qu.:213       3rd Qu.:4775                3rd Qu.: 808.5  
-##  Max.   :231       Max.   :6300                Max.   :1127.4
+##  flipper_length_mm  body_mass_g       sex           year        bill_size     
+##  Min.   :172       Min.   :2700   female:165   Min.   :2007   Min.   : 497.6  
+##  1st Qu.:190       1st Qu.:3550   male  :168   1st Qu.:2007   1st Qu.: 669.6  
+##  Median :197       Median :4050                Median :2008   Median : 731.6  
+##  Mean   :201       Mean   :4207                Mean   :2008   Mean   : 752.7  
+##  3rd Qu.:213       3rd Qu.:4775                3rd Qu.:2009   3rd Qu.: 808.5  
+##  Max.   :231       Max.   :6300                Max.   :2009   Max.   :1127.4
 
 ```
 
@@ -429,7 +434,7 @@ penguins %&gt;%
 ```
 ## Error: Problem with `summarise()` input `mean_bill`.
 ## x object 'bill_size' not found
-## i Input `mean_bill` is `sd(bill_size)`.
+## ℹ Input `mean_bill` is `sd(bill_size)`.
 ```
 
 --
@@ -447,7 +452,7 @@ class: center, middle
 ---
 
 
-&lt;code class ='r hljs remark-code'&gt;&lt;span style='background-color:#ffff7f'&gt;penguins &lt;- &lt;/span&gt;penguins %&gt;%&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;mutate(&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;bill_size = bill_length_mm * bill_depth_mm&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;)&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;br&gt;penguins %&gt;%&lt;br&gt;&amp;nbsp;&amp;nbsp;summarize(mean_bill = sd(bill_size))&lt;/code&gt;
+&lt;code class ='r hljs remark-code'&gt;&lt;span style="background-color:#ffff7f"&gt;penguins &lt;- &lt;/span&gt;penguins %&gt;%&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;mutate(&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;bill_size = bill_length_mm * bill_depth_mm&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;)&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;br&gt;penguins %&gt;%&lt;br&gt;&amp;nbsp;&amp;nbsp;summarize(mean_bill = sd(bill_size))&lt;/code&gt;
 
 ```
 
@@ -472,20 +477,21 @@ penguins %&gt;%
 ```
 
 ```
-## # A tibble: 333 x 8
-##    species island bill_length_mm bill_depth_mm flipper_length_~ body_mass_g
-##    &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;int&gt;       &lt;int&gt;
-##  1 Chinst~ Dream            46.9          16.6              192        2700
-##  2 Adelie  Biscoe           36.5          16.6              181        2850
-##  3 Adelie  Biscoe           36.4          17.1              184        2850
-##  4 Adelie  Biscoe           34.5          18.1              187        2900
-##  5 Adelie  Dream            33.1          16.1              178        2900
-##  6 Adelie  Torge~           38.6          17                188        2900
-##  7 Chinst~ Dream            43.2          16.6              187        2900
-##  8 Adelie  Biscoe           37.9          18.6              193        2925
-##  9 Adelie  Dream            37            16.9              185        3000
-## 10 Adelie  Dream            37.3          16.8              192        3000
-## # ... with 323 more rows, and 2 more variables: sex &lt;fct&gt;, bill_size &lt;dbl&gt;
+## # A tibble: 333 x 9
+##    species   island    bill_length_mm bill_depth_mm flipper_length_… body_mass_g
+##    &lt;fct&gt;     &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;            &lt;int&gt;       &lt;int&gt;
+##  1 Chinstrap Dream               46.9          16.6              192        2700
+##  2 Adelie    Biscoe              36.5          16.6              181        2850
+##  3 Adelie    Biscoe              36.4          17.1              184        2850
+##  4 Adelie    Biscoe              34.5          18.1              187        2900
+##  5 Adelie    Dream               33.1          16.1              178        2900
+##  6 Adelie    Torgersen           38.6          17                188        2900
+##  7 Chinstrap Dream               43.2          16.6              187        2900
+##  8 Adelie    Biscoe              37.9          18.6              193        2925
+##  9 Adelie    Dream               37            16.9              185        3000
+## 10 Adelie    Dream               37.3          16.8              192        3000
+## # … with 323 more rows, and 3 more variables: sex &lt;fct&gt;, year &lt;int&gt;,
+## #   bill_size &lt;dbl&gt;
 ```
 
 ---
@@ -499,14 +505,14 @@ penguins %&gt;%
 ```
 
 ```
-## # A tibble: 4 x 8
-##   species island bill_length_mm bill_depth_mm flipper_length_~ body_mass_g sex  
+## # A tibble: 4 x 9
+##   species island bill_length_mm bill_depth_mm flipper_length_… body_mass_g sex  
 ##   &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;int&gt;       &lt;int&gt; &lt;fct&gt;
 ## 1 Gentoo  Biscoe           49.2          15.2              221        6300 male 
 ## 2 Gentoo  Biscoe           59.6          17                230        6050 male 
 ## 3 Gentoo  Biscoe           51.1          16.3              220        6000 male 
 ## 4 Gentoo  Biscoe           48.8          16.2              222        6000 male 
-## # ... with 1 more variable: bill_size &lt;dbl&gt;
+## # … with 2 more variables: year &lt;int&gt;, bill_size &lt;dbl&gt;
 ```
 
 ---
@@ -564,7 +570,7 @@ penguins %&gt;%
 ##  8 Adelie           2925
 ##  9 Adelie           3000
 ## 10 Adelie           3000
-## # ... with 323 more rows
+## # … with 323 more rows
 ```
 
 ---
@@ -604,80 +610,15 @@ class: center, middle, inverse
 
 # Your Turn!
 
----
-
-## In `Practice.Rmd`, make a new dataset called `kellogg_calories`, with the following changes:
-
-1. There is a new variable called `cal_per_cup` which shows the number of calories in each cup of cereal.
-
-2. The dataset only includes this new variable, the name of the cereal, and the brand of the cereal.
-
-3. The dataset only includes Kellogg brand cereals
-
-4. The cereals in the dataset are ordered from most to least calories per cup.
-
-**Try to do all these in one sequence of pipes!**
-
-5. Then choose one of the four main plot types (histogram, barplot, boxplot, scatterplot), make an interesting visualization from your `kellog_calories` dataset.
-
----
-class:center,middle,inverse
-
-# Grouping and summarizing
----
-# `group_by`
-
-* We have learned how to use the `summarize` functions to get information.
-
-* What if you want to summarize your data within categories?
-
-
-```r
-penguins %&gt;%
-  group_by(species) %&gt;%
-  summarize(mean(body_mass_g))
-```
-
-```
-## `summarise()` ungrouping output (override with `.groups` argument)
-```
-
-```
-## # A tibble: 3 x 2
-##   species   `mean(body_mass_g)`
-##   &lt;fct&gt;                   &lt;dbl&gt;
-## 1 Adelie                  3706.
-## 2 Chinstrap               3733.
-## 3 Gentoo                  5092.
-```
----
-# Warning!
-
-## You should **always** have a `summarize` after a `group_by`!!!
-
-(There are other ways to use it, but wait until you are very familiar with `dplyr` to try that.)
-
----
-class: center, middle, inverse
-
-# Your Turn!
-
----
-# Grouping and summarizing
-
-* Find the average calories per serving for each manufacturer.
-
-* Find the average sugar per serving for hot versus cold cereals.
-
----
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
-"highlightStyle": "github",
+"highlightStyle": "solarized-light",
 "highlightLines": true,
 "countIncrementalSlides": false,
-"ratio": "16:9"
+"ratio": "16:9",
+"slideNumberFormat": "<div class=\"progress-bar-container\">\n  <div class=\"progress-bar\" style=\"width: calc(%current% / %total% * 100%);\">\n  </div>\n</div>"
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));

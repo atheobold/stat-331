@@ -116,6 +116,37 @@ If you would like a video tutorial on downloading RStudio, here is one: [](https
 
 ---
 
+## Functions in R
+
+```{r, results = "asis", echo = FALSE}
+req_vid("Intro to Functions", type = "Required", url = "https://www.youtube.com/embed/Cp_9y39ZRRM")
+```
+
+
+```{r, results = "asis", echo = FALSE}
+link_slides("Slides/Functions.html")
+```
+
+
+```{r, results = "asis", echo = FALSE}
+req_read("Basics of R", type = "Required", url = "https://r4ds.had.co.nz/workflow-basics.html")
+```
+
+---
+
+
+```{r, results = "asis", echo = FALSE}
+checkin("Troubleshooting")
+```
+
+What is the reason for the error below?  How would you fix it?
+
+```{r, error = TRUE}
+matrix(c("a", "b", "c", "d"), num_row = 2)
+```
+
+---
+
 `r emo::ji("check")` Check-in: Introduction to R, RStudio, and RStudio Projects
 
 **Question 1:** What does it mean for R to be **"open-source"**?
@@ -184,4 +215,3 @@ Then follow the instructions that print out to update a few of your tidyverse pa
 **Question 2:** How often do you need to install a package on your computer? 
 
 **Question 3:** What is the tidyverse? 
-

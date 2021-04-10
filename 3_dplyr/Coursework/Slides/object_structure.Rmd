@@ -1,0 +1,179 @@
+---
+title: "Learning More About Object Structures"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["xaringan-themer.css", "slide-style.css"]
+    nature:
+      highlightStyle: solarized-light
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+```{r xaringan-themer, include=FALSE}
+library(xaringanthemer)
+library(xaringan)
+library(showtext)
+library(fontawesome)
+library(tidyverse)
+library(flair)
+
+style_duo_accent(
+  primary_color      = "#0F4C81", # pantone classic blue
+  secondary_color    = "#B6CADA", # pantone baby blue
+  header_font_google = google_font("Raleway"),
+  text_font_google   = google_font("Raleway", "300", "300i"),
+  code_font_google   = google_font("Source Code Pro"),
+  text_font_size     = "30px"
+)
+```
+
+.larger[Object Structures]
+
+Is your object a...
+
+* `vector`?
+
+* `list`?
+
+* `data.frame`?
+
+* `tibble`?
+
+* `matrix`?
+
+* `function`? 
+
+---
+
+.larger[Vectors]
+
+A **vector** is a set of values that are all the same **type**
+
+```{r, error  = TRUE}
+my_vec <- c("a", "b", "c")
+
+str(my_vec)
+
+my_vec <- c(1, 3, 5)
+
+str(my_vec)
+```
+
+---
+
+.larger[Atomic Vectors]
+
+A vector with only **one** element is called an *_atomic vector_.
+
+```{r, error  = TRUE}
+
+my_vec <- 1
+
+```
+
+```{r}
+str(my_vec)
+
+my_vec[1]
+
+```
+
+---
+
+.larger[Matrices]
+
+A **matrix** is a **two-dimensional** set of vectors. 
+
+- Every vector must have the same data type.
+
+```{r, error  = TRUE}
+my_mat <- matrix(c("a", "b", "c", "d"), nrow = 2, ncol = 2)
+
+str(my_mat)
+```
+
+--
+
+Note: If turning  vector into a matrix, be careful with rows and columns!
+
+```{r}
+my_mat
+```
+
+
+---
+
+.larger[Lists]
+
+A **list** is the the **most general** object.  
+
+Any structure and any data type can be stored in a list!
+
+```{r}
+my_list <- list(
+  a = "Well hi there",
+  b = 1:10,
+  c = my_mat
+)
+```
+
+---
+
+.bitlarger[Lists]
+
+```{r}
+my_list
+
+str(my_list)
+
+```
+
+---
+
+.bitlarger[Accessing Elements (Easy)]
+
+```{r}
+my_list$a
+```
+
+---
+
+.bitlarger[Accessing Elements (Hard)]
+
+
+```{r}
+my_list[[1]]
+
+my_list[1]
+```
+
+</br>
+<center>
+
+**What is the difference?**
+
+---
+
+.bitlarger[Accessing Elements (Hard)]
+
+```{r}
+str(my_list[[1]])
+```
+
+--
+
+```{r}
+
+str(my_list[1])
+```

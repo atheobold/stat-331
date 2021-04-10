@@ -1,0 +1,234 @@
+---
+title: "Learning More about Data Types"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["xaringan-themer.css", "slide-style.css"]
+    nature:
+      highlightStyle: solarized-light
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+```{r xaringan-themer, include=FALSE}
+library(xaringanthemer)
+library(xaringan)
+library(showtext)
+library(fontawesome)
+library(tidyverse)
+library(flair)
+
+style_duo_accent(
+  primary_color      = "#0F4C81", # pantone classic blue
+  secondary_color    = "#B6CADA", # pantone baby blue
+  header_font_google = google_font("Raleway"),
+  text_font_google   = google_font("Raleway", "300", "300i"),
+  code_font_google   = google_font("Source Code Pro"),
+  text_font_size     = "30px"
+)
+```
+
+
+.larger[Data Types]
+
+Does your data consist of...
+
+--
+
+* numbers?
+    + integers?
+    + doubles?
+    
+--
+
+* words?
+    + characters/string?
+    + factor?
+    
+--
+
+---
+
+.larger[Other Possibilities]
+
+* `TRUE` or `FALSE` values (*boolean*)?
+
+--
+
+* something else???
+    + Dates and times?
+    + Images?
+    
+
+---
+
+.bitlarger[Data Types: Numeric]
+
+```{r}
+
+a <- 5.5
+
+class(a)
+
+typeof(a)
+
+str(a)
+
+```
+
+---
+
+.bitlarger[Data Types: Numeric]
+  
+```{r}
+is.numeric(a)
+
+is.double(a)
+
+```
+
+---
+
+.hand-medium[What do you think will happen?]
+
+```{r, eval = FALSE}
+a <- 5
+
+is.integer(a)
+```
+
+--
+
+```{r, echo = FALSE}
+a <- 5
+
+is.integer(a)
+```
+
+---
+
+# Data Types: Numeric
+
+Integers are special:
+
+
+```{r, echo = FALSE}
+decorate('a <- 5L') %>%
+  flair("L")
+
+```
+
+```{r}
+is.integer(a)
+
+typeof(a)
+```
+
+
+--
+
+For this class, it won't be important to make the distinction between integers and doubles.
+---
+
+.bitlarger[Data Types: Boolean]
+
+- `0` (`FALSE`)
+- `1` (`TRUE`).
+
+```{r}
+is_5 <- a == 5
+
+is_5
+
+class(is_5)
+
+is_5 + 1
+```
+
+
+
+---
+
+.bitlarger[Data Types: Character]
+
+```{r}
+my_word <- "Allison"
+
+class(my_word)
+
+```
+
+--
+
+```{r}
+
+my_sentence <- "Hi, I'm Allison!"
+
+class(my_sentence)
+```
+--
+
+Another word for a **character** type object is a **string**.
+
+---
+
+.bitlarger[Data Types: Factors]
+
+```{r, echo = FALSE}
+library(palmerpenguins)
+```
+
+```{r}
+head(penguins)
+```
+
+<center>
+</br>
+
+The term `fct` stands for `factor`! 
+
+---
+
+.bitlarger[Data Types: Factors]
+
+Not just *any* string, but specifically defined **categories**.
+
+```{r}
+class(penguins$species)
+
+levels(penguins$species)
+
+str(penguins$species)
+```
+
+---
+
+.bitlarger[Factors **are not** Stored as Characters]
+
+![](images/factors_map.jpeg)   
+
+---
+
+.bitlarger[Warning:  Factors are *weird*]
+
+```{r}
+as.character(penguins$species)
+```
+---
+
+.bitlarger[Warning:  Factors are *weird*]
+
+```{r}
+as.integer(penguins$species)
+```
+

@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Basics: Structures and Types</title>
+    <title>Learning More about Data Types</title>
     <meta charset="utf-8" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="slide-style.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Basics: Structures and Types
-## Week 2
+# Learning More about Data Types
 
 ---
 
@@ -20,11 +21,7 @@ class: center, middle, inverse, title-slide
 
 
 
-class: center, middle, inverse
-# Data Types
-
----
-# Data Types
+.larger[Data Types]
 
 Does your data consist of...
 
@@ -42,6 +39,10 @@ Does your data consist of...
     
 --
 
+---
+
+.larger[Other Possibilities]
+
 * `TRUE` or `FALSE` values (*boolean*)?
 
 --
@@ -52,7 +53,8 @@ Does your data consist of...
     
 
 ---
-# Data Types: Numeric
+
+.bitlarger[Data Types: Numeric]
 
 
 ```r
@@ -82,7 +84,8 @@ str(a)
 ```
 
 ---
-# Data Types: Numeric
+
+.bitlarger[Data Types: Numeric]
   
 
 ```r
@@ -102,9 +105,8 @@ is.double(a)
 ```
 
 ---
-# Data Types: Numeric
 
-*What do you think will happen?*
+.hand-medium[What do you think will happen?]
 
 
 ```r
@@ -128,7 +130,7 @@ Integers are special:
 
 
 
-&lt;code class ='r hljs remark-code'&gt;a &lt;- 5&lt;span style='background-color:#ffff7f'&gt;L&lt;/span&gt;&lt;/code&gt;
+&lt;code class ='r hljs remark-code'&gt;a &lt;- 5&lt;span style="background-color:#ffff7f"&gt;L&lt;/span&gt;&lt;/code&gt;
 
 
 ```r
@@ -152,9 +154,11 @@ typeof(a)
 
 For this class, it won't be important to make the distinction between integers and doubles.
 ---
-# Data Types: Boolean
 
-For Boolean data , you should think of the data as having values `0` (`FALSE`) or `1` (`TRUE`).
+.bitlarger[Data Types: Boolean]
+
+- `0` (`FALSE`)
+- `1` (`TRUE`).
 
 
 ```r
@@ -176,14 +180,6 @@ class(is_5)
 ```
 
 ```r
-as.integer(is_5)
-```
-
-```
-## [1] 1
-```
-
-```r
 is_5 + 1
 ```
 
@@ -194,11 +190,12 @@ is_5 + 1
 
 
 ---
-# Data Types: Character
+
+.bitlarger[Data Types: Character]
 
 
 ```r
-my_word &lt;- "Kelly"
+my_word &lt;- "Allison"
 
 class(my_word)
 ```
@@ -211,7 +208,7 @@ class(my_word)
 
 
 ```r
-my_sentence &lt;- "Hi, I'm Kelly!"
+my_sentence &lt;- "Hi, I'm Allison!"
 
 class(my_sentence)
 ```
@@ -220,12 +217,12 @@ class(my_sentence)
 ## [1] "character"
 ```
 --
+
 Another word for a **character** type object is a **string**.
 
-
 ---
-# Data Types: Factors
 
+.bitlarger[Data Types: Factors]
 
 
 
@@ -235,20 +232,26 @@ head(penguins)
 ```
 
 ```
-## # A tibble: 6 x 7
-##   species island bill_length_mm bill_depth_mm flipper_length_~ body_mass_g sex  
+## # A tibble: 6 x 8
+##   species island bill_length_mm bill_depth_mm flipper_length_… body_mass_g sex  
 ##   &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;int&gt;       &lt;int&gt; &lt;fct&gt;
-## 1 Adelie  Torge~           39.1          18.7              181        3750 male 
-## 2 Adelie  Torge~           39.5          17.4              186        3800 fema~
-## 3 Adelie  Torge~           40.3          18                195        3250 fema~
-## 4 Adelie  Torge~           NA            NA                 NA          NA &lt;NA&gt; 
-## 5 Adelie  Torge~           36.7          19.3              193        3450 fema~
-## 6 Adelie  Torge~           39.3          20.6              190        3650 male
+## 1 Adelie  Torge…           39.1          18.7              181        3750 male 
+## 2 Adelie  Torge…           39.5          17.4              186        3800 fema…
+## 3 Adelie  Torge…           40.3          18                195        3250 fema…
+## 4 Adelie  Torge…           NA            NA                 NA          NA &lt;NA&gt; 
+## 5 Adelie  Torge…           36.7          19.3              193        3450 fema…
+## 6 Adelie  Torge…           39.3          20.6              190        3650 male 
+## # … with 1 more variable: year &lt;int&gt;
 ```
 
+&lt;center&gt;
+&lt;/br&gt;
+
+The term `fct` stands for `factor`! 
 
 ---
-# Data Types: Factors
+
+.bitlarger[Data Types: Factors]
 
 Not just *any* string, but specifically defined **categories**.
 
@@ -277,11 +280,15 @@ str(penguins$species)
 ##  Factor w/ 3 levels "Adelie","Chinstrap",..: 1 1 1 1 1 1 1 1 1 1 ...
 ```
 
+---
+
+.bitlarger[Factors **are not** Stored as Characters]
+
+![](images/factors_map.jpeg)   
 
 ---
-# Data Types: Factors
 
-Warning:  Factors are *weird*
+.bitlarger[Warning:  Factors are *weird*]
 
 
 ```r
@@ -349,9 +356,8 @@ as.character(penguins$species)
 ## [343] "Chinstrap" "Chinstrap"
 ```
 ---
-# Data Types: Factors
 
-Warning:  Factors are *weird*
+.bitlarger[Warning:  Factors are *weird*]
 
 
 ```r
@@ -371,233 +377,15 @@ as.integer(penguins$species)
 ## [334] 2 2 2 2 2 2 2 2 2 2 2
 ```
 
----
-class: center, middle
-# Object Structures
-
----
-
-# Object Structures
-
-Is your object a...
-
-* function?
-
-* vector?
-
-* list?
-
-* data frame?
-
-* matrix?
-
----
-# Vectors
-
-A **vector** is a set of values that are all the same **type**
-
-
-```r
-my_vec &lt;- c("a", "b", "c")
-
-str(my_vec)
-```
-
-```
-##  chr [1:3] "a" "b" "c"
-```
-
-```r
-my_vec &lt;- c(1, 3, 5)
-
-str(my_vec)
-```
-
-```
-##  num [1:3] 1 3 5
-```
-
-```r
-my_vec &lt;- c(1, "a")
-
-str(my_vec)
-```
-
-```
-##  chr [1:2] "1" "a"
-```
-
----
-# Vectors
-
-A vector with only one **element** is called an **atomic vector**.
-
-
-```r
-my_vec &lt;- 1
-
-str(my_vec)
-```
-
-```
-##  num 1
-```
-
-```r
-my_vec[1]
-```
-
-```
-## [1] 1
-```
-
----
-
-# Matrices
-
-A **matrix** is a **two-dimensional** set of values that are all the same type.
-
-
-
-
-```r
-my_mat &lt;- matrix(c("a", "b", "c", "d"), nrow = 2, ncol = 2)
-
-str(my_mat)
-```
-
-```
-##  chr [1:2, 1:2] "a" "b" "c" "d"
-```
-
---
-Note: If turning  vector into a matrix, be careful with rows and columns!
-
-
-```r
-my_mat
-```
-
-```
-##      [,1] [,2]
-## [1,] "a"  "c" 
-## [2,] "b"  "d"
-```
-
-
----
-# Lists
-
-A **list** is the the **most general** object.  Any structure and any data type can be stored in a list!
-
-
-```r
-my_list &lt;- list(
-  a = "Well hi there",
-  b = 1:10,
-  c = my_mat
-)
-
-my_list
-```
-
-```
-## $a
-## [1] "Well hi there"
-## 
-## $b
-##  [1]  1  2  3  4  5  6  7  8  9 10
-## 
-## $c
-##      [,1] [,2]
-## [1,] "a"  "c" 
-## [2,] "b"  "d"
-```
-
----
-# Lists
-
-
-```r
-str(my_list)
-```
-
-```
-## List of 3
-##  $ a: chr "Well hi there"
-##  $ b: int [1:10] 1 2 3 4 5 6 7 8 9 10
-##  $ c: chr [1:2, 1:2] "a" "b" "c" "d"
-```
-
-```r
-my_list$a
-```
-
-```
-## [1] "Well hi there"
-```
-
----
-# Lists: brackets
-
-What is the difference between the following two ways of accessing information in a list?
-
-
-```r
-my_list[[2]]
-```
-
-```
-##  [1]  1  2  3  4  5  6  7  8  9 10
-```
-
-```r
-my_list[2]
-```
-
-```
-## $b
-##  [1]  1  2  3  4  5  6  7  8  9 10
-```
-
----
-# Lists: brackets
-
-What is the difference between the following two ways of accessing information in a list?
-
-
-```r
-str(my_list[[2]])
-```
-
-```
-##  int [1:10] 1 2 3 4 5 6 7 8 9 10
-```
-
---
-
-
-```r
-str(my_list[2])
-```
-
-```
-## List of 1
-##  $ b: int [1:10] 1 2 3 4 5 6 7 8 9 10
-```
-
----
-class: center, middle, inverse
-
-# Check-In: Object structures and data types
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
-"highlightStyle": "github",
+"highlightStyle": "solarized-light",
 "highlightLines": true,
 "countIncrementalSlides": false,
-"ratio": "16:9"
+"ratio": "16:9",
+"slideNumberFormat": "<div class=\"progress-bar-container\">\n  <div class=\"progress-bar\" style=\"width: calc(%current% / %total% * 100%);\">\n  </div>\n</div>"
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));

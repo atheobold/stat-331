@@ -109,6 +109,14 @@ h4 {
   color: var(--classic-blue);
   font-size: 125%;
 }
+
+.hand-medium{
+  font-family: 'Montserat', cursive;
+  color: var(--classic-blue);
+  font-size: 300%;
+}
+
+
 .hand-large{
   font-family: 'Montserat', cursive;
   color: var(--classic-blue);
@@ -199,10 +207,12 @@ ul{
   margin-top: 5px;
   margin-bottom: 5px;
 }
+
 .discussion{
   border-left: solid 5px var(--opal-gray);
   background-color: var(--opal-gray-30);
 }
+
 .discussion:before{
   content: "Discussion";
   font-size: 150%;
@@ -210,11 +220,13 @@ ul{
   color: var(--monument);
   margin-bottom: 10px;
 }
+
 .your-turn {
   border-left: solid 5px var(--cornhusk);
   background-color: var(--cornhusk-30);
   font-size: 25px;
 }
+
 .your-turn:before{
   content: "Your turn!";
   font-size: 150%;
@@ -222,10 +234,12 @@ ul{
   color: var(--stucco);
   margin-bottom: 10px;
 }
+
 .take-home {
   border-left: solid 5px var(--opal-gray);
   background-color: var(--opal-gray-30);
 }
+
 .take-home:before{
   content: "Take home";
   font-size: 150%;
@@ -233,6 +247,7 @@ ul{
   color: var(--monument);
   margin-bottom: 10px;
 }
+
 .alert {
   border-right: solid 5px var(--peach-quartz);
   background-color: var(--peach-quartz-30);

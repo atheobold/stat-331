@@ -1,0 +1,85 @@
+---
+title: "Cereals Activity"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: xaringan-themer.css
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: '16:9'
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+library(tidyverse)
+library(flair)
+library(palmerpenguins)
+```
+
+```{r xaringan-themer, include=FALSE}
+library(xaringanthemer)
+style_duo(
+  primary_color = "#26116c",
+  secondary_color = "#fd5e53",
+  title_slide_text_color = "#fff8e7",
+  header_font_google = google_font("Roboto"),
+  text_font_google   = google_font("Roboto Condensed"),
+  code_font_google   = google_font("Droid Mono")
+)
+```
+
+
+## In `Practice.Rmd`, make a new dataset called `kellogg_calories`, with the following changes:
+
+1. There is a new variable called `cal_per_cup` which shows the number of calories in each cup of cereal.
+
+2. The dataset only includes this new variable, the name of the cereal, and the brand of the cereal.
+
+3. The dataset only includes Kellogg brand cereals
+
+4. The cereals in the dataset are ordered from most to least calories per cup.
+
+**Try to do all these in one sequence of pipes!**
+
+5. Then choose one of the four main plot types (histogram, barplot, boxplot, scatterplot), make an interesting visualization from your `kellog_calories` dataset.
+
+---
+class:center,middle,inverse
+
+# Grouping and summarizing
+---
+# `group_by`
+
+* We have learned how to use the `summarize` functions to get information.
+
+* What if you want to summarize your data within categories?
+
+```{r}
+penguins %>%
+  group_by(species) %>%
+  summarize(mean(body_mass_g))
+
+```
+---
+# Warning!
+
+## You should **always** have a `summarize` after a `group_by`!!!
+
+(There are other ways to use it, but wait until you are very familiar with `dplyr` to try that.)
+
+---
+class: center, middle, inverse
+
+# Your Turn!
+
+---
+# Grouping and summarizing
+
+* Find the average calories per serving for each manufacturer.
+
+* Find the average sugar per serving for hot versus cold cereals.
+
+---
+

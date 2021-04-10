@@ -1,0 +1,284 @@
+---
+title: "Data Wranging with dplyr"
+author: ""
+output:
+  prettydoc::html_pretty:
+    theme: tactile
+    highlight: github
+    css: styles.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+### change this if icons local
+```
+
+```{r, include = FALSE}
+library(tidyverse)
+library(flair)
+library(palmerpenguins)
+```
+
+In this lesson, you'll learn 
+
+- More about packages in R
+
+- More about the differences between `list`s, `data.frame`s, and `tibble`s
+
+- How to wrangle data using the **dplyr** package in 
+the **tidyverse**
+
+</br>
+
+When you are finished with the readings and videos, you should be able to...
+
+* Describe to someone what a function conflict is 
+
+* Describe to someone the similarities and differences between a `list`, a 
+`data.frame`, and a `tibble`
+
+* Identify the **structure** of an object 
+
+* Identify the **data type(s)** of an object  
+
+* Describe to someone what the *tidyverse* is
+
+* Use the five main dplyr verbs:
+
+  * `filter()`
+  
+  * `arrange()`
+  
+  * `select()`
+  
+  * `mutate()`
+  
+  * `summarize()`
+
+* Use `group_by()` to perform groupwise operations
+
+* Use the pipe operator (`%>%`) to chain together data wrangling operations
+
+---
+
+# Part One: Learning More about Packages, Data Types, and Objects (Optional) 
+
+`r emo::ji("play button")` Watch Videos: 30 minutes  
+
+`r emo::ji("book")` Readings: 10 minutes   
+  
+`r emo::ji("check")` Check-ins: 1
+
+## Learning More About Packages in R 
+
+`r emo::ji("play button")` [Required Video: Why do I get this message when I load the tidyverse? -- 8 minutes ](http://somup.com/crf6q4b920)
+
+`r emo::ji("link")` [Link to Slides](Slides/packages.html)
+
+---
+
+## Learning More about Data Types & Objects in R 
+
+`r emo::ji("play button")` [Required Video: Learning More about Data Types -- 11 minutes](http://somup.com/crf6q7b9o6)
+
+`r emo::ji("link")` [Link to Slides](Slides/data_types.html)
+
+`r emo::ji("play button")` [Required Video: A Bit More on Object Structures -- 8 minutes](http://somup.com/crf6YVb9oH)
+
+`r emo::ji("link")` [Link to Slides](Slides/object_structure.html)
+
+`r emo::ji("book")` [Required Reading: Tibbles](https://r4ds.had.co.nz/tibbles.html)
+
+---
+
+`r emo::ji("check")` Chech-in: Data Structures 
+
+This lecture did **not** explicitly discuss the important structure of
+**`data.frames`**.
+
+That's because, in essence, a `data.frame` is simply a special `list` - with
+a few extra restrictions on the `list` format.  
+
+Think about the datasets you have already worked with. Which of the following
+restrictions on a `list` do you think are needed for the `list` to be a
+`data.frame`?
+
+a) The elements of the list must all be vectors of the same length.
+b) The elements of the list must all be the same data type.
+c) The elements of the list must all have no missing values.
+d) The elements of the list must all have names.
+
+---
+
+# Part Two: Wrangling data with dplyr
+
+`r emo::ji("play button")` Watch Videos: 60 minutes  
+
+`r emo::ji("book")` Readings: 0-60 minutes   
+
+`r emo::ji("computer")` Activities: 20-30 minutes  
+  
+`r emo::ji("check")` Check-ins: 2
+
+---
+
+## Introduction to dplyr
+
+`r emo::ji("play button")` [Required Video: Intro to dplyr](https://www.youtube.com/embed/p1NVeYm_DvG0)
+
+`r emo::ji("book")` [Required Reading: Data Transformation](https://r4ds.had.co.nz/transform.html)
+
+`r emo::ji("question")` [Additional Resource: Modern Dive Textbook -- Section 3.1 through 3.6](https://moderndive.com/3-wrangling.html)
+
+## dplyr Verbs
+
+`r emo::ji("play button")` [Required Video: `filter()`](https://www.youtube.com/embed/p1NVeYm_DvG0)
+
+`r emo::ji("play button")` [Required Video: `select()`](https://www.youtube.com/embed/p1NVeYm_DvG0)
+
+`r emo::ji("play button")` [Required Video: `arrange()`](https://www.youtube.com/embed/p1NVeYm_DvG0)
+
+`r emo::ji("play button")` [Required Video: `mutate()`](https://www.youtube.com/embed/p1NVeYm_DvG0)
+
+`r emo::ji("play button")` [Required Video: `summarize()`](https://www.youtube.com/embed/p1NVeYm_DvG0)
+
+`r emo::ji("play button")` [Required Video: `group_by()`](https://www.youtube.com/embed/p1NVeYm_DvG0)
+
+## The Pipe Operator 
+
+`r emo::ji("book")` [Required Reading: Pipes](https://r4ds.had.co.nz/pipes.html)
+
+`r emo::ji("play button")` [Required Video: The pipe operator](https://www.youtube.com/embed/p1NVeYm_DvG0)
+
+`r emo::ji("play button")` [Required Video: Extending the pipe](https://www.youtube.com/embed/p1NVeYm_DvG0)
+
+`r emo::ji("paper")` [Link to Slides](Slides/Intro_to_Tidyverse.html)
+
+## Practice 
+
+`r emo::ji("computer")` [Required Tutorial: Practice with dplyr](https://rstudio.cloud/learn/primers/2)
+
+Cereals Activity: [click to download]()
+
+`r emo::ji("play button")` [Optional Video: Live coding of cereals activity](https://www.youtube.com/watch?v=CgQELANvAZ8)
+
+
+---
+
+`r emo::ji("check")` Check-in: Data Wrangling
+
+
+**Question 1:**  Suppose we would like to study how the ratio of penguin body
+mass to flipper size differs across the species.  Rearrange the following steps
+into an order that accomplishes this goal (assuming the steps are connected with
+a `%>%`).
+
+```{r, include = FALSE}
+penguins %>%
+  mutate(
+    mass_flipper_ratio = body_mass_g/flipper_length_mm
+  ) %>%
+  group_by(species) %>%
+  summarize(
+    avg_mass_flipper_ratio = median(mass_flipper_ratio)
+  ) %>%
+  arrange(avg_mass_flipper_ratio)
+
+#cebda
+```
+
+```{r, eval = FALSE}
+
+# a
+arrange(avg_mass_flipper_ratioo)
+
+
+# b
+group_by(species)
+
+# c
+penguins 
+  
+
+# d
+summarize(
+  avg_mass_flipper_ratioo = median(mass_flipper_ratio)
+)
+  
+# e
+mutate(
+  mass_flipper_ratio = body_mass_g/flipper_length_mm
+)
+  
+```
+
+**Question 2:** 
+
+Consider the base R code below.
+
+
+```{r, eval = FALSE}
+mean(penguins[penguins$species == "Adelie", "body_mass_g"])
+```
+
+<!-- Mean of Adelie specied body mass!  -->
+
+For each of the following `dplyr` pipelines, indicate if it
+
+(i) Returns the exact same thing as the (above) base R code;
+(ii) Returns the correct information, but the wrong object type;
+(iii) Returns incorrect information; or
+(iv) Returns an error
+
+```{r, eval = FALSE}
+# a
+penguins %>%
+  filter("body_mass_g") %>%
+  pull("Adelie") %>%
+  mean()
+
+
+# b
+penguins %>%
+  filter(species == "Adelie") %>%
+  select(body_mass_g) %>%
+  summarize(mean(body_mass_g))
+
+
+# c
+penguins %>%
+  pull(body_mass_g) %>%
+  filter(species == "Adelie") %>%
+  mean()
+
+# d
+penguins %>%
+  filter(species == "Adelie") %>%
+  select(body_mass_g) %>%
+  mean()
+
+# e
+penguins %>%
+  filter(species == "Adelie") %>%
+  pull(body_mass_g) %>%
+  mean()
+
+# f
+penguins %>%
+  select(species == "Adelie") %>%
+  filter(body_mass_g) %>%
+  summarize(mean(body_mass_g))
+```
+
+<!-- A = incorrect filter statement -> Error -->
+
+<!-- B = correct information but a tibble not a vector -->
+
+<!-- C = cannot filter when species is gone -> Error  -->
+
+<!-- D = doesn't return a correct value, no input to mean()  -->
+
+<!-- E = same as base R, vector output -->
+
+<!-- F = flipped filter and select -> Error  -->
+
