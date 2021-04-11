@@ -1,0 +1,38 @@
+
+
+#### Step 1  
+
+<!-- Move to next week! -->
+
+Aubrey hopes that his songs will be percieved as authentically hiphop. He hopes
+his lyrics will be recognizeable to those who describe themselves as hiphop
+fans, but less recognizeable to those who do not consider themselves fans. 
+Suggest some words or phrases that Aubrey should try to use, and some words he
+should avoid. 
+
+*Hint: Do not simply find the most popular words in each category.  Think about words that are very different between hiphop fans and nonfans.*
+
+```{r}
+
+fans <- hiphop %>% 
+  ## At least the top third of genres
+  filter(hiphop >= 7) %>%
+  group_by(word) %>% 
+  summarize(avg_fam = mean(familiarity))
+
+not_fans <- hiphop %>% 
+  ## Hiphop in the lowest third of genres
+  filter(hiphop < 4) %>%
+  group_by(word) %>% 
+  summarize(avg_fam = mean(familiarity))
+
+
+new <- full_join(fans, not_fans, by = "word") %>%
+  mutate(
+    diff = avg_fam.x - avg_fam.y
+  ) 
+
+new %>% top_n(5, diff)
+new %>% top_n(5, desc(diff))
+
+```

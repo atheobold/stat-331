@@ -93,6 +93,8 @@ When you are finished with the readings and videos, you should be able to...
 
 `r emo::ji("check")` Chech-in: Data Structures 
 
+**Question 1:** 
+
 This lecture did **not** explicitly discuss the important structure of
 **`data.frames`**.
 
@@ -108,7 +110,22 @@ b) The elements of the list must all be the same data type.
 c) The elements of the list must all have no missing values.
 d) The elements of the list must all have names.
 
+**Question 2:**
+
+Tibbles are described as "opinionated" dataframes. Which of the following are
+true about a `tibble`'s behavior? 
+
+- `tibble`s only print the first 10 rows of a dataset
+
+- `tibble`s allow for non-syntactic variable names, like `:)`
+
+- `tibble`s never convert strings to factors
+
+- `tibble`s create row names
+
+
 ---
+
 
 # Part Two: Wrangling data with dplyr
 

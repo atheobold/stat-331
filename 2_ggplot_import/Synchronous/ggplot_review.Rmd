@@ -33,8 +33,8 @@ library(gridExtra)
 .pull-left[
 ```{r, echo = FALSE}
 penguins %>% 
-  ggplot(aes(x = bill_length_mm, y = species, fill = sex)) + 
-  geom_density_ridges(alpha = 0.5)
+  ggplot(aes(x = bill_length_mm, y = species, color = sex)) + 
+  geom_density_ridges(alpha = 0.5, scale = 1)
 
 ```
 ]
