@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>It’s a Party Now – Making Groups</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="slide-style.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# It’s a Party Now – Making Groups
+
+---
+
+
+
+
+
+
+
+
+.larger[Making Groups]
+
+Verb: `group_by()`
+
+Separating a **categorical** variable into its different levels. 
+
+
+
+
+
+&lt;code class ='r hljs remark-code'&gt;&lt;span style="background-color:#ffff7f"&gt;group_by&lt;/span&gt;(cereals, temp)&lt;/code&gt;
+
+---
+
+.larger[A grouped dataset?]
+
+
+```r
+group_by(cereals, mfr)
+```
+
+```
+## # A tibble: 77 x 16
+## # Groups:   mfr [7]
+##    name      mfr   temp  calories protein   fat sodium fiber carbo sugars potass
+##    &lt;chr&gt;     &lt;fct&gt; &lt;fct&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+##  1 100% Bran N     C           70       4     1    130  10     5        6    280
+##  2 100% Nat~ Q     C          120       3     5     15   2     8        8    135
+##  3 All-Bran  K     C           70       4     1    260   9     7        5    320
+##  4 All-Bran~ K     C           50       4     0    140  14     8        0    330
+##  5 Almond D~ R     C          110       2     2    200   1    14        8     -1
+##  6 Apple Ci~ G     C          110       2     2    180   1.5  10.5     10     70
+##  7 Apple Ja~ K     C          110       2     0    125   1    11       14     30
+##  8 Basic 4   G     C          130       3     2    210   2    18        8    100
+##  9 Bran Chex R     C           90       2     1    200   4    15        6    125
+## 10 Bran Fla~ P     C           90       3     0    210   5    13        5    190
+## # ... with 67 more rows, and 5 more variables: vitamins &lt;dbl&gt;, shelf &lt;dbl&gt;,
+## #   weight &lt;dbl&gt;, cups &lt;dbl&gt;, rating &lt;dbl&gt;
+```
+
+---
+
+.larger[A friend!]
+
+`group_by()` is almost always paired with `summarize()` 
+
+&lt;/br&gt;
+&lt;center&gt;
+
+.larger[How?]
+
+---
+
+.larger[Option #1: Nesting]
+
+
+```r
+summarise(
+  group_by(cereals, mfr), 
+  mean_cal = mean(calories)
+)
+```
+
+```
+## # A tibble: 7 x 2
+##   mfr   mean_cal
+##   &lt;fct&gt;    &lt;dbl&gt;
+## 1 N         86.7
+## 2 Q         95  
+## 3 K        109. 
+## 4 R        115  
+## 5 G        111. 
+## 6 P        109. 
+## 7 A        100
+```
+
+---
+
+.bitlarger[Option #2: Intermediate Variable]
+
+
+```r
+groups &lt;- group_by(cereals, mfr)
+
+summarise(groups, mean_cal = mean(calories))
+```
+
+```
+## # A tibble: 7 x 2
+##   mfr   mean_cal
+##   &lt;fct&gt;    &lt;dbl&gt;
+## 1 N         86.7
+## 2 Q         95  
+## 3 K        109. 
+## 4 R        115  
+## 5 G        111. 
+## 6 P        109. 
+## 7 A        100
+```
+
+---
+
+.larger[Option #3: The pipe]
+
+
+```r
+cereals %&gt;% 
+  group_by(mfr) %&gt;% 
+  summarise(mean_cal = mean(calories))
+```
+
+```
+## # A tibble: 7 x 2
+##   mfr   mean_cal
+##   &lt;fct&gt;    &lt;dbl&gt;
+## 1 N         86.7
+## 2 Q         95  
+## 3 K        109. 
+## 4 R        115  
+## 5 G        111. 
+## 6 P        109. 
+## 7 A        100
+```
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "solarized-light",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9",
+"slideNumberFormat": "<div class=\"progress-bar-container\">\n  <div class=\"progress-bar\" style=\"width: calc(%current% / %total% * 100%);\">\n  </div>\n</div>"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

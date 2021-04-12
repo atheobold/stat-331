@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Getting Fancy – Arranging Some Data</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="slide-style.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Getting Fancy – Arranging Some Data
+
+---
+
+
+
+
+
+
+
+
+# Ordering
+
+Verb: `arrange()`
+
+We **arrange** the dataset in order of a particular variable.
+
+
+```r
+arrange(cereals, calories)
+```
+
+```
+## # A tibble: 77 x 16
+##    name      mfr   type  calories protein   fat sodium fiber carbo sugars potass
+##    &lt;chr&gt;     &lt;fct&gt; &lt;fct&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+##  1 All-Bran~ K     C           50       4     0    140    14     8      0    330
+##  2 Puffed R~ Q     C           50       1     0      0     0    13      0     15
+##  3 Puffed W~ Q     C           50       2     0      0     1    10      0     50
+##  4 100% Bran N     C           70       4     1    130    10     5      6    280
+##  5 All-Bran  K     C           70       4     1    260     9     7      5    320
+##  6 Shredded~ N     C           80       2     0      0     3    16      0     95
+##  7 Bran Chex R     C           90       2     1    200     4    15      6    125
+##  8 Bran Fla~ P     C           90       3     0    210     5    13      5    190
+##  9 Nutri-gr~ K     C           90       3     0    170     3    18      2     90
+## 10 Raisin S~ K     C           90       2     0      0     2    15      6    110
+## # ... with 67 more rows, and 5 more variables: vitamins &lt;dbl&gt;, shelf &lt;dbl&gt;,
+## #   weight &lt;dbl&gt;, cups &lt;dbl&gt;, rating &lt;dbl&gt;
+```
+
+---
+
+.larger[Descending Order]
+
+.pull-left[
+Default is ascending order!
+
+
+```r
+arrange(cereals, calories)
+```
+]
+
+.pull-right[
+Need to add `desc()` to get descending order! 
+
+
+```r
+arrange(cereals, desc(calories))
+```
+
+]
+
+---
+
+.larger[Related: `top_n()`]
+
+
+```r
+top_n(cereals, 3, sugars)
+```
+
+```
+## # A tibble: 5 x 16
+##   name       mfr   type  calories protein   fat sodium fiber carbo sugars potass
+##   &lt;chr&gt;      &lt;fct&gt; &lt;fct&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1 Apple Jac~ K     C          110       2     0    125     1    11     14     30
+## 2 Golden Cr~ P     C          100       2     0     45     0    11     15     40
+## 3 Post Nat.~ P     C          120       3     1    200     6    11     14    260
+## 4 Smacks     K     C          110       2     1     70     1     9     15     40
+## 5 Total Rai~ G     C          140       3     1    190     4    15     14    230
+## # ... with 5 more variables: vitamins &lt;dbl&gt;, shelf &lt;dbl&gt;, weight &lt;dbl&gt;,
+## #   cups &lt;dbl&gt;, rating &lt;dbl&gt;
+```
+
+---
+
+.larger[Function Arguments]
+
+This is correct, but lazy. 
+
+
+```r
+top_n(cereals, 3, sugars)
+```
+
+This is **much** better practice!
+
+
+```r
+top_n(x = cereals, n = 3, wt = sugars)
+```
+
+---
+
+.larger[`bottom_n()` ?] 
+
+
+```r
+top_n(cereals, n = 3, wt = desc(sugars))
+```
+
+```
+## # A tibble: 8 x 16
+##   name       mfr   type  calories protein   fat sodium fiber carbo sugars potass
+##   &lt;chr&gt;      &lt;fct&gt; &lt;fct&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1 All-Bran ~ K     C           50       4     0    140  14       8      0    330
+## 2 Cream of ~ N     H          100       3     0     80   1      21      0     -1
+## 3 Puffed Ri~ Q     C           50       1     0      0   0      13      0     15
+## 4 Puffed Wh~ Q     C           50       2     0      0   1      10      0     50
+## 5 Quaker Oa~ Q     H          100       5     2      0   2.7    -1     -1    110
+## 6 Shredded ~ N     C           80       2     0      0   3      16      0     95
+## 7 Shredded ~ N     C           90       3     0      0   4      19      0    140
+## 8 Shredded ~ N     C           90       3     0      0   3      20      0    120
+## # ... with 5 more variables: vitamins &lt;dbl&gt;, shelf &lt;dbl&gt;, weight &lt;dbl&gt;,
+## #   cups &lt;dbl&gt;, rating &lt;dbl&gt;
+```
+
+---
+
+.larger[Data Investigation]
+
+
+```r
+arrange(cereals, sugars, carbo)
+```
+
+```
+## # A tibble: 77 x 16
+##    name      mfr   type  calories protein   fat sodium fiber carbo sugars potass
+##    &lt;chr&gt;     &lt;fct&gt; &lt;fct&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+##  1 Quaker O~ Q     H          100       5     2      0   2.7    -1     -1    110
+##  2 All-Bran~ K     C           50       4     0    140  14       8      0    330
+##  3 Puffed W~ Q     C           50       2     0      0   1      10      0     50
+##  4 Puffed R~ Q     C           50       1     0      0   0      13      0     15
+##  5 Shredded~ N     C           80       2     0      0   3      16      0     95
+##  6 Shredded~ N     C           90       3     0      0   4      19      0    140
+##  7 Shredded~ N     C           90       3     0      0   3      20      0    120
+##  8 Cream of~ N     H          100       3     0     80   1      21      0     -1
+##  9 Cheerios  G     C          110       6     2    290   2      17      1    105
+## 10 Nutri-gr~ K     C           90       3     0    170   3      18      2     90
+## # ... with 67 more rows, and 5 more variables: vitamins &lt;dbl&gt;, shelf &lt;dbl&gt;,
+## #   weight &lt;dbl&gt;, cups &lt;dbl&gt;, rating &lt;dbl&gt;
+```
+
+---
+
+.larger[Tying to `mutate()`]
+
+Missing values were recorded as `-1`. Let's fix that!
+
+
+```r
+cereals &lt;- mutate_all(cereals, ~na_if(. , -1))
+```
+
+---
+
+.larger[`mutate_all()`]
+
+![](images/mutate_all.jpg)
+
+---
+
+
+.larger[`na_if()`]
+
+![](images/na_if.jpg)
+
+---
+
+
+.larger[Checking our work]
+
+
+```r
+arrange(cereals, sugars)
+```
+
+```
+## # A tibble: 77 x 16
+##    name      mfr   type  calories protein   fat sodium fiber carbo sugars potass
+##    &lt;chr&gt;     &lt;fct&gt; &lt;fct&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+##  1 All-Bran~ K     C           50       4     0    140    14     8      0    330
+##  2 Cream of~ N     H          100       3     0     80     1    21      0     NA
+##  3 Puffed R~ Q     C           50       1     0      0     0    13      0     15
+##  4 Puffed W~ Q     C           50       2     0      0     1    10      0     50
+##  5 Shredded~ N     C           80       2     0      0     3    16      0     95
+##  6 Shredded~ N     C           90       3     0      0     4    19      0    140
+##  7 Shredded~ N     C           90       3     0      0     3    20      0    120
+##  8 Cheerios  G     C          110       6     2    290     2    17      1    105
+##  9 Corn Fla~ K     C          100       2     0    290     1    21      2     35
+## 10 Nutri-gr~ K     C           90       3     0    170     3    18      2     90
+## # ... with 67 more rows, and 5 more variables: vitamins &lt;dbl&gt;, shelf &lt;dbl&gt;,
+## #   weight &lt;dbl&gt;, cups &lt;dbl&gt;, rating &lt;dbl&gt;
+```
+
+---
+
+&lt;center&gt;
+
+![](images/high_five.jpg)
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "solarized-light",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9",
+"slideNumberFormat": "<div class=\"progress-bar-container\">\n  <div class=\"progress-bar\" style=\"width: calc(%current% / %total% * 100%);\">\n  </div>\n</div>"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

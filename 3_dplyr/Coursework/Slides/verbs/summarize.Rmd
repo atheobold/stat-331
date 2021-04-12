@@ -45,49 +45,129 @@ cereals <- read_csv("../practice/cereals.csv") %>%
 ```
 
 
-# Summarizing specifics
+.larger[Summarizing Variables]
+
+Verb: `summarize()`
+
+We calculate different **summaries** of variables in the dataset.
+
+```{r summarize, echo = FALSE, eval = FALSE}
+summarize(cereals, 
+          mean_calories = mean(calories)
+)
+```
+
 
 ```{r, echo = FALSE}
-decorate('
-penguins %>%
-  summarize(mean_mass = mean(body_mass_g))
-  ') %>% 
-  flair("ize(") %>% 
-  flair("mean", color = "teal") %>%
-  flair("body_mass_g", color = "cornflowerblue")
+decorate("summarize") %>% 
+  flair("summarize") %>% 
+  flair("mean_calories", color = "teal") %>%
+  flair("mean(calories)")
 ```
 
 --
 
-* What are the **required** arguments of `summarize`?  
+.larger[Function Arguments]
+
+* What are the **required** arguments of `summarize()`?
+
+--
+
+- dataset to summarize
+- name-value pairs of summary functions
+
+--
 
 * Are there any optional arguments?
 
+- `.groups` -- grouping structure of result
+- will explain further in `group_by()`
+
 ---
 
-# Many variables?  Many summary statistics?
-## No problemo
+.larger[Many Summaries]
+
+```{r many, echo = FALSE, eval = FALSE}
+summarize(cereals, 
+          mean_calories = mean(calories), 
+          num_cereals = n(), 
+          mean_sugar = mean(sugars)
+)
+```
 
 ```{r, echo = FALSE}
-decorate('
-penguins %>%
-  summarize(across(c(body_mass_g, flipper_length_mm),
-            list(mean, median)))
-  ') %>% 
-  flair("across") %>%
-  flair_rx("(mean)|(median)", color = "teal") %>%
-  flair_rx("(body_mass_g)|(flipper_length_mm)", color = "cornflowerblue") %>%
+decorate("many") %>% 
+  flair(pattern = "mean_calories", color = "blue") %>% 
+  flair(pattern = "num_cereals",  color = "purple") %>% 
+  flair(pattern = "mean_sugar", color = "green")
+```
+
+
+---
+
+.larger[Handy Helpers]
+
+- `mean()`, `median()`, `sd()`, `sum()`
+- `n()`, `n_distinct()` 
+- `min()`, `max()`
+- `first()`, `last()`, `nth()`
+
+---
+
+
+class: inverse
+
+.larger[What if I want summaries for **every** nutritional variable?]
+
+---
+
+.larger[`summarize_at()`]
+
+```{r across, eval = FALSE, echo = FALSE}
+summarize_at(cereals,
+             vars(protein:potass), 
+                 list(mean = ~ mean(.x, na.rm = TRUE),
+                      median = ~ median(.x, na.rm = TRUE))
+                )
+```
+
+```{r, echo = FALSE}
+decorate("across", eval = FALSE) %>% 
+  flair("summarize_at") %>%
+  flair_rx("vars", color = "cornflowerblue") %>%
   flair_rx("list", color = "darkred")
 ```
----
-class: center, middle, inverse
 
-# Your Turn!
 
 ---
-class: center, middle
-# In `Practice.Rmd`, find the following:
 
-* Mean, Median, and standard deviation of the sugar content of cereals
+.larger[Select the Variables]
 
-* Total calories if I ate one serving of every single cereal in the dataset.
+![](images/summarize_at1.jpg)
+
+---
+
+.larger[Declare Functions]
+
+![](images/summarize_at2.jpg)
+
+---
+
+![](images/summarize_at3.jpg)
+---
+
+.larger[Neato!]
+
+.pull-left-wide[
+```{r, echo = FALSE}
+summarize_at(cereals,
+             vars(protein:potass), 
+                 list(mean = ~ mean(.x, na.rm = TRUE),
+                      median = ~ median(.x, na.rm = TRUE))
+                )
+```
+]
+
+.pull-right[
+![](images/ellen_justin.jpg)
+]

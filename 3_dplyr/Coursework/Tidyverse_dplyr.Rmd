@@ -166,15 +166,15 @@ $\hspace{0.25in}$ `r emo::ji("link")` [Link to Slides](Slides/verbs/select.html)
 
 $\hspace{0.25in}$ `r emo::ji("link")` [Link to Slides](Slides/verbs/mutate.html)
 
-`r emo::ji("play button")` [Required Video: `arrange()` -- will be posted 4/12 by 9am]()
+`r emo::ji("play button")` [Required Video: `arrange()` -- 7 minutes](http://somup.com/crfl2abSgF)
 
 $\hspace{0.25in}$ `r emo::ji("link")` [Link to Slides](Slides/verbs/arrange.html)
 
-`r emo::ji("play button")` [Required Video: `summarize()`-- will be posted 4/12 by 9am]()
+`r emo::ji("play button")` [Required Video: `summarize()`-- 8 minutes](http://somup.com/crflFLbWom)
 
 $\hspace{0.25in}$ `r emo::ji("link")` [Link to Slides](Slides/verbs/summarize.html)
 
-`r emo::ji("play button")` [Required Video: `group_by()` -- will be posted 4/11 by 9pm]()
+`r emo::ji("play button")` [Required Video: `group_by()` -- 6 minutes](http://somup.com/crflqbbWFy)
 
 $\hspace{0.25in}$ `r emo::ji("link")` [Link to Slides](Slides/verbs/group_by.html)
 
@@ -183,11 +183,11 @@ $\hspace{0.25in}$ `r emo::ji("link")` [Link to Slides](Slides/verbs/group_by.htm
 
 `r emo::ji("book")` [Required Reading: Pipes](https://r4ds.had.co.nz/pipes.html)
 
-`r emo::ji("play button")` [Required Video: The pipe operator -- will be posted 4/12 by 9am]()
+`r emo::ji("play button")` [Required Video: The pipe operator -- ]()
 
 $\hspace{0.25in}$ `r emo::ji("link")` [Link to Slides](Slides/extensions/pipe.html)
 
-`r emo::ji("play button")` [Required Video: Extending the pipe -- will be posted 4/12 by 9am]()
+`r emo::ji("play button")` [Required Video: Extending the pipe -- ]()
 
 $\hspace{0.25in}$ `r emo::ji("link")` [Link to Slides](Slides/extensions/extend_pipe.html)
 

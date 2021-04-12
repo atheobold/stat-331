@@ -51,41 +51,106 @@ Verb: `arrange()`
 We **arrange** the dataset in order of a particular variable.
 
 ```{r}
-penguins %>% 
-  arrange(body_mass_g)
+arrange(cereals, calories)
 ```
 
 ---
 
-## Related: `top_n`
+.larger[Descending Order]
+
+.pull-left[
+Default is ascending order!
+
+```{r, eval = FALSE}
+arrange(cereals, calories)
+```
+]
+
+.pull-right[
+Need to add `desc()` to get descending order! 
+
+```{r, eval = FALSE}
+arrange(cereals, desc(calories))
+```
+
+]
+
+---
+
+.larger[Related: `top_n()`]
 
 ```{r}
-penguins %>%
-  top_n(3, body_mass_g)
+top_n(cereals, 3, sugars)
 ```
 
 ---
 
-# Quick check in!
+.larger[Function Arguments]
 
-Remember,
-
-```{r, eval = FALSE}
-penguins %>%
-  top_n(3, body_mass_g)
-```
-
-is the same as
+This is correct, but lazy. 
 
 ```{r, eval = FALSE}
-top_n(penguins, 3, body_mass_g)
+top_n(cereals, 3, sugars)
 ```
 
-or
+This is **much** better practice!
 
 ```{r, eval = FALSE}
-top_n(x = penguins, n = 3, wt = body_mass_g)
+top_n(x = cereals, n = 3, wt = sugars)
 ```
 
-4. The cereals in the dataset are ordered from most to least calories per cup.
+---
+
+.larger[`bottom_n()` ?] 
+
+```{r}
+top_n(cereals, n = 3, wt = desc(sugars))
+```
+
+---
+
+.larger[Data Investigation]
+
+```{r}
+arrange(cereals, sugars, carbo)
+```
+
+---
+
+.larger[Tying to `mutate()`]
+
+Missing values were recorded as `-1`. Let's fix that!
+
+```{r}
+cereals <- mutate_all(cereals, ~na_if(. , -1))
+```
+
+---
+
+.larger[`mutate_all()`]
+
+![](images/mutate_all.jpg)
+
+---
+
+
+.larger[`na_if()`]
+
+![](images/na_if.jpg)
+
+---
+
+
+.larger[Checking our work]
+
+```{r}
+arrange(cereals, sugars)
+```
+
+---
+
+<center>
+
+![](images/high_five.jpg)
+
 
