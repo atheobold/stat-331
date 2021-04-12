@@ -187,7 +187,7 @@ $\hspace{0.25in}$ `r emo::ji("link")` [Link to Slides](Slides/verbs/group_by.htm
 
 $\hspace{0.25in}$ `r emo::ji("link")` [Link to Slides](Slides/extensions/pipe.html)
 
-`r emo::ji("play button")` [Required Video: Extending the pipe -- ]()
+`r emo::ji("play button")` [Required Video: Extending the pipe -- 3 minutes ](http://somup.com/crflYmbWup)
 
 $\hspace{0.25in}$ `r emo::ji("link")` [Link to Slides](Slides/extensions/extend_pipe.html)
 

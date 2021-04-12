@@ -72,7 +72,7 @@ decorate("pipe", message = FALSE, eval = FALSE) %>%
   flair(pattern = "+")
 ```
 
-```{r, echo = FALSE, out.width = "30%", fig.align='center'}
+```{r, echo = FALSE, out.width = "35%", fig.align='center'}
 cereals %>%
   filter(temp == "C") %>%
   ggplot(aes(x = calories)) +
