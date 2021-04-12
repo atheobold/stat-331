@@ -1,0 +1,10 @@
+# Plotting: The pipe is your friend
+
+Want a histogram of body mass for just *Adelie* species penguins?  Pipe it through `filter()` first!
+
+```{r, message = FALSE, fig.height=4}
+penguins %>%
+  filter(species == "Adelie") %>%
+  ggplot(aes(x = body_mass_g)) +
+    geom_histogram(bins = 20)
+```

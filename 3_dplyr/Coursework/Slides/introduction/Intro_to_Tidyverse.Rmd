@@ -1,5 +1,5 @@
 ---
-title: "Intro to the Tidyverse"
+title: "An Introduction to the tidyverse & dplyr"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -75,13 +75,16 @@ The term `base R` is sometimes used as an alternative, to refer to only R's buil
 
 ---
 
-# The tidyverse
+</br>
+</br>
 
-* One philosophy of the **tidyverse** is building **pipe-friendly** functions.
+>Programs must be written for people to read, and only incidentally for 
+> machines to execute.
+>
+>— Hal Abelson
 
-* Another philosophy is using **English verbs** as function names instead of symbols or abbreviations.
-
-* Some consider this more accessible/readable
+</br>
+</br>
 
 ```{r, eval = FALSE}
 penguins %>%
@@ -93,6 +96,23 @@ penguins %>%
 penguins[penguins$species == "Adelie",]
 ```
 
+---
+
+
+# The Philosophy of the tidyverse
+
+- Keep functions as simple as possible 
+  * Each function should do one thing well 
+  
+--
+
+- Function names should be verbs
+  * When many functions use the same verb, focus on noun (ggplot2)
+  * Favor explicit, lengthy names, over short, implicit, names
+
+--
+
+- Build **pipe-friendly** functions
 
 ---
 
@@ -109,7 +129,6 @@ penguins[penguins$species == "Adelie",]
 --
 
 * Semi-guaranteed maintenance of packages
-
 (because RStudio pays developers!)
 
 --

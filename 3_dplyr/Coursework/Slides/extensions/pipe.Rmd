@@ -1,0 +1,153 @@
+---
+title: "Data Wrangling with dplyr"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["xaringan-themer.css", "slide-style.css"]
+    nature:
+      highlightStyle: solarized-light
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+```{r xaringan-themer, include=FALSE}
+library(xaringanthemer)
+library(xaringan)
+library(showtext)
+library(fontawesome)
+library(tidyverse)
+library(flair)
+library(palmerpenguins)
+
+style_duo_accent(
+  primary_color      = "#0F4C81", # pantone classic blue
+  secondary_color    = "#B6CADA", # pantone baby blue
+  header_font_google = google_font("Raleway"),
+  text_font_google   = google_font("Raleway", "300", "300i"),
+  code_font_google   = google_font("Source Code Pro"),
+  text_font_size     = "30px"
+)
+```
+
+
+class: center, middle, invert
+
+# Cleaning and transforming data
+
+<img src="https://d33wubrfki0l68.cloudfront.net/071952491ec4a6a532a3f70ecfa2507af4d341f9/c167c/images/hex-dplyr.png" width=300>
+
+
+---
+class: center, middle, inverse
+
+# Prerequisite:  The Pipe  `%>%`
+
+>No matter how complex and polished the individual operations are, it is often the >quality of the glue that most directly determines the power of the system.
+>
+>— Hal Abelson
+
+---
+# Prerequisite: The Pipe
+
+* Part of the `magrittr` package (installs with the tidyverse)
+
+---
+
+```{r, echo=FALSE, out.width = '70%', fig.align = "center"}
+knitr::include_graphics(here::here("Images", "other", "ceci_pipe.jpeg"))
+```
+
+---
+```{r, echo=FALSE, out.width = '50%', fig.align = "center"}
+knitr::include_graphics(here::here("Images", "other", "magrittr_hex.png"))
+```
+
+---
+# Prerequisite: The Pipe
+
+* Part of the `magrittr` package (installs with the tidyverse)
+
+--
+
+* Idea:  The **data** is the primary object, so it should come first in your code.
+
+--
+
+* Idea:  Code should read **like a sentence**
+
+--
+
+```{r, echo=FALSE, fig.align = "center"}
+knitr::include_graphics(here::here("Images", "other", "diagram_sentence.jpg"))
+```
+
+
+---
+# The Pipe
+
+```{r, eval = FALSE}
+dr_bodwin %>%
+  do_a_dance()
+```
+--
+
+```{r, eval = FALSE}
+dr_bodwin %>%
+  put_on("cool hat") %>%
+  do_a_dance(type = "macarena")
+```
+
+---
+
+```{r pipe, echo=FALSE, out.width = "30%", fig.align = "center"}
+knitr::include_graphics(here::here("Images", "silly_gifs", "pipe.png"))
+```
+
+---
+
+# The Pipe
+
+```{r, echo = FALSE}
+decorate('penguins %>% summary()', eval = FALSE) %>% 
+  flair("%>%") %>% 
+  flair_funs(color = "teal")
+```
+
+is the same as
+
+```{r, echo = FALSE}
+decorate('summary(penguins)', eval = FALSE) %>% 
+  flair_funs(color = "teal")
+```
+
+---
+# The Pipe
+
+What do you think the following will do?
+
+```{r, eval = FALSE}
+penguins %>%
+  filter(species == "Adelie") %>%
+  arrange(body_mass_g)
+```
+
+---
+# The Pipe
+
+What do you think the following will do?
+
+```{r}
+penguins %>%
+  filter(species == "Adelie") %>%
+  arrange(body_mass_g)
+```

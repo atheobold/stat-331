@@ -1,0 +1,127 @@
+---
+title: "Next Steps -- Selecting Columns"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["xaringan-themer.css", "slide-style.css"]
+    nature:
+      highlightStyle: solarized-light
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+```{r xaringan-themer, include=FALSE}
+library(xaringanthemer)
+library(xaringan)
+library(showtext)
+library(fontawesome)
+library(tidyverse)
+library(flair)
+
+style_duo_accent(
+  primary_color      = "#0F4C81", # pantone classic blue
+  secondary_color    = "#B6CADA", # pantone baby blue
+  header_font_google = google_font("Raleway"),
+  text_font_google   = google_font("Raleway", "300", "300i"),
+  code_font_google   = google_font("Source Code Pro"),
+  text_font_size     = "30px"
+)
+```
+
+```{r, echo = FALSE, message = FALSE}
+cereals <- read_csv("../practice/cereals.csv") %>% 
+  mutate(type = as_factor(type), 
+         mfr = as_factor(mfr))
+```
+
+.large[Selecting]
+
+Verb: `select()`
+
+We **select** which variables we would like to remain in the dataset.
+
+```{r}
+select(cereals, 
+       name, mfr, calories, cups)
+       
+```
+
+---
+
+.larger[Selecting a Range of Columns]
+
+You can use the `:` to select a sequence of columns! 
+
+```{r range, eval = FALSE, echo = FALSE}
+select(cereals, 
+       name:calories)
+```
+
+```{r, echo = FALSE}
+decorate("range", eval = FALSE) %>% 
+  flair(pattern = ":")
+```
+
+
+---
+
+.larger[Omitting Columns]
+
+You can remove columns from the dataset using a `-`. 
+
+```{r omit, eval = FALSE, echo = FALSE}
+select(cereals, 
+       -rating)
+```
+
+```{r, echo = FALSE}
+decorate("omit", eval = FALSE) %>% 
+  flair(pattern = "-")
+```
+
+---
+
+.larger[Reordering]
+
+You can reorder the columns in the dataset inside of `select()`!
+
+```{r}
+select(cereals, name, rating, mfr, type, calories, cups, weight, 
+       everything())
+```
+
+
+---
+
+.larger[Handy Helpers]
+
+- `:`
+- `-`
+- `everything()`
+- `starts_with()`
+- `ends_with()`
+- `contains()`
+
+---
+
+.large[A Note on Renaming Columns]
+
+- You can use `select()` to rename, but all columns not included will be deleted! 
+  * Using the `rename()` function is easier! 
+
+```{r}
+rename(cereals, temp = type)
+```
+
+
+

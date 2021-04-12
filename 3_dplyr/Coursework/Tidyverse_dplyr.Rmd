@@ -1,11 +1,16 @@
 ---
 title: "Data Wranging with dplyr"
-author: ""
+author: ''
 output:
   prettydoc::html_pretty:
     theme: tactile
     highlight: github
     css: styles.css
+resource_files:
+- Slides/verbs/filter.html
+- Slides/data types, objects, packages/packages.html
+- Slides/data types, objects, packages/data_types.html
+- Slides/data types, objects, packages/object_structure.html
 ---
 
 ```{r setup, include=FALSE}
@@ -73,7 +78,7 @@ When you are finished with the readings and videos, you should be able to...
 
 `r emo::ji("play button")` [Required Video: Why do I get this message when I load the tidyverse? -- 8 minutes ](http://somup.com/crf6q4b920)
 
-`r emo::ji("link")` [Link to Slides](Slides/packages.html)
+$\hspace{1in}$ `r emo::ji("link")` [Link to Slides](Slides/packages.html)
 
 ---
 
@@ -81,17 +86,17 @@ When you are finished with the readings and videos, you should be able to...
 
 `r emo::ji("play button")` [Required Video: Learning More about Data Types -- 11 minutes](http://somup.com/crf6q7b9o6)
 
-`r emo::ji("link")` [Link to Slides](Slides/data_types.html)
+$\hspace{1in}$ `r emo::ji("link")` [Link to Slides](Slides/data_types.html)
 
 `r emo::ji("play button")` [Required Video: A Bit More on Object Structures -- 8 minutes](http://somup.com/crf6YVb9oH)
 
-`r emo::ji("link")` [Link to Slides](Slides/object_structure.html)
+$\hspace{1in}$ `r emo::ji("link")` [Link to Slides](Slides/object_structure.html)
 
 `r emo::ji("book")` [Required Reading: Tibbles](https://r4ds.had.co.nz/tibbles.html)
 
 ---
 
-`r emo::ji("check")` Chech-in: Data Structures 
+`r emo::ji("check")` **Check-in: Data Structures**
 
 **Question 1:** 
 
@@ -135,13 +140,13 @@ true about a `tibble`'s behavior?
 
 `r emo::ji("computer")` Activities: 20-30 minutes  
   
-`r emo::ji("check")` Check-ins: 2
+`r emo::ji("check")` Check-ins: 1
 
 ---
 
 ## Introduction to dplyr
 
-`r emo::ji("play button")` [Required Video: Intro to dplyr](https://www.youtube.com/embed/p1NVeYm_DvG0)
+`r emo::ji("play button")` [Required Video: Intro to the tidyverse & dplyr -- 8 minutes](http://somup.com/crflc4bRy6)
 
 `r emo::ji("book")` [Required Reading: Data Transformation](https://r4ds.had.co.nz/transform.html)
 
@@ -149,40 +154,51 @@ true about a `tibble`'s behavior?
 
 ## dplyr Verbs
 
-`r emo::ji("play button")` [Required Video: `filter()`](https://www.youtube.com/embed/p1NVeYm_DvG0)
+`r emo::ji("play button")` [Required Video: `filter()`](http://somup.com/crflVqbRaR)
 
-`r emo::ji("play button")` [Required Video: `select()`](https://www.youtube.com/embed/p1NVeYm_DvG0)
+$\hspace{1in}$ `r emo::ji("link")` [Link to Slides](Slides/verbs/filter.html)
 
-`r emo::ji("play button")` [Required Video: `arrange()`](https://www.youtube.com/embed/p1NVeYm_DvG0)
+`r emo::ji("play button")` [Required Video: `select()` -- will be posted 4/11 by 9pm]()
 
-`r emo::ji("play button")` [Required Video: `mutate()`](https://www.youtube.com/embed/p1NVeYm_DvG0)
+$\hspace{1in}$ `r emo::ji("link")` [Link to Slides](Slides/verbs/select.html)
 
-`r emo::ji("play button")` [Required Video: `summarize()`](https://www.youtube.com/embed/p1NVeYm_DvG0)
+`r emo::ji("play button")` [Required Video: `arrange()` -- will be posted 4/11 by 9pm]()
 
-`r emo::ji("play button")` [Required Video: `group_by()`](https://www.youtube.com/embed/p1NVeYm_DvG0)
+$\hspace{1in}$ `r emo::ji("link")` [Link to Slides](Slides/verbs/arrange.html)
+
+`r emo::ji("play button")` [Required Video: `mutate()` -- will be posted 4/12 by 9am]()
+
+$\hspace{1in}$ `r emo::ji("link")` [Link to Slides](Slides/verbs/mutate.html)
+
+`r emo::ji("play button")` [Required Video: `summarize()`-- will be posted 4/12 by 9am]()
+
+$\hspace{1in}$ `r emo::ji("link")` [Link to Slides](Slides/verbs/summarize.html)
+
+`r emo::ji("play button")` [Required Video: `group_by()` -- will be posted 4/11 by 9pm]()
+
+$\hspace{1in}$ `r emo::ji("link")` [Link to Slides](Slides/verbs/group_by.html)
+
 
 ## The Pipe Operator 
 
 `r emo::ji("book")` [Required Reading: Pipes](https://r4ds.had.co.nz/pipes.html)
 
-`r emo::ji("play button")` [Required Video: The pipe operator](https://www.youtube.com/embed/p1NVeYm_DvG0)
+`r emo::ji("play button")` [Required Video: The pipe operator -- will be posted 4/12 by 9am]()
 
-`r emo::ji("play button")` [Required Video: Extending the pipe](https://www.youtube.com/embed/p1NVeYm_DvG0)
+$\hspace{1in}$ `r emo::ji("link")` [Link to Slides](Slides/extensions/pipe.html)
 
-`r emo::ji("paper")` [Link to Slides](Slides/Intro_to_Tidyverse.html)
+`r emo::ji("play button")` [Required Video: Extending the pipe -- will be posted 4/12 by 9am]()
+
+$\hspace{1in}$ `r emo::ji("link")` [Link to Slides](Slides/extensions/extend_pipe.html)
+
 
 ## Practice 
 
 `r emo::ji("computer")` [Required Tutorial: Practice with dplyr](https://rstudio.cloud/learn/primers/2)
 
-Cereals Activity: [click to download]()
-
-`r emo::ji("play button")` [Optional Video: Live coding of cereals activity](https://www.youtube.com/watch?v=CgQELANvAZ8)
-
-
 ---
 
-`r emo::ji("check")` Check-in: Data Wrangling
+`r emo::ji("check")` **Check-in: Data Wrangling**
 
 
 **Question 1:**  Suppose we would like to study how the ratio of penguin body
@@ -238,7 +254,7 @@ Consider the base R code below.
 mean(penguins[penguins$species == "Adelie", "body_mass_g"])
 ```
 
-<!-- Mean of Adelie specied body mass!  -->
+<!-- Mean of Adelie species body mass!  -->
 
 For each of the following `dplyr` pipelines, indicate if it
 
