@@ -170,7 +170,7 @@ $\hspace{0.25in}$ `r emo::ji("link")` [Link to Slides](Slides/verbs/mutate.html)
 
 $\hspace{0.25in}$ `r emo::ji("link")` [Link to Slides](Slides/verbs/arrange.html)
 
-`r emo::ji("play button")` [Required Video: `summarize()`-- 8 minutes](http://somup.com/crflFLbWom)
+`r emo::ji("play button")` [Required Video: `summarize()`-- 8 minutes](http://somup.com/crflYibWZw)
 
 $\hspace{0.25in}$ `r emo::ji("link")` [Link to Slides](Slides/verbs/summarize.html)
 
@@ -183,7 +183,7 @@ $\hspace{0.25in}$ `r emo::ji("link")` [Link to Slides](Slides/verbs/group_by.htm
 
 `r emo::ji("book")` [Required Reading: Pipes](https://r4ds.had.co.nz/pipes.html)
 
-`r emo::ji("play button")` [Required Video: The pipe operator -- ]()
+`r emo::ji("play button")` [Required Video: The pipe operator -- 8 minutes](http://somup.com/crflYfbWZD)
 
 $\hspace{0.25in}$ `r emo::ji("link")` [Link to Slides](Slides/extensions/pipe.html)
 

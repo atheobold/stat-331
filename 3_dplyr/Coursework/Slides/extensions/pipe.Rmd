@@ -1,5 +1,5 @@
 ---
-title: "Data Wrangling with dplyr"
+title: "The pipe operator"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -39,43 +39,40 @@ style_duo_accent(
 )
 ```
 
+```{r, echo = FALSE, message = FALSE}
+cereals <- read_csv("../practice/cereals.csv") %>% 
+  mutate(type = as_factor(type), 
+         mfr = as_factor(mfr)) %>% 
+  mutate_all(list(~na_if(., -1))) %>% 
+  rename(temp = type)
+```
 
-class: center, middle, invert
 
-# Cleaning and transforming data
+</br>
+</br> 
 
-<img src="https://d33wubrfki0l68.cloudfront.net/071952491ec4a6a532a3f70ecfa2507af4d341f9/c167c/images/hex-dplyr.png" width=300>
-
-
----
-class: center, middle, inverse
-
-# Prerequisite:  The Pipe  `%>%`
-
->No matter how complex and polished the individual operations are, it is often the >quality of the glue that most directly determines the power of the system.
+>No matter how complex and polished the individual operations are, it is often
+the quality of the glue that most directly determines the power of the system.
 >
 >— Hal Abelson
 
 ---
-# Prerequisite: The Pipe
 
-* Part of the `magrittr` package (installs with the tidyverse)
-
----
-
-```{r, echo=FALSE, out.width = '70%', fig.align = "center"}
-knitr::include_graphics(here::here("Images", "other", "ceci_pipe.jpeg"))
+```{r, echo = FALSE, out.width = "40%", fig.align='center'}
+knitr::include_graphics("images/hex.png")
 ```
 
 ---
-```{r, echo=FALSE, out.width = '50%', fig.align = "center"}
-knitr::include_graphics(here::here("Images", "other", "magrittr_hex.png"))
+
+```{r, echo = FALSE, out.width = "60%", fig.align='center'}
+knitr::include_graphics("images/not_a_pipe.jpg")
 ```
 
 ---
-# Prerequisite: The Pipe
 
-* Part of the `magrittr` package (installs with the tidyverse)
+# The Pipe
+
+* Part of the **magrittr** package (installs with the tidyverse)
 
 --
 
@@ -87,30 +84,33 @@ knitr::include_graphics(here::here("Images", "other", "magrittr_hex.png"))
 
 --
 
-```{r, echo=FALSE, fig.align = "center"}
-knitr::include_graphics(here::here("Images", "other", "diagram_sentence.jpg"))
+```{r, echo = FALSE, out.width = "80%"}
+knitr::include_graphics("images/diagram_sentence.jpg")
 ```
 
-
 ---
+
 # The Pipe
 
 ```{r, eval = FALSE}
-dr_bodwin %>%
+dr_theobold %>%
   do_a_dance()
 ```
+
 --
 
 ```{r, eval = FALSE}
-dr_bodwin %>%
+dr_theobold %>%
   put_on("cool hat") %>%
   do_a_dance(type = "macarena")
 ```
 
 ---
 
-```{r pipe, echo=FALSE, out.width = "30%", fig.align = "center"}
-knitr::include_graphics(here::here("Images", "silly_gifs", "pipe.png"))
+.larger[Don't Fear the Pipe!]
+
+```{r, echo = FALSE, out.height = "20%", out.width = "25%", fig.align='center'}
+knitr::include_graphics("images/pipe.png")
 ```
 
 ---
@@ -118,7 +118,7 @@ knitr::include_graphics(here::here("Images", "silly_gifs", "pipe.png"))
 # The Pipe
 
 ```{r, echo = FALSE}
-decorate('penguins %>% summary()', eval = FALSE) %>% 
+decorate('cereals %>% summary()', eval = FALSE) %>% 
   flair("%>%") %>% 
   flair_funs(color = "teal")
 ```
@@ -126,7 +126,7 @@ decorate('penguins %>% summary()', eval = FALSE) %>%
 is the same as
 
 ```{r, echo = FALSE}
-decorate('summary(penguins)', eval = FALSE) %>% 
+decorate('summary(cereals)', eval = FALSE) %>% 
   flair_funs(color = "teal")
 ```
 
@@ -136,18 +136,39 @@ decorate('summary(penguins)', eval = FALSE) %>%
 What do you think the following will do?
 
 ```{r, eval = FALSE}
-penguins %>%
-  filter(species == "Adelie") %>%
-  arrange(body_mass_g)
+cereals %>%
+  filter(mfr == "Q") %>%
+  arrange(calories)
 ```
 
+--
+
+```{r, echo = FALSE}
+cereals %>%
+  filter(mfr == "Q") %>%
+  arrange(calories)
+```
+
+
 ---
+
 # The Pipe
 
 What do you think the following will do?
 
-```{r}
-penguins %>%
-  filter(species == "Adelie") %>%
-  arrange(body_mass_g)
+```{r, eval = FALSE}
+cereals %>%
+  filter(mfr == "Q") %>%
+  group_by(temp) %>% 
+  arrange(sugars)
+```
+
+
+--
+
+```{r, echo = FALSE}
+cereals %>%
+  filter(mfr == "Q") %>%
+  group_by(temp) %>% 
+  arrange(sugars)
 ```

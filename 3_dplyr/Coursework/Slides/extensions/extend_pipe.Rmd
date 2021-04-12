@@ -1,10 +1,81 @@
-# Plotting: The pipe is your friend
+---
+title: "Extending the pipe"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["xaringan-themer.css", "slide-style.css"]
+    nature:
+      highlightStyle: solarized-light
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+---
 
-Want a histogram of body mass for just *Adelie* species penguins?  Pipe it through `filter()` first!
-
-```{r, message = FALSE, fig.height=4}
-penguins %>%
-  filter(species == "Adelie") %>%
-  ggplot(aes(x = body_mass_g)) +
-    geom_histogram(bins = 20)
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
 ```
+
+```{r xaringan-themer, include=FALSE}
+library(xaringanthemer)
+library(xaringan)
+library(showtext)
+library(fontawesome)
+library(tidyverse)
+library(flair)
+library(palmerpenguins)
+
+style_duo_accent(
+  primary_color      = "#0F4C81", # pantone classic blue
+  secondary_color    = "#B6CADA", # pantone baby blue
+  header_font_google = google_font("Raleway"),
+  text_font_google   = google_font("Raleway", "300", "300i"),
+  code_font_google   = google_font("Source Code Pro"),
+  text_font_size     = "30px"
+)
+```
+
+```{r, echo = FALSE, message = FALSE}
+cereals <- read_csv("../practice/cereals.csv") %>% 
+  mutate(type = as_factor(type), 
+         mfr = as_factor(mfr)) %>% 
+  rename(temp = type)
+```
+
+class: inverse
+
+.larger[You can use the pipe for so much more!]
+
+---
+
+.larger[Plotting: The pipe is your friend]
+
+Want a histogram of the calories for just *cold* cereals?  Pipe it through 
+`filter()` first!
+
+---
+
+```{r pipe, eval = FALSE, echo = FALSE}
+cereals %>%
+  filter(temp == "C") %>%
+  ggplot(aes(x = calories)) +
+    geom_histogram(binwidth = 17)
+```
+
+```{r, echo = FALSE}
+decorate("pipe", message = FALSE, eval = FALSE) %>% 
+  flair(pattern = "%>%") %>% 
+  flair(pattern = "+")
+```
+
+```{r, echo = FALSE, out.width = "30%", fig.align='center'}
+cereals %>%
+  filter(temp == "C") %>%
+  ggplot(aes(x = calories)) +
+    geom_histogram(binwidth = 17)
+```
+
