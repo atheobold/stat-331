@@ -1,0 +1,177 @@
+---
+title: "Recap of Data Wrangling with dplyr"
+date: "April 13, 2021"
+author: "Dr. Allison Theobold"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["xaringan-themer.css", "slide-style.css"]
+    nature:
+      highlightStyle: solarized-light
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+---
+
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.width = 8, fig.height = 6}
+knitr::opts_chunk$set(message = FALSE, 
+                      warning = FALSE, 
+                      fig.align = "center")
+
+library(xaringanthemer)
+library(xaringan)
+library(tidyverse)
+library(flair)
+library(ggridges)
+library(gridExtra)
+
+
+style_duo_accent(
+  primary_color      = "#0F4C81", # pantone classic blue
+  secondary_color    = "#B6CADA", # pantone baby blue
+  header_font_google = google_font("Raleway"),
+  text_font_google   = google_font("Raleway", "300", "300i"),
+  code_font_google   = google_font("Source Code Pro"),
+  text_font_size     = "30px"
+)
+```
+
+class: inverse 
+
+</br>
+</br>
+
+> Programs must be written for people to read, and only incidentally for 
+> machines to execute.
+>
+>— Hal Abelson
+
+</br>
+</br>
+
+---
+<center>
+.bitlarger[Data Wrangling Verbs]
+</center>
+
+.pull-left[
+</br>
+</br>
+
+```{r, echo = FALSE, out.height = "70%", out.width = "70%"}
+knitr::include_graphics("images/dplyr_hex.jpeg")
+```
+]
+
+.pull-right[
+<center>
+</br>
+</br> 
+
+`filter()`
+
+`select()`
+
+`mutate()`
+
+`summarize()`
+
+`arrange()`
+
+`group_by()`
+
+]
+
+---
+
+.pull-left-wide[
+
+.larger[Brainstorm definitions for each verb]
+
+<!-- 1. selects columns from the dataset -->
+<!-- 2. filters columns from the dataset -->
+<!-- 3. prints the top of the dataset -->
+<!-- 4. creates data summaries -->
+<!-- 5. summarizes every variable in the dataset -->
+<!-- 6. selects rows from the dataset -->
+<!-- 7. filters rows from the dataset -->
+<!-- 8. adds new variables to the dataset -->
+<!-- 9. modifies the variables in the dataset -->
+<!-- 10. subsets a group from the dataset -->
+<!-- 11. organizes the dataset in a specific order -->
+<!-- 12. organizes the dataset into groups  -->
+]
+.pull-right-narrow[
+
+- `select()`
+
+- `filter()`
+
+- `mutate()`
+
+- `summarize()`
+
+- `arrange()`
+
+- `group_by()`
+
+]
+
+---
+
+class: center
+
+.larger[Try it out]
+
+.large[You have data on each Cal Poly student for the 2020-2021 academic year.
+You are tasked with reporting how the number of CR/NC courses students take
+differs based on department.]
+
+</br>
+
+__What data wrangling operations would you use?__
+
+__What order would you use to accomplish this goal?__
+
+---
+
+class: middle
+
+.larger[Getting Specific]
+
+Often you are interested in **one** specific summary statistic!
+
+```{r}
+starwars %>% 
+  group_by(homeworld) %>% 
+  summarize(mean_height = mean(height)) %>% 
+  filter(homeworld == "Tatooine")
+```
+
+---
+
+class: middle
+
+.larger[A Handy Tool]
+
+`pull()` 
+
+- Extracts entries from dataframes
+
+```{r}
+starwars %>% 
+  group_by(homeworld) %>% 
+  summarize(mean_height = mean(height)) %>% 
+  filter(homeworld == "Tatooine") %>% 
+  pull()
+```
+
+---
+
+.larger[Your Turn: PA Exploration]
