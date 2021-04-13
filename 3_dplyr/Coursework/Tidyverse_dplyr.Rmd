@@ -7,10 +7,7 @@ output:
     highlight: github
     css: styles.css
 resource_files:
-- Slides/verbs/filter.html
-- Slides/data types, objects, packages/packages.html
-- Slides/data types, objects, packages/data_types.html
-- Slides/data types, objects, packages/object_structure.html
+- ./Slides
 ---
 
 ```{r setup, include=FALSE}
@@ -78,7 +75,7 @@ When you are finished with the readings and videos, you should be able to...
 
 `r emo::ji("play button")` [Required Video: Why do I get this message when I load the tidyverse? -- 8 minutes ](http://somup.com/crf6q4b920)
 
-$\hspace{0.25in}$ `r emo::ji("link")` [Link to Slides](Slides/packages.html)
+$\hspace{0.25in}$ `r emo::ji("link")` [Link to Slides](./Slides/data types, objects, packages/packages.html)
 
 ---
 

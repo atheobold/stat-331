@@ -3,6 +3,7 @@
   <head>
     <title>Spicing it Up – Mutating Variables</title>
     <meta charset="utf-8" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="slide-style.css" type="text/css" />
   </head>
@@ -64,16 +65,16 @@ cereals
 ##    name      mfr   type  calories protein   fat sodium fiber carbo sugars potass
 ##    &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
 ##  1 100% Bran N     C           70       4     1    130  10     5        6    280
-##  2 100% Nat~ Q     C          120       3     5     15   2     8        8    135
+##  2 100% Nat… Q     C          120       3     5     15   2     8        8    135
 ##  3 All-Bran  K     C           70       4     1    260   9     7        5    320
-##  4 All-Bran~ K     C           50       4     0    140  14     8        0    330
-##  5 Almond D~ R     C          110       2     2    200   1    14        8     -1
-##  6 Apple Ci~ G     C          110       2     2    180   1.5  10.5     10     70
-##  7 Apple Ja~ K     C          110       2     0    125   1    11       14     30
+##  4 All-Bran… K     C           50       4     0    140  14     8        0    330
+##  5 Almond D… R     C          110       2     2    200   1    14        8     -1
+##  6 Apple Ci… G     C          110       2     2    180   1.5  10.5     10     70
+##  7 Apple Ja… K     C          110       2     0    125   1    11       14     30
 ##  8 Basic 4   G     C          130       3     2    210   2    18        8    100
 ##  9 Bran Chex R     C           90       2     1    200   4    15        6    125
-## 10 Bran Fla~ P     C           90       3     0    210   5    13        5    190
-## # ... with 67 more rows, and 5 more variables: vitamins &lt;dbl&gt;, shelf &lt;dbl&gt;,
+## 10 Bran Fla… P     C           90       3     0    210   5    13        5    190
+## # … with 67 more rows, and 5 more variables: vitamins &lt;dbl&gt;, shelf &lt;dbl&gt;,
 ## #   weight &lt;dbl&gt;, cups &lt;dbl&gt;, rating &lt;dbl&gt;
 ```
 
@@ -146,6 +147,7 @@ mutate(cereals,
        mfr = as.factor(mfr)
        )
 ```
+
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

@@ -3,6 +3,7 @@
   <head>
     <title>Getting Fancy – Arranging Some Data</title>
     <meta charset="utf-8" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="slide-style.css" type="text/css" />
   </head>
@@ -36,17 +37,17 @@ arrange(cereals, calories)
 ## # A tibble: 77 x 16
 ##    name      mfr   type  calories protein   fat sodium fiber carbo sugars potass
 ##    &lt;chr&gt;     &lt;fct&gt; &lt;fct&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-##  1 All-Bran~ K     C           50       4     0    140    14     8      0    330
-##  2 Puffed R~ Q     C           50       1     0      0     0    13      0     15
-##  3 Puffed W~ Q     C           50       2     0      0     1    10      0     50
+##  1 All-Bran… K     C           50       4     0    140    14     8      0    330
+##  2 Puffed R… Q     C           50       1     0      0     0    13      0     15
+##  3 Puffed W… Q     C           50       2     0      0     1    10      0     50
 ##  4 100% Bran N     C           70       4     1    130    10     5      6    280
 ##  5 All-Bran  K     C           70       4     1    260     9     7      5    320
-##  6 Shredded~ N     C           80       2     0      0     3    16      0     95
+##  6 Shredded… N     C           80       2     0      0     3    16      0     95
 ##  7 Bran Chex R     C           90       2     1    200     4    15      6    125
-##  8 Bran Fla~ P     C           90       3     0    210     5    13      5    190
-##  9 Nutri-gr~ K     C           90       3     0    170     3    18      2     90
-## 10 Raisin S~ K     C           90       2     0      0     2    15      6    110
-## # ... with 67 more rows, and 5 more variables: vitamins &lt;dbl&gt;, shelf &lt;dbl&gt;,
+##  8 Bran Fla… P     C           90       3     0    210     5    13      5    190
+##  9 Nutri-gr… K     C           90       3     0    170     3    18      2     90
+## 10 Raisin S… K     C           90       2     0      0     2    15      6    110
+## # … with 67 more rows, and 5 more variables: vitamins &lt;dbl&gt;, shelf &lt;dbl&gt;,
 ## #   weight &lt;dbl&gt;, cups &lt;dbl&gt;, rating &lt;dbl&gt;
 ```
 
@@ -86,12 +87,12 @@ top_n(cereals, 3, sugars)
 ## # A tibble: 5 x 16
 ##   name       mfr   type  calories protein   fat sodium fiber carbo sugars potass
 ##   &lt;chr&gt;      &lt;fct&gt; &lt;fct&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-## 1 Apple Jac~ K     C          110       2     0    125     1    11     14     30
-## 2 Golden Cr~ P     C          100       2     0     45     0    11     15     40
-## 3 Post Nat.~ P     C          120       3     1    200     6    11     14    260
+## 1 Apple Jac… K     C          110       2     0    125     1    11     14     30
+## 2 Golden Cr… P     C          100       2     0     45     0    11     15     40
+## 3 Post Nat.… P     C          120       3     1    200     6    11     14    260
 ## 4 Smacks     K     C          110       2     1     70     1     9     15     40
-## 5 Total Rai~ G     C          140       3     1    190     4    15     14    230
-## # ... with 5 more variables: vitamins &lt;dbl&gt;, shelf &lt;dbl&gt;, weight &lt;dbl&gt;,
+## 5 Total Rai… G     C          140       3     1    190     4    15     14    230
+## # … with 5 more variables: vitamins &lt;dbl&gt;, shelf &lt;dbl&gt;, weight &lt;dbl&gt;,
 ## #   cups &lt;dbl&gt;, rating &lt;dbl&gt;
 ```
 
@@ -126,15 +127,15 @@ top_n(cereals, n = 3, wt = desc(sugars))
 ## # A tibble: 8 x 16
 ##   name       mfr   type  calories protein   fat sodium fiber carbo sugars potass
 ##   &lt;chr&gt;      &lt;fct&gt; &lt;fct&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-## 1 All-Bran ~ K     C           50       4     0    140  14       8      0    330
-## 2 Cream of ~ N     H          100       3     0     80   1      21      0     -1
-## 3 Puffed Ri~ Q     C           50       1     0      0   0      13      0     15
-## 4 Puffed Wh~ Q     C           50       2     0      0   1      10      0     50
-## 5 Quaker Oa~ Q     H          100       5     2      0   2.7    -1     -1    110
-## 6 Shredded ~ N     C           80       2     0      0   3      16      0     95
-## 7 Shredded ~ N     C           90       3     0      0   4      19      0    140
-## 8 Shredded ~ N     C           90       3     0      0   3      20      0    120
-## # ... with 5 more variables: vitamins &lt;dbl&gt;, shelf &lt;dbl&gt;, weight &lt;dbl&gt;,
+## 1 All-Bran … K     C           50       4     0    140  14       8      0    330
+## 2 Cream of … N     H          100       3     0     80   1      21      0     -1
+## 3 Puffed Ri… Q     C           50       1     0      0   0      13      0     15
+## 4 Puffed Wh… Q     C           50       2     0      0   1      10      0     50
+## 5 Quaker Oa… Q     H          100       5     2      0   2.7    -1     -1    110
+## 6 Shredded … N     C           80       2     0      0   3      16      0     95
+## 7 Shredded … N     C           90       3     0      0   4      19      0    140
+## 8 Shredded … N     C           90       3     0      0   3      20      0    120
+## # … with 5 more variables: vitamins &lt;dbl&gt;, shelf &lt;dbl&gt;, weight &lt;dbl&gt;,
 ## #   cups &lt;dbl&gt;, rating &lt;dbl&gt;
 ```
 
@@ -151,17 +152,17 @@ arrange(cereals, sugars, carbo)
 ## # A tibble: 77 x 16
 ##    name      mfr   type  calories protein   fat sodium fiber carbo sugars potass
 ##    &lt;chr&gt;     &lt;fct&gt; &lt;fct&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-##  1 Quaker O~ Q     H          100       5     2      0   2.7    -1     -1    110
-##  2 All-Bran~ K     C           50       4     0    140  14       8      0    330
-##  3 Puffed W~ Q     C           50       2     0      0   1      10      0     50
-##  4 Puffed R~ Q     C           50       1     0      0   0      13      0     15
-##  5 Shredded~ N     C           80       2     0      0   3      16      0     95
-##  6 Shredded~ N     C           90       3     0      0   4      19      0    140
-##  7 Shredded~ N     C           90       3     0      0   3      20      0    120
-##  8 Cream of~ N     H          100       3     0     80   1      21      0     -1
+##  1 Quaker O… Q     H          100       5     2      0   2.7    -1     -1    110
+##  2 All-Bran… K     C           50       4     0    140  14       8      0    330
+##  3 Puffed W… Q     C           50       2     0      0   1      10      0     50
+##  4 Puffed R… Q     C           50       1     0      0   0      13      0     15
+##  5 Shredded… N     C           80       2     0      0   3      16      0     95
+##  6 Shredded… N     C           90       3     0      0   4      19      0    140
+##  7 Shredded… N     C           90       3     0      0   3      20      0    120
+##  8 Cream of… N     H          100       3     0     80   1      21      0     -1
 ##  9 Cheerios  G     C          110       6     2    290   2      17      1    105
-## 10 Nutri-gr~ K     C           90       3     0    170   3      18      2     90
-## # ... with 67 more rows, and 5 more variables: vitamins &lt;dbl&gt;, shelf &lt;dbl&gt;,
+## 10 Nutri-gr… K     C           90       3     0    170   3      18      2     90
+## # … with 67 more rows, and 5 more variables: vitamins &lt;dbl&gt;, shelf &lt;dbl&gt;,
 ## #   weight &lt;dbl&gt;, cups &lt;dbl&gt;, rating &lt;dbl&gt;
 ```
 
@@ -203,17 +204,17 @@ arrange(cereals, sugars)
 ## # A tibble: 77 x 16
 ##    name      mfr   type  calories protein   fat sodium fiber carbo sugars potass
 ##    &lt;chr&gt;     &lt;fct&gt; &lt;fct&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-##  1 All-Bran~ K     C           50       4     0    140    14     8      0    330
-##  2 Cream of~ N     H          100       3     0     80     1    21      0     NA
-##  3 Puffed R~ Q     C           50       1     0      0     0    13      0     15
-##  4 Puffed W~ Q     C           50       2     0      0     1    10      0     50
-##  5 Shredded~ N     C           80       2     0      0     3    16      0     95
-##  6 Shredded~ N     C           90       3     0      0     4    19      0    140
-##  7 Shredded~ N     C           90       3     0      0     3    20      0    120
+##  1 All-Bran… K     C           50       4     0    140    14     8      0    330
+##  2 Cream of… N     H          100       3     0     80     1    21      0     NA
+##  3 Puffed R… Q     C           50       1     0      0     0    13      0     15
+##  4 Puffed W… Q     C           50       2     0      0     1    10      0     50
+##  5 Shredded… N     C           80       2     0      0     3    16      0     95
+##  6 Shredded… N     C           90       3     0      0     4    19      0    140
+##  7 Shredded… N     C           90       3     0      0     3    20      0    120
 ##  8 Cheerios  G     C          110       6     2    290     2    17      1    105
-##  9 Corn Fla~ K     C          100       2     0    290     1    21      2     35
-## 10 Nutri-gr~ K     C           90       3     0    170     3    18      2     90
-## # ... with 67 more rows, and 5 more variables: vitamins &lt;dbl&gt;, shelf &lt;dbl&gt;,
+##  9 Corn Fla… K     C          100       2     0    290     1    21      2     35
+## 10 Nutri-gr… K     C           90       3     0    170     3    18      2     90
+## # … with 67 more rows, and 5 more variables: vitamins &lt;dbl&gt;, shelf &lt;dbl&gt;,
 ## #   weight &lt;dbl&gt;, cups &lt;dbl&gt;, rating &lt;dbl&gt;
 ```
 
@@ -222,6 +223,8 @@ arrange(cereals, sugars)
 &lt;center&gt;
 
 ![](images/high_five.jpg)
+
+
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

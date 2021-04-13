@@ -23,8 +23,6 @@ options(htmltools.dir.version = FALSE)
 ```{r xaringan-themer, include=FALSE}
 library(xaringanthemer)
 library(xaringan)
-library(showtext)
-library(fontawesome)
 library(tidyr)
 
 style_duo_accent(

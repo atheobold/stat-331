@@ -23,11 +23,8 @@ options(htmltools.dir.version = FALSE)
 ```{r xaringan-themer, include=FALSE}
 library(xaringanthemer)
 library(xaringan)
-library(showtext)
-library(fontawesome)
 library(tidyverse)
 library(flair)
-library(palmerpenguins)
 
 style_duo_accent(
   primary_color      = "#0F4C81", # pantone classic blue

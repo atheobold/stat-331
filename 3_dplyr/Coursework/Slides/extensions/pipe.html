@@ -3,6 +3,7 @@
   <head>
     <title>The pipe operator</title>
     <meta charset="utf-8" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="slide-style.css" type="text/css" />
   </head>
@@ -110,19 +111,18 @@ cereals %&gt;%
 
 ```
 ## # A tibble: 8 x 16
-##   name   mfr   temp  calories protein   fat sodium fiber carbo
-##   &lt;chr&gt;  &lt;fct&gt; &lt;fct&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 Puffe~ Q     C           50       1     0      0   0      13
-## 2 Puffe~ Q     C           50       2     0      0   1      10
-## 3 Life   Q     C          100       4     2    150   2      12
-## 4 Quake~ Q     C          100       4     1    135   2      14
-## 5 Quake~ Q     H          100       5     2      0   2.7    NA
-## 6 100% ~ Q     C          120       3     5     15   2       8
-## 7 Cap'n~ Q     C          120       1     2    220   0      12
-## 8 Honey~ Q     C          120       1     2    220   1      12
-## # ... with 7 more variables: sugars &lt;dbl&gt;, potass &lt;dbl&gt;,
-## #   vitamins &lt;dbl&gt;, shelf &lt;dbl&gt;, weight &lt;dbl&gt;, cups &lt;dbl&gt;,
-## #   rating &lt;dbl&gt;
+##   name       mfr   temp  calories protein   fat sodium fiber carbo sugars potass
+##   &lt;chr&gt;      &lt;fct&gt; &lt;fct&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1 Puffed Ri… Q     C           50       1     0      0   0      13      0     15
+## 2 Puffed Wh… Q     C           50       2     0      0   1      10      0     50
+## 3 Life       Q     C          100       4     2    150   2      12      6     95
+## 4 Quaker Oa… Q     C          100       4     1    135   2      14      6    110
+## 5 Quaker Oa… Q     H          100       5     2      0   2.7    NA     NA    110
+## 6 100% Natu… Q     C          120       3     5     15   2       8      8    135
+## 7 Cap'n'Cru… Q     C          120       1     2    220   0      12     12     35
+## 8 Honey Gra… Q     C          120       1     2    220   1      12     11     45
+## # … with 5 more variables: vitamins &lt;dbl&gt;, shelf &lt;dbl&gt;, weight &lt;dbl&gt;,
+## #   cups &lt;dbl&gt;, rating &lt;dbl&gt;
 ```
 
 
@@ -147,19 +147,18 @@ cereals %&gt;%
 ```
 ## # A tibble: 8 x 16
 ## # Groups:   temp [2]
-##   name   mfr   temp  calories protein   fat sodium fiber carbo
-##   &lt;chr&gt;  &lt;fct&gt; &lt;fct&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 Puffe~ Q     C           50       1     0      0   0      13
-## 2 Puffe~ Q     C           50       2     0      0   1      10
-## 3 Life   Q     C          100       4     2    150   2      12
-## 4 Quake~ Q     C          100       4     1    135   2      14
-## 5 100% ~ Q     C          120       3     5     15   2       8
-## 6 Honey~ Q     C          120       1     2    220   1      12
-## 7 Cap'n~ Q     C          120       1     2    220   0      12
-## 8 Quake~ Q     H          100       5     2      0   2.7    NA
-## # ... with 7 more variables: sugars &lt;dbl&gt;, potass &lt;dbl&gt;,
-## #   vitamins &lt;dbl&gt;, shelf &lt;dbl&gt;, weight &lt;dbl&gt;, cups &lt;dbl&gt;,
-## #   rating &lt;dbl&gt;
+##   name       mfr   temp  calories protein   fat sodium fiber carbo sugars potass
+##   &lt;chr&gt;      &lt;fct&gt; &lt;fct&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1 Puffed Ri… Q     C           50       1     0      0   0      13      0     15
+## 2 Puffed Wh… Q     C           50       2     0      0   1      10      0     50
+## 3 Life       Q     C          100       4     2    150   2      12      6     95
+## 4 Quaker Oa… Q     C          100       4     1    135   2      14      6    110
+## 5 100% Natu… Q     C          120       3     5     15   2       8      8    135
+## 6 Honey Gra… Q     C          120       1     2    220   1      12     11     45
+## 7 Cap'n'Cru… Q     C          120       1     2    220   0      12     12     35
+## 8 Quaker Oa… Q     H          100       5     2      0   2.7    NA     NA    110
+## # … with 5 more variables: vitamins &lt;dbl&gt;, shelf &lt;dbl&gt;, weight &lt;dbl&gt;,
+## #   cups &lt;dbl&gt;, rating &lt;dbl&gt;
 ```
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
