@@ -75,7 +75,7 @@ When you are finished with the readings and videos, you should be able to...
 
 `r emo::ji("play button")` [Required Video: Why do I get this message when I load the tidyverse? -- 8 minutes ](http://somup.com/crf6q4b920)
 
-$\hspace{0.25in}$ `r emo::ji("link")` [Link to Slides](./Slides/data types, objects, packages/packages.html)
+$\hspace{0.25in}$ `r emo::ji("link")` [Link to **All** Presentation Slides](https://app.box.com/s/rw3r1sytyyvuipj2gtn2uxiwl71eov1j)
 
 ---
 
@@ -83,11 +83,9 @@ $\hspace{0.25in}$ `r emo::ji("link")` [Link to Slides](./Slides/data types, obje
 
 `r emo::ji("play button")` [Required Video: Learning More about Data Types -- 11 minutes](http://somup.com/crf6q7b9o6)
 
-$\hspace{0.25in}$ `r emo::ji("link")` [Link to Slides](Slides/data_types.html)
+$\hspace{0.25in}$ `r emo::ji("link")` [Link to **All** Presentation Slides](https://app.box.com/s/rw3r1sytyyvuipj2gtn2uxiwl71eov1j)
 
 `r emo::ji("play button")` [Required Video: A Bit More on Object Structures -- 8 minutes](http://somup.com/crf6YVb9oH)
-
-$\hspace{0.25in}$ `r emo::ji("link")` [Link to Slides](Slides/object_structure.html)
 
 `r emo::ji("book")` [Required Reading: Tibbles](https://r4ds.had.co.nz/tibbles.html)
 
@@ -145,6 +143,8 @@ true about a `tibble`'s behavior?
 
 `r emo::ji("play button")` [Required Video: Intro to the tidyverse & dplyr -- 8 minutes](http://somup.com/crflc4bRy6)
 
+$\hspace{0.25in}$ `r emo::ji("link")` [Link to **All** Presentation Slides](https://app.box.com/s/rw3r1sytyyvuipj2gtn2uxiwl71eov1j)
+
 `r emo::ji("book")` [Required Reading: Data Transformation](https://r4ds.had.co.nz/transform.html)
 
 `r emo::ji("question")` [Additional Resource: Modern Dive Textbook -- Section 3.1 through 3.6](https://moderndive.com/3-wrangling.html)
@@ -153,27 +153,15 @@ true about a `tibble`'s behavior?
 
 `r emo::ji("play button")` [Required Video: `filter()` -- 11 minutes](http://somup.com/crflVqbRaR)
 
-$\hspace{0.25in}$ `r emo::ji("link")` [Link to Slides](Slides/verbs/filter.html)
-
 `r emo::ji("play button")` [Required Video: `select()` -- 6 minutes](http://somup.com/crfleebR5K)
-
-$\hspace{0.25in}$ `r emo::ji("link")` [Link to Slides](Slides/verbs/select.html)
 
 `r emo::ji("play button")` [Required Video: `mutate()` -- 9 minutes](http://somup.com/crfle3bRGI)
 
-$\hspace{0.25in}$ `r emo::ji("link")` [Link to Slides](Slides/verbs/mutate.html)
-
 `r emo::ji("play button")` [Required Video: `arrange()` -- 7 minutes](http://somup.com/crfl2abSgF)
-
-$\hspace{0.25in}$ `r emo::ji("link")` [Link to Slides](Slides/verbs/arrange.html)
 
 `r emo::ji("play button")` [Required Video: `summarize()`-- 8 minutes](http://somup.com/crflYibWZw)
 
-$\hspace{0.25in}$ `r emo::ji("link")` [Link to Slides](Slides/verbs/summarize.html)
-
 `r emo::ji("play button")` [Required Video: `group_by()` -- 6 minutes](http://somup.com/crflqbbWFy)
-
-$\hspace{0.25in}$ `r emo::ji("link")` [Link to Slides](Slides/verbs/group_by.html)
 
 
 ## The Pipe Operator 
@@ -182,11 +170,7 @@ $\hspace{0.25in}$ `r emo::ji("link")` [Link to Slides](Slides/verbs/group_by.htm
 
 `r emo::ji("play button")` [Required Video: The pipe operator -- 8 minutes](http://somup.com/crflYfbWZD)
 
-$\hspace{0.25in}$ `r emo::ji("link")` [Link to Slides](Slides/extensions/pipe.html)
-
 `r emo::ji("play button")` [Required Video: Extending the pipe -- 3 minutes ](http://somup.com/crflYmbWup)
-
-$\hspace{0.25in}$ `r emo::ji("link")` [Link to Slides](Slides/extensions/extend_pipe.html)
 
 
 ## Practice 
