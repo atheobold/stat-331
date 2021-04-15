@@ -1,7 +1,7 @@
 ---
-title: "A Few More Data Wrangling Tools"
-date: "April 15, 2021"
-author: "Dr. Allison Theobold"
+title: " `r emo::ji('speech')` A Few More Data Wrangling Tools </br>"
+date: "</br> April 15, 2021"
+author: "</br> Dr. Allison Theobold"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -166,7 +166,19 @@ starwars %>%
 
 ---
 
-.bitlarger[Connecting with `ggplot()`]
+.larger[A few words about `drop_na()`]
+
+--
+
+- Easy tool to remove missing values 
+
+--
+
+- Unilaterally removes **any** row with a missing value for **any** variable
+
+---
+
+.bitlarger[`r emo::ji("heart")` `%>%`]
 
 .pull-left[
 ```{r, eval = FALSE}
