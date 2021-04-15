@@ -175,8 +175,9 @@ a.sourceLine {
 <p>Clean the dataset in whichever ways you see fit. This might mean adjusting <em>variable type</em>, for example from “character” to “factor”, or dealing with missing data.</p>
 <p><strong>Possible response:</strong></p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>hiphop <span class="ot">&lt;-</span> hiphop <span class="sc">%&gt;%</span> </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">as_factor</span>(sex)) <span class="sc">%&gt;%</span> </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(city <span class="sc">&gt;</span> <span class="dv">0</span>)</span></code></pre></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">as_factor</span>(sex), </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">ethnic =</span> <span class="fu">as_factor</span>(ethnic)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(city <span class="sc">&gt;</span> <span class="dv">0</span>)</span></code></pre></div>
 <p><em>I chose not to omit any missing values, since there were no missing values for <code>familiarity</code>, <code>sex</code>, <code>age</code>, and <code>ethnic</code>. I did, however, choose to remove observations with a city population of 0, since that seemed a bit unreasonable and likely should have been an <code>NA</code>.</em></p>
 </div>
 <div id="section-4" class="section level4">
@@ -204,19 +205,20 @@ a.sourceLine {
 <h4>7.</h4>
 <p>What are the demographics of the people in this study? Investigate the variables <code>sex</code>, <code>age</code>, and <code>ethnic</code> and summarize your findings in 1-3 complete sentences.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>subjects <span class="ot">&lt;-</span> hiphop <span class="sc">%&gt;%</span> </span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(subj, age, sex, ethnic_group) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(subj, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>subjects <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(subj, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>subjects <span class="sc">%&gt;%</span> </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(subj, age, sex, ethnic) <span class="sc">%&gt;%</span> </span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code></pre></div>
-<pre><code>##      subj                age            sex         ethnic_group
-##  Length:162         Min.   :16.00   Female:112   white    :134  
-##  Class :character   1st Qu.:18.00   Male  : 50   non-white: 28  
-##  Mode  :character   Median :19.00                               
-##                     Mean   :20.09                               
-##                     3rd Qu.:20.00                               
-##                     Max.   :48.00</code></pre>
+<pre><code>##      subj                age            sex           ethnic   
+##  Length:162         Min.   :16.00   Female:112   white   :134  
+##  Class :character   1st Qu.:18.00   Male  : 50   asian   : 14  
+##  Mode  :character   Median :19.00                african :  5  
+##                     Mean   :20.09                hispanic:  3  
+##                     3rd Qu.:20.00                indian  :  2  
+##                     Max.   :48.00                native  :  1  
+##                                                  (Other) :  3</code></pre>
 <p><strong>Possible response:</strong></p>
 <p><em>Of the 168 participants in the study, 117 identified as female and 51 identified as male (given binary options). Additionally, 135 subjects identified as White, while 33 identified as non-white (Asian, Indian, Native, Black, African, Hispanic, Biracial, Unknown). The ages of the participants ranged from 16 to 48, with a median of 19 (mean of 20).</em></p>
 </div>
