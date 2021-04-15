@@ -1,0 +1,196 @@
+---
+title: "A Few More Data Wrangling Tools"
+date: "April 15, 2021"
+author: "Dr. Allison Theobold"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["xaringan-themer.css", "slide-style.css"]
+    nature:
+      highlightStyle: solarized-light
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+---
+
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.width = 8, fig.height = 6}
+knitr::opts_chunk$set(message = FALSE, 
+                      warning = FALSE, 
+                      fig.align = "center")
+
+library(xaringanthemer)
+library(xaringan)
+library(tidyverse)
+library(flair)
+
+style_duo_accent(
+  primary_color      = "#0F4C81", # pantone classic blue
+  secondary_color    = "#B6CADA", # pantone baby blue
+  header_font_google = google_font("Raleway"),
+  text_font_google   = google_font("Raleway", "300", "300i"),
+  code_font_google   = google_font("Source Code Pro"),
+  text_font_size     = "30px"
+)
+```
+
+
+.larger[Summarizing Frequencies]
+
+`count()` -- counts the values of one or more variables
+
+.pull-left[
+```{r, eval = FALSE}
+starwars %>% 
+  count(homeworld)
+```
+]
+
+.pull-right[
+```{r, eval = FALSE}
+starwars %>% 
+  count(homeworld, films)
+```
+
+]
+
+
+---
+
+.larger[Unique Groups]
+
+`distinct()` -- selects the unique / distinct rows from a dataset
+
+<center>
+.large[**Arguments**]
+</center>
+
+- `...` -- variables to use when determining uniqueness
+  * can use multiple!
+
+--  
+
+- `.keep_all` -- decides if all of the columns should be kept
+  * `FALSE` is default!
+
+
+---
+
+.larger[Discritizing Variables]
+
+--
+
+- `if_else()` 
+  * Useful when there are two options
+
+--
+
+- `case_when()`
+  * Useful when there are three or more options
+
+---
+
+.larger[`summarize()` Variants]
+
+--
+
+- `summarize_all()` -- summarizes **every** variable in the dataset
+
+--
+
+- `summarize_at()` -- summarizes variables selected 
+
+--
+
+- `summarize_if()` -- summarizes variables selected with condition
+
+
+---
+
+.large[**Examples**]
+
+.pull-left-wide[
+.large[`summarize_at()`]
+```{r, eval = FALSE}
+starwars %>% 
+  summarise_at(vars(height:mass), list(mean), na.rm = TRUE)
+
+```
+
+
+.large[`summarize_if()`]
+```{r, eval = FALSE}
+starwars %>% 
+  summarise_if(is.numeric, list(mean), na.rm = TRUE)
+
+```
+]
+
+.pull-right-narrow[
+</br>
+</br>
+```{r, echo = FALSE}
+starwars %>% 
+  summarise_at(vars(height:mass), list(mean), na.rm = TRUE)
+
+```
+
+</br>
+</br>
+
+```{r, echo = FALSE}
+starwars %>% 
+  summarise_if(is.numeric, list(mean), na.rm = TRUE)
+
+```
+
+<!-- before the Battle of Yavin -->
+
+
+]
+
+---
+
+.larger[`mutate()` Variants]
+
+- `mutate_all()` -- mutates **every** variable
+
+- `muatate_at()` -- mutates variables selected
+
+- `mutate_if()` -- mutates variables selected with condition
+
+---
+
+.bitlarger[Connecting with `ggplot()`]
+
+.pull-left[
+```{r, eval = FALSE}
+starwars %>% 
+  filter(gender == "feminine", 
+         !is.na(homeworld)) %>%
+  ggplot(aes(x = gender, fill = homeworld)) + 
+  geom_bar(position = "dodge") + 
+  labs(x = "Gender Expression of Character", 
+       fill = "Homeworld")
+  
+```
+]
+
+.pull-right[
+```{r, echo = FALSE, fig.width = 6, fig.height = 6}
+starwars %>% 
+  filter(gender == "feminine", 
+         !is.na(homeworld)) %>%
+  ggplot(aes(x = gender, fill = homeworld)) + 
+  geom_bar(position = "dodge") +
+  labs(x = "Gender Expression of Character", 
+       fill = "Homeworld")
+  
+```
+]
+
