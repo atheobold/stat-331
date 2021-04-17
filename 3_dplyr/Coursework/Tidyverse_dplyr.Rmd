@@ -75,17 +75,17 @@ When you are finished with the readings and videos, you should be able to...
 
 `r emo::ji("play button")` [Required Video: Why do I get this message when I load the tidyverse? -- 8 minutes ](http://somup.com/crf6q4b920)
 
-$\hspace{0.25in}$ `r emo::ji("link")` [Link to **All** Presentation Slides](https://app.box.com/s/rw3r1sytyyvuipj2gtn2uxiwl71eov1j)
+$\hspace{0.25in}$ `r emo::ji("link")` [Link to **All** Presentation Slides](https://youtu.be/Jn-s_6lDS4A)
 
 ---
 
 ## Learning More about Data Types & Objects in R 
 
-`r emo::ji("play button")` [Required Video: Learning More about Data Types -- 11 minutes](http://somup.com/crf6q7b9o6)
+`r emo::ji("play button")` [Required Video: Learning More about Data Types -- 11 minutes](https://youtu.be/Z7iRJWy5ZJA)
 
 $\hspace{0.25in}$ `r emo::ji("link")` [Link to **All** Presentation Slides](https://app.box.com/s/rw3r1sytyyvuipj2gtn2uxiwl71eov1j)
 
-`r emo::ji("play button")` [Required Video: A Bit More on Object Structures -- 8 minutes](http://somup.com/crf6YVb9oH)
+`r emo::ji("play button")` [Required Video: A Bit More on Object Structures -- 8 minutes](https://youtu.be/8EBKGY38MPA)
 
 `r emo::ji("book")` [Required Reading: Tibbles](https://r4ds.had.co.nz/tibbles.html)
 
@@ -141,7 +141,7 @@ true about a `tibble`'s behavior?
 
 ## Introduction to dplyr
 
-`r emo::ji("play button")` [Required Video: Intro to the tidyverse & dplyr -- 8 minutes](http://somup.com/crflc4bRy6)
+`r emo::ji("play button")` [Required Video: Intro to the tidyverse & dplyr -- 8 minutes](https://youtu.be/jgVi2znoHgg)
 
 $\hspace{0.25in}$ `r emo::ji("link")` [Link to **All** Presentation Slides](https://app.box.com/s/rw3r1sytyyvuipj2gtn2uxiwl71eov1j)
 
@@ -151,13 +151,13 @@ $\hspace{0.25in}$ `r emo::ji("link")` [Link to **All** Presentation Slides](http
 
 ## dplyr Verbs
 
-`r emo::ji("play button")` [Required Video: `filter()` -- 11 minutes](http://somup.com/crflVqbRaR)
+`r emo::ji("play button")` [Required Video: `filter()` -- 11 minutes](https://youtu.be/pPI-prhLYqI)
 
-`r emo::ji("play button")` [Required Video: `select()` -- 6 minutes](http://somup.com/crfleebR5K)
+`r emo::ji("play button")` [Required Video: `select()` -- 6 minutes](https://youtu.be/OInnmiccHt8)
 
-`r emo::ji("play button")` [Required Video: `mutate()` -- 9 minutes](http://somup.com/crfle3bRGI)
+`r emo::ji("play button")` [Required Video: `mutate()` -- 9 minutes](https://youtu.be/QWyUnQ2EzPs)
 
-`r emo::ji("play button")` [Required Video: `arrange()` -- 7 minutes](http://somup.com/crfl2abSgF)
+`r emo::ji("play button")` [Required Video: `arrange()` -- 7 minutes](https://youtu.be/4Qhdc81mpvo)
 
 `r emo::ji("play button")` [Required Video: `summarize()`-- 8 minutes](http://somup.com/crflYibWZw)
 
