@@ -1,0 +1,123 @@
+---
+title: "Pivoting Longer"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["xaringan-themer.css", "slide-style.css"]
+    nature:
+      highlightStyle: solarized-light
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+```{r xaringan-themer, include=FALSE}
+library(xaringanthemer)
+library(xaringan)
+library(tidyverse)
+library(flair)
+
+style_duo_accent(
+  primary_color      = "#0F4C81", # pantone classic blue
+  secondary_color    = "#B6CADA", # pantone baby blue
+  header_font_google = google_font("Raleway"),
+  text_font_google   = google_font("Raleway", "300", "300i"),
+  code_font_google   = google_font("Source Code Pro"),
+  text_font_size     = "30px"
+)
+```
+
+```{r, echo = FALSE, message = FALSE}
+cereals <- read_csv("../practice/cereals.csv") %>% 
+  mutate(type = as_factor(type), 
+         mfr = as_factor(mfr))
+```
+
+
+# Pivoting longer
+
+What if we want to make boxplots comparing the different bill dimensions of penguins?
+
+
+```{r, error = TRUE}
+ggplot(penguins, 
+       aes(x = Bill.Dimension, y = Size, fill = species)) +
+  geom_boxplot()
+
+```
+
+---
+class: center, middle, inverse
+
+# Tip 1:
+## Work backwards - what is your end goal?
+
+---
+
+# Pivoting longer
+
+What if we want to make boxplots comparing the different bill dimensions of penguins?
+
+
+```{r}
+head(penguins)
+```
+
+---
+class: center, middle, inverse
+
+# Tip 2:
+## Draw a picture
+
+---
+# Pivoting longer
+
+```{r}
+
+penguins %>%
+  pivot_longer(bill_length_mm:bill_depth_mm, 
+               names_to = "Bill.Dimension", 
+               values_to = "Size")
+
+```
+
+---
+# Pivoting longer
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
+
+penguins %>%
+  pivot_longer(bill_length_mm:bill_depth_mm, 
+               names_to = "Bill.Dimension", 
+               values_to = "Size") %>%
+  ggplot(aes(x = Bill.Dimension, y = Size, fill = species)) +
+  geom_boxplot()
+  
+
+```
+
+
+---
+class: middle
+
+# Alert:
+## `pivot_longer()` is a new function name!
+## It used to be called `gather()`
+## `gather()` will still work, but I suggest you run `install.packages("tidyr")`
+
+---
+# Try it!
+
+Create a new dataset called `cereals_3`, that has three columns:
+* The name of the cereal
+* A column called "Nutrient" with values `protein`, `fat`, or `fiber`.
+* A column called "Amount" with the corresponding amount of the nutrient.
