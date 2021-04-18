@@ -19,7 +19,7 @@ library(flair)
 
 Let's start working in `R`!
 
-![](../../Images/silly_gifs/typing_R.gif)
+![](typing_R.gif)
 
 </br>
 

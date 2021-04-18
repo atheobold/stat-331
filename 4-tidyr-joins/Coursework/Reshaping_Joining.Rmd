@@ -88,10 +88,10 @@ Data, and Comments
 
 - Before every comma
 
-**Question 3:** How many characters per line should you strive to have in your 
+**Question 2:** How many characters per line should you strive to have in your 
 R code (and RMarkdown files)?
 
-**Question 2:** Which of the following are **bad** object names?
+**Question 3:** Which of the following are **bad** object names?
 
 - `data`
 
@@ -107,7 +107,6 @@ R code (and RMarkdown files)?
 
 - `cereals_data_clean`
 
-
 ---
 
 ## Reshaping Data
@@ -118,7 +117,9 @@ R code (and RMarkdown files)?
 
 `r emo::ji("book")` [Required Reading: *R4DS* 12.1-12.3 (Tidy Data)](https://r4ds.had.co.nz/tidy-data.html)
 
-`r emo::ji("play button")` [Required Video: Pivoting Longer]()
+`r emo::ji("play button")` [Required Video: Data Layouts](http://somup.com/crfFrmF6VQ)
+
+`r emo::ji("play button")` [Required Video: Pivoting Longer](http://somup.com/crfF3NF6hg)
 
 `r emo::ji("play button")` [Required Video: Pivoting Wider]()
 
@@ -129,7 +130,7 @@ R code (and RMarkdown files)?
 
 `r emo::ji("check")` Check-in: Pivoting
 
-- Download the `cereals.csv` data here: [https://app.box.com/s/zcr1fijnwxs27nvtxn4p38p3sgtxl4bt](https://app.box.com/s/zcr1fijnwxs27nvtxn4p38p3sgtxl4bt)
+- Download the `cereal.csv` data here: [https://app.box.com/s/zcr1fijnwxs27nvtxn4p38p3sgtxl4bt](https://app.box.com/s/zcr1fijnwxs27nvtxn4p38p3sgtxl4bt)
 
 **Question 1:** Create a new dataset called `cereals_long`, that has three
 columns:
@@ -150,14 +151,13 @@ columns:
 
 `r emo::ji("book")` [Required Reading: Mutating Joins](https://www.garrickadenbuie.com/project/tidyexplain/)
 
-`r emo::ji("play button")` [Required Video: Left Joins]()
+`r emo::ji("play button")` [Required Video: Left Joins -- Will be Posted by Monday at 9am]()
 
-`r emo::ji("play button")` [Required Video: Right Joins]()
+`r emo::ji("play button")` [Required Video: Right Joins -- Will be Posted by Monday at 9am]()
 
-`r emo::ji("play button")` [Required Video: Full Joins]()
+`r emo::ji("play button")` [Required Video: Full Joins -- Will be Posted by Monday at noon]()
 
-`r emo::ji("play button")` [Required Video: Inner Joins]()
-
+`r emo::ji("play button")` [Required Video: Inner Joins -- Will be Posted by Monday at noon]()
 
 ---
 
@@ -166,26 +166,23 @@ columns:
 The following code creates three datasets:
 
 ```{r}
-data1 <- data.frame(
+prof_info <- data.frame(
   professor = 
-    c("Bodwin", "Glanz", "Carlton", "Sun", "Theobold"),
+    c("Bodwin", "Glanz", "Carlton", "Sun"),
   undergrad_school = 
-    c("Harvard", "Cal Poly", "Cal Poly", "Harvard",
-      "Colorado Mesa University"),
+    c("Harvard", "Cal Poly", "Cal Poly", "Harvard"),
   grad_school = 
-    c("UNC", "Boston University", "UCLA", "Stanford",
-      "Montana State")
+    c("UNC", "Boston University", "UCLA", "Stanford")
 )
 
-data2 <- data.frame(
-  professor = c("Bodwin", "Glanz", "Carlton",
-                "Theobold"),
-  Stat_331 = c(TRUE, TRUE, TRUE, TRUE),
-  Stat_330 = c(FALSE, TRUE, TRUE, FALSE),
-  Stat_431 = c(TRUE, TRUE, FALSE, TRUE)
+prof_course <- data.frame(
+  professor = c("Bodwin", "Glanz", "Carlton"),
+  Stat_331 = c(TRUE, TRUE, TRUE),
+  Stat_330 = c(FALSE, TRUE, TRUE),
+  Stat_431 = c(TRUE, TRUE, FALSE)
 )
 
-data3 <- data.frame(
+course_info <- data.frame(
   course = c("Stat_331", "Stat_330", "Stat_431"),
   num_sections = c(8, 3, 1)
 )
@@ -195,11 +192,11 @@ data3 <- data.frame(
 Here is what they look like once created:
 
 ```{r, echo = FALSE}
-data1
+prof_info
 
-data2
+prof_course
 
-data3
+course_info
 ```
 
 These datasets contain information about four Cal Poly professors, their
@@ -214,7 +211,8 @@ a) Combine datasets 1 and 2 to make this:
 
 ```{r, echo = FALSE, message = FALSE}
 
-data1 %>% full_join(data2)
+prof_info %>% 
+  inner_join(prof_course)
 
 ```
 
@@ -222,35 +220,17 @@ b) Combine datasets 1 and 2 to make this:
 
 ```{r, echo = FALSE, message = FALSE}
 
-data1 %>% right_join(data2)
+prof_info %>% 
+  left_join(prof_course, by = "professor")
 
 ```
 
 c) Combine datasets 2 and 3 to make this:
 
 ```{r, echo = FALSE, message = FALSE}
-data2 %>%
+prof_course %>%
   pivot_longer(Stat_331:Stat_431, 
                names_to = "course",
                values_to = "can_teach") %>%
-  full_join(data3)
+  full_join(course_info)
 ```
-
-
-**Question 2: Solve the puzzle**
-
-We would like to assign teachers for next year, with the following guidelines:
-
-1. Each professor should be given 4 sections.
-
-2. At least half of all 331 sections should be taught by non-Cal Poly graduates.
-
-3. More than half of all 330 sections should be taught by UCLA graduates.
-
-4. Each professor should teach at least 2 different classes.
-
-Combine the three datasets into a single data frame that helps you find
-the answer to the question:
-
-*How many sections of Stat 331 will Dr. Bodwin teach?*
-
