@@ -20,7 +20,8 @@ I advise you to focus particularly on:
 
 * Making sure you don't print out more output than you need to.
 
-* Making your code readable and nicely formatted.  (This is the last lab where you will **not** be graded on code style.)
+* Making your code readable and nicely formatted.  (This is the last lab where
+you will **not** be graded on code style.)
 
 * Thinking through your desired result **before** writing any code.
 
@@ -150,11 +151,11 @@ cali %>%
 ```
 
 
-
-# Flex Points
+# Challenge 
 
 A joke in the media is that Millenials can't afford houses, because they spend all their money buying avocado toast.  Let's use this dataset to address that claim.
 
 Find or make a dataset with house prices for the California regions.  Join this dataset with your avocado data.  Use your new large dataset to make an argument about the relationship between house prices and avocado prices/sales.  Support your argument with a plot.
 
 This section is worth up to **20 Flex Points**.  It should be submitted as a **separate html file** to the "Lab 2 Flex" assignment.
+
