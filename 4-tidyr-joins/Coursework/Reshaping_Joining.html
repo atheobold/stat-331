@@ -162,16 +162,16 @@ code span.ot { color: #007020; }
 
 
 
-<p>In this lesson, you will learn to:</p>
+<p>In this lesson, you will learn:</p>
 <ul>
-<li><p><strong>Reshape</strong> your dataset by pivoting <em>longer</em> or <em>wider</em></p></li>
-<li><p>Use <strong>mutating joins</strong> and <strong>filtering joins</strong> to combine different datasets with related information.</p></li>
-<li><p>Understand the importance of nicely formatted code and how to adhere to style “guidelines”</p></li>
+<li><p>The importance of nicely formatted code and how to adhere to style “guidelines”</p></li>
+<li><p>How to <strong>reshape</strong> your dataset by pivoting <em>longer</em> or <em>wider</em></p></li>
+<li><p>How to use <strong>mutating joins</strong> and <strong>filtering joins</strong> to combine different datasets with related information.</p></li>
 </ul>
 <hr />
-<p>▶️ Watch Videos: 60 minutes</p>
-<p>📖 Readings: 20-60 minutes</p>
-<p>💻 Activities: 60 minutes</p>
+<p>▶️ Watch Videos: 25 minutes</p>
+<p>📖 Readings: 30-60 minutes</p>
+<p>💻 Activities: 45-60 minutes</p>
 <p>✅ Check-ins: 4</p>
 <hr />
 <div id="code-style" class="section level2">
@@ -193,7 +193,7 @@ code span.ot { color: #007020; }
 <li>This is all important!</li>
 </ul>
 <hr />
-<p>✅ Check-in: Code Style</p>
+<p>✅ <strong>Check-in: <em>Code Style</em></strong></p>
 <p><strong>Question 1:</strong> Based on the tidyverse style guide, where should whitespace (blank spaces) go?</p>
 <ul>
 <li><p>Before and after every <code>+</code> sign</p></li>
@@ -221,12 +221,12 @@ code span.ot { color: #007020; }
 <div id="tidy-data-and-reshaping" class="section level3">
 <h3>Tidy Data and Reshaping</h3>
 <p>📖 <a href="https://r4ds.had.co.nz/tidy-data.html">Required Reading: <em>R4DS</em> 12.1-12.3 (Tidy Data)</a></p>
-<p>▶️ <a href="http://somup.com/crfFrmF6VQ">Required Video: Data Layouts</a></p>
-<p>▶️ <a href="http://somup.com/crfF3NF6hg">Required Video: Pivoting Longer</a></p>
-<p>▶️ <a href="http://somup.com/crfqebF63k">Required Video: Pivoting Wider</a></p>
+<p>▶️ <a href="http://somup.com/crfFrmF6VQ">Required Video: Data Layouts – 7 minutes</a></p>
+<p>▶️ <a href="http://somup.com/crfF3NF6hg">Required Video: Pivoting Longer – 9 minutes</a></p>
+<p>▶️ <a href="http://somup.com/crfqebF63k">Required Video: Pivoting Wider – 9 minutes</a></p>
 <p>📖 <a href="https://r4ds.had.co.nz/tidy-data.html">Optional Reading: <em>R4DS</em> 12.4-12.5 (Separate/Unite and Missing Values)</a> – A few more tricks for data cleaning / wrangling, if you’re interested!</p>
 <hr />
-<p>✅ Check-in: Pivoting</p>
+<p>✅ <strong>Check-in: <em>Pivoting</em></strong></p>
 <ul>
 <li>Download the <code>cereal.csv</code> data here: <a href="https://app.box.com/s/zcr1fijnwxs27nvtxn4p38p3sgtxl4bt">https://app.box.com/s/zcr1fijnwxs27nvtxn4p38p3sgtxl4bt</a></li>
 </ul>
@@ -244,12 +244,12 @@ code span.ot { color: #007020; }
 <hr />
 <p>📖 <a href="https://r4ds.had.co.nz/relational-data.html">Required Reading: <em>R4DS</em> Chapter 13 (Relational Data)</a></p>
 <p>📖 <a href="https://www.garrickadenbuie.com/project/tidyexplain/">Required Reading: Mutating Joins</a></p>
-<p>▶️ <a href>Required Video: Left Joins – Will be Posted by Monday at 9am</a></p>
-<p>▶️ <a href>Required Video: Right Joins – Will be Posted by Monday at 9am</a></p>
-<p>▶️ <a href>Required Video: Full Joins – Will be Posted by Monday at noon</a></p>
-<p>▶️ <a href>Required Video: Inner Joins – Will be Posted by Monday at noon</a></p>
+<ul>
+<li>These notes have great pictures / gifs for what is happening with joins!</li>
+</ul>
+<p>⚠️ <strong>Disclaimer:</strong> Because these chapters do a <strong>much</strong> better job visualizing the concepts, I’ve chosen not to record additional videos.</p>
 <hr />
-<p>✅ Check-in: Practice with Joins</p>
+<p>✅ <strong>Check-in: <em>Practice with Joins</em></strong></p>
 <p>The following code creates three datasets:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>prof_info &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</span>
 <span id="cb1-2"><a href="#cb1-2"></a>  <span class="dt">professor =</span> </span>
@@ -286,26 +286,18 @@ code span.ot { color: #007020; }
 ## 2 Stat_330            3
 ## 3 Stat_431            1</code></pre>
 <p>These datasets contain information about four Cal Poly professors, their educational history, the classes they are able to teach, and the number of sections of each class that need to be assigned.</p>
-<p>We’d like to use all three datasets to figure out the best assignment of courses.</p>
-<p><strong>Question 1: Warm-up</strong></p>
-<ol style="list-style-type: lower-alpha">
-<li>Combine datasets 1 and 2 to make this:</li>
-</ol>
+<p><strong>a) Combine datasets 1 and 2 to make this:</strong></p>
 <pre><code>##   professor undergrad_school       grad_school Stat_331 Stat_330 Stat_431
 ## 1    Bodwin          Harvard               UNC     TRUE    FALSE     TRUE
 ## 2     Glanz         Cal Poly Boston University     TRUE     TRUE     TRUE
 ## 3   Carlton         Cal Poly              UCLA     TRUE     TRUE    FALSE</code></pre>
-<ol start="2" style="list-style-type: lower-alpha">
-<li>Combine datasets 1 and 2 to make this:</li>
-</ol>
+<p><strong>b) Combine datasets 1 and 2 to make this:</strong></p>
 <pre><code>##   professor undergrad_school       grad_school Stat_331 Stat_330 Stat_431
 ## 1    Bodwin          Harvard               UNC     TRUE    FALSE     TRUE
 ## 2     Glanz         Cal Poly Boston University     TRUE     TRUE     TRUE
 ## 3   Carlton         Cal Poly              UCLA     TRUE     TRUE    FALSE
 ## 4       Sun          Harvard          Stanford       NA       NA       NA</code></pre>
-<ol start="3" style="list-style-type: lower-alpha">
-<li>Combine datasets 2 and 3 to make this:</li>
-</ol>
+<p><strong>c) Combine datasets 2 and 3 to make this:</strong></p>
 <pre><code>## # A tibble: 9 x 4
 ##   professor course   can_teach num_sections
 ##   &lt;chr&gt;     &lt;chr&gt;    &lt;lgl&gt;            &lt;dbl&gt;

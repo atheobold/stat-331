@@ -19,23 +19,24 @@ library(flair)
 ```
 
 
-In this lesson, you will learn to:
+In this lesson, you will learn:
 
-* **Reshape** your dataset by pivoting *longer* or *wider*
-
-* Use **mutating joins** and **filtering joins** to combine different datasets with related information.
-
-* Understand the importance of nicely formatted code and how to adhere to 
+* The importance of nicely formatted code and how to adhere to 
 style "guidelines"
+
+* How to **reshape** your dataset by pivoting *longer* or *wider*
+
+* How to use **mutating joins** and **filtering joins** to combine different
+datasets with related information.
 
 
 ---
 
-`r emo::ji("play button")` Watch Videos: 60 minutes  
+`r emo::ji("play button")` Watch Videos: 25 minutes  
 
-`r emo::ji("book")` Readings: 20-60 minutes   
+`r emo::ji("book")` Readings: 30-60 minutes   
 
-`r emo::ji("computer")` Activities: 60 minutes  
+`r emo::ji("computer")` Activities: 45-60 minutes  
   
 `r emo::ji("check")` Check-ins: 4
 
@@ -74,7 +75,7 @@ Data, and Comments
 
 ---
 
-`r emo::ji("check")` Check-in: Code Style
+`r emo::ji("check")` **Check-in: _Code Style_**
 
 **Question 1:** Based on the tidyverse style guide, where should whitespace (blank spaces) go? 
 
@@ -117,18 +118,18 @@ R code (and RMarkdown files)?
 
 `r emo::ji("book")` [Required Reading: *R4DS* 12.1-12.3 (Tidy Data)](https://r4ds.had.co.nz/tidy-data.html)
 
-`r emo::ji("play button")` [Required Video: Data Layouts](http://somup.com/crfFrmF6VQ)
+`r emo::ji("play button")` [Required Video: Data Layouts -- 7 minutes](http://somup.com/crfFrmF6VQ)
 
-`r emo::ji("play button")` [Required Video: Pivoting Longer](http://somup.com/crfF3NF6hg)
+`r emo::ji("play button")` [Required Video: Pivoting Longer -- 9 minutes](http://somup.com/crfF3NF6hg)
 
-`r emo::ji("play button")` [Required Video: Pivoting Wider](http://somup.com/crfqebF63k)
+`r emo::ji("play button")` [Required Video: Pivoting Wider -- 9 minutes](http://somup.com/crfqebF63k)
 
 `r emo::ji("book")` [Optional Reading: *R4DS* 12.4-12.5 (Separate/Unite and Missing Values)](https://r4ds.had.co.nz/tidy-data.html) -- A few more tricks for data cleaning / wrangling, if you're interested!
 
 
 ---
 
-`r emo::ji("check")` Check-in: Pivoting
+`r emo::ji("check")` **Check-in: _Pivoting_**
 
 - Download the `cereal.csv` data here: [https://app.box.com/s/zcr1fijnwxs27nvtxn4p38p3sgtxl4bt](https://app.box.com/s/zcr1fijnwxs27nvtxn4p38p3sgtxl4bt)
 
@@ -149,19 +150,19 @@ columns:
 
 `r emo::ji("book")` [Required Reading: *R4DS* Chapter 13 (Relational Data)](https://r4ds.had.co.nz/relational-data.html)
 
+
 `r emo::ji("book")` [Required Reading: Mutating Joins](https://www.garrickadenbuie.com/project/tidyexplain/)
 
-`r emo::ji("play button")` [Required Video: Left Joins -- Will be Posted by Monday at 9am]()
+  * These notes have great pictures / gifs for what is happening with joins! 
 
-`r emo::ji("play button")` [Required Video: Right Joins -- Will be Posted by Monday at 9am]()
+`r emo::ji("warning")` **Disclaimer:** Because these chapters do a __much__
+better job visualizing the concepts, I've chosen not to record additional
+videos. 
 
-`r emo::ji("play button")` [Required Video: Full Joins -- Will be Posted by Monday at noon]()
-
-`r emo::ji("play button")` [Required Video: Inner Joins -- Will be Posted by Monday at noon]()
 
 ---
 
-`r emo::ji("check")` Check-in: Practice with Joins
+`r emo::ji("check")` **Check-in: _Practice with Joins_**
 
 The following code creates three datasets:
 
@@ -203,11 +204,7 @@ These datasets contain information about four Cal Poly professors, their
 educational history, the classes they are able to teach, and the number of
 sections of each class that need to be assigned.
 
-We'd like to use all three datasets to figure out the best assignment of courses.
-
-**Question 1: Warm-up** 
-
-a) Combine datasets 1 and 2 to make this:
+**a) Combine datasets 1 and 2 to make this:**
 
 ```{r, echo = FALSE, message = FALSE}
 
@@ -216,7 +213,7 @@ prof_info %>%
 
 ```
 
-b) Combine datasets 1 and 2 to make this:
+**b) Combine datasets 1 and 2 to make this:**
 
 ```{r, echo = FALSE, message = FALSE}
 
@@ -225,7 +222,7 @@ prof_info %>%
 
 ```
 
-c) Combine datasets 2 and 3 to make this:
+**c) Combine datasets 2 and 3 to make this:**
 
 ```{r, echo = FALSE, message = FALSE}
 prof_course %>%
