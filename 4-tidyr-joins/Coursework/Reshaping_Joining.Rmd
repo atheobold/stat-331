@@ -121,7 +121,7 @@ R code (and RMarkdown files)?
 
 `r emo::ji("play button")` [Required Video: Pivoting Longer](http://somup.com/crfF3NF6hg)
 
-`r emo::ji("play button")` [Required Video: Pivoting Wider]()
+`r emo::ji("play button")` [Required Video: Pivoting Wider](http://somup.com/crfqebF63k)
 
 `r emo::ji("book")` [Optional Reading: *R4DS* 12.4-12.5 (Separate/Unite and Missing Values)](https://r4ds.had.co.nz/tidy-data.html) -- A few more tricks for data cleaning / wrangling, if you're interested!
 
