@@ -127,6 +127,7 @@ hiphop %>%
   count()
 ```
 
+_There were 64 unique AAVE words included in the study._
 
 #### 6. 
 
@@ -157,7 +158,7 @@ subjects <- hiphop %>%
       
 
 subjects %>% 
-  select(subj, age, sex, ethnic) %>% 
+  select(age, sex, ethnic, ethnic_group) %>% 
   summary()
 ```
 
@@ -184,19 +185,22 @@ subjects %>%
   ggplot(aes(x = age)) + 
   geom_histogram(binwidth = 2) +
   facet_wrap(~ sex) + 
-  labs(x = "Age")
+  labs(x = "Age", 
+       title = "Participant Ages by Identified Sex")
 
 subjects %>% 
   ggplot(aes(x = age)) + 
   geom_histogram(binwidth = 2) +
   facet_wrap(~ ethnic_group) + 
-  labs(x = "Age")
+  labs(x = "Age", 
+       title = "Participant Ages by Identified Ethnic Group")
 
 subjects %>% 
   ggplot(aes(x = ethnic_group, fill = sex)) + 
   geom_bar(position = "dodge") +
   labs(fill = "Self-reported \nSex", 
-       x = "Self-reported Ethnicity")
+       x = "Self-reported Ethnicity", 
+       title = "Participant Identified Sex and Ethnicity")
 ```
 
 
