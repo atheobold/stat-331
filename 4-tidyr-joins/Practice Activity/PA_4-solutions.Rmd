@@ -11,15 +11,15 @@ countries of the world and military spending.
 
 The SIPRI (Stockholm International Peace Research Institute) Military Expenditure
 Database is an open source dataset with contains consistent time series on the 
-military spending of countries for the period 1949–2018. The database is updated
+military spending of countries for the period 1949–2019. The database is updated
 annually, which may include updates to data for any of the years included in the
 database.
 
 Military expenditure in local currency at current prices is presented according
 to both the financial year of each country and according to calendar year, 
 calculated on the assumption that, where financial years do not correspond to 
-calendar years, spending is distributed evenly through the year. 
-Figures in constant (2017) and current US $, as a share of GDP and per capita 
+calendar years, spending is distributed evenly through the year. Figures in
+constant (2018) and current US $, as a share of GDP and per capita 
 are presented according to calendar year. 
 
 The availability of data varies considerably by country, but for a majority of 
@@ -90,6 +90,9 @@ military_clean <- military %>%
                               )
 ```
 
+**Note**: Because the variables are numbers, which is not syntaxtically correct, 
+you need to surround the names of these variables with either backticks (`), 
+quotation marks ("), or single quotes ('). 
 
 Because of the use of characters to mark missing values, all of the 
 columns 1988 through 2019 were read in a characters. 
@@ -123,6 +126,13 @@ cont_region <- read_xlsx(here::here("4-tidyr-joins", "Practice Activity",
 
 ```
 
+**Note:** I filtered out the `Region`s that had `"World total"`, since I don't 
+want to use those for my filtering. 
+
+**Another Note:** It's something we haven't discussed, but you can make 
+changes to your dataset *when* you read it in! Here, I am reading in the data, 
+and immediately piping it into the `filter()` function to remove the observations
+I don't want. Fun! 
 
 If you think about `filter()`ing data, so that only certain values of a variable 
 are retained, we should remember our friendly `%in%` function! However, if you
@@ -159,10 +169,17 @@ military_clean <- military_clean %>%
 __Part One Answer:__ What regions were not removed from the `military_clean` 
 dataset? Use their correct capitalization **and** punctuation! 
 
-- Middle East
 - Asia & Oceania
 - Central America and the Caribbean
+- Middle East
 - Sub-Saharan
+
+**Note:** The `"Middle East"` region is still in the dataset, because in the 
+"Regional totals" sheet it has parentheses next to it indicating whether it is 
+including or excluding Iraq. `"Asia & Oceania"` has an `&` in one dataset and 
+an `and` in the other dataset, which is similar for `"Central America and the 
+Caribbean"`. This goes to show that if you aren't consistent bad things can 
+happen! 
 
 ## Data Organization
 
@@ -228,15 +245,15 @@ labels!
 
 long_military %>% 
   ggplot(aes(x = Spending, y = Year)) + 
-  geom_boxplot(outlier.shape = NA) + 
-  geom_jitter(alpha = 0.2, color = "tomato")
+  geom_boxplot(outlier.shape = NA,, alpha = 0.2) + 
+  geom_jitter(alpha = 0.5, color = "tomato") + 
+  labs(x = "Military Spending as % of Total Government Spending")
   
 ```
 
 
 __Part Two Answer:__ What year was the second largest military expenditure? 
 What country had this expenditure? 
-
 
 - Year: 1990
 - Country: Kuwait
