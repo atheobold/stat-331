@@ -41,8 +41,8 @@ dataset. We are interested in the sheet labeled "Share of Govt. spending" which
 contains information about the share of government spending that is allocated to
 military spending. 
 
-Next, you'll notice that there are notes about the dataset in the first seven rows. 
-Ugh! 
+Next, you'll notice that there are notes about the dataset in the first seven
+rows. Ugh! 
 
 Rather than copying this one sheet into a new Excel file and deleting the first 
 seven rows, let's learn something new about the `read_xlsx()` function! 
@@ -58,7 +58,7 @@ the sheet that you want to use.
 The `read_xlsx()` function also has a `skip` argument, where you specify the 
 number of rows you want to be skipped *before* reading in the data.
 
-__1.__ Modify the code below to read the miliary expenditures data into your
+__1.__ Modify the code below to read the military expenditures data into your
 work space. 
 
 ```{r, message = FALSE}
@@ -103,13 +103,12 @@ military_clean <- military_clean %>%
   mutate_at(vars(`1988`:`2019`), as.numeric) 
 ```
 
-
 If you give the `Country` column a look, you'll see that there are names
 of continents and regions included. These names are only included to make it 
 simpler to find countries, as they contain no data. 
 
 Luckily for us, these names were stored in the "Regional totals" sheet. We can 
-us the `Region` column of this dataset to filter out the names we don't want. 
+use the `Region` column of this dataset to filter out the names we don't want. 
 
 Run the code below to read in the "Regional totals" dataset, making any 
 necessary modifications to the path. 
@@ -158,11 +157,11 @@ military_clean <- military_clean %>%
 </br>
 
 __Part One Answer:__ What regions were not removed from the `military_clean` 
-dataset? Use their correct capitalizaton **and** punctutation! 
+dataset? Use their correct capitalization **and** punctuation! 
 
 - Middle East
 - Asia & Oceania
-- Central America and the Carribean
+- Central America and the Caribbean
 - Sub-Saharan
 
 ## Data Organization
@@ -229,7 +228,7 @@ labels!
 
 long_military %>% 
   ggplot(aes(x = Spending, y = Year)) + 
-  geom_boxplot() + 
+  geom_boxplot(outlier.shape = NA) + 
   geom_jitter(alpha = 0.2, color = "tomato")
   
 ```
@@ -237,6 +236,7 @@ long_military %>%
 
 __Part Two Answer:__ What year was the second largest military expenditure? 
 What country had this expenditure? 
+
 
 - Year: 1990
 - Country: Kuwait
