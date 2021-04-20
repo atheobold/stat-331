@@ -211,6 +211,8 @@ sections of each class that need to be assigned.
 prof_info %>% 
   inner_join(prof_course)
 
+## A right join will also work!
+
 ```
 
 **b) Combine datasets 1 and 2 to make this:**
@@ -219,6 +221,8 @@ prof_info %>%
 
 prof_info %>% 
   left_join(prof_course, by = "professor")
+
+## A full join will also work!
 
 ```
 
@@ -229,5 +233,7 @@ prof_course %>%
   pivot_longer(Stat_331:Stat_431, 
                names_to = "course",
                values_to = "can_teach") %>%
-  full_join(course_info)
+  inner_join(course_info)
+
+## A right join will also work! 
 ```
