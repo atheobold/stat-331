@@ -1,0 +1,151 @@
+---
+title: "Introduction to ggplot"
+author: ""
+output:
+  prettydoc::html_pretty:
+    theme: tactile
+    highlight: github
+    css: styles.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, include = FALSE}
+library(tidyverse)
+library(flair)
+```
+
+Now that we've refreshed how to work with different types of objects in R, let's
+start visualizing!
+
+> "The simple graph has brought more information to the data analysist's mind than 
+> any other device."
+> -- John Tukey
+
+`r emo::ji("play button")` Watch Videos: 50 minutes  
+
+  - I've broken the videos up into smaller ~5 minute increments! 
+
+`r emo::ji("book")` Readings: 45 minutes   
+
+  - I've added an optional video on how to take notes in a programming textbook [here](http://somup.com/crffFPbHQ2). 
+
+`r emo::ji("computer")` Activities: 30-45 minutes  
+  
+  - You'll be working through the textbook exercises for each section. 
+
+`r emo::ji("check")` Check-ins: 1 (broken out by sections)
+
+
+## Loading in the **ggplot2** Package
+
+This week we will be taking a deep dive into data visualization, using the 
+**ggplot2** package. The ggplot2 package is included in the **tidyverse** package
+that you have already downloaded! To load in the ggplot2 package, you will 
+either need to run the code to load in the entire tidyverse package *or* load in 
+the ggplot2 package directly. 
+
+```{r, eval = FALSE, echo = TRUE}
+library(tidyverse)
+
+OR 
+
+library(ggplot2)
+```
+
+## Data Visualization with **ggplot2** 
+
+This coursework will walk you through the different sections of Chapter Three 
+in *R for Data Science*. 
+
+`r emo::ji("book")` [Required Reading: Data visualisation](https://r4ds.had.co.nz/data-visualisation.html). 
+
+
+## Getting Started with **ggplot2** 
+
+`r emo::ji("play button")` [Required Video: Why ggplot2?](https://www.youtube.com/watch?v=5c-8yPCwVzs)
+
+`r emo::ji("play button")` [Required Video: First Steps](https://www.youtube.com/watch?v=1Jmbfh6GotI)
+
+`r emo::ji("check")` Check-in: 
+
+**Question 1:** With the `mpg` dataset, make a scatterplot of `hwy` versus `cty`. 
+Which of these correctly describe the relationship seen in the plot? 
+
+**Question 2:** What specifically does the code `ggplot(data = mpg)` do? 
+
+</br>
+
+`r emo::ji("play button")` [Required Video: What is an aesthetic?](https://www.youtube.com/watch?v=oYVuzW_t93w)
+
+`r emo::ji("check")` Check-in: 
+
+**Question 3:** Exercise 3.3.1 #1: What's gone wrong with this code? Why are the
+points not blue?
+
+</br>
+
+`r emo::ji("play button")` [Required Video: What is a geometric object?](https://www.youtube.com/watch?v=pMC2l2YhjMI)
+
+
+`r emo::ji("check")` Check-in: 
+
+**Question 4:** Match each plot with the `geom_XXX()` function used to create it! 
+
+</br> 
+
+`r emo::ji("computer")` [Required Tutorial: Data Visualization Basics](https://rstudio.cloud/learn/primers/1.1)
+
+After working through the tutorial, if you feel more detail would be helpful,
+consider the following readings:
+
+* `r emo::ji("question")` [Modern Dive: Chapter 2](https://moderndive.com/2-viz.html)
+
+
+## Getting a bit Fancier
+
+In this section we dig a bit deeper into how we can make our code more efficient
+and other ways we can add additional variables to our plots. 
+
+`r emo::ji("play button")` [Required Video: Global vs. local aesthetics](http://youtu.be/y3BWlYa7q-Q?hd=1)
+
+`r emo::ji("check")` Check-in: 
+
+**Question 5:** Match the code to the type of aesthetics that are being used: global or local
+
+</br> 
+
+`r emo::ji("play button")` [Required Video: Adding a third variable with facets](http://somup.com/crffbHbH1h)
+
+`r emo::ji("check")` Check-in: 
+
+**Question 6:** What do the `nrow` and `ncol` arguments to `facet_wrap()` do?
+
+
+## Data Transformations
+
+`r emo::ji("play button")` [Required Video: What is being plotted?](http://somup.com/crffb8bH1x)
+
+`r emo::ji("check")` Check-in: 
+
+**Question 7:** Match the stat function with its associated geom function. 
+
+</br>
+
+`r emo::ji("play button")` [Required Video: How do I change positions?](http://somup.com/crffFibH1R)
+
+`r emo::ji("check")` Check-in: 
+
+**Question 8:** What parameters to `geom_jitter()` control the amount of 
+jittering? 
+
+
+## Plot Customizations 
+
+`r emo::ji("play button")` [Required Video: Axis labels, color themes, and legends, oh my!](http://somup.com/crffFDbHiU)
+
+`r emo::ji("check")` Check-in: 
+
+**Question 9:** What can the `labs()` function do? (select all that apply)

@@ -1,0 +1,123 @@
+---
+title: ".hand[What is a **geom**?]"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["xaringan-themer.css", "slide-style.css"]
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: '16:9'
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+---
+
+```{r setup, include = FALSE}
+library(tidyverse)
+library(gridExtra)
+library(flair)
+```
+
+.larger[How to represent the data?]
+
+```{r, echo = FALSE, fig.width = 10, fig.height = 6, message = FALSE, fig.align='center'}
+p1 <- ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) 
+             
+p2 <- ggplot(data = mpg) + 
+  geom_smooth(mapping = aes(x = displ, y = hwy))
+      
+grid.arrange(p1, p2, nrow = 1)       
+
+
+```
+
+---
+
+.larger[**geom**]
+
+> "A **geom** is the geometrical object that a plot uses to represent data."   
+
+> "People often describe plots by the type of geom that the plot uses."
+
+</br>
+
+.large[
+
+| Plot                | geom            |
+|---------------------|-----------------|
+| Boxplot     | boxplot   |
+| Bar plot    | bar       |
+| Line graph  | line      |
+| Scatterplot | point     |
+
+]
+
+---
+
+.larger[Changing **geom**s]
+
+```{r point, eval = FALSE, echo = FALSE}
+# Scatterplot
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy))
+
+```
+
+```{r, echo = FALSE}
+decorate_chunk(chunk_name = "point", eval = FALSE) %>% 
+  flair(pattern = "geom_point", color = "blue")
+```
+
+</br>
+
+```{r smooth, eval = FALSE, echo = FALSE}
+# Smoothing Curve
+ggplot(data = mpg) + 
+  geom_smooth(mapping = aes(x = displ, y = hwy))
+```
+
+```{r, echo = FALSE}
+decorate_chunk(chunk_name = "smooth", eval = FALSE) %>% 
+  flair(pattern = "geom_smooth", color = "green")
+```
+---
+
+.larger[**geom**s and **mapping**s]
+
+.large[Different `geom`s take different `mapping` arguments
+
+.pull-left[
+- `geom_smooth`: no `shape`, `linetype` instead
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.width = 6, fig.height = 4}
+ggplot(data = mpg) + 
+  geom_smooth(mapping = aes(x = displ, y = hwy, linetype = class))
+```
+]
+
+.pull-right[
+
+- `geom_bar`: `color` bad, `fill` better
+
+```{r, echo = FALSE, fig.width = 6, fig.height = 4}
+ggplot(data = mpg) +
+  geom_bar(mapping = aes(x = drv, fill = class))
+```
+]
+]
+
+---
+
+.larger[Multiple **geom**s in one plot!]
+
+```{r, fig.align='center', message = FALSE, fig.width = 6, fig.height = 6}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) + 
+  geom_smooth(mapping = aes(x = displ, y = hwy))
+```
+

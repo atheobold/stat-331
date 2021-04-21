@@ -1,0 +1,72 @@
+---
+title: ".hand[Why should I use ggplot2?]"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["xaringan-themer.css", "slide-style.css"]
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: '16:9'
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+---
+
+.pull-left[
+.large[
+**Pros** 
+
+- Simple to create complex plots
+
+- Programmatic interface
+
+- Minimal changes to change visualization types 
+
+- Default customizations are desirable
+]
+]
+
+.pull-right[
+![](ggplot_logo.png)
+
+.large[
+**Cons** 
+
+- New syntax to learn! 
+]
+]
+
+---
+
+.larger[`ggplot()` compared to "base" R]
+
+
+.pull-left[
+.large[
+
+- Same syntax
+- Change `geom` 
+
+```{r, eval = FALSE}
+ggplot(data = <DATA>) + 
+  <GEOM_FUNCTION>(mapping = aes(<MAPPINGS>))
+```
+]
+]
+
+.pull-right[
+.large[
+Different functions for different types of plots
+
+- Scatterplot: `plot()`
+- Boxplot: `boxplot()`
+- Histogram: `hist()` 
+- Density plot: `density()`
+- Bar plot: `barplot()`
+
+]
+]

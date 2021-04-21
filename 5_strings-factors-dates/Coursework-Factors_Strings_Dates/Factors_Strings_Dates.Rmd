@@ -1,0 +1,181 @@
+---
+title: "Factors, Strings, and Dates"
+output:
+  prettydoc::html_pretty:
+    theme: tactile
+    highlight: github
+    css: styles.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options("couRsework-img_path" = here::here("Images", "icons")) 
+### change this if icons local
+```
+
+```{r, include = FALSE}
+library(tidyverse)
+library(lubridate)
+```
+
+
+In this lesson, you will learn:
+
+* The importance of nicely formatted code and how to adhere to 
+style "guidelines"
+
+* How to **reshape** your dataset by pivoting *longer* or *wider*
+
+* How to use **mutating joins** and **filtering joins** to combine different
+datasets with related information.
+
+
+---
+
+`r emo::ji("play button")` Watch Videos: 60 minutes  
+
+`r emo::ji("book")` Readings: 45-60 minutes   
+
+`r emo::ji("computer")` Activities: 75-120 minutes  
+  
+`r emo::ji("check")` Check-ins: 6
+
+
+---
+
+# Factors
+
+`r emo::ji("book")` [Required Video: Factors with forcats]()
+
+`r emo::ji("book")` [Required Reading: *R4DS* -- Factors with forcats](https://r4ds.had.co.nz/factors.html)
+
+---
+
+`r emo::ji("book")` **Check-in: Functions from forcats 
+
+Answer the questions from the video(s):
+
+* What is the difference between `fct_relevel()` and `fct_recode()`?
+
+* What is the difference between `fct_collapse()` and `fct_lump()`?
+
+* What is the difference between `fct_reorder()` and `fct_inorder()`?
+
+*Feel free to share answers with your classmates in the Discord server, to make
+sure you understand.*
+
+`r emo::ji("check")` **Check-in: Apply your skills 
+
+In your *colleges_clean* dataset, adjust the `REGION` variable to have nicer or
+clearer labels and/or better categories.
+
+---
+
+# Strings
+
+`r emo::ji("play")` [Required Video -- Strings with stringr]() 
+
+`r emo::ji("book")` [Required Reading: *R4DS* -- Strings]"https://r4ds.had.co.nz/strings.html)
+
+---
+
+`r emo::ji("check")` **Check-in**: Functions from stringr
+
+Answer the questions from the video(s):
+
+* What is the difference between `length()` and `str_length()`?
+
+* What is the difference between `str_replace()` and `str_replace_all()`?
+
+* What is the difference between `str_trim()` and `str_trunc()`?
+
+* What is the difference between `str_sub()` and `str_subset()`?
+
+* What does the `collapse` argument do in `str_c()`?
+
+*Feel free to share answers with your classmates in the Discord server, to make
+sure you understand.*
+
+`r emo::ji("check")` **Check-in**: Apply your skills
+
+Using your *colleges_clean* dataset, answer these questions:
+
+**Question 1:** How *exactly* does Cal Poly's name appear in this dataset?
+
+**Question 2:** How many colleges have the word "University" in their name?
+
+**Question 3:** Which college has the *longest* name?  The *shortest* name?
+
+---
+
+# Dates
+
+`r emo::ji("play")` [Required Video: DateTime Objects with lubridate]()
+
+`r emo::ji("book")` [Required Reading: *R4DS* -- Dates and Times](https://r4ds.had.co.nz/dates-and-times.html)
+
+**Extra Resources**
+
+* [A more in-depth discussion of the POSIXlt and POSIXct data classes.](https://www.cyclismo.org/tutorial/R/time.html)
+
+* [A tutorial on lubridate](https://data.library.virginia.edu/working-with-dates-and-time-in-r-using-the-lubridate-package/) - scroll down for details on intervals if 
+you have trouble with `%within%` and `%--%`
+
+---
+
+`r emo::ji("check")` **Check-in**: Functions from lubridate
+
+
+* What is the difference between `year()` and `years()` and `dyears()`?
+
+* What time zone does R think dates are in, by default?
+
+* What is the difference between `%within%` and `%--%`?
+
+* What happens if you use the `parse_datetime()` function, but you do not provide a `day` argument?
+
+
+`r emo::ji("check")` **Check-in**: Apply your skills
+
+
+**Question 1: Warm-up**
+
+Answer the following using code (even if you know the answer already).
+
+a. Save your birthday as a Datetime object in R.  
+
+```{r, include = FALSE}
+bday <- make_datetime(year = 1989, month = 01, day = 14)
+```
+
+
+b. What day of the week does/did your birthday fall on in 2020?
+
+```{r, include = FALSE}
+bday2 <- bday
+year(bday2) <- 2020
+bday2 %>% wday(label = TRUE)
+```
+
+c. On what day of the week should you plan your 100th birthday party?
+
+```{r, include = FALSE}
+(bday + years(100)) %>% wday(label = TRUE)
+```
+
+d. Find the date that is exactly 9 months before your birthday.  If it falls on
+a holiday, think about the implications.
+
+```{r, include = FALSE}
+(bday - months(9)) 
+```
+
+
+**Question 2: Your Zodiac sign**
+
+Download the `zodiac.csv` data from the course website.  This dataset gives the
+date ranges for the 12 Zodiac signs; that is, if you were born between the dates
+listed, you are affliated with that particular sign.
+
+Use this dataset, and your new skills with DateTimes, to determine your sign
+*using only code*.
