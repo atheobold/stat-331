@@ -95,7 +95,7 @@ class: inverse
 
 ---
 
-.larger[Some words about depreciated functions]
+.larger[Some words about deprecated functions]
 
 --
 
