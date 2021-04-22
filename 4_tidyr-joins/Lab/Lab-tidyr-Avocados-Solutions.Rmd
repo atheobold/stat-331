@@ -65,27 +65,36 @@ the `region` variable.  Notice that the category `"LosAngeles"` is contained in
 
 
 ```{r}
-# Step 1: Rename the PLU variables to be sizes of avocados! 
 avocado <- avocado %>%
+  # Rename the PLU variables to be sizes of avocados!
   rename(
     Size_Small = `4046`,
     Size_Large = `4225`,
-    Size_XL = `4770`)
+    Size_XL = `4770`) %>% 
+  # Filter out "TotalUS" because it is not a region or city!
+  filter(region != "TotalUS")
 
 # Make tibble with the names of the major regions 
-major_regions <- tibble(region = c("Plains", "Midsouth", "West", "SouthCentral",
-                   "Northeast", "Southeast", "GreatLakes")
+major_regions <- tibble(region = c("Plains", "Midsouth", "West",
+                                   "SouthCentral", "Northeast",
+                                   "Southeast", "GreatLakes")
                    )
   
 # Keep only the observations in the avocado dataset WITH matches in the major_regions
 avo_regional <- avocado %>%
   semi_join(major_regions, by = "region")
 
+# Make tibble with the names of the states / regions to NOT include
+# I'm assuming that "NewYork" is the city and not the state!
+states <- tibble(region = c("California", "WestTexNewMexico",
+                            "NorthernNewEngland", "SouthCarolina")
+                 )
+
 # Keep only the observations in the avocado dataset WITHOUT matches in the major_regions
 avo_metro <- avocado %>%
   anti_join(major_regions, by = "region") %>% 
-  ## Filter out "TotalUS" because it isn't a region!
-  filter(region != "TotalUS")
+  anti_join(states, by = "region")
+
 ```
 
 
@@ -100,19 +109,20 @@ avo_regional %>%
          year == 2017) %>%
   group_by(region) %>%
   summarize(tot_small_bags = sum(Size_Small)) %>%
-  top_n(1, tot_small_bags)
+  slice_max(tot_small_bags)
 ```
 
 
 __2.__ Use the `separate()` function to split the `Date` variable into year,
-month, and day. In which month is the highest volume of avocado sales?
+month, and day. Across all of the years, which month had the highest volume of
+avocado sales?
 
 ```{r}
 avocado %>%
   separate(Date, into = c("Year", "Month", "Day"), sep = "-") %>%
   group_by(Month) %>%
   summarize(tot_sales = sum(`Total Volume`)) %>%
-  top_n(1, tot_sales)
+  slice_max(tot_sales)
 ```
 
 
