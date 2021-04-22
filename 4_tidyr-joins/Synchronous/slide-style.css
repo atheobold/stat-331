@@ -143,6 +143,20 @@ h4 {
   clear: both;
 }
 
+/* Three Column Pull */
+.column-left{ 
+  float: left; width: 33.333%; 
+  
+}
+
+.column-right{ 
+  float: right; width: 33.333%; 
+  
+}
+
+.column-center{ 
+  clear: both;display: inline-block; width: 33.333%; 
+}
 
 /* Four column layout */
 .four-column {
