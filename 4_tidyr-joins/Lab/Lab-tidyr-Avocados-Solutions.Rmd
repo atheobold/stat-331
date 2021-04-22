@@ -45,7 +45,7 @@ __0.__ Create an R Markdown file, load the data, and declare your package depend
 ```{r, message = FALSE}
 library(tidyverse)
 
-avocado <- read_csv(here::here("4-tidyr-joins", "Lab", "avocado.csv"))
+avocado <- read_csv(here::here("4_tidyr-joins", "Lab", "avocado.csv"))
 
 ```
 
@@ -59,7 +59,8 @@ or conventional), and the size of the avocado._
 
 
 __2.__ Clean the data in any way you see fit. In particular, look carefully at
-the `region` variable.  Notice that the category `"LosAngeles"` is contained in `"California"`, which is contained in `"West"`, which is contained in 
+the `region` variable.  Notice that the category `"LosAngeles"` is contained in
+`"California"`, which is contained in `"West"`, which is contained in 
 `"TotalUS"`. Think about how you want to handle this issue in your analysis.
 
 
@@ -73,8 +74,8 @@ avocado <- avocado %>%
 
 # Make tibble with the names of the major regions 
 major_regions <- tibble(region = c("Plains", "Midsouth", "West", "SouthCentral",
-                   "Northeast", "Southeast")
-)
+                   "Northeast", "Southeast", "GreatLakes")
+                   )
   
 # Keep only the observations in the avocado dataset WITH matches in the major_regions
 avo_regional <- avocado %>%
@@ -200,8 +201,6 @@ cali_avo %>%
   labs(x = "Region of CA", 
        y = "Proportion of Mean Avocados Sold", 
        fill = "Avocado Size")
-
-
 ```
 
 
