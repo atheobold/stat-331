@@ -1,0 +1,227 @@
+---
+title: "Working with Dates Using `lubridate`"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["xaringan-themer.css", "slide-style.css"]
+    nature:
+      highlightStyle: solarized-light
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+library(tidyverse)
+library(lubridate)
+library(palmerpenguins)
+```
+
+```{r xaringan-themer, include=FALSE}
+library(xaringanthemer)
+style_duo(
+  primary_color = "#26116c",
+  secondary_color = "#fd5e53",
+  title_slide_text_color = "#fff8e7",
+  header_font_google = google_font("Roboto"),
+  text_font_google   = google_font("Roboto Condensed"),
+  code_font_google   = google_font("Droid Mono"),
+  text_font_size     = "30px"
+)
+```
+
+class: center, middle
+
+.larger[Dates]
+
+<img src="https://pbs.twimg.com/media/CQ6A-NdWwAAncW-.png" width=300>
+
+---
+
+# Dates
+
+.pull-left[
+Common tasks:
+
+* Convert a date-like variable ("January 14, 1989") to a special DateTime Object.
+
+* Find the weekday, month, year, etc from a DateTime object
+
+* Convert between timezones
+]
+
+--
+
+.pull-right[
+The package `lubridate` is AMAZING for this. 
+  * `lubridate` does not **load** with the `tidyverse` but it does **install**
+  with it.
+]
+
+---
+
+.larger[`datetime` Objects]
+
+There are actually three data types (classes) in R for dates and datetimes.
+
+- **Date** (duh)
+- **POSIXlt** (???)
+- and **POSIXct** (???)
+
+---
+
+.large[History of `POSIXlt` and `POSIXct`]
+
+.pull-left[
+
+- `POSIXct` -- stores date/time values as the number of seconds since
+January 1, 1970 ("Unix Epoch")
+
+- `POSIXlt` -- stores date/time values as a list with elements for second,
+minute, hour, day, month, and year, among others. 
+]
+
+.pull-right[
+In the "old days", to make a Date or Datetime object, you'd have to get the
+format *just right*.
+
+```{r}
+as.Date("1989-01-14") %>% str()
+as_datetime("1989-01-14") %>% str()
+```
+]
+
+---
+
+.larger[Today: `lubridate`]
+
+.pull-left[
+```{r}
+make_date(year = 1989, month = 01, day = 14)
+mdy("January 14, 1989")
+dmy("14-Jan-1989", tz = "America/Denver")
+```
+
+]
+
+--
+
+.pull-right[
+```{r}
+parse_datetime("1/14/1989", format = "mdy")
+```
+]
+
+---
+
+# Common mistake
+
+What's wrong here?
+
+```{r}
+as_datetime(2021-04-25)
+```
+
+--
+
+```{r}
+my_date <- 2021-04-25
+my_date
+```
+
+---
+
+.larger[Components of Dates]
+
+```{r}
+bday <- ymd_hms("1989-01-14 12:12:12")
+```
+
+.pull-left[
+```{r}
+year(bday)
+month(bday)
+day(bday)
+```
+
+]
+
+.pull-right[
+```{r}
+wday(bday)
+
+wday(bday, label = TRUE)
+```
+
+]
+
+---
+
+.larger[When is my ______ birthday?]
+
+.pull-left[
+.large[next]
+
+```{r}
+(bday + years(33)) %>% 
+  wday(label = TRUE)
+```
+]
+
+.pull-right[
+.large[100]
+```{r}
+bday + years(50)
+```
+
+]
+
+---
+
+# lubridate
+
+Reference the `lubridate` cheatsheet: https://evoldyn.gitlab.io/evomics-2018/ref-sheets/R_lubridate.pdf
+
+Use it, and your own experiments, to answer the following:
+
+*Hint:* Consider data types and object structures!
+
+1. What is the difference between `year()` and `years()`?
+
+<!-- year() -- extracts the year of a datetime object -->
+<!-- years() -- creates a period object based on number of years  -->
+
+2. What `tz` would you use for San Luis Obispo? 
+
+<!-- tz = "America/Los_Angeles" -->
+
+3. What is the difference between `%within%` and `%--%`?
+
+<!-- %within% checks if a date is included in an interval -->
+<!-- %--% creates an interval with a start and end time  -->
+ 
+4. What happens if you use the `parse_datetime()` function,
+but you do not provide a `day` argument?
+
+<!-- Assigns the first day of that month! -->
+
+---
+
+.larger[Your Turn!]
+
+Answer the following using code (even if you know the answer already).
+
+First, use the `make_date()` function to save your birthday as a
+Datetime object in R.  
+
+1. What day of the week does/did your birthday fall on in 2021?
+
+2. On what day of the week should you plan your 50th birthday party?
+
+3. Find the date that is exactly 9 months before the day you were born.  If it falls on a holiday, think about the implications.

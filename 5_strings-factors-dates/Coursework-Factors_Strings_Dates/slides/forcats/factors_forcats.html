@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>🐱 Working with Factors Using forcats</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="slide-style.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# 🐱 Working with Factors Using <code>forcats</code>
+
+---
+
+
+
+
+
+class: center, middle
+
+# Setup
+
+.pull-left[
+Create a new R Markdown file, and load in the dataset `colleges_clean.csv`,
+which is posted on the course site.
+
+(This is a pre-cleaned version of the dataset from Practice Activity 2,
+"Find the mystery college".)
+]
+
+.pull-right[
+![](images/zuko.jpg)
+]
+---
+
+class: center, middle, inverse
+
+.larger[Factors &amp; forcats]
+
+.pull-left[
+&lt;img src="images/buddies.jpg" width="60%" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+&lt;img src="images/forcats.png" width="70%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+.larger[Factors &amp; Forcats]
+
+.pull-left[
+Common tasks:
+
+* Turn a `character` or `numeric` variable into a factor
+
+* Make a factor by discritizing / "binning" a numeric variable
+
+* Rename or reorder the `levels` of an existing `factor`
+]
+
+--
+
+.pull-right[
+The packages `forcats` ("for categoricals") gives nice shortcuts for
+wrangling categorical variables.
+  * `forcats` loads with the `tidyverse`!
+]
+---
+
+.larger[Create a `factor`]
+
+
+```r
+x &lt;- c("apple", "dog", "banana", "cat", "banana", "Queen Elizabeth", "dog")
+
+x
+```
+
+```
+## [1] "apple"           "dog"             "banana"          "cat"            
+## [5] "banana"          "Queen Elizabeth" "dog"
+```
+
+
+```r
+x &lt;- factor(x)
+
+x
+```
+
+```
+## [1] apple           dog             banana          cat            
+## [5] banana          Queen Elizabeth dog            
+## Levels: apple banana cat dog Queen Elizabeth
+```
+
+---
+
+.larger[What happened?]
+
+![](images/factor_assignment.jpeg)
+
+---
+
+# Recoding
+
+![](images/relevel.jpeg)
+
+---
+
+.larger[Try the following:]
+
+&lt;/br&gt;
+
+
+```r
+colleges_clean &lt;- 
+  colleges_clean %&gt;%
+  mutate(
+    CONTROL = factor(CONTROL),
+    Type = fct_recode(CONTROL, 
+                      Public = "1", 
+                      Private = "2")
+  )
+```
+
+&lt;/br&gt;
+&lt;center&gt;
+.large[**What did it do?**]
+
+---
+
+# Forcats Exploration
+
+Find the `forcats` "cheatsheet" at https://resources.rstudio.com/rstudio-developed/factors
+
+Use it to answer the following:
+
+* What is the difference between `fct_relevel()` and `fct_recode()`?
+
+* What is the difference between `fct_collapse()` and `fct_lump()`?
+
+* What is the difference between `fct_reorder()` and `fct_inorder()`?
+
+&lt;/br&gt;
+
+*Hint: Make up a couple of factors, and see what happens when you use these functions on them.*
+
+---
+
+class: center, middle
+
+.pull-left[
+.larger[Your Turn!]
+
+Adjust the `REGION` variable to have clearer labels and / or better
+categories.
+
+]
+
+.pull-right[
+![](images/boomie.jpg)
+]
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "solarized-light",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9",
+"slideNumberFormat": "<div class=\"progress-bar-container\">\n  <div class=\"progress-bar\" style=\"width: calc(%current% / %total% * 100%);\">\n  </div>\n</div>"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

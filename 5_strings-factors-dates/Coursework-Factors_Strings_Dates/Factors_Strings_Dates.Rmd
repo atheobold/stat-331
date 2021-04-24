@@ -33,6 +33,7 @@ datasets with related information.
 ---
 
 `r emo::ji("play button")` Watch Videos: 60 minutes  
+  * `r emo::ji("link")` Link to **all** Slides: [here])()
 
 `r emo::ji("book")` Readings: 45-60 minutes   
 
@@ -53,7 +54,9 @@ datasets with related information.
 
 `r emo::ji("book")` **Check-in: Functions from forcats 
 
-Answer the questions from the video(s):
+Answer the questions based on the reading, video, **forcats**
+[website](https://forcats.tidyverse.org/reference/index.html), or 
+**forcats** [cheat sheet](https://www.rstudio.com/resources/cheatsheets/). 
 
 * What is the difference between `fct_relevel()` and `fct_recode()`?
 
@@ -81,7 +84,9 @@ clearer labels and/or better categories.
 
 `r emo::ji("check")` **Check-in**: Functions from stringr
 
-Answer the questions from the video(s):
+Answer the questions based on the reading, video, **stringr**
+[website](https://stringr.tidyverse.org/reference/index.html), or 
+**stringr** [cheat sheet](https://www.rstudio.com/resources/cheatsheets/). 
 
 * What is the difference between `length()` and `str_length()`?
 
@@ -125,57 +130,39 @@ you have trouble with `%within%` and `%--%`
 
 `r emo::ji("check")` **Check-in**: Functions from lubridate
 
+Answer the questions based on the reading, video, **lubridate**
+[website](https://lubridate.tidyverse.org/reference/index.html), or 
+**lubridate** [cheat sheet](https://www.rstudio.com/resources/cheatsheets/). 
 
-* What is the difference between `year()` and `years()` and `dyears()`?
+- What is the difference between `year()` and `years()`?
 
-* What time zone does R think dates are in, by default?
+<!-- year() -- extracts the year of a datetime object -->
+<!-- years() -- creates a period object based on number of years  -->
 
-* What is the difference between `%within%` and `%--%`?
+- What `tz` would you use for San Luis Obispo? 
 
-* What happens if you use the `parse_datetime()` function, but you do not provide a `day` argument?
+<!-- tz = "America/Los_Angeles" -->
+
+- What is the difference between `%within%` and `%--%`?
+
+<!-- %within% checks if a date is included in an interval -->
+<!-- %--% creates an interval with a start and end time  -->
+ 
+- What happens if you use the `parse_datetime()` function,
+but you do not provide a `day` argument?
+
+<!-- Assigns the first day of that month! -->
 
 
 `r emo::ji("check")` **Check-in**: Apply your skills
 
+(Answer the following using code (even if you know the answer already).
 
-**Question 1: Warm-up**
+First, use the `make_date()` function to save your birthday as a
+Datetime object in R.  
 
-Answer the following using code (even if you know the answer already).
+- What day of the week does/did your birthday fall on in 2021?
 
-a. Save your birthday as a Datetime object in R.  
+- On what day of the week should you plan your 50th birthday party?
 
-```{r, include = FALSE}
-bday <- make_datetime(year = 1989, month = 01, day = 14)
-```
-
-
-b. What day of the week does/did your birthday fall on in 2020?
-
-```{r, include = FALSE}
-bday2 <- bday
-year(bday2) <- 2020
-bday2 %>% wday(label = TRUE)
-```
-
-c. On what day of the week should you plan your 100th birthday party?
-
-```{r, include = FALSE}
-(bday + years(100)) %>% wday(label = TRUE)
-```
-
-d. Find the date that is exactly 9 months before your birthday.  If it falls on
-a holiday, think about the implications.
-
-```{r, include = FALSE}
-(bday - months(9)) 
-```
-
-
-**Question 2: Your Zodiac sign**
-
-Download the `zodiac.csv` data from the course website.  This dataset gives the
-date ranges for the 12 Zodiac signs; that is, if you were born between the dates
-listed, you are affliated with that particular sign.
-
-Use this dataset, and your new skills with DateTimes, to determine your sign
-*using only code*.
+- Find the date that is exactly 9 months before the day you were born.  If it falls on a holiday, think about the implications.

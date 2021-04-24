@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Working with Dates Using lubridate</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="slide-style.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Working with Dates Using <code>lubridate</code>
+
+---
+
+
+
+
+
+
+class: center, middle
+
+.larger[Dates]
+
+&lt;img src="https://pbs.twimg.com/media/CQ6A-NdWwAAncW-.png" width=300&gt;
+
+---
+
+# Dates
+
+.pull-left[
+Common tasks:
+
+* Convert a date-like variable ("January 14, 1989") to a special DateTime Object.
+
+* Find the weekday, month, year, etc from a DateTime object
+
+* Convert between timezones
+]
+
+--
+
+.pull-right[
+The package `lubridate` is AMAZING for this. 
+  * `lubridate` does not **load** with the `tidyverse` but it does **install**
+  with it.
+]
+
+---
+
+.larger[`datetime` Objects]
+
+There are actually three data types (classes) in R for dates and datetimes.
+
+- **Date** (duh)
+- **POSIXlt** (???)
+- and **POSIXct** (???)
+
+---
+
+.large[History of `POSIXlt` and `POSIXct`]
+
+.pull-left[
+
+- `POSIXct` -- stores date/time values as the number of seconds since
+January 1, 1970 ("Unix Epoch")
+
+- `POSIXlt` -- stores date/time values as a list with elements for second,
+minute, hour, day, month, and year, among others. 
+]
+
+.pull-right[
+In the "old days", to make a Date or Datetime object, you'd have to get the
+format *just right*.
+
+
+```r
+as.Date("1989-01-14") %&gt;% str()
+```
+
+```
+##  Date[1:1], format: "1989-01-14"
+```
+
+```r
+as_datetime("1989-01-14") %&gt;% str()
+```
+
+```
+##  POSIXct[1:1], format: "1989-01-14"
+```
+]
+
+---
+
+.larger[Today: `lubridate`]
+
+.pull-left[
+
+```r
+make_date(year = 1989, month = 01, day = 14)
+```
+
+```
+## [1] "1989-01-14"
+```
+
+```r
+mdy("January 14, 1989")
+```
+
+```
+## [1] "1989-01-14"
+```
+
+```r
+dmy("14-Jan-1989", tz = "America/Denver")
+```
+
+```
+## [1] "1989-01-14 MST"
+```
+
+]
+
+--
+
+.pull-right[
+
+```r
+parse_datetime("1/14/1989", format = "mdy")
+```
+
+```
+## Warning: 1 parsing failure.
+## row col      expected    actual
+##   1  -- date like mdy 1/14/1989
+```
+
+```
+## [1] NA
+```
+]
+
+---
+
+# Common mistake
+
+What's wrong here?
+
+
+```r
+as_datetime(2021-04-25)
+```
+
+```
+## [1] "1970-01-01 00:33:12 UTC"
+```
+
+--
+
+
+```r
+my_date &lt;- 2021-04-25
+my_date
+```
+
+```
+## [1] 1992
+```
+
+---
+
+.larger[Components of Dates]
+
+
+```r
+bday &lt;- ymd_hms("1989-01-14 12:12:12")
+```
+
+.pull-left[
+
+```r
+year(bday)
+```
+
+```
+## [1] 1989
+```
+
+```r
+month(bday)
+```
+
+```
+## [1] 1
+```
+
+```r
+day(bday)
+```
+
+```
+## [1] 14
+```
+
+]
+
+.pull-right[
+
+```r
+wday(bday)
+```
+
+```
+## [1] 7
+```
+
+```r
+wday(bday, label = TRUE)
+```
+
+```
+## [1] Sat
+## 7 Levels: Sun &lt; Mon &lt; Tue &lt; Wed &lt; ... &lt; Sat
+```
+
+]
+
+---
+
+.larger[When is my ______ birthday?]
+
+.pull-left[
+.large[next]
+
+
+```r
+(bday + years(33)) %&gt;% 
+  wday(label = TRUE)
+```
+
+```
+## [1] Fri
+## 7 Levels: Sun &lt; Mon &lt; Tue &lt; Wed &lt; ... &lt; Sat
+```
+]
+
+.pull-right[
+.large[100]
+
+```r
+bday + years(50)
+```
+
+```
+## [1] "2039-01-14 12:12:12 UTC"
+```
+
+]
+
+---
+
+# lubridate
+
+Reference the `lubridate` cheatsheet: https://evoldyn.gitlab.io/evomics-2018/ref-sheets/R_lubridate.pdf
+
+Use it, and your own experiments, to answer the following:
+
+*Hint:* Consider data types and object structures!
+
+1. What is the difference between `year()` and `years()`?
+
+&lt;!-- year() -- extracts the year of a datetime object --&gt;
+&lt;!-- years() -- creates a period object based on number of years  --&gt;
+
+2. What `tz` would you use for San Luis Obispo? 
+
+&lt;!-- tz = "America/Los_Angeles" --&gt;
+
+3. What is the difference between `%within%` and `%--%`?
+
+&lt;!-- %within% checks if a date is included in an interval --&gt;
+&lt;!-- %--% creates an interval with a start and end time  --&gt;
+ 
+4. What happens if you use the `parse_datetime()` function,
+but you do not provide a `day` argument?
+
+&lt;!-- Assigns the first day of that month! --&gt;
+
+---
+
+.larger[Your Turn!]
+
+Answer the following using code (even if you know the answer already).
+
+First, use the `make_date()` function to save your birthday as a
+Datetime object in R.  
+
+1. What day of the week does/did your birthday fall on in 2021?
+
+2. On what day of the week should you plan your 50th birthday party?
+
+3. Find the date that is exactly 9 months before the day you were born.  If it falls on a holiday, think about the implications.
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "solarized-light",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9",
+"slideNumberFormat": "<div class=\"progress-bar-container\">\n  <div class=\"progress-bar\" style=\"width: calc(%current% / %total% * 100%);\">\n  </div>\n</div>"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
