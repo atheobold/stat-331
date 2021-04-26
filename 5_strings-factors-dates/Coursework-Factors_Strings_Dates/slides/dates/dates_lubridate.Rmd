@@ -115,6 +115,10 @@ dmy("14-Jan-1989", tz = "America/Denver")
 .pull-right[
 ```{r}
 parse_datetime("1/14/1989", format = "mdy")
+
+parse_datetime("1/14/1989", 
+               format = "%m/%d/%Y")
+
 ```
 ]
 

@@ -12,7 +12,7 @@
 
 
 
-<title>Practice Activity Clue: Dates and Times</title>
+<title>Lab 3: Billboard Hot 100</title>
 
 <script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
 
@@ -36,30 +36,82 @@
 <div id="container">
 <div class="inner">
 <header>
-<h1 class="title toc-ignore">Practice Activity Clue: Dates and Times</h1>
+<h1 class="title toc-ignore">Lab 3: Billboard Hot 100</h1>
 </header>
 
 <hr>
 
 
 
-<div id="solve-the-mystery" class="section level2">
-<h2>Solve the mystery</h2>
-<p>One of the most famous mysteries in California history is the identity of the so-called “Zodiac Killer”, who murdered 7 people in Northern California between 1968 and 1969.</p>
-<p>A new murder was committed last year in California, suspected to be the work of a new Zodiac Killer on the loose. Fortunately, a camera was planted at the location where the body was found. The FBI has provided you with a list of people who entered the building last year, and what date and time they entered, in Pacific Standard Time (PST). This dataset is available <a href="https://app.box.com/s/3a37j0bvfhk9b5m48w1cqqlv3evp5dug">here</a>, named <code>suspects_times.csv</code>.</p>
-<p>Unfortunately, the date and time of the murder is not known. You have been hired to crack the case. Use the clues below to discover the murderer’s identity.</p>
-<ol style="list-style-type: decimal">
-<li><p>Based on the sunburn patterns on the body, the murder was not committed in the morning.</p></li>
-<li><p>The room where the murder was committed is closed Tuesdays and Thursdays, so the murder did not happen on those days.</p></li>
-<li><p>It is believed that the murder was committed within 5 weeks (35 days) of Thanksgiving, 2018.</p></li>
-<li><p>It was discovered that just before being murdered, the victim tried to send a text to her sister in Iceland, saying “Goodnight over there!”</p></li>
-<li><p>The Killer left behind a birthday card at the scene of the crime. The date is smudged, but the number of the month is shown to be 22. It is thought that perhaps this murder took place less than two days after the Killer’s birthday.</p></li>
-<li><p>The Killer is amused by our efforts, and he has sent us a cryptic clue:</p></li>
-</ol>
-<blockquote>
-<p>“The number of minutes between Jan 1, 1970 at midnight and the time I arrived on the scene is divisible by 10.”</p>
-</blockquote>
-<p>Who is the killer? (Only one name should remain.)</p>
+<div id="instructions" class="section level2">
+<h2>Instructions</h2>
+<ul>
+<li><p>Please answer these questions using code.</p></li>
+<li><p>The <strong>only</strong> R printouts should be the answers to the questions. Make sure your code does not display any extra information.</p></li>
+<li><p>If the question is fully answered by the code, you do not need to also answer it in text form. For example, you do not need to write “The median weight of penguins is 4050”; you can just compute the median.</p></li>
+<li><p>However, for more open-ended questions, you should still provide text to motivate and interpret your work.</p></li>
+<li><p>Think about making your code readable. Use white space (spacebars and new lines) carefully, use variable names that are clear, and be deliberate about how you use code chunks.</p>
+<ul>
+<li><strong>If you output the dataset to your HTML file, you will receive a 5% penalty</strong>.</li>
+</ul></li>
+</ul>
+<hr />
+</div>
+<div id="the-data" class="section level2">
+<h2>The Data</h2>
+<p>Today, we will study song popularity. In the US, the Billboard Hot 100 is a list that comes out every week, showing the 100 most played songs that week.</p>
+<p>The dataset can be downloaded <a href="https://app.box.com/s/luiqkrrkds2q6l2xvppzwx5nejgpbgin">here</a>. Note this dataset was stored in a <code>txt</code> file, with <em>tabs</em> between the columns, so you will need to use the <code>read_tsv()</code> function to read in the dataset.</p>
+<p>More information about the creation of this dataset, as well as some analyses by the author, can be found here: <a href="https://mikekling.com/analyzing-the-billboard-hot-100/">https://mikekling.com/analyzing-the-billboard-hot-100/</a><br />
+The dataset you are provided is a limited version of the full data, containing:</p>
+<ul>
+<li><code>title</code>: The title</li>
+<li><code>artist</code>: The artist</li>
+<li><code>overall peak</code>: The highest rank the song ever reached (1 is the best)</li>
+<li><code>weeks on chart</code>: The number of weeks the song was on the chart</li>
+<li><code>chart date</code>: The latest date the song appeared on the Billboard Hot 100</li>
+</ul>
+<hr />
+</div>
+<div id="advice" class="section level2">
+<h2>Advice</h2>
+<p>This is a very large dataset! Consider using a function like <code>slice_sample()</code> to create a small dataset with only, say, 200 of the rows. You can try all your code out on the smaller dataset first, and then only run the analysis of the full data after you have perfected everything.</p>
+<p><strong>Note:</strong> <code>slice_sample()</code> randomly selects rows from a dataset based on either the number (<code>n</code>) of observations requested, or the proportion (<code>prop</code>) of observations requested.</p>
+<hr />
+</div>
+<div id="setup" class="section level2">
+<h2>Setup</h2>
+<p>Do any data cleaning you need.</p>
+<p><em>Hint:</em> You’ll want to create a datetime object for the date the song leaves the chart.</p>
+<hr />
+</div>
+<div id="questions" class="section level2">
+<h2>Questions</h2>
+<p><strong>1. What 5 songs spent the longest on the charts? Give only the title, artist, and weeks.</strong></p>
+<p></br> </br></p>
+<p><strong>2. Which five artists had the most number 1 hits?</strong></p>
+<p><em>For this question, you may ignore songs with more than one artist listed.</em></p>
+<p></br> </br></p>
+<p>Use the team manager’s birthday to answer the following question:</p>
+<p><strong>3. What hit songs could have been played at your 10th birthday party? That is, which songs that <strong>eventually</strong> peaked at #1 <strong>entered</strong> the charts within two months (before or after) your 10th birthday? Give only the song title, artist, and date of chart entry.</strong></p>
+<p></br> </br></p>
+<p><strong>4. Explore the <a href="https://stringr.tidyverse.org/articles/regular-expressions.html#matching-multiple-characters">Matching Multiple Characters</a> section of the <code>lubridate</code> resources to learn about the <code>str_extract_all()</code> function. Use <code>str_extract_all()</code> to uncover what is the most common word, <em>at least</em> four letters long, used in the title of any song. Give only the word itself, and its count.</strong></p>
+<p><em>Hint 1:</em> Look up the help file on <code>str_extract_all()</code>!</p>
+<p><em>Hint 2:</em> <code>&quot;hello&quot;</code> and <code>&quot;Hello&quot;</code> are the same word!</p>
+<p><em>Hint 3:</em> The result of <code>str_extract_all()</code> is a list. To make the list into a vector, use <code>unlist()</code>!</p>
+<p></br> </br></p>
+<p><strong>5. Let’s take a look at artists who work together on songs. Which three artists have <strong>featured</strong> on the most Billboard charting songs?</strong></p>
+<p><em>Hint:</em> The functions <code>str_subset()</code>, <code>str_replace_all()</code>, and <code>str_split()</code> would be useful!</p>
+<p>Definitions:</p>
+<pre><code>RAE SREMMURD featuring NICKI MINAJ &amp; YOUNG THUG</code></pre>
+<p>In this string, Nicki Minaj and Young Thug are considered to be <strong>featured</strong>.</p>
+<pre><code>JESSIE J, ARIANA GRANDE &amp; NICKI MINAJ</code></pre>
+<p>In this string, Jessie J and Ariana Grande and Nicki Minaj all worked together (collaborated), but <strong>nobody</strong> was featured.</p>
+<hr />
+</div>
+<div id="challenge" class="section level2">
+<h2>Challenge</h2>
+<p>Explain each line of the code that your team wrote to address question 6.</p>
+<p><strong>Talk through</strong> what the regular expressions <em>mean</em>! For example, how are the matches being made? What is being replaced? How are strings being split up?</p>
 </div>
 </div>
 </div>

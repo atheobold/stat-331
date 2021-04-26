@@ -1,0 +1,252 @@
+---
+title: "Lab 3: Billboard Hot 100"
+output:
+  prettydoc::html_pretty:
+    theme: tactile
+    highlight: github
+    css: styles.css
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(fig.width=12,
+                      fig.height=8, 
+                      fig.path='Figs/',
+                      warning=FALSE,
+                      message=FALSE, 
+                      echo = FALSE)
+
+library(readr)
+```
+
+
+## Instructions
+
+* Please answer these questions using code.
+
+* The **only** R printouts should be the answers to the questions. Make sure
+your code does not display any extra information.
+
+* If the question is fully answered by the code, you do not need to also answer
+it in text form.  For example, you do not need to write "The median weight of
+penguins is 4050"; you can just compute the median.
+
+* However, for more open-ended questions, you should still provide text to
+motivate and interpret your work.
+
+* Think about making your code readable.  Use white space (spacebars and new
+lines) carefully, use variable names that are clear, and be deliberate about
+how you use code chunks.
+  * **If you output the dataset to your HTML file, you will receive a 
+  5% penalty**. 
+  
+---
+
+## The Data
+
+Today, we will study song popularity.  In the US, the Billboard Hot 100 is a
+list that comes out every week, showing the 100 most played songs that week.
+
+The dataset can be downloaded 
+[here](https://app.box.com/s/luiqkrrkds2q6l2xvppzwx5nejgpbgin). Note this
+dataset was stored in a `txt` file, with *tabs* between the columns, so you will
+need to use the `read_tsv()` function to read in the dataset. 
+
+More information about the creation of this dataset, as well as some analyses by
+the author, can be found here: [https://mikekling.com/analyzing-the-billboard-hot-100/](https://mikekling.com/analyzing-the-billboard-hot-100/)  
+The dataset you are provided is a limited version of the full data, containing:
+
+- `title`: The title
+- `artist`: The artist
+- `overall peak`: The highest rank the song ever reached (1 is the best)
+- `weeks on chart`: The number of weeks the song was on the chart
+- `chart date`: The latest date the song appeared on the Billboard Hot 100
+
+
+```{r}
+library(tidyverse)
+library(lubridate)
+```
+
+```{r, echo = FALSE, eval = TRUE}
+songs <- read_tsv(here::here("5_strings-factors-dates",
+                                "Lab-Billboard100",
+                                "billboard_songs.txt")
+                    )
+```
+
+---
+
+## Advice
+
+This is a very large dataset!  Consider using a function like `slice_sample()`
+to create a small dataset with only, say, 200 of the rows.  You can try all your
+code out on the smaller dataset first, and then only run the analysis of the 
+full data after you have perfected everything.
+
+**Note:** `slice_sample()` randomly selects rows from a dataset based on either
+the number (`n`) of observations requested, or the proportion (`prop`) of 
+observations requested. 
+
+---
+
+## Setup
+
+Do any data cleaning you need.
+
+*Hint:* You'll want to create a datetime object for the date the song leaves the
+chart.
+
+```{r, eval = FALSE}
+songs <- songs %>% 
+  mutate(
+    date = as.character(`chart date`),
+    year = str_sub(date, 0, 4),
+    month = str_sub(date, 5, 6),
+    day = str_sub(date, 7, 8),
+    date = make_date(year =  year,
+                     month = month,
+                     day = day), 
+    exit_date = date,
+    entry_date = exit_date - weeks(`weeks on chart`)
+  )
+
+sample <- songs %>% 
+  slice_sample(n = 1000)
+
+```
+
+---
+
+## Questions
+
+__1. What 5 songs spent the longest on the charts?  Give only the title, artist, 
+and weeks.__
+
+```{r, eval = FALSE}
+sample %>% 
+  top_n(5, `weeks on chart`) %>%
+  arrange(desc(`weeks on chart`)) %>%
+  select(title, artist, `weeks on chart`)
+```
+
+</br>
+</br>
+
+__2. Which five artists had the most number 1 hits?__
+
+*For this question, you may ignore songs with more than one artist listed.*
+
+```{r, eval = FALSE}
+songs %>% 
+  filter(`overall peak` == 1) %>%
+  group_by(artist) %>%
+  summarize(num_songs = n()) %>%
+  top_n(5, num_songs)
+
+```
+
+</br>
+</br>
+
+Use the team manager's birthday to answer the following question: 
+
+__3. What hit songs could have been played at your 10th birthday party?  That
+is, which songs that **eventually** peaked at #1  **entered** the charts within
+two months (before or after) your 10th birthday?  Give only the song title,
+artist, and date of chart entry.__
+
+
+```{r, eval = FALSE}
+my_bday <- mdy("January 14, 1989")
+
+songs %>% 
+  filter(`overall peak` == 1 & 
+           entry_date %within% interval(my_bday + years(10) - months(2),
+                                        my_bday + years(10) + months(2))
+         ) %>%
+  select(title, artist, entry_date)
+  
+```
+
+</br>
+</br>
+
+__4. Explore the [Matching Multiple Characters](https://stringr.tidyverse.org/articles/regular-expressions.html#matching-multiple-characters) section of the `lubridate` resources to learn about the 
+`str_extract_all()` function. Use `str_extract_all()` to uncover what is the
+most common word, *at least* four letters long, used in the title of any song.
+Give only the word itself, and its count.__
+
+*Hint 1:* Look up the help file on `str_extract_all()`! 
+
+*Hint 2:* `"hello"` and `"Hello"` are the same word!  
+
+*Hint 3:* The result of `str_extract_all()` is a list. To make the list into a 
+vector, use `unlist()`! 
+
+```{r, eval = FALSE}
+title_words <- songs %>%
+  pull(title) %>%
+  str_extract_all("\\w+") %>%
+  unlist() %>%
+  str_to_lower()
+
+my_words <- tibble(
+  word = title_words,
+  length = str_length(word)
+)
+
+my_words %>%
+  filter(length >= 4) %>%
+  count(word) %>%
+  top_n(1, n)
+```
+
+</br>
+</br>
+
+__5. Let's take a look at artists who work together on songs. Which three 
+artists have **featured** on the most Billboard charting songs?__  
+
+*Hint:* The functions `str_subset()`, `str_replace_all()`, and `str_split()`
+would be useful! 
+
+Definitions:
+```
+RAE SREMMURD featuring NICKI MINAJ & YOUNG THUG
+```
+In this string, Nicki Minaj and Young Thug are considered to be **featured**.
+```
+JESSIE J, ARIANA GRANDE & NICKI MINAJ
+```
+In this string, Jessie J and Ariana Grande and Nicki Minaj all worked 
+together (collaborated), but **nobody** was featured.
+
+
+
+```{r, eval = FALSE}
+artist_creds <- songs %>%
+  pull(artist)
+
+feat_artists <- artist_creds %>% 
+  str_subset("featuring") %>% 
+  str_replace_all(".* featuring", "") %>%
+  str_split("([&,])|( or )|( and )") %>%
+  unlist() %>%
+  str_trim(side = "both")
+  
+tibble(
+  artist = feat_artists
+) %>%
+  count(artist) %>%
+  slice_max(order_by = n, n = 3)
+
+```
+
+---
+
+## Challenge
+
+Explain each line of the code that your team wrote to address question 6.  
+
+**Talk through** what the regular expressions *mean*! For example, how are the
+matches being made? What is being replaced? How are strings being split up? 

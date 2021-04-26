@@ -33,26 +33,27 @@ datasets with related information.
 ---
 
 `r emo::ji("play button")` Watch Videos: 60 minutes  
-  * `r emo::ji("link")` Link to **all** Slides: [here])()
+  
+  * `r emo::ji("link")` Link to **all** Slides from Videos: [here]()
 
 `r emo::ji("book")` Readings: 45-60 minutes   
 
-`r emo::ji("computer")` Activities: 75-120 minutes  
+`r emo::ji("computer")` Activities: 60-75 minutes  
   
-`r emo::ji("check")` Check-ins: 6
+`r emo::ji("check")` Check-ins: 3
 
 
 ---
 
 # Factors
 
-`r emo::ji("book")` [Required Video: Factors with forcats]()
+`r emo::ji("play button")` [Required Video: Factors with forcats](http://somup.com/crfTrOF3tN)
 
 `r emo::ji("book")` [Required Reading: *R4DS* -- Factors with forcats](https://r4ds.had.co.nz/factors.html)
 
 ---
 
-`r emo::ji("book")` **Check-in: Functions from forcats 
+`r emo::ji("book")` **Check-in: Functions from forcats** 
 
 Answer the questions based on the reading, video, **forcats**
 [website](https://forcats.tidyverse.org/reference/index.html), or 
@@ -60,14 +61,24 @@ Answer the questions based on the reading, video, **forcats**
 
 * What is the difference between `fct_relevel()` and `fct_recode()`?
 
+<!-- fct_relevel() -- moves the levels of a factor to different positions -->
+<!-- fct_recode() -- changes values of levels of a factor -->
+
 * What is the difference between `fct_collapse()` and `fct_lump()`?
 
+<!-- fct_collapse() -- collapses levels of a factor into a new level -->
+<!-- fct_lump() -- lumps all of the least represented levels together -->
+
 * What is the difference between `fct_reorder()` and `fct_inorder()`?
+
+<!-- fct_reorder() -- orders the levels of a factor based on the values of a  -->
+<!-- variable / variables (done in ascending order) -->
+<!-- fct_inorder() -- changes the levels of a factor to be in the order they appeared -->
 
 *Feel free to share answers with your classmates in the Discord server, to make
 sure you understand.*
 
-`r emo::ji("check")` **Check-in: Apply your skills 
+`r emo::ji("check")` **Check-in: Apply your skills**
 
 In your *colleges_clean* dataset, adjust the `REGION` variable to have nicer or
 clearer labels and/or better categories.
@@ -76,13 +87,13 @@ clearer labels and/or better categories.
 
 # Strings
 
-`r emo::ji("play")` [Required Video -- Strings with stringr]() 
+`r emo::ji("play button")` [Required Video -- Strings with stringr (will be posted Monday by 9am)]()  
 
-`r emo::ji("book")` [Required Reading: *R4DS* -- Strings]"https://r4ds.had.co.nz/strings.html)
+`r emo::ji("book")` [Required Reading: *R4DS* -- Strings](https://r4ds.had.co.nz/strings.html)
 
 ---
 
-`r emo::ji("check")` **Check-in**: Functions from stringr
+`r emo::ji("check")` **Check-in: Functions from stringr**
 
 Answer the questions based on the reading, video, **stringr**
 [website](https://stringr.tidyverse.org/reference/index.html), or 
@@ -101,7 +112,7 @@ Answer the questions based on the reading, video, **stringr**
 *Feel free to share answers with your classmates in the Discord server, to make
 sure you understand.*
 
-`r emo::ji("check")` **Check-in**: Apply your skills
+`r emo::ji("check")` **Check-in: Apply your skills**
 
 Using your *colleges_clean* dataset, answer these questions:
 
@@ -115,7 +126,7 @@ Using your *colleges_clean* dataset, answer these questions:
 
 # Dates
 
-`r emo::ji("play")` [Required Video: DateTime Objects with lubridate]()
+`r emo::ji("play button")` [Required Video: DateTime Objects with lubridate](http://somup.com/crfTrLF3U3)
 
 `r emo::ji("book")` [Required Reading: *R4DS* -- Dates and Times](https://r4ds.had.co.nz/dates-and-times.html)
 
@@ -128,7 +139,7 @@ you have trouble with `%within%` and `%--%`
 
 ---
 
-`r emo::ji("check")` **Check-in**: Functions from lubridate
+`r emo::ji("check")` **Check-in: Functions from lubridate**
 
 Answer the questions based on the reading, video, **lubridate**
 [website](https://lubridate.tidyverse.org/reference/index.html), or 
@@ -153,8 +164,10 @@ but you do not provide a `day` argument?
 
 <!-- Assigns the first day of that month! -->
 
+*Feel free to share answers with your classmates in the Discord server, to make
+sure you understand.*
 
-`r emo::ji("check")` **Check-in**: Apply your skills
+`r emo::ji("check")` **Check-in: Apply your skills**
 
 (Answer the following using code (even if you know the answer already).
 
