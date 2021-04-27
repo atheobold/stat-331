@@ -72,13 +72,36 @@ class: inverse, center
 
 .larger[Time Zones]
 
+
+```r
+x &lt;- ymd_h("2021-4-25-6", tz = "America/Los_Angeles")
+```
+
 - `force_tz()` 
   * **same clock time** as input, new time zone
+
+
+```r
+force_tz(x, tzone = "America/Denver")
+```
+
+```
+## [1] "2021-04-25 06:00:00 MDT"
+```
 
 --
 
 - `with_tz()`
   * **new clock time**, as it would appear in a different time zone
+
+
+```r
+with_tz(x, tzone = "America/Denver")
+```
+
+```
+## [1] "2021-04-25 07:00:00 MDT"
+```
 
 ---
 

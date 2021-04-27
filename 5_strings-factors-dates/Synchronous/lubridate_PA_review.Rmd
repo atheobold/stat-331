@@ -28,6 +28,7 @@ library(xaringanthemer)
 library(xaringan)
 library(tidyverse)
 library(kableExtra)
+library(lubridate)
 
 style_duo_accent(
   primary_color      = "#0F4C81", # pantone classic blue
@@ -88,13 +89,25 @@ class: inverse, center
 
 .larger[Time Zones]
 
+```{r}
+x <- ymd_h("2021-4-25-6", tz = "America/Los_Angeles")
+```
+
 - `force_tz()` 
   * **same clock time** as input, new time zone
+
+```{r}
+force_tz(x, tzone = "America/Denver")
+```
 
 --
 
 - `with_tz()`
   * **new clock time**, as it would appear in a different time zone
+
+```{r}
+with_tz(x, tzone = "America/Denver")
+```
 
 ---
 
