@@ -18,23 +18,9 @@ library(tidyverse)
 library(lubridate)
 ```
 
-
-In this lesson, you will learn:
-
-* The importance of nicely formatted code and how to adhere to 
-style "guidelines"
-
-* How to **reshape** your dataset by pivoting *longer* or *wider*
-
-* How to use **mutating joins** and **filtering joins** to combine different
-datasets with related information.
-
-
----
-
-`r emo::ji("play button")` Watch Videos: 60 minutes  
+`r emo::ji("play button")` Watch Videos: 40 minutes  
   
-  * `r emo::ji("link")` Link to **all** Slides from Videos: [here]()
+  * `r emo::ji("link")` Link to **all** Slides from Videos: [here](https://app.box.com/s/vxf4ynij6qnymx34s5l49xejecdbq6zk)
 
 `r emo::ji("book")` Readings: 45-60 minutes   
 
@@ -87,7 +73,7 @@ clearer labels and/or better categories.
 
 # Strings
 
-`r emo::ji("play button")` [Required Video -- Strings with stringr (will be posted Monday by 9am)]()  
+`r emo::ji("play button")` [Required Video -- Strings with stringr](https://www.youtube.com/watch?v=Oo_MtXwpi2Q)  
 
 `r emo::ji("book")` [Required Reading: *R4DS* -- Strings](https://r4ds.had.co.nz/strings.html)
 
@@ -101,13 +87,28 @@ Answer the questions based on the reading, video, **stringr**
 
 * What is the difference between `length()` and `str_length()`?
 
+<!-- length() gives the number of elements in a vector  -->
+<!-- str_length() gives the number of characters in a string -->
+
 * What is the difference between `str_replace()` and `str_replace_all()`?
+
+<!-- str_replace() replaces the FIRST instance of the pattern  -->
+<!-- str_replace_all() replaces EVERY instance of the pattern -->
 
 * What is the difference between `str_trim()` and `str_trunc()`?
 
+<!-- str_trim() removes the whitespace from the start / end of a string -->
+<!-- str_trunc() truncates a string based on the desired "width" / length of the string -->
+
 * What is the difference between `str_sub()` and `str_subset()`?
 
+<!-- str_sub() creates a substring of a string, based on the start / end positions given  -->
+<!-- str_subset() outputs the elements of a string that match the given pattern -->
+
 * What does the `collapse` argument do in `str_c()`?
+
+<!-- collapse provides a character that should be used when ALL of the elements  -->
+<!-- of a vector of characters are combined -->
 
 *Feel free to share answers with your classmates in the Discord server, to make
 sure you understand.*
@@ -118,9 +119,38 @@ Using your *colleges_clean* dataset, answer these questions:
 
 **Question 1:** How *exactly* does Cal Poly's name appear in this dataset?
 
+```{r, include = FALSE, eval = FALSE}
+colleges_clean$INSTNM %>%
+  str_subset("Polytechnic")
+```
+
 **Question 2:** How many colleges have the word "University" in their name?
 
+```{r, include = FALSE, eval = FALSE}
+colleges_clean %>%
+  mutate(
+    is_univ = str_detect(INSTNM, "University")
+  ) %>%
+  count(is_univ)
+
+```
+
 **Question 3:** Which college has the *longest* name?  The *shortest* name?
+
+```{r, include = FALSE, eval = FALSE}
+colleges_clean %>%
+  mutate(
+    name_len = str_length(INSTNM)
+  ) %>% 
+  slice_min(name_len) 
+
+colleges_clean %>%
+  mutate(
+    name_len = str_length(INSTNM)
+  ) %>% 
+  slice_max(name_len) 
+
+```
 
 ---
 
@@ -174,8 +204,26 @@ sure you understand.*
 First, use the `make_date()` function to save your birthday as a
 Datetime object in R.  
 
+```{r, include = FALSE}
+bday <- make_date(day = 14, month = 1, year = 1989)
+```
+
 - What day of the week does/did your birthday fall on in 2021?
+
+```{r, include = FALSE}
+(bday  + years(32)) %>% 
+  wday(label = TRUE)
+```
 
 - On what day of the week should you plan your 50th birthday party?
 
+```{r, include = FALSE}
+(bday  + years(50)) %>% 
+  wday(label = TRUE)
+```
+
 - Find the date that is exactly 9 months before the day you were born.  If it falls on a holiday, think about the implications.
+
+```{r, include = FALSE}
+bday  - months(9)
+```

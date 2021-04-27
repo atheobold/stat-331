@@ -43,16 +43,9 @@
 
 
 
-<p>In this lesson, you will learn:</p>
+<p>▶️ Watch Videos: 40 minutes</p>
 <ul>
-<li><p>The importance of nicely formatted code and how to adhere to style “guidelines”</p></li>
-<li><p>How to <strong>reshape</strong> your dataset by pivoting <em>longer</em> or <em>wider</em></p></li>
-<li><p>How to use <strong>mutating joins</strong> and <strong>filtering joins</strong> to combine different datasets with related information.</p></li>
-</ul>
-<hr />
-<p>▶️ Watch Videos: 60 minutes</p>
-<ul>
-<li>🔗 Link to <strong>all</strong> Slides from Videos: <a href>here</a></li>
+<li>🔗 Link to <strong>all</strong> Slides from Videos: <a href="https://app.box.com/s/vxf4ynij6qnymx34s5l49xejecdbq6zk">here</a></li>
 </ul>
 <p>📖 Readings: 45-60 minutes</p>
 <p>💻 Activities: 60-75 minutes</p>
@@ -68,7 +61,7 @@
 <ul>
 <li>What is the difference between <code>fct_relevel()</code> and <code>fct_recode()</code>?</li>
 </ul>
-<!-- fct_relevel() -- moves the levels of a factor to different postitions -->
+<!-- fct_relevel() -- moves the levels of a factor to different positions -->
 <!-- fct_recode() -- changes values of levels of a factor -->
 <ul>
 <li>What is the difference between <code>fct_collapse()</code> and <code>fct_lump()</code>?</li>
@@ -88,18 +81,36 @@
 </div>
 <div id="strings" class="section level1">
 <h1>Strings</h1>
-<p>▶️ <a href>Required Video – Strings with stringr (will be posted Monday by 9am)</a></p>
+<p>▶️ <a href="https://www.youtube.com/watch?v=Oo_MtXwpi2Q">Required Video – Strings with stringr</a></p>
 <p>📖 <a href="https://r4ds.had.co.nz/strings.html">Required Reading: <em>R4DS</em> – Strings</a></p>
 <hr />
 <p>✅ <strong>Check-in: Functions from stringr</strong></p>
 <p>Answer the questions based on the reading, video, <strong>stringr</strong> <a href="https://stringr.tidyverse.org/reference/index.html">website</a>, or <strong>stringr</strong> <a href="https://www.rstudio.com/resources/cheatsheets/">cheat sheet</a>.</p>
 <ul>
-<li><p>What is the difference between <code>length()</code> and <code>str_length()</code>?</p></li>
-<li><p>What is the difference between <code>str_replace()</code> and <code>str_replace_all()</code>?</p></li>
-<li><p>What is the difference between <code>str_trim()</code> and <code>str_trunc()</code>?</p></li>
-<li><p>What is the difference between <code>str_sub()</code> and <code>str_subset()</code>?</p></li>
-<li><p>What does the <code>collapse</code> argument do in <code>str_c()</code>?</p></li>
+<li>What is the difference between <code>length()</code> and <code>str_length()</code>?</li>
 </ul>
+<!-- length() gives the number of elements in a vector  -->
+<!-- str_length() gives the number of characters in a string -->
+<ul>
+<li>What is the difference between <code>str_replace()</code> and <code>str_replace_all()</code>?</li>
+</ul>
+<!-- str_replace() replaces the FIRST instance of the pattern  -->
+<!-- str_replace_all() replaces EVERY instance of the pattern -->
+<ul>
+<li>What is the difference between <code>str_trim()</code> and <code>str_trunc()</code>?</li>
+</ul>
+<!-- str_trim() removes the whitespace from the start / end of a string -->
+<!-- str_trunc() truncates a string based on the desired "width" / length of the string -->
+<ul>
+<li>What is the difference between <code>str_sub()</code> and <code>str_subset()</code>?</li>
+</ul>
+<!-- str_sub() creates a substring of a string, based on the start / end positions given  -->
+<!-- str_subset() outputs the elements of a string that match the given pattern -->
+<ul>
+<li>What does the <code>collapse</code> argument do in <code>str_c()</code>?</li>
+</ul>
+<!-- collapse provides a character that should be used when ALL of the elements  -->
+<!-- of a vector of characters are combined -->
 <p><em>Feel free to share answers with your classmates in the Discord server, to make sure you understand.</em></p>
 <p>✅ <strong>Check-in: Apply your skills</strong></p>
 <p>Using your <em>colleges_clean</em> dataset, answer these questions:</p>

@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="slide-style.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
@@ -30,7 +31,8 @@ class: center, middle
 
 A **string** is a bunch of **characters**.
 
-Don't confuse a **string** (many characters, one object) with a **character vector** (vector of strings)
+Don't confuse a **string** (many characters, one object) with a 
+**character vector** (vector of strings)
 
 
 
@@ -55,6 +57,7 @@ my_vector
 ```
 
 ---
+
 # Strings
 
 Common tasks:
@@ -66,9 +69,8 @@ Common tasks:
 * Edit a string (for example, make it lowercase)
 
 
-The packages `stringr` is very useful for strings!
-
-(`stringr` loads with the `tidyverse`)
+The packages `stringr` is very useful for strings!  
+  *`stringr` loads with the `tidyverse`
 
 ---
 
@@ -86,6 +88,7 @@ str_subset(my_vector, "Bond")
 ```
 
 ---
+
 class: center, middle, invert
 
 # Exercise: What's the difference?
@@ -125,6 +128,7 @@ str_detect(my_vector, "Bond")
 Returns a **logical vector** indicating if the pattern was found in that element of the original vector.
 
 ---
+
 # Answers
 
 
@@ -280,24 +284,29 @@ class: center, middle, inverse
 
 Using your *colleges_clean* dataset, answer these questions:
 
-* How exactly does Cal Poly's name appear in this dataset?
+1. How exactly does Cal Poly's name appear in this dataset?
 
-* How many colleges have the word "University" in their name?
+2. How many colleges have the word "University" in their name?
 
-* Which college has the *longest* name?  The *shortest* name?
+3. Which college has the *longest* name?  The *shortest* name?
 
 ---
 
 # Hints
 
-*Hint 1:* The code below will be quite correct.  Why?
+*Hint 1:* The code below will work, but may not be quite correct.  Why?
     
 
 ```r
 str_count(colleges_clean$INSTNM, "University")
 ```
 
-*Hint 2:*  Remember that the `str_*` functions need the first argument to be a **vector of strings**, not a **dataset**.  You might want to use them *inside* functions like `filter` or `mutate`.
+&lt;!-- This double counts two institutions, since they have University in their name --&gt;
+&lt;!-- twice! --&gt;
+
+*Hint 2:*  Remember that the `str_*` functions need the first argument to be a
+**vector of strings**, not a **dataset**.  You might want to use them *inside*
+functions like `filter` or `mutate`.
 
 
 ```r
@@ -315,15 +324,15 @@ colleges_clean %&gt;%
 
 
 
-
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
-"highlightStyle": "github",
+"highlightStyle": "solarized-light",
 "highlightLines": true,
 "countIncrementalSlides": false,
-"ratio": "16:9"
+"ratio": "16:9",
+"slideNumberFormat": "<div class=\"progress-bar-container\">\n  <div class=\"progress-bar\" style=\"width: calc(%current% / %total% * 100%);\">\n  </div>\n</div>"
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
