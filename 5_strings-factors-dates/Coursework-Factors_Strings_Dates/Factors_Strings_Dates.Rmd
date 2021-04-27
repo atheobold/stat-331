@@ -9,8 +9,6 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-options("couRsework-img_path" = here::here("Images", "icons")) 
-### change this if icons local
 ```
 
 ```{r, include = FALSE}

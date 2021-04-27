@@ -74,10 +74,18 @@ class: inverse, center
 
 
 ```r
-x &lt;- ymd_h("2021-4-25-6", tz = "America/Los_Angeles")
+x &lt;- ymd_h("2021-4-25 6", tz = "America/Los_Angeles")
+x
 ```
 
-- `force_tz()` 
+```
+## [1] "2021-04-25 06:00:00 PDT"
+```
+
+--
+
+.pull-left[
+`force_tz()` 
   * **same clock time** as input, new time zone
 
 
@@ -88,10 +96,12 @@ force_tz(x, tzone = "America/Denver")
 ```
 ## [1] "2021-04-25 06:00:00 MDT"
 ```
+]
 
 --
 
-- `with_tz()`
+.pull-right[
+`with_tz()`
   * **new clock time**, as it would appear in a different time zone
 
 
@@ -103,20 +113,47 @@ with_tz(x, tzone = "America/Denver")
 ## [1] "2021-04-25 07:00:00 MDT"
 ```
 
+]
+
 ---
 
 .larger[Time of Day]
 
-.pull-left[
-- `am()`
 
+```r
+x
+```
+
+```
+## [1] "2021-04-25 06:00:00 PDT"
+```
+
+
+.pull-left[
+
+- `am()`
 - `pm()`
 
+`TRUE` or `FALSE` values for whether the time occurs in the AM or PM
 ] 
 
 .pull-right[
 
-`TRUE` or `FALSE` values for whether the time occurs in the AM or PM
+```r
+am(x)
+```
+
+```
+## [1] TRUE
+```
+
+```r
+pm(x)
+```
+
+```
+## [1] FALSE
+```
 ]
 
     </textarea>
