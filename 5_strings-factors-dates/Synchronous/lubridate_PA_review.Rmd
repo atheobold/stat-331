@@ -1,0 +1,114 @@
+---
+title: "Practice Activity Warm-up"
+date: "April 27, 2021"
+author: "Dr. Allison Theobold"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["xaringan-themer.css", "slide-style.css"]
+    nature:
+      highlightStyle: solarized-light
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+---
+
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.width = 8, fig.height = 6}
+knitr::opts_chunk$set(message = FALSE, 
+                      warning = FALSE, 
+                      fig.align = "center")
+
+library(xaringanthemer)
+library(xaringan)
+library(tidyverse)
+library(kableExtra)
+
+style_duo_accent(
+  primary_color      = "#0F4C81", # pantone classic blue
+  secondary_color    = "#B6CADA", # pantone baby blue
+  header_font_google = google_font("Raleway"),
+  text_font_google   = google_font("Raleway", "300", "300i"),
+  code_font_google   = google_font("Source Code Pro"),
+  text_font_size     = "30px"
+)
+```
+
+class: center, inverse
+
+.larger[Dates] 
+
+<img src="https://pbs.twimg.com/media/CQ6A-NdWwAAncW-.png" width=300>
+
+---
+
+.larger[Come in all varieties]
+
+- `20150307`
+
+- `2018-03-24 11:07:40`
+
+- `24-03-2018`
+
+---
+
+.larger[With functions for each!]
+
+.pull-left[
+- `dmy()`
+
+- `ymd()`
+
+- `mdy()`
+] 
+
+.pull-right[
+- `ymd_h()`
+
+- `ymd_hm()`
+
+- `ymd_hms()` 
+]
+
+---
+
+class: inverse, center
+
+.larger[What would you do?]
+
+**`20150307` cannot be coerced into any of these functions!** 
+
+
+---
+
+.larger[Time Zones]
+
+- `force_tz()` 
+  * **same clock time** as input, new time zone
+
+--
+
+- `with_tz()`
+  * **new clock time**, as it would appear in a different time zone
+
+---
+
+.larger[Time of Day]
+
+.pull-left[
+- `am()`
+
+- `pm()`
+
+] 
+
+.pull-right[
+
+`TRUE` or `FALSE` values for whether the time occurs in the AM or PM
+]
+
