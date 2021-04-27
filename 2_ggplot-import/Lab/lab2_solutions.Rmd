@@ -1,6 +1,6 @@
 ---
 title: "Lab 2: Exploring Rodents with ggplot2"
-author: "Your group's names here!"
+author: "Solutions by Dr. Theobold"
 output: html_document 
 ---
 
@@ -57,10 +57,9 @@ We'll read in our data using the `read_csv()` function instead of the
 __1. Using the `read_csv()` function and the **here** package, to write the code necessary to load in the `surveys.csv` dataset.__
 
 ```{r, results = 'hide'}
+surveys <- read_csv(here("2_ggplot-import", "Lab", "surveys.csv"))
 ## NOTE: This path is unique to MY project and your path may look different!
 ## The important part is that you use the here() function to specify your path
-
-surveys <- read_csv(here("2_ggplot_import", "Lab", "surveys.csv"))
 ```
 
 __2. What are the dimensions of these data?__
@@ -74,8 +73,13 @@ dim(surveys)
 
 __3. What types of variables are included in the dataset?__ 
 
-There are a mix of numeric, character, and date variables. All of the qualitative 
-variables about each animal (`species_id`, `sex`, `genus)
+There are a mix of numeric, character, and date variables. All of the
+qualitative / categorical variables about each animal (`species_id`, `sex`,
+`genus`) are all character data types. Some of the numeric data are fairly 
+continuous (e.g., `hindfoot_length`), while others are more discrete 
+(e.g., `month`). There is the possibility that discrete numerical variables 
+should be considered to be categorical rather than continuous. 
+
 ```{r}
 glimpse(surveys)
 ```
@@ -140,7 +144,7 @@ __7. Facet your jittered scatterplot by `species_id`.__
 ```{r, results = 'hold'}
 ggplot(data = surveys, 
        mapping = aes(x = weight, y = hindfoot_length)) +
-    geom_jitter(alpha = 0.1) + 
+  geom_jitter(alpha = 0.1) + 
   facet_wrap(~ species_id)
 ```
 
@@ -161,8 +165,9 @@ fall into each genus:
 ```{r, results = 'hold'}
 surveys %>% 
   ggplot(mapping = aes(x = species, y = weight)) +
-    geom_boxplot(outlier.shape = NA) + 
-    geom_jitter(alpha = 0.2, color = "tomato")
+    geom_jitter(alpha = 0.2, color = "tomato") + 
+    geom_boxplot(outlier.shape = NA, alpha = 0.2)  
+    # You could also use outlier.alpha = 0
 ```
 
 But there is a problem! You should notice that there are **both** red points 
@@ -180,12 +185,11 @@ __10. Using the code you created in question 9, modify the x-axis and y-axis lab
 
 ```{r}
 surveys %>% 
-  ggplot(mapping = aes(x = species_id, y = weight)) +
-    geom_boxplot(outlier.shape = NA) + 
-    geom_jitter(alpha = 0.2, color = "tomato") + 
-    labs(title = "Observed Genera Through Time",
-       x = "Weight (in grams)",
-       y = "Species of Rodent") 
+  ggplot(mapping = aes(x = species, y = weight)) +
+    geom_jitter(alpha = 0.1, color = "tomato") + 
+    geom_boxplot(outlier.shape = NA, alpha = 0.2) +
+    labs(y = "Weight (in grams)",
+         x = "Species of Rodent") 
 ```
 
 Some people (and journals) prefer for boxplots to be stacked with a specific 
@@ -196,3 +200,11 @@ function.
 
 __11. Flip the orientation of the boxplots you created in question 9. If you created side-by-side boxplots (stacked horizontally), your boxplots should be stacked vertically. If you had vertically stacked boxplots, you should stack your boxplots horizontally!__ 
 
+```{r}
+surveys %>% 
+  ggplot(mapping = aes(y = species, x = weight)) +
+    geom_jitter(alpha = 0.1, color = "tomato") + 
+    geom_boxplot(outlier.shape = NA, alpha = 0.5) + 
+    labs(x = "Weight (in grams)",
+         y = "Species of Rodent") 
+```
