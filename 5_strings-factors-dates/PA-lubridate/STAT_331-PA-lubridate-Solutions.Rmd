@@ -8,10 +8,6 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, 
-                      include = FALSE,
-                      eval = FALSE)
-
 library(tidyverse)
 library(lubridate)
 ```
@@ -34,37 +30,24 @@ Unfortunately, the date and time of the murder is not known.  You have been
 hired to crack the case.  Use the clues below to discover the murderer's
 identity.
 
-```{r}
+```{r, message = FALSE}
 # 214 total suspects
 suspects <- read_csv(here::here("5_strings-factors-dates",
                                 "PA-lubridate",
                                 "suspect_times.csv")
                      )
-
-# ted <- suspects %>% 
-#   filter(Name == "Ted Cruz") %>%
-#   mutate(
-#   Time.Spotted = force_tz(ymd_hms(Time.Spotted), "America/Los_Angeles")
-# )
-# 
-# am(ted$Time.Spotted)
-# 
-# wday(ted$Time.Spotted, label = TRUE)
-# 
-# month(ted$Time.Spotted)
-# 
-# hour(with_tz(ted$Time.Spotted, tz = "GMT"))
-# 
-# as.numeric(ted$Time.Spotted)
 ```
 
 
-1. Based on the sunburn patterns on the body, the murder was not committed in the morning.
+1. Based on the sunburn patterns on the body, the murder was not committed in
+the morning.
 
 ```{r}
 suspects <- suspects %>% 
   mutate(
-  Time.Spotted = force_tz(ymd_hms(Time.Spotted), "America/Los_Angeles")
+  Time.Spotted = force_tz(
+    ymd_hms(Time.Spotted), 
+    tz = "America/Los_Angeles")
   ) %>% 
   filter(!am(Time.Spotted)) 
 # Down to 112
@@ -78,12 +61,14 @@ so the murder did not happen on those days.
 suspects <- suspects %>% 
   filter(!(wday(Time.Spotted, label = TRUE) %in% c("Tue", "Thu")
            )
+         ## The ! negates the statement before it! 
          )
 ## Down to 77
 ```
 
 
-3. It is believed that the murder was committed within 5 weeks (35 days) of Thanksgiving, 2018. 
+3. It is believed that the murder was committed within 5 weeks (35 days) of
+Thanksgiving, 2018. 
 
 ```{r}
 tgiving <- make_date(year = 2018, 
@@ -103,7 +88,11 @@ a text to their sister in Iceland, saying "Goodnight over there!"
 
 ```{r}
 suspects <- suspects %>% 
-  filter(pm(with_tz(Time.Spotted, "GMT"))) 
+  filter(
+    pm(
+      with_tz(Time.Spotted, "GMT")
+      )
+    ) 
 
 ## Down to 5
 ```
@@ -126,6 +115,9 @@ suspects <- suspects %>%
 > "The number of minutes between Jan 1, 1970 at midnight and the time I arrived
 on the scene is divisible by 10."
 
+_There are a few ways to do this, here are some I tried:_
+
+**Using `difftime()` to get a `difftime` object**
 
 ```{r}
 epoch <- ymd_hms("1970-01-01 0:0:0",
@@ -138,8 +130,27 @@ suspects <- suspects %>%
   filter(as.integer(minutes) %% 10 == 0) 
 ```
 
+**Using `as.numeric()`**
+
+```{r, eval = FALSE}
+suspects <- suspects %>% 
+  filter(
+    as.integer(
+      as.numeric(Time.Spotted)/60
+      ) %% 10 == 0) 
+```
+
+**Using `duration()` to get a `duration` object**
+
+```{r, eval = FALSE}
+suspects <- suspects %>% 
+  mutate(minutes  = difftime(Time.Spotted,
+                             epoch, 
+                             units = "mins"), 
+         minutes = duration(as.character(minutes), 
+                            units = "minutes")
+         ) %>%
+  filter(minutes %% 10 == 0) 
+```
 
 Who is the killer? (Only one name should remain.)
-
-
-
