@@ -1,5 +1,5 @@
 ---
-title: "Lab 3: Billboard Hot 100"
+title: "Lab 5: Billboard Hot 100"
 output:
   prettydoc::html_pretty:
     theme: tactile
@@ -243,7 +243,7 @@ tibble(
 
 ## Challenge
 
-Explain each line of the code that your team wrote to address question 6.  
+Explain each line of the code that your team wrote to address question 5.  
 
 **Talk through** what the regular expressions *mean*! For example, how are the
 matches being made? What is being replaced? How are strings being split up? 

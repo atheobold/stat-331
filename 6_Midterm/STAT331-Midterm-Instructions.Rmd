@@ -15,45 +15,72 @@ library(templar)
 ## Introduction
 
 ### Policies
-  * You may use: any online resources, including anything posted on Canvas. 
-  * You may NOT contact anyone, inside or outside this class, during the course of the exam.  This includes email, chat/messenger services, and posting on online forums and message boards.
-  * You may NOT use exam materials from previous years.
-  * Violations of academic honesty include accessing and using any illegal materials, and giving or receiving help on this exam including looking at other student's exams, allowing other students to look at your own exam, and/or revealing any information about this exam or future exams to someone who has not yet taken it.
-  * Students who exhibit academic misconduct will be reported to the Office of Student Rights
-and Responsibilities; academic dishonesty may be punishable by a grade of F in this course.
-  * You may **not** discuss the exam with any other students until after the exams have been returned to all students.
-  * If you witness others exhibiting academic misconduct, you have a duty to report them to your
-professor.
+- You may use: any online resources, including anything posted on Canvas. 
+  * Online resources used, outside of the _R for Data Science_ textbook, are 
+  required to be properly cited. A citation can be a simple link to the webpage
+  that was used as a resource. 
+- You may **NOT** contact anyone, inside or outside this class, during the
+  duration of the exam.  This includes email, chat/messenger services, and
+  posting on online forums and message boards.
+- You may **NOT** use exam materials from previous years.
+- Violations of academic honesty include accessing and using any illegal
+  materials, using external resources and neglecting to cite the sources, 
+  giving or receiving help on this exam including looking at
+  other student's exams, allowing other students to look at your own exam,
+  and / or revealing any information about this exam or future exams to someone
+  who has not yet taken it.
+- Students who exhibit academic misconduct will be reported to the Office of
+  Student Rights and Responsibilities; academic dishonesty may ultimately be
+  punishable by earning an F in this course.
+- You may **not** discuss the exam with any other students until after the
+  exams have been returned to all students.
+- If you witness others exhibiting academic misconduct, you have a duty to
+  report them to your professor.
 
-
- 
  
 ### Instructions
-  * Please note that you will need to use the data documentation in order to successfully complete this exam.
-  * The problems on this exam do not necessarily need to be completed sequentially, e.g., if you cannot accomplish problem 1, you may still be able to accomplish problem 2.
-  * Some parts to problems may need to be completed sequentially.  If you cannot complete part (a), please outline code or your thought process for completing part (b).
-  * All questions should be answered **using R code**.  Make sure your code prints out only the information that directly answers the question.  **Penalties will be given if your `.html` file has extra output beyond that which answers the question.**
-  * If your code has errors that you cannot fix in time, you may also include in the comments explanations of your thought process, to potentially receive partial credit.
-  * Submit both your `.Rmd` and `.html` files on Canvas by the end of the allotted time. However, only your `.html` file will be graded - make sure the knitted output contains all your answers.
+
+- Please note that you will need to use the data documentation in order to
+  successfully complete this exam.
+- The problems on this exam do not necessarily need to be completed
+  sequentially, e.g., if you cannot accomplish problem 1, you may still be able
+  to accomplish problem 2.
+- Some parts to problems may need to be completed sequentially. If you cannot
+  complete part (a), please outline code or your thought process for completing
+  part (b).
+- If you cannot accomplish a problem, please leave the code that you tried 
+**and** write a description of your thinking and how you tried to accomplish the 
+problem. These two components will allow for me to understand your thinking and 
+award you partial credit for the problem. 
+  * For example, tell me where you wanted to get and what you tried trying to 
+  get there.
+  * For the problem you cannot accomplish, please set your code chunk option to 
+  `error = TRUE`, to allows for the document to be knit even if there are errors. 
+- All questions should be answered **using R code**.  Make sure your code
+  prints out only the information that directly answers the question. 
+  * **Penalties will be given if your `.html` file has extra output beyond that
+  which answers the question.**
+-  Submit both your `.Rmd` and `.html` files on Canvas by the end of the
+  allotted time. Only your `.html` file will be graded - make sure the
+  knitted output contains all your answers.
   
 ### The Dataset
 
-Parts Three and Four of this exam pertain to the dataset `min_wage.csv` on Canvas.
+Parts Three and Four of this exam pertain to the dataset `min_wage.csv` on
+Canvas.
 
 Documentation for this dataset can be found [here](https://github.com/Lislejoem/Minimum-Wage-by-State-1968-to-2017/tree/master).
-(Note that you can also find the code that the author used to clean the data. It
-**is** permissible to look at this code, but do not copy-paste from that source.)
+
+*Note:* You can also find the code that the author used to clean the data. It
+**is** permissible to look at this code, but do not copy-paste from that source.
+
 
 ## Part One: General R Questions  [50 points]
 
 **Fill out your answers in the Part One Quiz on Canvas.**
 
+1. Suppose I create an object with the following:
 
-1. In Week 1, you were asked to consider the relationship between private companies
-and open-source community.  In a short paragraph (3-5 sentences), share your thoughts
-on this topic as it relates to R, RStudio, and the R community.
-
-2. Suppose I create an object with the following:
 ```{r}
 a <- 10
 ```
@@ -70,17 +97,16 @@ Which of the following is an accurate statement about `a`?
 (f) `as.character(a)` will return `"10"`
 
 
-
-3. Consider the following output:
+2. Consider the following output:
 
 ```{r, echo = FALSE}
 mystery_object <- matrix(rnorm(12), nrow = 3, ncol = 4)
 ```
 
-
 ```{r}
 str(mystery_object)
 ```
+
 What object structure is `mystery_object`?
 
 *Check all that apply*
@@ -92,26 +118,39 @@ What object structure is `mystery_object`?
 (e) A list
 
 
-4. Suppose `student_names` is a **character vector** containing the names of 
-students in a particular class.  For example, one entry of `student names` might 
-be `Brad Pitt`, and another might be `Jeffrey Armstrong`.  You may assume 
+3. Suppose `student_names` is a **character vector** containing the names of 
+students in a particular class.  For example, one entry of `student_names` might 
+be `"Brad Pitt"`, and another might be `"Jeffrey Armstrong"`.  You may assume 
 there are no middle names or two-word first or last names.
 
-What object will be returned by `str_extract(")
-
-Which of the following will return the *full names* of students whose *first name* 
-starts with a K?
+Which of the following will return the **_full names_** of students whose
+*first name* starts with a K?
 
 *Check all that apply*
 
 (a) `str_extract(student_names, "^K")`
+<!-- Only selects letter K -->
 (b) `str_extract(student_names, "^K.*")`
+<!-- Extracts first AND last name -->
 (c) `str_extract(student_names, "^K[a-z]*")`
+<!-- Extracts first name! -->
 (d) `str_extract(student_names, "K[a-z]* ")`
+<!-- Extracts first name! -->
 (e) `str_subset(student_names, "^K")`
+<!-- Extracts first AND last name.  -->
 (f) `str_subset(student_names, "^K.*")`
+<!-- Extracts first AND last name.  -->
 (g) `str_subset(student_names, "^K[a-z]*")`
+<!-- Extracts first AND last name.  -->
 (h) `str_subset(student_names, "K[a-z]* ")`
+<!-- Extracts first AND last name plus other names.  -->
+
+4. Question about categorical variables, lumping, and it's implications.
+
+
+5. Question about the data analyzed in Lab 3 -- studying African American 
+Vocabulary based on the population of the study. Use for inference? 
+
 
 
 ## Part Two: Short Answer [100 points]
@@ -122,34 +161,80 @@ starts with a K?
 For all questions, please show your work in code.
 
 ```{r, include = FALSE}
-min_wage <- read_csv(here::here("5_Midterm", "min_wage.csv"))
+min_wage <- read_csv(here::here("6_Midterm", "min_wage.csv"))
 ```
+
 1. How many entries in this dataset had footnote `(b)`?
+
+```{r, echo = FALSE, eval = FALSE}
+min_wage %>% 
+  mutate(b_foot = str_detect(`Footnote`, "(b)")) %>% 
+  count(b_foot)
+
+# 80 (b) Footnotes
+```
+
+\hspace{1cm}
 
 2. Which states had the highest and lowest minimum wage in each year?  (Use the 
 `High.Value` dollar amount, not adjusted for inflation.)
 
+```{r, eval = FALSE, echo = FALSE}
+min_wage %>% 
+  group_by(Year) %>% 
+  slice_max(High.Value, n = 1) %>% 
+  select(State)
+
+min_wage %>% 
+  group_by(Year) %>% 
+  slice_min(High.Value, n = 1) %>% 
+  select(State)
+```
+
+\hspace{1cm}
+
 3. Which states had the largest change in minimum wage (difference between high 
 and low values) in each year?
+
+```{r, echo = FALSE, eval = FALSE}
+min_wage %>% 
+  mutate(wage_diff = High.Value - Low.Value) %>% 
+  group_by(Year) %>% 
+  slice_max(wage_diff, n = 1) %>% 
+  select(State)
+```
+
+\hspace{1cm}
 
 4. Consider only Texas and California.  Make a plot comparing their minimum wage 
 in 2018 dollars (`Low.2018`) over time:
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, eval = FALSE}
 min_wage %>%
   filter(State %in% c("California", "Texas")) %>%
   ggplot(aes(x = Year, y = Low.2018, color = State)) +
   geom_line()
 ```
 
+\hspace{1cm}
+
 5. Create a new data frame with the following properties:
-* Each row should represent a different year of observations.
-* Each column should represent one state
-* Values should be the highest minimum wage (`High.2018`) in that state for a 
-particular year
+- Each row should represent a different year of observations.
+- Each column should represent one state
+- Values should be the highest minimum wage (`High.2018`) in that state for
+a particular year
+
+```{r, echo = FALSE, eval = FALSE}
+min_wage %>% 
+  select(Year, State, High.2018) %>% 
+  pivot_wider(names_from = State, 
+              values_from = High.2018
+  )
+```
 
 
-## Part Four:  Open-Ended Analysis [150 points]
+
+## Part Three:  Open-Ended Analysis [150 points]
 
 **Please submit your .Rmd and .html for this section to Canvas**
 *In this section, you __may__ use any formatting options you wish.*
@@ -161,9 +246,15 @@ consider East vs. West, North vs. South, or something more nuanced.  You are wel
 to reference any internet source to determine your grouping.
 
 Compare the minimum wage between regions to come up with an interesting insight.  
-For example: Did some regions grow faster than others? Do some regions tend to have higher
-minimum wage than others?  etc.
+For example: Did some regions grow faster than others? Do some regions tend to
+have a higher minimum wage than others?  etc.
 
-Create a writeup of approximately 1 page (including all plots and tables) that
-tells a clear story.  Your writeup must include at least on plot and at least one
-summary statistic.
+Create a write-up of approximately 1-page (including all plots and tables) that
+tells a clear story. Your write-up must include at least on plot and at least
+one summary statistic.
+
+## Part Four:   Description of Code [50 points]
+
+Pick **one** aspect of your code from you analysis in Part Three that you are
+proud of.  Describe what your code accomplishes! Be specific and talk through
+each line, connecting each component together. 

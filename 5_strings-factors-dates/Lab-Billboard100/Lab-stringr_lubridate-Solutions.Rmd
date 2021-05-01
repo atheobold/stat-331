@@ -141,7 +141,7 @@ songs %>%
   filter(`overall peak` == 1) %>%
   group_by(artist) %>%
   summarize(num_songs = n()) %>%
-  top_n(5, num_songs)
+  slice_max(5, num_songs)
 
 ```
 
