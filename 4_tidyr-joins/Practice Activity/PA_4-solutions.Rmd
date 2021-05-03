@@ -65,7 +65,7 @@ work space.
 library(readxl) 
 library(tidyverse)
 
-military <- read_xlsx(here::here("4-tidyr-joins", "Practice Activity", 
+military <- read_xlsx(here::here("4_tidyr-joins", "Practice Activity", 
                                  "data", "gov_spending_per_capita.xlsx"), 
                       sheet = "Share of Govt. spending", 
                       skip = 7)
@@ -117,7 +117,7 @@ Run the code below to read in the "Regional totals" dataset, making any
 necessary modifications to the path. 
 
 ```{r, message = FALSE}
-cont_region <- read_xlsx(here::here("4-tidyr-joins", "Practice Activity", 
+cont_region <- read_xlsx(here::here("4_tidyr-joins", "Practice Activity", 
                                  "data", "gov_spending_per_capita.xlsx"), 
                       sheet = "Regional totals", 
                       skip = 14) %>% 
@@ -200,7 +200,8 @@ military_clean %>%
   labs(x = "Spending (% of total Government Spending)")
 ```
 
-Unfortunately, this requires that each year is it's own column! 
+Unfortunately, this requires that each year is included in **one** column, not 
+mulitple columns! 
 
 To tidy a dataset like this, we need to gather those columns into a new pair of
 variables. To do this process we need three parameters:  
@@ -246,7 +247,10 @@ labels!
 long_military %>% 
   ggplot(aes(x = Spending, y = Year)) + 
   geom_boxplot(outlier.shape = NA,, alpha = 0.2) + 
-  geom_jitter(alpha = 0.5, color = "tomato") + 
+  geom_jitter(alpha = 0.2,
+              width = 0.1, 
+              height = 0.1, 
+              color = "tomato") + 
   labs(x = "Military Spending as % of Total Government Spending")
   
 ```

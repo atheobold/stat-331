@@ -66,8 +66,8 @@ award you partial credit for the problem.
   
 ### The Dataset
 
-Parts Three and Four of this exam pertain to the dataset `min_wage.csv` on
-Canvas.
+Parts Two, Three, and Four of this exam pertain to the dataset `min_wage.csv`
+on Canvas.
 
 Documentation for this dataset can be found [here](https://github.com/Lislejoem/Minimum-Wage-by-State-1968-to-2017/tree/master).
 
