@@ -7,7 +7,8 @@ output: rmdformats::readthedown
 ```{r setup, include=FALSE}
 library(tidyverse)
 library(lubridate)
-library(templar)
+library(kableExtra)
+library(forcats)
 ```
 
 
@@ -46,8 +47,8 @@ library(templar)
   sequentially, e.g., if you cannot accomplish problem 1, you may still be able
   to accomplish problem 2.
 - Some parts to problems may need to be completed sequentially. If you cannot
-  complete part (a), please outline code or your thought process for completing
-  part (b).
+  complete part (a), please write some skeleton code **and** your thought
+  process for completing part (b).
 - If you cannot accomplish a problem, please leave the code that you tried 
 **and** write a description of your thinking and how you tried to accomplish the 
 problem. These two components will allow for me to understand your thinking and 
@@ -55,19 +56,18 @@ award you partial credit for the problem.
   * For example, tell me where you wanted to get and what you tried trying to 
   get there.
   * For the problem you cannot accomplish, please set your code chunk option to 
-  `error = TRUE`, to allows for the document to be knit even if there are errors. 
+  `error = TRUE`, to allow for the document to be knit even if there are errors. 
 - All questions should be answered **using R code**.  Make sure your code
   prints out only the information that directly answers the question. 
   * **Penalties will be given if your `.html` file has extra output beyond that
   which answers the question.**
 -  Submit both your `.Rmd` and `.html` files on Canvas by the end of the
-  allotted time. Only your `.html` file will be graded - make sure the
-  knitted output contains all your answers.
+  allotted time. Make sure the knitted output contains all your answers!
   
 ### The Dataset
 
 Parts Two, Three, and Four of this exam pertain to the dataset `min_wage.csv`
-on Canvas.
+posted in the Midterm Module on Canvas.
 
 Documentation for this dataset can be found [here](https://github.com/Lislejoem/Minimum-Wage-by-State-1968-to-2017/tree/master).
 
@@ -79,13 +79,15 @@ Documentation for this dataset can be found [here](https://github.com/Lislejoem/
 
 **Fill out your answers in the Part One Quiz on Canvas.**
 
-1. Suppose I create an object with the following:
+</br>
+
+__1. Suppose I create an object with the following:__
 
 ```{r}
 a <- 10
 ```
 
-Which of the following is an accurate statement about `a`?
+__Which of the following is an accurate statement about `a`?__
 
 *Check all that apply*
 
@@ -96,8 +98,9 @@ Which of the following is an accurate statement about `a`?
 (e) `a + c(1,4,7)` will give an error.
 (f) `as.character(a)` will return `"10"`
 
+</br>
 
-2. Consider the following output:
+__2. Consider the following output:__
 
 ```{r, echo = FALSE}
 mystery_object <- matrix(rnorm(12), nrow = 3, ncol = 4)
@@ -107,7 +110,7 @@ mystery_object <- matrix(rnorm(12), nrow = 3, ncol = 4)
 str(mystery_object)
 ```
 
-What object structure is `mystery_object`?
+__What object structure is `mystery_object`?__
 
 *Check all that apply*
 
@@ -117,14 +120,15 @@ What object structure is `mystery_object`?
 (d) A data frame
 (e) A list
 
+</br>
 
-3. Suppose `student_names` is a **character vector** containing the names of 
+__3. Suppose `student_names` is a **character vector** containing the names of 
 students in a particular class.  For example, one entry of `student_names` might 
 be `"Brad Pitt"`, and another might be `"Jeffrey Armstrong"`.  You may assume 
-there are no middle names or two-word first or last names.
+there are no middle names or two-word first or last names.__
 
-Which of the following will return the **_full names_** of students whose
-*first name* starts with a K?
+__Which of the following will return the **_full names_** of students whose
+*first name* starts with a K?__
 
 *Check all that apply*
 
@@ -145,13 +149,56 @@ Which of the following will return the **_full names_** of students whose
 (h) `str_subset(student_names, "K[a-z]* ")`
 <!-- Extracts first AND last name plus other names.  -->
 
-4. Question about categorical variables, lumping, and it's implications.
+</br>
 
+__4. Suppose you are interested in summarizing the demographics of students at 
+Cal Poly. You have 20,000 survey responses for a variety of variables, including
+gender, race, and ethnicity. For some groups, there aren't many responses. So,
+you decide to lump together the smaller groups.__
 
-5. Question about the data analyzed in Lab 3 -- studying African American 
-Vocabulary based on the population of the study. Use for inference? 
+__Which of the following will create an "other" group for levels of `race` that
+appear fewer than 2,000 times?__
 
+*Check all that apply* 
 
+(a) `fct_lump(race)`
+<!-- wrong -->
+(b) `fct_lump_prop(race, 0.1)`
+<!-- correct -->
+(c) `fct_lump_n(race, 3)`
+<!-- wrong -->
+(d) `fct_lump_lowfreq(race, other_level = "other")`
+<!-- wrong -->
+(e) `fct_lump_min(race, 2000)`
+<!-- correct -->
+
+</br>
+
+__5. Suppose, your resulting "lumped" demographic table looks like this:__ 
+
+```{r, echo = FALSE}
+data <- tibble(race = c(rep("African American", 171), 
+                        rep("Hispanic/Latino", 3077), 
+                        rep("Native American", 27),
+                        rep("Non-Resident Alien", 475), 
+                        rep("Unknown/Other", 548), 
+                        rep("Asian American", 1965), 
+                        rep("Multiracial", 1718), 
+                        rep("White", 12019)
+  )
+)
+               
+data %>% 
+  mutate(race = fct_lump_prop(race, 0.15)) %>% 
+  count(race) %>% 
+  kable() %>% 
+  kable_styling()
+```
+
+__What are some issues with representing the data in this way? i.e. What are 
+some implications of "lumping" the data in this manner?__
+
+</br>
 
 ## Part Two: Short Answer [100 points]
 
@@ -164,7 +211,7 @@ For all questions, please show your work in code.
 min_wage <- read_csv(here::here("6_Midterm", "min_wage.csv"))
 ```
 
-1. How many entries in this dataset had footnote `(b)`?
+__1. How many entries in this dataset had footnote `"(b)"`?__
 
 ```{r, echo = FALSE, eval = FALSE}
 min_wage %>% 
@@ -174,10 +221,10 @@ min_wage %>%
 # 80 (b) Footnotes
 ```
 
-\hspace{1cm}
+</br>
 
-2. Which states had the highest and lowest minimum wage in each year?  (Use the 
-`High.Value` dollar amount, not adjusted for inflation.)
+__2. Which states had the highest and lowest minimum wage in each year?  (Use the 
+`High.Value` dollar amount, not adjusted for inflation.)__
 
 ```{r, eval = FALSE, echo = FALSE}
 min_wage %>% 
@@ -191,10 +238,10 @@ min_wage %>%
   select(State)
 ```
 
-\hspace{1cm}
+</br>
 
-3. Which states had the largest change in minimum wage (difference between high 
-and low values) in each year?
+__3. Which states had the largest change in minimum wage (difference between high 
+and low values) in each year?__
 
 ```{r, echo = FALSE, eval = FALSE}
 min_wage %>% 
@@ -204,10 +251,10 @@ min_wage %>%
   select(State)
 ```
 
-\hspace{1cm}
+</br>
 
-4. Consider only Texas and California.  Make a plot comparing their minimum wage 
-in 2018 dollars (`Low.2018`) over time:
+__4. Consider only Texas and California.  Make a plot comparing their minimum wage 
+in 2018 dollars (`Low.2018`) over time:__
 
 ```{r, echo = FALSE, eval = FALSE}
 min_wage %>%
@@ -216,9 +263,10 @@ min_wage %>%
   geom_line()
 ```
 
-\hspace{1cm}
+</br>
 
-5. Create a new data frame with the following properties:
+__5. Create a new data frame with the following properties:__
+
 - Each row should represent a different year of observations.
 - Each column should represent one state
 - Values should be the highest minimum wage (`High.2018`) in that state for
@@ -232,7 +280,7 @@ min_wage %>%
   )
 ```
 
-
+</br>
 
 ## Part Three:  Open-Ended Analysis [150 points]
 
@@ -245,15 +293,15 @@ Decide on your own regional grouping for the states.  For example, you might
 consider East vs. West, North vs. South, or something more nuanced.  You are welcome
 to reference any internet source to determine your grouping.
 
-Compare the minimum wage between regions to come up with an interesting insight.  
+Compare the minimum wage between regions to come up with an interesting insight. 
 For example: Did some regions grow faster than others? Do some regions tend to
 have a higher minimum wage than others?  etc.
 
-Create a write-up of approximately 1-page (including all plots and tables) that
-tells a clear story. Your write-up must include at least on plot and at least
-one summary statistic.
+Create a write-up of approximately one printed page (including all plots and
+tables) that tells a clear story. Your write-up must include *at least* one plot
+and *at least* one summary statistic.
 
-## Part Four:   Description of Code [50 points]
+## Part Four: Description of Code [50 points]
 
 Pick **one** aspect of your code from you analysis in Part Three that you are
 proud of.  Describe what your code accomplishes! Be specific and talk through
