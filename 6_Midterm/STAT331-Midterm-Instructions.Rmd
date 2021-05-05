@@ -132,6 +132,14 @@ __Which of the following will return the **_full names_** of students whose
 
 *Check all that apply*
 
+```{r, include = FALSE}
+student_names <- c("Brad Pitt", "Jeffrey Armstrong", 
+                             "Marilyn Foraker", 
+                             "Karen Theobold", 
+                   "Allen Klein")
+
+```
+
 (a) `str_extract(student_names, "^K")`
 <!-- Only selects letter K -->
 (b) `str_extract(student_names, "^K.*")`
@@ -146,7 +154,7 @@ __Which of the following will return the **_full names_** of students whose
 <!-- Extracts first AND last name.  -->
 (g) `str_subset(student_names, "^K[a-z]*")`
 <!-- Extracts first AND last name.  -->
-(h) `str_subset(student_names, "K[a-z]* ")`
+(h) `str_subset(student_names, "K[a-z]*")`
 <!-- Extracts first AND last name plus other names.  -->
 
 </br>
@@ -234,8 +242,8 @@ min_wage %>%
 
 min_wage %>% 
   group_by(Year) %>% 
-  slice_min(High.Value, n = 1) %>% 
-  select(State)
+  slice_min(Low.Value, n = 1) %>% 
+  select(State, High.Value)
 ```
 
 </br>
@@ -270,7 +278,7 @@ __5. Create a new data frame with the following properties:__
 - Each row should represent a different year of observations.
 - Each column should represent one state
 - Values should be the highest minimum wage (`High.2018`) in that state for
-a particular year
+that particular year
 
 ```{r, echo = FALSE, eval = FALSE}
 min_wage %>% 
