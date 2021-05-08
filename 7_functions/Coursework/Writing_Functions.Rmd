@@ -1,0 +1,285 @@
+---
+title: "Writing R Functions"
+author: ""
+output:
+  prettydoc::html_pretty:
+    theme: tactile
+    highlight: github
+    css: styles.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, include = FALSE}
+library(tidyverse)
+library(lubridate)
+```
+
+
+This week you will learn to:
+
+* Write your own functions in R
+
+* Make good decisions about function arguments and returns
+
+* Include side effects and / or error messages in your functions
+
+* Extend your use of good R coding style
+
+---
+
+`r emo::ji("play button")` Watch Videos:  
+  
+  * `r emo::ji("link")` Link to **all** Slides from Videos: [here]()
+
+`r emo::ji("book")` Readings: 60-75 minutes   
+
+`r emo::ji("computer")` Activities: 45-60 minutes  
+  
+`r emo::ji("check")` Check-ins: 4 (included in 1 assignment on Canvas)
+
+---
+
+# Why Write a Function? 
+
+You might be coming into this chapter wondering, "Why would I write a
+function?". Especially, if thus far you've been able to do everything with 
+built-in functions and / or reusing your code a few times. 
+
+The critical motivation behind functions is the "don't repeat yourself" (DRY) 
+principle. In general, "you should consider writing a function whenever 
+copied and pasted your code more than twice (i.e. you now have three copies of
+the same code)" (Wickham & Grolemund, 2020). 
+
+One of my favorite papers, *Best Practices for Scientific Computing*, summarizes
+this idea in a slightly different way: 
+
+> Anything that is repeated in two or more places is more difficult to maintain.
+> Every time a change or correction is made, multiple locations must be updated,
+> which increases the chance of errors and inconsistencies. To avoid this,
+> programmers follow the DRY Principle, which applies to both data and code.
+
+The DRY Principle applies at two scales: small and large. At small scales,
+researchers (**you**) should work to modularize code instead of copying and
+pasting. Modularizing your code helps you remember what the code is doing as a
+single mental chunk. This makes your code easier to understand, since there is 
+less to remember! Another perk is that your modularized code can also be more 
+easily repurposed for other projects. At larger scales, it is vital that
+scientific programmers (**you**) re-use code instead of rewriting it (Wilson et
+al., 2014).  
+
+If you are interested in reading more about these "best practices" you can find
+the article here: 
+<https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001745>
+
+***
+
+# Writing Functions
+
+`r emo::ji("play button")` [Required Video: Writing Functions]()
+
+`r emo::ji("computer")` [Required Tutorial: RStudio Primer -- Writing Functions](https://rstudio.cloud/learn/primers/6)
+
+`r emo::ji("book")` [Recommended Reading: *R4DS* -- Functions](https://r4ds.had.co.nz/functions.html)
+
+---
+
+`r emo::ji("check")` **Check-in: Simple Functions** 
+
+Fill in the necessary code to write a function called `times_seven()`. The 
+function should take a single argument and multiply the input by 7. 
+
+This function should check that the argument is numeric.
+
+This function should also excitedly announce (print) "I love sevens!" if the
+argument to the function is a 7.
+
+
+```{r, eval = FALSE}
+times_seven <- function(x){
+  stopifnot(___)
+  
+  if(___){
+    print(___)
+  }
+  return(___)
+}
+
+```
+
+---
+
+`r emo::ji("check")` **Check-in: Predicting Function Behavior** 
+
+```{r addtwo}
+add_or_subtract <- function(first_num, 
+                            second_num = 2, 
+                            type = "add") {
+  
+  if (type == "add") {
+    first_num + second_num
+  } else if (type == "subtract") {
+    first_num - second_num
+  } else {
+    stop("Please choose `add` or `subtract` as the type.")
+  }
+  
+}
+  
+```
+
+**Question 1:** For the four calls to the `add_or_subtract()` function, which 
+of the following will be output?  
+i) 1
+ii) -1
+iii) 30
+iv) An error defined in the function `add_or_subtract`
+v) An error defined in a different function, that is called from inside `add_or_subtract`
+
+```{r, eval = FALSE}
+add_or_subtract(5, 6, type = "subtract")
+
+add_or_subtract("orange")
+
+add_or_subtract(5, 6, type = "multiply")
+
+add_or_subtract("orange", type = "multiply")
+```
+
+**Question 2:**
+
+Consider the following code:
+
+```{r}
+first_num <- 5
+second_num <- 3
+
+result <- 8
+
+result <- add_or_subtract(first_num, second_num = 4)
+
+result_2 <- add_or_subtract(first_num)
+```
+
+In your Global Environment, what is the value of...
+
+a) `first_num`
+b) `second_num`
+c) `result`
+d) `result_2`
+
+---
+
+`r emo::ji("check")` **Check-in: Functions and Data Wrangling** 
+
+Write a function called `find_car_make()` that takes as input the name of a car,
+and returns only the "make", or the company that created the car.  For example,
+`find_car_make("Toyota Camry")` should return `"Toyota"` and 
+`find_car_make("Ford Anglica")` should return `"Ford"`. (You can assume that the
+first word of a car name is always its make.)
+
+_**Hint:**_ The `word()` function from **stringr** may be useful to you! 
+
+Once you've made your function, try it out on the built-in dataset `mtcars`. 
+Use the function to create a new column in the data called `make` that gives the
+
+_**Hint:**_ You should start by using the function `dplyr::rownames_to_column()`, so
+that the car names are a variable in the data frame instead of row labels.*
+
+```{r, include = FALSE}
+
+find_car_make <- function(x){
+  make <- word(x, 1)
+  return(make)
+}
+
+mtcars %>% 
+  rownames_to_column(var = "car") %>% 
+  mutate(make = find_car_make(car))
+
+```
+
+---
+
+## Good Code Style
+
+---
+
+Consider the following two chunks of code:
+
+```{r, eval = FALSE}
+some_data<-penguins%>%group_by(species)%>%summarize(av=mean(body_mass_g,0,TRUE))
+```
+
+```{r, eval = FALSE}
+avg_by_species <-
+  penguins %>% 
+    group_by(species) %>% 
+    summarize(
+      avg_mass = mean(body_mass_g, na.rm = TRUE)
+    )
+```
+
+Which one is easier to read?  The second one, of course!
+
+Part of writing reproducible and shareable code is following good
+**style guidelines**.  Mostly, this means choosing good object names and using
+white space in a consistent and clear way.
+
+You should have already read the sections of the Tidyverse Style Guide relevant 
+to piping, plotting, and naming objects. This week we are extending these 
+style guides to functions. 
+
+I would **highly recommend** reading through the style guide for naming
+functions, what to do with long lines, and the use of comments. The guide can 
+be found here: <https://style.tidyverse.org/functions.html>
+
+### Summary
+
+Designing functions is somewhat subjective, but there are a few principles that apply:
+
+1. Choose a good, descriptive **names** 
+    + Your function name should describe what it does, and usually involves a
+    verb.
+    + Your argument names should be simple and / or descriptive.
+    + Names of variables in the body of the function should be descriptive.
+2. Output should be **very predictable**
+    + Your function should always *return* the same object type, no matter what
+    input it gets.
+    + Your function should expect certain objects or object types as *input*, 
+    and give errors when it does not get them.
+    + Your function should give errors or warnings for common mistakes.
+    + Default values of arguments should only be used when there is a clear
+    common choice.
+3. The body of the function should be **easy to read**.
+    + Code should use [good style principles](https://style.tidyverse.org/).
+    + There should be occasional comments to explain the purpose of the steps.
+    + Complicated steps, or steps that are repeated many times, should be
+    written into **separate functions** (sometimes called *helper functions*).
+4. Functions should be **self-contained**.
+    + They should not rely on any information besides what is given as input.
+    + *(Relying on other _functions_ is fine, though*)
+    + They should not alter the Global Environment
+    + *(do not put `library()` statements inside functions!)*
+
+---
+
+`r emo::ji("check")` **Check-in: Function Design** 
+
+Identify *five* major violations of design principles for the following
+function:
+
+```{r, eval = FALSE}
+
+ugh <- function(dataset) {
+  
+  library(tidyverse)
+  
+  thing <- dataset%>%group_by(Species)%>%summarize(newvar = mean(Sepal.Length))
+  
+  ggplot(thing)+geom_col(aes(x = Species, y = newvar))+ggtitle("Sepal Lengths")}
+
+ugh(iris)
+```

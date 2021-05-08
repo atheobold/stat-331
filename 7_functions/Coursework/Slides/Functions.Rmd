@@ -1,7 +1,5 @@
 ---
 title: "Writing your own functions"
-author: "Week 4"
-
 output:
   xaringan::moon_reader:
     lib_dir: libs
