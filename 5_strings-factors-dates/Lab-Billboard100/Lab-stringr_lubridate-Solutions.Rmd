@@ -12,8 +12,7 @@ knitr::opts_chunk$set(fig.width=12,
                       fig.height=8, 
                       fig.path='Figs/',
                       warning=FALSE,
-                      message=FALSE, 
-                      echo = FALSE)
+                      message=FALSE)
 
 library(readr)
 ```
@@ -68,9 +67,11 @@ library(lubridate)
 ```
 
 ```{r, echo = FALSE, eval = TRUE}
-songs <- read_tsv(here::here("5_strings-factors-dates",
+songs <- read_delim(here::here("5_strings-factors-dates",
                                 "Lab-Billboard100",
-                                "billboard_songs.txt")
+                                "billboard_songs.txt"), 
+                    delim = "\t", 
+                    escape_double = FALSE
                     )
 ```
 
@@ -96,7 +97,7 @@ Do any data cleaning you need.
 *Hint:* You'll want to create a datetime object for the date the song leaves the
 chart.
 
-```{r, eval = FALSE}
+```{r}
 songs <- songs %>% 
   mutate(
     date = as.character(`chart date`),
@@ -122,7 +123,7 @@ sample <- songs %>%
 __1. What 5 songs spent the longest on the charts?  Give only the title, artist, 
 and weeks.__
 
-```{r, eval = FALSE}
+```{r}
 sample %>% 
   top_n(5, `weeks on chart`) %>%
   arrange(desc(`weeks on chart`)) %>%
@@ -136,7 +137,7 @@ __2. Which five artists had the most number 1 hits?__
 
 *For this question, you may ignore songs with more than one artist listed.*
 
-```{r, eval = FALSE}
+```{r
 songs %>% 
   filter(`overall peak` == 1) %>%
   group_by(artist) %>%
@@ -156,7 +157,7 @@ two months (before or after) your 10th birthday?  Give only the song title,
 artist, and date of chart entry.__
 
 
-```{r, eval = FALSE}
+```{r}
 my_bday <- mdy("January 14, 1989")
 
 songs %>% 
@@ -183,7 +184,7 @@ Give only the word itself, and its count.__
 *Hint 3:* The result of `str_extract_all()` is a list. To make the list into a 
 vector, use `unlist()`! 
 
-```{r, eval = FALSE}
+```{r}
 title_words <- songs %>%
   pull(title) %>%
   str_extract_all("\\w+") %>%
@@ -222,14 +223,13 @@ In this string, Jessie J and Ariana Grande and Nicki Minaj all worked
 together (collaborated), but **nobody** was featured.
 
 
-
-```{r, eval = FALSE}
+```{r}
 artist_creds <- songs %>%
   pull(artist)
 
 feat_artists <- artist_creds %>% 
   str_subset("featuring") %>% 
-  str_replace_all(".* featuring", "") %>%
+  str_replace_all(".* featuring|feat|ft", "") %>%
   str_split("([&,])|( or )|( and )") %>%
   unlist() %>%
   str_trim(side = "both")
