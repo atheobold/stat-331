@@ -1,0 +1,68 @@
+---
+title: "Why write a function `r emo::ji('question')`"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["xaringan-themer.css", "slide-style.css"]
+    nature:
+      highlightStyle: solarized-light
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+---
+
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.width = 8, fig.height = 6}
+knitr::opts_chunk$set(message = FALSE, 
+                      warning = FALSE, 
+                      fig.align = "center")
+
+options(htmltools.dir.version = FALSE)
+
+library(xaringanthemer)
+library(xaringan)
+library(tidyverse)
+
+
+style_duo_accent(
+  primary_color      = "#0F4C81", # pantone classic blue
+  secondary_color    = "#B6CADA", # pantone baby blue
+  header_font_google = google_font("Raleway"),
+  text_font_google   = google_font("Raleway", "300", "300i"),
+  code_font_google   = google_font("Source Code Pro"),
+  text_font_size     = "30px"
+)
+```
+
+
+.larger[Why write functions?]
+
+--
+
+* Functions allow you to automate common tasks
+
+--
+
+* We've been using functions since Day 1
+
+--
+
+* Did you ever find yourself copy-pasting an analysis and changing small parts?
+  
+---
+
+.larger[Advantages of Functions]
+
+
+**Writing your OWN functions has 3 big advantages over copy-and-paste:**
+
+1. Your code is easier to read
+
+2. To change your analysis, simply change the function
+
+3. No more mistakes from copy-paste

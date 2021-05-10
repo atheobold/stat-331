@@ -1,0 +1,291 @@
+---
+title: "More About Function Arguments"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["xaringan-themer.css", "slide-style.css"]
+    nature:
+      highlightStyle: solarized-light
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+---
+
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.width = 8, fig.height = 6}
+knitr::opts_chunk$set(message = FALSE, 
+                      warning = FALSE, 
+                      fig.align = "center")
+
+options(htmltools.dir.version = FALSE)
+
+library(xaringanthemer)
+library(xaringan)
+library(tidyverse)
+library(flair)
+library(palmerpenguins)
+
+style_duo_accent(
+  primary_color      = "#0F4C81", # pantone classic blue
+  secondary_color    = "#B6CADA", # pantone baby blue
+  header_font_google = google_font("Raleway"),
+  text_font_google   = google_font("Raleway", "300", "300i"),
+  code_font_google   = google_font("Source Code Pro"),
+  text_font_size     = "30px"
+)
+```
+
+
+.larger[Standardizing]
+
+
+```{r}
+standardize <- function(data) {
+  deviations <- data - mean(data, na.rm = TRUE)
+  newdata <- deviations / sd(data, na.rm = TRUE)
+  return(newdata)
+}
+```
+
+---
+
+.larger[Still...] 
+
+We haven't eliminated copy-and-pasting from our `penguins` dataset! 
+
+```{r, eval = FALSE}
+penguins$bill_length_mm <- standardize(penguins$bill_length_mm)
+penguins$bill_depth_mm <- standardize(penguins$bill_depth_mm)
+penguins$flipper_length_mm <- standardize(penguins$flipper_length_mm)
+penguins$body_mass_g <- standardize(penguins$body_mass_g)
+```
+
+--
+
+<center>
+
+**What should we do?** 
+
+
+---
+
+class: inverse
+
+.huge-text[Familiar Option]
+
+---
+
+.larger[`mutate_at()`]
+
+```{r}
+penguins %>% 
+  mutate_at(vars(bill_length_mm:body_mass_g), 
+            standardize)
+```
+
+---
+
+class: inverse
+
+.huge-text[New Option]
+
+---
+
+.larger[Variables as Arguments]
+
+
+```{r stdcol}
+stdize_column <- function(dat, variable) {
+  dat <- dat %>%
+    mutate(
+      variable = standardize(variable)
+    )
+  return(dat)
+}
+```
+
+*(Notice how we relied on the existing function `stdize()` inside the new function, for clarity!)*
+
+---
+
+.larger[Variables as arguments]
+
+Alas...
+
+```{r, error = TRUE}
+stdize_column(penguins, body_mass_g)
+```
+
+--
+
+<center>
+
+**What happened?**
+
+---
+
+# Tidy evaluation
+
+Functions that use **unquoted** variable names as arguments are called
+**nonstandard evaluation** or **tidy evaluation**.
+
+--
+
+
+.pull-left[
+**Easier**:
+
+```{r, eval = FALSE}
+penguins %>% pull(body_mass_g)
+```
+
+
+```{r, eval = FALSE}
+penguins$body_mass_g
+```
+]
+
+--
+
+.pull-right[
+**Harder**: 
+
+```{r, eval = FALSE}
+penguins[, "body_mass_g"]
+```
+
+
+```{r, eval = FALSE}
+penguins[["body_mass_g"]]
+```
+]
+
+--
+
+</br>
+
+<center> 
+
+**But they are complicated to write!**
+
+---
+
+class: middle, center, inverse
+
+.huge-text[What to do?]
+
+---
+
+.larger[Option 1 `r emo::ji("shrug")`] 
+
+--
+
+</br>
+
+.bitlarger[**Just don't use it in your functions.**]
+
+</br>
+
+.bitlarger[**Harder to read/use, but safe.**]
+
+---
+
+```{r}
+stdize_column <- function(dat, variable) {
+  dat[[variable]] <- standardize(dat[[variable]])
+  return(dat)
+}
+
+stdize_column(penguins, "body_mass_g")
+```
+
+---
+
+.larger[Option 2 -- `vars()`]
+
+The `vars()` function produces a _quosure_ object, which can be used to extract
+variables. 
+
+--
+
+.bitlarger[**This only works for `mutate()` type functions, that do calculations on the variable.**]
+
+---
+
+```{r vars, echo = FALSE, eval = FALSE}
+stdize_column <- function(dat, variable) {
+  dat <- dat %>%
+    mutate_at(variable, standardize)
+  return(dat)
+}
+
+stdize_column(penguins, vars(body_mass_g))
+```
+
+```{r, echo = FALSE}
+decorate("vars", eval = FALSE) %>%
+  flair("vars")
+```
+
+---
+
+.larger[Option 3 -- Tunnel] 
+
+In February 2020 **rlang** introduced the curly-curly `{{` operator to simplify
+writing functions around tidyverse pipelines. 
+
+--
+
+With the `{{` operator you can tunnel data-variables (i.e. columns from the
+data frames) through function arguments! 
+
+--
+
+**This only works for `pull()` and `select()` type functions, that use the literal name of the variable to subset the data.**
+
+</br> 
+
+[link to **tidyverse** article](https://www.tidyverse.org/blog/2020/02/glue-strings-and-tidy-eval/)
+
+---
+
+
+```{r tunnel, eval = FALSE, echo = FALSE}
+stdize_column <- function(dat, variable) {
+  new_var <- dat %>%
+    pull( {{ variable }} ) %>%
+    standardize()
+  return(new_var)
+}
+
+stdize_column(penguins, body_mass_g)
+```
+
+```{r, echo = FALSE}
+decorate("tunnel", eval = FALSE) %>%
+  flair("{{ variable }}")
+```
+
+
+---
+
+class: center, middle, inverse
+
+.huge-text[Function Writing Tips]
+
+---
+.larger[Tip 1]
+
+.bitlarger[**Keep thinking about object types and structures!!!**]
+
+---
+
+.larger[Tip 2]
+
+.bitlarger[**If you want to write a function for data wrangling, consider
+arguments that expect _vectors_ rather than _variable names_.**]

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>More About Function Returns 💵</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="slide-style.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# More About Function Returns 💵
+
+---
+
+
+
+
+
+---
+# Conditional returns
+
+Maybe you want to return different results in different situations
+
+
+
+
+&lt;code class ='r hljs remark-code'&gt;even_or_odd &lt;- function(x) {&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;br&gt;&amp;nbsp;&amp;nbsp;if (&lt;span style="background-color:#ffff7f"&gt;x %% 2 == 0&lt;/span&gt;) {&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;return("&lt;span style="background-color:green"&gt;It's even!&lt;/span&gt;")&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;br&gt;&amp;nbsp;&amp;nbsp;} else {&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;return("&lt;span style="background-color:pink"&gt;It's odd.&lt;/span&gt;")&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;br&gt;&amp;nbsp;&amp;nbsp;}&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;br&gt;}&lt;/code&gt;
+
+---
+# Errors
+
+
+```r
+add_something &lt;- function(x, something = 2) {
+  
+  if (!is.numeric(something)) {
+    
+    stop("Please enter a number!")
+    
+  }
+  
+  x + something
+  
+}
+```
+
+---
+# Errors
+
+```r
+add_something(5, something = "bob")
+```
+
+```
+## Error in add_something(5, something = "bob"): Please enter a number!
+```
+
+---
+
+class: center, middle
+
+# Debugging
+
+---
+
+
+```r
+fibonacci &lt;- function(start, len) {
+  
+  fib &lt;- vector()
+  
+  for (i in 1:len) {
+    
+    fib[i + 1] &lt;- fib[i] + fib[i - 1]
+    
+  }
+  
+  return(fib)
+  
+  
+}
+```
+
+---
+# Debugging tricks
+
+## `print()`
+
+## `browser()`
+
+## `debugonce()`
+
+(Try it.)
+
+
+---
+
+# Testing
+
+We Only Need to Change the Code in One Place: `standardize()`
+
+
+
+
+&lt;code class ='r hljs remark-code'&gt;standardize &lt;- function(data) {&lt;br&gt;&amp;nbsp;&amp;nbsp;deviations &lt;- data - mean(data, &lt;span style="background-color:#ffff7f"&gt;na.rm = TRUE&lt;/span&gt;)&lt;br&gt;&amp;nbsp;&amp;nbsp;newdata &lt;- deviations / sd(data, &lt;span style="background-color:#ffff7f"&gt;na.rm = TRUE&lt;/span&gt;)&lt;br&gt;&amp;nbsp;&amp;nbsp;return(newdata)&lt;br&gt;}&lt;br&gt;&lt;br&gt;testdata &lt;- c(2, 4, 3, 9, NA, 4, 6)&lt;br&gt;standardize(testdata)&lt;/code&gt;
+
+```
+
+## [1] -1.0652473 -0.2663118 -0.6657796  1.7310268         NA -0.2663118  0.5326236
+
+```
+
+---
+
+
+
+&lt;code class ='r hljs remark-code'&gt;myiris &lt;- iris&lt;br&gt;&lt;br&gt;myiris$Sepal.Length &lt;- (myiris$Sepal.Length - mean(myiris$Sepal.Length, &lt;span style="background-color:#ffff7f"&gt;na.rm = TRUE&lt;/span&gt;)) / sd(myiris$Sepal.Length, &lt;span style="background-color:#ffff7f"&gt;na.rm = TRUE&lt;/span&gt;)&lt;br&gt;myiris$Sepal.Width &lt;- (myiris$Sepal.Width - mean(myiris$Sepal.Length, &lt;span style="background-color:#ffff7f"&gt;na.rm = TRUE&lt;/span&gt;)) / sd(myiris$Sepal.Width, &lt;span style="background-color:#ffff7f"&gt;na.rm = TRUE&lt;/span&gt;)&lt;br&gt;myiris$Petal.Length &lt;- (myiris$Petal.Length - mean(myiris$Petal.Length, &lt;span style="background-color:#ffff7f"&gt;na.rm = TRUE&lt;/span&gt;)) / sd(myiris$Petal.Length, &lt;span style="background-color:#ffff7f"&gt;na.rm = TRUE&lt;/span&gt;)&lt;br&gt;myiris$Petal.Width &lt;- (myiris$Petal.Width - mean(myiris$Petal.Width, &lt;span style="background-color:#ffff7f"&gt;na.rm = TRUE&lt;/span&gt;)) / sd(myiris$Petal.Width, &lt;span style="background-color:#ffff7f"&gt;na.rm = TRUE&lt;/span&gt;)&lt;/code&gt;
+
+---
+
+# Print versus return
+
+
+
+```r
+even_or_odd &lt;- function(x) {
+  
+  if (x %% 2 == 0) {
+    
+    return("It's even!")
+    
+  } else {
+    
+    return("It's odd.")
+    
+  }
+  
+  
+}
+
+bob &lt;- even_or_odd(7)
+
+bob
+```
+
+```
+## [1] "It's odd."
+```
+
+---
+# Print versus return
+
+
+
+```r
+even_or_odd &lt;- function(x) {
+  
+  if (x %% 2 == 0) {
+    
+    cat("It's even!")
+    
+  } else {
+    
+    cat("It's odd.")
+    
+  }
+  
+  return(x)
+  
+  
+}
+
+bob &lt;- even_or_odd(7)
+```
+
+```
+## It's odd.
+```
+
+```r
+bob
+```
+
+```
+## [1] 7
+```
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "solarized-light",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9",
+"slideNumberFormat": "<div class=\"progress-bar-container\">\n  <div class=\"progress-bar\" style=\"width: calc(%current% / %total% * 100%);\">\n  </div>\n</div>"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

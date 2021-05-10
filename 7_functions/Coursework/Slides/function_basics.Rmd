@@ -1,0 +1,274 @@
+---
+title: "`r emo::ji('party')` Writing Your Own Functions!"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["xaringan-themer.css", "slide-style.css"]
+    nature:
+      highlightStyle: solarized-light
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+---
+
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.width = 8, fig.height = 6}
+knitr::opts_chunk$set(message = FALSE, 
+                      warning = FALSE, 
+                      fig.align = "center")
+
+options(htmltools.dir.version = FALSE)
+
+library(xaringanthemer)
+library(xaringan)
+library(tidyverse)
+library(tidyverse)
+library(flair)
+
+style_duo_accent(
+  primary_color      = "#0F4C81", # pantone classic blue
+  secondary_color    = "#B6CADA", # pantone baby blue
+  header_font_google = google_font("Raleway"),
+  text_font_google   = google_font("Raleway", "300", "300i"),
+  code_font_google   = google_font("Source Code Pro"),
+  text_font_size     = "30px"
+)
+```
+
+
+.larger[A (very) simple function]
+
+```{r my_fun}
+add_two <- function(x) {
+  
+  x + 2
+  
+}
+```
+
+```{r}
+add_two(5)
+```
+
+
+---
+
+.larger[Components to a Function]
+
+1. Name
+2. Arguments / Inputs
+3. Body 
+4. Output / Return
+
+---
+
+.larger[What's in a name?]
+
+The **name** of the function is chosen by the author.
+
+--
+
+```{r, echo = FALSE}
+
+decorate("my_fun") %>% flair("add_two")
+
+```
+
+---
+
+class: inverse 
+
+.larger[A Word of Caution]
+
+Function names have no inherent meaning.
+
+```{r}
+add_three <- function(x) {
+  
+  x + 7
+  
+}
+
+```
+
+--
+
+**What did you expect?** 
+
+```{r}
+add_three(5)
+```
+
+
+---
+
+class: center, middle, inverse
+
+.huge-text[Arguments]
+
+---
+
+.larger[Arguments] 
+
+The **argument(s)** of the function are chosen by the author.
+
+.pull-left[
+```{r, echo = FALSE}
+
+decorate("my_fun") %>% flair("x")
+
+```
+]
+
+--
+
+.pull-right[
+- arguments are temporary variables with general names
+
+- `x`, `y`, `z` -- vectors
+
+- `df` -- dataframe
+
+- `i`, `j` -- indices
+]
+
+
+---
+
+# Optional arguments
+
+
+```{r add, include = FALSE}
+add_something <- function(x, something = 2) {
+  
+  x + something
+  
+}
+```
+
+```{r, echo = FALSE}
+decorate("add") %>% flair_rx("something = .")
+```
+] 
+
+--
+
+.pull-left[
+```{r}
+add_something(5)
+```
+
+]
+
+--
+
+.pull-right[
+```{r}
+add_something(5, something = 6)
+```
+]
+
+---
+
+# Required arguments
+
+If you **do not** supply a default value, the argument is **required**:
+
+```{r, eval = FALSE}
+add_something <- function(x, something) {
+  
+  x + something
+  
+}
+
+add_something(2)
+```
+
+```
+## Error in add_something(): argument "x" is missing, with no default
+```
+
+---
+
+class: center, middle, inverse
+
+.huge-text[Body]
+
+---
+
+.larger[Body]
+
+The **body** of the function is where the action happens.
+
+```{r, echo = FALSE}
+
+decorate("my_fun") %>% flair("x + 2")
+
+```
+
+
+---
+
+class: center, middle, inverse
+
+.huge-text[Returns]
+
+---
+
+.larger[Returns]
+
+Your function will "give back" whatever would normally "print out".
+
+```{r}
+add_two <- function(x) {
+  
+  x + 2
+  
+}
+```
+
+--
+
+.pull-left[
+```{r}
+7 + 2
+```
+
+]
+
+--
+
+.pull-right[
+```{r}
+add_two(7)
+
+```
+]
+
+
+---
+
+
+.larger[Returns]
+
+You can be explicit (and clearer) by using `return()`
+
+```{r return, echo = FALSE}
+add_two <- function(x) {
+  
+  return(x + 2)
+  
+}
+```
+
+
+```{r, echo = FALSE}
+
+decorate("return") %>% flair("return")
+
+```

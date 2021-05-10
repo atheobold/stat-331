@@ -78,7 +78,15 @@ the article here:
 
 # Writing Functions
 
-`r emo::ji("play button")` [Required Video: Writing Functions]()
+`r emo::ji("play button")` [Required Video: Why write a function? -- 5 minutes](http://somup.com/crh6eXFmMK)
+
+`r emo::ji("play button")` [Required Video: Components of a function -- 10 minutes](http://somup.com/crh6euFmNj)
+
+`r emo::ji("play button")` [Required Video: More about function arguments -- posted by May 10 at noon]()
+
+`r emo::ji("play button")` [Required Video: More about function returns  -- posted by May 10 at noon]()
+
+`r emo::ji("play button")` [Required Video: Function environments -- 6 minutes ](http://somup.com/crh6eBFmNK)
 
 `r emo::ji("computer")` [Required Tutorial: RStudio Primer -- Writing Functions](https://rstudio.cloud/learn/primers/6)
 
@@ -132,6 +140,7 @@ add_or_subtract <- function(first_num,
 
 **Question 1:** For the four calls to the `add_or_subtract()` function, which 
 of the following will be output?  
+
 i) 1
 ii) -1
 iii) 30
@@ -185,8 +194,8 @@ _**Hint:**_ The `word()` function from **stringr** may be useful to you!
 Once you've made your function, try it out on the built-in dataset `mtcars`. 
 Use the function to create a new column in the data called `make` that gives the
 
-_**Hint:**_ You should start by using the function `dplyr::rownames_to_column()`, so
-that the car names are a variable in the data frame instead of row labels.*
+_**Hint:**_ You should start by using the function `dplyr::rownames_to_column()`,
+so that the car names are a variable in the data frame instead of row labels.
 
 ```{r, include = FALSE}
 
