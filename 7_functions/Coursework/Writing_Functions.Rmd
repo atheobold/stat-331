@@ -30,13 +30,13 @@ This week you will learn to:
 
 ---
 
-`r emo::ji("play button")` Watch Videos:  
+`r emo::ji("play button")` Watch Videos: 45 minutes
   
-  * `r emo::ji("link")` Link to **all** Slides from Videos: [here]()
+  * `r emo::ji("link")` Link to **all** Slides from Videos: [here](https://app.box.com/s/bctcjsbysmpv0vs84izzeqk09sx7mz00)
 
 `r emo::ji("book")` Readings: 60-75 minutes   
 
-`r emo::ji("computer")` Activities: 45-60 minutes  
+`r emo::ji("computer")` Activities: 60-75 minutes  
   
 `r emo::ji("check")` Check-ins: 4 (included in 1 assignment on Canvas)
 
@@ -82,13 +82,15 @@ the article here:
 
 `r emo::ji("play button")` [Required Video: Components of a function -- 10 minutes](http://somup.com/crh6euFmNj)
 
-`r emo::ji("play button")` [Required Video: More about function arguments -- posted by May 10 at noon]()
+`r emo::ji("play button")` [Required Video: More about function arguments -- 12 minutes](http://somup.com/crh6F9FJY9)
 
-`r emo::ji("play button")` [Required Video: More about function returns  -- posted by May 10 at noon]()
+`r emo::ji("play button")` [Required Video: More about function returns -- 9 minutes](http://somup.com/crh6q6FJ3o)
 
 `r emo::ji("play button")` [Required Video: Function environments -- 6 minutes ](http://somup.com/crh6eBFmNK)
 
 `r emo::ji("computer")` [Required Tutorial: RStudio Primer -- Writing Functions](https://rstudio.cloud/learn/primers/6)
+
+- I **highly recommend** you work through _every_ tutorial except Loops! 
 
 `r emo::ji("book")` [Recommended Reading: *R4DS* -- Functions](https://r4ds.had.co.nz/functions.html)
 

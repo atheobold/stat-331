@@ -18,111 +18,38 @@ class: center, middle, inverse, title-slide
 
 
 
----
-# Conditional returns
 
-Maybe you want to return different results in different situations
+class: center, inverse
 
-
+.larger[Conditional returns]
 
 
-&lt;code class ='r hljs remark-code'&gt;even_or_odd &lt;- function(x) {&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;br&gt;&amp;nbsp;&amp;nbsp;if (&lt;span style="background-color:#ffff7f"&gt;x %% 2 == 0&lt;/span&gt;) {&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;return("&lt;span style="background-color:green"&gt;It's even!&lt;/span&gt;")&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;br&gt;&amp;nbsp;&amp;nbsp;} else {&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;return("&lt;span style="background-color:pink"&gt;It's odd.&lt;/span&gt;")&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;br&gt;&amp;nbsp;&amp;nbsp;}&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;br&gt;}&lt;/code&gt;
+&lt;/br&gt;
 
----
-# Errors
-
-
-```r
-add_something &lt;- function(x, something = 2) {
-  
-  if (!is.numeric(something)) {
-    
-    stop("Please enter a number!")
-    
-  }
-  
-  x + something
-  
-}
-```
-
----
-# Errors
-
-```r
-add_something(5, something = "bob")
-```
-
-```
-## Error in add_something(5, something = "bob"): Please enter a number!
-```
-
----
-
-class: center, middle
-
-# Debugging
-
----
-
-
-```r
-fibonacci &lt;- function(start, len) {
-  
-  fib &lt;- vector()
-  
-  for (i in 1:len) {
-    
-    fib[i + 1] &lt;- fib[i] + fib[i - 1]
-    
-  }
-  
-  return(fib)
-  
-  
-}
-```
-
----
-# Debugging tricks
-
-## `print()`
-
-## `browser()`
-
-## `debugonce()`
-
-(Try it.)
-
-
----
-
-# Testing
-
-We Only Need to Change the Code in One Place: `standardize()`
-
-
-
-
-&lt;code class ='r hljs remark-code'&gt;standardize &lt;- function(data) {&lt;br&gt;&amp;nbsp;&amp;nbsp;deviations &lt;- data - mean(data, &lt;span style="background-color:#ffff7f"&gt;na.rm = TRUE&lt;/span&gt;)&lt;br&gt;&amp;nbsp;&amp;nbsp;newdata &lt;- deviations / sd(data, &lt;span style="background-color:#ffff7f"&gt;na.rm = TRUE&lt;/span&gt;)&lt;br&gt;&amp;nbsp;&amp;nbsp;return(newdata)&lt;br&gt;}&lt;br&gt;&lt;br&gt;testdata &lt;- c(2, 4, 3, 9, NA, 4, 6)&lt;br&gt;standardize(testdata)&lt;/code&gt;
-
-```
-
-## [1] -1.0652473 -0.2663118 -0.6657796  1.7310268         NA -0.2663118  0.5326236
-
-```
+.bitlarger[**Value returned _depends_ on the input.**]
 
 ---
 
 
 
-&lt;code class ='r hljs remark-code'&gt;myiris &lt;- iris&lt;br&gt;&lt;br&gt;myiris$Sepal.Length &lt;- (myiris$Sepal.Length - mean(myiris$Sepal.Length, &lt;span style="background-color:#ffff7f"&gt;na.rm = TRUE&lt;/span&gt;)) / sd(myiris$Sepal.Length, &lt;span style="background-color:#ffff7f"&gt;na.rm = TRUE&lt;/span&gt;)&lt;br&gt;myiris$Sepal.Width &lt;- (myiris$Sepal.Width - mean(myiris$Sepal.Length, &lt;span style="background-color:#ffff7f"&gt;na.rm = TRUE&lt;/span&gt;)) / sd(myiris$Sepal.Width, &lt;span style="background-color:#ffff7f"&gt;na.rm = TRUE&lt;/span&gt;)&lt;br&gt;myiris$Petal.Length &lt;- (myiris$Petal.Length - mean(myiris$Petal.Length, &lt;span style="background-color:#ffff7f"&gt;na.rm = TRUE&lt;/span&gt;)) / sd(myiris$Petal.Length, &lt;span style="background-color:#ffff7f"&gt;na.rm = TRUE&lt;/span&gt;)&lt;br&gt;myiris$Petal.Width &lt;- (myiris$Petal.Width - mean(myiris$Petal.Width, &lt;span style="background-color:#ffff7f"&gt;na.rm = TRUE&lt;/span&gt;)) / sd(myiris$Petal.Width, &lt;span style="background-color:#ffff7f"&gt;na.rm = TRUE&lt;/span&gt;)&lt;/code&gt;
+
+&lt;code class ='r hljs remark-code'&gt;even_or_odd &lt;- function(x) {&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;br&gt;&amp;nbsp;&amp;nbsp;if (&lt;span style="background-color:#ffff7f"&gt;x %% 2 == 0&lt;/span&gt;) {&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;return("&lt;span style="background-color:blue"&gt;It's even!&lt;/span&gt;")&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;br&gt;&amp;nbsp;&amp;nbsp;} else {&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;return("&lt;span style="background-color:pink"&gt;It's odd.&lt;/span&gt;")&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;br&gt;&amp;nbsp;&amp;nbsp;}&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;br&gt;}&lt;/code&gt;
 
 ---
 
-# Print versus return
+class: inverse, center
+.huge-text[`print()` versus `return()`]
 
+---
 
+&lt;center&gt;
+
+.larger[`return()`]
+
+&lt;/center&gt; 
+&lt;/br&gt;
+
+.pull-left[
 
 ```r
 even_or_odd &lt;- function(x) {
@@ -139,53 +66,203 @@ even_or_odd &lt;- function(x) {
   
   
 }
+```
+]
 
-bob &lt;- even_or_odd(7)
+.pull-right[
 
-bob
+```r
+even_or_odd(7)
 ```
 
 ```
 ## [1] "It's odd."
 ```
+]
 
 ---
-# Print versus return
 
+&lt;center&gt;
 
+.larger[`print()`]
+
+&lt;/center&gt; 
+&lt;/br&gt;
+
+.pull-left[
 
 ```r
 even_or_odd &lt;- function(x) {
   
   if (x %% 2 == 0) {
     
-    cat("It's even!")
+    print("It's even!")
     
   } else {
     
-    cat("It's odd.")
+    print("It's odd.")
+    
+  }
+  
+}
+```
+]
+
+.pull-right[
+
+```r
+even_or_odd(7)
+```
+
+```
+## [1] "It's odd."
+```
+]
+
+
+---
+
+&lt;center&gt;
+
+.bitlarger[`print()` *and* `return()`]
+
+&lt;/center&gt; 
+&lt;/br&gt;
+
+.pull-left[
+
+```r
+even_or_odd &lt;- function(x) {
+  
+  if (x %% 2 == 0) {
+    
+    print("It's even!")
+    
+  } else {
+    
+    print("It's odd.")
     
   }
   
   return(x)
   
-  
 }
+```
+]
 
-bob &lt;- even_or_odd(7)
+.pull-right[
+
+```r
+my_num &lt;- even_or_odd(7)
 ```
 
 ```
-## It's odd.
+## [1] "It's odd."
 ```
 
 ```r
-bob
+my_num
 ```
 
 ```
 ## [1] 7
 ```
+]
+
+
+---
+
+class: inverse, center, middle
+
+.huge-text[Returning Errors!]
+
+---
+
+.larger[Conditional Returns Continued...]
+.pull-left[
+
+```r
+add_something &lt;- function(x, something = 2) {
+  
+  if (!is.numeric(something)) {
+    
+    stop("Please enter a number!")
+    
+  }
+  
+  x + something
+  
+}
+```
+]
+
+.pull-right[
+
+```r
+add_something(5, something = "bob")
+```
+
+```
+## Error in add_something(5, something = "bob"): Please enter a number!
+```
+]
+
+---
+
+class: inverse, center, middle
+
+.huge-text[Debugging]
+
+---
+
+.bitlarger[**Unexpected Output**]
+
+.pull-left[
+
+```r
+scale_01 &lt;- function(x){
+  deviations &lt;- x - mean(x)
+  normalized &lt;- deviations / sd(x)
+  return(normalized)
+}
+```
+]
+
+.pull-right[
+
+```r
+penguins %&gt;% 
+  mutate_at(vars(bill_length_mm:body_mass_g), 
+            scale_01)
+```
+
+```
+## # A tibble: 344 x 8
+##    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g year  species
+##             &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt; &lt;fct&gt;  
+##  1             NA            NA                NA          NA 2007  Adelie 
+##  2             NA            NA                NA          NA 2007  Adelie 
+##  3             NA            NA                NA          NA 2007  Adelie 
+##  4             NA            NA                NA          NA 2007  Adelie 
+##  5             NA            NA                NA          NA 2007  Adelie 
+##  6             NA            NA                NA          NA 2007  Adelie 
+##  7             NA            NA                NA          NA 2007  Adelie 
+##  8             NA            NA                NA          NA 2007  Adelie 
+##  9             NA            NA                NA          NA 2007  Adelie 
+## 10             NA            NA                NA          NA 2007  Adelie 
+## # ... with 334 more rows, and 2 more variables: island &lt;fct&gt;, sex &lt;fct&gt;
+```
+]
+
+---
+
+.larger[Debugging Tricks] 
+
+- `print()` 
+
+- `browser()`
+
+-  `debugonce()`
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

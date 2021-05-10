@@ -29,6 +29,7 @@ library(xaringan)
 library(tidyverse)
 library(tidyverse)
 library(flair)
+library(palmerpenguins)
 
 style_duo_accent(
   primary_color      = "#0F4C81", # pantone classic blue
@@ -38,12 +39,24 @@ style_duo_accent(
   code_font_google   = google_font("Source Code Pro"),
   text_font_size     = "30px"
 )
+
+
+penguins <- penguins %>% 
+  select(bill_length_mm:body_mass_g, year, everything()) %>% 
+  mutate(year = as.factor(year))
 ```
 
----
-# Conditional returns
 
-Maybe you want to return different results in different situations
+class: center, inverse
+
+.larger[Conditional returns]
+
+
+</br>
+
+.bitlarger[**Value returned _depends_ on the input.**]
+
+---
 
 ```{r even, include = FALSE}
 even_or_odd <- function(x) {
@@ -58,7 +71,6 @@ even_or_odd <- function(x) {
     
   }
   
-  
 }
 
 ```
@@ -66,112 +78,25 @@ even_or_odd <- function(x) {
 ```{r, echo = FALSE}
 decorate("even") %>%
   flair("x %% 2 == 0") %>%
-  flair("It's even!", background = "green") %>%
+  flair("It's even!", background = "blue") %>%
   flair("It's odd.", background = "pink")
 ```
 
 ---
-# Errors
 
-```{r}
-add_something <- function(x, something = 2) {
-  
-  if (!is.numeric(something)) {
-    
-    stop("Please enter a number!")
-    
-  }
-  
-  x + something
-  
-}
-```
-
----
-# Errors
-```{r, error = TRUE}
-add_something(5, something = "bob")
-```
+class: inverse, center
+.huge-text[`print()` versus `return()`]
 
 ---
 
-class: center, middle
+<center>
 
-# Debugging
+.larger[`return()`]
 
----
+</center> 
+</br>
 
-```{r}
-fibonacci <- function(start, len) {
-  
-  fib <- vector()
-  
-  for (i in 1:len) {
-    
-    fib[i + 1] <- fib[i] + fib[i - 1]
-    
-  }
-  
-  return(fib)
-  
-  
-}
-```
-
----
-# Debugging tricks
-
-## `print()`
-
-## `browser()`
-
-## `debugonce()`
-
-(Try it.)
-
-
----
-
-# Testing
-
-We Only Need to Change the Code in One Place: `standardize()`
-
-```{r testing, include = FALSE, eval = FALSE}
-standardize <- function(data) {
-  deviations <- data - mean(data, na.rm = TRUE)
-  newdata <- deviations / sd(data, na.rm = TRUE)
-  return(newdata)
-}
-
-testdata <- c(2, 4, 3, 9, NA, 4, 6)
-standardize(testdata)
-```
-
-```{r, echo = FALSE}
-decorate("testing") %>%
-  flair("na.rm = TRUE")
-```
-
----
-```{r iris2, include = FALSE}
-myiris <- iris
-
-myiris$Sepal.Length <- (myiris$Sepal.Length - mean(myiris$Sepal.Length, na.rm = TRUE)) / sd(myiris$Sepal.Length, na.rm = TRUE)
-myiris$Sepal.Width <- (myiris$Sepal.Width - mean(myiris$Sepal.Length, na.rm = TRUE)) / sd(myiris$Sepal.Width, na.rm = TRUE)
-myiris$Petal.Length <- (myiris$Petal.Length - mean(myiris$Petal.Length, na.rm = TRUE)) / sd(myiris$Petal.Length, na.rm = TRUE)
-myiris$Petal.Width <- (myiris$Petal.Width - mean(myiris$Petal.Width, na.rm = TRUE)) / sd(myiris$Petal.Width, na.rm = TRUE)
-```
-
-```{r, echo = FALSE}
-decorate("iris2") %>%
-  flair("na.rm = TRUE")
-```
-
----
-
-# Print versus return
-
-
+.pull-left[
 ```{r}
 even_or_odd <- function(x) {
   
@@ -187,36 +112,155 @@ even_or_odd <- function(x) {
   
   
 }
+```
+]
 
-bob <- even_or_odd(7)
-
-bob
+.pull-right[
+```{r}
+even_or_odd(7)
 
 ```
+]
 
 ---
-# Print versus return
 
+<center>
 
+.larger[`print()`]
+
+</center> 
+</br>
+
+.pull-left[
 ```{r}
 even_or_odd <- function(x) {
   
   if (x %% 2 == 0) {
     
-    cat("It's even!")
+    print("It's even!")
     
   } else {
     
-    cat("It's odd.")
+    print("It's odd.")
+    
+  }
+  
+}
+```
+]
+
+.pull-right[
+```{r}
+
+even_or_odd(7)
+
+```
+]
+
+
+---
+
+<center>
+
+.bitlarger[`print()` *and* `return()`]
+
+</center> 
+</br>
+
+.pull-left[
+```{r}
+even_or_odd <- function(x) {
+  
+  if (x %% 2 == 0) {
+    
+    print("It's even!")
+    
+  } else {
+    
+    print("It's odd.")
     
   }
   
   return(x)
   
+}
+```
+]
+
+.pull-right[
+```{r}
+my_num <- even_or_odd(7)
+my_num
+```
+]
+
+
+---
+
+class: inverse, center, middle
+
+.huge-text[Returning Errors!]
+
+---
+
+.larger[Conditional Returns Continued...]
+.pull-left[
+```{r}
+add_something <- function(x, something = 2) {
+  
+  if (!is.numeric(something)) {
+    
+    stop("Please enter a number!")
+    
+  }
+  
+  x + something
   
 }
-
-bob <- even_or_odd(7)
-bob
-
 ```
+]
+
+.pull-right[
+```{r, error = TRUE}
+add_something(5, something = "bob")
+```
+]
+
+---
+
+class: inverse, center, middle
+
+.huge-text[Debugging]
+
+---
+
+.bitlarger[**Unexpected Output**]
+
+.pull-left[
+```{r}
+standardize <- function(data) {
+  deviations <- data - mean(data, na.rm = TRUE)
+  newdata <- deviations / sd(data, na.rm = TRUE)
+  return(newdata)
+}
+```
+]
+
+.pull-right[
+```{r, error = TRUE}
+penguins %>% 
+  mutate_at(vars(bill_length_mm:body_mass_g), 
+            standardize)
+```
+]
+
+---
+
+.larger[Debugging Tricks] 
+
+- `print()` 
+
+- `browser()`
+
+-  `debugonce()`
+
