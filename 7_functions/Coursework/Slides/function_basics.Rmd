@@ -144,11 +144,15 @@ decorate("my_fun") %>% flair("x")
 
 
 ```{r add, include = FALSE}
+
+
 add_something <- function(x, something = 2) {
   
-  x + something
+  return(x + something)
   
 }
+
+
 ```
 
 ```{r, echo = FALSE}

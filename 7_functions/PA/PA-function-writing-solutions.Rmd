@@ -32,13 +32,10 @@ Test it by running the code below the function.
 
 ```{r}
 divide_and_round <- function(nums){
-  
   my_min <- min(nums, na.rm = TRUE)
   divided <- round( nums / my_min)
   return(divided)
-  
 }
-
 
 test <- c(5:10, NA)
 
@@ -57,7 +54,6 @@ by 9 or 12, and returns `FALSE` otherwise.
 
 ```{r}
 no_nines_or_twelves <- function(nums){
-
   check <- !(nums %% 9 == 0 | nums %% 12 == 0)
   return(check)
 }
@@ -73,9 +69,9 @@ no_nines_or_twelves(test)
 __Question 3__ 
 
 Write a function called `every_other()` which takes a vector and returns every
-other value in the vector. **Do not** use a `for()` loop to do this! Accomplish
-this with the `seq_along()` function, bracket subsetting (`[]`), and modulus 
-arithmetic (`%%`). 
+other value in the vector. 
+
+**Do not** use a `for()` loop to do this! Accomplish this with the `seq_along()` function, bracket subsetting (`[]`), and modulus arithmetic (`%%`). 
 
 Include an optional argument called "start" which lets you choose where to start skipping; that is, if `start = 1`, we return the 1st value, 3rd, 5th, etc. and
 if `start = 2`, we return the 2nd, 4th, 6th, etc. 
@@ -106,7 +102,7 @@ every_other(test, start = 2)
 __Question 4__ 
 
 Write a function called `shorten()` which takes a vector, drops the values 
-**after** the cumulative sum is greater than a provided number, and returns the
+**before** the cumulative sum is greater than a provided number, and returns the
 remaining values.
 
 **Do not** use a `while()` loop to do this! Accomplish this with the ``cumsum()` function and bracketing.
@@ -117,7 +113,7 @@ Be sure to test your function!
 shorten <- function(x, sum){
   vec_sum <- cumsum(x) 
   return(
-    x[vec_sum >= sum]
+    x[vec_sum > sum]
   )
 }
 

@@ -102,7 +102,7 @@ every_other(test, start = 2)
 __Question 4__ 
 
 Write a function called `shorten()` which takes a vector, drops the values 
-**after** the cumulative sum is greater than a provided number, and returns the
+**before** the cumulative sum is greater than a provided number, and returns the
 remaining values.
 
 **Do not** use a `while()` loop to do this! Accomplish this with the `cumsum()`

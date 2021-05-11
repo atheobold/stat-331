@@ -1,5 +1,7 @@
 ---
-title: "Why write a function `r emo::ji('question')`"
+title: "Functions `r emo::ji('party')`"
+date: "May 11, 2021"
+author: "Stat 331"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -39,50 +41,51 @@ style_duo_accent(
 )
 ```
 
+class: inverse, center, middle
 
-<!-- # Your turn -->
-
-<!-- Write a function called `times_seven()` which takes a single argument and multiplies by 7.  -->
-
-<!-- -- -->
-<!-- *Sneak Preview* What happens when you run this? -->
-
-<!-- ```{r, eval = FALSE} -->
-<!-- my_vec <- c(7, 8, 9) -->
-
-<!-- times_seven(my_vec) -->
-<!-- ``` -->
-
-
-<!-- What about this? -->
-
-<!-- ```{r, eval = FALSE} -->
-<!-- times_seven(mtcars) -->
-<!-- ``` -->
-
+.larger[Becoming R Developers!]
 
 ---
 
-# BUT WAIT
+.larger[Why write functions?]
 
-Perhaps you observed that we haven't *completely* eliminated copy-pasting!
+- Less Error Prone
+- Don't Repeat Yourself
+- Efficient
 
-```{r}
-stdize_column <- function(dat, variable) {
-  dat[[variable]] <- standardize(dat[[variable]])
-  return(dat)
+---
+
+.larger[Function Components]
+
+![](images/function.jpg)
+
+---
+
+```{r, echo = FALSE}
+times_seven <- function(x){
+  stopifnot(is.numeric(x))
+  
+  if(x == 7){
+    print("I love sevens!")
+  }
+  return(x*7)
 }
-
-iris <- iris %>%
-  stdize_column("Petal.Length") %>%
-  stdize_column("Petal.Width") %>%
-  stdize_column("Sepal.Length") %>%
-  stdize_column("Sepal.Width")
-
 ```
 
---
+*Sneak Preview* What happens when you run this?
 
-Stay tuned...
+```{r, eval = FALSE}
+my_vec <- c(7, 8, 9)
+
+times_seven(my_vec)
+```
+
+
+What about this?
+
+```{r, eval = FALSE}
+times_seven(mtcars)
+```
+
 
 ---
