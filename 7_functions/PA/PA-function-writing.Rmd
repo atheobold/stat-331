@@ -48,14 +48,14 @@ divide_and_round(test)
 __Question 2__ 
 
 Write a function called `no_nines_or_twelves()`, which takes a number or
-vector of numbers and returns `TRUE` if the number(s) is(are) **NOT** divisible
+vector of numbers and returns `TRUE` if the number(s) **are not** divisible
 by 9 or 12, and returns `FALSE` otherwise.
 
 
 ```{r}
 no_nines_or_twelves <- function(nums){
   
-  check <- !(nums %% 9 == 0 | nums %% 12 == 0)
+  check <- !(nums %% 9 == 0)
   
 }
 
@@ -69,12 +69,14 @@ no_nines_or_twelves(test)
 __Question 3__ 
 
 Write a function called `every_other()` which takes a vector and returns every
-other value in the vector. **Do not** use a `for()` loop to do this! Accomplish
+other value in the vector. 
+
+**Do not** use a `for()` loop to do this! Accomplish
 this with the `seq_along()` function, bracket subsetting (`[]`), and modulus 
 arithmetic (`%%`). 
 
-Include an optional argument called "start" which lets you choose where to start skipping; that is, if `start = 1`, we return the 1st value, 3rd, 5th, etc. and
-if `start = 2`, we return the 2nd, 4th, 6th, etc. 
+Include an optional argument called "start" which lets you choose where to start skipping; that is, if `start = 1`, the function returns the 1st, 3rd, 5th, etc.
+values and if `start = 2`, the function returns the 2nd, 4th, 6th, etc. values.  
 
 ```{r}
 every_other <- function(vec){
@@ -83,9 +85,7 @@ every_other <- function(vec){
 
     
   } else if(start == 1) {
-    
-    
-    
+
     
   }
   
@@ -101,12 +101,14 @@ every_other(test, start = 2)
 
 __Question 4__ 
 
-Write a function called `shorten()` which takes a vector and keeps dropping the first value, until the sum of the vector is less than 350  Return the remaining values.
+Write a function called `shorten()` which takes a vector, drops the values 
+**after** the cumulative sum is greater than a provided number, and returns the
+remaining values.
 
-*Hint: You probably want to either use the `cumsum()` function, or write a `while()` loop.*
+**Do not** use a `while()` loop to do this! Accomplish this with the `cumsum()`
+function and bracketing.
 
-Be sure to test your function.
-
+Be sure to test your function!
 
 ```{r}
 shorten <- function(){
@@ -120,11 +122,20 @@ shorten <- function(){
 
 __Question 5__ 
 
-Once you have written your four functions correctly, copy-pase and run the following code:
+Once you have written your four functions correctly, copy-paste and run the following code:
 
 ```{r}
 
-my_vec <- c(39, 1.87, 48, 11, 8, 45, 21, 5, 12, 33, 9, 11, 108, 4, 18, 5, 16, 17, 8, 48, 27, 24, 4, 22, 12, 27, 23, 46, 42, 35, 15, 34, 36, 26, 18, 10, 18.21, 72.04, 36.9, 41.81, 29, 89.75, 34.03, 20.18, 48.74, 15.76, 31.86, 83.6, 43.55, 39.99, 23.55, 8.54, 24.71, 22.02, 9.71, 62.14, 35.46, 16.61, 15.66, 21.29, 30.52, 201.07, 45.81, 7.85, 30.13, 34.14, 22.62, 10.2, 6.02, 30.12, 10.64, 31.72, 24.57, 14.43, 43.37, 89.93, 44.72, 51.32, 13.62, 45.56, 22.96, 7.05, 29.99, 41.38, 26.59, 23.04, 19.82, 50.73, 39.56, 43.79, 30.22, 85.85, 5.78, 78.85, 29.52, 66.27, 44.06, 27.28, 24.43, 64.32, 3.35, 67.45, 46.72, 48.44, 48.65, 33.3, 40.28, 19.04)
+my_vec <- c(39, 1.87, 48, 11, 8, 45, 21, 5, 12, 33, 9, 11, 108, 4, 18, 5, 16,
+            17, 8, 48, 27, 24, 4, 22, 12, 27, 23, 46, 42, 35, 15, 34, 36, 26,
+            18, 10, 18.21, 72.04, 36.9, 41.81, 29, 89.75, 34.03, 20.18, 48.74,
+            15.76, 31.86, 83.6, 43.55, 39.99, 23.55, 8.54, 24.71, 22.02, 9.71,
+            62.14, 35.46, 16.61, 15.66, 21.29, 30.52, 201.07, 45.81, 7.85,
+            30.13, 34.14, 22.62, 10.2, 6.02, 30.12, 10.64, 31.72, 24.57, 14.43,
+            43.37, 89.93, 44.72, 51.32, 13.62, 45.56, 22.96, 7.05, 29.99, 41.38,
+            26.59, 23.04, 19.82, 50.73, 39.56, 43.79, 30.22, 85.85, 5.78, 78.85,
+            29.52, 66.27, 44.06, 27.28, 24.43, 64.32, 3.35, 67.45, 46.72, 48.44,
+            48.65, 33.3, 40.28, 19.04)
 
 my_vec <- every_other(my_vec, start = 2)
 my_vec <- divide_and_round(my_vec)

@@ -171,56 +171,65 @@ code span.ot { color: #007020; }
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>divide_and_round &lt;-<span class="st"> </span><span class="cf">function</span>(nums){</span>
 <span id="cb1-2"><a href="#cb1-2"></a>  </span>
 <span id="cb1-3"><a href="#cb1-3"></a>  my_min &lt;-<span class="st"> </span><span class="kw">min</span>(nums, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb1-4"><a href="#cb1-4"></a>  divided &lt;-<span class="st"> </span>nums<span class="op">/</span>my_min</span>
-<span id="cb1-5"><a href="#cb1-5"></a>  </span>
-<span id="cb1-6"><a href="#cb1-6"></a>}</span>
-<span id="cb1-7"><a href="#cb1-7"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a>  divided &lt;-<span class="st"> </span><span class="kw">round</span>( nums <span class="op">/</span><span class="st"> </span>my_min)</span>
+<span id="cb1-5"><a href="#cb1-5"></a>  <span class="kw">return</span>(divided)</span>
+<span id="cb1-6"><a href="#cb1-6"></a>  </span>
+<span id="cb1-7"><a href="#cb1-7"></a>}</span>
 <span id="cb1-8"><a href="#cb1-8"></a></span>
-<span id="cb1-9"><a href="#cb1-9"></a>test &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span><span class="op">:</span><span class="dv">10</span>, <span class="ot">NA</span>)</span>
-<span id="cb1-10"><a href="#cb1-10"></a></span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="kw">divide_and_round</span>(test)</span></code></pre></div>
+<span id="cb1-9"><a href="#cb1-9"></a></span>
+<span id="cb1-10"><a href="#cb1-10"></a>test &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span><span class="op">:</span><span class="dv">10</span>, <span class="ot">NA</span>)</span>
+<span id="cb1-11"><a href="#cb1-11"></a></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="kw">divide_and_round</span>(test)</span></code></pre></div>
 <hr />
 <p><strong>Question 2</strong></p>
-<p>Write a function called <code>no_nines_or_twelves()</code>, which takes a number or vector of numbers and returns <code>TRUE</code> if the number(s) <strong>are not</strong> divisible by 9 or 12, and returns <code>FALSE</code> otherwise.</p>
+<p>Write a function called <code>no_nines_or_twelves()</code>, which takes a number or vector of numbers and returns <code>TRUE</code> if the numbers are <strong>NOT</strong> divisible by 9 or 12, and returns <code>FALSE</code> otherwise.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>no_nines_or_twelves &lt;-<span class="st"> </span><span class="cf">function</span>(nums){</span>
-<span id="cb2-2"><a href="#cb2-2"></a>  </span>
-<span id="cb2-3"><a href="#cb2-3"></a>  check &lt;-<span class="st"> </span><span class="op">!</span>(nums <span class="op">%%</span><span class="st"> </span><span class="dv">9</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>)</span>
-<span id="cb2-4"><a href="#cb2-4"></a>  </span>
-<span id="cb2-5"><a href="#cb2-5"></a>}</span>
-<span id="cb2-6"><a href="#cb2-6"></a></span>
-<span id="cb2-7"><a href="#cb2-7"></a>test &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span><span class="op">:</span><span class="dv">12</span><span class="op">*</span><span class="dv">5</span>, <span class="ot">NA</span>)</span>
+<span id="cb2-2"><a href="#cb2-2"></a></span>
+<span id="cb2-3"><a href="#cb2-3"></a>  check &lt;-<span class="st"> </span><span class="kw">if_else</span>(<span class="op">!</span>(nums <span class="op">%%</span><span class="st"> </span><span class="dv">9</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span> <span class="op">|</span><span class="st"> </span>nums <span class="op">%%</span><span class="st"> </span><span class="dv">12</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>), </span>
+<span id="cb2-4"><a href="#cb2-4"></a>                   <span class="ot">TRUE</span>, </span>
+<span id="cb2-5"><a href="#cb2-5"></a>                   <span class="ot">FALSE</span>)</span>
+<span id="cb2-6"><a href="#cb2-6"></a>  <span class="kw">return</span>(check)</span>
+<span id="cb2-7"><a href="#cb2-7"></a>}</span>
 <span id="cb2-8"><a href="#cb2-8"></a></span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="kw">no_nines_or_twelves</span>(test)</span></code></pre></div>
+<span id="cb2-9"><a href="#cb2-9"></a>test &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span><span class="op">:</span><span class="dv">12</span><span class="op">*</span><span class="dv">5</span>, <span class="ot">NA</span>)</span>
+<span id="cb2-10"><a href="#cb2-10"></a></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="kw">no_nines_or_twelves</span>(test)</span></code></pre></div>
 <hr />
 <p><strong>Question 3</strong></p>
-<p>Write a function called <code>every_other()</code> which takes a vector and returns every other value in the vector.</p>
-<p><strong>Do not</strong> use a <code>for()</code> loop to do this! Accomplish this with the <code>seq_along()</code> function, bracket subsetting (<code>[]</code>), and modulus arithmetic (<code>%%</code>).</p>
-<p>Include an optional argument called “start” which lets you choose where to start skipping; that is, if <code>start = 1</code>, the function returns the 1st, 3rd, 5th, etc. values and if <code>start = 2</code>, the function returns the 2nd, 4th, 6th, etc. values.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>every_other &lt;-<span class="st"> </span><span class="cf">function</span>(vec){</span>
+<p>Write a function called <code>every_other()</code> which takes a vector and returns every other value in the vector. <strong>Do not</strong> use a <code>for()</code> loop to do this! Accomplish this with the <code>seq_along()</code> function, bracket subsetting (<code>[]</code>), and modulus arithmetic (<code>%%</code>).</p>
+<p>Include an optional argument called “start” which lets you choose where to start skipping; that is, if <code>start = 1</code>, we return the 1st value, 3rd, 5th, etc. and if <code>start = 2</code>, we return the 2nd, 4th, 6th, etc.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>every_other &lt;-<span class="st"> </span><span class="cf">function</span>(vec, <span class="dt">start =</span> <span class="dv">1</span>){</span>
 <span id="cb3-2"><a href="#cb3-2"></a>  </span>
 <span id="cb3-3"><a href="#cb3-3"></a>  <span class="cf">if</span>(start <span class="op">==</span><span class="st"> </span><span class="dv">2</span>){</span>
-<span id="cb3-4"><a href="#cb3-4"></a></span>
-<span id="cb3-5"><a href="#cb3-5"></a>    </span>
-<span id="cb3-6"><a href="#cb3-6"></a>  } <span class="cf">else</span> <span class="cf">if</span>(start <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) {</span>
-<span id="cb3-7"><a href="#cb3-7"></a></span>
-<span id="cb3-8"><a href="#cb3-8"></a>    </span>
-<span id="cb3-9"><a href="#cb3-9"></a>  }</span>
-<span id="cb3-10"><a href="#cb3-10"></a>  </span>
-<span id="cb3-11"><a href="#cb3-11"></a>}</span>
-<span id="cb3-12"><a href="#cb3-12"></a></span>
-<span id="cb3-13"><a href="#cb3-13"></a>test &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</span>
-<span id="cb3-14"><a href="#cb3-14"></a></span>
-<span id="cb3-15"><a href="#cb3-15"></a><span class="kw">every_other</span>(test)</span>
-<span id="cb3-16"><a href="#cb3-16"></a><span class="kw">every_other</span>(test, <span class="dt">start =</span> <span class="dv">2</span>)</span></code></pre></div>
+<span id="cb3-4"><a href="#cb3-4"></a>    <span class="kw">return</span>(</span>
+<span id="cb3-5"><a href="#cb3-5"></a>      vec[(<span class="kw">seq_along</span>(vec) <span class="op">+</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%%</span><span class="st"> </span><span class="dv">2</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>]</span>
+<span id="cb3-6"><a href="#cb3-6"></a>    )</span>
+<span id="cb3-7"><a href="#cb3-7"></a>  } <span class="cf">else</span> <span class="cf">if</span>(start <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) {</span>
+<span id="cb3-8"><a href="#cb3-8"></a>    <span class="kw">return</span>(</span>
+<span id="cb3-9"><a href="#cb3-9"></a>      vec[<span class="kw">seq_along</span>(vec) <span class="op">%%</span><span class="st"> </span><span class="dv">2</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>]</span>
+<span id="cb3-10"><a href="#cb3-10"></a>      ) </span>
+<span id="cb3-11"><a href="#cb3-11"></a>  }</span>
+<span id="cb3-12"><a href="#cb3-12"></a>}</span>
+<span id="cb3-13"><a href="#cb3-13"></a></span>
+<span id="cb3-14"><a href="#cb3-14"></a>test &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</span>
+<span id="cb3-15"><a href="#cb3-15"></a></span>
+<span id="cb3-16"><a href="#cb3-16"></a><span class="kw">every_other</span>(test)</span>
+<span id="cb3-17"><a href="#cb3-17"></a><span class="kw">every_other</span>(test, <span class="dt">start =</span> <span class="dv">2</span>)</span></code></pre></div>
 <hr />
 <p><strong>Question 4</strong></p>
 <p>Write a function called <code>shorten()</code> which takes a vector, drops the values <strong>after</strong> the cumulative sum is greater than a provided number, and returns the remaining values.</p>
-<p><strong>Do not</strong> use a <code>while()</code> loop to do this! Accomplish this with the <code>cumsum()</code> function and bracketing.</p>
+<p><strong>Do not</strong> use a <code>while()</code> loop to do this! Accomplish this with the `<code>cumsum()</code> function and bracketing.</p>
 <p>Be sure to test your function!</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>shorten &lt;-<span class="st"> </span><span class="cf">function</span>(){</span>
-<span id="cb4-2"><a href="#cb4-2"></a></span>
-<span id="cb4-3"><a href="#cb4-3"></a>  </span>
-<span id="cb4-4"><a href="#cb4-4"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>shorten &lt;-<span class="st"> </span><span class="cf">function</span>(x, sum){</span>
+<span id="cb4-2"><a href="#cb4-2"></a>  vec_sum &lt;-<span class="st"> </span><span class="kw">cumsum</span>(x) </span>
+<span id="cb4-3"><a href="#cb4-3"></a>  <span class="kw">return</span>(</span>
+<span id="cb4-4"><a href="#cb4-4"></a>    x[vec_sum <span class="op">&gt;=</span><span class="st"> </span>sum]</span>
+<span id="cb4-5"><a href="#cb4-5"></a>  )</span>
+<span id="cb4-6"><a href="#cb4-6"></a>}</span>
+<span id="cb4-7"><a href="#cb4-7"></a></span>
+<span id="cb4-8"><a href="#cb4-8"></a></span>
+<span id="cb4-9"><a href="#cb4-9"></a>test &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">100</span> </span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="kw">shorten</span>(test, <span class="dv">350</span>)</span></code></pre></div>
 <hr />
 <p><strong>Question 5</strong></p>
 <p>Once you have written your four functions correctly, copy-paste and run the following code:</p>
@@ -238,7 +247,7 @@ code span.ot { color: #007020; }
 <span id="cb5-12"><a href="#cb5-12"></a>my_vec &lt;-<span class="st"> </span><span class="kw">every_other</span>(my_vec, <span class="dt">start =</span> <span class="dv">2</span>)</span>
 <span id="cb5-13"><a href="#cb5-13"></a>my_vec &lt;-<span class="st"> </span><span class="kw">divide_and_round</span>(my_vec)</span>
 <span id="cb5-14"><a href="#cb5-14"></a>my_vec &lt;-<span class="st"> </span><span class="kw">every_other</span>(my_vec, <span class="dt">start =</span> <span class="dv">1</span>)</span>
-<span id="cb5-15"><a href="#cb5-15"></a>my_vec &lt;-<span class="st"> </span><span class="kw">shorten</span>(my_vec)</span>
+<span id="cb5-15"><a href="#cb5-15"></a>my_vec &lt;-<span class="st"> </span><span class="kw">shorten</span>(my_vec, <span class="dv">350</span>)</span>
 <span id="cb5-16"><a href="#cb5-16"></a>my_vec &lt;-<span class="st"> </span>my_vec[<span class="kw">no_nines_or_twelves</span>(my_vec)]</span>
 <span id="cb5-17"><a href="#cb5-17"></a></span>
 <span id="cb5-18"><a href="#cb5-18"></a>my_vec &lt;-<span class="st"> </span><span class="kw">sort</span>(my_vec)</span>

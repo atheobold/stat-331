@@ -9,7 +9,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
 
 library(dplyr)
 ```
@@ -58,9 +58,7 @@ by 9 or 12, and returns `FALSE` otherwise.
 ```{r}
 no_nines_or_twelves <- function(nums){
 
-  check <- if_else(!(nums %% 9 == 0 | nums %% 12 == 0), 
-                   TRUE, 
-                   FALSE)
+  check <- !(nums %% 9 == 0 | nums %% 12 == 0)
   return(check)
 }
 
@@ -107,9 +105,9 @@ every_other(test, start = 2)
 
 __Question 4__ 
 
-Write a function called `shorten()` which takes a vector, drops the values of 
-the vector if the cumulative sum is greater than a provided number, and returns
-the remaining values.
+Write a function called `shorten()` which takes a vector, drops the values 
+**after** the cumulative sum is greater than a provided number, and returns the
+remaining values.
 
 **Do not** use a `while()` loop to do this! Accomplish this with the ``cumsum()` function and bracketing.
 
@@ -119,7 +117,7 @@ Be sure to test your function!
 shorten <- function(x, sum){
   vec_sum <- cumsum(x) 
   return(
-    x[vec_sum <= sum]
+    x[vec_sum >= sum]
   )
 }
 
@@ -154,9 +152,7 @@ my_vec <- every_other(my_vec, start = 1)
 my_vec <- shorten(my_vec, 350)
 my_vec <- my_vec[no_nines_or_twelves(my_vec)]
 
-my_vec <- sort(
-  unique(my_vec)
-)
+my_vec <- sort(my_vec)
 
 my_vec
 
