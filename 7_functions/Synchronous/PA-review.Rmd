@@ -20,9 +20,7 @@ output:
 
 
 ```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.width = 8, fig.height = 6}
-knitr::opts_chunk$set(message = FALSE, 
-                      warning = FALSE, 
-                      fig.align = "center")
+knitr::opts_chunk$set(fig.align = "center")
 
 options(htmltools.dir.version = FALSE)
 
@@ -61,6 +59,8 @@ class: inverse, center, middle
 
 ---
 
+.larger[`times_seven()`]
+
 ```{r, echo = FALSE}
 times_seven <- function(x){
   stopifnot(is.numeric(x))
@@ -70,9 +70,14 @@ times_seven <- function(x){
   }
   return(x*7)
 }
+
+my_vec <- c(7, 8, 9)
+
 ```
 
-*Sneak Preview* What happens when you run this?
+<center>
+**What happens when you run this?**
+</center>
 
 ```{r, eval = FALSE}
 my_vec <- c(7, 8, 9)
@@ -80,20 +85,93 @@ my_vec <- c(7, 8, 9)
 times_seven(my_vec)
 ```
 
+--
+
+```{r}
+times_seven(my_vec)
+```
+
 ---
 
 .larger[Vectorized Conditions]
 
+- `if()` and `elseif()` take single inputs
+
+--
+
+- `if_else()` and `ifelse()` can take vector inputs
 
 ---
 
-if_else() option 
+.larger[`if_else()`]
+
+- Lives in the **dplyr** package 
+
+--
+
+- Requires `TRUE` and `FALSE` to be the **same** data type
+
+--
+
+```{r, error = TRUE}
+if_else(my_vec == 9, NA, my_vec)
+```
+
+--
+
+```{r}
+if_else(my_vec == 9, NA_real_, my_vec)
+```
 
 ---
 
-case_when() option
+.larger[Multiple Checks]
 
-- components need to be mutually exclusive!
+```{r}
+pos_neg_zero <- function(x){
+  stopifnot(is.numeric(x))
+  
+  if(x > 0){
+    return("Greater than 0!")
+  } else if (x < 0){
+    return("Less than 0!")
+  } else {
+    return("Equal to 0!")
+      }
+}
+```
+
+--
+
+```{r}
+pos_neg_zero(3)
+```
+
 
 ---
 
+.larger[Vectorized Multiple Checks]
+
+![](images/case_when.jpeg)
+
+```{r, echo = FALSE}
+pos_neg_zero <- function(x){
+  stopifnot(is.numeric(x))
+  
+  state <- case_when(x > 0 ~ "Greater than 0!", 
+                     
+                     x < 0 ~ "Less than 0!", 
+                     TRUE ~ "Equal to 0!")
+  return(state)
+}
+```
+
+---
+
+.larger[Try it out!]
+
+--
+
+```{r}
+pos_neg_zero(c(0, 1, -1))
+```

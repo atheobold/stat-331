@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Functions 🎈</title>
+    <title>Functions 🎉</title>
     <meta charset="utf-8" />
     <meta name="author" content="Stat 331" />
     <meta name="date" content="2021-05-11" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="slide-style.css" type="text/css" />
   </head>
@@ -12,7 +13,7 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Functions 🎈
+# Functions 🎉
 ### Stat 331
 ### May 11, 2021
 
@@ -30,9 +31,9 @@ class: inverse, center, middle
 
 .larger[Why write functions?]
 
-- Efficient
-- Don't Repeat Yourself
 - Less Error Prone
+- Don't Repeat Yourself
+- Efficient
 
 ---
 
@@ -42,7 +43,13 @@ class: inverse, center, middle
 
 ---
 
-*Sneak Preview* What happens when you run this?
+.larger[`times_seven()`]
+
+
+
+&lt;center&gt;
+**What happens when you run this?**
+&lt;/center&gt;
 
 
 ```r
@@ -51,16 +58,121 @@ my_vec &lt;- c(7, 8, 9)
 times_seven(my_vec)
 ```
 
-
-What about this?
+--
 
 
 ```r
-times_seven(mtcars)
+times_seven(my_vec)
+```
+
+```
+## Warning in if (x == 7) {: the condition has length &gt; 1 and only the first
+## element will be used
+```
+
+```
+## [1] "I love sevens!"
+```
+
+```
+## [1] 49 56 63
+```
+
+---
+
+.larger[Vectorized Conditions]
+
+- `if()` and `elseif()` take single inputs
+
+--
+
+- `if_else()` and `ifelse()` can take vector inputs
+
+---
+
+.larger[`if_else()`]
+
+- Lives in the **dplyr** package 
+
+--
+
+- Requires `TRUE` and `FALSE` to be the **same** data type
+
+--
+
+
+```r
+if_else(my_vec == 9, NA, my_vec)
+```
+
+```
+## Error: `false` must be a logical vector, not a double vector.
+```
+
+--
+
+
+```r
+if_else(my_vec == 9, NA_real_, my_vec)
+```
+
+```
+## [1]  7  8 NA
+```
+
+---
+
+.larger[Multiple Checks]
+
+
+```r
+pos_neg_zero &lt;- function(x){
+  stopifnot(is.numeric(x))
+  
+  if(x &gt; 0){
+    return("Greater than 0!")
+  } else if (x &lt; 0){
+    return("Less than 0!")
+  } else {
+    return("Equal to 0!")
+      }
+}
+```
+
+--
+
+
+```r
+pos_neg_zero(3)
+```
+
+```
+## [1] "Greater than 0!"
 ```
 
 
 ---
+
+.larger[Vectorized Multiple Checks]
+
+![](images/case_when.jpeg)
+
+
+
+---
+
+.larger[Try it out!]
+
+--
+
+
+```r
+pos_neg_zero(c(0, 1, -1))
+```
+
+```
+## [1] "Equal to 0!"     "Greater than 0!" "Less than 0!"
+```
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
