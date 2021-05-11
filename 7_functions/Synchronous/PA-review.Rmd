@@ -80,12 +80,20 @@ my_vec <- c(7, 8, 9)
 times_seven(my_vec)
 ```
 
+---
 
-What about this?
-
-```{r, eval = FALSE}
-times_seven(mtcars)
-```
+.larger[Vectorized Conditions]
 
 
 ---
+
+if_else() option 
+
+---
+
+case_when() option
+
+- components need to be mutually exclusive!
+
+---
+
