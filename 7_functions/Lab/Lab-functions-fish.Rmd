@@ -261,4 +261,27 @@ fish <- fish %>%
 
 ## Challenge: Incorporating a Variable
 
-**Coming Soon** 
+Suppose you have other datasets that we would like to use your `rescale()`
+function on. However, you would like a more flexible version of 
+your `rescale()` function. Ideally, you would like a function that takes a
+dataframe and a variable name as inputs and returns a dataframe where the
+variable has been rescaled. 
+
+Explore creating a `rescale_column()` function that does just that. The function 
+will need to accept two arguments, (1) a dataframe, and (2) a variable name. 
+The body of the function should call the original `rescale()` function you 
+wrote previously. 
+
+*Hint:* Watch the video on function arguments to learn about the difference 
+between quoted variable names and unquoted variable names ("tidy evaluation").  
+
+```{r, include = FALSE}
+rescale_column <- function(df, variable){
+  
+  new_df <- df %>% 
+    mutate_at(variable, rescale) 
+  return(new_df)
+}
+```
+
+
