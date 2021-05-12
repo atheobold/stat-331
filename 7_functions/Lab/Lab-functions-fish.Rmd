@@ -1,0 +1,264 @@
+---
+title: "Lab 7: Functions and Fish"
+author: ""
+output:
+  prettydoc::html_pretty:
+    theme: tactile
+    highlight: github
+    css: style.css
+---
+
+The goal of this lab is learn more about exploring missing data and to teach you
+to write modular code. 
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(fig.width=12, 
+                      fig.height=8, 
+                      fig.path='Figs/',
+                      echo=TRUE, 
+                      warning=FALSE, 
+                      message=FALSE,
+                      echo=FALSE)
+
+```
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(gridExtra)
+
+fish <- read.csv(here::here("7_functions", "Lab", "BlackfootFish.csv"))
+```
+
+## The Data
+
+This lab's dataset concerns mark-recapture data on fish from the Blackfoot River, 
+outside of Helena, Montana. 
+
+![](images/blackfoot_river.jpg)
+
+Mark-recapture is a common method used by Ecologists to estimate an animal
+population's size, when it is impossible to conduct a census (count every 
+animal). This method works by "tagging" animals with a tracking device, so 
+scientists can track their movement and / or presence. 
+
+<div class="row">
+  <div class="column">
+```{r, eval = TRUE, echo = FALSE}
+knitr::include_graphics("images/grizzly.jpg")
+```
+  </div>
+  <div class="column">
+```{r, eval = TRUE, echo = FALSE}
+knitr::include_graphics("images/condor.jpg")
+```
+  </div>
+  <div class="column">
+```{r, eval = TRUE, echo = FALSE}
+knitr::include_graphics("images/fish.PNG")
+```
+  </div>
+</div>
+
+
+You may download the `BlackfootFish.csv` dataset on Canvas.
+
+## Part One: Summaries and Plots
+## (Midterm Review)
+
+### Task 1 
+
+The measurements of each fish captured were taken by a Biologist on a raft. 
+This lack of "laboratory setting" opens the door to the possibility of
+measurement errors. 
+
+- How many observations have missing values? 
+
+- What variable(s) have missing values present? 
+
+
+### Task 2
+
+Unfortunately, these missing values are not for only one `year`, `trip`, or
+`section` of river. 
+
+Create a thoughtful visualization exploring the frequency of missing values
+across the different years, sections, and trips. 
+
+```{r, include = FALSE}
+years <- fish %>% 
+  distinct(year)
+
+fish %>% 
+  filter(is.na(weight)) %>% 
+  group_by(year, section, trip) %>% 
+  count(is.na(weight)) %>% 
+  mutate(trip = as.factor(trip)) %>% 
+  ggplot(aes(x = year, y = n, fill = trip)) + 
+  geom_col() + 
+  facet_wrap(vars(section)) + 
+  labs(x = "Year of Sample", 
+       y = "Number of Missing Fish Weights", 
+       fill = "Trip Number") 
+
+```
+
+
+### Task 3
+
+Create a thoughtful visualization exploring how the number of fish captured 
+differed each year, for each section of river. 
+
+
+### Task 4
+
+Create a table displaying the mean `length` and `weight` of the fish caught over
+the different sampling years. The table should have:
+
+- different values of `year` as (separate) columns
+- the mean `length` and mean `weight` as (separate) rows 
+
+```{r, include = FALSE}
+fish %>% 
+  group_by(year) %>% 
+  summarize(mean_length = mean(length, na.rm = TRUE), 
+            mean_weight = mean(weight, na.rm = TRUE)) %>% 
+  pivot_longer(cols = c(`mean_length`, `mean_weight`), 
+               names_to = "measurement", 
+               values_to = "value") %>% 
+  pivot_wider(names_from = year, 
+              values_from = value)
+```
+
+
+</br> 
+
+## Part Two:  Adjust the Data (Function Writing)
+
+If I wanted to rescale every quantitative variable in my dataset so
+that the variables have values between 0 and 1. I could use the following
+formula:  
+
+</br>
+
+$$y_{scaled} = \frac{y_i - min\{y_1, y_2,..., y_n\}}{max\{y_1, y_2,..., y_n\} 
+- min\{y_1, y_2,..., y_n\}}$$
+
+</br>
+
+The following `R` code would carry out this rescaling procedure for the `length`
+and `weight` columns of the data:  
+
+\vspace{0.25cm}
+
+```{r, echo = TRUE, eval = FALSE}
+BlackfootFish$length <- (BlackfootFish$length - min(BlackfootFish$length, na.rm = TRUE)) /
+  (max(BlackfootFish$length, na.rm = TRUE) - min(BlackfootFish$length, na.rm = TRUE))
+
+BlackfootFish$weight <- (BlackfootFish$weight - min(BlackfootFish$weight, na.rm = TRUE)) /
+  (max(BlackfootFish$weight, na.rm = TRUE) - min(BlackfootFish$length, na.rm = TRUE))
+```  
+
+This process of duplicating an action multiple times makes it difficult to
+understand the intent of the process. Additionally, it makes it very difficult
+to spot the mistakes. _Did you spot the mistake in the weight conversion?_ 
+
+Often you will find yourself in the position of needing to find a function that 
+performs a specific task, but you do not know of a function or a library that 
+would help you. You could spend time Googling for a solution, but in the amount 
+of time it takes you to find something you could have already written your own 
+function!  
+
+
+### Task 1
+
+Let's transform the repeated process above into a `rescale()` function.  
+
+- The function should take a single vector as its argument.
+
+```{r, echo = FALSE}
+rescale <- function(x){
+  rng <- range(x, na.rm = TRUE)
+  scaled <-  (x - rng[1]) / (rng[2] - rng[1])
+  return(scaled)
+}
+```
+
+
+### Task 2
+
+Now, let's incorporate some checks into your function! Modify your previous code
+to create the following checks: 
+
+- the function should stop if the input is not numeric
+- the function should stop if the length of the vector is not greater than 1 
+
+```{r, echo = FALSE}
+rescale <- function(x){
+  stopifnot(is.numeric(x), 
+            length(x) > 1)
+  
+  rng <- range(x, na.rm = TRUE)
+  scaled <-  (x - rng[1]) / (rng[2] - rng[1])
+  return(scaled)
+}
+```
+
+
+### Task 3
+
+Test your function on a simple vector. 
+
+```{r, eval = FALSE, include = TRUE}
+
+x <- c(1:25, NA)
+
+rescale(x)
+
+```
+
+### Task 4
+
+Next, let's test the function on the `length` column of the `BlackfootFish`
+dataset.
+
+- Make side-by-side plots of the original values of `length` and the rescaled
+values of `length`. 
+
+*Hint:* The **gridExtra** package has a `grid.arrange()` function that allows 
+for you to arrange multiple `ggplot()` objects into rows and columns. Or, you 
+can play around with the `fig.show` and `out.width` options of your code chunk (<https://bookdown.org/yihui/rmarkdown-cookbook/figures-side.html>). 
+
+```{r, include = FALSE}
+original <- fish %>% 
+  ggplot(aes(x = length)) + 
+  geom_histogram(binwidth = 45)
+
+scaled <- fish %>% 
+  mutate(length_scaled = rescale(length)) %>%  
+  ggplot(aes(x = length_scaled)) + 
+  geom_histogram(binwidth = .04)
+
+
+grid.arrange(original, scaled, nrow = 1)
+
+```
+        
+### Task 4 
+
+Alright, now that we feel good about our function, let's put it to work. Use 
+your `rescale()` function to rescale **both** the `length` and `weight` 
+columns. 
+
+**I expect that you only call the `rescale()` function _one_ time!**  
+
+```{r}
+fish <- fish %>% 
+  mutate_at(vars(length:weight), 
+            rescale)
+```
+
+</br> 
+
+## Challenge: Incorporating a Variable
+
+**Coming Soon** 
