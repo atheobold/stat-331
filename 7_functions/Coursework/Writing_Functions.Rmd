@@ -119,6 +119,18 @@ times_seven <- function(x){
 
 ```
 
+```{r, include = FALSE}
+times_seven <- function(x){
+  stopifnot(is.numeric(x))
+  
+  if(x == 7){
+    print("I love sevens!")
+  }
+  return(x*7)
+}
+
+```
+
 ---
 
 `r emo::ji("check")` **Check-in: Predicting Function Behavior** 

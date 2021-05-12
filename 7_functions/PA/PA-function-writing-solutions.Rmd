@@ -84,11 +84,11 @@ every_other <- function(vec, start = 1){
   
   if(start == 2){
     return(
-      vec[(seq_along(vec) + 1) %% 2 > 0]
+      vec[seq_along(vec) %% 2 == 0]
     )
   } else if(start == 1) {
     return(
-      vec[seq_along(vec) %% 2 > 0]
+      vec[seq_along(vec) %% 2 == 1]
       ) 
   }
 }
