@@ -17,8 +17,7 @@ knitr::opts_chunk$set(fig.width=12,
                       fig.path='Figs/',
                       echo=TRUE, 
                       warning=FALSE, 
-                      message=FALSE,
-                      echo=FALSE)
+                      message=FALSE)
 
 ```
 
@@ -84,10 +83,7 @@ Unfortunately, these missing values are not for only one `year`, `trip`, or
 Create a thoughtful visualization exploring the frequency of missing values
 across the different years, sections, and trips. 
 
-```{r, include = FALSE}
-years <- fish %>% 
-  distinct(year)
-
+```{r}
 fish %>% 
   filter(is.na(weight)) %>% 
   group_by(year, section, trip) %>% 
@@ -108,20 +104,16 @@ fish %>%
 Create a thoughtful visualization exploring how the number of fish captured 
 differed each year, for each section of river. 
 
-```{r, include = FALSE, fig.show = 'hold', out.width = 50%}
-years <- fish %>% 
-  distinct(year) %>% 
-  pull()
-
+```{r, fig.show = 'hold', out.width = 50%}
 fish %>% 
   group_by(year, section, species) %>% 
   count() %>% 
   mutate(year = as.factor(year)) %>% 
   ggplot(aes(x = year, y = n, fill = species)) + 
-  geom_col(position = "fill") + 
+  geom_col() + 
   facet_wrap(vars(section)) + 
   labs(x = "Year of Sample", 
-       y = "Proportion of Fish Captured", 
+       y = "Number of Fish Captured", 
        fill = "Species of Fish") + 
   theme(axis.text.x = element_text(angle = 60, hjust = 1))
 
@@ -148,7 +140,7 @@ the different sampling years. The table should have:
 - different values of `year` as (separate) columns
 - the mean `length` and mean `weight` as (separate) rows 
 
-```{r, include = FALSE}
+```{r}
 fish %>% 
   group_by(year) %>% 
   summarize(mean_length = mean(length, na.rm = TRUE), 
@@ -206,7 +198,7 @@ Let's transform the repeated process above into a `rescale()` function.
 
 - The function should take a single vector as its argument.
 
-```{r, echo = FALSE}
+```{r}
 rescale <- function(x){
   rng <- range(x, na.rm = TRUE)
   scaled <-  (x - rng[1]) / (rng[2] - rng[1])
@@ -223,7 +215,7 @@ to create the following checks:
 - the function should stop if the input is not numeric
 - the function should stop if the length of the vector is not greater than 1 
 
-```{r, echo = FALSE}
+```{r}
 rescale <- function(x){
   stopifnot(is.numeric(x), 
             length(x) > 1)
@@ -239,7 +231,7 @@ rescale <- function(x){
 
 Test your function on a simple vector. 
 
-```{r, eval = FALSE, include = TRUE}
+```{r}
 
 x <- c(1:25, NA)
 
@@ -259,7 +251,7 @@ values of `length`.
 for you to arrange multiple `ggplot()` objects into rows and columns. Or, you 
 can play around with the `fig.show` and `out.width` options of your code chunk (<https://bookdown.org/yihui/rmarkdown-cookbook/figures-side.html>). 
 
-```{r, include = FALSE}
+```{r}
 original <- fish %>% 
   ggplot(aes(x = length)) + 
   geom_histogram(binwidth = 45)
