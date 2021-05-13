@@ -112,8 +112,6 @@ str(mystery_object)
 
 __What object structure is `mystery_object`?__
 
-*Check all that apply*
-
 (a) An atomic vector
 (b) A vector
 (c) A matrix
