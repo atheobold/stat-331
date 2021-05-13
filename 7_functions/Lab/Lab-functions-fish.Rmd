@@ -85,14 +85,12 @@ Create a thoughtful visualization exploring the frequency of missing values
 across the different years, sections, and trips. 
 
 ```{r, include = FALSE}
-years <- fish %>% 
-  distinct(year)
-
 fish %>% 
   filter(is.na(weight)) %>% 
   group_by(year, section, trip) %>% 
   count(is.na(weight)) %>% 
-  mutate(trip = as.factor(trip)) %>% 
+  mutate(trip = as.factor(trip), 
+         year = as.factor(year)) %>% 
   ggplot(aes(x = year, y = n, fill = trip)) + 
   geom_col() + 
   facet_wrap(vars(section)) + 
@@ -108,10 +106,7 @@ fish %>%
 Create a thoughtful visualization exploring how the number of fish captured 
 differed each year, for each section of river. 
 
-```{r, include = FALSE, fig.show = 'hold', out.width = 50%}
-years <- fish %>% 
-  distinct(year) %>% 
-  pull()
+```{r, include = FALSE, fig.show = 'hold', out.width = "50%"}
 
 fish %>% 
   group_by(year, section, species) %>% 
@@ -313,6 +308,9 @@ rescale_column <- function(df, variable){
     mutate_at(variable, rescale) 
   return(new_df)
 }
+
+rescale_column(fish, vars(length)) %>% 
+  glimpse()
 ```
 
 

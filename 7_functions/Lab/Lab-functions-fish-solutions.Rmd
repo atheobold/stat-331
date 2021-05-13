@@ -88,7 +88,8 @@ fish %>%
   filter(is.na(weight)) %>% 
   group_by(year, section, trip) %>% 
   count(is.na(weight)) %>% 
-  mutate(trip = as.factor(trip)) %>% 
+  mutate(trip = as.factor(trip), 
+         year = as.factor(year)) %>% 
   ggplot(aes(x = year, y = n, fill = trip)) + 
   geom_col() + 
   facet_wrap(vars(section)) + 
@@ -104,7 +105,7 @@ fish %>%
 Create a thoughtful visualization exploring how the number of fish captured 
 differed each year, for each section of river. 
 
-```{r, fig.show = 'hold', out.width = 50%}
+```{r, fig.show = 'hold', out.width = "50%"}
 fish %>% 
   group_by(year, section, species) %>% 
   count() %>% 
@@ -284,4 +285,33 @@ fish <- fish %>%
 
 ## Challenge: Incorporating a Variable
 
-**Coming Soon** 
+Suppose you have other datasets that we would like to use your `rescale()`
+function on. However, you would like a more flexible version of 
+your `rescale()` function. Ideally, you would like a function that takes a
+dataframe and a variable name as inputs and returns a dataframe where the
+variable has been rescaled. 
+
+Explore creating a `rescale_column()` function that does just that. The function 
+will need to accept two arguments, (1) a dataframe, and (2) a variable name. 
+The body of the function should call the original `rescale()` function you 
+wrote previously. 
+
+*Hint:* Watch the video on function arguments to learn about the difference 
+between quoted variable names and unquoted variable names ("tidy evaluation").  
+
+```{r, echo = FALSE}
+fish <- read.csv(here::here("7_functions", "Lab", "BlackfootFish.csv"))
+```
+
+```{r}
+rescale_column <- function(df, variable){
+  
+  new_df <- df %>% 
+    mutate_at(variable, rescale) 
+  return(new_df)
+}
+
+rescale_column(fish, vars(length)) %>% 
+  glimpse()
+```
+
