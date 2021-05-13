@@ -1,0 +1,103 @@
+---
+title: "Missing Data & Scaling Variables"
+date: "May 13, 2021"
+author: "Stat 331"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["xaringan-themer.css", "slide-style.css"]
+    nature:
+      highlightStyle: solarized-light
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+---
+
+class: center, middle, inverse
+
+.larger[Missing Data]
+
+--
+
+.larger[**are important**]
+
+---
+
+.pull-left[
+.larger[Looking for Patterns]
+]
+
+.pull-right[
+![](images/magnifying_glass.jpg)
+]
+
+---
+
+.larger[Assumptions when Removing]
+
+--
+
+- Without inspection:
+
+  * Observations are "missing **completely** at random" 
+
+<!-- When observations of a variable are missing completely at random, the missing observations are a random subset of all observations; the missing and observed values will have similar distributions. -->
+
+--
+
+- With information about the "missingness" 
+
+  * Observations are "missing at random"
+
+<!-- Missing at random means there might be systematic differences between the missing and observed values, but these can be entirely explained by other observed variables. -->
+
+
+---
+
+class: inverse, center
+
+.larger[**For example**]
+
+--
+
+.large[**If** fish length measurements are missing at random, conditional on month, year, and river section,]
+
+--
+
+.large[**then** the distributions of lengths will be similar for fish of the same 
+month, year, and river section.]
+
+---
+
+class: inverse, center, middle
+
+.huge-text[Scaling Variables]
+
+---
+
+class: middle
+
+.larger[Why Scale?]
+
+--
+
+- (More) difficult to compare 
+
+- (More) difficult to model 
+
+---
+
+class: middle
+
+.larger[Why not Scale?]
+
+--
+
+- Difficult to interpret
+
+

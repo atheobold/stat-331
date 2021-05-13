@@ -296,7 +296,7 @@ will need to accept two arguments, (1) a dataframe, and (2) a variable name.
 The body of the function should call the original `rescale()` function you 
 wrote previously. 
 
-*Hint:* Watch the video on function arguments to learn about the difference 
+**_Hint:_** Watch the video on function arguments to learn about the difference 
 between quoted variable names and unquoted variable names ("tidy evaluation").  
 
 ```{r, echo = FALSE}
