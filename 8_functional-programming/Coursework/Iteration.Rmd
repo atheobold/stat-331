@@ -35,9 +35,9 @@ library(lubridate)
 
 ### Videos
 
-`r emo::ji("play button")` [Introduction to Iteration -- Posted by May 16 at 5pm]()
+`r emo::ji("play button")` [Introduction to Iteration -- Posted by May 16 at 8pm]()
 
-`r emo::ji("play button")` [Iteration with `for()` loops -- Posted by May 16 at 5pm]()
+`r emo::ji("play button")` [Iteration with `for()` loops -- Posted by May 11 at noon]()
 
 `r emo::ji("play button")` [Iteration with the `apply()` family -- Posted by May 17 at noon]()
  
