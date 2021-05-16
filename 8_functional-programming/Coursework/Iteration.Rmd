@@ -2,15 +2,13 @@
 title: "Iteration"
 output:
   prettydoc::html_pretty:
-    theme: tactile
+    theme: leonids 
     highlight: github
-    css: styles.css
+    css: style.css
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-options("couRsework-img_path" = here::here("Images", "icons")) 
-### change this if icons local
 ```
 
 ```{r, include = FALSE}
@@ -19,45 +17,122 @@ library(palmerpenguins)
 library(lubridate)
 ```
 
+`r emo::ji("play button")` Watch Videos: 30 minutes
+  
+  * `r emo::ji("link")` Link to **all** Slides from Videos: [here]()
 
-```{css, echo = FALSE}
-img {
-  vertical-align:middle;
-}
+`r emo::ji("book")` Readings: 45-60 minutes   
 
-body {
-  text-shadow:none;
-}
-
-```
-
-
-```{r, results = "asis", echo = FALSE}
-make_summary_table(vid_time = "30 min", 
-                   reading_time = "0 min", 
-                   work_time = "60 min", 
-                   num_activities = 2)
-```
+`r emo::ji("computer")` Activities: 60 minutes  
+  
+`r emo::ji("check")` Check-ins: 2 (included in 1 assignment on Canvas)
 
 ---
 
-```{r, results = "asis", echo = FALSE}
-req_vid("Functional Programming", type = "Required", url = "https://www.youtube.com/embed/lq2a4m8TMYo")
+### Reading
+
+`r emo::ji("book")` [Recommended Reading -- *R for Data Science*: Iteration](https://r4ds.had.co.nz/iteration.html)
+
+### Videos
+
+`r emo::ji("play button")` [Introduction to Iteration -- Posted by May 16 at 5pm]()
+
+`r emo::ji("play button")` [Iteration with `for()` loops -- Posted by May 16 at 5pm]()
+
+`r emo::ji("play button")` [Iteration with the `apply()` family -- Posted by May 17 at noon]()
+ 
+`r emo::ji("play button")` [Iteration with the `map()` family -- Posted by May 17 at noon]()
+
+### Tutorial
+
+`r emo::ji("computer")` [Required Tutorial: Iteration](https://rstudio.cloud/learn/primers/5)
+
+
+### Extra Resources
+
+:::: {style="display: flex;"}
+
+::: {}
+Cheatsheet for purrr functions[here:](https://github.com/rstudio/cheatsheets/blob/master/purrr.pdf)
+:::
+
+::: {}
+```{r, echo = FALSE, out.width = "45%"}
+knitr::include_graphics("images/purrr_hex.jpeg")
+```
+:::
+
+::::
+
+:::: {style="display: flex;"}
+
+::: {}
+Lessons and Examples by the one and only Jenny Bryan: [here](https://jennybc.github.io/purrr-tutorial/index.html)
+:::
+
+::: {}
+```{r, echo = FALSE, out.width = "25%"}
+knitr::include_graphics("images/jenny_bryan.png")
+```
+:::
+
+::::
+
+
+A More In-depth Exploration of Functionals -- [*Advanced R*](https://adv-r.hadley.nz/functionals.html)
+
+</br>
+
+***
+
+`r emo::ji("check")` **Check-in: Functional Programming**
+
+**Question 1:**
+
+Suppose we would like to find the median of the measurement variables 
+(`bill_length_mm`, `bill_depth_mm`, `flipper_length_mm`, `body_mass_g`) from the
+`penguins` dataset (from the **palmerpenguins** package). Which of the following
+will produce a **vector** of the median of every measurement variable?
+
+*Select all that apply!*
+
+_(a)_
+```{r, include = FALSE}
+# Returns a list
+penguins %>% 
+  select(bill_length_mm:body_mass_g) %>% 
+  map(median, na.rm = TRUE)
 ```
 
-```{r, results = "asis", echo = FALSE}
-req_tutorial("Iteration", type = "Required", url = "https://rstudio.cloud/learn/primers/5")
+_(b)_
+```{r, include = FALSE}
+# Correct!
+penguins %>% 
+  select(bill_length_mm:body_mass_g) %>% 
+  map_dbl(median, na.rm = TRUE)
 ```
 
----
-
-```{r, results = "asis", echo = FALSE}
-checkin("Functional Programming")
+_(c)_
+```{r, include = FALSE}
+# Correct!
+penguins %>% 
+  select(bill_length_mm:body_mass_g) %>% 
+  sapply(., median, na.rm = TRUE)
 ```
+
+_(d)_
+```{r, include = FALSE}
+# Returns a list
+penguins %>% 
+  select(bill_length_mm:body_mass_g) %>% 
+  lapply(., function(x) median(x, na.rm = TRUE))
+```
+
+***
 
 Recall that in the last unit, we discussed the challenge of standardizing many
 columns in a data frame.  For example, we wanted to standardize all the numeric 
-variables in the `penguins` dataset (from the **palmerpenguins** package).
+variables in the `penguins` dataset.
 
 Here is the function we wrote for that:
 
@@ -69,8 +144,7 @@ standardize <- function(data) {
 }
 ```
 
-
-**Question 1:** Why does the following not work?
+**Question 2:** Why does the following not work?
 
 ```{r}
 penguins %>%
@@ -89,7 +163,7 @@ penguins %>%
 <!-- This means that `map_dbl()` expects that the result should have length 1!  -->
 
 
-**Question 2:** 
+**Question 3:** 
 
 Use appropriate `map` functions, along with `scale()`, to create
 a standardized version of the measurement variables from the `penguins` dataset
