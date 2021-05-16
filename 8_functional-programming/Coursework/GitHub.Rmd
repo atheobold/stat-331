@@ -47,7 +47,8 @@ exploration up to you.
 
 ## Before We Get Started
 
-[Meet the toolkit: Version control and collaboration](https://www.youtube.com/watch?v=124DQasLyNQ) 
+[This Video](https://youtu.be/21Gl97tkbHU) provides a cheesy but 
+cute introduction to GitHub.
 
 ---
 
@@ -56,8 +57,20 @@ exploration up to you.
 `r emo::ji("play button")` [Required Video-- Intro to Git and Github](https://www.youtube.com/embed/BCQHnlnPusY)
 
   * I hope you love this person as much as I do! 
+  
+`r emo::ji("question")` [Additional Materials -- *Happy Git with R*](https://happygitwithr.com/)
 
-`r emo::ji("question")` [Additional Materials on Git and GitHub](https://swcarpentry.github.io/git-novice/)
+`r emo::ji("question")` [Additional Materials -- Software Carpentry Version Control Workshop Materials](https://swcarpentry.github.io/git-novice/)
+
+### Git and Github Tips 
+
+- There are millions of git commands -- alright, that is an exaggeration. But, 
+there are a lot of commands. Very few people know them all. Really, 99% of the 
+time you will use git to `add`, `commit`, `pull`, and `push`. That's it. 
+
+- When Googling for help on a problem with git, you might come across methods
+for doing things in the command line. Skip those "solutions" and move to the 
+next ones, unless you feel comfortable trying it out.
 
 ---
 
@@ -101,11 +114,26 @@ from going as smoothly as in the video.  This doesn't necessarily mean you are
 doing something wrong!  If you hit a snag, please contact Dr. Theobold to get
 help!
 
+## Working with Github with the usethis Package -- Optional
+
+usethis is a workflow package: it automates repetitive tasks that arise during
+project setup and development, both for R packages and non-package projects.
+
+Honestly, I hardly ever use git commands in RStudio. Instead, I use the helper 
+functions from usethis.
+
+
+https://usethis.r-lib.org/articles/articles/usethis-setup.html
+
 ---
 
 ## Branches and Pull Requests
 
 `r emo::ji("play button")` [Required Video -- Branching](https://www.youtube.com/embed/oPpnCh7InLY)
+
+`r emo::ji("book")` [Recommended Reading -- PR Functions in **usethis**](https://usethis.r-lib.org/articles/articles/pr-functions.html)
+
+---
 
 `r emo::ji("check")` **Check-in: Making a branch and pull request**
 
