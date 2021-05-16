@@ -15,8 +15,7 @@ options("couRsework-img_path" = here::here("Images", "icons"))
 
 ```{r, include = FALSE}
 library(tidyverse)
-library(couRsework)
-library(flair)
+library(palmerpenguins)
 library(lubridate)
 ```
 
@@ -50,7 +49,6 @@ req_vid("Functional Programming", type = "Required", url = "https://www.youtube.
 req_tutorial("Iteration", type = "Required", url = "https://rstudio.cloud/learn/primers/5")
 ```
 
-
 ---
 
 ```{r, results = "asis", echo = FALSE}
@@ -59,7 +57,7 @@ checkin("Functional Programming")
 
 Recall that in the last unit, we discussed the challenge of standardizing many
 columns in a data frame.  For example, we wanted to standardize all the numeric 
-variables in the dataset `iris`.
+variables in the `penguins` dataset (from the **palmerpenguins** package).
 
 Here is the function we wrote for that:
 
@@ -75,17 +73,41 @@ standardize <- function(data) {
 **Question 1:** Why does the following not work?
 
 ```{r}
-iris %>%
+penguins %>%
   mutate(
-    Petal.Length = map_dbl(Petal.Length, standardize)
+    body_mass_g = map_dbl(body_mass_g, standardize)
   )
 ```
 
+<!-- The `map_dbl()` function expects a single output from a list or atomic vector. -->
+<!-- If you use `safely(standardize)` you should get the following error:  -->
+
+<!-- ``` -->
+<!-- Error: Result 1 must be a single double, not a list of length 2 -->
+<!-- ``` -->
+
+<!-- This means that `map_dbl()` expects that the result should have length 1!  -->
+
+
 **Question 2:** 
 
-Use appropriate `map` or `apply` functions, along with `scale()`, to create
-a standardized version of the `iris` dataset.  Do this **without** copy-pasting 
-lines and changing `Petal.Length` to `Petal.Width`, etc.
+Use appropriate `map` functions, along with `scale()`, to create
+a standardized version of the measurement variables from the `penguins` dataset
+(`bill_length_mm`, `bill_depth_mm`, `flipper_length_mm`, `body_mass_g`).
+Do this **without** copy-pasting lines and changing `bill_length_mm` to
+`bill_depth_mm`, etc.
 
-(I recommend looking into `map_dfc()`, although this is not the only possible solution.)
+I recommend looking into `map_df()` or `map_at()`! 
+
+```{r, include = FALSE}
+
+penguins %>%
+  map_at(vars(bill_length_mm:body_mass_g), 
+         standardize)
+
+penguins %>% 
+  select(bill_length_mm:body_mass_g) %>% 
+  map_df(., standardize)
+
+```
 

@@ -120,14 +120,13 @@ for (i in 99:95) {
 * Can change values at each loop step.
 
 
-**Con:**
-
-* Slow in R.
+**Cons:**
 
 * A little messy to read the code
 
 * Not always necessary.
 
+* A bit slower
 
 ---
 # Better: The `apply` functions
@@ -194,7 +193,7 @@ sapply(99:95, sing_about_drinks(drink = "beer"))
 
 # You can kind of get around this...
 
-(This is called a **headless function**)
+(This is called a **headless** or **annonymous** function)
 
 ```{r}
 

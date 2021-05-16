@@ -15,16 +15,16 @@ library(tidyverse)
 
 ## Introduction
 
-The song "12 Days of Christmas", written around 1780, tells the tale of many gifts 
-a person receives in the days leading up to Christmas. ([https://en.wikipedia.org/wiki/The_Twelve_Days_of_Christmas_(song)](https://en.wikipedia.org/wiki/The_Twelve_Days_of_Christmas_(song))) 
+The song "12 Days of Christmas", written around 1780, tells the tale of many
+gifts a person receives in the days leading up to Christmas. ([https://en.wikipedia.org/wiki/The_Twelve_Days_of_Christmas_(song)](https://en.wikipedia.org/wiki/The_Twelve_Days_of_Christmas_(song))) 
 
-These gifts repeat and compound; on the first day, the narrator recieves
+These gifts repeat and compound; on the first day, the narrator receives
 
 ```
 A partridge in a pear tree.
 ```
 
-On the last day, he or she receives
+On the last day, they receive
 
 ```
 Twelve Drummers Drumming
@@ -41,7 +41,7 @@ Two Turtle Doves
 And a Partridge in a Pear Tree
 ```
 
-Your task will be to help write a package that automatically sings this very
+Your task will be to help write a function that automatically sings this very
 repetitive song.
 
 ---
@@ -342,5 +342,3 @@ get started.
 Create at least one unit test for each of your three functions.
 
 ---
-
-
