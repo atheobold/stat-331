@@ -1,0 +1,112 @@
+---
+title: "Iteration with the `map()` family"
+author: Stat 331
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["xaringan-themer.css", "slide-style.css"]
+    nature:
+      highlightStyle: solarized-light
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+---
+
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.width = 8, fig.height = 6}
+knitr::opts_chunk$set(message = FALSE, 
+                      warning = FALSE, 
+                      fig.align = "center")
+
+options(htmltools.dir.version = FALSE)
+
+library(xaringanthemer)
+library(xaringan)
+library(tidyverse)
+library(flair)
+library(palmerpenguins)
+
+style_duo_accent(
+  primary_color      = "#0F4C81", # pantone classic blue
+  secondary_color    = "#B6CADA", # pantone baby blue
+  header_font_google = google_font("Raleway"),
+  text_font_google   = google_font("Raleway", "300", "300i"),
+  code_font_google   = google_font("Source Code Pro"),
+  text_font_size     = "30px"
+)
+```
+
+# Best:  The `map` functions from `purrr`
+
+- `map` always returns a **list**
+
+- `map_chr` always returns a **character vector**  (or an error)
+
+- What do you think `map_dbl` returns?
+
+
+---
+
+# What if I want some options in my function?
+
+```{r}
+sing_about_drinks <- function(num, drink) {
+  
+  
+    
+  glue("{num} bottles of {drink} on the wall, {num} bottles of {drink}.
+       Take one down, pass it around, {num - 1} bottles of {drink} on the wall.")
+  
+}
+```
+
+---
+
+# But `map` has a cool shortcut!
+
+- Note the "~" in front of the function - this is important!
+
+- Note the "." before the "x" - this is important!
+
+```{r}
+
+map_chr(99:95, ~sing_about_drinks(.x, "beer"))
+
+```
+
+# What if I want to use many options?
+
+```{r, echo = FALSE}
+
+data <- data.frame(num = 99:95, drink = c("pop", "beer", "water", "lemonade","milk"))
+
+```
+
+```{r}
+head(data)
+```
+
+---
+# Use `map2`!
+
+```{r}
+map2_chr(data$num, data$drink, ~sing_about_drinks(.x, .y))
+```
+
+
+## Things to remember
+
+- What does your function take as INPUT?
+
+- What does your function give as OUTPUT?
+
+- How can we write it to be friendly with `apply` or `map`?
+
+- Do you REALLY need to use `apply` or `map`, or is it vectorized?
+
+- Bonus: How can we write it to be friendly with `%>%`?

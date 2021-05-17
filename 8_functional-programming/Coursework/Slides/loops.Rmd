@@ -1,0 +1,97 @@
+---
+title: "Iteration with `for()` loops"
+author: Stat 331
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["xaringan-themer.css", "slide-style.css"]
+    nature:
+      highlightStyle: solarized-light
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+---
+
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.width = 8, fig.height = 6}
+knitr::opts_chunk$set(message = FALSE, 
+                      warning = FALSE, 
+                      fig.align = "center")
+
+options(htmltools.dir.version = FALSE)
+
+library(xaringanthemer)
+library(xaringan)
+library(tidyverse)
+library(flair)
+library(palmerpenguins)
+
+style_duo_accent(
+  primary_color      = "#0F4C81", # pantone classic blue
+  secondary_color    = "#B6CADA", # pantone baby blue
+  header_font_google = google_font("Raleway"),
+  text_font_google   = google_font("Raleway", "300", "300i"),
+  code_font_google   = google_font("Source Code Pro"),
+  text_font_size     = "30px"
+)
+```
+
+# Repeated Function Calls
+
+... but it is still repetitive...
+
+```{r}
+sing_about_pop(99)
+sing_about_pop(98)
+sing_about_pop(97)
+```
+
+---
+
+# Good: For loops
+
+```{r}
+for (i in 99:95) {
+  
+  sing_about_pop(i)
+
+}
+```
+--
+
+... wait, where did it go?
+
+---
+# Print!
+
+```{r}
+for (i in 99:95) {
+  
+  print(sing_about_pop(i))
+
+}
+```
+
+---
+# Good: For loops
+
+**Pro:**
+
+* Classic programming approach; easy to understand
+
+* Can change values at each loop step.
+
+
+**Cons:**
+
+* A little messy to read the code
+
+* Not always necessary.
+
+* A bit slower
+

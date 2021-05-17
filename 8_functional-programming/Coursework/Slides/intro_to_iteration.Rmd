@@ -1,0 +1,143 @@
+---
+title: "Introduction to Iteration"
+author: Stat 331
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["xaringan-themer.css", "slide-style.css"]
+    nature:
+      highlightStyle: solarized-light
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+---
+
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.width = 8, fig.height = 6}
+knitr::opts_chunk$set(message = FALSE, 
+                      warning = FALSE, 
+                      fig.align = "center")
+
+options(htmltools.dir.version = FALSE)
+
+library(xaringanthemer)
+library(xaringan)
+library(tidyverse)
+library(flair)
+library(palmerpenguins)
+
+style_duo_accent(
+  primary_color      = "#0F4C81", # pantone classic blue
+  secondary_color    = "#B6CADA", # pantone baby blue
+  header_font_google = google_font("Raleway"),
+  text_font_google   = google_font("Raleway", "300", "300i"),
+  code_font_google   = google_font("Source Code Pro"),
+  text_font_size     = "30px"
+)
+
+
+standardize <- function(data) {
+  deviations <- data - mean(data, na.rm = TRUE)
+  newdata <- deviations / sd(data, na.rm = TRUE)
+  return(newdata)
+}
+```
+
+class: inverse, center, middle 
+
+.huge-text[Iteration]
+
+<center>
+
+.bitlarger[*Definition*: the process of repeating steps]
+
+---
+
+class: center, middle
+
+.pull-left[
+.larger[Functions]
+
+.bitlarger[**Reduce duplication by identifying repeated patterns of code**]
+
+]
+
+--
+
+.pull-right[
+.larger[Iteration]
+
+.bitlarger[**Reduce duplication by identifying repeated operations**]
+
+]
+
+
+---
+
+.larger[Calculating Lots of Means]
+
+```{r}
+penguins %>% 
+  summarise(mean_bill_length = mean(bill_length_mm, na.rm = TRUE), 
+            mean_bill_depth = mean(bill_depth_mm, na.rm = TRUE), 
+            mean_flipper_length = mean(flipper_length_mm, na.rm = TRUE), 
+            mean_mass = mean(body_mass_g, na.rm = TRUE))
+```
+
+---
+
+.larger[Removing Duplication]
+
+```{r}
+penguins %>% 
+  summarise_at(vars(bill_length_mm:body_mass_g), mean, na.rm = TRUE)
+```
+
+---
+
+.larger[Rescaling Variables]
+
+```{r}
+penguins %>% 
+  mutate(bill_length_mm = standardize(bill_length_mm), 
+         bill_depth_mm = standardize(bill_depth_mm), 
+         flipper_length_mm = standardize(flipper_length_mm), 
+         body_mass_g = standardize(body_mass_g))
+```
+
+---
+
+.larger[Removing Duplication]
+
+```{r}
+penguins %>% 
+  mutate_at(vars(bill_length_mm:body_mass_g), standardize)
+```
+
+---
+
+.larger[Iteration Paradigms]
+
+--
+
+class: inverse
+
+.pull-left[
+.bitlarger[**Imperative Programming**]
+
+You write the code that specifies the steps that the computer must take to
+accomplish the goal.
+]
+
+--
+
+.pull-right[
+.bitlarger[**Functional Programming**]
+
+You apply and compose functions mapping values to other values
+]
