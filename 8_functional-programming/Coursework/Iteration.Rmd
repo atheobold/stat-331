@@ -39,9 +39,9 @@ library(lubridate)
 
 `r emo::ji("play button")` [Iteration with `for()` loops (9 minutes)](http://somup.com/crhbbHFR3u)
 
-`r emo::ji("play button")` [Iteration with the `apply()` family -- Posted by May 17 at noon]()
+`r emo::ji("play button")` [Iteration with the `apply()` family (7 minutes)](https://www.youtube.com/watch?v=NadUAnlrh-M)
  
-`r emo::ji("play button")` [Iteration with the `map()` family -- Posted by May 17 at noon]()
+`r emo::ji("play button")` [(Iteration with the `map()` family (6 minutes)](https://www.youtube.com/watch?v=FPD3a6IHO6w)
 
 ### Tutorial
 
@@ -132,7 +132,11 @@ penguins %>%
 
 <!-- Returns a list! -->
 
+</br>
+
 ***
+
+</br>
 
 Recall that in the last unit, we discussed the challenge of standardizing many
 columns in a data frame.  For example, we wanted to standardize all the numeric 
@@ -153,8 +157,7 @@ standardize <- function(data) {
 ```{r, eval = FALSE}
 penguins %>%
   mutate(
-    body_mass_g = map_dbl(body_mass_g, 
-                          standardize)
+    body_mass_g = map_dbl(body_mass_g, standardize)
   )
 ```
 
