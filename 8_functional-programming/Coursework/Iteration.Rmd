@@ -37,7 +37,7 @@ library(lubridate)
 
 `r emo::ji("play button")` [Introduction to Iteration (6 minutes)](http://somup.com/crhbeDF9eR)
 
-`r emo::ji("play button")` [Iteration with `for()` loops -- Posted by May 11 at noon]()
+`r emo::ji("play button")` [Iteration with `for()` loops (9 minutes)](http://somup.com/crhbbHFR3u)
 
 `r emo::ji("play button")` [Iteration with the `apply()` family -- Posted by May 17 at noon]()
  

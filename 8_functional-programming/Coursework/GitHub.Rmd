@@ -95,7 +95,7 @@ file you created.  It should look similar to 9:36 of the video (linked above).
 
 ## Git and RStudio
 
-`r emo::ji("play button")` [Required Video -- GitHub and RStudio (5 minutes)](http://somup.com/crhD3UFPdHE)
+`r emo::ji("play button")` [Required Video -- GitHub and RStudio (5 minutes)](http://youtu.be/Tyw-FuVq8lA?hd=1)
 
 `r emo::ji("question")` [Additional Materials on GitHub and RStudio](https://swcarpentry.github.io/git-novice/14-supplemental-rstudio/index.html)
 
