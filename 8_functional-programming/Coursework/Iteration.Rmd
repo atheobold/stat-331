@@ -17,9 +17,9 @@ library(palmerpenguins)
 library(lubridate)
 ```
 
-`r emo::ji("play button")` Watch Videos: 30 minutes
+`r emo::ji("play")` Watch Videos: 30 minutes
   
-  * `r emo::ji("link")` Link to **all** Slides from Videos: [here]()
+  * `r emo::ji("link")` Link to **all** Slides from Videos: [here](https://app.box.com/s/ae5f0yollihcggzr6bghkwabkdz2y7g9)
 
 `r emo::ji("book")` Readings: 45-60 minutes   
 
@@ -35,7 +35,7 @@ library(lubridate)
 
 ### Videos
 
-`r emo::ji("play button")` [Introduction to Iteration -- Posted by May 16 at 8pm]()
+`r emo::ji("play button")` [Introduction to Iteration (6 minutes)](http://somup.com/crhbeDF9eR)
 
 `r emo::ji("play button")` [Iteration with `for()` loops -- Posted by May 11 at noon]()
 
@@ -53,7 +53,7 @@ library(lubridate)
 :::: {style="display: flex;"}
 
 ::: {}
-Cheatsheet for purrr functions[here:](https://github.com/rstudio/cheatsheets/blob/master/purrr.pdf)
+Cheatsheet for purrr functions:  [here](https://github.com/rstudio/cheatsheets/blob/master/purrr.pdf)
 :::
 
 ::: {}
@@ -71,7 +71,7 @@ Lessons and Examples by the one and only Jenny Bryan: [here](https://jennybc.git
 :::
 
 ::: {}
-```{r, echo = FALSE, out.width = "25%"}
+```{r, echo = FALSE, out.width = "35%"}
 knitr::include_graphics("images/jenny_bryan.png")
 ```
 :::
@@ -97,36 +97,40 @@ will produce a **vector** of the median of every measurement variable?
 *Select all that apply!*
 
 _(a)_
-```{r, include = FALSE}
-# Returns a list
+```{r, eval = FALSE}
 penguins %>% 
   select(bill_length_mm:body_mass_g) %>% 
   map(median, na.rm = TRUE)
 ```
 
+<!-- Returns a list! -->
+
 _(b)_
-```{r, include = FALSE}
-# Correct!
+```{r, eval = FALSE}
 penguins %>% 
   select(bill_length_mm:body_mass_g) %>% 
   map_dbl(median, na.rm = TRUE)
 ```
 
+<!-- Correct! -->
+
 _(c)_
-```{r, include = FALSE}
-# Correct!
+```{r, eval = FALSE}
 penguins %>% 
   select(bill_length_mm:body_mass_g) %>% 
   sapply(., median, na.rm = TRUE)
 ```
 
+<!-- Correct! -->
+
 _(d)_
-```{r, include = FALSE}
-# Returns a list
+```{r, eval = FALSE}
 penguins %>% 
   select(bill_length_mm:body_mass_g) %>% 
   lapply(., function(x) median(x, na.rm = TRUE))
 ```
+
+<!-- Returns a list! -->
 
 ***
 
@@ -146,10 +150,11 @@ standardize <- function(data) {
 
 **Question 2:** Why does the following not work?
 
-```{r}
+```{r, eval = FALSE}
 penguins %>%
   mutate(
-    body_mass_g = map_dbl(body_mass_g, standardize)
+    body_mass_g = map_dbl(body_mass_g, 
+                          standardize)
   )
 ```
 
@@ -168,6 +173,7 @@ penguins %>%
 Use appropriate `map` functions, along with `scale()`, to create
 a standardized version of the measurement variables from the `penguins` dataset
 (`bill_length_mm`, `bill_depth_mm`, `flipper_length_mm`, `body_mass_g`).
+
 Do this **without** copy-pasting lines and changing `bill_length_mm` to
 `bill_depth_mm`, etc.
 
