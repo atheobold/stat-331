@@ -1,6 +1,6 @@
 ---
 title: "Version Control `r emo::ji('computer')`"
-date: "May 11, 2021"
+date: "May 18, 2021"
 author: "Stat 331"
 output:
   xaringan::moon_reader:
