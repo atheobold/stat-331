@@ -45,7 +45,7 @@ class: inverse
 ![](images/git.png) 
 
 - Language for version control
-- Developed by Linus Torvalds
+- Developed by Linus Torvalds (Linux, Android, Chrome OS)
 - Uses command line or GUI
 ]
 
@@ -59,6 +59,50 @@ class: inverse
 ]
 
 ---
+
+.larger[A Formidable Opponent]
+
+.pull-left[
+![](images/git_hard.png)
+]
+
+--
+
+.pull-right[
+
+- The 2012 Git User’s Survey identified two areas in need of help
+  * The user interface (71%)
+  * The documentation (75%)
+
+<!-- - "What do you hate about Git?" -->
+<!--   * "too complex for many users" -->
+<!--   * "requires steep learning curve for newbies" -->
+<!--   * "dark corners" -->
+]
+
+---
+
+.larger[Some Unsavory Practices]
+
+```{r, echo = FALSE, out.width = "50%"}
+knitr::include_graphics("images/GH_ice.jpeg")
+```
+
+---
+
+.larger[Other Options]
+
+.pull-left[
+![](images/mercurial.png)
+]
+
+.pull-right[
+![](images/sourcetree.png)
+![](images/bitbucket.png)
+]
+
+---
+
 
 .larger[Git Workflow]
 
