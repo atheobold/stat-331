@@ -1,5 +1,5 @@
 ---
-title: "Iteration with the `apply()` family"
+title: "The Next Step in Efficient Iteration"
 author: Stat 331
 output:
   xaringan::moon_reader:
@@ -29,6 +29,7 @@ library(xaringanthemer)
 library(xaringan)
 library(tidyverse)
 library(flair)
+library(glue)
 library(palmerpenguins)
 
 style_duo_accent(
@@ -41,56 +42,124 @@ style_duo_accent(
 )
 ```
 
-# Better: The `apply` functions
+.larger[A bit better: the `apply` family]
 
+.pull-left[
+- `apply()`
+
+- `sapply()` 
+
+]
+
+.pull-right[
+- `lapply()`
+
+- `vapply()`
+]
+
+---
+
+.larger[`apply()`]
+
+.pull-left[
+.bitlarger[Applies a function to a matrix] 
+
+.large[**Returns a vector or a matrix**]
+]
+
+--
+
+.pull-right[
 ```{r}
+penguins_measurements <- penguins %>% 
+  select(bill_length_mm:body_mass_g)
 
-sapply(99:95, sing_about_pop)
+apply(penguins_measurements, MARGIN = 2, 
+      mean, na.rm = TRUE)
 
 ```
----
-
-# Better: The `apply` functions
-
-- Pay attention to what type of input they *take* and what type of output they *give*
-
-- `sapply` takes a vector, returns a vector
-
-- `lapply` takes a list, returns a list
-
-- `apply` takes a dataset and a dimension (1 = row, 2 = col), returns a vector or list
+]
 
 ---
 
-# What if I want some options in my function?
+.larger[`lapply()`]
 
+.pull-left[
+.bitlarger[Applies a function to a list] 
+
+.large[**Always returns a list**]
+]
+
+.pull-right[
 ```{r}
-sing_about_drinks <- function(num, drink) {
-  
-  
-    
-  glue("{num} bottles of {drink} on the wall, {num} bottles of {drink}.
-       Take one down, pass it around, {num - 1} bottles of {drink} on the wall.")
-  
-}
+lapply(penguins_measurements, 
+       mean, na.rm = TRUE)
+
 ```
+]
 
 ---
-# `sapply` has trouble!
 
+.larger[`sapply()`]
+
+.pull-left[
+.bitlarger[Wrapper around `lapply()`] 
+
+.large[**Automatically simplifies the output**]
+]
+
+.pull-right[
+```{r}
+sapply(penguins_measurements, 
+       mean, na.rm = TRUE)
+
+```
+]
+
+---
+
+.larger[`vapply()`]
+
+
+.pull-left[
+.bitlarger[Safer version of `sapply()`] 
+
+.large[**Can specify what is returned**]
+]
+
+.pull-right[
 ```{r, error = TRUE}
+vapply(penguins_measurements, mean, 
+       FUN.VALUE = numeric(1), na.rm = TRUE)
 
-sapply(99:95, sing_about_drinks(drink = "beer"))
+vapply(penguins_measurements, mean, 
+       FUN.VALUE = list(1), na.rm = TRUE)
 
 ```
+]
+
 ---
 
-# You can kind of get around this...
+<center>
+.larger[The `apply` family]
+</center>
 
-(This is called a **headless** or **annonymous** function)
+.pull-left[
+.bitlarger[**Pros**]
 
-```{r}
+- More efficient code
 
-sapply(99:95, function(x) sing_about_drinks(x, drink = "beer"))
+- Functional programming
 
-```
+- Can output matrices
+
+]
+
+--
+
+.pull-right[
+.bitlarger[**Cons**]
+
+- Uncertainty in output 
+
+]

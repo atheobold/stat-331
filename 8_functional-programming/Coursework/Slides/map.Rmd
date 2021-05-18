@@ -1,5 +1,5 @@
 ---
-title: "Iteration with the `map()` family"
+title: "The Final Step in Efficient Iteration"
 author: Stat 331
 output:
   xaringan::moon_reader:
@@ -29,6 +29,8 @@ library(xaringanthemer)
 library(xaringan)
 library(tidyverse)
 library(flair)
+library(glue)
+library(purrr)
 library(palmerpenguins)
 
 style_duo_accent(
@@ -39,74 +41,66 @@ style_duo_accent(
   code_font_google   = google_font("Source Code Pro"),
   text_font_size     = "30px"
 )
-```
-
-# Best:  The `map` functions from `purrr`
-
-- `map` always returns a **list**
-
-- `map_chr` always returns a **character vector**  (or an error)
-
-- What do you think `map_dbl` returns?
 
 
----
-
-# What if I want some options in my function?
-
-```{r}
-sing_about_drinks <- function(num, drink) {
-  
-  
-    
-  glue("{num} bottles of {drink} on the wall, {num} bottles of {drink}.
-       Take one down, pass it around, {num - 1} bottles of {drink} on the wall.")
-  
+standardize <- function(data) {
+  stopifnot(is.numeric)
+  deviations <- data - mean(data, na.rm = TRUE)
+  newdata <- deviations / sd(data, na.rm = TRUE)
+  return(newdata)
 }
 ```
 
----
+.larger[The best option: the `map` family] 
 
-# But `map` has a cool shortcut!
+.pull-left[
+- `map_chr()`
+- `map_lgl()`
+- `map_int()`
+- `map_dbl()`
+]
 
-- Note the "~" in front of the function - this is important!
+.pull-right[
+- `map2_chr()`
+- `map2_lgl()`
+- `map2_int()`
+- `map2_dbl()`
+- `pmap()`
 
-- Note the "." before the "x" - this is important!
-
-```{r}
-
-map_chr(99:95, ~sing_about_drinks(.x, "beer"))
-
-```
-
-# What if I want to use many options?
-
-```{r, echo = FALSE}
-
-data <- data.frame(num = 99:95, drink = c("pop", "beer", "water", "lemonade","milk"))
-
-```
-
-```{r}
-head(data)
-```
+]
 
 ---
-# Use `map2`!
+
+.larger[`map_dbl()`]
 
 ```{r}
-map2_chr(data$num, data$drink, ~sing_about_drinks(.x, .y))
+penguins %>% 
+  select(bill_length_mm:body_mass_g) %>% 
+  map_dbl(mean, na.rm = TRUE)
+
 ```
 
+---
 
-## Things to remember
+.larger[`map_dbl()`]
 
-- What does your function take as INPUT?
+.pull-left-wide[
+```{r}
+penguins %>% 
+  map_int(~ sum(is.na(.x)))
 
-- What does your function give as OUTPUT?
+```
+]
 
-- How can we write it to be friendly with `apply` or `map`?
+--
 
-- Do you REALLY need to use `apply` or `map`, or is it vectorized?
+.pull-left[
+- Note the `~` in front of the function!
+]
 
-- Bonus: How can we write it to be friendly with `%>%`?
+</br>
+</br>
+
+.pull-right[
+- Note the `.` before the `x`!
+]
