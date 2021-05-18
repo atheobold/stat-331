@@ -107,7 +107,8 @@ Take turns in completing the exercise, only one member at a time:
 **You will get an error!** 
 
   * Pull the changes from the repo
-  * Review the document with the merge conflict
+  * Review the document with the merge conflict 
+  (Note how the conflicting lines are marked!)
   * Resolve the conflict with the preferred change
   * Commit your changes
   * Push the changes to the repository 
