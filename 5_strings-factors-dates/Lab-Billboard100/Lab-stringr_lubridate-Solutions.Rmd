@@ -1,5 +1,6 @@
 ---
 title: "Lab 3: Billboard Hot 100"
+date: "Stat 331 </br> Solutions by Dr. Theobold"
 output:
   prettydoc::html_pretty:
     theme: tactile
@@ -17,28 +18,6 @@ knitr::opts_chunk$set(fig.width=12,
 library(readr)
 ```
 
-
-## Instructions
-
-* Please answer these questions using code.
-
-* The **only** R printouts should be the answers to the questions. Make sure
-your code does not display any extra information.
-
-* If the question is fully answered by the code, you do not need to also answer
-it in text form.  For example, you do not need to write "The median weight of
-penguins is 4050"; you can just compute the median.
-
-* However, for more open-ended questions, you should still provide text to
-motivate and interpret your work.
-
-* Think about making your code readable.  Use white space (spacebars and new
-lines) carefully, use variable names that are clear, and be deliberate about
-how you use code chunks.
-  * **If you output the dataset to your HTML file, you will receive a 
-  5% penalty**. 
-  
----
 
 ## The Data
 
@@ -77,19 +56,6 @@ songs <- read_delim(here::here("5_strings-factors-dates",
 
 ---
 
-## Advice
-
-This is a very large dataset!  Consider using a function like `slice_sample()`
-to create a small dataset with only, say, 200 of the rows.  You can try all your
-code out on the smaller dataset first, and then only run the analysis of the 
-full data after you have perfected everything.
-
-**Note:** `slice_sample()` randomly selects rows from a dataset based on either
-the number (`n`) of observations requested, or the proportion (`prop`) of 
-observations requested. 
-
----
-
 ## Setup
 
 Do any data cleaning you need.
@@ -111,9 +77,6 @@ songs <- songs %>%
     entry_date = exit_date - weeks(`weeks on chart`)
   )
 
-sample <- songs %>% 
-  slice_sample(n = 1000)
-
 ```
 
 ---
@@ -124,7 +87,7 @@ __1. What 5 songs spent the longest on the charts?  Give only the title, artist,
 and weeks.__
 
 ```{r}
-sample %>% 
+songs %>% 
   top_n(5, `weeks on chart`) %>%
   arrange(desc(`weeks on chart`)) %>%
   select(title, artist, `weeks on chart`)
@@ -137,12 +100,12 @@ __2. Which five artists had the most number 1 hits?__
 
 *For this question, you may ignore songs with more than one artist listed.*
 
-```{r
+```{r}
 songs %>% 
   filter(`overall peak` == 1) %>%
   group_by(artist) %>%
   summarize(num_songs = n()) %>%
-  slice_max(5, num_songs)
+  slice_max(num_songs, n = 5)
 
 ```
 
@@ -159,11 +122,12 @@ artist, and date of chart entry.__
 
 ```{r}
 my_bday <- mdy("January 14, 1989")
+party_interval <- (my_bday + years(10) - months(2)) %--% 
+  (my_bday + years(10) + months(2))
 
 songs %>% 
-  filter(`overall peak` == 1 & 
-           entry_date %within% interval(my_bday + years(10) - months(2),
-                                        my_bday + years(10) + months(2))
+  filter(`overall peak` == 1,
+           entry_date %within% party_interval
          ) %>%
   select(title, artist, entry_date)
   
@@ -172,17 +136,10 @@ songs %>%
 </br>
 </br>
 
-__4. Explore the [Matching Multiple Characters](https://stringr.tidyverse.org/articles/regular-expressions.html#matching-multiple-characters) section of the `lubridate` resources to learn about the 
-`str_extract_all()` function. Use `str_extract_all()` to uncover what is the
+__4. Use `str_extract_all()` to uncover what is the
 most common word, *at least* four letters long, used in the title of any song.
 Give only the word itself, and its count.__
 
-*Hint 1:* Look up the help file on `str_extract_all()`! 
-
-*Hint 2:* `"hello"` and `"Hello"` are the same word!  
-
-*Hint 3:* The result of `str_extract_all()` is a list. To make the list into a 
-vector, use `unlist()`! 
 
 ```{r}
 title_words <- songs %>%
@@ -208,20 +165,6 @@ my_words %>%
 __5. Let's take a look at artists who work together on songs. Which three 
 artists have **featured** on the most Billboard charting songs?__  
 
-*Hint:* The functions `str_subset()`, `str_replace_all()`, and `str_split()`
-would be useful! 
-
-Definitions:
-```
-RAE SREMMURD featuring NICKI MINAJ & YOUNG THUG
-```
-In this string, Nicki Minaj and Young Thug are considered to be **featured**.
-```
-JESSIE J, ARIANA GRANDE & NICKI MINAJ
-```
-In this string, Jessie J and Ariana Grande and Nicki Minaj all worked 
-together (collaborated), but **nobody** was featured.
-
 
 ```{r}
 artist_creds <- songs %>%
@@ -242,11 +185,3 @@ tibble(
 
 ```
 
----
-
-## Challenge
-
-Explain each line of the code that your team wrote to address question 6.  
-
-**Talk through** what the regular expressions *mean*! For example, how are the
-matches being made? What is being replaced? How are strings being split up? 

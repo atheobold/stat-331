@@ -1,7 +1,6 @@
 ---
-title: "Lab 2: Avocado Prices"
-subtitle: "Stat 331"
-author: "Solutions by Dr. Theobold"
+title: "Lab 4: Avocado Prices"
+subtitle: "Stat 331 </br> Solutions by Dr. Theobold"
 output: rmdformats::readthedown
 ---
 
@@ -16,21 +15,6 @@ knitr::opts_chunk$set(fig.width = 12,
                       include = TRUE)
 ```
 
-
-# Instructions
-
-Submit your .html and .Rmd files to the assignment on Canvas.
-
-I advise you to focus particularly on:
-
-* Setting chunk options carefully.
-
-* Making sure you don't print out more output than you need to.
-
-* Making your code readable and nicely formatted. (Next lab, you **will** be 
-graded on code style.)
-
-* Thinking through your desired result **before** writing any code.
 
 # Introduction & Set-up
 
@@ -212,14 +196,3 @@ cali_avo %>%
        y = "Proportion of Mean Avocados Sold", 
        fill = "Avocado Size")
 ```
-
-
-# Challenge 
-
-A joke in the media is that Millenials can't afford houses, because they spend
-all their money buying avocado toast.  Let's use this dataset to address that 
-claim.
-
-Find or make a dataset with house prices for these four California regions. Join
-this dataset with your California avocado dataset.  Use your new joined dataset
-to make an argument about the relationship between house prices and avocado prices/sales.  Support your argument with a plot.
