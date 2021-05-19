@@ -152,7 +152,7 @@ make_phrase <- function(num, num_word, item, verb, adjective, location) {
 
 ```{r}
 make_phrase(num = 10, 
-            num_word = "ten", 
+            num_word = english::english(10), 
             item = "lord", 
             verb = "a-leaping", 
             adjective = "", 
@@ -165,8 +165,13 @@ Try your function out on the `xmas` data, by making a new variable containing th
 ```{r}
 xmas <- xmas %>%
   mutate(
-    Num.Word = as.character(english::english(Day)),
-    Full.Phrase = pmap_chr(list(Day, Num.Word, Gift.Item, Verb, Adjective, Location), make_phrase)
+    day.num = as.character(
+      english::english(Day)
+      ), 
+    Full.Phrase = pmap_chr(list(num = Day, num_word = day.num, 
+                                item = Gift.Item, verb = Verb, 
+                                adjective = Adjective, location = Location), 
+                           make_phrase)
   )
 ```
 
@@ -186,27 +191,29 @@ Write a function called `sing_line` that takes as input:
 ```{r}
 sing_line <- function(data, num, phrase_col) {
   
-  
   ## Set up intro line
   
   num_word <- english::ordinal(num)
   
   intro <- glue::glue("On the {num_word} day of Christmas, my true love gave to me:")
   
+  
   ## Sing gift phrases
   
   phrases <- data %>%
     pull({{phrase_col}})
-
   
-  phrases[1] <- paste0("and ", phrases[1], ".")
+  if(num > 1){
+    phrases[2] <- paste0(phrases[2], " and")
+  }
   
-  gift_lines <- str_c(phrases[num:1], collapse = ", \n")
+  gift_lines <- str_c(phrases[num:1], collapse = "\n")
   
   ## put it together
   
-  glue::glue("{intro} \n{gift_lines}")
-  
+  return( 
+    glue::glue("{intro} \n{gift_lines}")
+  )
   
 }
 ```
@@ -214,30 +221,11 @@ sing_line <- function(data, num, phrase_col) {
 
 
 ```{r}
-sing_line(xmas, 2, Full.Phrase)
+song <- xmas %>% 
+  pmap(list(num = Day,
+                  num_chr = Day.in.Words,
+                  phrase_col = Full.Phrase),
+             sing_line)
 
-```
-
-#### Try the package
-
-Use the following code to load a dataset that is different from the original
-`xmas` song. 
-
-```{r, echo = TRUE}
-xmas2 <- read.csv("https://www.dropbox.com/s/ap2hqssese1ki4j/xmas_2.csv?dl=1")
-
-```
-
-```{r}
-xmas2 <- xmas2 %>%
-  mutate(
-    Num.Word = as.character(english::english(Day)),
-    Full.Phrase = pmap_chr(list(Day, Num.Word, Gift.Item, Verb, Adjective, Location), make_phrase)
-  ) 
-
-map_chr(1:12, ~sing_line(xmas2, .x, Full.Phrase)) %>%
-  str_c(collapse = "\n") %>%
-  cat()
-  
 ```
 

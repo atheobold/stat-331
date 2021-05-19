@@ -13,10 +13,15 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 library(tidyverse)
 ```
 
+
+![](christmas_tree.jpg)
+
 ## Introduction
 
 The song "12 Days of Christmas", written around 1780, tells the tale of many
-gifts a person receives in the days leading up to Christmas. ([https://en.wikipedia.org/wiki/The_Twelve_Days_of_Christmas_(song)](https://en.wikipedia.org/wiki/The_Twelve_Days_of_Christmas_(song))) 
+gifts a person receives in the days leading up to Christmas.
+([link to lyrics](https://en.wikipedia.org/wiki/The_Twelve_Days_of_Christmas_(song)](https://en.wikipedia.org/wiki/The_Twelve_Days_of_Christmas_(song)))).  
+
 
 These gifts repeat and compound; on the first day, the narrator receives
 
@@ -24,7 +29,7 @@ These gifts repeat and compound; on the first day, the narrator receives
 A partridge in a pear tree.
 ```
 
-On the last day, they receive
+On the twelfth day, they receive
 
 ```
 Twelve Drummers Drumming
@@ -46,31 +51,37 @@ repetitive song.
 
 ---
 
-## The Package
+## The Repository
 
-Go to https://github.com/Adventures-R/twelvedays to find 
+Go to <https://github.com/atheobold/twelvedays> to find 
 the package for this week's lab.
 
-Fortunately, I have already created the main structure of the package for you.
-Unfortunately, the functions in the package are not complete.  
-Your job is to fill out the
-rest of the code inside the functions. 
+Fortunately, I have already created the main structure of the functions for you.
+Your job is to fill in the rest of the code inside the functions. 
 
-To get your own copy of the package repository, you'll want to **fork** it from
-the `Adventures-R` account.
-You can then **clone** the repository; i.e., download a copy to your local 
-machine.  You can do this via GitHub Desktop (recommended!) or by downloading 
-and unzipping a compressed file.
+To get your own copy of the repository, you'll want to **fork** it from my
+account (`atheobold`). Once you have your own fork, GitHub will take you to the 
+page for your copy of my `twelvedays` repository. You can then **clone** the
+repository; i.e., download a copy to your local machine by copying-and-pasting 
+the HTTPS address into a new RStudio project (the same steps you did in the 
+Practice Activity). 
 
 ![](fork_clone.gif)
 
+**Every** member of your group should have their own copy of the `twelvedays` 
+repository. You are expected to add, commit, and push the changes you make to 
+**your** repository. Unless **everyone** on your team feels comfortable, 
+**do not** collaborate on the _same_ repository! 
 
-Once you have downloaded the repository folder, double-click the `.Rproj` file inside to
+If you are horribly opposed to working in GitHub for this lab, you can download
+the compressed file with all of the contents for the lab. Once you have
+downloaded the repository folder, double-click the `.Rproj` file inside to
 launch your R Project.
+
 
 ### A Test Dataset
 
-Run the code below to load up a dataset called `xmas` that contains the crucial 
+Run the code provided to load in a dataset called `xmas` that contains the crucial 
 information about the gifts in the song. We will use this dataset to test out
 our functions as we work on them.
 
@@ -79,37 +90,30 @@ xmas <- read.csv("https://www.dropbox.com/s/e584pryn8evm1gz/xmas.csv?dl=1")
 ```
 
 Note that your functions can - and should! - reference each other.  
-That is, don't duplicate code; use earlier, smaller functions inside your larger 
-functions.
+That is, don't duplicate code; use earlier, smaller functions inside your
+larger functions.
 
 ### Other packages
 
-The packages `dplyr`, `stringr`, `glue`, and `purrr` are already imported into
-the `twelvedays` package, so you can use functions from these without worrying.
+The packages `dplyr`, `stringr`, `glue`, and `purrr` are already loaded into
+the materials for making the `twelvedays` functions. Make sure you have each of 
+these packages installed! 
 
-If you want to rely on functions from other packages that's fine, but you need to 
-deal with two fiddly steps:
-
-1.  Type `usethis::use_package("packagename")` into the **console**.
-2.  Add `@import packagename` in the top section of each `.R` file.
-
-Other than this quirk, you do not need to edit any of the package files or documentation
-in `twelvedays`.
+If you want to rely on functions from other packages that's fine, but you will 
+need to load them in the set-up chunk.  
 
 
 ### Advice
 
 #### Workflow
 
-A function in a package is no different than any other function.  I suggest you
-make an R Markdown file just for yourself, while you work on designing your
-functions and testing them on small examples.
+Make smaller versions of the `xmas` dataset (e.g., the first two days). 
 
-Once you feel confident in your function code, copy your work into the appropriate
-files in the `twelvedays` package folder.
+Once you feel confident in your function code, use the smaller version of the
+data to test the functions you write, before you test them on the full dataset. 
 
-Make sure that after each function is finished, you **commit** your work to Git.
-(You do not need to **push** to GitHub until you are done with everything.)
+Make sure that after each function is finished, you **commit** and **push** 
+your work to Git.
 
 
 #### Build from small pieces
@@ -131,38 +135,24 @@ and a patridge in a pear tree.
 
 There's a lot you can do to polish up the way the song prints.
 
-However, the goal of this lab is to practice writing functions and using iteration.
-Don't get bogged down in details like how the song displays, or small grammar
-rules, until you've finished the main tasks.
+However, the goal of this lab is to practice writing functions and using
+iteration. Don't get bogged down in details like how the song displays, or small
+grammar rules (like commas!), until you've finished the main tasks.
 
 ---
 
 ## Step One:  Plurals
 
-Note that the gifts are listed in singular: for example, on day 5 the narrator 
-receives "5 golden rings", but the entry in the dataset for the gift on day 5 
-simply says "ring".  
+Note that the gifts are listed in singular: for example, on day five the
+narrator receives "five golden rings", but the entry in the dataset for the gift
+on day five simply says "ring".  
 
-In your `twelvedays` package, navigate to the file `pluralize_gift.R` in the `R` 
-folder. You will find some incomplete code for a function called `pluralize_gift` 
-that takes a gift and returns the appropriate plural. 
+Using the skeleton of the `pluralize_gift()` function, complete the code so that 
+the function takes a gift and returns the appropriate plural. 
 
-Complete this function code.
-
-Try your function out on the gifts in the dataset.  
-(Consider: is your function *vectorized*?  
-It does not have to be, but it may make things simpler!)
-
-```{r}
-
-pluralize_gift(xmas$Gift.Item)
-
-purrr::map_chr(xmas$Gift.Item, pluralize_gift)
-
-```
-
-*Hint 1:* Note that the gifts on days 6 and 9 have unusual pluralizations.  You 
-may assume that in other datasets, there will be no special cases besides these types.
+*Hint 1:* Note that the gifts on days six and nine have unusual pluralization.
+You may assume that in other datasets, there will be no special cases besides
+these types.
 
 *Hint 2:*  The following small example may be useful to you:
 
@@ -177,18 +167,34 @@ my_names %>%
 **Important:**  You should **absolutely not** "hard-code" anything into this 
 function; this function should work in general, not just for the items in the 12 
 Days of Christmas.  For example, the word "rings" should not appear anywhere in 
-the function.  I should be able to give it any gift and any day, and get back the 
-plural.
+the function.  I should be able to give it any gift and get back the plural of 
+that gift.
+
+
+### Test Your Function
+
+Try your function out on the smaller and then larger gift dataset.  
+(Consider: is your function *vectorized*?  It does not have to be, but you can 
+try it out if you want!)
+
+```{r}
+
+# Will work if your function is vectorized! 
+pluralize_gift(xmas$Gift.Item)
+
+# Will work if your function is not vectorized!
+purrr::map_chr(xmas$Gift.Item, pluralize_gift)
+
+```
 
 
 ---
 
 
-
 ## Step Two: Creating sentences
 
-Write a function called `make_phrase` that takes as input the necessary information, 
-and returns a phrase.  For example, 
+Write a function called `make_phrase()` that takes as input the necessary 
+information, and returns a phrase.  For example, 
 
 ```{r}
 make_phrase(num = 10, 
@@ -205,13 +211,28 @@ should return
 "ten lords a-leaping"
 ```
 
-Try your function out on the `xmas` data, by making a new variable containing the daily phrases.
+### Test Your Function
+
+Try your function out on the `xmas` data, by making a new variable containing 
+the daily phrases.
+
+**Hint:** The `Day.in.Words` variable isn't quite what you want! You want `12`
+to say `"twelve"` **not** `"twelfth"`. I suggest using the **english** package
+to create numbered days and then use those in your `pmap_chr()`!
+
 
 ```{r}
-xmas %>%
-  mutate(
-    Full.Phrase = pmap...
+xmas <- xmas %>%
+  mutate(day.num = ___, 
+    Full.Phrase = pmap_chr(list(num = Day, 
+                                num_word = day.num, 
+                                item = Gift.Item, 
+                                verb = Verb, 
+                                adjective = Adjective, 
+                                location = Location), 
+                           make_phrase)
   )
+
 ```
 
 ---
@@ -219,7 +240,7 @@ xmas %>%
 
 ## Step Three:  Iteration.
 
-Write a function called `sing_line` that takes as input:
+Write a function called `sing_line()` that takes as input:
 
 * A dataset
 
@@ -233,76 +254,79 @@ For example,
 
 ```{r}
 sing_line(xmas, 2, Full.Phrase)
-
 ```
 
 should return
 
 ```
-On the second day of Christmas, my true love sent to me,
-two turtle doves 
-and a partridge in a pear tree.
+On the second day of Christmas, my true love sent to me:
+two turtle doves and
+a partridge in a pear tree.
 ```
 
-*Hint:* This function will need a `map` function inside of it, to iterate over 
-all the gifts that are given on a particular day.
-
-*Hint 2:*  The `{{phrase_col}}` part, which I provided for you, lets you use 
+*Hint:*  The `{{phrase_col}}` part, which I provided for you, lets you use 
 column names as arguments to a function.  Don't delete that line of code!
+
 
 ---
 
-## Step Four: Use your package.
 
+## Step Four: Use Your Functions!
+
+Run the following code to test out your functions! The output should be the 
+lyrics for the entire 12 Days of Christmas song. 
+
+```{r}
+xmas2 <- xmas %>%
+  mutate(
+    day.num = as.character(english::english(Day)), 
+    Full.Phrase = pmap_chr(list(num = Day, 
+                                num_word = day.num, 
+                                item = Gift.Item, 
+                                verb = Verb, 
+                                adjective = Adjective, 
+                                location = Location), 
+                           make_phrase)
+  )
+
+map_chr(1:12, ~sing_line(xmas2, .x, Full.Phrase)) %>%
+  str_c(collapse = "\n") %>%
+  cat()
+
+```
+
+
+---
+
+
+## Step Five: Show Me Your Work! 
 
 #### Get it on GitHub
 
-Once you are done with all the functions, make sure you have **pushed** your work
-to GitHub.
+Once you are done with all the functions, make sure you have **pushed** your
+work to GitHub.
 
-#### Install the package
+Make sure your repository contains your completed RMarkdown document and
+knitted HTML. 
 
-In your console, type 
+- Your HTML should **only** show the code for your functions and output from 
+testing / verifying that your functions perform as they should. 
 
-```{r}
-remotes::install_github("yourname/twelvedays")
-```
+__If you used GitHub to store your work:__
 
-If it prompts you to update packages, I recommend skipping that for now.
+Submit the link to your GitHub repository in the Lab 8 assignment portal. 
 
-#### Load the package
+__If you downloaded the compressed folder and did not use GitHub:__
 
-Create a new R Markdown file. At the top, include:
+Submit **both** your RMarkdown file and knitted HTML file
 
-```{r}
-library(twelvedays)
-```
-
-Also include a url to your GitHub repository.
-
-
-#### Try the package
-
-Use the following code to load a dataset that is different from the original
-`xmas` song. 
-
-```{r, echo = TRUE}
-xmas2 <- read.csv("https://www.dropbox.com/s/ap2hqssese1ki4j/xmas_2.csv?dl=1")
-
-```
-
-Use the functions from your package to print out the whole song from the `xmas2`
-dataset.
-
-Knit your html, and turn it in.
 
 ---
 
+
 ## Grading
 
-Major points will be deducted for:
-
-* A package that cannot be installed
+__You will get an automatic revision for:__
 
 * Functions that do not work the way they are intended
 
@@ -314,31 +338,24 @@ Major points will be deducted for:
 *and* all the prior days.
 
 
-Minor points will be deducted for:
+__Minor points will be deducted for:__
 
-* Song output that displays in unappealing ways (e.g. extraneous output, extra white
-space, etc.)
+* Song output that displays in unappealing ways (e.g. extraneous output, extra
+white space, etc.)
 
 * Minor warning messages from functions
 
 * Forgetting to include the url to your GitHub repo
 
 
-No points will be deducted for:
+__No points will be deducted for:__
 
 * Unvectorized functions
 
-* Anything to do with the package files, apart from the functions themselves.
 
 ---
+
 
 ## Challenge
 
-Add a **unit test** to your package.
-
-[This blog post](https://kbroman.org/pkg_primer/pages/tests.html) should help you
-get started.
-
-Create at least one unit test for each of your three functions.
-
----
+There is no challenge this week! 
