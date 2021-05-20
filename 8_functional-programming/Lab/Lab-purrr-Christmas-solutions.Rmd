@@ -29,7 +29,6 @@ functions.
 
 ---
 
-
 ## Step One:  Plurals
 
 Note that the gifts are listed in singular: for example, on day five the
@@ -53,7 +52,8 @@ my_names %>%
 ```
 
 
-**Allison's Completed Function:** 
+**Allison's Non-Vectorized Function:** 
+
 
 ```{r}
 pluralize_gift <- function(item){
@@ -63,8 +63,8 @@ pluralize_gift <- function(item){
     item <- str_replace(item, "oo", "ee")
   } 
   ## Handle "y" changing to "ies"
-  else if (str_detect(item, "y")) {
-    item <- str_replace(item, "y", "ies")
+  else if (str_detect(item, "y$")) {
+    item <- str_replace(item, "y$", "ies")
   } 
   ## Just use an "s" for everything else
   else {
@@ -74,22 +74,36 @@ pluralize_gift <- function(item){
 }
 ```
 
-
-Try your function out on the gifts in the dataset.  
-(Consider: is your function *vectorized*?  
-It does not have to be, but it may make things simpler!)
+### Test Your Function! 
 
 ```{r, error = TRUE}
 purrr::map_chr(xmas$Gift.Item, pluralize_gift)
-
 ```
 
+**Allison's Vectorized Function** 
+
+```{r}
+pluralize_gift_vec <- function(item){
+  
+  plural <- case_when(
+     ## Handle goose changing to geese
+    str_detect(item, "oo") ~ str_replace(item, "oo", "ee"), 
+    ## Handle y changing to ies
+    str_detect(item, "y$") ~ str_replace(item, "y$", "ies"), 
+    ## Add an s for everything else
+    TRUE ~ paste0(item, "s")
+  )
+  return(plural)
+}
 ```
-This function is NOT vectorized.
+
+### Test Your Function
+
+```{r}
+pluralize_gift_vec(xmas$Gift.Item)
 ```
 
 ---
-
 
 
 ## Step Two: Creating sentences
@@ -98,7 +112,7 @@ Write a function called `make_phrase()` that takes as input the necessary
 information, and returns a phrase.  
 
 
-**Allison's Completed Function:** 
+**Allison's Non-Vectorized Function:** 
 
 ```{r}
 make_phrase <- function(num, num_word, item, verb, adjective, location) {
@@ -109,46 +123,33 @@ make_phrase <- function(num, num_word, item, verb, adjective, location) {
   adjective <- replace_na(adjective, "")
   location <- replace_na(location, "")
   
-  
   ## Figure out if a word starts with a vowel
-  vowel_start <- str_sub(item, 1, 1) %>% str_detect("[aeiou]")
+  vowel_start <- str_sub(item, 1, 1) %>% 
+    str_detect("[aeiou]")
   
   ## If the day is larger than 1, the items need pluralized! 
   if (num > 1) {
-    
     item <- pluralize_gift(item)
-    
   } 
-  ## If the word starts with a vowel, add "an" to the beginning
+  ## If the day is 1 AND the word starts with a vowel, add "an" to the beginning
   else if (vowel_start) {
-    
     num_word <- "an"
-    
   } 
-  ## If the word starts with a consonant, add "a" to the beginning
+  ## If the day is 1 AND word starts with a consonant, add "a" to the beginning
   else {
-    
     num_word <- "a"
-    
   }
   
   ## Glue all of the pieces together! 
   glue::glue("{num_word} {adjective} {item} {verb} {location}") %>%
+    ## Remove extra white space between words 
     str_squish()
-  
   
 }
 ```
 
 
 ### Test Your Function
-
-Try your function out on the `xmas` data, by making a new variable containing 
-the daily phrases.
-
-**Hint:** The `Day.in.Words` variable isn't quite what you want! You want `12`
-to say `"twelve"` **not** `"twelfth"`. I suggest using the **english** package
-to create numbered days and then use those in your `pmap_chr()`!
 
 ```{r}
 xmas <- xmas %>%
@@ -170,6 +171,60 @@ xmas %>%
 ```
 
 
+**Allison's Vectorized Function:** 
+
+```{r}
+make_phrase_vec <- function(num, num_word, item, verb, adjective, location) {
+  
+  ## Replace NAs with blank strings
+  item <- replace_na(item, "")
+  verb <- replace_na(verb, "")
+  adjective <- replace_na(adjective, "")
+  location <- replace_na(location, "")
+  
+  ## Figure out if a word starts with a vowel
+  vowel_start <- str_sub(item, 1, 1) %>% 
+    str_detect("[aeiou]")
+  
+  ## If the day is larger than 1, the items need pluralized! 
+  item <- if_else(num > 1, pluralize_gift_vec(item), item) 
+  
+  ## If the word starts with a vowel, add "an" to the beginning
+  num_word <- case_when(
+    num_word == 1 & vowel_start == TRUE ~ "an",
+    num_word == 1 & vowel_start == FALSE ~ "a",
+    TRUE ~ num_word)
+
+  ## Glue all of the pieces together! 
+  glue::glue("{num_word} {adjective} {item} {verb} {location}") %>%
+    str_squish()
+}
+```
+
+
+### Test Your Function
+
+```{r}
+xmas <- xmas %>%
+  mutate(
+    day.num = as.character(
+      english::english(Day)
+      ),
+    Full.Phrase = make_phrase_vec(num = Day,
+                                  num_word = day.num, 
+                                  item = Gift.Item,
+                                  verb = Verb, 
+                                  adjective = Adjective, 
+                                  location = Location)
+    )
+```
+
+```{r}
+xmas %>% 
+  select(Full.Phrase) %>% 
+  head()  
+```
+
 ---
 
 
@@ -183,9 +238,6 @@ Write a function called `sing_line()` that takes as input:
 
 * The name of a column in the dataset that contains the phrases for each day.
 
-
-**Allison's Completed Function:** 
-
 ```{r}
 sing_line <- function(data, num, phrase_col) {
   
@@ -194,7 +246,6 @@ sing_line <- function(data, num, phrase_col) {
   num_word <- english::ordinal(num)
   
   intro <- glue::glue("On the {num_word} day of Christmas, my true love gave to me:")
-  
   
   ## Sing gift phrases
   
@@ -211,7 +262,7 @@ sing_line <- function(data, num, phrase_col) {
   ## Start at the day and end at 1
   gift_lines <- str_c(phrases[num:1], collapse = "\n")
   
-  ## put it together
+  ## Put it together
   
   return( 
     glue::glue("{intro} \n{gift_lines}")
@@ -220,7 +271,7 @@ sing_line <- function(data, num, phrase_col) {
 }
 ```
 
-
+### Test Your Function 
 
 ```{r}
 xmas %>% 
