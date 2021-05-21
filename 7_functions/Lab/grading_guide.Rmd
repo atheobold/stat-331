@@ -1,0 +1,309 @@
+---
+title: "Grading Guide - Lab 7"
+output: html_document
+---
+
+## Report
+
+Please flag at the beginning if the HTML file for the report:
+
+- prints messages / warnings (e.g., when the data is loaded, when the plots are
+made)
+- prints the dataset or previews of the dataset (e.g., `View(fish)` or 
+`head(fish)`)
+
+## Code Format 
+
+While grading, please flag if the formatting of the code is poor (e.g., there 
+are not spaces before and after `=`, there are not new lines after every ` %>%`, there are not new lines
+after every `+`)
+
+
+## Part One: Summaries and Plots
+
+### Task 1 
+
+- How many observations have missing values? 
+
+  * **4**: have code to find the number of missing values -- correct
+  answer of 1796 (can just be printed)
+  * **Redo**: If only say 1796 with no code
+
+```{r, eval = FALSE}
+na_dim <- fish %>% 
+  drop_na() %>% 
+  dim()
+
+og_dim <- fish %>% 
+  dim() 
+
+og_dim[1] - na_dim[1]
+
+```
+
+- What variable(s) have missing values present? 
+
+  * **4**: have code to show that `weight` is only variable with missing
+  values (can use `summary()` or more complicated approach)
+  * **Redo**: If only say "weight" with no code
+
+```{r, eval = FALSE}
+fish <- fish %>%
+  mutate_if(is.character, as_factor)
+
+# Simple approach
+fish %>% 
+  summary()
+
+# More complicated approach
+fish %>% 
+  summarise_at(vars(everything()), ~ sum(is.na(.x)))
+```
+ 
+
+### Task 2 
+
+- Create a thoughtful visualization exploring the frequency of missing values
+across the different years, sections, and trips.
+
+  * Absolutely every answer must have:
+    + filter include only missing values (`filter()`)
+    + grouped counts for the number of missing observations (`group_by()` + `count()` or `summarize()`) 
+    + barplot of counts (with `geom_bar()` or `geom_col()`)
+    + If **any** of these are not met, the response earns a "Redo"
+
+  * **4** -- Must have:
+    + `fill` for one variable & `facet_wrap()` for the other variable
+    + nice axis labels, stating the y-axis is "counts of observations with missing values"
+    + transform `year` into a factor to get all of the years printed on the x-axis
+
+  * **3** -- Must have: 
+    + `fill` for one variable & `facet_wrap()` for the other variable
+    + nice axis labels, stating the y-axis is "counts of observations with missing values"
+   
+  * **Redo**: If the response **does not** have *at least* 2 of the criteria for a 4
+
+```{r, eval = FALSE}
+fish %>% 
+  filter(is.na(weight)) %>% 
+  group_by(year, section, trip) %>% 
+  count(is.na(weight)) %>% 
+  mutate(trip = as.factor(trip), 
+         year = as.factor(year)) %>% 
+  ggplot(aes(x = year, y = n, fill = trip)) + 
+  geom_col() + 
+  facet_wrap(vars(section)) + 
+  labs(x = "Year of Sample", 
+       y = "Number of Missing Fish Weights", 
+       fill = "Trip Number") 
+```
+
+
+### Task 3 (similar to Task 2)
+
+- Create a thoughtful visualization exploring how the number of fish captured 
+differed each year, for each section of river. 
+
+  * Absolutely every answer must have:
+    + grouped counts for the number of observations (`group_by()` + `count()` or `summarize()`) 
+    + barplot of counts (with `geom_bar()` or `geom_col()`)
+    + If **either** of these are not met, the response earns a "Redo"
+
+  * **4** -- Must have:
+    + `fill` for one variable & `facet_wrap()` for the other variable
+    + nice axis labels, stating the y-axis is "counts of observations"
+    + transform `year` into a factor to get all of the years printed on the x-axis
+    (Note if they rotated the axis labels to print nicer!)
+
+  * **3** -- Must have: 
+    + `fill` for one variable & `facet_wrap()` for the other variable
+    + nice axis labels, stating the y-axis is "counts of observations with missing values"
+   
+  * **Redo**: If the response **does not** have *at least* 2 of the criteria for a 4
+
+```{r, eval = FALSE}
+# Counts of fish captured
+fish %>% 
+  group_by(year, section, species) %>% 
+  count() %>% 
+  mutate(year = as.factor(year)) %>% 
+  ggplot(aes(x = year, y = n, fill = species)) + 
+  geom_col() + 
+  facet_wrap(vars(section)) + 
+  labs(x = "Year of Sample", 
+       y = "Number of Fish Captured", 
+       fill = "Species of Fish") + 
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+# Proportion of fish captured
+fish %>% 
+  group_by(year, section, species) %>% 
+  count() %>% 
+  mutate(year = as.factor(year)) %>% 
+  ggplot(aes(x = year, y = n, fill = species)) + 
+  geom_col(position = "fill") + 
+  facet_wrap(vars(section)) + 
+  labs(x = "Year of Sample", 
+       y = "Proportion of Fish Captured", 
+       fill = "Species of Fish") + 
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+```
+
+
+### Task 4 
+
+
+Create a table displaying the mean `length` and `weight` of the fish caught over
+the different sampling years. The table should have:
+
+- different values of `year` as (separate) columns
+- the mean `length` and mean `weight` as (separate) rows 
+
+
+  * **4** -- Use a double pivot (`pivot_longer()` then `pivot_wider()`)
+  * **Redo** -- If a double pivot is not used
+
+
+```{r, eval = FALSE}
+fish %>% 
+  group_by(year) %>% 
+  summarize(mean_length = mean(length, na.rm = TRUE), 
+            mean_weight = mean(weight, na.rm = TRUE)) %>% 
+  pivot_longer(cols = c(`mean_length`, `mean_weight`), 
+               names_to = "measurement", 
+               values_to = "value") %>% 
+  pivot_wider(names_from = year, 
+              values_from = value)
+```
+
+
+## Part Two:  Adjust the Data (Function Writing)
+
+### Task 1
+
+Let's transform the repeated process above into a `rescale()` function.  
+
+- The function should take a single vector as its argument.
+
+  * **4** -- Must have:
+    + store `range()` in an object 
+    + use object with `range()` elements (e.g. `range[1]`) to calculate scaled
+    values
+    + explicit return (e.g. `return(scaled)`)
+    
+  * **3**
+    + If the `min()` function is called twice **or** if there is not an
+    explicit return
+    
+  * **Redo** 
+    + If the `min()` function is called twice **and** there is not an
+    explicit return
+
+
+```{r, eval = FALSE}
+rescale <- function(x){
+  rng <- range(x, na.rm = TRUE)
+  scaled <-  (x - rng[1]) / (rng[2] - rng[1])
+  return(scaled)
+}
+```
+
+
+### Task 2
+
+Now, let's incorporate some checks into your function! Modify your previous code
+to create the following checks: 
+
+- the function should stop if the input is not numeric
+- the function should stop if the length of the vector is not greater than 1 
+
+  * **4** -- Must have:
+   + Conditional checks for whether an input is numeric (`is.numeric(x)`) 
+   **and** if the vector's length is strictly greater than 1 (`length(x) > 1`)
+   (Note if the checks allow for the function to be vectorized!)
+  
+  + **Redo** -- If one of the above checks is incorrect
+
+```{r, eval = FALSE}
+rescale <- function(x){
+  stopifnot(is.numeric(x), 
+            length(x) > 1)
+  
+  rng <- range(x, na.rm = TRUE)
+  scaled <-  (x - rng[1]) / (rng[2] - rng[1])
+  return(scaled)
+}
+```
+
+
+### Task 3
+
+Test your function on a simple vector. 
+
+  - **4** -- If there is evidence of a check
+  
+  - **Redo** -- If there is not evidence of a check
+
+```{r, eval = FALSE}
+
+x <- c(1:25, NA)
+
+rescale(x)
+
+```
+
+### Task 4
+
+Next, let's test the function on the `length` column of the `BlackfootFish`
+dataset.
+
+- Make side-by-side plots of the original values of `length` and the rescaled
+values of `length`. 
+
+  * **4** -- Must have:
+   +  two histograms of `length` variable (unscaled and scaled) 
+   + different y-axis labels: (1) stating the units of the original measurements
+   (mm), and (2) stating the values are scaled (e.g. "Scaled Fish Lengths")
+   + side-by-side plots (either using `grid.arrange()` or code chunk specifications)
+  
+  * **3** -- If **one** of the following is true for the response
+    + does not use `geom_histogram()`
+    + does not change y-axis labels
+
+  * **Redo** -- If the plots are not side-by-side **or** if both of the 
+  statments above (for a **3**) are true 
+
+
+```{r, eval = FALSE}
+
+original <- fish %>% 
+  ggplot(aes(x = length)) + 
+  geom_histogram(binwidth = 45) + 
+  labs(x = "Fish Length (mm)")
+
+scaled <- fish %>% 
+  mutate(length_scaled = rescale(length)) %>%  
+  ggplot(aes(x = length_scaled)) + 
+  geom_histogram(binwidth = .04) + 
+  labs(x = "Scaled Fish Lengths (Scaled with Minimum and Range)")
+
+grid.arrange(original, scaled, nrow = 1)
+
+```
+
+
+### Task 5 (incorrectly labeled as Task 4)
+
+Use your `rescale()` function to rescale **both** the `length` and `weight` 
+columns. **I expect that you only call the `rescale()` function _one_ time!**  
+
+  - **4** -- If the response uses `mutate_at()` to scale the variables 
+  - **Redo** -- If the response calls the `rescale()` function twices
+
+
+```{r, eval = FALSE}
+fish <- fish %>% 
+  mutate_at(vars(length:weight), 
+            rescale)
+```

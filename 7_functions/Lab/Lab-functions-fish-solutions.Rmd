@@ -72,7 +72,31 @@ measurement errors.
 
 - How many observations have missing values? 
 
+```{r}
+na_dim <- fish %>% 
+  drop_na() %>% 
+  dim()
+
+og_dim <- fish %>% 
+  dim() 
+
+og_dim[1] - na_dim[1]
+
+```
+
 - What variable(s) have missing values present? 
+
+```{r}
+fish <- fish %>%
+  mutate_if(is.character, as_factor)
+
+# Initial investigation
+# fish %>% summary()
+
+fish %>% 
+  summarise_at(vars(everything()), ~ sum(is.na(.x)))
+```
+
 
 
 ### Task 2
@@ -255,19 +279,21 @@ can play around with the `fig.show` and `out.width` options of your code chunk (
 ```{r}
 original <- fish %>% 
   ggplot(aes(x = length)) + 
-  geom_histogram(binwidth = 45)
+  geom_histogram(binwidth = 45) + 
+  labs(x = "Fish Length (mm)")
 
 scaled <- fish %>% 
   mutate(length_scaled = rescale(length)) %>%  
   ggplot(aes(x = length_scaled)) + 
-  geom_histogram(binwidth = .04)
+  geom_histogram(binwidth = .04) + 
+  labs(x = "Scaled Fish Lengths (Scaled with Minimum and Range)")
 
 
 grid.arrange(original, scaled, nrow = 1)
 
 ```
         
-### Task 4 
+### Task 5 
 
 Alright, now that we feel good about our function, let's put it to work. Use 
 your `rescale()` function to rescale **both** the `length` and `weight` 
