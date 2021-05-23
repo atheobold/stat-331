@@ -152,7 +152,7 @@ a.sourceLine {
 </div>
 <div id="simulating-in-r" class="section level2">
 <h2>Simulating in R</h2>
-<p>⏯ <a href="https://www.youtube.com/embed/LNg7kQbXvU0">Required Video – Simulating Data in R</a></p>
+<p>▶️ <a href="https://www.youtube.com/embed/LNg7kQbXvU0">Required Video – Simulating Data in R</a></p>
 <p>📖 <a href="https://bookdown.org/rdpeng/rprogdatascience/simulation.html">Required Reading – <em>R Programming for Data Science</em> : Simulation</a></p>
 <hr />
 <p>✅ <strong>Check-in: The <code>r</code>, <code>p</code>, <code>q</code>, and <code>d</code> functions</strong></p>
@@ -176,12 +176,12 @@ a.sourceLine {
 <p>Functions like <code>rnorm()</code> rely on something called <strong>pseudorandomness</strong>. Because computers can never be <em>truly</em> random, complicated processes are implemented to make “random” number generation be so unpredictable as to behave like true randomness.</p>
 <p>This means that projects involving simulation are harder to make <strong>reproducible</strong>. For example, here are two identical lines of code that give different results!</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span></code></pre></div>
-<pre><code>## [1] 0.5679161</code></pre>
+<pre><code>## [1] -0.5123896</code></pre>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span></code></pre></div>
-<pre><code>## [1] -0.129151</code></pre>
+<pre><code>## [1] -1.148993</code></pre>
 <p>Fortunately, pseudorandomness depends on a <strong>seed</strong>, which is an arbitrary number where the randomizing process starts. Normally, R will choose the seed for you, from a pre-generated vector:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(.Random.seed)</span></code></pre></div>
-<pre><code>## [1]       10403           9  1390682053  -748960900 -1387643950   -32375987</code></pre>
+<pre><code>## [1]       10403           9  -574581502  -167215651 -1059857193  1825228734</code></pre>
 <p>However, you can also choose your own seed using the <code>set.seed()</code> function. This guarantees your results will be consistent:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span></code></pre></div>

@@ -144,7 +144,7 @@ runif(1)
 ---
 
 
-### Plotting distributions
+### Plotting Distributions
 
 Here is the code that made one of the plots from the lecture video:
 

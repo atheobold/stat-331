@@ -1,6 +1,6 @@
 ---
 title: "Statistical Distributions and Simulation"
-
+author: "Stat 331"
 output:
   xaringan::moon_reader:
     lib_dir: libs
