@@ -1,0 +1,465 @@
+---
+title: "Introduction to Linear Models -- Simple Linear Regression"
+author: "Stat 331"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["xaringan-themer.css", "slide-style.css"]
+    nature:
+      highlightStyle: solarized-light
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+---
+
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.width = 8, fig.height = 6}
+knitr::opts_chunk$set(fig.align = "center", 
+                      message = FALSE, 
+                      warning = FALSE)
+
+options(htmltools.dir.version = FALSE)
+options(show.signif.stars = FALSE)
+
+library(openintro)
+library(broom)
+library(gridExtra)
+library(kableExtra)
+library(png)
+library(xaringanthemer)
+library(xaringan)
+library(tidyverse)
+library(flair)
+
+
+style_duo_accent(
+  primary_color      = "#0F4C81", # pantone classic blue
+  secondary_color    = "#B6CADA", # pantone baby blue
+  header_font_google = google_font("Raleway"),
+  text_font_google   = google_font("Raleway", "300", "300i"),
+  code_font_google   = google_font("Source Code Pro"),
+  text_font_size     = "30px"
+)
+```
+
+
+## Data for Today 
+
+The `ncbirths` dataset is a random sample of 1,000 cases taken from a larger 
+dataset collected in North Carolina in 2004. 
+
+Each case describes the birth of a single child born in North Carolina, along
+with various characteristics of the child (e.g. birth weight, length of
+gestation, etc.), the child’s mother (e.g. age, weight gained during pregnancy,
+smoking habits, etc.) and the child’s father (e.g. age). 
+
+</br>
+
+__What do you expect the dataset would look like?__ 
+
+## Relationships Between Variables
+
+- In a statistical model, we generally have one variable that is the output and
+one or more variables that are the inputs. 
+
+- Response variable
+  * a.k.a. $y$, dependent
+  * The quantity you want to understand
+
+- Explanatory variable
+  * a.k.a. $x$, independent, explanatory, predictor
+  * Something you think might be related to the response
+
+- Both variables are numerical
+
+
+## Visualizing Linear Regression
+
+- The scatterplot has been called the most "generally useful invention in the
+history of statistical graphics." 
+
+- It is a simple two-dimensional plot in which the two coordinates of each dot
+represent the values of two variables measured on a single observation.
+
+```{r 2, echo = FALSE, fig.width = 4, fig.height = 3, fig.align = 'center'}
+ggplot(data = bdims, aes(y = wgt, x = hgt)) + 
+  geom_point() +
+  scale_x_continuous("Explanatory Variable", labels = NULL) + 
+  scale_y_continuous("Response Variable", labels = NULL)
+```
+
+## Characterizing Relationships 
+
+<!-- Scatterplots can reveal characteristics of the relationship between two variables. Any patterns - and deviations from those - we see in these plots could give us some insight into the nature of the underlying phenomenon. Specifically, we look for four things: form, direction, strength, and outliers. -->
+
+- Form (e.g. linear, quadratic, non-linear)
+
+- Direction (e.g. positive, negative)
+
+- Strength (how much scatter/noise?)
+
+- Unusual observations (do points not fit the overall pattern?)
+
+<!-- Form is the overall shape made by the points. Since we are learning about linear regression, our primary concern is whether the form is linear or non-linear. -->
+
+<!-- Direction is either positive or negative. Here, the question is whether the two variables tend to move in the same direction - that is, when one goes up, the other tends to go up - or in the opposite direction. We’ll see examples of both in just a minute. -->
+
+<!-- The strength of the relationship is governed by how much scatter is present. Do the points seem to be clustered together in a way that suggests a close relationship? Or are they very loosely organized? -->
+
+<!-- Finally, any points that don’t fit the overall pattern, or simply lie far away, are important to investigate. These outliers may be erroneous measurements, or they can be exceptions that help clarify the general trend. Either way, outliers can be revealing, and we’ll learn more about them later in the course. -->
+
+## Your Turn
+
+```{r, eval = FALSE}
+ncbirths %>% 
+ggplot(aes(x = weeks, y = weight)) +
+  geom_jitter() + 
+  labs(x = "Length of pregnancy (in weeks)",
+       y = "Birth weight of baby (in lbs)")
+```
+
+<div class="columns-2">
+
+```{r, echo = FALSE}
+ncbirths %>% 
+ggplot(aes(x = weeks, y = weight)) +
+  geom_jitter() + 
+  labs(x = "Length of pregnancy (in weeks)",
+       y = "Birth weight of baby (in lbs)")
+```
+
+
+</br>
+</br>
+
+<!-- As we work through these, please keep in mind that much of what we are doing at -->
+<!-- this stage involves making judgment calls. This is part of the nature of -->
+<!-- statistics, and while it can be frustrating - especially as a beginner - it is -->
+<!-- inescapable. For better or for worse, statistics is not a field where there is -->
+<!-- one right answer. There are of course an infinite number of indefensible claims, -->
+<!-- but many judgments are open to interpretation. -->
+
+How would your characterize this relationship? 
+
+- shape
+- direction
+- strength 
+- outliers
+
+<!-- <!-- There isn’t a universal, hard-and-fast definition of what constitutes -->
+<!-- <!-- an outlier, but they are often easy to spot in a scatterplot. -->
+
+<!-- - What observations would you consider to be outliers?  -->
+
+<!-- - How would you go about removing these outliers from the data?  -->
+
+## Summarizing a Linear Relationship 
+
+- Correlation  
+
+  * Correlation coefficient between -1 and 1
+  * Sign of the correlations shows direction
+  * Magnitude of the correlation shows strength
+
+```{r}
+ncbirths %>% 
+  filter(is.na(weight) == FALSE, 
+         is.na(weeks) == FALSE, 
+         weeks > 26) %>% 
+  summarize(correlation = cor(weight, weeks))
+```
+
+## Anscombe Correlations
+
+<div class="columns-2">
+
+<!-- In 1973, statistician Francis Anscombe created a synthetic data set that has -->
+<!-- been used extensively to illustrate concepts related to correlation and -->
+<!-- regression. -->
+
+```{r, echo = FALSE}
+anscombe <- anscombe %>%
+  mutate(id = 1:nrow(.)) %>%
+  gather(key = "key", value = "val", -id) %>%
+  separate(key, into = c("variable", "set"), sep = 1) %>%
+  spread(key = variable, value = val)
+
+ggplot(data = anscombe, aes(x = x, y = y)) +
+  geom_point() +
+  facet_wrap(~set)
+```
+
+Four datasets, very different graphical presentations  
+
+- same mean and standard deviation in both $x$ and $y$
+- same correlation
+- same regression line
+
+</div>
+</br>
+<center>
+
+__For which of these relationships is correlation a reasonable summary measure?__
+
+<!-- ## Interpretation of Correlation -->
+
+<!-- The word “correlation” has both a precise mathematical definition and a more general definition for typical usage in English. While these uses of the word are obviously related and generally in sync, there are times when these two uses can be conflated and/or misconstrued. This occurs frequently in the media when journalists write about scientific results—particularly in health-related studies. -->
+
+## Linear Regression
+
+<!-- Models are ubiquitous in statistics. In many cases, we assume that the value of -->
+<!-- our response variable is some function of our explanatory variable, plus some -->
+<!-- random noise.  -->
+
+<!-- What we are saying here is that there is some mathematical function $f$, which can translate values of one variable into values of another, except that there is some randomness in the process. What often distinguishes statisticians from other quantitative researchers is the way that we try to model that random noise.  -->
+
+- Assume the relationship between $x$ and $y$ takes the form of a linear function.
+
+$$
+  response = intercept + slope \cdot explanatory + noise
+$$
+</br>
+
+- Population Regression Model
+
+$$
+  Y = \beta_0 + \beta_1 \cdot X + \epsilon_i \,, \qquad \epsilon \sim N(0, \sigma)
+$$
+
+</br>
+
+- Fitted Regression Model 
+
+$$
+  \hat{y} = \hat{\beta}_0 + \hat{\beta}_1 \cdot x
+$$
+
+## Fitting a Linear Model
+
+```{r smooth, echo = FALSE, eval = FALSE}
+ncbirths %>% 
+ggplot(aes(x = gained, y = weight)) +
+  geom_jitter() + 
+  geom_smooth(method = "lm") +
+  labs(x = "Weight gained by mother (in lbs)",
+       y = "Weight of the baby at birth (in lbs)")
+
+m1 <- lm(weight ~ gained, data = ncbirths)
+```
+
+```{r, echo = FALSE}
+decorate_chunk("smooth", eval = FALSE) %>%
+  flair("lm")
+```
+
+```{r, echo = FALSE, fig.width = 4, fig.height = 2.75, fig.align = "center"}
+ncbirths %>% 
+ggplot(aes(x = gained, y = weight)) +
+  geom_jitter() + 
+  geom_smooth(method = "lm") +
+  labs(x = "Weight gained by mother (in lbs)",
+       y = "Weight of the baby at birth (in lbs)")
+```
+
+
+## Interpretting a Linear Regression
+
+```{r}
+m1 <- lm(weight ~ weeks, data = ncbirths)
+coef(m1)
+```
+
+</br> 
+
+- Intercept: Expected __mean__ value for $y$, when $x$ is 0  
+
+<!-- __How would we interpret the intercept for this relationship?__  -->
+
+- Slope: Expected change in the __mean__ of $y$, when $x$ is increased by 1 unit
+
+__What do these interpretations look like for this relationship?__
+
+## Model Diagnostics 
+
+- Linear relationship
+
+- Independence of observations
+
+- Normally distributed residuals
+
+- Equal (constant) variance 
+
+## Linear Relationship 
+
+- Almost nothing you explore will look perfectly linear 
+
+- Be careful with relationships that have curvature 
+
+- Variable transformations can often help 
+  
+```{r, echo = FALSE, fig.width = 8}
+## curvature
+p1 <- ggplot(ncbirths, aes(x = weeks, y = weight)) +
+  geom_jitter() +
+  geom_smooth(method = "lm") +
+  labs(x = "Length of pregnancy (in weeks)", y = "Birth weight of baby (in lbs)")
+
+p2 <- ggplot(ncbirths, aes(x = weeks, y = weight)) +
+  scale_y_log10() +
+  scale_x_log10() +
+  geom_jitter() +
+  geom_smooth(method = "lm") +
+  labs(x = "Length of pregnancy (in log weeks)", y = "Birth weight of baby (in log lbs)")
+
+grid.arrange(p1, p2, nrow = 1)
+```
+
+## Independence
+
+In all of the statistical models we encounter in this course we require for the
+observations in the data to be independent.  
+
+  * Often the most crucial but also the most difficult to diagnose. 
+
+<!-- It is also extremely difficult to gather a dataset which is a true random sample -->
+<!-- from the population of interest.  -->
+
+- Independence means that I should not be able to guess the $y$ value for one
+observation based on knowing the $y$ value of another observation. 
+
+- If there is an inherent grouping of observations, then independence may be 
+violated. 
+  * Stock market prices over time  
+  * Geographical similarities
+  * Biological conditions of family members
+  * Repeated observations 
+
+## Normally Distributed Residuals
+
+<div class="columns-2">
+
+</br>
+</br>
+
+```{r, message = FALSE, fig.height = 4, fig.width = 4, echo = FALSE}
+ggplot(data = m1, aes(x = .resid)) +
+  geom_histogram(aes(y = ..density..)) +
+  geom_density(color = "dodgerblue", 
+               lwd = 1.5) + 
+  xlab("Residuals")
+```
+
+</br>
+</br>
+
+- Observations vary symmetrically around the least squares line, spreading out
+in a bell-shaped fashion.
+
+- Less important than linearity or independence for a few reasons: 
+  * Least squares is an unbiased estimate of the true population model.
+  * Larger sample sizes make the model more reliable. 
+
+## Equal Variance
+
+<div class="columns-2">
+
+```{r, echo = FALSE, fig.height = 5}
+p1 <- ncbirths %>% 
+  filter(weeks > 26) %>% 
+  ggplot(aes(x = weeks, y = weight)) +
+  geom_jitter() +
+  geom_smooth(method = "lm") +
+  labs(x = "Length of pregnancy (in weeks)", y = "Birth weight of baby (in lbs)")
+
+p2 <- ggplot(data = m1, aes(x = .fitted, y = .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "red") +
+  xlab("Fitted values") +
+  ylab("Residuals")
+
+grid.arrange(p1, p2, ncol = 1)
+```
+
+- The variability of points around the least squares line remains roughly
+constant.
+
+- Data that exhibit non-equal variance across the range of x-values will have
+the potential to seriously mis-estimate the variability of the slope. 
+
+<!-- This will have consequences for the inference results 
+(i.e., hypothesis tests and confidence intervals). -->
+
+## Your Turn!
+
+Let's look at the relationship between the number of hospital visits of the 
+mother and the weight of the baby. 
+
+```{r, echo = FALSE, fig.align = "center", fig.height = 4, fig.width = 5}
+ncbirths %>% 
+    ggplot(aes(y = weight, x = visits)) +
+    geom_jitter() + 
+    geom_smooth(method = "lm") + 
+  labs(x = "Number of Hospital Visits", 
+       y = "Birth Weight of Baby (in lbs)")
+```
+
+## Interpret the Model 
+
+```{r}
+m2 <- lm(gained ~ visits, data = ncbirths)
+```
+
+```{r, echo = FALSE}
+tidy(m2)
+```
+
+</br>
+</br>
+
+<center>
+__Interpret the intercept & slope estimates in the context of hospital visits
+and baby's birth weight.__
+
+## Assessing Model Fit 
+
+</br> 
+
+- Sum of Square Errors (SSE)
+  * sum of squared residuals 
+
+</br> 
+
+- Root Mean Square Error (RMSE)
+  * standard deviation of residuals 
+
+</br> 
+
+- $R^2$ 
+* proportion of variability in response accounted for by model
+
+## Model Comparison
+
+```{r, echo = TRUE}
+weight_weeks <- lm(weight ~ weeks, data = ncbirths)
+```
+
+- SSE = 1246.55 
+- RMSE = 1.119
+- $R^2$ = 0.449
+
+</br>
+
+```{r, echo = TRUE}
+weight_visits <- lm(weight ~ visits, data = ncbirths)
+```
+
+- SSE = 2152.74
+- RMSE = 1.475
+- $R^2$ = 0.01819
+
+

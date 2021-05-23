@@ -1,0 +1,240 @@
+---
+title: "Introduction to Linear Models -- Model Conditions"
+author: "Stat 331"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["xaringan-themer.css", "slide-style.css"]
+    nature:
+      highlightStyle: solarized-light
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+---
+
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.width = 8, fig.height = 6}
+knitr::opts_chunk$set(fig.align = "center", 
+                      message = FALSE, 
+                      warning = FALSE)
+
+options(htmltools.dir.version = FALSE)
+options(show.signif.stars = FALSE)
+
+library(openintro)
+library(broom)
+library(gridExtra)
+library(kableExtra)
+library(png)
+library(xaringanthemer)
+library(xaringan)
+library(tidyverse)
+library(flair)
+library(openintro)
+
+
+style_duo_accent(
+  primary_color      = "#0F4C81", # pantone classic blue
+  secondary_color    = "#B6CADA", # pantone baby blue
+  header_font_google = google_font("Raleway"),
+  text_font_google   = google_font("Raleway", "300", "300i"),
+  code_font_google   = google_font("Source Code Pro"),
+  text_font_size     = "30px"
+)
+
+m1 <- ncbirths %>% 
+  lm(weight ~ gained, data = .)
+```
+
+.larger[Model Diagnostics]
+
+--
+
+.large[
+.pull-left[
+- **Linear relationship**
+
+- **Independence of observations**
+]
+]
+
+--
+
+.large[
+.pull-right[
+- **Normally distributed residuals**
+
+- **Equal (constant) variance**
+]
+]
+
+---
+
+class: inverse
+
+.larger[Linear Relationship]
+
+</br> 
+
+- Almost nothing you explore will look perfectly linear 
+
+- Be careful with relationships that have curvature 
+
+- Variable transformations can often help 
+
+---
+
+class: center
+
+.larger[Visualize!]
+
+```{r, echo = FALSE, fig.width = 10, fig.height = 6}
+## curvature
+p1 <- ggplot(ncbirths, aes(x = weeks, y = weight)) +
+  geom_jitter() +
+  geom_smooth(method = "lm") +
+  labs(x = "Length of pregnancy (in weeks)", y = "Birth weight of baby (in lbs)")
+
+p2 <- ggplot(ncbirths, aes(x = weeks, y = weight)) +
+  scale_y_log10() +
+  scale_x_log10() +
+  geom_jitter() +
+  geom_smooth(method = "lm") +
+  labs(x = "Length of pregnancy (in log weeks)", y = "Birth weight of baby (in log lbs)")
+
+grid.arrange(p1, p2, nrow = 1)
+```
+
+---
+
+class: inverse, center, middle 
+
+.larger[Independence]
+
+**Nearly every statistical model you will encounter, require for the
+observations in the data to be independent.** 
+
+</br>
+
+This is often the most crucial but also the most difficult to diagnose. 
+
+<!-- It is also extremely difficult to gather a dataset which is a true random sample -->
+<!-- from the population of interest.  -->
+
+---
+
+.larger[What does independence mean?]
+
+Independence means that I should not be able to know the $y$ value for one
+observation based on knowing the $y$ value of another observation. 
+
+---
+
+.bitlarger[**Situations with independence violations**]
+
+- If there is an inherent grouping of observations, then independence may be 
+violated. 
+
+--
+
+  * Stock market prices over time  
+--
+
+  * Geographical similarities
+
+--
+
+  * Biological conditions of family members
+
+--
+
+  * Repeated observations 
+
+---
+
+class: inverse 
+
+.pull-left[
+.larger[Normally Distributed Residuals]
+]
+
+.pull-right[
+Observations vary symmetrically around the least squares line, spreading out
+in a bell-shaped fashion.
+
+</br>
+</br>
+</br>
+
+Less important than linearity or independence for a few reasons: 
+  * Least squares is an unbiased estimate of the true population model.
+  * Larger sample sizes make the model more reliable. 
+]
+
+---
+
+class: center 
+
+.larger[Visualize!]
+
+.pull-left[
+```{r, eval = FALSE}
+ggplot(data = m1, aes(x = .resid)) +
+  geom_histogram(aes(y = ..density..)) +
+  geom_density(color = "dodgerblue", 
+               lwd = 1.5) + 
+  xlab("Residuals")
+```
+]
+
+.pull-right[
+```{r, message = FALSE, fig.height = 6, fig.width = 6, echo = FALSE}
+ggplot(data = m1, aes(x = .resid)) +
+  geom_histogram(aes(y = ..density..)) +
+  geom_density(color = "dodgerblue", 
+               lwd = 1.5) + 
+  xlab("Residuals")
+```
+]
+
+---
+
+class: inverse
+
+.larger[Equal / Constant Variance]
+
+- The variability of points around the least squares line remains roughly
+constant.
+
+--
+
+- Data that exhibit non-equal variance across the range of x-values will have
+the potential to seriously mis-estimate the variability of the slope. 
+
+---
+
+class: center
+
+.larger[Visualize!]
+
+```{r, echo = FALSE, fig.height = 6, fig.width = 10}
+p1 <- ncbirths %>% 
+  filter(weeks > 26) %>% 
+  ggplot(aes(x = weeks, y = weight)) +
+  geom_jitter() +
+  geom_smooth(method = "lm") +
+  labs(x = "Length of pregnancy (in weeks)", y = "Birth weight of baby (in lbs)")
+
+p2 <- ggplot(data = m1, aes(x = .fitted, y = .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "red", lwd = 1.5) +
+  xlab("Fitted values") +
+  ylab("Residuals")
+
+grid.arrange(p1, p2, ncol = 2)
+```
