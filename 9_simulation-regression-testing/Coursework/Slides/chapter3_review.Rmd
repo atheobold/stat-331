@@ -48,7 +48,7 @@ style_duo_accent(
 ```
 
 
-## Data for Today 
+.larger[The Data]
 
 The `ncbirths` dataset is a random sample of 1,000 cases taken from a larger 
 dataset collected in North Carolina in 2004. 
@@ -58,9 +58,8 @@ with various characteristics of the child (e.g. birth weight, length of
 gestation, etc.), the child’s mother (e.g. age, weight gained during pregnancy,
 smoking habits, etc.) and the child’s father (e.g. age). 
 
-</br>
+---
 
-__What do you expect the dataset would look like?__ 
 
 ## Relationships Between Variables
 
@@ -158,58 +157,6 @@ How would your characterize this relationship?
 
 <!-- - How would you go about removing these outliers from the data?  -->
 
-## Summarizing a Linear Relationship 
-
-- Correlation  
-
-  * Correlation coefficient between -1 and 1
-  * Sign of the correlations shows direction
-  * Magnitude of the correlation shows strength
-
-```{r}
-ncbirths %>% 
-  filter(is.na(weight) == FALSE, 
-         is.na(weeks) == FALSE, 
-         weeks > 26) %>% 
-  summarize(correlation = cor(weight, weeks))
-```
-
-## Anscombe Correlations
-
-<div class="columns-2">
-
-<!-- In 1973, statistician Francis Anscombe created a synthetic data set that has -->
-<!-- been used extensively to illustrate concepts related to correlation and -->
-<!-- regression. -->
-
-```{r, echo = FALSE}
-anscombe <- anscombe %>%
-  mutate(id = 1:nrow(.)) %>%
-  gather(key = "key", value = "val", -id) %>%
-  separate(key, into = c("variable", "set"), sep = 1) %>%
-  spread(key = variable, value = val)
-
-ggplot(data = anscombe, aes(x = x, y = y)) +
-  geom_point() +
-  facet_wrap(~set)
-```
-
-Four datasets, very different graphical presentations  
-
-- same mean and standard deviation in both $x$ and $y$
-- same correlation
-- same regression line
-
-</div>
-</br>
-<center>
-
-__For which of these relationships is correlation a reasonable summary measure?__
-
-<!-- ## Interpretation of Correlation -->
-
-<!-- The word “correlation” has both a precise mathematical definition and a more general definition for typical usage in English. While these uses of the word are obviously related and generally in sync, there are times when these two uses can be conflated and/or misconstrued. This occurs frequently in the media when journalists write about scientific results—particularly in health-related studies. -->
-
 ## Linear Regression
 
 <!-- Models are ubiquitous in statistics. In many cases, we assume that the value of -->
@@ -284,115 +231,6 @@ coef(m1)
 
 __What do these interpretations look like for this relationship?__
 
-## Model Diagnostics 
-
-- Linear relationship
-
-- Independence of observations
-
-- Normally distributed residuals
-
-- Equal (constant) variance 
-
-## Linear Relationship 
-
-- Almost nothing you explore will look perfectly linear 
-
-- Be careful with relationships that have curvature 
-
-- Variable transformations can often help 
-  
-```{r, echo = FALSE, fig.width = 8}
-## curvature
-p1 <- ggplot(ncbirths, aes(x = weeks, y = weight)) +
-  geom_jitter() +
-  geom_smooth(method = "lm") +
-  labs(x = "Length of pregnancy (in weeks)", y = "Birth weight of baby (in lbs)")
-
-p2 <- ggplot(ncbirths, aes(x = weeks, y = weight)) +
-  scale_y_log10() +
-  scale_x_log10() +
-  geom_jitter() +
-  geom_smooth(method = "lm") +
-  labs(x = "Length of pregnancy (in log weeks)", y = "Birth weight of baby (in log lbs)")
-
-grid.arrange(p1, p2, nrow = 1)
-```
-
-## Independence
-
-In all of the statistical models we encounter in this course we require for the
-observations in the data to be independent.  
-
-  * Often the most crucial but also the most difficult to diagnose. 
-
-<!-- It is also extremely difficult to gather a dataset which is a true random sample -->
-<!-- from the population of interest.  -->
-
-- Independence means that I should not be able to guess the $y$ value for one
-observation based on knowing the $y$ value of another observation. 
-
-- If there is an inherent grouping of observations, then independence may be 
-violated. 
-  * Stock market prices over time  
-  * Geographical similarities
-  * Biological conditions of family members
-  * Repeated observations 
-
-## Normally Distributed Residuals
-
-<div class="columns-2">
-
-</br>
-</br>
-
-```{r, message = FALSE, fig.height = 4, fig.width = 4, echo = FALSE}
-ggplot(data = m1, aes(x = .resid)) +
-  geom_histogram(aes(y = ..density..)) +
-  geom_density(color = "dodgerblue", 
-               lwd = 1.5) + 
-  xlab("Residuals")
-```
-
-</br>
-</br>
-
-- Observations vary symmetrically around the least squares line, spreading out
-in a bell-shaped fashion.
-
-- Less important than linearity or independence for a few reasons: 
-  * Least squares is an unbiased estimate of the true population model.
-  * Larger sample sizes make the model more reliable. 
-
-## Equal Variance
-
-<div class="columns-2">
-
-```{r, echo = FALSE, fig.height = 5}
-p1 <- ncbirths %>% 
-  filter(weeks > 26) %>% 
-  ggplot(aes(x = weeks, y = weight)) +
-  geom_jitter() +
-  geom_smooth(method = "lm") +
-  labs(x = "Length of pregnancy (in weeks)", y = "Birth weight of baby (in lbs)")
-
-p2 <- ggplot(data = m1, aes(x = .fitted, y = .resid)) +
-  geom_point() +
-  geom_hline(yintercept = 0, linetype = "dashed", color = "red") +
-  xlab("Fitted values") +
-  ylab("Residuals")
-
-grid.arrange(p1, p2, ncol = 1)
-```
-
-- The variability of points around the least squares line remains roughly
-constant.
-
-- Data that exhibit non-equal variance across the range of x-values will have
-the potential to seriously mis-estimate the variability of the slope. 
-
-<!-- This will have consequences for the inference results 
-(i.e., hypothesis tests and confidence intervals). -->
 
 ## Your Turn!
 
@@ -424,6 +262,7 @@ tidy(m2)
 <center>
 __Interpret the intercept & slope estimates in the context of hospital visits
 and baby's birth weight.__
+
 
 ## Assessing Model Fit 
 
