@@ -33,9 +33,12 @@ In this module, you'll learn to compute linear regression models in R.
 
 `r emo::ji("book")` [Recommended Reading -- _Modern Dive _: Basic Regression](https://moderndive.com/5-regression.html)
 
+`r emo::ji("play")` [Recommended Video -- Simple Linear Regression (will post Sunday by 5pm)]()
+
+
 ## Assumptions of Linear Regression
 
-`r emo::ji("play")` [Recommended Video -- Regression Assumptions (10 minutes)](https://www.youtube.com/watch?v=FFxUbXRuufM)
+`r emo::ji("play")` [Recommended Video -- Regression Assumptions (will post Sunday by 5pm)]()
 
 ---
 

@@ -47,6 +47,7 @@ style_duo_accent(
 )
 ```
 
+class: inverse
 
 .larger[The Data]
 
@@ -60,81 +61,81 @@ smoking habits, etc.) and the child’s father (e.g. age).
 
 ---
 
+.larger[Relationships Between Variables]
 
-## Relationships Between Variables
+**In a statistical model, we generally have one variable that is the output and
+one or more variables that are the inputs.**  
 
-- In a statistical model, we generally have one variable that is the output and
-one or more variables that are the inputs. 
-
+.pull-left[
 - Response variable
   * a.k.a. $y$, dependent
   * The quantity you want to understand
+]
 
+.pull-right[
 - Explanatory variable
   * a.k.a. $x$, independent, explanatory, predictor
   * Something you think might be related to the response
+]
 
-- Both variables are numerical
 
+---
 
-## Visualizing Linear Regression
+.larger[Visualizing Linear Regression]
 
-- The scatterplot has been called the most "generally useful invention in the
-history of statistical graphics." 
+.pull-left[
+**The scatterplot has been called the most "generally useful invention in the
+history of statistical graphics."** 
+]
 
-- It is a simple two-dimensional plot in which the two coordinates of each dot
-represent the values of two variables measured on a single observation.
-
-```{r 2, echo = FALSE, fig.width = 4, fig.height = 3, fig.align = 'center'}
+.pull-right[
+```{r 2, echo = FALSE, fig.width = 5, fig.height = 4, fig.align = 'center'}
 ggplot(data = bdims, aes(y = wgt, x = hgt)) + 
   geom_point() +
   scale_x_continuous("Explanatory Variable", labels = NULL) + 
   scale_y_continuous("Response Variable", labels = NULL)
 ```
+]
 
-## Characterizing Relationships 
 
-<!-- Scatterplots can reveal characteristics of the relationship between two variables. Any patterns - and deviations from those - we see in these plots could give us some insight into the nature of the underlying phenomenon. Specifically, we look for four things: form, direction, strength, and outliers. -->
+---
 
-- Form (e.g. linear, quadratic, non-linear)
+class: middle
 
-- Direction (e.g. positive, negative)
+.larger[Characterizing Relationships]
 
-- Strength (how much scatter/noise?)
+- Form -- linear, quadratic, non-linear?
 
-- Unusual observations (do points not fit the overall pattern?)
+- Direction -- positive, negative?
 
-<!-- Form is the overall shape made by the points. Since we are learning about linear regression, our primary concern is whether the form is linear or non-linear. -->
+- Strength -- how much scatter/noise?
 
-<!-- Direction is either positive or negative. Here, the question is whether the two variables tend to move in the same direction - that is, when one goes up, the other tends to go up - or in the opposite direction. We’ll see examples of both in just a minute. -->
+- Unusual observations -- do points not fit the overall pattern?
 
-<!-- The strength of the relationship is governed by how much scatter is present. Do the points seem to be clustered together in a way that suggests a close relationship? Or are they very loosely organized? -->
 
-<!-- Finally, any points that don’t fit the overall pattern, or simply lie far away, are important to investigate. These outliers may be erroneous measurements, or they can be exceptions that help clarify the general trend. Either way, outliers can be revealing, and we’ll learn more about them later in the course. -->
+---
 
-## Your Turn
+.larger[Your Turn]
 
-```{r, eval = FALSE}
+.pull-left[
+How would your characterize this relationship? 
+
+- shape
+- direction
+- strength 
+- outliers
+]
+
+.pull-right[
+
+```{r, echo = FALSE, fig.height = 6}
 ncbirths %>% 
 ggplot(aes(x = weeks, y = weight)) +
   geom_jitter() + 
   labs(x = "Length of pregnancy (in weeks)",
        y = "Birth weight of baby (in lbs)")
 ```
-
-<div class="columns-2">
-
-```{r, echo = FALSE}
-ncbirths %>% 
-ggplot(aes(x = weeks, y = weight)) +
-  geom_jitter() + 
-  labs(x = "Length of pregnancy (in weeks)",
-       y = "Birth weight of baby (in lbs)")
-```
-
-
-</br>
-</br>
+]
 
 <!-- As we work through these, please keep in mind that much of what we are doing at -->
 <!-- this stage involves making judgment calls. This is part of the nature of -->
@@ -143,12 +144,7 @@ ggplot(aes(x = weeks, y = weight)) +
 <!-- one right answer. There are of course an infinite number of indefensible claims, -->
 <!-- but many judgments are open to interpretation. -->
 
-How would your characterize this relationship? 
 
-- shape
-- direction
-- strength 
-- outliers
 
 <!-- <!-- There isn’t a universal, hard-and-fast definition of what constitutes -->
 <!-- <!-- an outlier, but they are often easy to spot in a scatterplot. -->
@@ -157,7 +153,11 @@ How would your characterize this relationship?
 
 <!-- - How would you go about removing these outliers from the data?  -->
 
-## Linear Regression
+---
+
+class: inverse 
+
+.larger[Linear Regression]
 
 <!-- Models are ubiquitous in statistics. In many cases, we assume that the value of -->
 <!-- our response variable is some function of our explanatory variable, plus some -->
@@ -165,140 +165,118 @@ How would your characterize this relationship?
 
 <!-- What we are saying here is that there is some mathematical function $f$, which can translate values of one variable into values of another, except that there is some randomness in the process. What often distinguishes statisticians from other quantitative researchers is the way that we try to model that random noise.  -->
 
-- Assume the relationship between $x$ and $y$ takes the form of a linear function.
+Assume the relationship between $x$ and $y$ takes the form of a linear function.
 
 $$
   response = intercept + slope \cdot explanatory + noise
 $$
+</br> 
+
+--
+
+.pull-left[
+Population Regression Model
+
+$Y = \beta_0 + \beta_1 \cdot X + \epsilon_i$  
+
+$\epsilon \sim N(0, \sigma)$
+]
+
+--
+
+.pull-right[Fitted Regression Model  
+
+$\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 \cdot x$
+]
+
+---
+
+class: center, middle
+
+.bitlarger[**Fitting a Linear Model**]
+
 </br>
-
-- Population Regression Model
-
-$$
-  Y = \beta_0 + \beta_1 \cdot X + \epsilon_i \,, \qquad \epsilon \sim N(0, \sigma)
-$$
-
-</br>
-
-- Fitted Regression Model 
-
-$$
-  \hat{y} = \hat{\beta}_0 + \hat{\beta}_1 \cdot x
-$$
-
-## Fitting a Linear Model
 
 ```{r smooth, echo = FALSE, eval = FALSE}
 ncbirths %>% 
 ggplot(aes(x = gained, y = weight)) +
   geom_jitter() + 
-  geom_smooth(method = "lm") +
-  labs(x = "Weight gained by mother (in lbs)",
-       y = "Weight of the baby at birth (in lbs)")
+  geom_smooth(method = "lm") 
 
-m1 <- lm(weight ~ gained, data = ncbirths)
+m1 <- ncbirths %>% 
+  lm(weight ~ gained, data = .)
 ```
 
 ```{r, echo = FALSE}
 decorate_chunk("smooth", eval = FALSE) %>%
+  flair('method = "lm"') %>% 
   flair("lm")
 ```
 
-```{r, echo = FALSE, fig.width = 4, fig.height = 2.75, fig.align = "center"}
-ncbirths %>% 
-ggplot(aes(x = gained, y = weight)) +
-  geom_jitter() + 
-  geom_smooth(method = "lm") +
-  labs(x = "Weight gained by mother (in lbs)",
-       y = "Weight of the baby at birth (in lbs)")
-```
+---
 
+.larger[Interpretting a Linear Regression]
 
-## Interpretting a Linear Regression
-
+.pull-left[
 ```{r}
-m1 <- lm(weight ~ weeks, data = ncbirths)
+m1 <- ncbirths %>% 
+  lm(weight ~ weeks, data = .)
+
 coef(m1)
 ```
+]
 
-</br> 
-
+.pull-right[
 - Intercept: Expected __mean__ value for $y$, when $x$ is 0  
 
-<!-- __How would we interpret the intercept for this relationship?__  -->
-
 - Slope: Expected change in the __mean__ of $y$, when $x$ is increased by 1 unit
-
-__What do these interpretations look like for this relationship?__
-
-
-## Your Turn!
-
-Let's look at the relationship between the number of hospital visits of the 
-mother and the weight of the baby. 
-
-```{r, echo = FALSE, fig.align = "center", fig.height = 4, fig.width = 5}
-ncbirths %>% 
-    ggplot(aes(y = weight, x = visits)) +
-    geom_jitter() + 
-    geom_smooth(method = "lm") + 
-  labs(x = "Number of Hospital Visits", 
-       y = "Birth Weight of Baby (in lbs)")
-```
-
-## Interpret the Model 
-
-```{r}
-m2 <- lm(gained ~ visits, data = ncbirths)
-```
-
-```{r, echo = FALSE}
-tidy(m2)
-```
-
-</br>
-</br>
-
-<center>
-__Interpret the intercept & slope estimates in the context of hospital visits
-and baby's birth weight.__
+]
 
 
-## Assessing Model Fit 
+---
 
-</br> 
+class: inverse
 
-- Sum of Square Errors (SSE)
+.larger[Assessing Model Fit]
+
+.pull-left[
+- **Sum of Square Errors (SSE)**
   * sum of squared residuals 
 
-</br> 
-
-- Root Mean Square Error (RMSE)
+- **Root Mean Square Error (RMSE)**
   * standard deviation of residuals 
+]
 
-</br> 
+--
 
-- $R^2$ 
-* proportion of variability in response accounted for by model
+.pull-right[
+- **$R^2$** 
+  * proportion of variability in response accounted for by the linear model
+]
 
-## Model Comparison
 
+---
+
+.larger[Model Comparison]
+
+.pull-left[
 ```{r, echo = TRUE}
-weight_weeks <- lm(weight ~ weeks, data = ncbirths)
+weight_weeks <- ncbirths %>% 
+  lm(weight ~ weeks, data = .)
 ```
 
 - SSE = 1246.55 
 - RMSE = 1.119
 - $R^2$ = 0.449
+]
 
-</br>
-
+.pull-right[
 ```{r, echo = TRUE}
-weight_visits <- lm(weight ~ visits, data = ncbirths)
+weight_visits <- ncbirths %>% 
+  lm(weight ~ visits, data = .)
 ```
 
 - SSE = 2152.74
 - RMSE = 1.475
 - $R^2$ = 0.01819
-
-
+]
