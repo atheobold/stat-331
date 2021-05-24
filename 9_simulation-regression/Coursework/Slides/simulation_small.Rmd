@@ -1,0 +1,327 @@
+---
+title: "Introduction to Simulating Data -- The Normal Distribution"
+author: "Stat 331"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["xaringan-themer.css", "slide-style.css"]
+    nature:
+      highlightStyle: solarized-light
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+---
+
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.width = 8, fig.height = 6}
+knitr::opts_chunk$set(fig.align = "center", 
+                      message = FALSE, 
+                      warning = FALSE)
+
+options(htmltools.dir.version = FALSE)
+options(show.signif.stars = FALSE)
+
+library(openintro)
+library(broom)
+library(gridExtra)
+library(kableExtra)
+library(png)
+library(xaringanthemer)
+library(xaringan)
+library(tidyverse)
+library(flair)
+
+
+style_duo_accent(
+  primary_color      = "#0F4C81", # pantone classic blue
+  secondary_color    = "#B6CADA", # pantone baby blue
+  header_font_google = google_font("Raleway"),
+  text_font_google   = google_font("Raleway", "300", "300i"),
+  code_font_google   = google_font("Source Code Pro"),
+  text_font_size     = "30px"
+)
+```
+
+
+## Statistical distributions
+
+Recall from your previous statistics classes...
+
+- A **random variable** is a value we don't know until we take a **sample**.
+    + Coin flip:  Could be heads (0) or tails (1)
+    + Person's height:  Could be anything from 0 feet to 20 feet.
+    + Annual income of a US worker:  $0 to $1.6 billion
+    
+--
+
+- The **distribution** of the random variable tells us the **possible values** and **how likely they are**
+    + Coin flip has 50% chance of heads, 50% chance of tails
+    + Heights of US men follow a bell curve shape with a mean around 70 inches
+    and a standard deviation of 3 inches
+    + Most American workers make under $100,000
+
+---
+
+.larger[Statistical distributions]
+
+Some distributions have names.  
+
+We will focus on the Normal distribution, but there are others! 
+
+--
+
+  * Uniform
+  * $t$-distribution
+  * Binomial
+  * Chi-Square
+
+---
+
+.larger[The Normal distribution]
+
+.pull-left[
+- Expect values to fall **near the center**.
+
+- 95% of observations fall within 2 standard deviations from the mean
+]
+
+.pull-right[
+```{r, echo = FALSE, out.width = "50%"}
+my_samples <- data.frame(x = rnorm(1000))
+
+ggplot(my_samples, aes(x)) + 
+  geom_histogram(binwidth = 0.4, aes(y = ..density..), fill = "grey", col = "white") + 
+  stat_function(fun=dnorm, col = "cornflowerblue", lwd = 2) +
+  theme_classic()
+```
+]
+
+---
+
+class: inverse, center, middle
+
+.larger[Statistical Distributions in R]
+
+---
+
+class: inverse
+
+.larger[Random Sampling]
+
+- `r` stands for for **random sampling**: generate a random value from a 
+specific distribution
+
+--
+
+- We typically use this to **simulate** date; that is, to generate pretend
+observations to see what happens.
+
+---
+
+.larger[`rnorm()`] 
+
+```{r}
+
+rnorm(3)
+rnorm(3, mean = -100, sd = 50)
+
+```
+
+---
+
+class: inverse
+
+.larger[Probabilities]
+
+- `p` for **probability**: i.e. compute the chance of observing a value **less
+than** `x`
+
+--
+
+- Typically, this is used to calculate **p-values**
+
+---
+
+.larger[`pnorm()`] 
+
+```{r}
+pnorm(1.5)
+pnorm(70, mean = 67, sd = 3)
+
+1 - pnorm(70, mean = 67, sd = 3)
+```
+
+
+---
+
+class: inverse
+
+.larger[Quantiles]
+
+- `q` stands for **quantile**: given a probability `p`, compute the x-value
+such that $P(X < x) = p$.
+
+- the `q` functions are the "backwards" version of the `p` functions
+
+---
+
+.larger[`qnorm()`] 
+
+```{r}
+qnorm(.95)
+qnorm(.95, mean = 67, sd = 3)
+```
+
+---
+
+class: inverse
+
+.larger[Density] 
+
+`d` stands for **density**: compute the height of distribution curve
+
+--
+
+* **Discrete** distributions: probability of getting that **exact value**
+
+* **Continuous** distributions: usually meaningless
+
+---
+
+class: inverse, middle, center
+
+.larger[Simulating Fake Data] 
+
+---
+
+.larger[Simulating a dataset]
+
+```{r fake, include = FALSE}
+fake_data <- tibble(
+  height = rnorm(100, mean = 67, sd = 3),
+  age = runif(100, min = 15, max = 75),
+  measure = rbinom(100, size = 1, prob = 0.6)
+) %>%
+  mutate(
+    supports_measure_A = ifelse(measure == 1, "yes", "no")
+  )
+```
+
+```{r, echo = FALSE}
+decorate("fake") %>%
+  flair("runif") %>%
+  flair("rnorm") %>%
+  flair("rbinom")
+```
+]
+
+---
+
+.pull-left[.larger[Plotting 
+a
+
+Distribution]
+]
+
+.pull-right[
+```{r, echo = FALSE, out.height = "30%"}
+fake_data %>%
+  ggplot(aes(x = height)) +
+  geom_histogram(aes(y = ..density..), 
+                 binwidth = 1, fill = "grey") +
+  stat_function(fun = ~dnorm(.x, mean = 67, sd = 3), 
+                col = "cornflowerblue", lwd = 2) + 
+  xlim(c(55, 80))
+```
+]
+
+---
+
+.larger[Plotting a Density]
+
+```{r hist2, include = FALSE}
+fake_data %>%
+  ggplot(aes(x = height)) +
+  geom_histogram(aes(y = ..density..), 
+                 binwidth = 1.1, fill = "grey") +
+  stat_function(fun = ~dnorm(.x, mean = 67, sd = 3), 
+                col = "cornflowerblue", lwd = 2)
+```
+
+```{r, echo = FALSE}
+decorate("hist2", eval = FALSE) %>%
+  flair("y = ..density..", background = "orange")
+```
+
+---
+
+.larger[Defining a Function]
+
+```{r hist3, include = FALSE}
+fake_data %>%
+  ggplot(aes(x = height)) +
+  geom_histogram(aes(y = ..density..), 
+                 binwidth = 1.1, fill = "grey") +
+  stat_function(fun = ~dnorm(.x, mean = 67, sd = 3), 
+                col = "cornflowerblue", lwd = 2)
+```
+
+```{r, echo = FALSE}
+decorate("hist3", eval = FALSE) %>%
+  flair("stat_function", background = "pink") %>%
+  flair("~", background = "pink") %>%
+  flair(".x", background = "pink") %>%
+  flair("mean = 67, sd = 3")
+```
+
+---
+
+.larger[Plotting Two Distributions]
+
+```{r hist5, out.width="30%", echo = FALSE}
+fake_data %>%
+  ggplot(aes(x = height)) +
+  geom_histogram(aes(y = ..density..), 
+                 binwidth = 1.75, fill = "grey", col = "white") +
+  stat_function(fun = ~dnorm(.x, mean = 67, sd = 3), 
+                col = "cornflowerblue", lwd = 2, 
+                xlim = c(55, 80)
+                ) +
+  stat_function(fun = ~dnorm(.x, mean = 67, sd = 2), 
+                col = "deeppink", lwd = 2, 
+                xlim = c(55, 80)
+                )
+```
+
+---
+
+.larger[Theoretical Distributions]
+
+.pull-left-wide[
+```{r, eval = FALSE}
+fake_data %>%
+  ggplot(aes(x = height)) +
+  #geom_histogram(aes(y = ..density..), bins = 10) 
+  stat_function(fun = ~dnorm(.x, mean = 67, sd = 3), 
+                col = "cornflowerblue", lwd = 2) +
+  stat_function(fun = ~dnorm(.x, mean = 67, sd = 2), 
+                col = "deeppink", lwd = 2)
+```
+]
+
+.pull-right-narrow[
+```{r, echo = FALSE, out.width="70%"}
+fake_data %>%
+  ggplot(aes(x = height)) +
+  #geom_histogram(aes(y = ..density..), bins = 10) 
+  stat_function(fun = ~dnorm(.x, mean = 67, sd = 3), 
+                col = "cornflowerblue", lwd = 2) +
+  stat_function(fun = ~dnorm(.x, mean = 67, sd = 2), 
+                col = "deeppink", lwd = 2)
+```
+]
