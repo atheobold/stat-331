@@ -19,9 +19,9 @@ library(palmerpenguins)
 
 In this module, you'll learn to compute linear regression models in R.  
 
-`r emo::ji("play button")` Watch Videos: 20 minutes
+`r emo::ji("play button")` Watch Videos: 30 minutes
 
-  * `r emo::ji("link")` Link to **all** Slides from Videos: [here (will be published with videos)]()
+  * `r emo::ji("link")` Link to **all** Slides from Videos: [here](https://app.box.com/s/zcnbbt2xepty8ztg56ikdgdxz8oiyvws)
 
 `r emo::ji("book")` Readings: 45-60 minutes   
 
@@ -35,12 +35,12 @@ In this module, you'll learn to compute linear regression models in R.
 
 `r emo::ji("book")` [Recommended Reading -- _Modern Dive _: Basic Regression](https://moderndive.com/5-regression.html)
 
-`r emo::ji("play")` [Recommended Video -- Simple Linear Regression (will post Sunday by 7pm)]()
+`r emo::ji("play")` [Recommended Video -- Simple Linear Regression (17 minutes)](https://www.youtube.com/watch?v=1IMpg1ukMpY)
 
 
-## Assumptions of Linear Regression
+## Conditions of Linear Regression
 
-`r emo::ji("play button")` [Recommended Video -- Regression Assumptions (will post Sunday by 7pm)]()
+`r emo::ji("play button")` [Recommended Video -- Regression Assumptions(14 minutes)](https://www.youtube.com/watch?v=LD3OSSVxKMU)
 
 ---
 
