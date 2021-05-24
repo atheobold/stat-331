@@ -127,8 +127,8 @@ observations to see what happens.
 
 ```{r}
 
-rnorm(3)
-rnorm(3, mean = -100, sd = 50)
+rnorm(n = 3)
+rnorm(n = 3, mean = -100, sd = 50)
 
 ```
 
@@ -203,9 +203,9 @@ class: inverse, middle, center
 
 ```{r fake, include = FALSE}
 fake_data <- tibble(
-  height = rnorm(100, mean = 67, sd = 3),
-  age = runif(100, min = 15, max = 75),
-  measure = rbinom(100, size = 1, prob = 0.6)
+  height = rnorm(n = 100, mean = 67, sd = 3),
+  age = runif(n = 100, min = 15, max = 75),
+  measure = rbinom(n = 100, size = 1, prob = 0.6)
 ) %>%
   mutate(
     supports_measure_A = ifelse(measure == 1, "yes", "no")

@@ -4,6 +4,7 @@
     <title>Introduction to Simulating Data – The Normal Distribution</title>
     <meta charset="utf-8" />
     <meta name="author" content="Stat 331" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="slide-style.css" type="text/css" />
   </head>
@@ -93,19 +94,19 @@ observations to see what happens.
 
 
 ```r
-rnorm(3)
+rnorm(n = 3)
 ```
 
 ```
-## [1] -1.6746125  0.2788519 -1.2385213
+## [1]  1.3162785 -1.4902103 -0.6803066
 ```
 
 ```r
-rnorm(3, mean = -100, sd = 50)
+rnorm(n = 3, mean = -100, sd = 50)
 ```
 
 ```
-## [1]  -90.70956 -111.54012 -246.73904
+## [1]   -6.143139  -97.638424 -148.215607
 ```
 
 ---
@@ -210,7 +211,7 @@ class: inverse, middle, center
 
 
 
-&lt;code class ='r hljs remark-code'&gt;fake_data &lt;- tibble(&lt;br&gt;&amp;nbsp;&amp;nbsp;height = &lt;span style="background-color:#ffff7f"&gt;rnorm&lt;/span&gt;(100, mean = 67, sd = 3),&lt;br&gt;&amp;nbsp;&amp;nbsp;age = &lt;span style="background-color:#ffff7f"&gt;runif&lt;/span&gt;(100, min = 15, max = 75),&lt;br&gt;&amp;nbsp;&amp;nbsp;measure = &lt;span style="background-color:#ffff7f"&gt;rbinom&lt;/span&gt;(100, size = 1, prob = 0.6)&lt;br&gt;) %&gt;%&lt;br&gt;&amp;nbsp;&amp;nbsp;mutate(&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;supports_measure_A = ifelse(measure == 1, "yes", "no")&lt;br&gt;&amp;nbsp;&amp;nbsp;)&lt;/code&gt;
+&lt;code class ='r hljs remark-code'&gt;fake_data &lt;- tibble(&lt;br&gt;&amp;nbsp;&amp;nbsp;height = &lt;span style="background-color:#ffff7f"&gt;rnorm&lt;/span&gt;(n = 100, mean = 67, sd = 3),&lt;br&gt;&amp;nbsp;&amp;nbsp;age = &lt;span style="background-color:#ffff7f"&gt;runif&lt;/span&gt;(n = 100, min = 15, max = 75),&lt;br&gt;&amp;nbsp;&amp;nbsp;measure = &lt;span style="background-color:#ffff7f"&gt;rbinom&lt;/span&gt;(n = 100, size = 1, prob = 0.6)&lt;br&gt;) %&gt;%&lt;br&gt;&amp;nbsp;&amp;nbsp;mutate(&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;supports_measure_A = ifelse(measure == 1, "yes", "no")&lt;br&gt;&amp;nbsp;&amp;nbsp;)&lt;/code&gt;
 ]
 
 ---
