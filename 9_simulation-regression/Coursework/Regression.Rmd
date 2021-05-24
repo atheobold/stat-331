@@ -90,7 +90,7 @@ broom::tidy(my_model)
 
 **Question 1: Code**
 
-a) What is the `data = .` argument in the `lm()` function?
+a) In the code above, what does the `data = .` argument in the `lm()` function do?
 
 b) What happens if you switch the order of `bill_length_mm` and `bill_depth_mm`
 in the `lm()` formula?
