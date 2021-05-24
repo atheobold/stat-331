@@ -176,14 +176,19 @@ Re-create this plot from the lecture slides:
 (The two colors are "cornflowerblue" and "deeppink")
 
 ```{r, echo = FALSE}
-my_samples <- data.frame(x = rnorm(1000, 
-                                   mean = 10, 
+my_samples <- data.frame(x = rnorm(100, 
+                                   mean = 67, 
                                    sd = 2))
 
-ggplot(my_samples, aes(x)) + 
-  geom_histogram(bins = 40, aes(y = ..density..), fill = "grey", col = "white") + 
-  stat_function(fun = function(x) dnorm(x, mean = 10, sd = 2), col = "cornflowerblue", lwd = 2) +
-  stat_function(fun = function(x) dnorm(x, mean = 10, sd = 2), col = "deeppink", lwd = 1) +
-  theme_classic()
+my_samples %>%
+  ggplot(aes(x = x)) +
+  geom_histogram(aes(y = ..density..), 
+                 binwidth = 1.75, fill = "grey", col = "white") +
+  stat_function(fun = ~dnorm(.x, mean = 67, sd = 3), 
+                col = "cornflowerblue", lwd = 2, 
+                xlim = c(60, 75)) +
+  stat_function(fun = ~dnorm(.x, mean = 67, sd = 2), 
+                col = "deeppink", lwd = 2, 
+                xlim = c(60, 75))
 ```
 
