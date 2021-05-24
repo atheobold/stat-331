@@ -16,27 +16,27 @@ library(tidyverse)
 
 `r emo::ji("play button")` Watch Videos: __ minutes
   
-  * `r emo::ji("link")` Link to **all** Slides from Videos: [here](https://app.box.com/s/ae5f0yollihcggzr6bghkwabkdz2y7g9)
+  * `r emo::ji("link")` Link to **all** Slides from Videos: [here (will post with videos)]()
 
 `r emo::ji("book")` Readings:  minutes   
 
 `r emo::ji("computer")` Activities: 45 minutes  
   
-`r emo::ji("check")` Check-ins: 1
+`r emo::ji("check")` Check-ins: 2 (combined in 1 check-in in Canvas)
 
 ---
 
 ## Review: Statistical Distributions
 
-`r emo::ji("play button")` [Required Video -- Review of Statistical Distributions](https://www.youtube.com/embed/KddbZr-ssZc)
+`r emo::ji("play button")` [Required Video -- A Review of the Normal Distribution (will post Monday by noon)]()
 
 ---
 
 ## Simulating in R
 
-`r emo::ji("play")` [Required Video -- Simulating Data in R](https://www.youtube.com/embed/LNg7kQbXvU0)
-
 `r emo::ji("book")` [Required Reading -- _R Programming for Data Science_ : Simulation](https://bookdown.org/rdpeng/rprogdatascience/simulation.html)
+
+`r emo::ji("play button")` [Required Video -- Simulating Data in R (will post Monday by noon)]()
 
 ---
 
@@ -62,7 +62,18 @@ dnorm(1.5, mean = 2, sd = 4)
 rnorm(100, mean = 2, sd = 4)
 ```
 
+**Question 1:** Explain in one sentence why each of the functions above produced the output you obtained. 
+
+**Question 2:** Explain in one sentence why
+
+```
+dnorm(2, mean = 0, sd = 1)
+1 - dnorm(2, mean = 0, sd = 1)
+```
+add up to 1.
+
 ---
+
 
 ## Setting a Random Number Seed
 

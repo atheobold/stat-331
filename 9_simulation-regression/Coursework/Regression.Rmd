@@ -19,7 +19,9 @@ library(palmerpenguins)
 
 In this module, you'll learn to compute linear regression models in R.  
 
-`r emo::ji("play")` Watch Videos: 15 minutes
+`r emo::ji("play button")` Watch Videos: 20 minutes
+
+  * `r emo::ji("link")` Link to **all** Slides from Videos: [here (will be published with videos)]()
 
 `r emo::ji("book")` Readings: 45-60 minutes   
 
@@ -33,12 +35,12 @@ In this module, you'll learn to compute linear regression models in R.
 
 `r emo::ji("book")` [Recommended Reading -- _Modern Dive _: Basic Regression](https://moderndive.com/5-regression.html)
 
-`r emo::ji("play")` [Recommended Video -- Simple Linear Regression (will post Sunday by 5pm)]()
+`r emo::ji("play")` [Recommended Video -- Simple Linear Regression (will post Sunday by 7pm)]()
 
 
 ## Assumptions of Linear Regression
 
-`r emo::ji("play")` [Recommended Video -- Regression Assumptions (will post Sunday by 5pm)]()
+`r emo::ji("play button")` [Recommended Video -- Regression Assumptions (will post Sunday by 7pm)]()
 
 ---
 
@@ -114,7 +116,7 @@ my_model_2 <- penguins %>%
 ```
 
 
-a) Make a plot illustrating `my_model_2`.  
+a) Make a plot illustrating `my_model_2`. Upload a picture of your plot! 
 *(Hint: what needs to change in the aesthetic of the plot above?)*
 
 b) Which model of the two models explains the most variance in `bill_length_mm`?
