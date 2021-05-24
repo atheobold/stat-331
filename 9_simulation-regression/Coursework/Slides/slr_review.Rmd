@@ -250,7 +250,7 @@ class: inverse
 --
 
 .pull-right[
-- **$R^2$** 
+- **R-squared**
   * proportion of variability in response accounted for by the linear model
 ]
 
@@ -265,9 +265,11 @@ weight_weeks <- ncbirths %>%
   lm(weight ~ weeks, data = .)
 ```
 
+.large[
 - SSE = 1246.55 
 - RMSE = 1.119
 - $R^2$ = 0.449
+]
 ]
 
 .pull-right[
@@ -276,7 +278,9 @@ weight_visits <- ncbirths %>%
   lm(weight ~ visits, data = .)
 ```
 
+.large[
 - SSE = 2152.74
 - RMSE = 1.475
 - $R^2$ = 0.01819
+]
 ]
