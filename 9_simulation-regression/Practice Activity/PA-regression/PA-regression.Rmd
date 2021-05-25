@@ -1,19 +1,20 @@
 ---
 title: "Practice Activity: Regression"
-output: rmdformats::readthedown
+output: rmdformats::html_docco
 
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(include = FALSE, eval = FALSE)
+
+library(tidyverse)
 ```
 
-```{r}
-altj <- c(0, 1, 1, 1, 0, 0, 1, 1)
-```
-
-```{r}
-dat <- read_csv(here::here("8_Regression_Testing", "PA-regression", "data_2.csv"))
+```{r, eval = FALSE}
+dat <- read_csv(here::here("9_simulation-regression", 
+                           "Practice Activity", 
+                           "PA-regression", 
+                           "data_2.csv"))
 
 new_dat <- dat %>%
   select(-z) %>%
@@ -36,14 +37,29 @@ new_dat %>%
 
 new_dat %>%
   select(weight_before, weight_after) %>%
-  write_csv(here::here("8_Regression_Testing", "PA-regression", "mystery_animal.csv"))
+  write_csv(here::here("8_Regression_Testing",
+                       "Practice Activity", 
+                       "PA-regression", 
+                       "mystery_animal.csv"))
 ```
 
+# Data
+
 The dataset "mystery_animal.csv" contains the weights of a particular animal before and after a year of eating only roasted duck.
- 
 
-Compute a linear model to determine if the Duck Diet caused the animal to gain weight, lose weight, or neither.
- 
 
-Plot the residuals (observed value minus predicted value) of this model versus
-the x-variable.  The function `add_predictions()` from the "modelr" package may be useful to you.
+# Linear Regression 
+
+Fit a linear regression to determine if the Duck Diet is associated with the 
+animal gaining weight, losing weight, or neither.
+
+
+# Residuals  
+
+Plot the residuals (observed value minus predicted value) of your linear model versus `weight_before`. The `.resid` variable contains the residuals from the 
+linear model you fit (assuming you stored it in an object!). 
+
+
+# Mystery Animal
+
+What animal do you see? 
