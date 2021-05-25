@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="generator" content="pandoc" />
 
+        <meta name="author" content="Stat 331" />
     
     
     <title>PA: Simulation</title>
@@ -908,7 +909,8 @@ document.addEventListener('DOMContentLoaded', function() {
       
    
       <!-- html_docco authors -->
-            
+         <h4 class="author"><em>Stat 331</em></h4>
+               
       <div id="toc">
      
    </div>
@@ -923,34 +925,58 @@ document.addEventListener('DOMContentLoaded', function() {
 <li><p>Trumpet weights are Uniformly distributed between 1.5 and 3.5 pounds.</p></li>
 <li><p>Reed instruments (like clarinets, bassoons, and saxophones) have weights that are Chi-Square distributed with 4 degrees of freedom.</p></li>
 </ul>
-<div id="remember" class="section level1">
-<h1>Remember</h1>
-<p><strong>Four Types of Calculations</strong></p>
+<div id="remember" class="section level2">
+<h2>Remember</h2>
+<div id="four-types-of-calculations" class="section level3">
+<h3>Four Types of Calculations</h3>
 <ul>
 <li><code>p</code> – stands for probability (left tail area for a given value of x)</li>
 <li><code>r</code> – stands for random (for generating data)</li>
 <li><code>q</code> – stands for quantile (for a given probability)</li>
 <li><code>d</code> – stands for density (of the distribution at a given value of x)</li>
 </ul>
-<p><strong>Distributions</strong></p>
+</div>
+<div id="distributions" class="section level3">
+<h3>Distributions</h3>
 <ul>
 <li>The Normal distribution functions end with <code>norm</code></li>
 <li>The Uniform distribution functions end with <code>unif</code></li>
 <li>The Chi-Square distribution functions end with <code>chisq</code></li>
 </ul>
 </div>
-<div id="warmup" class="section level1">
-<h1>Warmup</h1>
-<ul>
-<li><p>What is the 95th percentile for trumpet weight?</p></li>
-<li><p>What is the 10th percentile for trombone weight?</p></li>
-<li><p>About what percent of trombones do you expect to be more than 5 pounds?</p></li>
-<li><p>About what percent of reed instruments do you expect to be more than 5 pounds?</p></li>
-<li><p>Simulate 100 random trombone weights. How many of them were below 4 pounds?</p></li>
-</ul>
 </div>
-<div id="catching-a-con" class="section level1">
-<h1>Catching a Con</h1>
+<div id="warmup" class="section level2">
+<h2>Warmup</h2>
+<ul>
+<li>What is the 95th percentile for trumpet weight?</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">qunif</span>(<span class="fl">0.95</span>, <span class="dt">min =</span> <span class="fl">1.5</span>, <span class="dt">max =</span> <span class="fl">3.5</span>)</span></code></pre></div>
+<pre><code>## [1] 3.4</code></pre>
+<ul>
+<li>What is the 10th percentile for trombone weight?</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">qnorm</span>(<span class="fl">0.10</span>, <span class="dt">mean =</span> <span class="fl">4.6</span>, <span class="dt">sd =</span> <span class="fl">0.8</span>)</span></code></pre></div>
+<pre><code>## [1] 3.574759</code></pre>
+<ul>
+<li>About what percent of trombones do you expect to be more than 5 pounds?</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">pnorm</span>(<span class="dv">5</span>, <span class="dt">mean =</span> <span class="fl">4.6</span>, <span class="dt">sd =</span> <span class="fl">0.8</span>)</span></code></pre></div>
+<pre><code>## [1] 0.3085375</code></pre>
+<ul>
+<li>About what percent of reed instruments do you expect to be more than 5 pounds?</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">pchisq</span>(<span class="dv">5</span>, <span class="dt">df =</span> <span class="dv">4</span>)</span></code></pre></div>
+<pre><code>## [1] 0.2872975</code></pre>
+<ul>
+<li>Simulate 100 random trombone weights. How many of them were below 4 pounds?</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>rand_trombones &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>, <span class="dt">mean =</span> <span class="fl">4.6</span>, <span class="dt">sd =</span> <span class="fl">0.8</span>)</span>
+<span id="cb9-2"><a href="#cb9-2"></a></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="kw">sum</span>(rand_trombones <span class="op">&lt;</span><span class="st"> </span><span class="dv">4</span>)</span></code></pre></div>
+<pre><code>## [1] 21</code></pre>
+</div>
+<div id="catching-a-con" class="section level2">
+<h2>Catching a con</h2>
 <p>You manage to intercept a shipping notice for delivery to Professor Hill. It says the following:</p>
 <pre><code>Wells Fargo Shipment 1957
 
@@ -969,23 +995,27 @@ Total Shipped Weight: 4532 lbs.
 <p>This is your chance to catch Professor Hill in his lie!</p>
 <p>First, write a function that samples the correct number of weights of trombones, cornets (trumpets), and reed instruments (saxophones, clarinets, bassoons), and then returns the total weight of the shipment.</p>
 <p>Then, use that function to create random samples of the total weight of 1000 possible shipments.</p>
-<p>(Some code is provided for you below. Do not change the seed!)</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>music_man &lt;-<span class="st"> </span><span class="cf">function</span>(n_tromb, n_cor, n_reed){</span>
-<span id="cb2-2"><a href="#cb2-2"></a>  </span>
-<span id="cb2-3"><a href="#cb2-3"></a>  trombones &lt;-<span class="st"> </span><span class="kw">rnorm</span>(n_tromb, ...)</span>
-<span id="cb2-4"><a href="#cb2-4"></a>  cornets &lt;-<span class="st"> </span>...</span>
-<span id="cb2-5"><a href="#cb2-5"></a>  reeds &lt;-<span class="st"> </span>...</span>
-<span id="cb2-6"><a href="#cb2-6"></a>  </span>
-<span id="cb2-7"><a href="#cb2-7"></a>  <span class="kw">return</span>()</span>
-<span id="cb2-8"><a href="#cb2-8"></a>  </span>
-<span id="cb2-9"><a href="#cb2-9"></a>}</span>
-<span id="cb2-10"><a href="#cb2-10"></a></span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="kw">set.seed</span>(<span class="dv">1957</span>)</span>
-<span id="cb2-12"><a href="#cb2-12"></a></span>
-<span id="cb2-13"><a href="#cb2-13"></a>my_weights &lt;-<span class="st"> </span><span class="kw">rerun</span>(<span class="dv">1000</span>, </span>
-<span id="cb2-14"><a href="#cb2-14"></a>                    <span class="kw">music_man</span>(<span class="dt">n_tromb =</span> <span class="dv">76</span>, ...)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb2-15"><a href="#cb2-15"></a><span class="st">  </span><span class="kw">flatten_dbl</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>music_man &lt;-<span class="st"> </span><span class="cf">function</span>(n_tromb, n_cor, n_reed){</span>
+<span id="cb12-2"><a href="#cb12-2"></a>  </span>
+<span id="cb12-3"><a href="#cb12-3"></a>  trombones &lt;-<span class="st"> </span><span class="kw">rnorm</span>(n_tromb, <span class="dt">mean =</span> <span class="fl">4.6</span>, <span class="dt">sd =</span> <span class="fl">0.8</span>)</span>
+<span id="cb12-4"><a href="#cb12-4"></a>  cornets &lt;-<span class="st"> </span><span class="kw">runif</span>(n_cor, <span class="dt">min =</span> <span class="fl">1.5</span>, <span class="dt">max =</span> <span class="fl">3.5</span>)</span>
+<span id="cb12-5"><a href="#cb12-5"></a>  reeds &lt;-<span class="st"> </span><span class="kw">rchisq</span>(n_reed, <span class="dt">df =</span> <span class="dv">4</span>)</span>
+<span id="cb12-6"><a href="#cb12-6"></a>  </span>
+<span id="cb12-7"><a href="#cb12-7"></a>  weight &lt;-<span class="st"> </span><span class="kw">sum</span>(trombones, cornets, reeds)</span>
+<span id="cb12-8"><a href="#cb12-8"></a>  </span>
+<span id="cb12-9"><a href="#cb12-9"></a>  <span class="kw">return</span>(weight)</span>
+<span id="cb12-10"><a href="#cb12-10"></a>  </span>
+<span id="cb12-11"><a href="#cb12-11"></a>}</span>
+<span id="cb12-12"><a href="#cb12-12"></a></span>
+<span id="cb12-13"><a href="#cb12-13"></a><span class="kw">set.seed</span>(<span class="dv">1957</span>)</span>
+<span id="cb12-14"><a href="#cb12-14"></a></span>
+<span id="cb12-15"><a href="#cb12-15"></a>my_weights &lt;-<span class="st"> </span><span class="kw">rerun</span>(<span class="dv">1000</span>, </span>
+<span id="cb12-16"><a href="#cb12-16"></a>                    <span class="kw">music_man</span>(<span class="dt">n_tromb =</span> <span class="dv">76</span>, <span class="dt">n_cor =</span> <span class="dv">110</span>, <span class="dt">n_reed =</span> <span class="dv">1035</span>)</span>
+<span id="cb12-17"><a href="#cb12-17"></a>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb12-18"><a href="#cb12-18"></a><span class="st">  </span><span class="kw">flatten_dbl</span>()</span></code></pre></div>
 <p>How many of these samples had a weight less than Prof. Hill’s shipment? Do you believe Professor Hill is lying, or not?</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">sum</span>(my_weights <span class="op">&lt;</span><span class="st"> </span><span class="dv">4532</span>)</span></code></pre></div>
+<pre><code>## [1] 7</code></pre>
 </div>
 </div>
 

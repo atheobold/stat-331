@@ -1,5 +1,6 @@
 ---
 title: "PA: Simulation"
+author: "Stat 331"
 output: rmdformats::html_docco
 ---
 
@@ -24,35 +25,57 @@ You do some research on the weights of properly crafted brass instruments, and y
 * Reed instruments (like clarinets, bassoons, and saxophones) have weights that 
 are Chi-Square distributed with 4 degrees of freedom.
 
-# Remember
+## Remember
 
-**Four Types of Calculations**
+### Four Types of Calculations
 
 - `p` -- stands for probability (left tail area for a given value of x)
 - `r` -- stands for random (for generating data)
 - `q` -- stands for quantile (for a given probability)
 - `d` -- stands for density (of the distribution at a given value of x)
 
-**Distributions**
+### Distributions
 
 - The Normal distribution functions end with `norm`
 - The Uniform distribution functions end with `unif`
 - The Chi-Square distribution functions end with `chisq`
 
-# Warmup
+## Warmup
 
 * What is the 95th percentile for trumpet weight?
 
+```{r}
+qunif(0.95, min = 1.5, max = 3.5)
+```
+
 * What is the 10th percentile for trombone weight?
+
+```{r}
+qnorm(0.10, mean = 4.6, sd = 0.8)
+```
 
 * About what percent of trombones do you expect to be more than 5 pounds?
 
+```{r}
+1 - pnorm(5, mean = 4.6, sd = 0.8)
+```
+
 * About what percent of reed instruments do you expect to be more than 5 pounds?
+
+```{r}
+1 - pchisq(5, df = 4)
+```
 
 * Simulate 100 random trombone weights.  How many of them were below 4 pounds?
 
+```{r}
+rand_trombones <- rnorm(100, mean = 4.6, sd = 0.8)
 
-# Catching a Con
+sum(rand_trombones < 4)
+
+```
+
+## Catching a con
 
 You manage to intercept a shipping notice for delivery to Professor Hill.  It says the following:
 
@@ -83,27 +106,34 @@ then returns the total weight of the shipment.
 Then, use that function to create random samples of the total weight of 1000 
 possible shipments. 
 
-(Some code is provided for you below. Do not change the seed!)
-
-```{r, eval = FALSE}
+```{r}
 music_man <- function(n_tromb, n_cor, n_reed){
   
-  trombones <- rnorm(n_tromb, ...)
-  cornets <- ...
-  reeds <- ...
+  trombones <- rnorm(n_tromb, mean = 4.6, sd = 0.8)
+  cornets <- runif(n_cor, min = 1.5, max = 3.5)
+  reeds <- rchisq(n_reed, df = 4)
   
-  return()
+  weight <- sum(trombones, cornets, reeds)
+  
+  return(weight)
   
 }
 
 set.seed(1957)
 
 my_weights <- rerun(1000, 
-                    music_man(n_tromb = 76, ...)) %>% 
+                    music_man(n_tromb = 76, n_cor = 110, n_reed = 1035)
+) %>% 
   flatten_dbl()
 ```
 
 
 How many of these samples had a weight less than Prof. Hill's shipment?
 Do you believe Professor Hill is lying, or not?
+
+```{r}
+sum(my_weights < 4532)
+```
+
+
 
