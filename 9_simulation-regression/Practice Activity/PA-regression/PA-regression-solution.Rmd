@@ -51,7 +51,7 @@ Plot the residuals (observed value minus predicted value) of your linear model
 
 ```{r}
 animal_lm %>% 
-  ggplot(aes(x = weight_before, y = .resid)) + 
+  ggplot(aes(x = weight_before, y = resid)) + 
   geom_point()
 
 ```
