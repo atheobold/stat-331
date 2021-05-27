@@ -11,7 +11,7 @@ knitr::opts_chunk$set(cache = TRUE)
 
 schools <- read_xlsx(here::here("9_simulation-regression", 
                                 "Project Part One", 
-                                "US_educational_data_project.xlsx"))
+                                "US_schools_data.xlsx"))
 ```
 
 
@@ -80,9 +80,13 @@ The `PRIMARY_KEY` column contains information for **both** the `state` and the
 
 ```{r, include = FALSE}
 schools_small <- schools_small %>% 
-  mutate(year = word(PRIMARY_KEY, start = 1, end = 1, sep = "_"), 
-         state = word(PRIMARY_KEY, start = 2, end = 2, sep = "_")) %>% 
-  select(-PRIMARY_KEY, year, state, everything())
+  mutate(PRIMARY_KEY = str_replace_all(PRIMARY_KEY, pattern = "_",
+                                      replacement = " "), 
+         year = str_extract(PRIMARY_KEY, "\\d{4}"), 
+         state = str_extract(PRIMARY_KEY, "(?<=\\d{4}).*"), 
+         state = str_trim(state)) %>% 
+  select(-PRIMARY_KEY) %>% 
+  select(year, state, everything())
 
 
 ```
