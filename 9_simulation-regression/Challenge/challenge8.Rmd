@@ -1,0 +1,27 @@
+---
+title: "Challenge 8: Plotting Extras"
+output: rmdformats::readthedown
+---
+
+This Challenge is intended to help you spice up *at least one* of the
+visualizations your group has made for the Final Project. By no means do you 
+need to make all of these additions. 
+
+Personally, when I think about making "professional" or "publication ready" 
+visualizations, my mind always comes back to this RStudio Presentation by 
+Will Chase, [presentation](https://www.rstudio.com/resources/rstudioconf-2020/the-glamour-of-graphics/) and [slides](https://www.williamrchase.com/slides/assets/player/KeynoteDHTMLPlayer.html#0). 
+
+Here are some additions to your plot(s) I'd like you to play around with:
+
+1. Choosing how much white space to have and what grid lines to display 
+
+2. Adding annotations for regions and / or states 
+
+3. Mindfully choosing color palettes
+
+4. Carefully choosing a font to use
+
+5. Removing legends and using annotations instead
+
+6. Crafting the legend so that the values are displayed in the order they appear 
+on the plot

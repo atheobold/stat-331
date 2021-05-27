@@ -1,0 +1,230 @@
+---
+title: "Final Project: Part One"
+output: rmdformats::readthedown
+---
+
+```{r, include = FALSE}
+library(tidyverse)
+library(readxl)
+
+knitr::opts_chunk$set(cache = TRUE)
+
+schools <- read_xlsx(here::here("9_simulation-regression", 
+                                "Project Part One", 
+                                "US_educational_data_project.xlsx"))
+```
+
+
+In Part One of this project you will:
+
+- Clean a **very** untidy dataset 
+- Explore data on state instructional expenditures and test scores
+- Use linear regression to model the relationship between these variables
+- Decide what model explains the most variability in test scores
+
+
+# The Data 
+
+The data for this project were pulled from the 
+[Urban Institute's API](https://ed-data-portal.urban.org/data-explorer/). The 
+master dataset brings together multiple facets of U.S. education data into one convenient CSV, including data related to student's race and sex. 
+
+These data can be downloaded from Canvas, under `US_schools_data.csv`. 
+
+
+
+A more thorough documentation of the variables in the dataset and how they are
+coded can be found: [in this Kaggle project](https://www.kaggle.com/noriuk/us-education-datasets-unification-project)
+
+
+
+# Data Cleaning 
+
+It is often said that 80-90% of what a "data scientist" does is clean and 
+organize data, in preparation for an analysis. I have certainly found this to 
+be true, and you will see why! 
+
+As is typical for large collated datasets (datasets that are merged together),
+these data are in *wide* format, meaning there are multiple variables spread
+across the columns. For example, grade, race, and exam are spread across
+different columns, using prefixes to describe the level of the variable (e.g.,
+`G04_WH_A_READING` is the grade 4 average reading score for White students). 
+
+**Hint**: The `ends_with()` function is quite helpful here!
+
+## Data Narrowing 
+
+For this analysis, we are interested in the school expenditure variables 
+(`TOTAL_EXPENDITURE`, `INSTRUCTION_EXPENDITURE`, `SUPPORT_SERVICES_EXPENDITURE`,
+`OTHER_EXPENDITURE`, `CAPITAL_OUTLAY_EXPENDITURE`), and the testing variables
+(anything ending in `READING` or `MATHEMATICS`). Downsize the dataset to only 
+include these variables, as well as the key column identifying the state / year. 
+
+
+```{r, include = FALSE}
+
+schools_small <- schools %>% 
+  select(PRIMARY_KEY, 
+         TOTAL_EXPENDITURE:CAPITAL_OUTLAY_EXPENDITURE | 
+           ends_with("READING") |
+           ends_with("MATHEMATICS"))
+
+```
+
+## Separating Key Column
+
+The `PRIMARY_KEY` column contains information for **both** the `state` and the 
+`year` of the observation. Separate this columns into two columns. 
+
+**Hint:** The `word()` function is quite helpful here! 
+
+```{r, include = FALSE}
+schools_small <- schools_small %>% 
+  mutate(year = word(PRIMARY_KEY, start = 1, end = 1, sep = "_"), 
+         state = word(PRIMARY_KEY, start = 2, end = 2, sep = "_")) %>% 
+  select(-PRIMARY_KEY, year, state, everything())
+
+
+```
+
+
+## Pivoting Longer
+
+The grade (04, 08), race (AM, AS, BL, HI, HP, TR, WH), sex (A, F, M), and test
+(READING, MATHEMATICS) are spread across the columns. We need to pivot these variables to be included in **one** column each (e.g., `grade`, `race`, `sex`, 
+`test`).  
+
+**Hint:** the `names_sep` argument in `pivot_longer()` is **very** helpful here!
+
+```{r, include = FALSE}
+schools_small <- schools_small %>% 
+  pivot_longer(G04_A_A_READING:G08_TR_A_MATHEMATICS, 
+           names_to = c("grade", "race", "sex", "test"), 
+           names_sep = "_")
+```
+
+## Regional Classification 
+
+Similar to the midterm exam, create a regional grouping for the states. As this 
+will be presented in a written report, be mindful about how you classify the 
+regions. You will need to convince me why you believe these different regions
+would have different relationships between school expenditures and student 
+test scores. 
+
+
+## Additional Cleaning
+
+Feel free to clean up the values of these variables! Keep in mind that these 
+are the values that will print to the visualizations you make! For example, 
+maybe you would prefer for the `grade` variable to only have levels `"4"` and 
+`"8"`, or maybe you'd prefer `test` to have levels `"Mathematics"` and 
+`"Reading"`. I would highly recommend renaming the "A" level of `sex` to say 
+`"all"`! 
+
+You should also consider what variables you want to be factors, and if there 
+are specific orderings that you would like for them to be displayed in for your 
+visualizations! 
+
+
+# Data Visualization
+
+Create **at least three** different visualizations exploring the following:
+
+- The relationship between instructional expenditures and testing scores, and
+how this differs by regions
+
+- The distribution of mathematics and reading test scores
+
+- How school instructional expenditures and test scores have changed over time,
+and how this differs by region 
+
+Each of these visualizations should also investigate how these relationships 
+differ based on student race and sex. 
+
+
+```{r, include = FALSE}
+schools_small %>% 
+  drop_na() %>% 
+  filter(state == "ALABAMA") %>% 
+  mutate(year = as.numeric(year)) %>% 
+  ggplot(aes(x = year, y = INSTRUCTION_EXPENDITURE)) + 
+  geom_line(aes(color = state))
+  
+
+schools_small %>% 
+  ggplot(aes(x = year, y = test)) + 
+  geom_point()
+
+```
+
+
+# Linear Regression
+
+Fit two simple linear regression models, (1) investigating the relationship
+between instructional expenditures and mathematics test scores, and (2) 
+investigating the relationship between instructional expenditures and reading test scores. 
+
+```{r, include = FALSE}
+math_lm <- schools_small %>% 
+  filter(test == "MATHEMATICS") %>% 
+  lm(value ~ INSTRUCTION_EXPENDITURE, data = .)
+
+read_lm <- schools_small %>% 
+  filter(test == "READING") %>% 
+  lm(value ~ INSTRUCTION_EXPENDITURE, data = .)
+
+```
+
+
+## Model Comparison 
+
+For which test does instructional expenditures account for a larger proportion
+of the variability? How substantial is the difference? 
+
+
+## Multiple Linear Regression 
+
+### Both Tests
+
+Rather than having separate models, one for reading and one for mathematics, we
+can instead fit **one** regression model that includes `test` as an explanatory 
+variable. 
+
+Does this model account for a larger proportion of variability in test scores? 
+
+
+### Additional Variables
+
+Alright, now that we've got a "good" starting model, we can start to add 
+variables. It is clear that the relationship between instructional expenditures
+and test scores changes over time. So, let's make a time-series model to account
+for this. 
+
+Include `year` as a second explanatory variable in your model. How much
+additional variability in test scores were you able to explain by including 
+`year`? 
+
+```{r, include = FALSE}
+schools_small %>% 
+  lm(value ~ INSTRUCTION_EXPENDITURE + test + year, data = .)
+```
+
+## Adjusting for Complexity 
+
+There is a trade off between model "complexity" and an increase in a model's 
+$R^2$. Unfortunately, even if a variable doesn't add much to the model, the 
+$R^2$ for that model will still increase. So, we need a different measure that 
+can account for whether the variable(s) explain components of the variability 
+in test scores that weren't accounted for by other variables. 
+
+This is where *adjusted* $R^2$ comes in. By "adjusting" the $R^2$, we are
+essentially making a penalty for whether the extra variable added something 
+"new" to the model. 
+
+Include additional variables in your regression and see how much variability 
+in test scores your model can account for. Use adjusted $R^2$ to decide on what
+final model your group believes is the "best." 
+
+With your final model, make a visualization that explores the relationships 
+accounted for in your model. 
+

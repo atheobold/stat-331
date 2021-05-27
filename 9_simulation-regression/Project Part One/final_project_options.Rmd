@@ -1,0 +1,142 @@
+---
+title: "Final Project: Structure & Deliverables"
+output: rmdformats::readthedown
+---
+
+## Overview
+
+For your Final Project in Stat 331, you will use your new skills to create a
+"deliverable."  This project should be a thoughtful, professional creation that
+you will be proud to share even after this class is over.
+
+Every group is expected to complete a written report outlining the "key" 
+features of your model and it's predictions. Your group also has the opportunity 
+to submit additional materials demonstrating key parts of your model through 
+a Shiny app or Blogdown website. These additional materials will earn you
+additional Challenge Points.  (Recall that any Challenge Points above the 100
+required for that grade category are extra credit!)
+
+Everyone in a group will receive the same grade, unless concerns are privately
+expressed to me about member contributions in the final peer evaluation. Bonus
+Challenge Points will be divided evenly across group members.
+
+The **entire** final project is due on **Sunday, June 6th**. Since nothing is 
+due until the end of the course, it is your group's responsibility to ensure 
+that you are staying on top of the work. You will be given class time to 
+complete the project, both this Thursday (5/27) and next week. I am also 
+available to answer any questions you have on Discord! 
+
+
+# The Written Report
+
+Every group is required to complete the final written project, covering 
+linear regression and model simulation. The written description of what you 
+need to accomplish in each component of the project can be found in each 
+week's "Final Project: Directions" document. This document will specify what 
+you are required to do for the project and what must be included in your
+written report. It is, however, up to you how you would like to structure your report (both content and style). 
+
+Your analysis should read like a formal article, such as those that appear in
+pop science journals like [this one](https://www.scientificamerican.com/). That
+is, it should be *formatted* and *polished* - we shouldn't be able to see any
+code unless it is absolutely necessary, plots and tables should have clear
+labels, and the article should have a clear narrative flow.
+
+
+#### Guidelines
+
+You will turn in to me:
+
+* Your .Rmd source file
+    
+* Your final report in html or pdf form.
+
+
+# Extras 
+
+Your group has the opportunity to complete additional components to the 
+written report, to earn additional Challenge points. These "extra" components 
+may take a great deal of time, so your **entire group** should make the decision 
+as to whether you can complete the task. 
+
+
+## Option A: Animating a Plot [+10 Challenge Points]
+
+A great extra for *any* plot is animation! The **gganimate** package makes 
+it easy to animate **ggplot2** graphics. 
+
+### Resources
+
+The **gganimate** website (<https://gganimate.com/>) has a great "Getting 
+Started" tutorial on how to make animated visualizations. 
+
+### Guidelines
+
+If your group chooses to embark on this adventure. I would like for you to 
+include your animated visualization in your written report! 
+
+
+## Option B: Shiny App [+20 Challenge Points]
+
+One of the most exciting features of **R** is the package **shiny**.  
+
+This package allows users to make fully interactive web applications directly
+in **R**.
+
+See some examples here: https://shiny.rstudio.com/gallery/
+
+*Shiny* is awesome, and this is the extra that I would most suggest you
+choose, unless you have a strong preference otherwise.
+
+It will take you some extra work to learn how **shiny** works, and how to build
+your app.  (Hence the bonus Challenge Points!)  However, I think you'll have fun
+with your results.
+
+The app should showcase in some way the data analysis you were asked to perform.
+This analysis can be less formal, and less complex, than written report. 
+
+### Resources
+
+[This site](https://shiny.rstudio.com/tutorial/) has very thorough tutorials.
+
+### Guidelines
+
+If your group chooses to embark on this adventure. In addition to your written 
+report, you will submit the following:
+
+* A link to your completed app from shinyapps.io.  
+  + At least one of your group members will need to make an account, so that you
+  can upload your app.
+
+* Submit to Canvas a .zip folder containing all relevant (data and code) files
+
+
+## Option C: A Blogdown Website [+20 Challenge Points]
+
+Have you always wanted to make websites to show off your data analysis?
+
+For the very dedicated, now is your chance!
+
+Use the `blogdown` package to make your very own website in **R**!
+
+This project will involve more learning-on-your-own and frustrating
+troubleshooting than any of the others.
+
+As a reward (in addition to bonus points!), you will have a personal website
+that you have built.
+
+The site should showcase in some way the data analysis you performed -- probably
+in the form of a small blog post on the site.  This analysis can be less formal,
+and less complex, than the written report.  
+
+### Resources
+
+The resources from [this workshop]([https://summer-of-blogdown.netlify.com/]) will be helpful to you.
+
+### Guidelines
+
+If your group chooses to embark on this adventure. In addition to your written 
+report, you will submit the following:
+
+- A link to your website
+

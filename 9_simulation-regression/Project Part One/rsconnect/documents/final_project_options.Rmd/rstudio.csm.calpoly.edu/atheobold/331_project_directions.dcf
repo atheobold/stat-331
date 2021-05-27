@@ -1,0 +1,13 @@
+name: 331_project_directions
+title: 331_project_directions
+username: atheobold
+account: atheobold
+server: rstudio.csm.calpoly.edu
+hostUrl: https://rstudio.csm.calpoly.edu/__api__
+appId: 328
+bundleId: 659
+url: https://rstudio.csm.calpoly.edu/project_directions/
+when: 1622067798.67188
+lastSyncTime: 1622067798.67188
+asMultiple: FALSE
+asStatic: TRUE
