@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Model Selection 🏹</title>
+    <title>Linear Regression &amp; Simulation</title>
     <meta charset="utf-8" />
     <meta name="author" content="Stat 331" />
-    <meta name="date" content="2021-05-27" />
+    <meta name="date" content="2021-05-25" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="slide-style.css" type="text/css" />
@@ -13,128 +13,133 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Model Selection 🏹
+# Linear Regression &amp; Simulation
 ### Stat 331
-### May 27, 2021
+### May 25, 2021
 
 ---
 
 
 
 
-class: inverse, middle, center
 
-.hand-medium[I have a lot of variables, how do I choose a model?]
+class: inverse
 
----
-
-class: middle
-
-.larger[Do you want to explain?]
-
---
-
-&gt; **Desire:** Describe and quantify the relationship between the outcome variable
-&gt; and a set of explanatory variables
-
---
-
-- Determine the "significance" of relationships
-
-- Identify causal relationships 
-
-
----
-
-class: middle 
-
-.larger[Do you want to predict?]
-
---
-
-&gt; **Desire:** Predict an outcome based on the information contained in
-&gt; a set of predictor variables
-
---
-
-- Don’t care so much about understanding variable relationships
-
-- Care about making good predictions
-
-
----
-
-class: inverse, middle, center
-
-.hand-medium[All models are wrong, but some are useful.]
-
-.bitlarger[George Box, 1976]
-
-
-
----
-
-.larger[Model Selection Criteria]
-
-.pull-left[
-- p-values 
-
-- **adjusted `\(R^2\)`**
-
-- SSE 
-
-- RMSE
-]
-
-.pull-right[
-- **AIC**
-
-- BIC
-
-- **Cross Validation**
-]
-
----
-
-class: center
-
-.larger[What are the steps?]
-
-.pull-left[
-__1.__ Fit an initial model
-
-__2.__ Add a variable (or interaction) to the model
-
-__3.__ Compare models based on selection criteria
-]
-
---
-
-.pull-right[
-__4.__ Keep the "better" model
-
-`\(\vdots\)`
-
-**Continue until all variables (and interactions) have been considered**
-
-]
-
-
----
-
-.larger[Model Selection **is not** Objective]
+.larger[The next two weeks...]
 
 --
 
 .pull-left[
-.bitlarger[**Humans** define the "model set"]
+.bitlarger[**Regression &amp; Simulation**]
 ]
 
 --
 
-.pull-right[
-.bitlarger[**Humans** define the selection criteria]
+.pull.right[
+
+&lt;/br&gt;
+.bitlarger[**Predictive Modeling**]
 ]
+
+---
+
+.larger[Linear Regression]
+
+$$
+  response = intercept + slope \cdot explanatory + noise
+$$
+--
+
+.pull-left[
+
+&lt;/br&gt;
+&lt;center&gt;
+`\(\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 \cdot x\)`
+
+]
+
+.pull-right[
+&lt;img src="PA-review_files/figure-html/2-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+.larger[Supervised Learning]
+
+
+```r
+evals %&gt;% 
+  lm(score ~ age, data = .)
+```
+
+```
+## 
+## Call:
+## lm(formula = score ~ age, data = .)
+## 
+## Coefficients:
+## (Intercept)          age  
+##    4.461932    -0.005938
+```
+
+---
+
+.larger[Accessing Residuals &amp; Fitted Values]
+
+- `resid()` 
+- `fitted()`
+
+---
+
+.larger[Plotting Residuals]
+
+
+
+
+```r
+ggplot(data = evals_lm, aes(y = .resid, x = .fitted )) +
+  geom_point()
+```
+
+&lt;img src="PA-review_files/figure-html/unnamed-chunk-4-1.png" width="30%" height="20%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+class: inverse
+
+.huge-text[Simulating Data]
+
+---
+
+.larger[Functions in R]
+
+- `r` stands for for **random sampling**: generate a random value from a 
+specific distribution
+
+--
+
+- `p` for **probability**: i.e. compute the chance of observing a value **less
+than** `x`
+
+--
+
+- `q` stands for **quantile**: given a probability `p`, compute the x-value
+such that `\(P(X &lt; x) = p\)`
+
+--
+
+- `d` stands for **density**: compute the height of distribution curve
+
+---
+
+.larger[Distributions in R]
+
+- Uniform -- `unif`
+- Normal -- `norm`
+- t -- `t`
+- Chi-Squared -- `chisq`
+- Binomial -- `binom`
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

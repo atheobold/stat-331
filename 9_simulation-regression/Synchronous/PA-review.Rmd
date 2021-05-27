@@ -1,0 +1,159 @@
+---
+title: "Linear Regression & Simulation"
+date: "May 25, 2021"
+author: "Stat 331"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["xaringan-themer.css", "slide-style.css"]
+    nature:
+      highlightStyle: solarized-light
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+---
+
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.width = 8, fig.height = 6}
+knitr::opts_chunk$set(fig.align = "center")
+
+options(htmltools.dir.version = FALSE)
+
+library(openintro)
+library(broom)
+library(gridExtra)
+library(kableExtra)
+library(png)
+library(xaringanthemer)
+library(xaringan)
+library(tidyverse)
+library(flair)
+library(moderndive)
+
+
+style_duo_accent(
+  primary_color      = "#0F4C81", # pantone classic blue
+  secondary_color    = "#B6CADA", # pantone baby blue
+  header_font_google = google_font("Raleway"),
+  text_font_google   = google_font("Raleway", "300", "300i"),
+  code_font_google   = google_font("Source Code Pro"),
+  text_font_size     = "30px"
+)
+```
+
+class: inverse
+
+.larger[The next two weeks...]
+
+--
+
+.pull-left[
+.bitlarger[**Regression & Simulation**]
+]
+
+--
+
+.pull.right[
+
+</br>
+.bitlarger[**Predictive Modeling**]
+]
+
+---
+
+.larger[Linear Regression]
+
+$$
+  response = intercept + slope \cdot explanatory + noise
+$$
+--
+
+.pull-left[
+
+</br>
+<center>
+$\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 \cdot x$
+
+]
+
+.pull-right[
+```{r 2, echo = FALSE, fig.width = 5, fig.height = 4, fig.align = 'center'}
+ggplot(data = bdims, aes(y = wgt, x = hgt)) + 
+  geom_point() +
+  scale_x_continuous("Explanatory Variable", labels = NULL) + 
+  scale_y_continuous("Response Variable", labels = NULL)
+```
+]
+
+---
+
+.larger[Supervised Learning]
+
+```{r}
+evals %>% 
+  lm(score ~ age, data = .)
+```
+
+---
+
+.larger[Accessing Residuals & Fitted Values]
+
+- `resid()` 
+- `fitted()`
+
+---
+
+.larger[Plotting Residuals]
+
+```{r, echo = FALSE}
+evals_lm <- evals %>% 
+  lm(score ~ age, data = .)
+```
+
+```{r, out.width = "30%", out.height = "20%"}
+ggplot(data = evals_lm, aes(y = .resid, x = .fitted )) +
+  geom_point()
+```
+
+
+---
+
+class: inverse
+
+.huge-text[Simulating Data]
+
+---
+
+.larger[Functions in R]
+
+- `r` stands for for **random sampling**: generate a random value from a 
+specific distribution
+
+--
+
+- `p` for **probability**: i.e. compute the chance of observing a value **less
+than** `x`
+
+--
+
+- `q` stands for **quantile**: given a probability `p`, compute the x-value
+such that $P(X < x) = p$
+
+--
+
+- `d` stands for **density**: compute the height of distribution curve
+
+---
+
+.larger[Distributions in R]
+
+- Uniform -- `unif`
+- Normal -- `norm`
+- t -- `t`
+- Chi-Squared -- `chisq`
+- Binomial -- `binom`

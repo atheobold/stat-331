@@ -56,6 +56,7 @@ class: middle
 --
 
 - Determine the "significance" of relationships
+
 - Identify causal relationships 
 
 
@@ -116,18 +117,18 @@ class: center
 .larger[What are the steps?]
 
 .pull-left[
-1. Fit an initial model
+__1.__ Fit an initial model
 
-2. Add a variable (or interaction) to the model
+__2.__ Add a variable (or interaction) to the model
 
-3. Compare models based on selection criteria
-
-4. Keep the "better" model
+__3.__ Compare models based on selection criteria
 ]
 
 --
 
 .pull-right[
+__4.__ Keep the "better" model
+
 $\vdots$
 
 **Continue until all variables (and interactions) have been considered**
