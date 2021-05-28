@@ -1,0 +1,29 @@
+---
+title: "Predictive Checks"
+author: ""
+output:
+  prettydoc::html_pretty:
+    theme: tactile
+    highlight: github
+    css: styles.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+```
+
+`r emo::ji("play button")` Watch Videos:
+  
+  * `r emo::ji("link")` Link to **all** Slides from Videos: [here]()
+
+`r emo::ji("book")` Readings:    
+
+`r emo::ji("computer")` Activities: 
+  
+`r emo::ji("check")` Check-ins: 
+
+---
+
+<!-- Simulating Linear Models: https://aosmith.rbind.io/2018/01/09/simulate-simulate-part1/ -->

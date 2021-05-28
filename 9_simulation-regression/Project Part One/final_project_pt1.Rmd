@@ -146,27 +146,12 @@ Each of these visualizations should also investigate how these relationships
 differ based on student race and sex. 
 
 
-```{r, include = FALSE}
-schools_small %>% 
-  drop_na() %>% 
-  filter(state == "ALABAMA") %>% 
-  mutate(year = as.numeric(year)) %>% 
-  ggplot(aes(x = year, y = INSTRUCTION_EXPENDITURE)) + 
-  geom_line(aes(color = state))
-  
-
-schools_small %>% 
-  ggplot(aes(x = year, y = test)) + 
-  geom_point()
-
-```
-
-
 # Linear Regression
 
 Fit two simple linear regression models, (1) investigating the relationship
 between instructional expenditures and mathematics test scores, and (2) 
-investigating the relationship between instructional expenditures and reading test scores. 
+investigating the relationship between instructional expenditures and reading
+test scores. 
 
 ```{r, include = FALSE}
 math_lm <- schools_small %>% 
