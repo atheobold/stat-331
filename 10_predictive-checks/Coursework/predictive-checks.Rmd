@@ -15,6 +15,8 @@ knitr::opts_chunk$set(echo = TRUE,
                       fig.align = "center")
 
 library(tidyverse)
+library(gridExtra)
+library(broom)
 
 set.seed(0114)
 ```
@@ -33,11 +35,11 @@ data
 **This week everything is self-contained in this coursework page!** 
 </center>
 
-`r emo::ji("book")` Readings: 15-20 minutes  
+`r emo::ji("book")` Readings: 15-30 minutes  
 
-`r emo::ji("computer")` Activities: 
+`r emo::ji("computer")` Activities: 10-15 minutes
   
-`r emo::ji("check")` Check-ins: 1
+`r emo::ji("check")` Check-ins: 5 (combined in 1 Canvas quiz)
 
 ---
 
@@ -136,6 +138,16 @@ from a `lm` object -- the `predict()` function.
 penguin_predict <- predict(penguin_lm)
 ```
 
+`r emo::ji("check")` **Check-in: The `predict()` function**
+
+What is the data structure of the predictions that are output by the `predict()`
+function?
+
+(a) list
+(b) vector
+(c) matrix
+(d) dataframe
+
 
 ## Extracting the Estimate of $\sigma$
 
@@ -177,6 +189,10 @@ new_data <- tibble(predict_length = noise(penguin_predict,
                    )
 ```
 
+`r emo::ji("check")` **Check-in: Normal Errors**
+
+When simulating data that come from a linear regression, why should the default value for the `mean` be 0? (when passed into the `rnorm()` function)
+
 ---
 
 # Plotting Predictions 
@@ -192,13 +208,13 @@ the relationship between the responses and the explanatory variables.
 pred <- new_data %>% 
   ggplot(aes(x = predict_length)) +
   geom_histogram(binwidth = 3.5) +
-  labs(x = "Simulated Bill Lengths (mm)")
+  labs(x = "Simulated Bill Lengths (mm)") +
   xlim(25, 65)
 
 obs <- penguins %>% 
   ggplot(aes(x = bill_length_mm)) + 
   geom_histogram(binwidth = 3.5) + 
-  labs(x = "Observed Bill Lengths (mm)")
+  labs(x = "Observed Bill Lengths (mm)") + 
   xlim(25, 65)
 
 
@@ -281,7 +297,7 @@ underestimates, but the values are not terribly close to the line.
 
 ```{r}
 new_data %>% 
-  ggplot(aes(y = predict_length, x = bill_length_mm)) + 
+  ggplot(aes(x = predict_length, y = bill_length_mm)) + 
   geom_point() + 
    labs(x = "Observed Bill Length (mm)", 
        y = "Simulated Bill Length (mm)" ) + 
@@ -298,10 +314,8 @@ for what I would expect if my model did a good job ($R^2 = 1$).
 I like the `glance()` function from the **broom** package, since it produces 
 a nice table output of the summary measures from a linear regression. I can 
 then use the column names of the table to select the `r.squared` column. 
-
+s
 ```{r}
-library(broom)
-
 new_data %>% 
   lm(bill_length_mm ~ predict_length, data = .) %>% 
   glance() %>% 
@@ -309,7 +323,13 @@ new_data %>%
   pull()
 ```
 
+`r emo::ji("check")` **Check-in: Interpreting $R^2$**
+
+What does the $R^2$ value for the above regression mean? How would you 
+interpret it? 
+
 ---
+
 
 # Iterating! 
 
@@ -385,6 +405,22 @@ sim_r_sq <- sims %>%
   map(glance) %>% 
   map_dbl(~.$r.squared)
 ```
+
+`r emo::ji("check")` **Check-in: Mapping Regression Summaries**
+
+What is the data structure of the values output after the `map(glance)` step? 
+i.e. What data structure do the following lines return:
+```
+sims %>% 
+  map( ~lm(bill_length_mm ~ .x, data = sims)) %>% 
+  map(glance)
+```
+
+(a) list
+(b) vector
+(c) matrix
+(d) dataframe
+
 
 ### Inspecting the $R^2$ Values
 
