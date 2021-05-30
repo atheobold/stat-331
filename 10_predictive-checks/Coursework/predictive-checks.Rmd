@@ -101,12 +101,30 @@ Normal distribution with mean 0 and standard deviation $\sigma$
 This implies that we can simulate data that we would have expected 
 to come from this model, by adding normally distributed errors to the values 
 predicted from the linear regression. By randomly generating these errors, we
-better understand what the "normality" and "equal variance" conditions mean.
+better understand what the "normality," "equal variance," and "independence"
+conditions mean.
 
 First, we are assuming that the errors follow a Normal distribution, because
 that is the distribution we are using to generate the errors! Second, we are 
 assuming that the variability of **every** observation is the same, which is 
-why we can use the same value of $\sigma$ when generating errors. 
+why we can use the same value of $\sigma$ when generating errors. Finally, we
+are assuming that we can randomly distribute the errors to the
+different predictions, because we are assuming that the observations are
+independent. 
+
+The independence assumption is a bit more of a stretch, so let's break down 
+the components. When we assume that observations are independent, we are saying 
+that we shouldn't be able to know the $y$ value for one observation just from 
+knowing the $y$ value of another observation. If I have repeated observations 
+on the same person taking a memory test, then it's pretty likely that I can
+guess their other scores from knowing one of their scores. Since we are using a
+linear regression to model the relationship between the explanatory variable(s)
+and the response, this assumption can be rephrased in terms of each
+observation's residual. Specifically, knowing the residual for one observation
+shouldn't give us perfect information about the residual for another
+observation. Because we are assuming that the observations / residuals are 
+independent, we can randomly draw an errors for each observation. 
+
 
 ---
 
