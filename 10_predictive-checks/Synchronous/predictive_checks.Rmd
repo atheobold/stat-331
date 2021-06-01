@@ -1,6 +1,6 @@
 ---
-title: "Model Selection `r emo::ji('bow and arrow')`"
-date: "May 27, 2021"
+title: "Predictive Checks `r emo::ji('check')`"
+date: "June 1, 2021"
 author: "Stat 331"
 output:
   xaringan::moon_reader:
@@ -37,3 +37,132 @@ style_duo_accent(
   text_font_size     = "30px"
 )
 ```
+
+class: inverse, center, middle
+
+.hand-large[What is a predictive check?] 
+
+---
+
+.pull-left[
+.larger[The middle point]
+]
+
+.pull-right[
+```{r, echo = FALSE}
+knitr::include_graphics("prediction_explanation.jpeg")
+```
+]
+
+---
+
+class: middle, center
+
+.larger[What predictive checks **do**]
+
+.large[*Assess if the model would produce data similar to what was observed*]
+
+---
+
+.larger[Requirements of a "good" regression model]
+
+--
+
+.pull-left[
+- Linear relationships
+- Independence of observations
+] 
+
+.pull-right[
+- Normality of residuals
+- Constant / Equal variance
+]
+
+---
+
+class: middle, center
+
+.larger[What predictive checks **do not do**]
+
+.large[*Make predictions for __new__ observations*] 
+
+---
+
+class: inverse, center, middle
+
+.hand-large[How do you do a predictive check?] 
+
+---
+.pull-left[
+.larger[**Step 1**]
+
+.large[Fit a regression model]
+
+.larger[**Step 2**]
+
+.large[Obtain predictions from the model]
+]
+
+--
+
+.pull-right[
+.larger[**Step 3**]
+
+.large[Add random errors to the predictions]
+
+.larger[**Step 4**]
+
+.large[Compare simulated data to observed data]
+]
+
+---
+
+class: inverse, center, middle
+
+.hand-large[How do you do add errors?] 
+
+---
+
+.larger[Linear Model Assumptions]
+
+</br>
+
+.pull-left[
+$$
+\text{y} = \beta_0 + \beta_1 \times x_1 + \cdots + \beta_n \times x_n + \epsilon
+$$
+
+$\epsilon \sim N(0, \sigma)$
+]
+
+--
+
+.pull-right-narrow[
+Random draws from Normal distribution
+  * Mean 0
+  * Standard deviation $\widehat{\sigma}$
+]
+
+---
+
+class: inverse, center, middle
+
+.hand-large[How do you compare?] 
+
+---
+
+class: center, middle 
+
+.larger[Measure "similarity"]
+
+--
+
+$R^2$ -- proportion of variability explained
+
+--
+
+$SSE$ -- size of the sum of squared errors 
+
+--
+
+$RMSE$ -- estimate of $\widehat{\sigma}$
