@@ -1517,36 +1517,49 @@ $(document).ready(function () {
     <h2><a href="#content">Final Project Guidelines</a></h2>
     <div id="text-table-of-contents">
       <ul>
-      <li><a href="#overview">Overview</a></li>
       <li><a href="#groups">Groups</a></li>
-      <li><a href="#option-a-data-analysis">Option A: Data Analysis</a></li>
-      <li><a href="#option-b-shiny-app-20-challenge-points">Option B: Shiny App [+20 Challenge Points]</a></li>
-      <li><a href="#option-c-a-blogdown-website-20-challenge-points">Option C: A Blogdown Website [+20 Challenge Points]</a></li>
-      <li><a href="#option-d-an-r-package-20-challenge-points">Option D: An R Package [+20 Challenge Points]</a></li>
-      <li><a href="#challenge-points">Challenge Points</a></li>
+      <li><a href="#part-one-vignette-100-points">Part One: Vignette [100 points]</a></li>
+      <li><a href="#part-two-final-deliverable-200-points">Part Two: Final Deliverable [200 points]</a></li>
+      <li><a href="#flex-points">Flex Points</a></li>
       </ul>
     </div>
 </div>
 
 <div id="main">
-<div id="overview" class="section level2">
-<h2>Overview</h2>
-<p>For your Final Project in Stat 331, you will use your new skills to create a “deliverable”. This project should be a thoughtful, professional creation that you will be proud to share even after this class is over.</p>
-<p>The format of this deliverable is up to you - you have a few options. Some of these options will earn you additional Challenge Points. (Recall that any Challenge Points above the 100 required for that grade category are Extra Credit!)</p>
-</div>
 <div id="groups" class="section level2">
 <h2>Groups</h2>
-<p>For this project, you may work in <strong>Groups of 1-4</strong> people. The project guidelines are the same regardless of group size; however, I will expect <code>X</code> deliverables from a group of size <code>X</code>.</p>
-<p>That is, a group of four should turn <strong>four</strong> projects, all on the same dataset or general theme. You <em>may</em> duplicate the project options; for example, a group of three might turn in one article and two supporting Shiny apps.</p>
-<p>Once you pick a group, <em>even if you are working alone</em>, you must join a Final Project group on Canvas.</p>
-<p>Everyone in a group will recieve the same grade, unless concerns are privately expressed to me about member contribution. Bonus Challenge Points will be divided evenly across group members.</p>
-<p>This project is due on <strong>Friday, August 28th</strong>. (i.e., the last day of the 10-week Summer Session)</p>
+<p>For this project, you may work in <strong>Groups of 1-4</strong> people. The project guidelines are the same regardless of group size; however, I will expect more content from larger groups. That is, a group of four should turn in a project that takes about 4 times as much work as a group of one.</p>
+<p>Once you pick a group, <em>even if you are working alone</em>, you must create your group on Canvas.<br />
+(In the section “People” choose the tab “Group” and click “+Group”)</p>
+<p>Everyone in a group will recieve the same grade, unless concerns are privately expressed to me about member contribution.</p>
+<p>You <strong>may</strong> work with people in other sections.<br />
+However, note that I will be giving you in-class work time in Week 10, which will be less helpful to groups that do not attend the same section.</p>
 </div>
-<div id="option-a-data-analysis" class="section level2">
-<h2>Option A: Data Analysis</h2>
-<p>Use your skills in the class to perform a formal analysis of a dataset.</p>
-<p>This analysis should read like a formal article, such as those that appear in pop science journals like <a href="https://www.scientificamerican.com/">this one</a>. That is, it should be <em>formatted</em> and <em>polished</em> - we shouldn’t be able to see any code unless it is absolutely necessary, plots and tables should have clear labels, and the article should have a clear narrative flow.</p>
-<p>Your analysis should demonstrate your skills from <strong>all 10 weeks</strong> of STAT 331, not just the first few weeks. An article that simply makes plots and summaries is NOT sufficient.</p>
+<div id="part-one-vignette-100-points" class="section level2">
+<h2>Part One: Vignette [100 points]</h2>
+<p>This part is due on <strong>Friday, March 13th</strong>. (i.e., <em>before</em> Finals Week)</p>
+<p>Every group must hand in a <em>vignette</em>, which is a short document describing the purpose and basic functionality of an R package.</p>
+<p><a href="https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html">The dplyr vignette</a> is a nice example. This length would be appropriate for a 4-person group; a one-person group could cover only a few of the functions in the package.</p>
+<p>You may:</p>
+<ol style="list-style-type: lower-alpha">
+<li><a href="https://twitter.com/KellyBodwin/status/1230651259599720448?s=20">Choose one of the packages discussed here</a>.<br />
+</li>
+<li>Propose a package to me for approval. This package must not have an existing vignette <em>or</em> you must justify why the existing vignette is insufficient and should be updated.</li>
+</ol>
+<p>Be sure to comment in the Canvas Forum to claim your package; only one group per section may do the same package.</p>
+<p><strong>Note</strong> You may find resources on the internet about writing vignettes for R packages. You should disregard these; you need not formally use official vignette formatting. You should instead use a simple, unformatted, <code>html_document</code>.</p>
+</div>
+<div id="part-two-final-deliverable-200-points" class="section level2">
+<h2>Part Two: Final Deliverable [200 points]</h2>
+<p>This part is due on <strong>Friday, March 20th</strong>. (i.e., <em>at the end of</em> Finals Week)</p>
+<div id="option-a-data-analysis-article" class="section level3">
+<h3>Option A: Data Analysis Article</h3>
+<p>Your baseline option is to use your skills in the class to perform a formal analysis of a dataset.</p>
+<div id="advice" class="section level4">
+<h4>Advice</h4>
+<p>This analysis should read like a formal article, such as those that appear in pop science journals like <a href="https://www.scientificamerican.com/">this one</a>.</p>
+<p>Your analysis should demonstrate your skills from <strong>all three units</strong> of STAT 331.</p>
+</div>
 <div id="guidelines" class="section level4">
 <h4>Guidelines</h4>
 <p>You will turn in to me:</p>
@@ -1556,17 +1569,19 @@ $(document).ready(function () {
 </ul>
 </div>
 </div>
-<div id="option-b-shiny-app-20-challenge-points" class="section level2">
-<h2>Option B: Shiny App [+20 Challenge Points]</h2>
+<div id="option-b-shiny-app-50-flex-points" class="section level3">
+<h3>Option B: Shiny App [+50 Flex Points]</h3>
 <p>One of the most exciting features of <strong>R</strong> is the package <em>Shiny</em>.</p>
 <p>This package allows users to make fully interactive web applications directly in <strong>R</strong>.</p>
 <p>See some examples here: <a href="https://shiny.rstudio.com/gallery/" class="uri">https://shiny.rstudio.com/gallery/</a></p>
-<p><em>Shiny</em> is awesome, and this is the project choice that I would most suggest you choosing, unless you have a strong preference otherwise.</p>
-<p>It will take you some extra work to learn how <em>Shiny</em> works, and how to build your app. (Hence the bonus Challenge Points!) However, I think you’ll have fun with your results.</p>
-<p>The app should showcase in some way a data analysis. This analysis can be less formal, and less complex, than Project A. However, it should not be trivial, and should involve skills from all 10 weeks of STAT 331.</p>
 <div id="resources" class="section level4">
 <h4>Resources</h4>
 <p><a href="https://shiny.rstudio.com/tutorial/">This site</a> has very thorough tutorials.</p>
+</div>
+<div id="advice-1" class="section level4">
+<h4>Advice</h4>
+<p><em>Shiny</em> is awesome, and this is the project choice that I would most suggest you choosing, unless you have a strong preference otherwise.</p>
+<p>It will take you some extra work to learn how <em>Shiny</em> works, and how to build your app. (Hence the Flex Points!) However, I think you’ll have fun with your results.</p>
 </div>
 <div id="guidelines-1" class="section level4">
 <h4>Guidelines</h4>
@@ -1575,39 +1590,46 @@ $(document).ready(function () {
 <li><p>Upload your completed app to shinyapps.io. At least one of your group members will need to make an account, so that you can upload your app.</p></li>
 <li><p>Submit to Canvas a .zip folder containing all relevant (data and code) files</p></li>
 </ul>
+<p>The app should showcase in some way a data analysis. This analysis can be less formal, and less complex, than Project A. However, it should not be trivial, and should demonstrate to me that you have mastered the skills of STAT 331.</p>
 </div>
 </div>
-<div id="option-c-a-blogdown-website-20-challenge-points" class="section level2">
-<h2>Option C: A Blogdown Website [+20 Challenge Points]</h2>
+<div id="option-c-a-blogdown-website-50-flex-points" class="section level3">
+<h3>Option C: A Blogdown Website [+50 Flex Points]</h3>
 <p>Have you always wanted to make websites to show off your data analysis?</p>
 <p>For the very dedicated, now is your chance!</p>
 <p>Use the <code>blogdown</code> package to make your very own website in <strong>R</strong>!</p>
-<p>This project will involve more learning-on-your-own and frustrating troubleshooting than any of the others.</p>
-<p>As a reward (in addition to flex points!), you will have a personal website that you have built.</p>
-<p>The site should showcase in some way a data analysis - probably in the form of a small blog post on the site. This analysis can be less formal, and less complex, than Project A. However, it should not be trivial, and should involve skills from all 10 weeks of STAT 331.</p>
 <div id="resources-1" class="section level4">
 <h4>Resources</h4>
-<p>The resources from <a href="%5Bhttps://summer-of-blogdown.netlify.com/%5D">this workshop</a> will be helpful to you.</p>
+<p>The resources from <a href="https://summer-of-blogdown.netlify.com/">this workshop</a> will be helpful to you.</p>
+</div>
+<div id="advice-2" class="section level4">
+<h4>Advice</h4>
+<p>This project will involve more learning-on-your-own and frustrating troubleshooting than any of the others.</p>
+<p>As a reward (in addition to challenge points!), you will have a personal website that you have built.</p>
 </div>
 <div id="guidelines-2" class="section level4">
 <h4>Guidelines</h4>
-<p>You will only turn in the link to your website.</p>
+<p>You will simply turn in the link to your website.</p>
+<p>The site should showcase in some way a data analysis. This analysis can be less formal, and less complex, than Project A. However, it should not be trivial, and should demonstrate to me that you have mastered the skills of STAT 331.</p>
 </div>
 </div>
-<div id="option-d-an-r-package-20-challenge-points" class="section level2">
-<h2>Option D: An R Package [+20 Challenge Points]</h2>
+<div id="option-d-an-r-package-50-flex-points" class="section level3">
+<h3>Option D: An R Package [+50 Flex Points]</h3>
 <p>Do you have an idea for some functions that you wish existed in <strong>R</strong>, that can make your life easier?</p>
 <p>Do you feel like you could write these functions yourself?</p>
 <p>Are you feeling ambitious about this project?</p>
 <p>Write an <strong>R Package</strong>!</p>
-<p>Your package does not need to be ground-breaking or complex; simply creating a few small functions that make people’s lives easier is very valueable!</p>
-<p>Your package also does not need to have broad scope. For example, perhaps you have some data and you find yourself making the same types of plots over and over. You might consider writing a function that auto-generates a plot, given a few variables of interest.</p>
-<p>This is a good project choice if you are excited about the more programming-heavy aspects of <strong>R</strong>. There will be a lot of extra work involved in documenting your functions and so forth. (Hence the bonus Challenge Points!)</p>
 <div id="resources-2" class="section level4">
 <h4>Resources</h4>
 <p>A good place to start learning about packages is <a href="https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/">this blog post</a>, which walks through the basic steps for a simple package.</p>
 <p>Further information can be found at <a href="http://r-pkgs.had.co.nz/">http://r-pkgs.had.co.nz/</a>. Note, though, that this book will contain a lot of information that you do <strong>not</strong> need for purposes of this assignment.</p>
 <p>I highly recommend the <code>usethis</code> package, to make a lot of this process easier.</p>
+</div>
+<div id="advice-3" class="section level4">
+<h4>Advice</h4>
+<p>Your package does not need to be ground-breaking or complex; simply creating a few small functions that make people’s lives easier is very valueable!</p>
+<p>Your package also does not need to have broad scope. For example, perhaps you have some data and you find yourself making the same types of plots over and over. You might consider writing a function that auto-generates a plot, given a few variables of interest.</p>
+<p>This is a good project choice if you are excited about the more programming-heavy aspects of <strong>R</strong>. There will be a lot of extra work involved in documenting your functions and so forth. (Hence the Flex Points!)</p>
 </div>
 <div id="guidelines-3" class="section level4">
 <h4>Guidelines</h4>
@@ -1616,25 +1638,27 @@ $(document).ready(function () {
 <li>A package folder with, at a minimum:
 <ul>
 <li>A <code>/R/</code> subfolder</li>
-<li>Package metadata (<code>DESCRIPTION</code>)</li>
-<li>Function documentation (<code>man/</code>)</li>
-<li>Namespaces (<code>NAMESPACE</code>)</li>
+<li>Package metadata (DESCRIPTION)</li>
+<li>Function documentation (man/)</li>
+<li>Namespaces (NAMESPACE)</li>
 </ul></li>
 <li>A short vignette demonstrating the purpose and use of your package.</li>
 </ul>
 </div>
 </div>
-<div id="challenge-points" class="section level2">
-<h2>Challenge Points</h2>
-<p>There are a few other ways to earn additional Challenge Points on this assignment.</p>
-<p>Each of these options is worth +10 challenge points. (You may score for each option only once.)</p>
+</div>
+<div id="flex-points" class="section level2">
+<h2>Flex Points</h2>
+<p>You <strong>may</strong> turn in two (but no more than two) deliverables for the same project, for extra Flex Points. Indicate in your project submission comments which deliverable you would like for me to grade.</p>
+<p>There are a few other ways to earn additional Flex Points on this assignment.</p>
+<p>Each of these options is worth +20 flex points. (You may score for each option only once.)</p>
 <ol style="list-style-type: decimal">
 <li>Instead of using an existing online dataset,
 <ul>
 <li>collect your data using <code>rvest</code> or a similar webscraping package, or</li>
 <li>use <code>dbplyr</code> or similar to read your data from a database like <strong>mySQL</strong></li>
 </ul></li>
-<li>As part of your data analysis process, make use of a statistical package that we did not learn in class, such as:
+<li>As part of your data analysis process, make use of a package that we did not learn in class, such as:
 <ul>
 <li>caret Training classification models</li>
 <li>parsnip Modeling</li>
@@ -1652,7 +1676,7 @@ $(document).ready(function () {
 <li>xts Time Series Data</li>
 <li>quantmod Financial Data</li>
 </ul></li>
-<li>As part of your data visualization, make use of a package that we did not learn in class, such as:
+<li>As part of your data visualization, make use of a package that we did not learn in class.
 <ul>
 <li>gganimate Animated visualization</li>
 <li>Corrplot Visualization of correlation matrices</li>
