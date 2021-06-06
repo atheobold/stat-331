@@ -414,12 +414,9 @@ Finally, I use `map_dbl()` to extract the `r.squared` from each of the model
 fit summaries. 
 
 ```{r, results = 'hide'}
-obs_vs_sim <- function(df){
-  lm(penguins$bill_length_mm ~ x)
-}
 
 sim_r_sq <- sims %>% 
-  map( ~lm(bill_length_mm ~ .x, data = sims)) %>% 
+  map(~lm(bill_length_mm ~ .x, data = sims)) %>% 
   map(glance) %>% 
   map_dbl(~.$r.squared)
 ```

@@ -340,14 +340,10 @@ a.sourceLine {
 <p>Now, we want to regress each of these simulated <code>bill_length</code>s on the original, observed <code>bill_length_mm</code>. Again, we will need to iterate through this process.</p>
 <p>Before, I fit a linear regression between <code>bill_length_mm</code> and the simulated data. Now, I have 100 different datasets I need to regress on <code>bill_length_mm</code>. I can use <code>map()</code> to define a function that will be applied to each column of <code>sims</code>. This function regresses <code>bill_length_mm</code> on each column (<code>.x</code>) from the <code>sims</code> dataset.</p>
 <p>Next, I <code>map()</code> the <code>glance()</code> function onto each of these 100 regressions. Finally, I use <code>map_dbl()</code> to extract the <code>r.squared</code> from each of the model fit summaries.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>obs_vs_sim <span class="ot">&lt;-</span> <span class="cf">function</span>(df){</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(penguins<span class="sc">$</span>bill_length_mm <span class="sc">~</span> x)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>sim_r_sq <span class="ot">&lt;-</span> sims <span class="sc">%&gt;%</span> </span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>( <span class="sc">~</span><span class="fu">lm</span>(bill_length_mm <span class="sc">~</span> .x, <span class="at">data =</span> sims)) <span class="sc">%&gt;%</span> </span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(glance) <span class="sc">%&gt;%</span> </span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_dbl</span>(<span class="sc">~</span>.<span class="sc">$</span>r.squared)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>sim_r_sq <span class="ot">&lt;-</span> sims <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(<span class="sc">~</span><span class="fu">lm</span>(bill_length_mm <span class="sc">~</span> .x, <span class="at">data =</span> sims)) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(glance) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_dbl</span>(<span class="sc">~</span>.<span class="sc">$</span>r.squared)</span></code></pre></div>
 <p>✅ <strong>Check-in: Mapping Regression Summaries</strong></p>
 <p>What is the data structure of the values output after the <code>map(glance)</code> step? i.e. What data structure do the following lines return:</p>
 <pre><code>sims %&gt;% 
