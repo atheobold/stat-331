@@ -24,7 +24,7 @@ brewer_pal <- brewer.pal(n = 9, name = "Purples")
 
 #### Professor Allison Theobold
 
-**Office:** Discord & Zoom
+**Office:** Building 25, Office 105 & Discord
 
 **Email:** atheobol@calpoly.edu
 
@@ -40,15 +40,15 @@ effectively use this server.
 
 ### Office Hours:
 
-- Mondays & Wednesdays from 2-3:30pm
+Tuesdays & Thursdays from 3:30 - 4:30pm **in-person**  
+Tuesdays & Thursdays from 4:30 - 5:30pm **on Discord**
 
-All office hours will be held on Discord, with the possibility of an individual 
-(or team) Zoom call. 
-
+If you would like to schedule an individual or team Zoom meeting, feel free to
+use the following link: <https://calendly.com/allisontheobold>
 
 ## Course Info
 
-**Room:** ADD ROOM INFORMATION
+**Room:** 38-123 (Math & Science)
 
 **Times:** 
 
@@ -169,13 +169,13 @@ Each week in STAT 331 will, for the most part, look something like this:
 **Individual Expectations**
 
 ```{r, out.width = '500%', out.height = "500%", fig.align = 'center'}
-knitr::include_graphics('images/individual_flow.jpeg')
+knitr::include_graphics('images/331_individual.jpg')
 ```
 
 **Group Expectations**
 
 ```{r, out.width = '100%', fig.align = 'center'}
-knitr::include_graphics('images/group_flow.jpeg')
+knitr::include_graphics('images/331_team.jpg')
 ```
 
 #### Readings and Videos
@@ -226,9 +226,9 @@ Practice Activities are due **Tuesdays at midnight.**
 Your typical "homework" assignments will be weekly labs. These lab assignments 
 will be completed in teams. 
 
-These labs are due on **Sunday at midnight**.  
+These labs are due on **Saturday at midnight**.  
 
-There are no extensions on lab assignments. Labs turned in later than Sunday
+There are no extensions on lab assignments. Labs turned in later than Saturday
 will not be reviewed, and instead will be quickly checked for completeness and
 receive an automatic grade of 50%.
 
@@ -246,8 +246,8 @@ each role.
 | Case Report Editor | Responsible for reviewing the draft summary provided by the case reporter, sharing the summary with the team, soliciting feedback from the team, and submitting the final lab assignment by the deadline. |
 | Team Manager | Responsible for organizing the team work: making sure all roles were assigned and clear, scheduling meetings, coordinating, leading discussion of lab assignment problems, and submitting a managers report at the end of the week. 
 
-The weekly manager report will be completed on Canvas, and shared with the team
-and Dr. Theobold. The report will contain (1) a brief summary of how the team 
+The weekly manager report will be completed on Canvas and shared with Dr.
+Theobold. The report will contain (1) a brief summary of how the team 
 functioned that week, (2) an outline of who participated in each role, (3) 
 descriptions of what aspects went well, and (4) what aspects needed improvement. 
 
@@ -316,8 +316,7 @@ rubric will earn at least a B- in the course.
 
 Letter grades will be assigned according to the following minimums: 
 
-<!-- FIND NEW CUTOFFS -->
-<!-- 3.75 (A), 3.0 (B-), 2.85 (C), below 2.85 (C-, D, or F). -->
+3.8 (A), 3.0 (B-), 2.85 (C), below 2.85 (C-, D, or F).
 
 
 #### Challenges
@@ -497,9 +496,9 @@ various statistical computing tasks, such as simulation and bootstrapping.
 
 **Final Exam:** 
 
-- Section 70: Monday, March 14 from 12:10 - 2:00pm
-- Section 71: Wednesday, March 16 from 2:10 - 4:00pm
-- Section 72: Friday, March 18 from 4:10 - 6:00pm
+- Section 70: Wednesday, March 16 from 10:10am - 1:00pm  
+- Section 71: Friday, March 18 from 1:10pm - 4:00pm  
+- Section 72: Monday, March 14 from 4:10 - 7:00pm  
 
 
 ## Other Policies
@@ -589,5 +588,4 @@ than you spending hours Googling things and get nowhere!
 If you have any questions about using and citing sources, you are expected to
 ask for clarification. 
 
-For more information about what constitutes cheating and plagiarism, please see
-https://academicprograms.calpoly.edu/content/academicpolicies/Cheating.
+For more information about what constitutes cheating and plagiarism, please see <https://academicprograms.calpoly.edu/content/academicpolicies/Cheating>.
