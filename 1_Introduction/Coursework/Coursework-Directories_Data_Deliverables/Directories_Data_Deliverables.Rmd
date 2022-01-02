@@ -40,7 +40,7 @@ You will learn how to:
 
 `r emo::ji("computer")` Activities: 10 min 
 
-`r emo::ji("check")` Check-ins: 1 (part of the whole)
+`r emo::ji("check")` Check-ins: 2
 
 ---
 
@@ -68,7 +68,9 @@ You will learn how to:
 
 `r emo::ji("check")` Check-in: R, RStudio, R Markdown, and RStudio Projects
 
-**Question 5:** Take a screenshot of your class directory, showing the **R Project** and the folder organization, including a **Week 1** or **Practice Activity** folder.
+**Question 5:** Take a screenshot of your class directory, showing the
+**R Project** and the folder organization, including a **Week 1** or
+**Practice Activity** folder.
 
 ---
 
@@ -97,7 +99,11 @@ correct?  I can't get R to knit."
 
 `r emo::ji("check")` Check-in: Reproducibility
 
-Categorize each description as either "reproducibility" or "replicability". If you'd like additional information on the differences between reproducibiity and replicability see [this video](https://www.youtube.com/watch?v=Y6hhJvIZhls). 
+Categorize each description as either "reproducibility" or "replicability". If
+you'd like additional information on the differences between reproducibiity and replicability see [this video](https://www.youtube.com/watch?v=Y6hhJvIZhls). 
+
+
+<!-- ADD QUESTIONS FOR THIS CHECKIN! -->
 
 ---
 
@@ -106,5 +112,5 @@ Categorize each description as either "reproducibility" or "replicability". If y
 * [Click Here](https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf) 
 to download a cheatsheet for R Markdown.
 
-* [This website](https://holtzy.github.io/Pimp-my-rmd/) has some tips for making your
-R Markdown documents more beautiful.
+* [This website](https://holtzy.github.io/Pimp-my-rmd/) has some tips for making
+your R Markdown documents more beautiful.

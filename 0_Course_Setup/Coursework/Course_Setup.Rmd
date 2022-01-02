@@ -60,30 +60,34 @@ We'll be using Discord to interact with our peers and group members.
 
 Discord is a platform for text chatting, voice chatting, and screen sharing.
 
-In particular, course **office hours** are held via Discord.  Your professor will be
-available for public questions, or one-on-one and small group chats by text, voice, 
-or video.
+In particular, course **office hours** are held via Discord.  Your professor
+will be available for public questions, or one-on-one and small group chats by
+text, voice, or video.
 
 The office hours for this class are:
 
-#### Mondays & Wednesdays from 2-3:30pm
-#### Tuesdays from 6-7pm
+#### Tuesdays & Thursdays from 2 - 3pm **in-person**
+#### Tuesdays & Thursdays from 3 - 4pm **on Discord**
 
-I will often be willing to hop on Discord and help out at other times, and I will answer text chat questions regularly throughout every day!
+I will often be willing to hop on Discord and help out at other times, and I
+will answer text chat questions regularly throughout every day!
 
 ---
 
 ## Join the server
 
 
-Join the [Stat 331 Server](https://discord.gg/UTrnrKRUFd) to start experimenting with the interface.
+Join the [Stat 331 Server](UPDATE LINK) to start experimenting with the
+interface.
 
 When you join the server, you will be given some suggestions to get started.  
 
 ![](../../Images/screencast_gifs/welcom_discord.png)
 
 
-We recommend you click through these - and in particular, it is probably a good idea to download the desktop version of Discord, and perhaps to install it on your phone if you wish.
+I recommend you click through these - and in particular, it is probably a good
+idea to download the desktop version of Discord, and perhaps to install it on
+your phone if you wish.
 
 ---
 
@@ -94,20 +98,21 @@ We recommend you click through these - and in particular, it is probably a good 
 To use this Discord server, you **must** have a verified email.  
 
 Nobody (including your professors) will be able to see this email, and it does 
-not have to be your Cal Poly email.  This is simply to keep the server from being 
-overrun by temporary accounts.
+not have to be your Cal Poly email.  This is simply to keep the server from
+being overrun by temporary accounts.
 
 
 ### Create your identity
 
-The first thing you should do is decide what name and picture you would like to use.
+The first thing you should do is decide what name and picture you would like to
+use.
 
 
 ![](../../Images/screencast_gifs/pic.gif)
 
-We would like to **strongly** encourage you to use your **real name and picture**, 
-so that we can get to know you.  However, if you prefer to remain anonymous, 
-you are free to do so.
+I would like to **strongly** encourage you to use your **real name and picture**, 
+so that everyone can get to know you.  However, if you prefer to remain
+anonymous, you are free to do so.
 
 ![](../../Images/screencast_gifs/pic_name.gif)
 
@@ -141,7 +146,8 @@ You can connect other apps to Discord, either for productivity or just for fun.
 
 ## Using the Channels
 
-The server is made up of many channels.  Some are text chatrooms, while some are "Voice Channels" that connect you via audio to everyone else in the channel.
+The server is made up of many channels.  Some are text chatrooms, while some are
+"Voice Channels" that connect you via audio to everyone else in the channel.
 
 
 ### Text Channels
@@ -150,7 +156,8 @@ Use the `#general` channel for anything and everything:
 
 ![](../../Images/screencast_gifs/saying_hi.gif)
 
-If your question is about course logistics, rather than the material itself, consider using the `#class-logistics` channel:
+If your question is about course logistics, rather than the material itself,
+consider using the `#class-logistics` channel:
 
 ![](../../Images/screencast_gifs/logistics.gif)
 
@@ -164,27 +171,36 @@ You can use the specific weekly channels to ask questions about the material...
 
 ![](../../Images/screencast_gifs/code_in_chat.gif)
 
-Notice that you can use tick marks (` ``` `), like in R Markdown, to make your code appear in a formatted code box.
+Notice that you can use tick marks (` ``` `), like in R Markdown, to make your
+code appear in a formatted code box.
 
 
 ### Voice Channels
 
-To join a voice channel, simply click it!  Make sure you are careful about when you are muted or unmuted.
+To join a voice channel, simply click it!  Make sure you are careful about when
+you are muted or unmuted.
 
 ![](../../Images/screencast_gifs/voice_channel.gif)
 
-The extra "Side Chat" channels are limited to 4 or 8 people, if you would like to start an impromptu study conversation without being heard by the professors and/or the rest of the class.  (We'll only drop in if you invite us!)
+The extra "Side Chat" channels are limited to 4 or 8 people, if you would like
+to start an impromptu study conversation without being heard by me and / or the
+rest of the class.  (I'll only drop in if you invite us!)
 
-Voice channels can also be used for people to "Go Live", and share their screen with everyone else.
+Voice channels can also be used for people to "Go Live", and share their screen
+with everyone else.
 
 ![](../../Images/screencast_gifs/going_live.gif)
 
-While this will usually be something professors use to demonstrate code, you can go live, too!  But you may need to download the desktop version of Discord to do so.
+While this will usually be something professors use to demonstrate code, you can
+go live, too!  But you may need to download the desktop version of Discord to do
+so.
 
 
 ### Private messages
 
-It is also easy to send private messages, to your professor(s) or to each other.  These private messages can also easily be used to launch a private video chat and/or screen sharing.
+It is also easy to send private messages, to your professor or to each other. 
+These private messages can also easily be used to launch a private video chat
+and / or screen sharing.
 
 ![](../../Images/screencast_gifs/private_message.gif)
 
@@ -192,7 +208,11 @@ It is also easy to send private messages, to your professor(s) or to each other.
 
 ## Creating your own server
 
-Last but not least - for the teams you are a part of, you may want to use Discord to communicate with each other about the weekly assignments. You can do this by creating your own server! You can easily hop between servers during work parties, to ask each other questions or just to take a break and chat about life.
+Last but not least - for the teams you are a part of, you may want to use
+Discord to communicate with each other about the weekly assignments. You can do
+this by creating your own server! You can easily hop between servers during work
+parties, to ask each other questions or just to take a break and chat about
+life.
 
 
 ![](../../Images/screencast_gifs/new_server.gif)
@@ -227,27 +247,32 @@ Introduce yourself in the "Introductions" channel of the Discord Server.
 Each week, you will be expected to work through a sequence of readings, videos,
 and check-ins. (Much like this one!)
 
-These are meant to replace the in-class lecture experience; thus, you should plan 
-to devote about 1-3 hours a week to this coursework. 
+These are meant to replace the in-class lecture experience; thus, you should
+plan to devote about 1 - 3 hours a week to this coursework. 
 
 
 ### Practice Activities
 
 *Due Wednesdays at midnight*
 
-As part of your "in-class" work, each week you will have short practice tasks to complete which tie the concepts from the reading and lectures together.  You should plan for these to take you 1-3 hours per week.
+As part of your "in-class" work, each week you will have short practice tasks to
+complete which tie the concepts from the reading and lectures together.  You
+should plan for these to take you 1-3 hours per week.
 
-These are meant to replace the in-class group work experience; as such, you are strongly encouraged to work on these in groups.
-
-The synchronous meetings on Tuesdays will have 1-hour dedicated to working on these practice activities, where you will work in your team in a breakout room. This allows for you to have the ability to "call me into your room," should any questions / issues arise. 
+The course meetings on Mondays will have atleast 1-hour dedicated to working on
+these practice activities, where you will work in your team. This allows for you
+to have the ability to ask me questions during the early stages of the activity. 
 
 ### Lab Assignments
 
 *Due Sundays at midnight*
 
-Aside from the Final Project and Exams, the majority of your grade in this class comes from Lab Assignments.  You should plan to spend a large amount of time outside of class (5-10 hours each week) completing your Lab Assignment.
+Aside from the Final Project and Exams, the majority of your grade in this class
+comes from Lab Assignments.  You should plan to spend a large amount of time
+outside of class (5-10 hours each week) completing your Lab Assignment.
 
-Lab work is completed in **teams**. Please read the description of the team roles that will be circulated around. 
+Lab work is completed in **teams**. Please read the description of the team
+roles that will be circulated around. 
 
 Labs will be submitted on Canvas.
 
@@ -258,17 +283,16 @@ Labs will be submitted on Canvas.
 
 Each week, your Lab Assignment will have an individual challenge, which will
 require you to learn and use skills beyond what is covered in the assignment.
-These challenges are worth 10% of your overall grade.
+These challenges are an individualized component of your lab assignment and are 
+worth 10% of your overall grade.
 
 Although you may discuss ideas with your classmates and seek help from the usual
 sources, all code and text **absolutely must** be your own.  
 
-Challenges are worth 10 points each, and you earn these points simply by making
-a good faith attempt.  Thus, **everyone** should receive at least an 80/100  
-(10 points times 8 labs) in this category.  
-
-I will also award bonus points for particularly impressive submissions, which
-could allow you to skip challenges, or to go over 100% and receive extra credit!
+Challenges are worth 10 points each and are graded based on how you extend your
+understanding. There is the opportunity to more than 10 points on a Challenge
+assignment, by submitting a Challenge with impressive effort. Extra bonus points
+earn you extra credit toward your overall course grade.
 
 
 ### Think Out Loud Recordings 
@@ -289,25 +313,23 @@ demonstrates you have spent time thinking about how to explain your code.
 
 **Question 2:** What materials and technology are required for this course? 
 
-**Question 3:** In this course, what is due every Wednesday? 
+**Question 3:** In this course, what is due every Tuesday? 
 
-**Question 4:** Revisions will be required for questions not earning at least what score on lab assignments?
+**Question 4:** Revisions will be required for questions not earning at least
+what score on lab assignments?
 
-**Question 5:** If you complete ALL the Challenges, but you do not earn bonus
-points on any of them, what will be your grade in this category?
+**Question 5:** How will the midterm and final exams be administered?
 
-**Question 4:** How will the midterm and final exams be administered?
-
-**Question 5:** You have finished the week's Practice Assignment, and you want
+**Question 6:** You have finished the week's Practice Assignment, and you want
 to know if you did it right.  You ask your friend, and she says, "Oh, I got *Luke
 Skywalker* as my answer."  This is a violation of the Academic Honesty policy. 
 
-**Question 6:** You and a friend have been working on Lab 1 together.  You finish
+**Question 7:** You and a friend have been working on Lab 1 together.  You finish
 up and want to go to bed, but she is still a little confused.  You email her your
 file, and say, "Don't copy this, just look how I did it so you can figure it out."
 Have you violated Academic Honesty policies?
 
-**Question 7:** You have been working on Challenge 1 for what feels like forever
+**Question 8:** You have been working on Challenge 1 for what feels like forever
 and it seems like you are making little to no progress. You type the prompt into
 Google and "Wham!" the first result is a Stack Overflow page with a solution. 
 You copy-and-paste the solution from the Stack Overflow page into your Challenge
@@ -318,7 +340,7 @@ violated the Academic Honesty policy.
 
 `r emo::ji("check")` Check-in 3: Team Formation Schedule Survey 
 
-[Link to Google Form](https://forms.gle/MQ9XTqwWNeDaVDjTA)
+[Link to Google Form](UPDATE LINK)
 
 ---
 
@@ -337,11 +359,14 @@ Follow these easy steps to success!
 
 #### Double-check the instructions for the assignment.
 
-Remember that most details will appear in the Coursework pages or in the Lab Assignment instructions - not in the submission links on Canvas.
+Remember that most details will appear in the Coursework pages or in the Lab
+Assignment instructions - **not** in the submission links on Canvas.
 
 #### Double-check the Announcements
 
-On the "Account" section of Canvas, under "Notifications", make sure your preferences are updated for Announcements.  We recommend opting to receive an email any time an announcement is posted.
+On the "Account" section of Canvas, under "Notifications", make sure your
+preferences are updated for Announcements.  We recommend opting to receive an
+email any time an announcement is posted.
 
 
 ![](../../Images/screencast_gifs/notifications.png)
@@ -351,8 +376,9 @@ On the "Account" section of Canvas, under "Notifications", make sure your prefer
 
 ## Ask your question on Discord
 
-If you post your question to a text channel, you will probably get a fast response
-from a classmate.  If not, you will get a response from me within 24 hours.
+If you post your question to a text channel, you will probably get a fast
+response from a classmate.  If not, you will get a response from me within 24 
+hours.
 
 ---
 
@@ -365,9 +391,7 @@ To do so, find the "Inbox" section, and click "compose a new message".
 
 **Note:** Although I *will* answer emails, I strongly prefer Canvas messages.
 
-
 ---
-
 
 # Tips for succeeding in this class:
 
@@ -375,11 +399,11 @@ To do so, find the "Inbox" section, and click "compose a new message".
 
 ## Take the Coursework pages as seriously as you take in-person lecture.
 
+Flipped classrooms puts you in the driver seat of mastering the course material.
+It can be tempting to cut corners to save yourself time, but this will likely
+result in you having a less complete understanding of the material. 
 
-With this class being online, there will likely be a temptation to skip things,
-multitask, and cut corners.  
-
-We want to encourage you to commit to giving the Coursework segments the same 
+I encourage you to commit to giving the Coursework segments the same 
 level of attention that you would ordinarily give to in-class lecture.  
 Put the same effort into the Check-In Activities that you would if you were 
 sitting in a classroom.
@@ -387,7 +411,7 @@ sitting in a classroom.
 ![](https://media.giphy.com/media/xUNda4ziBZR0nzca9W/giphy.gif)
 
 In return for your efforts, I promise to choose required videos and readings 
-carefully, so that we do not waste your time. 
+carefully, so that I do not waste your time. 
 
 ---
 
@@ -409,24 +433,22 @@ Learn to:
 
 ---
 
-##  Find ways to work together.
+##  Use your team for your benefit!
 
-While much of this course is identical to the in-person version, it is impossible 
-to fully replicate the experience of working together on a coding task in person.
-
-For this reason, this course makes use of team-based learning. In the first week 
-you will be placed into a team that will last for the first 5 weeks of the 
-course. After the midterm, you will be given the option to join a new group or 
-stick with the group you've been working with thus far. 
+This course makes use of team-based learning. In the first week you will be
+placed into a team that will last for the first five weeks of the course. After
+the midterm exam, you will be given the option to join a new group or stick with
+the group you've been working with thus far. 
 
 Outside of your group, I encourage you to establish study buddies and/or study
 groups early in the quarter, even if you don't know anyone yet.  
 
-The class Discord server is a great way to get started.  We also hope you will
+The class Discord server is a great way to get started. I also hope you will
 be proactive about setting up your own video chat sessions, phone calls, Google
 Docs, group chats, etc.  (How many different platforms can you talk about Stat
 331 on?  Facebook? Snapchat?  Instagram?  TikTok?  Bumble???)
 
-I hope that we will all be purposeful and creative about finding ways to work as a team.
+I hope that we will all be purposeful and creative about finding ways to work as
+a team.
 
 ![](https://media1.tenor.com/images/73929a723ee5cde85b313407cd4e4640/tenor.gif?itemid=13261612)
