@@ -74,7 +74,7 @@
 <p>Using the R Markdown cheatsheet <a href="https://www.rstudio.org/links/r_markdown_cheat_sheet">link</a> add specifications <em>inside</em> the <code>opts_chunk$set()</code> that:</p>
 <ul>
 <li>ensure all figures are center aligned</li>
-<li>tidy the code displayed in the document</li>
+<li>remove messages from being output</li>
 </ul>
 </div>
 </div>
@@ -86,7 +86,8 @@
 <h3>Check the data documentation</h3>
 <p>In your <strong>console</strong> (<em>NOT</em> in the R Markdown document), type <code>?cars</code>.</p>
 <p>Use the information that pops up in your <em>Help</em> pane in RStudio to fill in the blanks below. Make certain to include the <em>age</em> of the dataset!</p>
-<p>Delete the text before the code chunk (starting in “This is an R Markdown document”) and insert your completed sentences. Change the name of the section to say “Cars Dataset”.</p>
+<p>Delete the text before the code chunk (starting in “This is an R Markdown document”) and insert your completed sentences.</p>
+<p>Change the name of the section to say <strong>Cars Dataset</strong>.</p>
 <center>
 <p><em>This dataset contains information about ______.</em></p>
 <p><em>It has _____ rows and ______ variables.</em></p>
@@ -95,7 +96,7 @@
 </div>
 <div id="modify-the-plot" class="section level2">
 <h2>Modify the Plot</h2>
-<p>The final code chunk uses the built-in <code>plot()</code> function to plot the relationship between the temperature and pressure of mercury.</p>
+<p>The final code chunk uses the built-in <code>plot()</code> function to create a plot for a different dataset. This plot a relationship for a different dataset. This plot shows the relationship between temperature and pressure of mercury, contained in the <code>pressure</code> dataset.</p>
 <p>Look up the help file on the <code>pressure</code> dataset to determine what units <code>temperature</code> and <code>pressure</code> are in. Next, look up the help file on the <code>plot()</code> function to find the arguments you can use to specify the x- and y-axis labels.</p>
 <p>Change the x-axis and y-axis labels to reflect the units of the measurements.</p>
 <div id="make-a-code-chunk" class="section level3">
@@ -107,7 +108,7 @@
 <h3>Create and discuss visualizations and summaries</h3>
 <ul>
 <li><p>Step 1: Extract the distance column of the <code>cars</code> dataset and save it into a new object named <code>dist</code>.</p></li>
-<li><p>Step 2: Plot the distribution of the stopping distances (contained in <code>dist</code>).<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p></li>
+<li><p>Step 2: Plot the distribution of the stopping distances(contained in <code>dist</code>).<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p></li>
 <li><p>Step 3: Plot the relationship between the stopping distance and speed.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p></li>
 </ul>
 <p>Type the code to complete each task in a new empty chunk, in the appropriate section of your document.</p>
@@ -141,7 +142,6 @@
 <li><p>Demonstrate how to use one of the other tips in the guide. Make sure you explicitly state which tip you tried; for example, you might write “Here is an example of a figure with a caption:” and then show the figure.</p></li>
 <li><p>Upload your knitted (.html) document to the Challenge 1 assignment on Canvas.</p></li>
 </ol>
-<p><em>Remember, you get full credit for a good faith attempt at the challenge that follows all directions. However, for 100% in this grade category, you’ll also need to earn bonus points occasionally by submitting extra impressive Challenges!</em></p>
 </div>
 </div>
 <div class="footnotes">

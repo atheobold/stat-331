@@ -29,7 +29,7 @@ Let's start working in `R`!
 
 `r emo::ji("computer")` Activities: 5-10 min 
 
-`r emo::ji("check")` Check-ins: 1 (part of the whole)
+`r emo::ji("check")` Check-ins: 1
 
 ---
 
@@ -96,58 +96,29 @@ RStudio can be downloaded [here](https://rstudio.com/products/rstudio/download/)
 
 If you already have RStudio:
 
-You **do not** need an update if your RStudio logo looks like this: <img src='../../Images/other/rs_icon_new.png' height='25' width='50'>
+You **do not** need an update if your RStudio logo looks like this: <img src='../../../Images/rstudio_images/rs_icon_new.png' height='25' width='50'>
 
-You **do** need an update if your RStudio logo looks like this: <img src='../../Images/other/rs_icon_old.png' height='25' width='25'>
+You **do** need an update if your RStudio logo looks like this: <img src='../../../Images/rstudio_images/rs_icon_old.png' height='25' width='25'>
 
-If you would like a video tutorial on downloading RStudio, here is one: [](https://vimeo.com/203516968)
+If you would like a video tutorial on downloading RStudio, here is one: <https://vimeo.com/203516968>
 
 ---
 
 # Introduction to R
 
-`r emo::ji("play button")` [Required Video: Introduction to `R`](http://somup.com/creuribzT2)
+`r emo::ji("play button")` [Required Video: Introduction to `R` (18 minutes)](http://somup.com/creuribzT2)
 
 ---
 
 ## Basics of R Programming
 
-`r emo::ji("keyboard")`  [Required Tutorial: RStudio Primer, Basics of Programming in R](https://rstudio.cloud/learn/primers/1.2)
+`r emo::ji("book")`[Required Reading: Basics of R](https://r4ds.had.co.nz/workflow-basics.html)
+
+`r emo::ji("keyboard")` [Required Tutorial: RStudio Primer, Basics of Programming in R](https://rstudio.cloud/learn/primers/1.2)
 
 ---
 
-## Functions in R
-
-```{r, results = "asis", echo = FALSE}
-req_vid("Intro to Functions", type = "Required", url = "https://www.youtube.com/embed/Cp_9y39ZRRM")
-```
-
-
-```{r, results = "asis", echo = FALSE}
-link_slides("Slides/Functions.html")
-```
-
-
-```{r, results = "asis", echo = FALSE}
-req_read("Basics of R", type = "Required", url = "https://r4ds.had.co.nz/workflow-basics.html")
-```
-
----
-
-
-```{r, results = "asis", echo = FALSE}
-checkin("Troubleshooting")
-```
-
-What is the reason for the error below?  How would you fix it?
-
-```{r, error = TRUE}
-matrix(c("a", "b", "c", "d"), num_row = 2)
-```
-
----
-
-`r emo::ji("check")` Check-in: Introduction to R, RStudio, and RStudio Projects
+`r emo::ji("check")` Check-in: Introduction to R & RStudio
 
 **Question 1:** What does it mean for R to be **"open-source"**?
 
@@ -160,9 +131,9 @@ d) Anyone can change the base functionality of R.
 
 # Introduction to RStudio
 
-`r emo::ji("play")` [Required Video: Introduction to RStudio](http://somup.com/creur3bzOr)
-
 `r emo::ji("book")` [Required Reading: A tour of RStudio, BasicsBasics1](https://rladiessydney.org/courses/ryouwithme/01-basicbasics-1/)
+
+`r emo::ji("play")` [Required Video: Introduction to RStudio (8 minutes)](http://somup.com/creur3bzOr)
 
 ---
 
@@ -180,7 +151,7 @@ RStudio.
 
 ### How to install R packages
 
-[Video Tutorial on Installing R Packages](http://youtu.be/tXZDoMlXfTE?hd=1)
+`r emo::ji("play")` [Required Video: Installing R Packages (4 minutes)](http://youtu.be/tXZDoMlXfTE?hd=1)
 
 
 ### Install / Update the tidyverse
@@ -190,7 +161,8 @@ packages we will use in the course.
 
 In this course, we will make heavy use of the **tidyverse** suite of packages.
 
-If you **have not** used the tidyverse before, type the following into your **console**:
+If you **have not** used the tidyverse before, type the following into your
+**console** or use the drop down menu in the **Packages** tab:
 
 ```{r, eval = FALSE}
 install.packages("tidyverse")
@@ -204,14 +176,23 @@ library(tidyverse)
 tidyverse_update()
 ```
 
-Then follow the instructions that print out to update a few of your tidyverse packages.
+Then follow the instructions that print out to update a few of your tidyverse
+packages.
 
 ---
 
 # Bringing it all together
 
-`r emo::ji("check")` Check-in: Introduction to R, RStudio, and RStudio Projects
+`r emo::ji("check")` Check-in: Introduction to R & RStudio  
 
 **Question 2:** How often do you need to install a package on your computer? 
 
 **Question 3:** What is the tidyverse? 
+
+**Question 4:** Correct the following sentences, so that they make sense.
+
+1. "I wrote RStudio code to make a beautiful plot."
+
+2. "I can't get R to open!"
+
+3. "Can I send you my RStudio so you can check out if my code is correct? "

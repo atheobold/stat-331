@@ -163,8 +163,6 @@ Upload the knitted document to Canvas!
 > You'll be doing this same process for all your future Lab Assignments and
 > Practice Activities. Each of these will involve an R Markdown file. 
 >
-> We will discuss easy ways to manage all these documents starting next week.
->
 
 ## Challenge: 
 
