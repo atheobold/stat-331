@@ -1,0 +1,13 @@
+name: 331_course_setup
+title: 331_Course_Setup
+username: atheobold
+account: atheobold
+server: rstudio.csm.calpoly.edu
+hostUrl: https://rstudio.csm.calpoly.edu/__api__
+appId: 378
+bundleId: 854
+url: https://rstudio.csm.calpoly.edu/331-course-setup/
+when: 1641154683.11303
+lastSyncTime: 1641154683.11305
+asMultiple: FALSE
+asStatic: TRUE

@@ -26,7 +26,7 @@ Welcome!
 In this coursework, you'll get set up with the Class Discord, learn about what
 is expected of you each week, and hear some tips from me about how to succeed.
 
-[Required Video: Welcome to Stat 331 from Dr. Theobold](http://somup.com/creubsbzlJ)
+[Required Video: Welcome to Stat 331 from Dr. Theobold (8 minutes)](https://www.youtube.com/watch?v=lO5Pj7Kx4iU)
 
 ## Course TODOs
 
@@ -66,8 +66,8 @@ video.
 
 The office hours for this class are:
 
-#### Tuesdays & Thursdays from 2 - 3pm **in-person**
-#### Tuesdays & Thursdays from 3 - 4pm **on Discord**
+#### Tuesdays & Thursdays from 3:30 - 4:30pm **in-person**
+#### Tuesdays & Thursdays from 4:30 - 5:30pm **on Discord**
 
 I will often be willing to hop on Discord and help out at other times, and I
 will answer text chat questions regularly throughout every day!
@@ -82,7 +82,7 @@ to start experimenting with the interface.
 
 When you join the server, you will be given some suggestions to get started.  
 
-![](../../Images/screencast_gifs/welcom_discord.png)
+![](../../Images/screencast_gifs/welcome_discord.png)
 
 
 I recommend you click through these - and in particular, it is probably a good
@@ -234,7 +234,7 @@ Introduce yourself in the "Introductions" channel of the Discord Server.
 
 ---
 
-[Required Video: Class Structure](https://www.youtube.com/watch?v=yzNLr0fDNcg)
+[Required Video: Class Structure (10 minutes)](https://www.youtube.com/watch?v=8TUyUN71JMY)
 
 ---
 
@@ -251,19 +251,19 @@ plan to devote about 1 - 3 hours a week to this coursework.
 
 ### Practice Activities
 
-*Due Wednesdays at midnight*
+*Due Tuesdays at midnight*
 
 As part of your "in-class" work, each week you will have short practice tasks to
 complete which tie the concepts from the reading and lectures together.  You
 should plan for these to take you 1-3 hours per week.
 
-The course meetings on Mondays will have atleast 1-hour dedicated to working on
+The course meetings on Mondays will have at least 1-hour dedicated to working on
 these practice activities, where you will work in your team. This allows for you
 to have the ability to ask me questions during the early stages of the activity. 
 
 ### Lab Assignments
 
-*Due Sundays at midnight*
+*Due Saturdays at midnight*
 
 Aside from the Final Project and Exams, the majority of your grade in this class
 comes from Lab Assignments.  You should plan to spend a large amount of time
@@ -277,7 +277,7 @@ Labs will be submitted on Canvas.
 
 ### Challenges
 
-*Due Sundays at midnight*
+*Due Saturdays at midnight*
 
 Each week, your Lab Assignment will have an individual challenge, which will
 require you to learn and use skills beyond what is covered in the assignment.
@@ -294,6 +294,8 @@ earn you extra credit toward your overall course grade.
 
 
 ### Think Out Loud Recordings 
+
+*Due Saturdays at midnight*
 
 Each week you will record a short video explaining what the code from your 
 challenge "solution" does. Each recording will be done through FlipGrid,
@@ -402,14 +404,10 @@ It can be tempting to cut corners to save yourself time, but this will likely
 result in you having a less complete understanding of the material. 
 
 I encourage you to commit to giving the Coursework segments the same 
-level of attention that you would ordinarily give to in-class lecture.  
-Put the same effort into the Check-In Activities that you would if you were 
-sitting in a classroom.
+level of attention that you would ordinarily give to in-class lecture. Put the
+same effort into the Check-In Activities that you would if you were sitting in a classroom. In return for your efforts, I promise to choose required videos and readings carefully, so that I do not waste your time.
 
 ![](https://media.giphy.com/media/xUNda4ziBZR0nzca9W/giphy.gif)
-
-In return for your efforts, I promise to choose required videos and readings 
-carefully, so that I do not waste your time. 
 
 ---
 
