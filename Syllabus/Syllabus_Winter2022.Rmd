@@ -32,7 +32,8 @@ brewer_pal <- brewer.pal(n = 9, name = "Purples")
 ### Course Discord:
 
 For questions of general interest, such as course clarifications or conceptual
-questions, please use the [Class Discord Server (link)](UPDATE LINK).
+questions, please use the
+[Class Discord Server (https://discord.gg/4MY346Bm)](https://discord.gg/4MY346Bm).
 Refer to the Day One Class Setup materials for more information on how to
 effectively use this server.
 

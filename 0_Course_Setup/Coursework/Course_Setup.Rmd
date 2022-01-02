@@ -44,11 +44,11 @@ is expected of you each week, and hear some tips from me about how to succeed.
 
 ---
 
-This is a *synchronous* online course, scheduled to meet on Tuesdays and Thursdays for 2 hours at a time. 
+This is a *synchronous* **in-person** course, scheduled to meet on Tuesdays and
+Thursdays for 2 hours at a time. 
 
-We **will** be meeting every Tuesday and Thursday this quarter, and attendance is expected. 
-
-We will be using Zoom for our course meetings, and Discord for our out of class meetings. 
+We **will** be meeting every Tuesday and Thursday this quarter, and attendance
+is expected. 
 
 ---
 
@@ -60,9 +60,9 @@ We'll be using Discord to interact with our peers and group members.
 
 Discord is a platform for text chatting, voice chatting, and screen sharing.
 
-In particular, course **office hours** are held via Discord.  Your professor
-will be available for public questions, or one-on-one and small group chats by
-text, voice, or video.
+In particular, course **office hours** are held via Discord. I will be available
+for public questions, or one-on-one and small group chats by text, voice, or
+video.
 
 The office hours for this class are:
 
@@ -77,8 +77,8 @@ will answer text chat questions regularly throughout every day!
 ## Join the server
 
 
-Join the [Stat 331 Server](UPDATE LINK) to start experimenting with the
-interface.
+Join the [Stat 331 Server (https://discord.gg/4MY346Bm)](https://discord.gg/4MY346Bm)
+to start experimenting with the interface.
 
 When you join the server, you will be given some suggestions to get started.  
 
@@ -221,8 +221,6 @@ life.
 ---
 
 ## See you at the Party!
-
-![](https://media3.giphy.com/media/Ap7Ab53nyc2o8/source.gif)
 
 ---
 
