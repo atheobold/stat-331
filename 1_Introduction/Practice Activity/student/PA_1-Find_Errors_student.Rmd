@@ -81,8 +81,9 @@ This chunk will load up the encoded secret message as a vector:
 
 ```{r}
 
-top_secret <- read.csv("https://www.dropbox.com/s/k72h1zewk4gtqep/PA_Secret_Code?dl=1",
-                       header = FALSE)$V1
+top_secret <- read_csv("https://www.dropbox.com/s/k72h1zewk4gtqep/PA_Secret_Code?dl=1", 
+                       skip = 1, 
+                       col_names = FALSE)$X1
 
 ```
 
@@ -116,8 +117,8 @@ there should be 352 numbers in the secret message that are below 17. Write the
 code to verify that this is true for your `top_secret` object! 
 
 *Hint:* This is what is called a "relational" comparison, where you compare 
-an object to a number and R will give you a vector of TRUEs and FLASEs based 
-on whether the comparion is / is not met. You can then use these TRUEs and 
+an object to a number and R will give you a vector of TRUEs and FALSEs based 
+on whether the comparison is / is not met. You can then use these TRUEs and 
 FALSEs as numbers, since TRUE = 1 and FALSE = 0 in R land.
 
 ```{r}
@@ -134,7 +135,8 @@ Next, carry out the following steps:
 numbers between 1 and 382. Name it "evens". That is, "evens" should contain
 2, 4, 6, 8 ..., 382.
 
-7. Subtract the "evens" vector from the first column of your secret message matrix.
+7. Subtract the "evens" vector from the first column of your secret message
+matrix.
 
 8. Subtract 100 from all numbers 18-24th rows of the 3rd column.
 
@@ -178,12 +180,13 @@ equal sign!
 ```
 
 
-**Checkpoint:** Headquarters has informed you that your final message should have 344 even numbers.
+**Checkpoint:** Headquarters has informed you that your final message should
+have 344 even numbers.
 
 *Hint:* Checking for divisibility is an interesting operation that isn't done
-much in R. Modulus is the operation you are interested in, where you are checking
-for whether the numbers are divisible by 2, with no remainder. See what you can 
-find about modulus in R! 
+much in R. Modulus is the operation you are interested in, where you are
+checking for whether the numbers are divisible by 2, with no remainder. See what
+you can find about modulus in R! 
 
 ```{r}
 # Code to verify how many even numbers are in your top_secret vector
@@ -193,8 +196,8 @@ find about modulus in R!
 
 ## Part 3: The secret message!
 
-Use your final vector of numbers as indices for my_symbols to discover the final message,
-by running the following code:
+Use your final vector of numbers as indices for my_symbols to discover the final
+message, by running the following code:
 
 ```{r, eval = FALSE}
 stringr::str_c(my_symbols$Symbol[top_secret], collapse = "")
