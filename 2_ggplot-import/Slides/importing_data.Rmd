@@ -1,0 +1,107 @@
+---
+title: "How do I read in my data?"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["xaringan-themer.css", "slide-style.css"]
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: '16:9'
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+library(tidyverse)
+```
+
+```{r xaringan-themer, include=FALSE}
+library(xaringanthemer)
+style_duo_accent(
+  primary_color      = "#0F4C81", # pantone classic blue
+  secondary_color    = "#B6CADA", # pantone baby blue
+  header_font_google = google_font("Raleway"),
+  text_font_google   = google_font("Raleway", "300", "300i"),
+  code_font_google   = google_font("Source Code Pro"),
+  text_font_size     = "30px"
+)
+```
+
+
+class: middle
+
+.larger[Common types of data files]
+
+.pull-left[
+
+`.csv` :  "Comma-separated"
+```
+Name, Age
+Bob, 49
+Joe, 40
+```
+</br>
+
+`.xls, .xlsx`:  Microsoft Excel Spreadsheet
+  - Common approach: save as `.csv`
+  - Nicer approach:  `readxl` package
+
+]
+
+.pull-right[
+`.txt`:  Plain text
+  - Could be just text
+  - Could be comma-separated data
+  - Could be tab-separated, bar-separated, etc.
+  - Need to let R know what to look for
+]
+
+---
+
+.larger[`read.csv()` and `read.table()`]
+
+- A more general version of `read.csv()` is `read.table()`.
+
+- Tell R what symbol separates data observations with `sep = `
+
+--
+
+```{r read.table, eval = FALSE}
+ages <- read.table("ages.txt", sep = ",")
+## comma delimiter 
+
+ages <- read.table("ages.txt", sep = "\t")  
+## tab delimiter
+```
+
+---
+
+.larger[A Cleaner Approach with readr]
+
+The tidyverse has some cleaned-up versions in the `readr` and `readxl` packages: 
+
+- `read_csv()` works like `read.csv`, with some extra stuff
+
+- `read_tsv()` is for tab-separated data
+
+- `read_table()` is for any data with "columns" (white space separating)
+
+- `read_delim()` is for special "delimiters" separating data
+
+- `read_excel()` is specifically for dealing with Excel files
+
+---
+
+# Exercises
+
+The folder "Age_Datasets" on Canvas several datasets containing the names and
+ages of five individuals.  The datasets are stored as different file types.
+Save these in a reasonable place, then do the following:
+
+1. Read in the dataset `ages.csv`.
+2. Read in the dataset `ages_tab.txt`
+3. Read in the dataset `ages_mystery.txt`
+4. Read in the dataset `ages.xlsx`
+5. Both `read.csv` and `read.table` have an optional argument called `stringsAsFactors`.  Figure out what this does.
+6. Find a way to use `read_csv` to read `ages.csv` with the variable "Name" as a factor and "Age" as a character.

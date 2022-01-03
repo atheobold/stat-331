@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>How do I get to my data?</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="slide-style.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# How do I get to my data?
+
+---
+
+
+
+
+
+
+class: middle
+
+.larger[`read_csv()`]
+
+- The most common way to read data is with `read_csv()` or `read.csv()`.
+
+- You may supply either a **url** to the dataset or a **path**.
+
+--
+
+
+```r
+surveys &lt;- read_csv("https://www.dropbox.com/s/1qqyshx5ikt9zoc/surveys.csv?dl=1")
+## This will work for everyone!
+```
+
+--
+
+
+```r
+surveys &lt;- read_csv("/Users/atheobold/Teaching/stat331/Labs/Lab 2/surveys.csv")
+## This will work only on my computer
+```
+
+--
+
+
+```r
+surveys &lt;- read_csv("surveys.csv")
+## This will work if the file is in the same directory as the code 
+## (i.e., the RMarkdown and the data are in the same folder)
+```
+
+--
+
+
+```r
+surveys &lt;- read.csv("data/surveys.csv")
+## This will work if a folder called "data" is in the same directory as the code.
+```
+
+---
+
+# The **here** package
+
+A great solution to consistency in paths is the `here` package:
+
+
+```r
+install.packages("here")
+```
+
+--
+
+&lt;/br&gt; 
+&lt;/br&gt; 
+
+This package thinks that *"here"* means
+*"the directory of the closest RStudio project"*.
+
+
+```r
+here::dr_here()
+```
+
+```
+here() starts at /Users/atheobol/Documents/Teaching/stat331.
+```
+
+---
+
+class: center, inverse
+
+.larger[Homebase]
+
+&lt;img src="images/homebase.jpg" width="40%" height="30%" /&gt;
+
+---
+
+# The **here** package
+
+My slides live in a subfolder for Week 2 and for this Lesson:
+
+
+```r
+getwd()
+```
+
+```
+## [1] "Users/atheobol/Documents/Teaching/stat331/2_ggplot-import/Slides"
+```
+
+--
+
+&lt;/br&gt; 
+&lt;/br&gt;
+
+If I wanted to access a dataset from the Lab folder, I'd have to use a
+relative file path:
+
+
+```r
+surveys &lt;- read.csv("../../Labs/Lab 2/surveys.csv")
+```
+--
+
+If I ever reshuffle my folder structure, I'm in trouble!
+
+---
+
+# The **here** package
+
+Instead of trying to reference data relative to **this** file, let's reference
+it relative to the **Project** location, which is unlikely to change.
+
+
+![](images/path.jpg)
+
+---
+
+class: center, middle
+
+.larger[Using `here()` **and** `read_csv()`]
+
+
+```r
+surveys &lt;- read_csv(here::here("Labs", "Lab 2", "surveys.csv"))
+```
+
+&lt;/br&gt;
+
+.large[This path will work for anyone who you share your project with!]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

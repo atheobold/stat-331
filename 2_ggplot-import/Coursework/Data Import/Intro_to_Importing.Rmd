@@ -17,7 +17,7 @@ library(tidyverse)
 library(flair)
 ```
 
-`r emo::ji("play button")` Watch Videos: 15 minutes  
+`r emo::ji("play button")` Watch Videos: 14 minutes  
 
 `r emo::ji("book")` Readings: 15-20 minutes   
 
@@ -26,30 +26,28 @@ library(flair)
 `r emo::ji("check")` Check-ins: 1
 
 
-## Loading Data Into R -- A Set of Videos by Dr. Kelly Bodwin
+## Loading Data Into R 
 
 ### Where does my data live?
 
-`r emo::ji("play button")` [Required Video: Data Locations and the {here} package](https://www.youtube.com/embed/kF_fmHEgUOM)
+`r emo::ji("play button")` [Required Video: Data Locations and the {here} package (8 minutes)](https://www.youtube.com/watch?v=jvWwrELLEw8)
 
-- Note that we **are not** using `hiphop.csv` in this course, but the central 
-concepts of the video still hold! 
-
-
-### How do I load the data?
-
-`r emo::ji("play button")` [Required Video: Loading Data](https://www.youtube.com/embed/WOmXNZm1Jr4) 
+### How do I load my data?
 
 `r emo::ji("book")` [Required Reading: Data Import](https://r4ds.had.co.nz/data-import.html)
 
+`r emo::ji("play button")` [Required Video: Loading Data (6 minutes)](https://www.youtube.com/watch?v=Kp4tJYCAvUs) 
+
 `r emo::ji("computer")` Download the `ages.zip` folder and the 
 `data_import_practice.Rmd` files on Canvas. Save these files in
-your Stat 331 folder, possibly inside a subfolder named "Activities". 
+your Stat 331 folder, possibly inside a subfolder named "Activities" or
+"Week 2". 
 
 **Note:** You will need to extract the contents of the `ages.zip` file
 
-Next, open the `data_import_practice.Rmd` file and write the code necessary to
-carry out the following tasks:
+Now, open your STAT 331 RStudio Project. Next, open the
+`data_import_practice.Rmd` file and write the code necessary to carry out the
+following tasks:
 
 1. Read in the dataset `ages.csv`.
 2. Read in the dataset `ages_tab.txt`

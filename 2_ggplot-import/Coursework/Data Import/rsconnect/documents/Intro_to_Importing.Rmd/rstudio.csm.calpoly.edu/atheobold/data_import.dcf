@@ -1,0 +1,13 @@
+name: data_import
+title: data_import
+username: atheobold
+account: atheobold
+server: rstudio.csm.calpoly.edu
+hostUrl: https://rstudio.csm.calpoly.edu/__api__
+appId: 381
+bundleId: 860
+url: https://rstudio.csm.calpoly.edu/content/392eeb8f-0fc7-4533-8576-c25068db5ec7/
+when: 1641250701.89676
+lastSyncTime: 1641250701.89677
+asMultiple: FALSE
+asStatic: TRUE
