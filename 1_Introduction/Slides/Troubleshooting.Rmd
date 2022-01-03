@@ -273,6 +273,10 @@ It *probably* means...
 
 --
 
+Look at the help file for the function!
+
+--
+
 When all else fails, **Google** your error message.
 
 --

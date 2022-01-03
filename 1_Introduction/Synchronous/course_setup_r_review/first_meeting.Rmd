@@ -168,7 +168,9 @@ x <- 12
 y <- c(1, 2, 3, 4)
 ```
 
-- The `c()` function binds a list of numbers or letters into a vector
+.large[The `c()` function binds a list of numbers or letters into a vector]
+
+--
 
 </br>
 
@@ -277,7 +279,7 @@ decorate("seq", eval = FALSE) %>%
 </br>
 </br>
 
-.large[**Naming your argument makes your code more readable!**]
+.large[**Naming your arguments makes your code more readable!**]
 
 ---
 
