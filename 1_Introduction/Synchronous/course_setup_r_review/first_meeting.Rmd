@@ -1,6 +1,6 @@
 ---
-title: "Welcome to Stat 331 & R Review"
-date: "March 30, 2021"
+title: "Welcome to Stat 331 & R Warm-up"
+date: "January 5, 2022"
 author: "Dr. Allison Theobold"
 output:
   xaringan::moon_reader:
@@ -21,6 +21,7 @@ output:
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 library(tidyverse)
+library(flair)
 ```
 
 ```{r xaringan-themer, include=FALSE}
@@ -36,8 +37,13 @@ style_duo_accent(
 ```
 
 
+class: middle 
 
-# Welcome to Stat 331!
+<center>
+
+.bitlarger[**Welcome to Stat 331!**]
+
+</center>
 
 This course will teach you the fundamentals of R Statistical Software and of
 statistical computing principles, extending your knowledge to more "intermediate"
@@ -52,11 +58,13 @@ topics, such as:
 
 ---
 
-# Data Science 
+class: center, middle
+
+.bitlarger[Data Science] 
 
 >Data science is an inter-disciplinary field that uses scientific methods, processes, algorithms and systems to extract >knowledge and insights from structured and unstructured data.
 
-Wikepedia 
+Wikipedia 
 
 </br> 
 
@@ -67,7 +75,9 @@ Hal Varian, chief economist at Google and UC Berkeley professor of information s
 
 ---
 
-# What Data Science Is To Me 
+class: center 
+
+.bitlarger[What Data Science Is To Me]
 
 </br>
 </br>
@@ -78,14 +88,30 @@ Hal Varian, chief economist at Google and UC Berkeley professor of information s
 
 class: middle 
 
-# Course Components 
+.larger[Course Components]
 
+.pull-left[
 - Coursework
 - Check-ins
 - Practice Activities
+]
+
+.pull-right[
 - Lab Assignments 
 - Challenges 
 - Think Out Loud Recordings
+]
+
+---
+
+.larger[Team-based Learning]
+
+*Team-based learning* is a structured form of small-group learning
+
+- Emphasizes student preparation out of class
+- Application of knowledge in class
+- Diverse teams of 4-5 students
+- Designated role for each member
 
 ---
 
@@ -108,15 +134,7 @@ class: middle
 
 ---
 
-.larger[Team-based Learning]
-
-*Team-based learning* is a structured form of small-group learning
-
-- Emphasizes student preparation out of class
-- Application of knowledge in class
-- Diverse teams of 5-6 students
-
----
+class: center
 
 .large[Mastery-based Grading]
 
@@ -180,6 +198,16 @@ letters_numbers
 
 ---
 
+class: inverse, center, middle
+
+.larger[**R** is a **functional programming** language.]
+
+--
+
+.large[This means R is designed for using and writing *functions*.]
+
+---
+
 .larger[Components of a Function]
 
 ```{r, eval = FALSE}
@@ -192,6 +220,64 @@ plot()
 - function name / call
 - input(s) / arguments 
 - output / return
+
+---
+
+class: center, middle 
+
+.bitlarger[Anatomy of a function]
+
+```{r seq, eval = FALSE, echo = FALSE}
+seq(from = 1, to = 100, by = 2)
+```
+
+```{r, echo = FALSE}
+decorate("seq", eval = FALSE)
+```
+
+--
+
+</br>
+
+**Function name:**
+
+```{r, echo = FALSE}
+decorate("seq", eval = FALSE) %>%
+  flair("seq")
+```
+
+--
+
+**Required arguments:**
+
+
+```{r, echo = FALSE}
+decorate("seq", eval = FALSE) %>%
+  flair("from") %>% 
+  flair("to")
+```
+
+---
+
+class: center, middle 
+
+.bitlarger[Anatomy of a function]
+
+</br>
+
+**Optional arguments:**
+
+```{r, echo = FALSE}
+decorate("seq", eval = FALSE) %>%
+  flair("by = 2")
+```
+
+--
+
+</br>
+</br>
+
+.large[**Naming your argument makes your code more readable!**]
 
 ---
 
@@ -234,9 +320,17 @@ y <- sqrt(y)
 
 - All elements must have **same** data type
 
+.pull-left[
+```{r}
+y
+```
+]
+
+.pull-right[
 ```{r}
 matrix(y, nrow = 2, ncol = 2)
 ```
+]
 
 ---
 

@@ -1,11 +1,9 @@
 ---
-title: "Basics: Functions and Troubleshooting"
-subtitle: "Week 2"  
-
+title: "Troubleshooting Errors!"
 output:
   xaringan::moon_reader:
     lib_dir: libs
-    css: xaringan-themer.css
+    css: ["xaringan-themer.css", "slide-style.css"]
     nature:
       highlightStyle: github
       highlightLines: true
@@ -15,206 +13,153 @@ output:
 
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
-library(tidyverse)
 library(flair)
 ```
 
 ```{r xaringan-themer, include=FALSE}
 library(xaringanthemer)
-style_duo(
-  primary_color = "#26116c",
-  secondary_color = "#fd5e53",
-  title_slide_text_color = "#fff8e7",
-  header_font_google = google_font("Roboto"),
-  text_font_google   = google_font("Roboto Condensed"),
-  code_font_google   = google_font("Droid Mono")
+style_duo_accent(
+  primary_color      = "#0F4C81", # pantone classic blue
+  secondary_color    = "#B6CADA", # pantone baby blue
+  header_font_google = google_font("Raleway"),
+  text_font_google   = google_font("Raleway", "300", "300i"),
+  code_font_google   = google_font("Source Code Pro"),
+  text_font_size     = "30px"
 )
 ```
 
+class: center, middle, inverse
+
+.huge[Syntax Errors]
+
+---
+
 class: center, middle
 
-# Functions
-
----
-# Important R Facts
-
-*Fact 1:* **R** is an **open-source** language.
-
---
-
-*Fact 2:* The power of **R** comes from **packages**.
-
---
-
-*Fact 3:* **R** is a **functional programming** language.
-
---
-
-(This means it is designed for using and writing *functions*.)
-
----
-# Anatomy of a function
-
-```{r rnorm1}
-rnorm(10, mean = 5, sd =3)
-```
-
----
-# Anatomy of a function
-
-```{r rnorm, eval = FALSE}
-rnorm(10, mean = 5, sd =3)
-```
-
---
-Function name:
+.larger[Did you leave off a parenthesis?]
 
 ```{r, echo = FALSE}
-decorate("rnorm", eval = FALSE) %>%
-  flair("rnorm")
-```
-
---
-
-Required arguments:
-
-
-```{r, echo = FALSE}
-decorate("rnorm", eval = FALSE) %>%
-  flair("10")
-```
-
-(we often don't use the names for required arguments, but `n = 10` would be okay too)
-
----
-# Anatomy of a function
-
-Optional arguments:
-
-
-```{r, echo = FALSE}
-decorate("rnorm", eval = FALSE) %>%
-  flair("mean = 5") %>%
-  flair("sd = 5")
-```
-
-(*always* use the argument names for optional arguments)
-
----
-class: center, middle
-
-# Troubleshooting Errors
-
----
-
-# Syntax Errors
-
-* Did you leave off a parenthesis?
-
-```{r, echo = FALSE}
-decorate('rnorm(10, mean = 5', eval = FALSE) %>%
+decorate('seq(from = 1, to = 10, by = 1', eval = FALSE) %>%
   flair("(")
 ```
 
 ```{r, echo = FALSE, error = TRUE}
 
-rnorm(10, mean = 5
+seq(from = 1, to = 10, by = 1
 
 ```
-
 
 ---
 
-# Syntax Errors
+class: center, middle
 
-* Did you leave off a comma?
+.larger[Did you leave off a comma?]
 
 ```{r, echo = FALSE, error = TRUE}
-decorate('rnorm(10 mean = 5)', eval = FALSE) %>%
-  flair(" mean")
+decorate('seq(from = 1, to = 10 by = 1)', eval = FALSE) %>%
+  flair("by")
 ```
 
 ```{r, echo = FALSE, error = TRUE}
 
-rnorm(10 mean = 5)
+seq(from = 1, to = 10 by = 1)
 
 ```
-
 
 ---
 
-# Syntax Errors
+class: center, middle
 
-* Did you make a typo?
+.larger[Did you make a typo? Are you using the right names?]
 
 
 ```{r, echo = FALSE}
-decorate('rnrom(10, mean = 5)', eval = FALSE) %>%
-  flair("rnrom")
+decorate('sequence(from = 1, to = 10, by = 1)', eval = FALSE) %>%
+  flair("sequence")
 ```
 
 ```{r, echo = FALSE, error = TRUE}
 
-rnrom(10, mean = 5)
+sequence(from = 1, to = 10, by = 1)
 
 ```
 
 ---
-# Object type errors
 
-* Are you using the right **input** that the function expects?
+class: center, middle
+
+.larger[Object type errors]
+
+**Are you using the right _input_ that the function expects?**
+
+--
 
 ```{r, echo = FALSE}
-decorate("rnorm('hi', mean = 5)", eval = FALSE) %>%
-  flair("'hi'")
+decorate("sqrt('1')", eval = FALSE) %>%
+  flair("'1'")
 ```
 
 ```{r, echo = FALSE, error = TRUE}
 
-rnorm('hi', mean = 5)
+sqrt('1')
 
 ```
 
 ---
-# Object type errors
 
-* Are you expecting the right **output** of the function?
+class: center, middle
 
-```{r closure, echo = FALSE, error = TRUE}
+.larger[Object type errors]
 
-my_obj <- rnorm(10, mean = 5)
+**Are you expecting the right _output_ of the function?**
+
+--
+
+```{r closure, echo = FALSE, error = TRUE, eval = FALSE}
+
+my_obj <- seq(from = 1, to = 10, by = 1)
 
 my_obj(5)
 
 ```
 
 ```{r, echo = FALSE}
-decorate("closure") %>%
+decorate("closure", error = TRUE) %>%
   flair("my_obj(5)")
 ```
 
 ---
-class: center, middle
 
-# Errors, warnings, and messages
+class: center, middle, inverse
+
+.huge[Errors, warnings, and messages]
 
 ---
-# Messages
 
-Just because you see scary red text, this does **not** mean something went wrong!  
+class: center, middle 
 
-This is just **R** communicating with you.
+.larger[Messages]
+
+--
+
+Just because you see scary red text, this does **not** mean something went
+wrong! This is just **R** communicating with you.
 
 --
 
 For example, you often see:
 
-```{r}
+```{r, message = TRUE}
 library(tidyverse)
 ```
 
 ---
-# Warnings
+
+class: center, middle
+
+.larger[Warnings]
+
+--
 
 Often, **R** will give you a **warning**.
 
@@ -227,7 +172,10 @@ This means that your code *did* run...
 ...but you probably want to make sure it succeeded.
 
 ---
-# Warnings
+
+class: center, middle
+
+.larger[Does this look right?]
 
 
 ```{r}
@@ -243,9 +191,13 @@ my_new_vec
 ```
 
 ---
-# Errors
 
-If the word **Error** appears in your message from **R**, then you have a problem.
+class: center, middle
+
+.larger[Errors]
+
+If the word **Error** appears in your message from **R**, then you have a
+problem.
 
 --
 
@@ -258,23 +210,22 @@ my_vec <- c("a", "b", "c")
 
 my_new_vec <- my_vec + 1
 ```
----
-class: center, middle
-
-## Parlez-vous ERROR?
-
-Error messages can be confusing!
 
 ---
-# Translations
 
-**R** says...
+class: center, middle, inverse
 
-> Error: Object 'some_obj' not found.
+.huge[Parlez-vous ERROR?]
+
+---
+
+.larger[**R** says...]
+
+> Error: Object `some_obj` not found.
 
 It *probably* means...
 
-> You haven't run the code to create 'some_obj'  OR you have a typo in the name!
+> You haven't run the code to create `some_obj`  OR you have a typo in the name!
 
 --
 
@@ -285,9 +236,8 @@ mean(some_obj)
 ```
 
 ---
-# Translations
 
-**R** says...
+.larger[**R** says...]
 
 > Error: Object of type 'closure' is not subsettable.
 
@@ -298,13 +248,12 @@ It *probably* means...
 --
 
 ```{r, error = TRUE}
-mean[1,2]
+mean[1, 2]
 ```
 
 ---
-# Translations
 
-**R** says...
+.larger[**R** says...]
 
 > Error: Non-numeric argument to binary operator
 
@@ -319,23 +268,28 @@ It *probably* means...
 ```
 
 ---
-# Okay, now what?
+
+.larger[What if none of these solved my error?]
+
+--
 
 When all else fails, **Google** your error message.
 
 --
 
-* Leave out the specifics.
+- Leave out the specifics.
 
---
-
-* Include the function you are using.
-
+- Include the function you are using.
 
 ---
-# Try it...
 
-*What's wrong here?*
+class: center, middle 
+
+.larger[Try it...] 
+
+**What's wrong here?**
+
+</br>
 
 ```{r, error = TRUE}
 matrix(c("a", "b", "c", "d"), num_row = 2)

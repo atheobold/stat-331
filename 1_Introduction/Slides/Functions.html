@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Basics: Functions and Troubleshooting</title>
+    <title>Troubleshooting Errors!</title>
     <meta charset="utf-8" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="slide-style.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Basics: Functions and Troubleshooting
-## Week 2
+# Troubleshooting Errors!
 
 ---
 
@@ -18,179 +19,115 @@ class: center, middle, inverse, title-slide
 
 
 
+
+class: center, middle, inverse
+
+.huge[Syntax Errors]
+
+---
 
 class: center, middle
 
-# Functions
-
----
-# Important R Facts
-
-*Fact 1:* **R** is an **open-source** language.
-
---
-
-*Fact 2:* The power of **R** comes from **packages**.
-
---
-
-*Fact 3:* **R** is a **functional programming** language.
-
---
-
-(This means it is designed for using and writing *functions*.)
-
----
-# Anatomy of a function
+.larger[Did you leave off a parenthesis?]
 
 
-```r
-rnorm(10, mean = 5, sd =3)
-```
-
-```
-##  [1]  7.222717  3.047437  7.070927  9.553958  8.261264  1.739862  5.496745
-##  [8]  7.606795 -1.197588  2.947701
-```
-
----
-# Anatomy of a function
-
-
-```r
-rnorm(10, mean = 5, sd =3)
-```
-
---
-Function name:
-
-
-&lt;code class ='r hljs remark-code'&gt;&lt;span style='background-color:#ffff7f'&gt;rnorm&lt;/span&gt;(10, mean = 5, sd =3)&lt;/code&gt;
-
---
-
-Required arguments:
-
-
-
-&lt;code class ='r hljs remark-code'&gt;rnorm(&lt;span style='background-color:#ffff7f'&gt;10&lt;/span&gt;, mean = 5, sd =3)&lt;/code&gt;
-
-(we often don't use the names for required arguments, but `n = 10` would be okay too)
-
----
-# Anatomy of a function
-
-Optional arguments:
-
-
-
-&lt;code class ='r hljs remark-code'&gt;rnorm(10, &lt;span style='background-color:#ffff7f'&gt;mean = 5&lt;/span&gt;, sd =3)&lt;/code&gt;
-
-(*always* use the argument names for optional arguments)
-
----
-class: center, middle
-
-# Troubleshooting Errors
-
----
-
-# Syntax Errors
-
-* Did you leave off a parenthesis?
-
-
-&lt;code class ='r hljs remark-code'&gt;rnorm&lt;span style='background-color:#ffff7f'&gt;(&lt;/span&gt;10, mean = 5&lt;/code&gt;
+&lt;code class ='r hljs remark-code'&gt;seq&lt;span style="background-color:#ffff7f"&gt;(&lt;/span&gt;from = 1, to = 10, by = 1&lt;/code&gt;
 
 
 ```
 ## Error: &lt;text&gt;:4:0: unexpected end of input
-## 2: rnorm(10, mean = 5
+## 2: seq(from = 1, to = 10, by = 1
 ## 3: 
 ##   ^
 ```
 
-
 ---
 
-# Syntax Errors
-
-* Did you leave off a comma?
-
-
-&lt;code class ='r hljs remark-code'&gt;rnorm(10&lt;span style='background-color:#ffff7f'&gt; mean&lt;/span&gt; = 5)&lt;/code&gt;
-
-
-```
-## Error: &lt;text&gt;:2:10: unexpected symbol
-## 1: 
-## 2: rnorm(10 mean
-##             ^
-```
-
-
----
-
-# Syntax Errors
-
-* Did you make a typo?
-
-
-
-&lt;code class ='r hljs remark-code'&gt;&lt;span style='background-color:#ffff7f'&gt;rnrom&lt;/span&gt;(10, mean = 5)&lt;/code&gt;
-
-
-```
-## Error in rnrom(10, mean = 5): could not find function "rnrom"
-```
-
----
-# Object type errors
-
-* Are you using the right **input** that the function expects?
-
-
-&lt;code class ='r hljs remark-code'&gt;rnorm(&lt;span style='background-color:#ffff7f'&gt;'hi'&lt;/span&gt;, mean = 5)&lt;/code&gt;
-
-
-```
-## Warning in rnorm("hi", mean = 5): NAs introduced by coercion
-```
-
-```
-## Error in rnorm("hi", mean = 5): invalid arguments
-```
-
----
-# Object type errors
-
-* Are you expecting the right **output** of the function?
-
-
-```
-## Error in my_obj(5): could not find function "my_obj"
-```
-
-
-&lt;code class ='r hljs remark-code'&gt;my_obj &lt;- rnorm(10, mean = 5)&lt;br&gt;&lt;br&gt;&lt;span style='background-color:#ffff7f'&gt;my_obj(5)&lt;/span&gt;&lt;/code&gt;
-
-```
-
-## Error in my_obj(5): could not find function "my_obj"
-
-```
-
----
 class: center, middle
 
-# Errors, warnings, and messages
+.larger[Did you leave off a comma?]
+
+
+&lt;code class ='r hljs remark-code'&gt;seq(from = 1, to = 10 &lt;span style="background-color:#ffff7f"&gt;by&lt;/span&gt; = 1)&lt;/code&gt;
+
+
+```
+## Error: &lt;text&gt;:2:23: unexpected symbol
+## 1: 
+## 2: seq(from = 1, to = 10 by
+##                          ^
+```
 
 ---
-# Messages
 
-Just because you see scary red text, this does **not** mean something went wrong!  
+class: center, middle
 
-This is just **R** communicating with you.
+.larger[Did you make a typo? Are you using the right names?]
+
+
+
+&lt;code class ='r hljs remark-code'&gt;&lt;span style="background-color:#ffff7f"&gt;sequence&lt;/span&gt;(from = 1, to = 10, by = 1)&lt;/code&gt;
+
+
+```
+## Error in sequence.default(from = 1, to = 10, by = 1): argument "nvec" is missing, with no default
+```
+
+---
+
+class: center, middle
+
+.larger[Object type errors]
+
+**Are you using the right _input_ that the function expects?**
+
+--
+
+
+&lt;code class ='r hljs remark-code'&gt;sqrt(&lt;span style="background-color:#ffff7f"&gt;'1'&lt;/span&gt;)&lt;/code&gt;
+
+
+```
+## Error in sqrt("1"): non-numeric argument to mathematical function
+```
+
+---
+
+class: center, middle
+
+.larger[Object type errors]
+
+**Are you expecting the right _output_ of the function?**
+
+--
+
+
+
+
+&lt;code class ='r hljs remark-code'&gt;my_obj &lt;- seq(from = 1, to = 10, by = 1)&lt;br&gt;&lt;br&gt;&lt;span style="background-color:#ffff7f"&gt;my_obj(5)&lt;/span&gt;&lt;/code&gt;
+
+```
+
+## Error in my_obj(5): could not find function "my_obj"
+
+```
+
+---
+
+class: center, middle, inverse
+
+.huge[Errors, warnings, and messages]
+
+---
+
+class: center, middle 
+
+.larger[Messages]
+
+--
+
+Just because you see scary red text, this does **not** mean something went
+wrong! This is just **R** communicating with you.
 
 --
 
@@ -201,8 +138,30 @@ For example, you often see:
 library(tidyverse)
 ```
 
+```
+## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --
+```
+
+```
+## v ggplot2 3.3.5     v purrr   0.3.4
+## v tibble  3.1.4     v dplyr   1.0.7
+## v tidyr   1.1.3     v stringr 1.4.0
+## v readr   2.0.1     v forcats 0.5.1
+```
+
+```
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+```
+
 ---
-# Warnings
+
+class: center, middle
+
+.larger[Warnings]
+
+--
 
 Often, **R** will give you a **warning**.
 
@@ -215,7 +174,10 @@ This means that your code *did* run...
 ...but you probably want to make sure it succeeded.
 
 ---
-# Warnings
+
+class: center, middle
+
+.larger[Does this look right?]
 
 
 
@@ -241,9 +203,13 @@ my_new_vec
 ```
 
 ---
-# Errors
 
-If the word **Error** appears in your message from **R**, then you have a problem.
+class: center, middle
+
+.larger[Errors]
+
+If the word **Error** appears in your message from **R**, then you have a
+problem.
 
 --
 
@@ -261,23 +227,22 @@ my_new_vec &lt;- my_vec + 1
 ```
 ## Error in my_vec + 1: non-numeric argument to binary operator
 ```
----
-class: center, middle
-
-## Parlez-vous ERROR?
-
-Error messages can be confusing!
 
 ---
-# Translations
 
-**R** says...
+class: center, middle, inverse
 
-&gt; Error: Object 'some_obj' not found.
+.huge[Parlez-vous ERROR?]
+
+---
+
+.larger[**R** says...]
+
+&gt; Error: Object `some_obj` not found.
 
 It *probably* means...
 
-&gt; You haven't run the code to create 'some_obj'  OR you have a typo in the name!
+&gt; You haven't run the code to create `some_obj`  OR you have a typo in the name!
 
 --
 
@@ -293,9 +258,8 @@ mean(some_obj)
 ```
 
 ---
-# Translations
 
-**R** says...
+.larger[**R** says...]
 
 &gt; Error: Object of type 'closure' is not subsettable.
 
@@ -307,7 +271,7 @@ It *probably* means...
 
 
 ```r
-mean[1,2]
+mean[1, 2]
 ```
 
 ```
@@ -315,9 +279,8 @@ mean[1,2]
 ```
 
 ---
-# Translations
 
-**R** says...
+.larger[**R** says...]
 
 &gt; Error: Non-numeric argument to binary operator
 
@@ -337,23 +300,28 @@ It *probably* means...
 ```
 
 ---
-# Okay, now what?
+
+.larger[What if none of these solved my error?]
+
+--
 
 When all else fails, **Google** your error message.
 
 --
 
-* Leave out the specifics.
+- Leave out the specifics.
 
---
-
-* Include the function you are using.
-
+- Include the function you are using.
 
 ---
-# Try it...
 
-*What's wrong here?*
+class: center, middle 
+
+.larger[Try it...] 
+
+**What's wrong here?**
+
+&lt;/br&gt;
 
 
 ```r
@@ -363,6 +331,7 @@ matrix(c("a", "b", "c", "d"), num_row = 2)
 ```
 ## Error in matrix(c("a", "b", "c", "d"), num_row = 2): unused argument (num_row = 2)
 ```
+
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

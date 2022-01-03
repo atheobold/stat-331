@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Welcome to Stat 331 &amp; R Review</title>
+    <title>Welcome to Stat 331 &amp; R Warm-up</title>
     <meta charset="utf-8" />
     <meta name="author" content="Dr. Allison Theobold" />
-    <meta name="date" content="2021-03-30" />
+    <meta name="date" content="2022-01-05" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="slide-style.css" type="text/css" />
@@ -13,9 +13,9 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Welcome to Stat 331 &amp; R Review
+# Welcome to Stat 331 &amp; R Warm-up
 ### Dr. Allison Theobold
-### March 30, 2021
+### January 5, 2022
 
 ---
 
@@ -25,8 +25,13 @@ class: center, middle, inverse, title-slide
 
 
 
+class: middle 
 
-# Welcome to Stat 331!
+&lt;center&gt;
+
+.bitlarger[**Welcome to Stat 331!**]
+
+&lt;/center&gt;
 
 This course will teach you the fundamentals of R Statistical Software and of
 statistical computing principles, extending your knowledge to more "intermediate"
@@ -41,11 +46,13 @@ topics, such as:
 
 ---
 
-# Data Science 
+class: center, middle
+
+.bitlarger[Data Science] 
 
 &gt;Data science is an inter-disciplinary field that uses scientific methods, processes, algorithms and systems to extract &gt;knowledge and insights from structured and unstructured data.
 
-Wikepedia 
+Wikipedia 
 
 &lt;/br&gt; 
 
@@ -56,7 +63,9 @@ Hal Varian, chief economist at Google and UC Berkeley professor of information s
 
 ---
 
-# What Data Science Is To Me 
+class: center 
+
+.bitlarger[What Data Science Is To Me]
 
 &lt;/br&gt;
 &lt;/br&gt;
@@ -67,14 +76,30 @@ Hal Varian, chief economist at Google and UC Berkeley professor of information s
 
 class: middle 
 
-# Course Components 
+.larger[Course Components]
 
+.pull-left[
 - Coursework
 - Check-ins
 - Practice Activities
+]
+
+.pull-right[
 - Lab Assignments 
 - Challenges 
 - Think Out Loud Recordings
+]
+
+---
+
+.larger[Team-based Learning]
+
+*Team-based learning* is a structured form of small-group learning
+
+- Emphasizes student preparation out of class
+- Application of knowledge in class
+- Diverse teams of 4-5 students
+- Designated role for each member
 
 ---
 
@@ -97,15 +122,7 @@ class: middle
 
 ---
 
-.larger[Team-based Learning]
-
-*Team-based learning* is a structured form of small-group learning
-
-- Emphasizes student preparation out of class
-- Application of knowledge in class
-- Diverse teams of 5-6 students
-
----
+class: center
 
 .large[Mastery-based Grading]
 
@@ -176,6 +193,16 @@ letters_numbers
 
 ---
 
+class: inverse, center, middle
+
+.larger[**R** is a **functional programming** language.]
+
+--
+
+.large[This means R is designed for using and writing *functions*.]
+
+---
+
 .larger[Components of a Function]
 
 
@@ -188,6 +215,54 @@ plot()
 - function name / call
 - input(s) / arguments 
 - output / return
+
+---
+
+class: center, middle 
+
+.bitlarger[Anatomy of a function]
+
+
+
+
+&lt;code class ='r hljs remark-code'&gt;seq(from = 1, to = 100, by = 2)&lt;/code&gt;
+
+--
+
+&lt;/br&gt;
+
+**Function name:**
+
+
+&lt;code class ='r hljs remark-code'&gt;&lt;span style="background-color:#ffff7f"&gt;seq&lt;/span&gt;(from = 1, to = 100, by = 2)&lt;/code&gt;
+
+--
+
+**Required arguments:**
+
+
+
+&lt;code class ='r hljs remark-code'&gt;seq(&lt;span style="background-color:#ffff7f"&gt;from&lt;/span&gt; = 1, &lt;span style="background-color:#ffff7f"&gt;to&lt;/span&gt; = 100, by = 2)&lt;/code&gt;
+
+---
+
+class: center, middle 
+
+.bitlarger[Anatomy of a function]
+
+&lt;/br&gt;
+
+**Optional arguments:**
+
+
+&lt;code class ='r hljs remark-code'&gt;seq(from = 1, to = 100, &lt;span style="background-color:#ffff7f"&gt;by = 2&lt;/span&gt;)&lt;/code&gt;
+
+--
+
+&lt;/br&gt;
+&lt;/br&gt;
+
+.large[**Naming your argument makes your code more readable!**]
 
 ---
 
@@ -241,6 +316,18 @@ y &lt;- sqrt(y)
 
 - All elements must have **same** data type
 
+.pull-left[
+
+```r
+y
+```
+
+```
+## [1] 1.000000 1.414214 1.732051 2.000000
+```
+]
+
+.pull-right[
 
 ```r
 matrix(y, nrow = 2, ncol = 2)
@@ -251,6 +338,7 @@ matrix(y, nrow = 2, ncol = 2)
 ## [1,] 1.000000 1.732051
 ## [2,] 1.414214 2.000000
 ```
+]
 
 ---
 
