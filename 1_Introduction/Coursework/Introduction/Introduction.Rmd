@@ -139,7 +139,7 @@ d) Anyone can change the base functionality of R.
 
 # `r emo::ji("question")` Extra Resources
 
-* [Click Here](https://github.com/rstudio/cheatsheets/raw/master/rstudio-ide.pdf) 
+* [Click Here](https://github.com/rstudio/cheatsheets/blob/main/rstudio-ide.pdf) 
 to download a "cheatsheet" (easy reference page) for RStudio.
 
 * [Click Here](https://youtu.be/cnQ-v1UUWyE) to watch another walkthrough video for touring
