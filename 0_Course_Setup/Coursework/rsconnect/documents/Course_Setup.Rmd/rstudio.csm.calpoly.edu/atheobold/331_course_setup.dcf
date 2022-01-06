@@ -5,9 +5,9 @@ account: atheobold
 server: rstudio.csm.calpoly.edu
 hostUrl: https://rstudio.csm.calpoly.edu/__api__
 appId: 378
-bundleId: 854
+bundleId: 864
 url: https://rstudio.csm.calpoly.edu/331-course-setup/
-when: 1641154683.11303
-lastSyncTime: 1641154683.11305
+when: 1641325222.94725
+lastSyncTime: 1641325222.94726
 asMultiple: FALSE
 asStatic: TRUE
