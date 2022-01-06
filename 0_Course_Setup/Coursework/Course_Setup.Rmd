@@ -340,7 +340,7 @@ violated the Academic Honesty policy.
 
 `r emo::ji("check")` Check-in 3: Team Formation Schedule Survey 
 
-[Link to Google Form](UPDATE LINK)
+[Link to Google Form](https://forms.gle/SZs2toNSAUj4stK3A)
 
 ---
 
