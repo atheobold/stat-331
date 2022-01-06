@@ -62,13 +62,16 @@ class: center, middle
 
 .bitlarger[Data Science] 
 
->Data science is an inter-disciplinary field that uses scientific methods, processes, algorithms and systems to extract >knowledge and insights from structured and unstructured data.
+>Data science is an inter-disciplinary field that uses scientific methods,
+> processes, algorithms and systems to extract knowledge and insights from
+> structured and unstructured data.
 
 Wikipedia 
 
 </br> 
 
->The ability to take data — to be able to understand it, to process it, to extract value from it, to visualize it, to communicate it. 
+>The ability to take data — to be able to understand it, to process it, to
+> extract value from it, to visualize it, to communicate it. 
 >
 
 Hal Varian, chief economist at Google and UC Berkeley professor of information sciences, business, and economics

@@ -76,7 +76,6 @@ This chunk will load up the encoded secret message as a vector:
 ```{r}
 
 top_secret <- read_csv("https://www.dropbox.com/s/k72h1zewk4gtqep/PA_Secret_Code?dl=1", 
-                       skip = 1, 
                        col_names = FALSE)$X1
 
 ```
