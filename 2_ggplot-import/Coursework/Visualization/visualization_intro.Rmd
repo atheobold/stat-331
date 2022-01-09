@@ -91,15 +91,22 @@ in *R for Data Science*.
 
 `r emo::ji("play button")` [Required Video: What is an aesthetic? (7 minutes)](https://www.youtube.com/watch?v=oYVuzW_t93w)
 
-`r emo::ji("check")` Check-in: 
-
-**Question 3:** Exercise 3.3.1 #1: Which of following changes would color the 
-points blue? 
+`r emo::ji("check")` Check-in: Introduction to Data Visualization with ggplot2
 
 ```{r}
 ggplot(data = mpg) +
   geom_point(mapping = aes(x = displ, y = hwy, color = "blue"))
 ```
+
+**Question 3:** What aesthetics does this plot contain?
+
+- x
+- y
+- color
+- data
+
+
+**Question 4:** Which of following changes would color the points blue? 
 
 ```
 ggplot(data = mpg) +
@@ -133,6 +140,11 @@ it!
 - Histogram
 - Area Chart
 
+- `geom_point()`
+- `geom_line()`
+- `geom_histogram()`
+- `geom_area()`
+
 </br> 
 
 `r emo::ji("computer")` [Required Tutorial: Data Visualization Basics](https://rstudio.cloud/learn/primers/1.1)
@@ -153,7 +165,7 @@ and other ways we can add additional variables to our plots.
 `r emo::ji("check")` Check-in: Introduction to Data Visualization with ggplot2 
 
 **Question 5:** Match the code to the type of aesthetics that are being used:
-global or local
+Global or Local
 
 ```
 ggplot(data = mpg, mapping = aes(x = mpg, y = hwy)) + geom_point()
@@ -179,13 +191,16 @@ ggplot(data = mpg) + geom_point(mapping = aes(x = mpg, y = hwy))
 - `stat_count()`
 - `stat_identity()`
 
+- `geom_bar()`
+- `geom_col()`
+
 </br>
 
 `r emo::ji("play button")` [Required Video: How do I change positions?](http://somup.com/crffFibH1R)
 
 `r emo::ji("check")` Check-in: Introduction to Data Visualization with ggplot2
 
-**Question 7:** What parameters to `geom_jitter()` control the amount of 
+**Question 7:** What arguments for `geom_jitter()` control the amount of 
 jittering? 
 
 - width

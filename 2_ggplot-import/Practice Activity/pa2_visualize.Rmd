@@ -1,10 +1,6 @@
 ---
 title: "PA 2: Using Data Visualization to Find the Group"
-output:
-  prettydoc::html_pretty:
-    theme: tactile
-    highlight: github
-    css: styles.css
+output: html_document
 ---
 
 ```{r, include = FALSE}
@@ -55,16 +51,17 @@ better way to visualize this relationship.
 
 # Part Two 
 
-1. In order to create the plot we want, `month` needs to be a character
-variable, not a numeric variable. Write the code to convert `month` into a 
+In order to create the plot we want, `month` needs to be a character
+variable, not a numeric variable. Use the code below to convert `month` into a 
 character data type. 
 
-```{r, eval = FALSE}
-
+```{r}
+nycflights <- nycflights %>%
+  mutate(month = as.character(month))
 ```
 
 
-2. Create a visualization of the relationship between the departure delay 
+1. Create a visualization of the relationship between the departure delay 
 (`dep_delay`) and the month of the departure (`month`) that allows for you to 
 see the **shape** of the distribution of the departure delays. 
 
@@ -72,7 +69,7 @@ see the **shape** of the distribution of the departure delays.
 
 ```
 
-3. Add the origin of the flight (`origin`) to your visualization. 
+2. Add the origin (airport) of the flight (`origin`) to your visualization. 
 
 ```{r}
 

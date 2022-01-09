@@ -5,9 +5,9 @@ account: atheobold
 server: rstudio.csm.calpoly.edu
 hostUrl: https://rstudio.csm.calpoly.edu/__api__
 appId: 382
-bundleId: 861
-url: https://rstudio.csm.calpoly.edu/content/7580eabb-d690-4258-8290-7db25272ebeb/
-when: 1641254087.42355
-lastSyncTime: 1641254087.42357
+bundleId: 866
+url: https://rstudio.csm.calpoly.edu/intro-visualization/
+when: 1641756368.0768
+lastSyncTime: 1641756368.0768
 asMultiple: FALSE
 asStatic: TRUE

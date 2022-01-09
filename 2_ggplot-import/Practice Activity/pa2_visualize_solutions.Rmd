@@ -59,23 +59,17 @@ better way to visualize this relationship.
 
 # Part Two 
 
-1. In order to create the plot we want, `month` needs to be a character
+In order to create the plot we want, `month` needs to be a character
 variable, not a numeric variable. Write the code to convert `month` into a 
 character data type. 
 
-```{r, eval = FALSE}
-# Option 1 -- base R
-nycflights <- as.character(nycflights$month)
-```
-
 ```{r}
-# Option 2 -- dplyr & forcats
 nycflights <- nycflights %>% 
-  mutate(month = as_factor(month))
+  mutate(month = as.character(month))
 
 ```
 
-2. Create a visualization of the relationship between the departure delay 
+1. Create a visualization of the relationship between the departure delay 
 (`dep_delay`) and the month of the departure (`month`) that allows for you to 
 see the **shape** of the distribution of the departure delays. 
 
@@ -85,7 +79,7 @@ ggplot(data = nycflights) +
 
 ```
 
-3. Add the origin of the flight (`origin`) to your visualization. 
+2. Add the origin of the flight (`origin`) to your visualization. 
 
 ```{r}
 # Option 1 -- facets
