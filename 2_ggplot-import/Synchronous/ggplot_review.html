@@ -4,8 +4,8 @@
     <title>Recap of Data Visualization with ggplot2</title>
     <meta charset="utf-8" />
     <meta name="author" content="Dr. Allison Theobold" />
-    <meta name="date" content="2021-04-06" />
-    <script src="libs/header-attrs-2.7/header-attrs.js"></script>
+    <meta name="date" content="2022-01-10" />
+    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="slide-style.css" type="text/css" />
   </head>
@@ -15,7 +15,7 @@ class: center, middle, inverse, title-slide
 
 # Recap of Data Visualization with ggplot2
 ### Dr. Allison Theobold
-### April 6, 2021
+### January 10, 2022
 
 ---
 
@@ -38,7 +38,11 @@ What `geom`etric object is being plotted?]
 ]
 ---
 
+class: middle, inverse
+
 .bitlarger[Univariate (One Variable) Visualizations -- For Numerical Data]
+
+--
 
 - Histogram 
 
@@ -52,13 +56,15 @@ What `geom`etric object is being plotted?]
 
 ---
 
+class: center
+
 .larger[Histogram]
 
 .pull-left[
 
 ```r
 ggplot(data = penguins, 
-         aes(x = bill_length_mm)) + 
+       mapping = aes(x = bill_length_mm)) + 
   geom_histogram()
 ```
 
@@ -71,22 +77,32 @@ ggplot(data = penguins,
 &lt;/br&gt;
 
 .pull-right[Is this aesthetic *global* or *local*?]
+
 ---
+
+class: middle
 
 .pull-left[
 .larger[Pros]
 - Easy to inspect
+
 - Higher bars represent where data are relatively more common 
+
 - Inspect shape of a distribution (skewed or symmetric) 
+
 - Identify modes
 ]
 
 .pull-right[
 .larger[Cons]
 - **Do not** plot raw data, plot summaries (counts) of the data! 
+
 - Sensitive to `binwidth`
 ]
+
 ---
+
+class: center
 
 .larger[Boxplot]
 
@@ -94,7 +110,7 @@ ggplot(data = penguins,
 
 ```r
 ggplot(data = penguins, 
-       aes(x = bill_length_mm)) + 
+       mapping = aes(x = bill_length_mm)) + 
   geom_boxplot()
 ```
 
@@ -113,13 +129,15 @@ ggplot(data = penguins,
 
 ---
 
+class: center
+
 .larger[Density Plot]
 
 .pull-left[
 
 ```r
 ggplot(data = penguins, 
-         aes(x = bill_length_mm)) + 
+       mapping = aes(x = bill_length_mm)) + 
   geom_density()
 ```
 
@@ -138,8 +156,11 @@ ggplot(data = penguins,
 
 ---
 
+class: middle, inverse
+
 .bitlarger[Bivariate (Two Variables) Visualizations -- For Numerical Data]
 
+--
 
 - Side-by-Side Boxplots 
 
@@ -157,13 +178,16 @@ ggplot(data = penguins,
 
 ---
 
+class: center
+
 .bitlarger[Side-by-Side Boxplots]
 
 .pull-left[
 
 ```r
 ggplot(data = penguins, 
-         aes(y = bill_length_mm, x = species)) + 
+       mapping = aes(y = bill_length_mm,
+                     x = species)) + 
   geom_boxplot()
 ```
 
@@ -171,17 +195,22 @@ ggplot(data = penguins,
 ]
 
 .pull-right[
+&lt;/br&gt;
+&lt;/br&gt;
+
 Can stack vertically (with categorical variable on `y`-axis) **or** horizontally (with categorical variable on `x`-axis)
 ]
 
 ---
 
+class: center
+
 .bitlarger[Faceted Histograms] 
 
 
 ```r
-ggplot(data = penguins, 
-       aes(x = bill_length_mm)) + 
+ggplot(data = penguins,
+       mapping = aes(x = bill_length_mm)) + 
   geom_histogram(binwidth = 3) + 
   facet_wrap(~ species)
 ```
@@ -190,12 +219,14 @@ ggplot(data = penguins,
 
 ---
 
+class: center
+
 .bitlarger[Scatterplots]
 
 
 ```r
 ggplot(data = penguins, 
-       aes(y = bill_length_mm, x = bill_depth_mm)) + 
+       mapping = aes(y = bill_length_mm, x = bill_depth_mm)) + 
   geom_point()
 ```
 
@@ -203,7 +234,9 @@ ggplot(data = penguins,
 
 ---
 
-.bitlarger[Multivariate Plots]
+class: middle
+
+.bitlarger[**Multivariate Plots**]
 
 There are two main methods for adding a third (or fourth) variable into a 
 data visualization: 
@@ -220,14 +253,16 @@ data visualization:
 
 ---
 
+class: center
+
 .bitlarger[Colors in Scatterplots]
 
 
 ```r
 ggplot(data = penguins, 
-         aes(y = bill_length_mm, 
-             x = bill_depth_mm, 
-             color = species)) + 
+       mapping = aes(y = bill_length_mm, 
+                     x = bill_depth_mm, 
+                     color = species)) + 
   geom_point()
 ```
 
@@ -235,14 +270,16 @@ ggplot(data = penguins,
 
 ---
 
+class: center
+
 .bitlarger[Colors in Boxplots]
 
 
 ```r
 ggplot(data = penguins, 
-         aes(y = bill_length_mm, 
-             x = species, 
-             color = sex)) + 
+       mapping = aes(y = bill_length_mm, 
+                     x = species, 
+                     color = sex)) + 
   geom_boxplot()
 ```
 
@@ -250,14 +287,16 @@ ggplot(data = penguins,
 
 ---
 
+class: center
+
 .bitlarger[Facets in Scatterplots] 
 
 
 ```r
 ggplot(data = penguins, 
-         aes(y = bill_length_mm, 
-             x = bill_depth_mm, 
-             color = sex)) + 
+       mapping = aes(y = bill_length_mm, 
+                     x = bill_depth_mm, 
+                     color = sex)) + 
   geom_point() + 
   facet_wrap(~ species)
 ```
@@ -266,14 +305,16 @@ ggplot(data = penguins,
 
 ---
 
+class: center
+
 .bitlarger[Facets in Boxplots]
 
 
 ```r
 ggplot(data = penguins, 
-         aes(x = bill_length_mm,
-             y = species,
-             fill = sex)) + 
+       mapping = aes(x = bill_length_mm,
+                     y = species,
+                     fill = sex)) + 
   geom_boxplot(alpha = 0.3) + 
   facet_wrap(~ island)
 ```
@@ -282,7 +323,9 @@ ggplot(data = penguins,
 
 ---
 
-## Your Turn!
+class: center, middle, inverse
+
+.huge[Your Turn!]
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
