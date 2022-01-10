@@ -1,76 +1,87 @@
 ---
-title: "Lab_1 Solutions"
-author: "Kelly Bodwin"
+title: "Lab 1 Solutions"
+author: "Dr. Theobold"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+# RMarkdown Output Options
+
+```{r setup}
+knitr::opts_chunk$set(echo = TRUE, 
+                      fig.align = "center", 
+                      messages = FALSE)
 ```
 
 ## Setup
 
 ```{r load-libraries-data, include = FALSE}
 library(tidyverse)
-    
-cars <- ggplot2::mpg
 ```
     
-## About the dataset
+## Car Dataset
     
 This dataset contains information about the qualities of certain car models made
 in 1999 and 2008.
     
 It has 234 rows and 11 variables.
 
+## Including Plots
+
+```{r pressure, echo=FALSE}
+plot(pressure, 
+     xlab = "Temperature (deg C)", 
+     ylab = "Pressure (mm)")
+```
+
+## Exploring the Cars Dataset
+
 (The plots below are only one option out of many possibilities, of course.)
-    
-    
-## Plot 1: 
+
+### Step 1: Extract the Distances
 
 ```{r}
-cars %>%
-  ggplot(aes(x = class, fill = drv)) +
-  geom_bar(position = "fill") +
-  xlab("Car Type")
+dist <- cars$dist
 ```
 
+### Step 2: Plot the Distribution of Distances
 
-This plot shows us the type of drive train (4 wheel drive, front-wheel drive, or
-rear-wheel drive) for each class of car in this dataset.  We can see that pickup
-trucks are all 4-wheel drive, 2-seaters are all rear-wheel drive, and minivans 
-are all front-wheel drive.  Subcompact cars have the most variety in drive train.
+*Distributions* of a single numerical variable are plotted using histograms or 
+density plots
 
-
-## Plot 2:
+**Option 1**: Using the `hist()` function 
 
 ```{r}
-cars %>%
-  ggplot(aes(x = displ, y = cty)) +
-  geom_point() +
-  xlab("Engine volume") +
-  ylab("Miles per gallon (city)")
+hist(dist, xlab = "Stopping Distance (ft)")
 ```
 
-
-This plot shows the relationship between engine volume ("displacement") and the
-miles per gallon of the car.  We can see that more powerful cars - i.e. those 
-with a larger volume - tend to have a lower fuel efficiency.  The relationship is 
-not linear.
-    
-    
-## Plot 3:
+**Option 2**: Using `ggplot()`
 
 ```{r}
-cars %>%
-  ggplot(aes(x = class, y = cty, fill = class)) +
-  geom_boxplot() +
-  xlab("Car Type") +
-  ylab("Miles per gallon (city)") + 
-  theme(legend.position = "none") 
+dist %>% 
+  as_tibble() %>% 
+  ggplot(mapping = aes(x = value)) + 
+  geom_histogram(binwidth = 10) + 
+  labs(x = "Stopping Distance (ft)")
 ```
 
+## Step 3: Stopping distance and Speed
 
-This plot shows the fuel efficiency (miles per gallon) of each car type.  Larger
-cars like pickups and SUVs get fewer miles per gallon, while smaller cars are more
-efficient.
+**Option 1**: Using the `plot()` function 
+
+```{r}
+plot(x = cars$speed,
+     y = cars$dist, 
+     xlab = "Stopping Distance (ft)", 
+     ylab = "Speed (mph)")
+```
+
+**Option 2**: Using `ggplot()`
+
+```{r}
+cars %>% 
+  ggplot(mapping = aes(x = speed, y = dist)) + 
+  geom_point() + 
+  labs(x = "Stopping Distance (ft)", 
+       y = "Speed (mph)")
+```
+
