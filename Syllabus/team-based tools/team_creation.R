@@ -53,7 +53,7 @@ master_70 <- master %>%
   filter(section == "70")
 
 master_70 %>% 
-  filter(times == "Evenings") %>% 
+  filter(times %in% c("Mornings, Evenings", "Mornings, Afternoons", "Mornings")) %>% 
   View()
 
 
@@ -63,16 +63,16 @@ master_71 <- master %>%
   filter(section == "71")
 
 master_71 %>% 
-  filter(times == "Afternoons") %>% 
+  filter(times %in% c("Afternoons, Evenings", "Afternoons")) %>% 
   View()
 
 
 # SECTION 72
 
-master_71 <- master %>% 
+master_72 <- master %>% 
   filter(section == "72")
 
-master_71 %>% 
-  filter(times == "Afternoons") %>% 
+master_72 %>% 
+  filter(times == "Mornings, Afternoons") %>% 
   View()
 
