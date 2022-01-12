@@ -1,6 +1,6 @@
 ---
 title: "Importing Data with RStudio Projects and the here Package"
-date: "April 8, 2021"
+date: "January 11, 2022"
 author: "Dr. Allison Theobold"
 output:
   xaringan::moon_reader:
@@ -45,4 +45,6 @@ class: inverse
 
 ---
 
-.larger[Your turn!]
+class: center, middle
+
+.huge-text[Your turn!]
