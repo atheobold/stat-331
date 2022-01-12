@@ -16,13 +16,15 @@ library(here)
 
 The Portal Project is a long-term ecological study being conducted near Portal,
 AZ. Since 1977, the site has been used to study the interactions among rodents,
-ants and plants and their respective responses to climate. To study the
+ants, plants, and their respective responses to climate. To study the
 interactions among organisms, we experimentally manipulate access to 24 study
 plots. This study has produced over 100 scientific papers and is one of the
 longest running ecological studies in the U.S.
 
 We will be investigating the animal species diversity and weights found within
-plots at the Portal study site. The dataset is stored as a comma separated value (CSV) file. Each row holds information for a single animal, and the columns represent:
+plots at the Portal study site. The dataset is stored as a comma separated value
+(CSV) file. Each row holds information for a single animal, and the columns
+represent:
 
 | Column           | Description                        |
 |------------------|------------------------------------|
@@ -44,15 +46,14 @@ plots at the Portal study site. The dataset is stored as a comma separated value
 # Reading the Data into R
 
 We have seen in the practice activity that when importing a data 
-frame, the columns that contain characters (i.e., text) are coerced 
-(=converted) into the `factor` data type. We had to set **`stringsAsFactors`** 
-to **`FALSE`** to avoid this hidden argument to convert our data type. 
+frame, the columns that contain characters (i.e., text) can be coerced 
+(=converted) into the `factor` data type. We could set **`stringsAsFactors`** to **`FALSE`** to avoid this hidden argument to convert our data type. 
 
 For this lab we will use the **`readr`** package (from the `tidyverse`) to
-read in the data and avoid having to set **`stringsAsFactors`** to **`FALSE`**
-
-We'll read in our data using the `read_csv()` function instead of the 
-`read.csv()` function. 
+read in the data. We'll read in our data using the `read_csv()` function instead
+of the `read.csv()` function. This function **does not** coerce character
+variables to factors, a behavior that many in the R community feel is
+unappealing.
 
 __1. Using the `read_csv()` function and the **here** package, to write the code necessary to load in the `surveys.csv` dataset.__
 
@@ -71,7 +72,7 @@ dim(surveys)
 ```
 
 
-__3. What types of variables are included in the dataset?__ 
+__3. What are the data types of the variables in the dataset?__ 
 
 There are a mix of numeric, character, and date variables. All of the
 qualitative / categorical variables about each animal (`species_id`, `sex`,
@@ -139,13 +140,13 @@ Despite our best efforts there is still a substantial amount of overplotting
 occurring in our scatterplot. Let's try splitting the dataset into smaller 
 subsets and see if that allows for us to see the trends a bit better. 
 
-__7. Facet your jittered scatterplot by `species_id`.__
+__7. Facet your jittered scatterplot by `species`.__
 
 ```{r, results = 'hold'}
 ggplot(data = surveys, 
        mapping = aes(x = weight, y = hindfoot_length)) +
   geom_jitter(alpha = 0.1) + 
-  facet_wrap(~ species_id)
+  facet_wrap(~ species)
 ```
 
 
@@ -160,11 +161,11 @@ ggplot(data = surveys,
 ```
 
 By adding points to boxplot, we can have a better idea of how many observations
-fall into each genus: 
+fall into each species: 
 
 ```{r, results = 'hold'}
-surveys %>% 
-  ggplot(mapping = aes(x = species, y = weight)) +
+ggplot(data = surveys, 
+       mapping = aes(x = species, y = weight)) +
     geom_jitter(alpha = 0.2, color = "tomato") + 
     geom_boxplot(outlier.shape = NA, alpha = 0.2)  
     # You could also use outlier.alpha = 0
@@ -181,7 +182,7 @@ __9. Inspect the help file for `geom_boxplot()` and see how you can remove the o
 I've outlined some small changes that make **big** differences to plots. One of 
 these changes are better labels for a plot's axes and legend. 
 
-__10. Using the code you created in question 9, modify the x-axis and y-axis labels.__
+__10. Using the code you created in question 8, modify the x-axis and y-axis labels.__
 
 ```{r}
 surveys %>% 
@@ -198,7 +199,7 @@ stacking you would need to use the `coord_flip()` function. **But** the most
 recent update to ggplot2 makes it possible to flip coordinates without an extra
 function. 
 
-__11. Flip the orientation of the boxplots you created in question 9. If you created side-by-side boxplots (stacked horizontally), your boxplots should be stacked vertically. If you had vertically stacked boxplots, you should stack your boxplots horizontally!__ 
+__11. Flip the orientation of your boxplots from question 10. If you created side-by-side boxplots (stacked horizontally), your boxplots should be stacked vertically. If you had vertically stacked boxplots, you should stack your boxplots horizontally!__
 
 ```{r}
 surveys %>% 

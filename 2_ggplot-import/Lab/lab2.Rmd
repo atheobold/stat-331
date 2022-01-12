@@ -44,15 +44,14 @@ plots at the Portal study site. The dataset is stored as a comma separated value
 # Reading the Data into R
 
 We have seen in the practice activity that when importing a data 
-frame, the columns that contain characters (i.e., text) are coerced 
-(=converted) into the `factor` data type. We had to set **`stringsAsFactors`** 
-to **`FALSE`** to avoid this hidden argument to convert our data type. 
+frame, the columns that contain characters (i.e., text) can be coerced 
+(=converted) into the `factor` data type. We could set **`stringsAsFactors`** to **`FALSE`** to avoid this hidden argument to convert our data type. 
 
 For this lab we will use the **`readr`** package (from the `tidyverse`) to
-read in the data and avoid having to set **`stringsAsFactors`** to **`FALSE`**
-
-We'll read in our data using the `read_csv()` function instead of the 
-`read.csv()` function. 
+read in the data. We'll read in our data using the `read_csv()` function instead
+of the `read.csv()` function. This function **does not** coerce character
+variables to factors, a behavior that many in the R community feel is
+unappealing.
 
 __1. Using the `read_csv()` function and the **here** package, to write the code necessary to load in the `surveys.csv` dataset.__
 
@@ -67,7 +66,7 @@ __2. What are the dimensions of these data?__
 see the code you used to address these questions!  -->
 
 
-__3. What types of variables are included in the dataset?__ 
+__3. What are the data types of the variables in the dataset?__ 
 
 
 ## Plotting with **`ggplot2`**
@@ -136,21 +135,29 @@ __8. Create side-by-side boxplots to visualize the distribution of weight within
 ```
 
 By adding points to boxplot, we can have a better idea of how many observations
-fall into each genus. We can do this by adding a `geom_jitter()` layer **on top** 
-of the `geom_boxplot()` layer. 
+fall into each species. We can do this by adding a `geom_jitter()` layer
+**on top** of the `geom_boxplot()` layer. This looks something like:
 
-But there is a problem! You should notice that there are **both** red points 
-and black points. So, some of the observations are being plotted twice! 
+```{r, eval = FALSE}
+ggplot(data = surveys, 
+       mapping = aes(x = weight, y = genus)) + 
+  geom_boxplot() + 
+  geom_jitter(color = "tomato", alpha = 0.1)
+```
+
+But there is a problem! You should notice that in the code above there are
+**both** red points and black points. So, some of the observations are being
+plotted twice! 
 
 __9. Inspect the help file for `geom_boxplot()` and see how you can remove the outliers from being plotted by `geom_boxplot()`. Make this change in the code above!__
 
 
 # Customization
 
-I've outlined some small changes that make **big** differences to plots. One of 
-these changes are better labels for a plot's axes and legend. 
+Some small changes that make **big** differences to plots. One of these changes
+are better labels for a plot's axes and legend. 
 
-__10. Using the code you created in question 9, modify the x-axis and y-axis labels.__
+__10. Using the code you created in question 8, modify the x-axis and y-axis labels to describe what is being plotted. Be sure to include any necessary units!__
 
 ```{r}
 # Code for question 10! 
@@ -163,7 +170,7 @@ stacking you would need to use the `coord_flip()` function. **But** the most
 recent update to ggplot2 makes it possible to flip coordinates without an extra
 function. 
 
-__11. Flip the orientation of the boxplots you created in question 9. If you created side-by-side boxplots (stacked horizontally), your boxplots should be stacked vertically. If you had vertically stacked boxplots, you should stack your boxplots horizontally!__ 
+__11. Flip the orientation of your boxplots from question 10. If you created side-by-side boxplots (stacked horizontally), your boxplots should be stacked vertically. If you had vertically stacked boxplots, you should stack your boxplots horizontally!__ 
 
 ```{r}
 # Code for question 11! 

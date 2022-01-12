@@ -89,5 +89,4 @@ read_csv(here("2_ggplot_import", "Coursework", "Data Import", "Ages_Data", "ages
          # The column types need to be specified as a list() not as a vector!
          # You can find this in the help file for read_csv() in the examples at the bottom!
          )
-
 ```
