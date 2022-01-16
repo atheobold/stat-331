@@ -14,28 +14,7 @@ library(openintro)
 library(forcats)
 ```
 
-Today you will be creating and manipulating vectors, lists, and data frames to
-uncover a top secret message.
-
-Some advice:
-
-* Work with those around you
-
-* If you aren't sure how to make a specific plot or how to customize a plot, 
-look over the *R for Data Science* textbook, all of the plots in this activity 
-are included in the textbook. 
-
-* Google is your friend! If you aren't sure how to accomplish a certain task, 
-type what you are trying to accomplish into Google and see what other people are
-saying. Generally, adding `ggplot` to the end of your search will help make your
-search results more relevant! 
-
-* Finally, don't forget to use your team members and course Discord as resources. 
-
-
 # Part One
-
-We will be exploring the `nycflights` data from the **openintro** package. 
 
 1. Install and load the **openintro** package. 
 
@@ -65,7 +44,8 @@ character data type.
 
 ```{r}
 nycflights <- nycflights %>% 
-  mutate(month = as.character(month))
+  mutate(month = as.character(month)
+         )
 
 ```
 
@@ -74,8 +54,10 @@ nycflights <- nycflights %>%
 see the **shape** of the distribution of the departure delays. 
 
 ```{r}
-ggplot(data = nycflights) + 
-  geom_boxplot(mapping = aes(y = dep_delay, x = month)) 
+ggplot(data = nycflights, 
+       mapping = aes(y = dep_delay, x = month)
+       ) + 
+  geom_boxplot() 
 
 ```
 
@@ -83,13 +65,15 @@ ggplot(data = nycflights) +
 
 ```{r}
 # Option 1 -- facets
-ggplot(data = nycflights) + 
-  geom_boxplot(mapping = aes(y = dep_delay, x = month)) +
+ggplot(data = nycflights, 
+       mapping = aes(y = dep_delay, x = month)) + 
+  geom_boxplot() + 
   facet_wrap(~ origin)
 
 # Option 2 -- color
-ggplot(data = nycflights) + 
-  geom_boxplot(mapping = aes(y = dep_delay, x = month, fill = origin)) 
+ggplot(data = nycflights, 
+       mapping = aes(y = dep_delay, x = month, fill = origin)) + 
+  geom_boxplot()
 
 ```
 
