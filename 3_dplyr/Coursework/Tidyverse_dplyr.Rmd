@@ -75,7 +75,7 @@ When you are finished with the readings and videos, you should be able to...
 
 `r emo::ji("play button")` [Required Video: Why do I get this message when I load the tidyverse? -- 8 minutes ](http://somup.com/crf6q4b920)
 
-$\hspace{0.25in}$ `r emo::ji("link")` [Link to **All** Presentation Slides](https://youtu.be/Jn-s_6lDS4A)
+$\hspace{0.25in}$ `r emo::ji("link")` [Link to **All** Presentation Slides](https://app.box.com/s/rw3r1sytyyvuipj2gtn2uxiwl71eov1j)
 
 ---
 
@@ -204,7 +204,7 @@ penguins %>%
 ```{r, eval = FALSE}
 
 # a
-arrange(avg_mass_flipper_ratioo)
+arrange(avg_mass_flipper_ratio)
 
 
 # b
@@ -216,12 +216,12 @@ penguins
 
 # d
 summarize(
-  avg_mass_flipper_ratioo = median(mass_flipper_ratio)
+  med_mass_flipper_ratio = median(mass_flipper_ratio)
 )
   
 # e
 mutate(
-  mass_flipper_ratio = body_mass_g/flipper_length_mm
+  mass_flipper_ratio = body_mass_g / flipper_length_mm
 )
   
 ```
@@ -237,12 +237,13 @@ mean(penguins[penguins$species == "Adelie", "body_mass_g"])
 
 <!-- Mean of Adelie species body mass!  -->
 
-For each of the following `dplyr` pipelines, indicate if it
+For each of the following `dplyr` pipelines, indicate which of the following is 
+true: 
 
-(i) Returns the exact same thing as the (above) base R code;
-(ii) Returns the correct information, but the wrong object type;
-(iii) Returns incorrect information; or
-(iv) Returns an error
+(i) It returns the exact same thing as the (above) base R code
+(ii) It returns the correct information, but the wrong object type
+(iii) It returns incorrect information
+(iv) It returns an error
 
 ```{r, eval = FALSE}
 # a
