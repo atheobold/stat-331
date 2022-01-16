@@ -92,7 +92,8 @@ Adjust the appropriate variables to be factors.
 # Notice these changes WERE NOT saved back into the colleges_clean dataset!
 # We needed to add a <- and put them back in the colleges_clean data
 
-colleges_clean <- colleges_clean %>% mutate(
+colleges_clean <- colleges_clean %>% 
+  mutate(
     CONTROL = as.factor(CONTROL),
     REGION = as.factor(REGION)
 )
@@ -105,7 +106,6 @@ colleges_clean <- colleges_clean %>%
   # To add a variable you need the mutate() function!
     mutate(TUITION_DIFF = TUITIONFEE_OUT - TUITIONFEE_IN)
 ```
-
 
 Remove every row with missing data.  
 
@@ -121,7 +121,7 @@ colleges_clean <- colleges_clean %>%
 
 Lastly, notice that each of these steps started with 
 
-```{r, eval = FALSE}
+```
 colleges_clean <- colleges_clean %>% ...
 ```
 
@@ -194,17 +194,20 @@ colleges_clean %>%
          ADM_RATE > region_median,
          TUITION_DIFF != 0) %>%
   mutate(
-    SAT_even = SAT_AVG %% 2 != 0
+    SAT_odd = SAT_AVG %% 2 != 0
   ) %>%
-  filter(SAT_even,
+  filter(SAT_odd == TRUE,
          STABBR != "ID") %>%
   mutate(
     freshman = as.numeric(UGDS) / 4, 
     applications = freshman / ADM_RATE
   ) %>%
   filter(applications < 1000, 
-         STABBR != "MT") 
+         STABBR != "MT") %>% 
+  DT::datatable()
+
 ```
+
 
 
 ![Fort Lewis College with Purgatory Ski Area](fort_lewis.jpg)   

@@ -66,21 +66,26 @@ The whole of the internet is at your disposal!  Use it early, use it often.
 
 Some tricks:
 
-* Copy-paste the exact error message into Google. Chances are, somebody else had a similar problem and got a similar message.
+* Copy-paste the exact error message into Google. Chances are, somebody else had
+a similar problem and got a similar message.
 
-* Include package names in your search terms.  For example, "bar plot in ggplot" is a better search than "bar plot in R".
+* Include package names in your search terms.  For example, "bar plot in ggplot"
+is a better search than "bar plot in R".
 
 
 ### Part One: Data import and cleaning
 
-This section will clean today's dataset, so that you can use it more easily in Part Two.
+This section will clean today's dataset, so that you can use it more easily in
+Part Two.
 
 
 #### Data download & packages
 
 First, we declare our package dependencies and load the data.
 
-(Note that the data loading function `read_csv` will give you an outpouring of helpful information about the dataset.  If you do not see the word "error", there is nothing to be concerned about.)
+(Note that the data loading function `read_csv` will give you an outpouring of
+helpful information about the dataset.  If you do not see the word "error",
+there is nothing to be concerned about.)
 
 ```{r setup, message = FALSE, warning = FALSE}
 library(tidyverse)
@@ -181,6 +186,12 @@ __Step 8:__ Combine your (fixed) code chunks into a **single** code chunk that
 carries out all of the steps necessary to clean the data.
 
 **Note:** You **should not** have multiple calls to the `mutate()` function! 
+
+```{r}
+# Code combining ALL of your previous steps into ONE pipeline
+
+
+```
 
 
 ## Part Two:  Identify the mystery college
