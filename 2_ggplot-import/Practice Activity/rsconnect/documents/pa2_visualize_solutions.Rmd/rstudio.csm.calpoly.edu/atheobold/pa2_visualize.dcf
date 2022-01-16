@@ -5,8 +5,9 @@ account: atheobold
 server: rstudio.csm.calpoly.edu
 hostUrl: https://rstudio.csm.calpoly.edu/__api__
 appId: 259
-bundleId: 539
-url: https://rstudio.csm.calpoly.edu/content/259/
-when: 1617579785.03119
+bundleId: 869
+url: https://rstudio.csm.calpoly.edu/pa2_solutions/
+when: 1642351174.52578
+lastSyncTime: 1642351174.52578
 asMultiple: FALSE
 asStatic: TRUE
