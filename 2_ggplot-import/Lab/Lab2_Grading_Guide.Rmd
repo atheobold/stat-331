@@ -27,7 +27,7 @@ output: html_document
 
 **4** 
 
-- Correct dimensions are *written* in document -- 30,4063 rows and 15 columns
+- Correct dimensions are *written* in document -- 30,463 rows and 15 columns
 - Code to find dimensions is provided (e.g., `dim()`, `glimpse()`, `nrow()`, 
 `ncol()`, `str()`)
 
@@ -136,12 +136,12 @@ ggplot(data = surveys,
 **4** 
 
 - adds a `facet_wrap()` layer
-- facets by (`~`) `species` 
+- facets by (`~`) `species_id` 
 
 **3** 
 
 - adds a `facet_wrap()` layer
-- facets by (`~`) `species_id`
+- facets by (`~`) `species`
 
 **Redo if above criteria is not met**
 
