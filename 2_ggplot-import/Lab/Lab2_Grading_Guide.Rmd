@@ -5,6 +5,10 @@ output: html_document
 
 </br>
 
+**In general, if there is no response to a question a score of 0 is awarded.**
+
+</br>
+
 ## Question 1 -- Reading in the Data
 
 **4** 
@@ -55,6 +59,9 @@ output: html_document
 - Code to find data types is provided (e.g., `str()`, `glimpse()`)
 
 **Redo if above criteria is not met**
+
+**0:** If the code uses `sapply(surveys, typeof)` or `sapply(surveys, class)`
+without a reference to an external resource (e.g., [https://stackoverflow.com/questions/21125222/determine-the-data-types-of-a-data-frames-columns](Stack Overflow)). 
 
 </br>
 
