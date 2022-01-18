@@ -25,26 +25,68 @@ class: center, middle, inverse, title-slide
 
 
 
-class: inverse 
+class: inverse, center, middle
 
-&lt;/br&gt;
-&lt;/br&gt;
-
+.large[
 &gt; Programs must be written for people to read, and only incidentally for 
 &gt; machines to execute.
 &gt;
-&gt;— Hal Abelson
-
-&lt;/br&gt;
-&lt;/br&gt;
+&gt; — Hal Abelson
+]
 
 ---
+
+class: center 
+
+.larger[A Vignette]
+
+--
+
+`subset()`
+
+&gt; Return subsets of vectors, matrices or data frames which
+&gt; meet conditions.
+
+--
+
+- `subset` argument states how the **rows** of the dataframe should be filtered
+
+
+```r
+subset(surveys, species_id == "DS")
+```
+
+--
+
+- `select` argument states what **columns** should be selected from the
+dataframe
+
+
+```r
+subset(surveys, species_id == "DS", select = c(weight, hindfoot_length))
+```
+
+---
+
+class: inverse, center, middle
+
+.huge[We want functions that accomplish **one** task!]
+
+---
+
+class: inverse, center, middle
+
+.huge[We want functions with **intuitive** names!]
+
+&lt;!-- the tidyverse is fundamentally human centred --&gt;
+
+---
+
 &lt;center&gt;
-.bitlarger[Data Wrangling Verbs]
+.larger[Data Wrangling Verbs]
 &lt;/center&gt;
 
 .pull-left[
-&lt;/br&gt;
 &lt;/br&gt;
 
 &lt;img src="images/dplyr_hex.jpeg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
@@ -71,23 +113,9 @@ class: inverse
 
 ---
 
-.pull-left-wide[
-
 .larger[Brainstorm definitions for each verb]
 
-&lt;!-- 1. selects columns from the dataset --&gt;
-&lt;!-- 2. filters columns from the dataset --&gt;
-&lt;!-- 3. prints the top of the dataset --&gt;
-&lt;!-- 4. creates data summaries --&gt;
-&lt;!-- 5. summarizes every variable in the dataset --&gt;
-&lt;!-- 6. selects rows from the dataset --&gt;
-&lt;!-- 7. filters rows from the dataset --&gt;
-&lt;!-- 8. adds new variables to the dataset --&gt;
-&lt;!-- 9. modifies the variables in the dataset --&gt;
-&lt;!-- 10. subsets a group from the dataset --&gt;
-&lt;!-- 11. organizes the dataset in a specific order --&gt;
-&lt;!-- 12. organizes the dataset into groups  --&gt;
-
+.pull-left-narrow[
 - `select()`
 
 - `filter()`
@@ -99,7 +127,23 @@ class: inverse
 - `arrange()`
 
 - `group_by()`
+]
 
+--
+
+.pull-right-wide[
+
+- selects **columns** from a dataset
+
+- filters **rows** from a dataset
+
+- modifies the **variables** (columns) in a dataset
+
+- creates summary statistics based on **variables** in a dataset
+
+- organizes a dataset based on values of a **variable**
+
+- creates groups from a **variable** in a dataset
 ]
 
 ---
@@ -134,77 +178,79 @@ class: center
  &lt;/thead&gt;
 &lt;tbody&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; el-Jalil, Shaimaaa &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Seerley, Ashley &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Biology &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Nguyen, Emily &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; Liberal Studies &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Smits-Kagoshima, Jade &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Business &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Little, Ryan &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Business &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Williams, Nicole &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Business &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Jones Jr, Deverrick &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Political Science &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Looper, Brent &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Clifton, Garan &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Liberal Studies &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Ertelt, Jun Raziel &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; Biology &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Martinez, Anton &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Hopkins, Ashley &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Business &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Bland, Tatayana &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Business &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Nguyen, Jennifer &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; Chemistry &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; el-Muhammed, Ghaazi &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Biology &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Pineda, Che &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Liberal Studies &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Franklin, Jamal &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Williams, Kijana &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; Political Science &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Leon, Debbie &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Political Science &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Cohen, Kali &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Business &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+
+.large[**Want**: Department totals for number of CR / NC courses]
 
 ---
 
@@ -221,18 +267,18 @@ class: center, middle
 
 ## # A tibble: 10 × 6
 ## # Groups:   name [10]
-##    name                  department        CRNC_f20 CRNC_w21 CRNC_s21 total
-##    &lt;chr&gt;                 &lt;chr&gt;                &lt;int&gt;    &lt;int&gt;    &lt;int&gt; &lt;int&gt;
-##  1 Little, Ryan          Business                 0        0        2     2
-##  2 Smits-Kagoshima, Jade Business                 1        0        0     1
-##  3 Williams, Nicole      Business                 1        1        2     4
-##  4 el-Jalil, Shaimaaa    Liberal Studies          2        1        1     4
-##  5 Pineda, Che           Liberal Studies          0        0        0     0
-##  6 Martinez, Anton       Chemistry                1        2        1     4
-##  7 Looper, Brent         Biology                  1        0        1     2
-##  8 el-Muhammed, Ghaazi   Biology                  0        1        0     1
-##  9 Leon, Debbie          Political Science        1        0        0     1
-## 10 Franklin, Jamal       Political Science        0        0        1     1
+##    name                department        CRNC_f20 CRNC_w21 CRNC_s21 total
+##    &lt;chr&gt;               &lt;chr&gt;                &lt;int&gt;    &lt;int&gt;    &lt;int&gt; &lt;int&gt;
+##  1 Hopkins, Ashley     Business                 2        0        0     2
+##  2 Cohen, Kali         Business                 0        1        1     2
+##  3 Bland, Tatayana     Business                 1        2        0     3
+##  4 Clifton, Garan      Liberal Studies          1        2        0     3
+##  5 Nguyen, Emily       Liberal Studies          1        0        2     3
+##  6 Nguyen, Jennifer    Chemistry                0        2        1     3
+##  7 Ertelt, Jun Raziel  Biology                  1        1        0     2
+##  8 Seerley, Ashley     Biology                  0        1        3     4
+##  9 Williams, Kijana    Political Science        2        0        0     2
+## 10 Jones Jr, Deverrick Political Science        0        1        2     3
 
 ```
 
@@ -252,11 +298,11 @@ class: center, middle
 ## # A tibble: 5 × 2
 ##   department        final_total
 ##   &lt;chr&gt;                   &lt;int&gt;
-## 1 Biology                     3
+## 1 Biology                     6
 ## 2 Business                    7
-## 3 Chemistry                   4
-## 4 Liberal Studies             4
-## 5 Political Science           2
+## 3 Chemistry                   3
+## 4 Liberal Studies             6
+## 5 Political Science           5
 
 ```
 
@@ -277,10 +323,10 @@ class: center, middle
 ##   department        final_total
 ##   &lt;chr&gt;                   &lt;int&gt;
 ## 1 Business                    7
-## 2 Chemistry                   4
-## 3 Liberal Studies             4
-## 4 Biology                     3
-## 5 Political Science           2
+## 2 Biology                     6
+## 3 Liberal Studies             6
+## 4 Political Science           5
+## 5 Chemistry                   3
 
 ```
 
@@ -292,6 +338,30 @@ class: middle
 
 Often you are interested in **one** specific summary statistic!
 
+.pull-left[
+
+```r
+students %&gt;% 
+  group_by(department) %&gt;% 
+  count() 
+```
+
+```
+## # A tibble: 5 × 2
+## # Groups:   department [5]
+##   department            n
+##   &lt;chr&gt;             &lt;int&gt;
+## 1 Biology               2
+## 2 Business              3
+## 3 Chemistry             1
+## 4 Liberal Studies       2
+## 5 Political Science     2
+```
+]
+
+--
+
+.pull-right[
 
 ```r
 students %&gt;% 
@@ -307,6 +377,7 @@ students %&gt;%
 ##   &lt;chr&gt;             &lt;int&gt;
 ## 1 Political Science     2
 ```
+]
 
 ---
 

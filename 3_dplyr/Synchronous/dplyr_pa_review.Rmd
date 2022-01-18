@@ -43,26 +43,66 @@ style_duo_accent(
 )
 ```
 
-class: inverse 
+class: inverse, center, middle
 
-</br>
-</br>
-
+.large[
 > Programs must be written for people to read, and only incidentally for 
 > machines to execute.
 >
->— Hal Abelson
-
-</br>
-</br>
+> — Hal Abelson
+]
 
 ---
+
+class: center 
+
+.larger[A Vignette]
+
+--
+
+`subset()`
+
+> Return subsets of vectors, matrices or data frames which
+> meet conditions.
+
+--
+
+- `subset` argument states how the **rows** of the dataframe should be filtered
+
+```{r, eval = FALSE}
+subset(surveys, species_id == "DS")
+```
+
+--
+
+- `select` argument states what **columns** should be selected from the
+dataframe
+
+```{r, eval = FALSE}
+subset(surveys, species_id == "DS", select = c(weight, hindfoot_length))
+```
+
+---
+
+class: inverse, center, middle
+
+.huge[We want functions that accomplish **one** task!]
+
+---
+
+class: inverse, center, middle
+
+.huge[We want functions with **intuitive** names!]
+
+<!-- the tidyverse is fundamentally human centred -->
+
+---
+
 <center>
-.bitlarger[Data Wrangling Verbs]
+.larger[Data Wrangling Verbs]
 </center>
 
 .pull-left[
-</br>
 </br>
 
 ```{r, echo = FALSE, out.height = "70%", out.width = "70%"}
@@ -91,23 +131,9 @@ knitr::include_graphics("images/dplyr_hex.jpeg")
 
 ---
 
-.pull-left-wide[
-
 .larger[Brainstorm definitions for each verb]
 
-<!-- 1. selects columns from the dataset -->
-<!-- 2. filters columns from the dataset -->
-<!-- 3. prints the top of the dataset -->
-<!-- 4. creates data summaries -->
-<!-- 5. summarizes every variable in the dataset -->
-<!-- 6. selects rows from the dataset -->
-<!-- 7. filters rows from the dataset -->
-<!-- 8. adds new variables to the dataset -->
-<!-- 9. modifies the variables in the dataset -->
-<!-- 10. subsets a group from the dataset -->
-<!-- 11. organizes the dataset in a specific order -->
-<!-- 12. organizes the dataset into groups  -->
-
+.pull-left-narrow[
 - `select()`
 
 - `filter()`
@@ -119,7 +145,23 @@ knitr::include_graphics("images/dplyr_hex.jpeg")
 - `arrange()`
 
 - `group_by()`
+]
 
+--
+
+.pull-right-wide[
+
+- selects **columns** from a dataset
+
+- filters **rows** from a dataset
+
+- modifies the **variables** (columns) in a dataset
+
+- creates summary statistics based on **variables** in a dataset
+
+- organizes a dataset based on values of a **variable**
+
+- creates groups from a **variable** in a dataset
 ]
 
 ---
@@ -158,6 +200,8 @@ students <- tibble(name = randomNames(n = 10),
 knitr::kable(slice_sample(students, n = 10)) %>% 
   kableExtra::kable_styling()
 ```
+
+.large[**Want**: Department totals for number of CR / NC courses]
 
 ---
 
@@ -229,12 +273,24 @@ class: middle
 
 Often you are interested in **one** specific summary statistic!
 
+.pull-left[
+```{r}
+students %>% 
+  group_by(department) %>% 
+  count() 
+```
+]
+
+--
+
+.pull-right[
 ```{r}
 students %>% 
   group_by(department) %>% 
   count() %>% 
   filter(department == "Political Science")
 ```
+]
 
 ---
 
