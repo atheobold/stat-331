@@ -1,6 +1,6 @@
 ---
 title: "Recap of Data Wrangling with dplyr"
-date: "April 13, 2021"
+date: "January 18, 2022"
 author: "Dr. Allison Theobold"
 output:
   xaringan::moon_reader:
@@ -30,6 +30,7 @@ library(tidyverse)
 library(flair)
 library(ggridges)
 library(gridExtra)
+library(randomNames)
 
 
 style_duo_accent(
@@ -106,8 +107,6 @@ knitr::include_graphics("images/dplyr_hex.jpeg")
 <!-- 10. subsets a group from the dataset -->
 <!-- 11. organizes the dataset in a specific order -->
 <!-- 12. organizes the dataset into groups  -->
-]
-.pull-right-narrow[
 
 - `select()`
 
@@ -141,6 +140,89 @@ __What order would you use to accomplish this goal?__
 
 ---
 
+class: center
+
+```{r, echo = FALSE}
+students <- tibble(name = randomNames(n = 10), 
+                   department = c(rep("Business", 3), 
+                                  rep("Liberal Studies", 2),
+                                  "Chemistry",
+                                  rep("Biology", 2), 
+                                  rep("Political Science", 2)
+                                  ), 
+                   CRNC_f20 = rbinom(10, size = 5, prob = 0.2),
+                   CRNC_w21 = rbinom(10, size = 5, prob = 0.2),
+                   CRNC_s21 = rbinom(10, size = 5, prob = 0.2)
+                   )
+
+knitr::kable(slice_sample(students, n = 10)) %>% 
+  kableExtra::kable_styling()
+```
+
+---
+
+class: center, middle
+
+.large[Step 1: Get totals for each student]
+
+```{r name-totals, echo = FALSE, eval = FALSE}
+students %>% 
+  group_by(name) %>% 
+  mutate(total = sum(CRNC_f20, CRNC_w21, CRNC_s21)
+         ) 
+
+```
+
+```{r, echo = FALSE}
+decorate_chunk("name-totals", eval = TRUE) %>% 
+  flair(pattern = "group_by(name)", color = "green")
+```
+
+---
+
+class: center, middle
+
+.large[Step 2: Get department totals]
+
+```{r dept-totals, echo = FALSE, eval = FALSE}
+students %>% 
+  group_by(name) %>% 
+  mutate(total = sum(CRNC_f20, CRNC_w21, CRNC_s21)
+         ) %>% 
+  group_by(department) %>% 
+  summarize(final_total = sum(total)
+            )
+```
+
+```{r, echo = FALSE}
+decorate_chunk("dept-totals", eval = TRUE) %>% 
+  flair(pattern = "group_by(department)", color = "blue")
+```
+
+---
+
+class: center, middle
+
+.large[Step 3: Arrange the totals]
+
+```{r arrange, echo = FALSE, eval = FALSE}
+students %>% 
+  group_by(name) %>% 
+  mutate(total = sum(CRNC_f20, CRNC_w21, CRNC_s21)
+         ) %>% 
+  group_by(department) %>% 
+  summarize(final_total = sum(total)
+            ) %>% 
+  arrange(desc(final_total))
+```
+
+```{r, echo = FALSE}
+decorate_chunk("arrange", eval = TRUE) %>% 
+  flair(pattern = "arrange", color = "turquoise")
+```
+
+---
+
 class: middle
 
 .larger[Getting Specific]
@@ -148,10 +230,10 @@ class: middle
 Often you are interested in **one** specific summary statistic!
 
 ```{r}
-starwars %>% 
-  group_by(homeworld) %>% 
-  summarize(mean_height = mean(height)) %>% 
-  filter(homeworld == "Tatooine")
+students %>% 
+  group_by(department) %>% 
+  count() %>% 
+  filter(department == "Political Science")
 ```
 
 ---
@@ -165,10 +247,10 @@ class: middle
 - Extracts entries from dataframes
 
 ```{r}
-starwars %>% 
-  group_by(homeworld) %>% 
-  summarize(mean_height = mean(height)) %>% 
-  filter(homeworld == "Tatooine") %>% 
+students %>% 
+  group_by(department) %>% 
+  count() %>% 
+  filter(department == "Political Science") %>% 
   pull()
 ```
 
