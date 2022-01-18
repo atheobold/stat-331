@@ -117,7 +117,7 @@ Despite our best efforts there is still a substantial amount of overplotting
 occurring in our scatterplot. Let's try splitting the dataset into smaller 
 subsets and see if that allows for us to see the trends a bit better. 
 
-__7. Facet your jittered scatterplot by `species_id`.__
+__7. Facet your jittered scatterplot by `species`.__
 
 ```{r}
 # Code for question 7

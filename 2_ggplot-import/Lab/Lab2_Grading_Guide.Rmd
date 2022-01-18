@@ -1,0 +1,231 @@
+---
+title: "Lab 2 Grading Guide"
+output: html_document
+---
+
+</br>
+
+**In general, if there is no response to a question a score of 0 is awarded.**
+
+</br>
+
+## Question 1 -- Reading in the Data
+
+**4** 
+
+- Read in data with `here()` and `read_csv()` or `read.csv()`
+
+**Redo if don’t use `here()` to specify path**
+
+</br>
+
+***
+
+</br>
+
+## Question 2 -- Dimensions of the Data
+
+**4** 
+
+- Correct dimensions are *written* in document -- 30,463 rows and 15 columns
+- Code to find dimensions is provided (e.g., `dim()`, `glimpse()`, `nrow()`, 
+`ncol()`, `str()`)
+
+**3** 
+
+- Correct dimensions are *written* in document -- 30,4063 rows and 15 columns
+- Code to find dimensions is provided (e.g., `dim()`, `glimpse()`, `nrow()`, 
+`ncol()`, `str()`)
+- Code previewing the **entire** dataset is included (e.g., `nycflights`)
+
+**Redo if no code is provided**
+
+</br>
+
+***
+
+</br>
+
+## Question 3 -- Data Types
+
+**4**
+
+- Correct data types provided (double, character, date) 
+- Code to find data types is provided (e.g., `str()`, `glimpse()`)
+
+**3** 
+
+- `numeric` is stated instead of `double` data type
+- Code to find data types is provided (e.g., `str()`, `glimpse()`)
+
+**Redo if above criteria is not met**
+
+**0:** If the code uses `sapply(surveys, typeof)` or `sapply(surveys, class)`
+without a reference to an external resource (e.g., [https://stackoverflow.com/questions/21125222/determine-the-data-types-of-a-data-frames-columns](Stack Overflow)). 
+
+</br>
+
+***
+
+</br>
+
+## Question 4 -- Scatterplot
+
+**4**
+
+- Uses `ggplot()` to create a scatterplot
+- `weight` is mapped to `x`
+- `hindfoot_length` is mapped to `y`
+- `geom_point()` or `geom_jitter()` is used to plot points
+
+```
+ggplot(data = surveys,
+       mapping = aes(x = weight, y = hindfoot_length)) +
+    geom_point()
+```
+
+**3** 
+
+- `weight` is mapped to `y`
+- `hindfoot_length` is mapped to `x`
+
+**Redo if above criteria is not met**
+
+</br>
+
+***
+
+</br>
+
+## Question 5 -- Transparency
+
+**4**
+
+- `alpha` value is specified inside of `geom_point()`
+
+**Redo is above criteria not met**
+
+</br>
+
+***
+
+</br>
+
+## Question 6 -- Jittering
+
+**4** 
+
+- `geom_jitter()` is used instead of `geom_point()`
+- `alpha` value from Question 5 is retained
+
+**3** 
+
+- `geom_jitter()` is used instead of `geom_point()`
+- `alpha` value from Question 5 *is not* retained
+
+**Redo if above criteria is not met**
+
+</br>
+
+***
+
+</br>
+
+## Question 7 -- Faceting
+
+**4** 
+
+- adds a `facet_wrap()` layer
+- facets by (`~`) `species_id` 
+
+**3** 
+
+- adds a `facet_wrap()` layer
+- facets by (`~`) `species`
+
+**Redo if above criteria is not met**
+
+</br>
+
+***
+
+</br>
+
+## Question 8 -- Side-by-Side Boxplots
+
+**4** 
+
+- Uses `ggplot()` to create side-by-side boxplots
+- `weight` and `species` are assigned to `x` or `y`
+- `geom_boxplot()` is used to plot points
+
+```
+ggplot(data = surveys, 
+       mapping = aes(x = species, y = weight)) +
+    geom_boxplot()
+```
+
+**3** 
+
+- Uses `species_id` instead of `species`
+
+**Redo if above criteria is not met**
+
+Notes:
+
+- Can use either horizontal or vertical orientation for boxplots!
+- Can add a `geom_jitter()` layer -- not required but nice!
+
+</br>
+
+***
+
+</br>
+
+## Question 9 -- Points over Boxplots
+
+**4** 
+
+- Modifies provided code
+- Adds either `outlier.shape = NA` or `outlier.alpha = 0` to `geom_boxplot()`
+
+**Redo if above criteria is not met**
+
+</br>
+
+***
+
+</br>
+
+## Question 10 -- Plot Labels
+
+**4** 
+
+- Uses `labs()` to change both x- and y-axis labels
+- `weight` axis label must include grams as unit of measure
+
+**3** 
+
+- Change both axis labels but don’t use units for `weight`
+
+**Redo if above criteria is not met** 
+
+</br>
+
+***
+
+</br>
+
+## Question 11 -- Changing Orientation
+
+**Scored based on Problem 8**
+
+**4**
+
+- Swap `x` and `y` aesthetics from Problem 8
+
+**3** 
+
+- Uses `coord_flip()` to swap aesthetics from Problem 9 
+
+**Redo if above criteria is not met**
