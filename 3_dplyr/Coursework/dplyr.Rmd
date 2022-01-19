@@ -232,7 +232,7 @@ Consider the base R code below.
 
 
 ```{r, eval = FALSE}
-mean(penguins[penguins$species == "Adelie", "body_mass_g"])
+mean(penguins[penguins$species == "Adelie", ]$body_mass_g)
 ```
 
 <!-- Mean of Adelie species body mass!  -->

@@ -260,7 +260,7 @@ a.sourceLine {
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p><strong>Question 2:</strong></p>
 <p>Consider the base R code below.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(penguins[penguins<span class="sc">$</span>species <span class="sc">==</span> <span class="st">&quot;Adelie&quot;</span>, <span class="st">&quot;body_mass_g&quot;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(penguins[penguins<span class="sc">$</span>species <span class="sc">==</span> <span class="st">&quot;Adelie&quot;</span>, ]<span class="sc">$</span>body_mass_g)</span></code></pre></div>
 <!-- Mean of Adelie species body mass!  -->
 <p>For each of the following <code>dplyr</code> pipelines, indicate which of the following is true:</p>
 <ol style="list-style-type: lower-roman">
