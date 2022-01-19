@@ -51,11 +51,15 @@ class: middle
 
 - Unilaterally removes **any** row with a missing value for **any** variable
 
+--
+
+- **But** you can specify what columns it should look at for missing values!
+
 ---
 
 .larger[Summarizing Frequencies]
 
-`count()` -- counts the values of one or more variables
+`count()` -- counts the values of one or more **categorical** variables
 
 .pull-left[
 ```{r, eval = FALSE}

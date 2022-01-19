@@ -35,11 +35,15 @@ class: middle
 
 - Unilaterally removes **any** row with a missing value for **any** variable
 
+--
+
+- **But** you can specify what columns it should look at for missing values!
+
 ---
 
 .larger[Summarizing Frequencies]
 
-`count()` -- counts the values of one or more variables
+`count()` -- counts the values of one or more **categorical** variables
 
 .pull-left[
 
@@ -56,7 +60,7 @@ starwars %&gt;%
 .pull-right[
 
 ```
-## # A tibble: 49 x 2
+## # A tibble: 49 × 2
 ##    homeworld     n
 ##    &lt;chr&gt;     &lt;int&gt;
 ##  1 Naboo        11
@@ -69,7 +73,7 @@ starwars %&gt;%
 ##  8 Kashyyyk      2
 ##  9 Mirial        2
 ## 10 Ryloth        2
-## # ... with 39 more rows
+## # … with 39 more rows
 ```
 
 ]
@@ -163,7 +167,7 @@ starwars %&gt;%
 &lt;/br&gt;
 
 ```
-## # A tibble: 1 x 2
+## # A tibble: 1 × 2
 ##   height  mass
 ##    &lt;dbl&gt; &lt;dbl&gt;
 ## 1   174.  97.3
@@ -174,7 +178,7 @@ starwars %&gt;%
 
 
 ```
-## # A tibble: 1 x 3
+## # A tibble: 1 × 3
 ##   height  mass birth_year
 ##    &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
 ## 1   174.  97.3       87.6
