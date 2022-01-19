@@ -1,5 +1,5 @@
 ---
-title: "Lab 3: HipHop Lyrics"
+title: "Lab 3: Hip-Hop Lyrics"
 author: ""
 output:
   prettydoc::html_pretty:
@@ -18,22 +18,27 @@ knitr::opts_chunk$set(fig.width=12, fig.height=8, fig.path='Figs/',
 
 Please submit an HTML document created using R Markdown.
 
-* The first chunk of your R Markdown document should be to set the *global chunk options*.
+* The first chunk of your R Markdown document should be to set the
+*global chunk options*.
 
-* The second chunk of your R Markdown document should be to *declare your libraries* (probably only `tidyverse` for now).
+* The second chunk of your R Markdown document should be to
+*declare your libraries* (probably only `tidyverse` for now).
 
 * Make sure you address **all the questions** in these instructions.
 
-* Even if a question does not say "write code," **you should write code for your answer!**
+* If a question requires **any** type of calculation, 
+**you should provide code for your answer!**
 
 * I have provided hints about functions that might be useful to you.  You are
 **not required** to use these functions.
 
 * You may have to Google to solve some of these!
 
-* Be sure to **save** your work regularly (*Ctrl/Cmd+S* or *File > Save* or the floppy disk icon)
+* Be sure to **save** your work regularly (*Ctrl/Cmd+S* or *File > Save* or the
+floppy disk icon)
 
-* Be sure to **knit** your file every so often, to check for errors and make sure it looks nice.
+* Be sure to **knit** your file every so often, to check for errors and make
+sure it looks nice.
 
     + Make your R Markdown document does not contain `View(dataset)` or `install.packages("package")`, both of these will prevent knitting.
     
@@ -49,7 +54,15 @@ Please submit an HTML document created using R Markdown.
 
 ## The dataset
 
-The data set "hiphop" contains results from a study conducted by a linguist at the University of Minnesota.  The researcher was interested in predicting musical taste based on familiarity with African American English (AAE).  168 subjects participated in the study, and each was asked to define 64 different AAE terms.  The definitions given were used to create a "familiarity" score for each subject for each term.  This score quantifies how well the subject knew the term on a scale of 1-5 (1 = not at all, 5 = very well).  Before tackling the problems, **study the information on the following website**, which includes a description of each variable:
+The data set "hiphop" contains results from a study conducted by a linguist at
+the University of Minnesota.  The researcher was interested in predicting
+musical taste based on familiarity with African American English (AAE).  168
+subjects participated in the study, and each was asked to define 64 different
+AAE terms.  The definitions given were used to create a "familiarity" score for
+each subject for each term.  This score quantifies how well the subject knew the
+term on a scale of 1-5 (1 = not at all, 5 = very well).  Before tackling the
+problems, **study the information on the following website**, which includes a
+description of each variable:
 
 [http://conservancy.umn.edu/bitstream/handle/11299/116327/5/explanationAAEHiphopChesley.txt](http://conservancy.umn.edu/bitstream/handle/11299/116327/5/explanationAAEHiphopChesley.txt)
 
@@ -89,7 +102,7 @@ missing data.
 
 #### 5. 
 
-How many unique AAVE words were studied in this dataset?
+How many unique AAE words were studied in this dataset?
 
 Helpful functions: `distinct()`, `count()`
 
