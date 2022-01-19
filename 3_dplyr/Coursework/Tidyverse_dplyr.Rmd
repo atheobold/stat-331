@@ -204,7 +204,7 @@ penguins %>%
 ```{r, eval = FALSE}
 
 # a
-arrange(avg_mass_flipper_ratio)
+arrange(med_mass_flipper_ratio)
 
 
 # b
