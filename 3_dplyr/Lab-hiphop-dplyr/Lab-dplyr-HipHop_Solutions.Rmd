@@ -217,19 +217,17 @@ a. People below the age of 20
 young <- hiphop %>% 
   filter(age < 20) %>% 
   group_by(word) %>% 
-  ## A more specific summarize() function, where we summarize for a specific variable
-  summarize_at(vars(familiarity), list(mean)) 
+  summarize(mean_fam = mean(familiarity)) 
   ## Although I am generally opposed to taking the mean of Likert data, this gives an "easy" answer
-
 
 ## Most familiar
 young %>% 
-  top_n(n = 1, familiarity) %>% 
+  slice_max(mean_fam) %>% 
   pull(word)
 
 ## Least familiar
 young %>% 
-  top_n(n = 1, desc(familiarity)) %>% 
+  slice_min(mean_fam) %>% 
   pull(word)
 ```
 
@@ -240,16 +238,16 @@ nonwhite_women <- hiphop %>%
   filter(sex == "Female", 
          ethnic_group == "non-white") %>% 
   group_by(word) %>% 
-  summarize_at(vars(familiarity), list(mean)) 
-
-## Least familiar
-nonwhite_women %>% 
-  top_n(n = 1, desc(familiarity)) %>% 
-  pull(word)
+  summarize(mean_fam = mean(familiarity)) 
 
 # Most familiar
 nonwhite_women %>% 
-  top_n(n = 1, familiarity) %>% 
+  slice_max(mean_fam) %>% 
+  pull(word)
+
+## Least familiar
+nonwhite_women %>% 
+  slice_min(mean_fam) %>% 
   pull(word)
 
 ```
@@ -262,16 +260,16 @@ old_white_men <- hiphop %>%
          ethnic_group == "white", 
          age > 30) %>% 
   group_by(word) %>% 
-  summarize_at(vars(familiarity), list(mean)) 
-
-## Least familiar
-old_white_men %>% 
-  top_n(n = 1, desc(familiarity)) %>% 
-  pull(word)
+  summarize(mean_fam = mean(familiarity)) 
 
 ## Most familiar
 old_white_men %>% 
-  top_n(n = 1, familiarity) %>% 
+  slice_max(mean_fam) %>% 
+  pull(word)
+
+## Least familiar
+old_white_men %>% 
+  slice_min(mean_fam) %>% 
   pull(word)
 
 ```
@@ -279,7 +277,9 @@ old_white_men %>%
 
 #### 2. 
 
-For each demographic comparison below, determine which music genre most differentiates the groups.  That is, which genre had much higher average (mean or median) score in one group than the other.
+For each demographic comparison below, determine which music genre most
+differentiates the groups.  That is, which genre had much higher average (mean
+or median) score in one group than the other.
 
 ```{r}
 
@@ -294,11 +294,11 @@ a. Male versus Female
 genres %>% 
   group_by(sex) %>%
   ## For all of the music genres, find the mean for each sex
-  summarize_at(vars(intl:hiphop), list(mean)) %>% 
+  summarize(across(intl:hiphop, mean)) %>% 
   ## For all of the music genres, find the difference in the sexes
-  summarise_at(vars(intl:hiphop), list(diff)) %>% 
+  summarise(across(intl:hiphop, diff)) %>% 
   ## Make the differences all positive to compare magnitudes
-  summarise_at(vars(intl:hiphop), list(abs)) %>% 
+  summarise(across(intl:hiphop, abs)) %>% 
   which.max()
 
 ```
@@ -309,28 +309,12 @@ b. White versus Non-White
 ```{r}
 genres %>% 
   group_by(ethnic_group) %>%
-  ## For all of the music genres, find the mean for each ethnic group
-  summarize_at(vars(intl:hiphop), list(mean)) %>% 
-  ## For all of the music genres, find the difference in the ethnic groups
-  summarise_at(vars(intl:hiphop), list(diff)) %>% 
+  ## For all of the music genres, find the mean for each sex
+  summarize(across(intl:hiphop, mean)) %>% 
+  ## For all of the music genres, find the difference in the sexes
+  summarise(across(intl:hiphop, diff)) %>% 
   ## Make the differences all positive to compare magnitudes
-  summarise_at(vars(intl:hiphop), list(abs)) %>% 
-  which.max()
-```
-
-
-c. Age below 21 versus age 21+
-
-```{r}
-genres %>% 
-  mutate(drinking_age = if_else(age < 21, "under 21", "21 or over")) %>% 
-  group_by(drinking_age) %>%
-  ## For all of the music genres, find the mean for each age group
-  summarize_at(vars(intl:hiphop), list(mean)) %>% 
-  ## For all of the music genres, find the difference in the age groups
-  summarise_at(vars(intl:hiphop), list(diff)) %>%
-  ## Make the differences all positive to compare magnitudes
-  summarise_at(vars(intl:hiphop), list(abs)) %>% 
+  summarise(across(intl:hiphop, abs)) %>% 
   which.max()
 
 ```
@@ -340,7 +324,36 @@ genres %>%
 
 ### Challenge: Use the data
 
-A former Canadian child TV star named Aubrey Graham is interested in switching careers to become a rapper.  Aubrey hires you to consult the `hiphop` dataset to help compose his new songs. 
+A former Canadian child TV star named Aubrey Graham is interested in switching
+careers to become a rapper.  Aubrey hires you to consult the `hiphop` dataset to
+help compose his new songs. 
+
+#### Step 2 
+
+Aubrey's true life dream is to collaborate with his fellow Canadian musician
+Justin Bieber.  Luckily, he knows that Bieber himself was one of the subjects in
+this study!  You know that Bieber is a white male, aged 17-23 at the time of the
+study, from a relatively small town (10,000-60,000 people) in Ontario.
+
+Determine which subject is secretly Bieber, and justify your answer.
+
+*Hint: Refer again to the dataset description.  There is another clue about Bieber's identity.*
+
+
+```{r}
+hiphop %>% 
+  distinct(subj, .keep_all = TRUE) %>%
+  filter(sex == "Male",
+         age <= 23, 
+         age >= 17,
+         city < 60000,
+         city > 10000) %>%
+  top_n(1, bieber) %>%
+  select(subj)
+
+```
+
+_Justin Bieber is subject "p17."_ 
 
 #### Step 1
 
@@ -378,34 +391,6 @@ popular in almost every city, regardless of size. Across all three city sizes
 (large, medium, small), "Hello" had over a 50% familiarity. For small cities, 
 it appears that the familiarity of "boo" and "hella" is nearly identical (50-50), 
 and thus for this city size both album titles may be equally popular._ 
-
-
-#### Step 2 
-
-Aubrey's true life dream is to collaborate with his fellow Canadian musician
-Justin Bieber.  Luckily, he knows that Bieber himself was one of the subjects in
-this study!  You know that Bieber is a white male, aged 17-23 at the time of the
-study, from a relatively small town (10,000-60,000 people) in Ontario.
-
-Determine which subject is secretly Bieber, and justify your answer.
-
-*Hint: Refer again to the dataset description.  There is another clue about Bieber's identity.*
-
-
-```{r}
-hiphop %>% 
-  distinct(subj, .keep_all = TRUE) %>%
-  filter(sex == "Male",
-         age <= 23, 
-         age >= 17,
-         city < 60000,
-         city > 10000) %>%
-  top_n(1, bieber) %>%
-  select(subj)
-
-```
-
-_Justin Bieber is subject "p17."_ 
 
 
 #### Step 3

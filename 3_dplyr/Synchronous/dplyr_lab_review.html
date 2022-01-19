@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>💬 A Few More Data Wrangling Tools </title>
+    <title>🗨️ A Few More Data Wrangling Tools </title>
     <meta charset="utf-8" />
     <meta name="author" content=" Dr. Allison Theobold" />
-    <meta name="date" content="2021-04-15" />
-    <script src="libs/header-attrs-2.7/header-attrs.js"></script>
+    <meta name="date" content="2022-01-19" />
+    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="slide-style.css" type="text/css" />
   </head>
@@ -13,9 +13,9 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# 💬 A Few More Data Wrangling Tools </br>
+# 🗨️ A Few More Data Wrangling Tools </br>
 ### </br> Dr. Allison Theobold
-### </br> April 15, 2021
+### </br> January 19, 2022
 
 ---
 
@@ -23,6 +23,19 @@ class: center, middle, inverse, title-slide
 
 
 
+class: middle
+
+.larger[A few words about `drop_na()`]
+
+--
+
+- Easy tool to remove missing values 
+
+--
+
+- Unilaterally removes **any** row with a missing value for **any** variable
+
+---
 
 .larger[Summarizing Frequencies]
 
@@ -32,15 +45,31 @@ class: center, middle, inverse, title-slide
 
 ```r
 starwars %&gt;% 
-  count(homeworld)
+  count(homeworld, sort = TRUE)
 ```
+
+- `sort` specifies if the resulting tibble should be sorted in descending order
 ]
+
+--
 
 .pull-right[
 
-```r
-starwars %&gt;% 
-  count(homeworld, films)
+```
+## # A tibble: 49 x 2
+##    homeworld     n
+##    &lt;chr&gt;     &lt;int&gt;
+##  1 Naboo        11
+##  2 Tatooine     10
+##  3 &lt;NA&gt;         10
+##  4 Alderaan      3
+##  5 Coruscant     3
+##  6 Kamino        3
+##  7 Corellia      2
+##  8 Kashyyyk      2
+##  9 Mirial        2
+## 10 Ryloth        2
+## # ... with 39 more rows
 ```
 
 ]
@@ -52,6 +81,8 @@ starwars %&gt;%
 
 `distinct()` -- selects the unique / distinct rows from a dataset
 
+--
+
 &lt;center&gt;
 .large[**Arguments**]
 &lt;/center&gt;
@@ -59,7 +90,7 @@ starwars %&gt;%
 - `...` -- variables to use when determining uniqueness
   * can use multiple!
 
---  
+--
 
 - `.keep_all` -- decides if all of the columns should be kept
   * `FALSE` is default!
@@ -81,44 +112,54 @@ starwars %&gt;%
 
 ---
 
-.larger[`summarize()` Variants]
+class: middle, center, inverse
 
---
-
-- `summarize_all()` -- summarizes **every** variable in the dataset
-
---
-
-- `summarize_at()` -- summarizes variables selected 
-
---
-
-- `summarize_if()` -- summarizes variables selected with condition
-
+.hand[.larger[What if I want to perform the same operation across multiple 
+columns?]]
 
 ---
 
-.large[**Examples**]
+class: center, middle
+
+.larger[`across()`]
+
+&gt; makes it easy to apply the same transformation to multiple columns,
+&gt; allowing you to use `select()` semantics inside in "data-masking" functions
+&gt; like `summarise()` and `mutate()`
+
+--
+
+&lt;/br&gt;
+
+.large[`across(.cols = everything(), .fns = NULL, ...)`]
+
+`.cols` -- columns in data to select  
+`.fns` -- functions to apply to selected columns  
+`...` -- addtional arguments for the function calls (from `.fns`)
+
+---
+
+.larger[Summarizing Multiple Columns]
 
 .pull-left-wide[
-.large[`summarize_at()`]
 
 ```r
 starwars %&gt;% 
-  summarise_at(vars(height:mass), list(mean), na.rm = TRUE)
+  summarise(across(height:mass, mean, na.rm = TRUE))
 ```
 
+&lt;/br&gt;
+&lt;/br&gt;
 
-.large[`summarize_if()`]
+.large[Conditional Summarizing]
 
 ```r
 starwars %&gt;% 
-  summarise_if(is.numeric, list(mean), na.rm = TRUE)
+  summarise(across(where(is.numeric), mean, na.rm = TRUE))
 ```
 ]
 
 .pull-right-narrow[
-&lt;/br&gt;
 &lt;/br&gt;
 
 ```
@@ -138,33 +179,7 @@ starwars %&gt;%
 ##    &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
 ## 1   174.  97.3       87.6
 ```
-
-&lt;!-- before the Battle of Yavin --&gt;
-
-
 ]
-
----
-
-.larger[`mutate()` Variants]
-
-- `mutate_all()` -- mutates **every** variable
-
-- `muatate_at()` -- mutates variables selected
-
-- `mutate_if()` -- mutates variables selected with condition
-
----
-
-.larger[A few words about `drop_na()`]
-
---
-
-- Easy tool to remove missing values 
-
---
-
-- Unilaterally removes **any** row with a missing value for **any** variable
 
 ---
 
