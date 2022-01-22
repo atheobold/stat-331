@@ -1,6 +1,6 @@
 ---
 title: "Reshaping and Joining Data Frames"
-author: ""
+author: "Week 4"
 output:
   prettydoc::html_pretty:
     theme: tactile
@@ -38,7 +38,7 @@ datasets with related information.
 
 `r emo::ji("computer")` Activities: 45-60 minutes  
   
-`r emo::ji("check")` Check-ins: 4
+`r emo::ji("check")` Check-ins: 2
 
 
 ---
@@ -77,7 +77,8 @@ Data, and Comments
 
 `r emo::ji("check")` **Check-in: _Code Style_**
 
-**Question 1:** Based on the tidyverse style guide, where should whitespace (blank spaces) go? 
+**Question 1:** Based on the tidyverse style guide, where should whitespace
+(blank spaces) go? 
 
 - Before and after every `+` sign
 
@@ -92,7 +93,8 @@ Data, and Comments
 **Question 2:** How many characters per line should you strive to have in your 
 R code (and RMarkdown files)?
 
-**Question 3:** Which of the following are **bad** object names?
+**Question 3:** Based on the styleguide, which of the following are **bad**
+object names?
 
 - `data`
 
@@ -142,6 +144,21 @@ columns:
 
 * A column called `Amount` with the corresponding amount of the nutrient.
 
+```{r, include = FALSE}
+
+cereals <- read_csv(here::here("4_tidyr-joins", "Coursework", "Slides", 
+                               "cereal.csv")
+                    )
+
+cereals_long <- cereals %>% 
+  select(name, protein:fiber) %>% 
+  pivot_longer(protein:fiber, 
+               names_to = "Nutrient", 
+               values_to = "Amount")
+  
+```
+
+
 ---
 
 ## Joining data
@@ -154,6 +171,8 @@ columns:
 `r emo::ji("book")` [Required Reading: Mutating Joins](https://www.garrickadenbuie.com/project/tidyexplain/)
 
   * These notes have great pictures / gifs for what is happening with joins! 
+  * Note: We **will not** be using `spread()` and `gather()` in this course, as
+  they are depricated functions!
 
 `r emo::ji("warning")` **Disclaimer:** Because these chapters do a __much__
 better job visualizing the concepts, I've chosen not to record additional
@@ -169,18 +188,18 @@ The following code creates three datasets:
 ```{r}
 prof_info <- data.frame(
   professor = 
-    c("Bodwin", "Glanz", "Carlton", "Sun"),
+    c("Bodwin", "Glanz", "Carlton", "Sun", "Theobold"),
   undergrad_school = 
-    c("Harvard", "Cal Poly", "Cal Poly", "Harvard"),
+    c("Harvard", "Cal Poly", "Cal Poly", "Harvard", "Colorado Mesa University"),
   grad_school = 
-    c("UNC", "Boston University", "UCLA", "Stanford")
+    c("UNC", "Boston University", "UCLA", "Stanford", "Montana State University")
 )
 
 prof_course <- data.frame(
-  professor = c("Bodwin", "Glanz", "Carlton"),
-  Stat_331 = c(TRUE, TRUE, TRUE),
-  Stat_330 = c(FALSE, TRUE, TRUE),
-  Stat_431 = c(TRUE, TRUE, FALSE)
+  professor = c("Bodwin", "Glanz", "Carlton", "Theobold"),
+  Stat_331 = c(TRUE, TRUE, TRUE, TRUE),
+  Stat_330 = c(FALSE, TRUE, TRUE, FALSE),
+  Stat_431 = c(TRUE, TRUE, FALSE, TRUE)
 )
 
 course_info <- data.frame(
@@ -200,7 +219,7 @@ prof_course
 course_info
 ```
 
-These datasets contain information about four Cal Poly professors, their
+These datasets contain information about five Cal Poly professors, their
 educational history, the classes they are able to teach, and the number of
 sections of each class that need to be assigned.
 
@@ -211,7 +230,13 @@ sections of each class that need to be assigned.
 prof_info %>% 
   inner_join(prof_course)
 
-## A right join will also work!
+```
+
+```{r, include = FALSE}
+## OR 
+
+prof_info %>%
+  right_join(prof_course)
 
 ```
 
@@ -222,9 +247,16 @@ prof_info %>%
 prof_info %>% 
   left_join(prof_course, by = "professor")
 
-## A full join will also work!
+```
+
+```{r, include = FALSE}
+## OR 
+
+prof_info %>% 
+  full_join(prof_course, by = "professor")
 
 ```
+
 
 **c) Combine datasets 2 and 3 to make this:**
 
@@ -235,5 +267,16 @@ prof_course %>%
                values_to = "can_teach") %>%
   inner_join(course_info)
 
-## A right join will also work! 
 ```
+
+```{r, include = FALSE}
+## OR
+
+prof_course %>%
+  pivot_longer(Stat_331:Stat_431, 
+               names_to = "course",
+               values_to = "can_teach") %>%
+  right_join(course_info)
+
+```
+
