@@ -1,0 +1,243 @@
+---
+title: "Lab 3 Grading Guide"
+output: html_document
+---
+
+</br>
+
+**If there is no response to a question a score of 0 is awarded.**
+
+**If code outside of the _R for Data Science_ book is used, a citation must be 
+included. If no citation is included, the question is awarded a 0.**
+
+</br>
+
+# Question 0
+
+-	4: Reads data in with the `here()` function 
+-	Redo: If uses relative or full path to read in the data
+
+</br>
+
+# Question 1
+
+**4**: Must have the following,
+
+  - number of participants (168)
+  - context of participants (undergraduate students)
+  - context of study (familiarity with African-American English)
+  - description of how familiarity was defined (1 = not at all, 5 = well)
+
+**3**: Has all of the above except for one
+
+**Redo if above criteria is not met**
+
+</br>
+
+# Question 2
+
+**4**: Rows are __one__ word for _each_ participant 
+(168 participants $\times$ 64 words = 10,752 rows)
+
+**Redo if above criteria is not met**
+
+</br>
+
+# Question 3
+
+**4** 
+
+  - Notes missing values for some variables were replaced with the mean
+  - Benefits: fewer instances of missing data
+  - Drawbacks: if the mean is not representative of what that individual would
+  have responded
+
+**3**: Meets the first two criteria, but does not discuss how the mean may
+misrepresent the true value
+
+**Redo if above criteria is not met**
+
+</br>
+
+# Question 4
+
+**4**
+
+- Uses `mutate()` to convert some variables (e.g. `sex`, `ethnic`) to factors
+- Uses `filter()` with `is.na()` or `drop_na()` to specify variables to remove
+missing values from 
+
+**Redo if uses `drop_na()` without any variables specified** -- removing **all**
+of the missing values
+
+</br>
+
+# Question 5
+
+**4**: Use `distinct()` and `count()` to get 64 words
+
+**3**: Use a “base R” method (e.g. `unique()`) to get 64 words
+
+**Redo if above criteria is not met**
+
+</br>
+
+# Question 6
+
+**4**
+
+  - Use `mutate()` and `if_else()` to create a new variable based on values of
+  `ethnic` variable  
+  - Note: Can use `ifelse()` function, but note that the behavior of `if_else()`
+  is preferred!
+
+```{r, eval = FALSE}
+hiphop <- hiphop %>%
+  mutate(
+    ethnic_group = if_else(ethnic == "white",
+                           "white", 
+                           "non-white"),
+    ethnic_group = as_factor(ethnic_group)
+  )
+```
+
+**Redo if above criteria is not met**
+
+</br>
+
+# Question 7
+
+__This answer will depend on how they “cleaned” their data.__
+
+**Every solution must use `distinct(subj, .keep_all = TRUE)` to select distinct
+study subjects** 
+
+
+**4**: Discusses all  
+**3**: Discusses two  
+**Redo**: Discusses one or none  
+
+  - number of female / male participants
+  - number of participants in ethnic groups 
+  - summaries for the ages of the participants (e.g. min, max, mean, median)
+
+**Note:** Looking at white / non-white groups created in #6 **does not** satisfy
+the second summary of `ethnic` groups
+
+</br>
+
+# Question 8 
+
+**4**: Produces at least two appropriate plots
+
+**3**: Produces two appropriate plots, but forgets to change axis labels and / 
+or plot titles
+
+**Redo**: One of more of the plots produced are not appropriate
+
+__List of Appropriate Plots__
+
+-	Histogram of `age`s -- can add colors / facets for sex or ethnic variable(s) 
+
+- Density Ridges of `age`s -- can add colors / facets for sex or ethnic
+variable(s) 
+  
+-	Boxplot of `age`s: can add colors / facets for sex or ethnic variable(s)
+
+-	Barplot of `sex` and / or ethnicity variables -- can add colors / facets for
+other variable(s)
+
+</br>
+
+---
+
+# Familiar Words
+
+### Part (a)
+
+**4**: 
+
+  * Uses `filter()` to remove observations under 20
+  * Groups by `word`
+  * Uses `summarize()` to calculate the mean `familiarity` score 
+  * Uses `slice_min()` to calculate the least familiar
+  * Uses `slice_max()` to calculate the most familiar
+
+**3**: Uses all of the above tools, except uses an alternative method to find
+the min / max
+
+_Answer should be_:
+
+  * “off the hook” most familiar
+  * “catch the vapors” least familiar
+  
+**Redo**: If group does not use these 5 tools
+
+</br>
+
+### Part (b)
+
+**4**:
+
+  * Uses `filter()` to retain “Female” and “non-white” participants
+  * Groups by `word`
+  * Uses `summarize()` to calculate the mean `familiarity` score
+  * Uses `slice_min()` to calculate the least familiar
+  * Uses `slice_max()` to calculate the most familiar
+
+**Note:** If team was previously deducted points for using a function other than
+`slice_XXX()` to find the minimum / maximum, do not deduct points again! 
+
+_Answer should be_: 
+
+  * "feel me" most familiar
+  * "break someone out" "dukey rope" "plex" and "rollie" least familiar
+  
+**Redo**: If group does not use these 5 tools
+
+</br>
+
+### Part (c)
+
+**4**:
+
+  * Uses `filter()` to retain `“Male”` and `“white”` observations over 30
+  * Groups by `word`
+  * Uses summarize() to calculate the mean `familiarity` score
+
+**Note:** If team was previously deducted points for using a function other than
+`slice_XXX()` to find the minimum / maximum, do not deduct points again! 
+
+_Answer should be_: 
+
+  * “5-0” most familiar
+  * 25 terms are the least familiar
+  
+**Redo**: If group does not use these 5 tools
+
+</br>
+
+---
+
+# Study Subjects
+
+**4**: 
+
+  - Uses the following `filter()`s: 
+
+```{r, eval = FALSE}
+filter(sex == "Male", 
+       age <= 23, 
+       age >= 17,
+       city < 60000,
+       city > 10000)
+```
+
+  - Uses `slice_max()` to find the maximum of the `bieber` variable
+
+_Answer should be:_ Justin Bieber is subject "p17."
+
+**3**: Uses all of the above `filter()`s, but uses an alternative method to find
+the min / max of the `bieber` variable
+
+**Redo if above criteria is not met**
