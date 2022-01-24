@@ -34,15 +34,16 @@ SIPRI military expenditure data is based on open sources only.
 
 ## Data Inspection
 
-__Download the data [here](). Open the Excel file and inspect the file.__ 
+__Download the data on Canvas. Open the Excel file and inspect the file.__ 
 
 First, you should notice that there are ten different sheets included in the 
 dataset. We are interested in the sheet labeled "Share of Govt. spending" which 
 contains information about the share of government spending that is allocated to
 military spending. 
 
-Next, you'll notice that there are notes about the dataset in the first seven
-rows. Ugh! 
+Next, you'll notice that there are notes about the dataset in the first six
+rows. Ugh! Also notice that the last six rows are footnotes about the dataset. 
+**Ugh**!
 
 Rather than copying this one sheet into a new Excel file and deleting the first 
 seven rows, let's learn something new about the `read_xlsx()` function! 
@@ -58,6 +59,9 @@ the sheet that you want to use.
 The `read_xlsx()` function also has a `skip` argument, where you specify the 
 number of rows you want to be skipped *before* reading in the data.
 
+Finally, `read_xlsx()` also has a `n_max` argument, where you specify the 
+maximum number of rows of data to read in.
+
 __1.__ Modify the code below to read the military expenditures data into your
 work space. 
 
@@ -65,10 +69,13 @@ work space.
 library(readxl) 
 library(tidyverse)
 
-military <- read_xlsx(here::here("4_tidyr-joins", "Practice Activity", 
-                                 "data", "gov_spending_per_capita.xlsx"), 
+military <- read_xlsx(here::here("4_tidyr-joins", 
+                                 "Practice Activity", 
+                                 "data", 
+                                 "gov_spending_per_capita.xlsx"), 
                       sheet = "Share of Govt. spending", 
-                      skip = 7)
+                      skip = 6, 
+                      n_max = 191)
 ## This is MY path to the data! Yours will look different! 
 ```
 
@@ -82,12 +89,13 @@ NAs. Save the mutated dataset into a new object named `military_clean`.
 
 ```{r, warning = FALSE}
 military_clean <- military %>% 
-                    mutate_at(vars(`1988`:`2019`),
-                              ~na_if(.x, y = ". .")
-                              ) %>%
-                      mutate_at(vars(`1988`:`2019`),
-                              ~na_if(.x, y = "xxx")
-                              )
+                    mutate(across(`1988`:`2019`,
+                                  ~ na_if(.x , y = ". .")
+                                  ), 
+                           across(`1988`:`2019`,
+                                  ~ na_if(.x, y = "xxx")
+                                  )
+                    )
 ```
 
 **Note**: Because the variables are numbers, which is not syntaxtically correct, 
@@ -103,7 +111,8 @@ data type. Save these changes into an updated version of `military_clean`.
 
 ```{r}
 military_clean <- military_clean %>% 
-  mutate_at(vars(`1988`:`2019`), as.numeric) 
+  mutate(across(`1988`:`2019`, as.numeric)
+  )
 ```
 
 If you give the `Country` column a look, you'll see that there are names
@@ -114,11 +123,13 @@ Luckily for us, these names were stored in the "Regional totals" sheet. We can
 use the `Region` column of this dataset to filter out the names we don't want. 
 
 Run the code below to read in the "Regional totals" dataset, making any 
-necessary modifications to the path. 
+necessary modifications to the path (since it is *my* path!).  
 
 ```{r, message = FALSE}
-cont_region <- read_xlsx(here::here("4_tidyr-joins", "Practice Activity", 
-                                 "data", "gov_spending_per_capita.xlsx"), 
+cont_region <- read_xlsx(here::here("4_tidyr-joins", 
+                                    "Practice Activity", 
+                                 "data", 
+                                 "gov_spending_per_capita.xlsx"), 
                       sheet = "Regional totals", 
                       skip = 14) %>% 
   filter(Region != "World total (including Iraq)", 
@@ -131,8 +142,8 @@ want to use those for my filtering.
 
 **Another Note:** It's something we haven't discussed, but you can make 
 changes to your dataset *when* you read it in! Here, I am reading in the data, 
-and immediately piping it into the `filter()` function to remove the observations
-I don't want. Fun! 
+and immediately piping it into the `filter()` function to remove the
+observations I don't want. Fun! 
 
 If you think about `filter()`ing data, so that only certain values of a variable 
 are retained, we should remember our friendly `%in%` function! However, if you
@@ -168,6 +179,14 @@ military_clean <- military_clean %>%
 
 __Part One Answer:__ What regions were not removed from the `military_clean` 
 dataset? Use their correct capitalization **and** punctuation! 
+
+
+```{r}
+military_clean %>% 
+  filter(across(`1988`:`2019`, is.na), 
+         !is.na(Country)) %>% 
+  pull(Country)
+```
 
 - Asia & Oceania
 - Central America and the Caribbean
@@ -239,7 +258,7 @@ spending across the years.
 
 __5.__ Create side-by-side boxplots of the military spending for each year. 
 
-**Hint:** Place the `Year` variable on an axis that makes it easy to read the 
+**Hint:** Place the `Year` variable on an axis that makes it easier to read the 
 labels! 
 
 ```{r, warning = FALSE, message = FALSE}
@@ -247,7 +266,7 @@ labels!
 long_military %>% 
   ggplot(aes(x = Spending, y = Year)) + 
   geom_boxplot(outlier.shape = NA,, alpha = 0.2) + 
-  geom_jitter(alpha = 0.2,
+  geom_jitter(alpha = 0.4,
               width = 0.1, 
               height = 0.1, 
               color = "tomato") + 
@@ -258,6 +277,13 @@ long_military %>%
 
 __Part Two Answer:__ What year was the second largest military expenditure? 
 What country had this expenditure? 
+
+```{r}
+long_military %>% 
+  filter(Year == 1990, 
+         Spending > 0.5)
+```
+
 
 - Year: 1990
 - Country: Kuwait

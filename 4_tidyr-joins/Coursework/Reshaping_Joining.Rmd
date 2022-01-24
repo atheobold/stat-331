@@ -190,7 +190,7 @@ prof_info <- data.frame(
   professor = 
     c("Bodwin", "Glanz", "Carlton", "Sun", "Theobold"),
   undergrad_school = 
-    c("Harvard", "Cal Poly", "Cal Poly", "Harvard", "Colorado Mesa University"),
+    c("Harvard", "Cal Poly", "Berkeley", "Harvard", "Colorado Mesa University"),
   grad_school = 
     c("UNC", "Boston University", "UCLA", "Stanford", "Montana State University")
 )
@@ -277,6 +277,14 @@ prof_course %>%
                names_to = "course",
                values_to = "can_teach") %>%
   right_join(course_info)
+
+## OR
+
+prof_course %>%
+  pivot_longer(Stat_331:Stat_431, 
+               names_to = "course",
+               values_to = "can_teach") %>%
+  left_join(course_info)
 
 ```
 

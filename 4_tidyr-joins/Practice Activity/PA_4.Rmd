@@ -13,9 +13,9 @@ countries of the world and military spending.
 
 It can be hard to spot bugs in code that you wrote.  
 
-Work with those around you - if something goes wrong, ask a friend or team member
-to take a peek at your code and see if any glaring errors (like *syntax error*)
-pop out.
+Work with those around you - if something goes wrong, ask a friend or team
+member to take a peek at your code and see if any glaring errors (like
+*syntax error*) pop out.
 
 **Explain your code out loud**
 
@@ -33,7 +33,8 @@ The whole of the internet is at your disposal!  Use it early, use it often.
 
 Some tricks:
 
-* Copy-paste the exact error message into Google. Chances are, somebody else had a similar problem and got a similar message.
+* Copy-paste the exact error message into Google. Chances are, somebody else had
+a similar problem and got a similar message.
 
 * Include package names in your search terms.  For example, "long data in tidyr"
 is a better search than "long data in R".
@@ -41,11 +42,11 @@ is a better search than "long data in R".
 
 ## Data for Today's Activity  
 
-The SIPRI (Stockholm International Peace Research Institute) Military Expenditure
-Database is an open source dataset with contains consistent time series on the 
-military spending of countries for the period 1949–2018. The database is updated
-annually, which may include updates to data for any of the years included in the
-database.
+The SIPRI (Stockholm International Peace Research Institute) Military
+Expenditure Database is an open source dataset with contains consistent time
+series on the military spending of countries for the period 1949–2018. The
+database is updated annually, which may include updates to data for any of the
+years included in the database.
 
 Military expenditure in local currency at current prices is presented according
 to both the financial year of each country and according to calendar year, 
@@ -66,18 +67,19 @@ SIPRI military expenditure data is based on open sources only.
 
 ## Data Inspection
 
-__Download the data [here](). Open the Excel file and inspect the file.__ 
+__Download the data on Canvas. Open the Excel file and inspect the file.__ 
 
 First, you should notice that there are ten different sheets included in the 
 dataset. We are interested in the sheet labeled "Share of Govt. spending" which 
 contains information about the share of government spending that is allocated to
 military spending. 
 
-Next, you'll notice that there are notes about the dataset in the first seven rows. 
-Ugh! 
+Next, you'll notice that there are notes about the dataset in the first six
+rows. Ugh! Also notice that the last six rows are footnotes about the dataset. 
+**Ugh**!
 
 Rather than copying this one sheet into a new Excel file and deleting the first 
-seven rows, let's learn something new about the `read_xlsx()` function! 
+and last six rows, let's learn something new about the `read_xlsx()` function! 
 
 
 ## Data Import
@@ -90,6 +92,9 @@ the sheet that you want to use.
 The `read_xlsx()` function also has a `skip` argument, where you specify the 
 number of rows you want to be skipped *before* reading in the data.
 
+Finally, `read_xlsx()` also has a `n_max` argument, where you specify the 
+maximum number of rows of data to read in.
+
 __1.__ Modify the code below to read the miliary expenditures data into your
 work space. 
 
@@ -97,8 +102,13 @@ work space.
 library(readxl) 
 library(tidyverse)
 
-military <- read_xlsx(here::here("data", "gov_spending_per_capita.xlsx"))
+military <- read_xlsx(here::here("data", 
+                                 "gov_spending_per_capita.xlsx"), 
+                      sheet = , 
+                      skip = , 
+                      nmax = )
 ```
+
 
 ## Data Cleaning 
 
@@ -118,17 +128,19 @@ data type. Save these changes into an updated version of `military_clean`.
 
 
 If you give the `Country` column a look, you'll see that there are names
-of continents and regions included. These names are only included to make it 
+of continents **and** regions included. These names are only included to make it 
 simpler to find countries, as they contain no data. 
 
-Luckily for us, these names were stored in the "Regional totals" sheet. We can 
-us the `Region` column of this dataset to filter out the names we don't want. 
+Luckily for us, these region names were also stored in the "Regional totals"
+sheet. We can us the `Region` column of this dataset to filter out the names we
+don't want. 
 
 Run the code below to read in the "Regional totals" dataset, making any 
 necessary modifications to the path. 
 
 ```{r, message = FALSE}
-cont_region <- read_xlsx(here::here("data", "gov_spending_per_capita.xlsx"), 
+cont_region <- read_xlsx(here::here("data",
+                                    "gov_spending_per_capita.xlsx"), 
                       sheet = "Regional totals", 
                       skip = 14) %>% 
   filter(Region != "World total (including Iraq)", 
@@ -166,7 +178,7 @@ example, `by = c("a" = "b")` will match `x$a` to `y$b`.
 ### Part One Answer
 
 What regions were not removed from the `military_clean` dataset? Use their 
-correct capitalizaton **and** punctutation! 
+correct capitalization **and** punctuation! 
 
 
 ## Data Organization
@@ -174,7 +186,7 @@ correct capitalizaton **and** punctutation!
 The comparison I am interested in looking at the military expenditures of 
 different countries across every year in the data. Something like this:  
 
-<iframe src="https://app.box.com/embed/s/ed74ynmti87pk8oats4jdbhwb5rqf7cm?sortColumn=date&view=list" width="500" height="400" frameborder="0" allowfullscreen webkitallowfullscreen msallowfullscreen></iframe> 
+<https://app.box.com/embed/s/ed74ynmti87pk8oats4jdbhwb5rqf7cm?sortColumn=date&view=list>
 
 Unfortunately, this requires that each year is it's own column! 
 
@@ -206,11 +218,12 @@ spending across the years.
 
 __5.__ Create side-by-side boxplots of the military spending for each year. 
 
-**Hint:** Place the `Year` variable on an axis that makes it easy to read the 
+**Hint:** Place the `Year` variable on an axis that makes it easier to read the 
 labels! 
 
 
 ### Part Two Answer
 
-What year was the second largest military expenditure? What country had this expenditure? 
+What year was the second largest military expenditure? What country had this
+expenditure? 
 
