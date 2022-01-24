@@ -1,6 +1,6 @@
 ---
-title: "Recap of Data Reorganization (and Cleaning!) "
-date: "April 20, 2021"
+title: "Recap of Relational Data"
+date: "January 24, 2022"
 author: "Dr. Allison Theobold"
 output:
   xaringan::moon_reader:
@@ -30,12 +30,16 @@ library(tidyverse)
 library(kableExtra)
 
 style_duo_accent(
-  primary_color      = "#0F4C81", # pantone classic blue
-  secondary_color    = "#B6CADA", # pantone baby blue
+  primary_color      = "#b76352", # mango
+  secondary_color    = "#34605f", # bayberry
   header_font_google = google_font("Raleway"),
   text_font_google   = google_font("Raleway", "300", "300i"),
   code_font_google   = google_font("Source Code Pro"),
-  text_font_size     = "30px"
+  header_color = "#793540", #rhubarb
+  white_color = "#F5F5F5", # lightest color
+  black_color = "#36454F", # darkest color
+  text_font_size = "30px", 
+  link_color = "#696969" #grey
 )
 
 surveys <- read_csv("data/surveys.csv")
@@ -44,20 +48,27 @@ species <- read_csv("data/species.csv")
 
 ```
 
-class: inverse
+class: inverse, center, middle
 
 .larger[Relational Data]
 
-- Mutating joins
-  * Adds information from a new dataframe to observations in an existing
-  dataframe
+--
+
+.mango[.bitlarger[Mutating joins]] 
+
+.large[*Adds information* from a new dataframe to observations in an existing dataframe
+]
 
 --
 
-- Filtering joins
-  * Filter observations based on values in new dataframe
-  
+.mango[.bitlarger[Filtering joins]]
+
+.large[*Filters observations* based on values in new dataframe
+]
+
 ---
+
+class: center, middle 
 
 .larger[Keys]
 
@@ -102,7 +113,9 @@ species %>%
 
 ---
 
-.larger[Inner Join]
+class: center, middle
+
+.larger[.rhubarb[Inner Join]]
 
 Matches pairs of observations when "keys" are equal
 
@@ -112,9 +125,14 @@ Matches pairs of observations when "keys" are equal
 
 class: center
 
-.large[**Species Inner Join**]
+.larger[**Mean Weights**]
 
-.pull-left-narrow[
+```{r, eval = FALSE}
+surveys_weight <- surveys %>% 
+  group_by(species_id) %>% 
+  summarize(mean_weight = mean(weight))
+```
+
 ```{r, echo = FALSE}
 surveys_weight <- surveys %>% 
   filter(!is.na(weight)) %>% 
@@ -127,11 +145,13 @@ surveys_weight %>%
   kable_styling()
 
 ```
-]
 
-</br>
+---
 
-.pull-right-wide[
+class: center
+
+.larger[**Adding Information**]
+
 ```{r, eval = FALSE}
 surveys_weight %>% 
   inner_join(species, by = "species_id")
@@ -140,17 +160,15 @@ surveys_weight %>%
 ```{r, echo = FALSE}
 surveys_weight %>% 
   inner_join(species, by = "species_id") %>% 
-  select(-taxa) %>% 
   head() %>% 
   kable() %>% 
   kable_styling()
 ```
-]
 
 ---
 
 .pull-left[
-.larger[Mutating Joins]
+.larger[.honey[Mutating Joins]]
 
 - Left Join: Everything is kept in the dataset **on the left**
 
@@ -163,12 +181,17 @@ surveys_weight %>%
 --
 
 .pull-right[
+</br>
 ![](figures/joins.JPG)   
 ]
 
 ---
 
-.bitlarger[Filtering Joins -- Keep Observations]
+class: center
+
+.larger[.pink[Filtering Joins]]
+
+.large[*Keeping Observations*]
 
 
 .pull-left[
@@ -187,6 +210,10 @@ surveys_weight %>%
 ]
 
 .pull-right[
+
+</br>
+</br>
+
 ```{r, echo = FALSE, fig.width = 12, fig.height = 16}
 knitr::include_graphics("figures/semi_join.png")
 ```
@@ -194,17 +221,22 @@ knitr::include_graphics("figures/semi_join.png")
 
 ---
 
-.bitlarger[Filtering Joins -- Removing Observations]
+class: center
+
+.larger[.pink[Filtering Joins]]
+
+.large[*Removing Observations*]
 
 .pull-left[
 ```{r, eval = FALSE}
-surveys_weight %>% 
-  anti_join(species, by = "species_id")
+species %>% 
+  anti_join(surveys_weight, by = "species_id")
 ```
 
 ```{r, echo = FALSE}
-surveys_weight %>% 
-  anti_join(species, by = "species_id") %>% 
+species %>% 
+  anti_join(surveys_weight, by = "species_id") %>% 
+  select(species_id, species) %>% 
   head(n = 3) %>% 
   kable() %>% 
   kable_styling()
@@ -212,6 +244,10 @@ surveys_weight %>%
 ]
 
 .pull-right[
+
+</br>
+</br>
+
 ```{r, echo = FALSE}
 knitr::include_graphics("figures/anti_join.png")
 ```
@@ -219,13 +255,17 @@ knitr::include_graphics("figures/anti_join.png")
 
 ---
 
-class: inverse
+class: middle
 
 .larger[Connections to Data Cleaning]
 
-- Including observations with `%in%` 
-  * Similar to `semi_join()`
+--
 
-- Excluding observations with `!%in%`
-  * Similar to `anti_join()`
+- Including observations with **`%in%`** 
+  * Similar to **`semi_join()`**
+
+--
+
+- Excluding observations with **`!%in%`**
+  * Similar to **`anti_join()`**
 

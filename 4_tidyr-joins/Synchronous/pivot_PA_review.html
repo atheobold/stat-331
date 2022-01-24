@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Recap of Data Reorganization (and Cleaning!)</title>
+    <title>Recap of Relational Data</title>
     <meta charset="utf-8" />
     <meta name="author" content="Dr. Allison Theobold" />
-    <meta name="date" content="2021-04-20" />
-    <script src="libs/header-attrs-2.7/header-attrs.js"></script>
+    <meta name="date" content="2022-01-24" />
+    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
     <script src="libs/kePrint-0.0.1/kePrint.js"></script>
     <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
@@ -15,9 +15,9 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Recap of Data Reorganization (and Cleaning!)
+# Recap of Relational Data
 ### Dr. Allison Theobold
-### April 20, 2021
+### January 24, 2022
 
 ---
 
@@ -25,20 +25,27 @@ class: center, middle, inverse, title-slide
 
 
 
-class: inverse
+class: inverse, center, middle
 
 .larger[Relational Data]
 
-- Mutating joins
-  * Adds information from a new dataframe to observations in an existing
-  dataframe
+--
+
+.mango[.bitlarger[Mutating joins]] 
+
+.large[*Adds information* from a new dataframe to observations in an existing dataframe
+]
 
 --
 
-- Filtering joins
-  * Filter observations based on values in new dataframe
-  
+.mango[.bitlarger[Filtering joins]]
+
+.large[*Filters observations* based on values in new dataframe
+]
+
 ---
+
+class: center, middle 
 
 .larger[Keys]
 
@@ -150,7 +157,9 @@ class: center
 
 ---
 
-.larger[Inner Join]
+class: center, middle
+
+.larger[.rhubarb[Inner Join]]
 
 Matches pairs of observations when "keys" are equal
 
@@ -160,9 +169,15 @@ Matches pairs of observations when "keys" are equal
 
 class: center
 
-.large[**Species Inner Join**]
+.larger[**Mean Weights**]
 
-.pull-left-narrow[
+
+```r
+surveys_weight &lt;- surveys %&gt;% 
+  group_by(species_id) %&gt;% 
+  summarize(mean_weight = mean(weight))
+```
+
 &lt;table class="table" style="margin-left: auto; margin-right: auto;"&gt;
  &lt;thead&gt;
   &lt;tr&gt;
@@ -197,11 +212,13 @@ class: center
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-]
 
-&lt;/br&gt;
+---
 
-.pull-right-wide[
+class: center
+
+.larger[**Adding Information**]
+
 
 ```r
 surveys_weight %&gt;% 
@@ -215,6 +232,7 @@ surveys_weight %&gt;%
    &lt;th style="text-align:right;"&gt; mean_weight &lt;/th&gt;
    &lt;th style="text-align:left;"&gt; genus &lt;/th&gt;
    &lt;th style="text-align:left;"&gt; species &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; taxa &lt;/th&gt;
   &lt;/tr&gt;
  &lt;/thead&gt;
 &lt;tbody&gt;
@@ -223,45 +241,50 @@ surveys_weight %&gt;%
    &lt;td style="text-align:right;"&gt; 8.60000 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; Baiomys &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; taylori &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Rodent &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; DM &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 43.15786 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; Dipodomys &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; merriami &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Rodent &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; DO &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 48.87052 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; Dipodomys &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; ordii &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Rodent &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; DS &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 120.13055 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; Dipodomys &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; spectabilis &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Rodent &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; NL &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 159.24566 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; Neotoma &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; albigula &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Rodent &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; OL &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 31.57526 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; Onychomys &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; leucogaster &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Rodent &lt;/td&gt;
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-]
 
 ---
 
 .pull-left[
-.larger[Mutating Joins]
+.larger[.honey[Mutating Joins]]
 
 - Left Join: Everything is kept in the dataset **on the left**
 
@@ -274,12 +297,17 @@ surveys_weight %&gt;%
 --
 
 .pull-right[
+&lt;/br&gt;
 ![](figures/joins.JPG)   
 ]
 
 ---
 
-.bitlarger[Filtering Joins -- Keep Observations]
+class: center
+
+.larger[.pink[Filtering Joins]]
+
+.large[*Keeping Observations*]
 
 
 .pull-left[
@@ -322,50 +350,75 @@ surveys_weight %&gt;%
 ]
 
 .pull-right[
+
+&lt;/br&gt;
+&lt;/br&gt;
+
 &lt;img src="figures/semi_join.png" width="451" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
 
-.bitlarger[Filtering Joins -- Removing Observations]
+class: center
+
+.larger[.pink[Filtering Joins]]
+
+.large[*Removing Observations*]
 
 .pull-left[
 
 ```r
-surveys_weight %&gt;% 
-  anti_join(species, by = "species_id")
+species %&gt;% 
+  anti_join(surveys_weight, by = "species_id")
 ```
 
 &lt;table class="table" style="margin-left: auto; margin-right: auto;"&gt;
  &lt;thead&gt;
   &lt;tr&gt;
    &lt;th style="text-align:left;"&gt; species_id &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; mean_weight &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; species &lt;/th&gt;
   &lt;/tr&gt;
  &lt;/thead&gt;
 &lt;tbody&gt;
   &lt;tr&gt;
-
+   &lt;td style="text-align:left;"&gt; AB &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; bilineata &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; AH &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; harrisi &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; AS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; savannarum &lt;/td&gt;
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 ]
 
 .pull-right[
+
+&lt;/br&gt;
+&lt;/br&gt;
+
 &lt;img src="figures/anti_join.png" width="452" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
 
-class: inverse
+class: middle
 
 .larger[Connections to Data Cleaning]
 
-- Including observations with `%in%` 
-  * Similar to `semi_join()`
+--
 
-- Excluding observations with `!%in%`
-  * Similar to `anti_join()`
+- Including observations with **`%in%`** 
+  * Similar to **`semi_join()`**
+
+--
+
+- Excluding observations with **`!%in%`**
+  * Similar to **`anti_join()`**
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
