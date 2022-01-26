@@ -1,6 +1,6 @@
 ---
-title: "Lab 4 Preparation"
-date: "April 22, 2021"
+title: "Lab 4 -- Warm-up"
+date: "January 26, 2022"
 author: "Dr. Allison Theobold"
 output:
   xaringan::moon_reader:
@@ -30,12 +30,16 @@ library(tidyverse)
 library(kableExtra)
 
 style_duo_accent(
-  primary_color      = "#0F4C81", # pantone classic blue
-  secondary_color    = "#B6CADA", # pantone baby blue
+  primary_color      = "#b76352", # mango
+  secondary_color    = "#34605f", # bayberry
   header_font_google = google_font("Raleway"),
   text_font_google   = google_font("Raleway", "300", "300i"),
   code_font_google   = google_font("Source Code Pro"),
-  text_font_size     = "30px"
+  header_color = "#793540", #rhubarb
+  white_color = "#F5F5F5", # lightest color
+  black_color = "#36454F", # darkest color
+  text_font_size = "30px", 
+  link_color = "#696969" #grey
 )
 
 surveys <- read_csv("data/surveys.csv")
@@ -44,7 +48,7 @@ species <- read_csv("data/species.csv")
 
 ```
 
-class: inverse
+class: center, middle
 
 .larger[Handy Helpers]
 
@@ -52,37 +56,38 @@ class: inverse
 --
 
 
-- .large[`rename()`]
-  * Change names of columns
+.large[`rename()`] -- Change names of columns
 
 --
 
-- .large[`separate()`] 
-  * Separate values of a variable
+.large[`separate()`] -- Separate values of a variable
 
 ---
 
-class: inverse 
+class: middle, center
 
 .larger[Semi- and Anti-Join]
 
 --
 
 .pull-left[ `semi_join()`
-- Keeps values found in another dataset
+- Keeps values **found** in another dataset
 ]
 
 --
 
 .pull-right[ `anti_join()`
-- Keeps values **not** found in another dataset
+- Keeps values **not found** in another dataset
 ]
 
 ---
 
-.larger[Some words about resources]
+class: center
 
-<center>
+.huge[.rhubarb[Some words about resources]]
+
+--
+
 ![](figures/stack_overflow.PNG)
 
 .pull-left[.larger[**Using**]]
@@ -95,16 +100,27 @@ class: inverse
 
 ---
 
-.larger[Some words about deprecated functions]
+class: center
+
+.huge[.honey[Some words about functions]]
 
 --
 
 .pull-left[
-- `mutate_each()` 
-- `funs()` 
-- `gather()` & `spread()`
+![](figures/depreciated.PNG)
 ]
 
 .pull-right[
-![](figures/depreciated.PNG)
+Has a better alternative available and is scheduled for removal.]
+
+--
+
+.pull-left[
+![](figures/superseded.png)
 ]
+
+.pull-right[
+Has a known better alternative, but the function itself is not going away.]
+
+
+

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Lab 4 Preparation</title>
+    <title>Lab 4 – Warm-up</title>
     <meta charset="utf-8" />
     <meta name="author" content="Dr. Allison Theobold" />
-    <meta name="date" content="2021-04-22" />
-    <script src="libs/header-attrs-2.7/header-attrs.js"></script>
+    <meta name="date" content="2022-01-26" />
+    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="slide-style.css" type="text/css" />
   </head>
@@ -13,9 +13,9 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Lab 4 Preparation
+# Lab 4 – Warm-up
 ### Dr. Allison Theobold
-### April 22, 2021
+### January 26, 2022
 
 ---
 
@@ -23,7 +23,7 @@ class: center, middle, inverse, title-slide
 
 
 
-class: inverse
+class: center, middle
 
 .larger[Handy Helpers]
 
@@ -31,37 +31,38 @@ class: inverse
 --
 
 
-- .large[`rename()`]
-  * Change names of columns
+.large[`rename()`] -- Change names of columns
 
 --
 
-- .large[`separate()`] 
-  * Separate values of a variable
+.large[`separate()`] -- Separate values of a variable
 
 ---
 
-class: inverse 
+class: middle, center
 
 .larger[Semi- and Anti-Join]
 
 --
 
 .pull-left[ `semi_join()`
-- Keeps values found in another dataset
+- Keeps values **found** in another dataset
 ]
 
 --
 
 .pull-right[ `anti_join()`
-- Keeps values **not** found in another dataset
+- Keeps values **not found** in another dataset
 ]
 
 ---
 
-.larger[Some words about resources]
+class: center
 
-&lt;center&gt;
+.huge[.rhubarb[Some words about resources]]
+
+--
+
 ![](figures/stack_overflow.PNG)
 
 .pull-left[.larger[**Using**]]
@@ -74,19 +75,30 @@ class: inverse
 
 ---
 
-.larger[Some words about deprecated functions]
+class: center
+
+.huge[.honey[Some words about functions]]
 
 --
 
 .pull-left[
-- `mutate_each()` 
-- `funs()` 
-- `gather()` &amp; `spread()`
+![](figures/depreciated.PNG)
 ]
 
 .pull-right[
-![](figures/depreciated.PNG)
+Has a better alternative available and is scheduled for removal.]
+
+--
+
+.pull-left[
+![](figures/superseded.png)
 ]
+
+.pull-right[
+Has a known better alternative, but the function itself is not going away.]
+
+
+
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
