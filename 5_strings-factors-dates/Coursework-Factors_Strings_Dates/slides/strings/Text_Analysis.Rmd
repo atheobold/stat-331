@@ -62,6 +62,7 @@ str_subset(my_str, "[A-z]+elly")
 ```
 
 ---
+
 # Regular Expressions
 
 
@@ -85,6 +86,7 @@ str_subset(my_str, "Kelly\\?")
 ```
 
 ---
+
 # Regular Expressions
 
 * Letters and numbers match themselves
@@ -100,6 +102,7 @@ str_subset(my_str, "Kelly\\?")
 *  See the `stringr` cheatsheet for more shortcuts, like `[:punct:]`
 
 ---
+
 # Regular Expressions
 
 * `.` matches any character at all (except new lines)
