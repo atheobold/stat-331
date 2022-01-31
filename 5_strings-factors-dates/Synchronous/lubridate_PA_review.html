@@ -4,8 +4,8 @@
     <title>Practice Activity Warm-up</title>
     <meta charset="utf-8" />
     <meta name="author" content="Dr. Allison Theobold" />
-    <meta name="date" content="2021-04-27" />
-    <script src="libs/header-attrs-2.7/header-attrs.js"></script>
+    <meta name="date" content="2022-01-31" />
+    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="slide-style.css" type="text/css" />
   </head>
@@ -15,7 +15,7 @@ class: center, middle, inverse, title-slide
 
 # Practice Activity Warm-up
 ### Dr. Allison Theobold
-### April 27, 2021
+### January 31, 2022
 
 ---
 
@@ -69,16 +69,61 @@ How would you coerce **`20150307`** into a datetime object?
 
 ---
 
+class: center, middle
+
+.larger[**Lots** of Choices]
+
+
+```r
+date &lt;- "20150307"
+```
+
+--
+
+.pull-left[
+.large[**Simple**]
+
+```r
+ymd(date) 
+```
+
+```
+## [1] "2015-03-07"
+```
+]
+
+--
+
+.pull-right[
+.large[**Complicated**]
+
+
+```r
+year &lt;- str_sub(date, start = 1, end = 4)
+month &lt;- str_sub(date, start = 5, end = 6)
+day &lt;- str_sub(date, start = 7, end = 8)
+make_date(year, month, day)
+```
+
+```
+## [1] "2015-03-07"
+```
+]
+
+---
+
+class: center, middle
+
 .larger[Time Zones]
 
 
 ```r
-x &lt;- ymd_h("2021-4-25 6", tz = "America/Los_Angeles")
+x &lt;- ymd_h("2021-4-25 18", tz = "America/Los_Angeles")
 x
 ```
 
 ```
-## [1] "2021-04-25 06:00:00 PDT"
+## [1] "2021-04-25 18:00:00 PDT"
 ```
 
 --
@@ -93,7 +138,7 @@ force_tz(x, tzone = "America/Denver")
 ```
 
 ```
-## [1] "2021-04-25 06:00:00 MDT"
+## [1] "2021-04-25 18:00:00 MDT"
 ```
 ]
 
@@ -109,7 +154,7 @@ with_tz(x, tzone = "America/Denver")
 ```
 
 ```
-## [1] "2021-04-25 07:00:00 MDT"
+## [1] "2021-04-25 19:00:00 MDT"
 ```
 
 ]
@@ -124,7 +169,7 @@ x
 ```
 
 ```
-## [1] "2021-04-25 06:00:00 PDT"
+## [1] "2021-04-25 18:00:00 PDT"
 ```
 
 
@@ -136,6 +181,8 @@ x
 `TRUE` or `FALSE` values for whether the time occurs in the AM or PM
 ] 
 
+--
+
 .pull-right[
 
 ```r
@@ -143,7 +190,7 @@ am(x)
 ```
 
 ```
-## [1] TRUE
+## [1] FALSE
 ```
 
 ```r
@@ -151,7 +198,7 @@ pm(x)
 ```
 
 ```
-## [1] FALSE
+## [1] TRUE
 ```
 ]
 

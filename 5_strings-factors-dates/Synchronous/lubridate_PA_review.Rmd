@@ -1,6 +1,6 @@
 ---
 title: "Practice Activity Warm-up"
-date: "April 27, 2021"
+date: "January 31, 2022"
 author: "Dr. Allison Theobold"
 output:
   xaringan::moon_reader:
@@ -86,10 +86,44 @@ How would you coerce **`20150307`** into a datetime object?
 
 ---
 
+class: center, middle
+
+.larger[**Lots** of Choices]
+
+```{r}
+date <- "20150307"
+```
+
+--
+
+.pull-left[
+.large[**Simple**]
+```{r}
+ymd(date) 
+```
+]
+
+--
+
+.pull-right[
+.large[**Complicated**]
+
+```{r}
+year <- str_sub(date, start = 1, end = 4)
+month <- str_sub(date, start = 5, end = 6)
+day <- str_sub(date, start = 7, end = 8)
+make_date(year, month, day)
+```
+]
+
+---
+
+class: center, middle
+
 .larger[Time Zones]
 
 ```{r}
-x <- ymd_h("2021-4-25 6", tz = "America/Los_Angeles")
+x <- ymd_h("2021-4-25 18", tz = "America/Los_Angeles")
 x
 ```
 
@@ -132,6 +166,8 @@ x
 
 `TRUE` or `FALSE` values for whether the time occurs in the AM or PM
 ] 
+
+--
 
 .pull-right[
 ```{r}

@@ -45,9 +45,8 @@ the morning.
 ```{r}
 suspects <- suspects %>% 
   mutate(
-  Time.Spotted = force_tz(
-    ymd_hms(Time.Spotted), 
-    tz = "America/Los_Angeles")
+  time_spotted = force_tz(ymd_hms(Time.Spotted), 
+                          tz = "America/Los_Angeles")
   ) %>% 
   filter(!am(Time.Spotted)) 
 # Down to 112
@@ -59,8 +58,8 @@ so the murder did not happen on those days.
 
 ```{r}
 suspects <- suspects %>% 
-  filter(!(wday(Time.Spotted, label = TRUE) %in% c("Tue", "Thu")
-           )
+  mutate(day_of_week = wday(Time.Spotted, label = TRUE)) %>% 
+  filter(! day_of_week %in% c("Tue", "Thu")
          ## The ! negates the statement before it! 
          )
 ## Down to 77
@@ -76,8 +75,9 @@ tgiving <- make_date(year = 2018,
                      day = 22)
 
 suspects <- suspects %>% 
-  filter(Time.Spotted >= tgiving - 35,
-         Time.Spotted <= tgiving + 35) 
+  filter(Time.Spotted >= tgiving - days(35),
+         Time.Spotted <= tgiving + days(35)
+  )
 
 ## Down to 13
 ```
@@ -89,8 +89,7 @@ a text to their sister in Iceland, saying "Goodnight over there!"
 ```{r}
 suspects <- suspects %>% 
   filter(
-    pm(
-      with_tz(Time.Spotted, "GMT")
+    pm(with_tz(time_spotted, "GMT")
       )
     ) 
 
@@ -126,7 +125,8 @@ epoch <- ymd_hms("1970-01-01 0:0:0",
 suspects <- suspects %>% 
   mutate(minutes  = difftime(Time.Spotted,
                              epoch, 
-                             units = "mins"))  %>%
+                             units = "mins"), 
+         minutes_whole = as.integer(minutes))  %>%
   filter(as.integer(minutes) %% 10 == 0) 
 ```
 
@@ -136,21 +136,8 @@ suspects <- suspects %>%
 suspects <- suspects %>% 
   filter(
     as.integer(
-      as.numeric(Time.Spotted)/60
+      as.numeric(Time.Spotted) / 60
       ) %% 10 == 0) 
-```
-
-**Using `duration()` to get a `duration` object**
-
-```{r, eval = FALSE}
-suspects <- suspects %>% 
-  mutate(minutes  = difftime(Time.Spotted,
-                             epoch, 
-                             units = "mins"), 
-         minutes = duration(as.character(minutes), 
-                            units = "minutes")
-         ) %>%
-  filter(minutes %% 10 == 0) 
 ```
 
 Who is the killer? (Only one name should remain.)
