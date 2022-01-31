@@ -1,0 +1,38 @@
+---
+title: "Challenge 3 Grading Rubric"
+output: html_document
+---
+
+# Published Comparisons (5 points)
+
+__Obtains means for each group for each genre -- 2 points__
+
+- Uses repeated calls to `summarize()` -- 1 point
+- Uses `filter()` to create groups instead of `group_by()` -- 1.5 points
+- Uses `summarize_at()` to calculate means of multiple columns -- 1.5 points
+- Uses `across()` to `summarize()` multiple columns -- 2 points
+
+__Obtains differences between each group -- 2.5 points__
+
+- Uses `summarize()` and `across()` to find differences -- 2.5 point
+- Uses `summarize_at()` or `mutate_at()` to find differences -- 2 points
+- Uses properties of matrices to extract 1st and 2nd rows to find differences --
+1 point
+- Uses multiple calls to `diff()` or `lag()` -- 0.5 points
+
+__States what genre the largest difference occurs at -- 0.5 points__
+
++ 0.5 Bonus -- Pivots table to find differences
++ 1 Bonus -- Includes visualizations of differences
+
+
+# Study Critique (5 points)
+
+Full credit if provides: 
+
+- reasonable critiques of study design
+- justification as to why these aspects are concerning
+
++ 0.5 Bonus -- Connect context of study (AAE) to lack of participants who
+identify as Black
+
