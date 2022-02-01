@@ -1,0 +1,165 @@
+---
+title: "Lab 4 Grading Guide"
+output: html_document
+---
+
+</br>
+
+**If there is no response to a question a score of 0 is awarded.**
+
+**If code outside of the _R for Data Science_ book is used, a citation must be 
+included. If no citation is included, the question is awarded a 0.**
+
+</br>
+
+---
+
+# RMarkdown Report 
+
+## Report Formatting
+
+</br>
+
+## Code Formatting 
+
+- 4: Code formatting adheres to the tidyverse styling guide. At a bare minimum, 
+the code has the following:
+  
+  *
+
+- 3: Occassional occurances of code formatting which does not adhere to styling
+guide
+
+**Redo if above conditions are not met**
+
+</br>
+
+## Reading in Data
+
+-	4: Reads data in with the `here()` function 
+-	Redo: If uses relative or full path to read in the data
+
+</br>
+
+---
+
+# Exercises
+
+## Problem 1
+
+**4**: Must have the following,
+
+1. context of data (**Hass** avocado sales)
+2. duration of data (2015 to 2018)
+3. description of variables (date of sale, price of avocado, region of sale,
+  type of avocado, size of avocado)
+
+**3**: Has components 1 & 2, describes some variables but not all
+
+**Redo if the above conditions are not met**
+
+</br>
+
+## Problem 2
+
+**4**: Must have the following,
+
+1. Uses `rename()`, `mutate()`, or `transmute()` to convert PLU variable names
+(`4046`, `4225`, `4770`) to variables related to **size** of avocado
+
+  - `4046` = small
+  - `4225` = large
+  - `4770` = XL
+
+2. Uses `filter()` to drop `"TotalUS"` from dataset
+
+```{r, eval = FALSE}
+avocado <- avocado %>%
+  # Rename the PLU variables to be sizes of avocados!
+  rename(
+    Size_Small = `4046`,
+    Size_Large = `4225`,
+    Size_XL = `4770`) %>% 
+  # Filter out "TotalUS" because it is not a region or city!
+  filter(region != "TotalUS")
+```
+
+**Redo if not met**
+
+
+</br>
+
+## Problem 3
+
+**4**: Must have the following,
+
+1. A dataset with the following major regions defined: Plains, Midsouth, 
+West, SouthCentral, Northeast, Southeast, GreatLakes"
+
+2. A region-level dataset produced with a `semi_join()`
+
+- 
+
+1. Uses `rename()`, `mutate()`, or `transmute()` to convert PLU variable names
+(`4046`, `4225`, `4770`) to variables related to **size** of avocado
+
+  - `4046` = small
+  - `4225` = large
+  - `4770` = XL
+
+2. Uses `filter()` to drop `"TotalUS"` from dataset
+
+```{r}
+# Make tibble with the names of the major regions 
+major_regions <- tibble(region = c("Plains",
+                                   "Midsouth",
+                                   "West",
+                                   "SouthCentral",
+                                   "Northeast",
+                                   "Southeast",
+                                   "GreatLakes")
+                   )
+  
+# Keep only the observations in the avocado dataset
+# WITH matches in the major_regions
+avo_regional <- avocado %>%
+  semi_join(major_regions, by = "region")
+```
+</br>
+
+## Problem 4
+
+</br>
+
+## Problem 5
+
+```{r}
+# Make tibble with the names of the states / regions to NOT include
+# I'm assuming that "NewYork" is the city and not the state!
+states <- tibble(region = c("California",
+                            "WestTexNewMexico",
+                            "NorthernNewEngland",
+                            "SouthCarolina")
+                 )
+
+# Keep only the observations in the avocado dataset
+# WITHOUT matches in the major_regions
+avo_metro <- avocado %>%
+  anti_join(major_regions, by = "region") %>% 
+  anti_join(states, by = "region")
+
+```
+
+
+</br>
+
+---
+
+# Reshaping
+
+## Problem 6
+
+</br>
+
+## Problem 7
+
