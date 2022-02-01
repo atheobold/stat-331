@@ -187,7 +187,7 @@ Answer the questions based on the reading, video, **lubridate**
 <!-- %within% checks if a date is included in an interval -->
 <!-- %--% creates an interval with a start and end time  -->
  
-- What happens if you use the `parse_datetime()` function,
+- What happens if you use the `make_date()` function,
 but you do not provide a `day` argument?
 
 <!-- Assigns the first day of that month! -->
