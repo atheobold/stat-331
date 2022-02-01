@@ -45,9 +45,9 @@ the morning.
 ```{r}
 suspects <- suspects %>% 
   mutate(
-  time_spotted = force_tz(ymd_hms(Time.Spotted), 
+  time_spotted = force_tz(ymd_hms(Time.Spotted),
                           tz = "America/Los_Angeles")
-  ) %>% 
+  ) %>%
   filter(!am(Time.Spotted)) 
 # Down to 112
 ```
@@ -58,7 +58,7 @@ so the murder did not happen on those days.
 
 ```{r}
 suspects <- suspects %>% 
-  mutate(day_of_week = wday(Time.Spotted, label = TRUE)) %>% 
+  mutate(day_of_week = wday(Time.Spotted)) %>% 
   filter(! day_of_week %in% c("Tue", "Thu")
          ## The ! negates the statement before it! 
          )
@@ -74,10 +74,10 @@ tgiving <- make_date(year = 2018,
                      month = 11, 
                      day = 22)
 
+t_int <- interval(tgiving - days(35), tgiving + days(35))
+
 suspects <- suspects %>% 
-  filter(Time.Spotted >= tgiving - days(35),
-         Time.Spotted <= tgiving + days(35)
-  )
+  filter(Time.Spotted %within% int)
 
 ## Down to 13
 ```

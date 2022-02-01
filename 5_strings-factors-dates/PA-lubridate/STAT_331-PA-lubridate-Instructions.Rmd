@@ -110,7 +110,7 @@ suspects <- suspects %>%
 
 
 5. The Killer left behind a birthday card at the scene of the crime.  The date
-is smudged, but the number of the month is shown to be 22.  It is thought that
+is smudged, but the day of the month is shown to be 22.  It is thought that
 perhaps this murder took place less than two days after the Killer's birthday.
 
 ```{r}

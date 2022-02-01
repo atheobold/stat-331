@@ -1,0 +1,205 @@
+---
+title: "Lab 5"
+author: "Annie Zell"
+date: "5/3/2021"
+output: html_document
+---
+
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 10px;}
+</style>
+<div class = "blue">
+
+Great job! You did not complete #4 or #5, so I cannot give you revisions for 
+those problems. The work you did on the other problems was great!
+
+Your document contains output from loading the data. As stated in the lab 
+instructions, you are receiving a 5% (1.5 point) deduction for this. 
+
+**Score** (average score for 7 questions): 2.5
+
+</div>
+
+Packages
+```{r}
+library(tidyverse)
+library(lubridate)
+```
+
+Read in dataset
+
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 10px;}
+</style>
+<div class = "blue">
+
+This does not utilize the fact that the `here()` function looks inside of the 
+directory for your RStudio project! You should only need to specify that you need 
+`here()` to look inside "Week 5" and "Lab 5" to get to the "billboard_songs.txt"
+dataset. 
+</div>
+
+```{r, eval = FALSE}
+billboard_songs <- read_tsv(here::here("/Users/anniezell/Desktop/Stat 331/Week 5/Lab 5/billboard_songs.txt"))
+```
+
+```{r, echo = FALSE}
+billboard_songs <- read_tsv(here::here("5_strings-factors-dates", 
+                                       "Lab-Billboard100", 
+                                       "billboard_songs.txt"))
+```
+
+Data cleanup
+
+```{r}
+billboard_songs <- billboard_songs %>%
+  rename("chart_date" = 'chart date', 
+         "overall_peak" = 'overall peak',
+         "weeks_chart" = 'weeks on chart') %>%
+  drop_na() %>%
+  mutate(chart_date = ymd(chart_date), 
+         overall_peak = as.numeric(overall_peak)) 
+```
+
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 10px;}
+</style>
+<div class = "blue">
+
+**3** -- Nice work creating a date variable from the chart date! The parsing 
+errors should have you worried! Look at the advice posted on Discord for how 
+to handle these parsing errors! 
+
+</div>
+
+#Use the slice_sample function to randomly select 200 rows from the dataset
+```{r}
+#billboard_songs200 <- slice_sample(billboard_songs, n = 200)
+```
+
+
+Questions
+1. What 5 songs spent the longest on the charts? Give only the title, artist, and weeks.
+```{r}
+billboard_songs %>% 
+  select(title, artist, weeks_chart) %>% 
+  arrange(desc(weeks_chart)) %>%
+  top_n(n=5)
+
+```
+
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 10px;}
+</style>
+<div class = "blue">
+
+**4**
+
+</div>
+
+2. Which five artists had the most number 1 hits?
+
+For this question, you may ignore songs with more than one artist listed.
+
+```{r}
+#make object for artist names and subset out single artists
+artist_names <- billboard_songs$artist
+single_artists <- str_subset(artist_names,"/|&|featuring|'+'",
+                             negate = TRUE)
+
+#
+billboard_songs %>%
+  filter(overall_peak == 1, artist %in% single_artists) %>%
+  group_by(artist) %>%
+  mutate(sum_peak = sum(overall_peak)) %>%
+  select( artist, sum_peak) %>%
+  arrange(desc(sum_peak)) %>%
+  distinct() %>%
+  top_n(n=5)
+
+
+
+```
+
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 10px;}
+</style>
+<div class = "blue">
+
+**4** -- Nice work filtering out the "extra" artists from the songs with a 
+regular expression! But, doesn't the `filter()` then allow for these "featuring" 
+artists to be included again (assuming they also have songs of their own)?
+
+</div>
+
+
+Use the team manager’s birthday to answer the following question:
+
+3. What hit songs could have been played at your 10th birthday party? That is, which songs that eventually peaked at #1 entered the charts within two months (before or after) your 10th birthday? Give only the song title, artist, and date of chart entry.
+
+```{r}
+bday_10 <- make_date(year = 2005, month = 05 , day = 18)
+
+
+plus2months <- bday_10 + months(2)
+minus2months <- bday_10 - months(2)
+
+billboard_songs %>% 
+  filter(overall_peak == 1) %>%
+  filter((chart_date %within% interval(minus2months, plus2months))) %>%
+  select(title, artist, chart_date)
+```
+
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 10px;}
+</style>
+<div class = "blue">
+
+**4** -- Nice work creating an interval and using the `%within%` check! 
+
+</div>
+
+
+4. Explore the Matching Multiple Characters section of the lubridate resources to learn about the str_extract_all() function. Use str_extract_all() to uncover what is the most common word, at least four letters long, used in the title of any song. Give only the word itself, and its count.
+
+Hint 1: Look up the help file on str_extract_all()!
+
+Hint 2: "hello" and "Hello" are the same word!
+
+Hint 3: The result of str_extract_all() is a list. To make the list into a vector, use unlist()!
+
+```{r}
+
+```
+
+
+
+5. Let’s take a look at artists who work together on songs. Which three artists have featured on the most Billboard charting songs?
+
+Hint: The functions str_subset(), str_replace_all(), and str_split() would be useful!
+
+```{r}
+
+```
+
+
+Definitions:
+
+RAE SREMMURD featuring NICKI MINAJ & YOUNG THUG
+In this string, Nicki Minaj and Young Thug are considered to be featured.
+
+JESSIE J, ARIANA GRANDE & NICKI MINAJ
+In this string, Jessie J and Ariana Grande and Nicki Minaj all worked together (collaborated), but nobody was featured.
+
+Challenge
+Explain each line of the code that your team wrote to address question 5.
+
+Talk through what the regular expressions mean! For example, how are the matches being made? What is being replaced? How are strings being split up?
+
+
+
+
+```{r}
+
+```
+

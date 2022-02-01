@@ -40,6 +40,22 @@ style_duo_accent(
 )
 ```
 
+```{r, eval = FALSE, include = FALSE}
+embed_video <- function(src, type = "video/mp4", width = "320", height = "240", 
+                     attribute = "controls", placeholder = "") {
+                        
+  if (knitr::is_html_output()) {
+    sprintf("<audio width='%3$s' height='%4$s' %5$s>
+               <source src='%1$s' type='%2$s'>
+            </audio>", src, type, width, height, attribute)
+  } else print(placeholder)
+
+}
+
+embed_video("bumi_tail.mp4")`
+
+```
+
 class: center, inverse
 
 .larger[Dates] 
