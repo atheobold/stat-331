@@ -1,6 +1,6 @@
 ---
-title: "Puzzle Activity:  Regular Expressions"
-author: ""
+title: "Practice Activity:  Regular Expressions"
+author: "As Coded by: Dr. Theobold"
 output:
   prettydoc::html_pretty:
     theme: tactile
@@ -9,7 +9,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(include = FALSE)
+knitr::opts_chunk$set(message = FALSE)
 ```
 ## Setup
 
@@ -17,7 +17,6 @@ Run the code below to load the scrambled message:
 
 ```{r}
 library(tidyverse)
-
 ```
 
 ```{r, include = TRUE, message = FALSE}
@@ -46,14 +45,14 @@ str_subset(message, pattern = "\\w") %>%
 ```
 
 3. Print out every piece of a word in the scrambled message that starts with the
-letter "m". 
+letter "k". 
 
 ```{r}
 message[str_detect(message, pattern = "^m")]
 ```
 
 4. Print out every piece of a word in the scrambled message that ends with the
-letter "z"
+letter "b"
 
 ```{r}
 message[str_detect(message, pattern = "z$")]
@@ -101,14 +100,16 @@ punctuation mark, delete this.
 
 ```{r}
 message <- message %>% 
-  str_replace_all(pattern = "ugh+[!,?.;]+", replacement = "")
+  str_replace_all(pattern = "ugh+[!,?.;]+", 
+                  replacement = "")
 ```
 
 4. Replace all instances of exactly 2 a's with exactly 2 e's.
 
 ```{r}
 message <- message %>% 
-  str_replace_all(pattern = "[aa]{2}", replacement = "ee")
+  str_replace_all(pattern = "[aa]{2}", 
+                  replacement = "ee")
 ```
 
 5. Replace all z's with t's.
@@ -136,9 +137,9 @@ message <- message %>%
 8. Use `str_c` to recombine all your words into a message.
 
 ```{r}
-message_combined <- str_c(message, collapse = " ")
+str_c(message, collapse = " ")
 ```
 
 9. Find the movie this quote is from.
 
-<!-- V for Vindetta -->
+![](v.jpg)
