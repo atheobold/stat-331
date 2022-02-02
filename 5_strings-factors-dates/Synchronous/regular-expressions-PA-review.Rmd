@@ -22,7 +22,8 @@ output:
 ```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.width = 8, fig.height = 6}
 knitr::opts_chunk$set(message = FALSE, 
                       warning = FALSE, 
-                      fig.align = "center")
+                      fig.align = "center", 
+                      echo = FALSE)
 
 library(xaringanthemer)
 library(xaringan)
@@ -31,11 +32,183 @@ library(kableExtra)
 library(lubridate)
 
 style_duo_accent(
-  primary_color      = "#0F4C81", # pantone classic blue
-  secondary_color    = "#B6CADA", # pantone baby blue
+  primary_color      = "#b76352", # mango
+  secondary_color    = "#34605f", # bayberry
   header_font_google = google_font("Raleway"),
   text_font_google   = google_font("Raleway", "300", "300i"),
   code_font_google   = google_font("Source Code Pro"),
-  text_font_size     = "30px"
+  header_color = "#793540", #rhubarb
+  white_color = "#F5F5F5", # lightest color
+  black_color = "#36454F", # darkest color
+  text_font_size = "30px", 
+  link_color = "#696969" #grey
 )
 ```
+
+class: inverse
+
+```{r, out.height = "20%", out.width = "50%"}
+knitr::include_graphics("reg_ex_cat.jpg")
+```
+
+---
+
+class: center, middle
+
+.larger[Regular Expressions]
+
+.large[
+
+> "Regexps are a very terse language that allow you to describe patterns in 
+> strings."
+>
+> *R for Data Science*
+
+]
+
+---
+
+class: center, middle
+
+.larger[**Regular Expressions versus _Strings_ of Regular Expressions**]
+
+---
+
+.larger[Useful Shortcuts for RegExps]
+
+--
+
+.pull-left[
+**.** -- Represents any character  
+**^** -- Looks at the beginning  
+**$** -- Looks at the end  
+
+</br>
+</br>
+
+**\w** -- Looks for any word  
+**\d** -- Looks for any digit  
+**\w** -- Looks for any whitespace
+]
+
+--
+
+.pull-right[
+**?** -- Occurs 0 or 1 times  
+**+** -- Occurs 1 or more times  
+__*__ -- Occurs 0 or more times
+
+</br>
+</br>
+
+**[abc]** -- Matches a, b, or c  
+**[^abc]** -- Matches anything except a, b, or c
+
+]
+
+---
+
+class: middle, inverse
+
+.larger[Your turn!]
+
+.large[Write a regular expression that search for words that:  
+
+- end with a vowel
+- start with x, y, or z 
+- *do not* contain x, y, or z
+- contain British spelling
+]
+
+---
+
+class: center
+
+.larger[Creating Groups & Referencing Groups]
+
+--
+
+Groups can be created with **( )**
+
+--
+
+A **|** can be used to search for **either** letter in a group
+
+```
+"gr(e|a)y"
+```
+--
+
+Groups can be referenced based on their position
+
+```
+"(.)(.)\\2\\1"
+```
+
+---
+
+class: center, middle, inverse
+
+.larger[.hand[What do you want to do with your strings?]]
+
+---
+
+class: center, middle
+
+.larger[Want to know if a value is contained in a string?] 
+
+--
+
+Use `str_detect()`!
+
+---
+
+class: center, middle
+
+.larger[Want to see what string(s) have certain values?]
+
+--
+
+Use `str_extract()` or `str_extract_all()`!
+
+---
+
+class: center, middle
+
+.larger[Want to extract components of a string?]
+
+--
+
+.pull-left[
+.large[**Based on their location?**]
+
+Use `str_sub()`!
+]
+
+--
+
+.pull-right[
+.large[**Based on a value?**]
+
+Use `str_subset()`!
+]
+
+---
+
+class: center, middle
+
+.larger[Want to replace value(s) in a string?]
+
+--
+
+Use `str_replace()` or `str_replace_all()`!
+
+---
+
+class: center, middle
+
+.larger[Want to smoosh values of a string together?]
+
+--
+
+Use `str_c()`!
