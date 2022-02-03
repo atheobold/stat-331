@@ -281,7 +281,8 @@ If 4 was not done above, a theme was used to reverse the direction of the colors
 
 </br>
 
-**3**: Uses multiple calls to `summarize()` instead of using `across()`
+**3**: Uses multiple calls to `summarize()` to calculate the `mean()` instead
+of using `across()`
 
 **Redo if above conditions are not met**
 
