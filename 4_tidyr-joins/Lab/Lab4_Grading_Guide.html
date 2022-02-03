@@ -171,33 +171,40 @@ pre code {
 <p></br></p>
 <p><strong>If there is no response to a question a score of 0 is awarded.</strong></p>
 <p><strong>If code outside of the <em>R for Data Science</em> book is used, a citation must be included. If no citation is included, the question is awarded a 0.</strong></p>
-<p></br></p>
 <hr />
 <div id="rmarkdown-report" class="section level1">
 <h1>RMarkdown Report</h1>
 <div id="report-formatting" class="section level2">
 <h2>Report Formatting</h2>
+<p><strong>4</strong>: The report has the following,</p>
+<ul>
+<li>Easy to locate headers / titles for question numbers</li>
+<li>No warnings from code</li>
+<li>No messages from code</li>
+<li>No output of data previews</li>
+</ul>
+<p><strong>3</strong>: The report includes a preview of the data (e.g., <code>glimpse(avocado)</code>)</p>
+<p><strong>Redo if above conditions are not met</strong></p>
 <p></br></p>
 </div>
 <div id="code-formatting" class="section level2">
 <h2>Code Formatting</h2>
+<p><strong>4</strong>: Code formatting adheres to the tidyverse styling guide. At a bare minimum, the code has the following:</p>
 <ul>
-<li><p>4: Code formatting adheres to the tidyverse styling guide. At a bare minimum, the code has the following:</p>
-<ul>
-<li></li>
-</ul></li>
-<li><p>3: Occassional occurances of code formatting which does not adhere to styling guide</p></li>
+<li>spaces around <code>=</code> signs</li>
+<li>spaces after <code>,</code>s</li>
+<li>new lines after <code>+</code>s</li>
+<li>new lines after <code>%&gt;%</code>s</li>
+<li>no lines of code that wrap across multiple lines</li>
 </ul>
+<p><strong>3</strong>: No more than two occurrences of code formatting which does not adhere to styling guide</p>
 <p><strong>Redo if above conditions are not met</strong></p>
 <p></br></p>
 </div>
 <div id="reading-in-data" class="section level2">
 <h2>Reading in Data</h2>
-<ul>
-<li>4: Reads data in with the <code>here()</code> function</li>
-<li>Redo: If uses relative or full path to read in the data</li>
-</ul>
-<p></br></p>
+<p><strong>4</strong>: Reads data in with the <code>here()</code> function</p>
+<p><strong>Redo: If uses relative or full path to read in the data</strong></p>
 <hr />
 </div>
 </div>
@@ -217,67 +224,164 @@ pre code {
 </div>
 <div id="problem-2" class="section level2">
 <h2>Problem 2</h2>
-<pre class="r"><code>avocado &lt;- avocado %&gt;%
-  # Rename the PLU variables to be sizes of avocados!
-  rename(
-    Size_Small = `4046`,
-    Size_Large = `4225`,
-    Size_XL = `4770`) %&gt;% 
-  # Filter out &quot;TotalUS&quot; because it is not a region or city!
-  filter(region != &quot;TotalUS&quot;)
-
-# Make tibble with the names of the major regions 
-major_regions &lt;- tibble(region = c(&quot;Plains&quot;,
-                                   &quot;Midsouth&quot;,
-                                   &quot;West&quot;,
-                                   &quot;SouthCentral&quot;,
-                                   &quot;Northeast&quot;,
-                                   &quot;Southeast&quot;,
-                                   &quot;GreatLakes&quot;)
-                   )
-  
-# Keep only the observations in the avocado dataset
-# WITH matches in the major_regions
-avo_regional &lt;- avocado %&gt;%
-  semi_join(major_regions, by = &quot;region&quot;)
-
-# Make tibble with the names of the states / regions to NOT include
-# I&#39;m assuming that &quot;NewYork&quot; is the city and not the state!
-states &lt;- tibble(region = c(&quot;California&quot;,
-                            &quot;WestTexNewMexico&quot;,
-                            &quot;NorthernNewEngland&quot;,
-                            &quot;SouthCarolina&quot;)
-                 )
-
-# Keep only the observations in the avocado dataset
-# WITHOUT matches in the major_regions
-avo_metro &lt;- avocado %&gt;%
-  anti_join(major_regions, by = &quot;region&quot;) %&gt;% 
-  anti_join(states, by = &quot;region&quot;)</code></pre>
+<p><strong>4</strong>: Must have the following,</p>
+<ol style="list-style-type: decimal">
+<li>Uses <code>rename()</code>, <code>mutate()</code>, or <code>transmute()</code> to convert PLU variable names (<code>4046</code>, <code>4225</code>, <code>4770</code>) to variables related to <strong>size</strong> of avocado:</li>
+</ol>
+<ul>
+<li><code>4046 = small_avocado</code> (or similar)</li>
+<li><code>4225 = large_avocado</code> (or similar)</li>
+<li><code>4770 = XL_avocado</code> (or similar)</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li>Uses <code>filter()</code> to drop <code>&quot;TotalUS&quot;</code> from dataset</li>
+</ol>
+<p><strong>Redo if above conditions are not met</strong></p>
 <p></br></p>
 </div>
 <div id="problem-3" class="section level2">
 <h2>Problem 3</h2>
+<p><strong>4</strong>: Must have the following,</p>
+<ol style="list-style-type: decimal">
+<li><p>A dataset with the following major regions defined: Plains, Midsouth, West, SouthCentral, Northeast, Southeast, GreatLakes</p></li>
+<li><p>A region-level dataset produced with a <code>semi_join()</code></p></li>
+<li><p><code>filter(type == &quot;organic&quot;, year == 2017)</code> (could be two calls to <code>filter()</code>)</p></li>
+<li><p><code>group_by(region)</code></p></li>
+<li><p>Uses <code>summarize()</code> to find the <code>sum(Size_Small))</code></p></li>
+<li><p>Names the summary statistic inside of summarize()<code>(e.g.,</code>summarize(tot_small_bags = sum(Size_Small)`)</p></li>
+<li><p>Uses <code>slice_max()</code> to grab the maximum of the summarized variable (<code>tot_small_bags</code>)</p></li>
+</ol>
+<p><strong>3</strong>:</p>
+<ul>
+<li>Satisfies criteria 1-5, but does not name the summary and / or use <code>slice_max()</code> to grab the max</li>
+</ul>
+<p><em>OR</em></p>
+<ul>
+<li>Satisfies criteria 2-5 but includes regions beyond those defined as “major”</li>
+</ul>
+<p><strong>Redo if above conditions are not met</strong></p>
 <p></br></p>
 </div>
 <div id="problem-4" class="section level2">
 <h2>Problem 4</h2>
+<p><strong>4</strong>: Must have the following,</p>
+<ol style="list-style-type: decimal">
+<li><p>Uses the <code>separate()</code> function to create three new columns: Year, Month, and Day</p></li>
+<li><p><code>group_by(Month)</code></p></li>
+<li><p>Uses <code>summarize()</code> to find the <code>sum(&#39;Total Volume&#39;)</code></p></li>
+<li><p>Names the summary statistic inside of summarize()<code>(e.g.,</code>summarize(tot_sales = sum(‘Total Volume’)`)</p></li>
+<li><p>Uses <code>slice_max()</code> to grab the maximum of the summarized variable (<code>tot_sales</code>)</p></li>
+</ol>
+<p><strong>3</strong>: Satisfies criteria 1-3, but does not name the summary and / or use <code>slice_max()</code> to grab the max</p>
+<p><strong>Redo if above conditions are not met</strong></p>
 <p></br></p>
 </div>
 <div id="problem-5" class="section level2">
 <h2>Problem 5</h2>
+<div id="data-summary" class="section level3">
+<h3>Data Summary</h3>
+<p><strong>4</strong>: Must have the following,</p>
+<ol style="list-style-type: decimal">
+<li>A dataset defined with regions to exclude. These can be <em>all</em> of the regions to exclude (major regions, minor regions, and states), or they could be only the minor regions and states not included in the previous “major regions” dataset.</li>
+</ol>
+<ul>
+<li>Additional regions to exclude: California, WestTexNewMexico, NorthernNewEngland, SouthCarolina</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li><p>A metro-level dataset produced with one or two <code>anti_join()</code>s</p></li>
+<li><p>The top 5 region’s mean avocado sales found using:</p></li>
+</ol>
+<ul>
+<li><code>group_by(region)</code></li>
+<li><code>summarize(avgtotvol = mean(&#39;Total Volume&#39;))</code></li>
+<li><code>slice_max(n = 5, avgtotvol)</code></li>
+</ul>
+<p><strong>3</strong>: Satisfies criteria 1-3, but does not name the summary and / or use <code>slice_max()</code> to grab the max</p>
+<p><strong>Redo if above conditions are not met</strong></p>
+</div>
+<div id="data-visualization" class="section level3">
+<h3>Data Visualization</h3>
+<p><strong>4</strong>: Must have the following,</p>
+<ol style="list-style-type: decimal">
+<li><p>The top 5 metro-regions are <code>semi_join()</code>ed from previous data summary code</p></li>
+<li><p>The metro-regions are plotted so their labels do not overlap</p></li>
+<li><p>The x- and y-axis labels are renamed to describe what is being plotted</p></li>
+</ol>
+<p><strong>3</strong>:</p>
+<ul>
+<li>Satisfies criteria 1 &amp; 2 but does not create new axis labels</li>
+</ul>
+<p><em>OR</em></p>
+<ul>
+<li>Satisfies criteria 2 &amp; 3, but uses a <code>filter()</code> to obtain only the top 5 metro-regions</li>
+</ul>
+<p><strong>Redo if above conditions are not met</strong></p>
 <p></br></p>
 <hr />
+</div>
 </div>
 </div>
 <div id="reshaping" class="section level1">
 <h1>Reshaping</h1>
 <div id="problem-6" class="section level2">
 <h2>Problem 6</h2>
+<div id="data-summary-1" class="section level3">
+<h3>Data Summary</h3>
+<p><strong>4</strong>: Must have the following,</p>
+<ol style="list-style-type: decimal">
+<li><p>A dataset is defined with California regions</p></li>
+<li><p>The California dataset is used to <code>semi_join()</code> with the <code>avocado</code> dataset</p></li>
+<li><p><code>group_by(region, type)</code></p></li>
+<li><p>Uses <code>summarize()</code> to find the <code>mean(AveragePrice)</code></p></li>
+<li><p>Uses <code>pivot_wider()</code> to relocate the <code>type</code> of avocados to columns, filled with the values found in the <code>summarize()</code> step</p></li>
+<li><p>Uses <code>mutate()</code> to create a column of the differences in prices between the avocado types</p></li>
+</ol>
 <p></br></p>
+<p><strong>3</strong>: Satisfies criteria 3-6 but does not use a <code>semi_join()</code> to extract CA cities</p>
+<p><strong>Redo if above conditions are not met</strong></p>
+</div>
+<div id="data-visualization-1" class="section level3">
+<h3>Data Visualization</h3>
+<p><strong>4</strong>: A visualization must have the following,</p>
+<ol style="list-style-type: decimal">
+<li><p>The distribution of average avocado prices (e.g., boxplots, density plots)</p></li>
+<li><p>Differentiation between organic and conventional avocados (as a <code>fill</code> or as an axis)</p></li>
+<li><p>Differentiation between cities (as a <code>fill</code> or as an axis)</p></li>
+<li><p>x- and y-axis labels which to describe what is being plotted</p></li>
+</ol>
+<p><strong>3</strong>:</p>
+<ul>
+<li>Satisfies criteria 1 - 3 but does not create new axis labels</li>
+</ul>
+<p><em>OR</em></p>
+<ul>
+<li>Uses <code>facet_wrap()</code> to differentiate between type of avocado or CA city</li>
+</ul>
+<p><strong>Redo if above conditions are not met</strong></p>
+<p></br></p>
+</div>
 </div>
 <div id="problem-7" class="section level2">
 <h2>Problem 7</h2>
+<p><strong>4</strong>: Must have the following,</p>
+<p><strong>Before the Plot</strong></p>
+<ol style="list-style-type: decimal">
+<li><code>group_by(region, type)</code></li>
+<li><code>summarize(across(.cols = [NAME_OF_SIZE_VARIABLES], .fns = mean))</code></li>
+<li><code>pivot_longer([NAME_OF_SIZE_VARIABLES], names_to = &quot;Size&quot;, values_to = &quot;Mean_Sold&quot;)</code></li>
+<li>releveling of the <code>Size</code> variable to be ordered Small, Large, Extra Large (can use <code>factor()</code> or <code>fct_relevel()</code>)</li>
+</ol>
+<p><strong>To Create the Plot</strong></p>
+<ol start="5" style="list-style-type: decimal">
+<li><code>ggplot(aes(x = region, y = Mean_Sold, fill = Size))</code> – names of <code>Mean_Sold</code> and <code>Size</code> depend on <code>pivot_longer()</code> step</li>
+<li><code>geom_col(position = &quot;fill&quot;)</code></li>
+<li><code>facet_wrap(~type)</code></li>
+<li>Change axis labels to: <code>x = &quot;Region of CA&quot;</code>, <code>y = &quot;Proportion of Mean Avocados Sold&quot;</code>, <code>fill = &quot;Avocado Size&quot;</code></li>
+</ol>
+<p>If 4 was not done above, a theme was used to reverse the direction of the colors</p>
+<p></br></p>
+<p><strong>3</strong>: Uses multiple calls to <code>summarize()</code> instead of using <code>across()</code></p>
+<p><strong>Redo if above conditions are not met</strong></p>
 </div>
 </div>
 
