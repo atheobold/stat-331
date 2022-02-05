@@ -16,6 +16,7 @@ library(forcats)
 ## Introduction
 
 ### Policies
+
 - You may use: any online resources, including anything posted on Canvas. 
   * Online resources used, outside of the _R for Data Science_ textbook, are 
   required to be properly cited. A citation can be a simple link to the webpage
@@ -34,7 +35,7 @@ library(forcats)
   Student Rights and Responsibilities; academic dishonesty may ultimately be
   punishable by earning an F in this course.
 - You may **not** discuss the exam with any other students until after the
-  exams have been returned to all students.
+  exams have been returned to **all** students.
 - If you witness others exhibiting academic misconduct, you have a duty to
   report them to your professor.
 
@@ -51,18 +52,21 @@ library(forcats)
   process for completing part (b).
 - If you cannot accomplish a problem, please leave the code that you tried 
 **and** write a description of your thinking and how you tried to accomplish the 
-problem. These two components will allow for me to understand your thinking and 
-award you partial credit for the problem. 
+problem. These two components will allow for me to award you partial credit for
+the problem. 
   * For example, tell me where you wanted to get and what you tried trying to 
   get there.
-  * For the problem you cannot accomplish, please set your code chunk option to 
-  `error = TRUE`, to allow for the document to be knit even if there are errors. 
+  * For the problem you cannot accomplish, please **leave your code there** and
+  set your code chunk option to `error = TRUE`, to allow for the document to be
+  knit even if there are errors. 
 - All questions should be answered **using R code**.  Make sure your code
   prints out only the information that directly answers the question. 
   * **Penalties will be given if your `.html` file has extra output beyond that
   which answers the question.**
 -  Submit both your `.Rmd` and `.html` files on Canvas by the end of the
-  allotted time. Make sure the knitted output contains all your answers!
+  allotted time. 
+- Only your knitted file will be graded, so make sure the knitted output
+contains all your answers!
   
 ### The Dataset
 
@@ -72,12 +76,20 @@ posted in the Midterm Module on Canvas.
 Documentation for this dataset can be found [here](https://github.com/Lislejoem/Minimum-Wage-by-State-1968-to-2017/tree/master).
 
 *Note:* You can also find the code that the author used to clean the data. It
-**is** permissible to look at this code, but do not copy-paste from that source.
+**is** permissible to look at this code, but **do not** copy-and-paste from that
+source.
 
+</br>
+
+---
+
+</br>
 
 ## Part One: General R Questions  [50 points]
 
 **Fill out your answers in the Part One Quiz on Canvas.**
+
+**It may be helpful to check your answers by producing code!**
 
 </br>
 
@@ -98,6 +110,8 @@ __Which of the following is an accurate statement about `a`?__
 (e) `a + c(1,4,7)` will give an error.
 (f) `as.character(a)` will return `"10"`
 
+<!-- Correct: a, b, d, f -->
+
 </br>
 
 __2. Consider the following output:__
@@ -112,8 +126,7 @@ str(mystery_object)
 
 __What object structure is `mystery_object`?__
 
-(a) An atomic vector
-(b) A vector
+(a) A vector
 (c) A matrix
 (d) A data frame
 (e) A list
@@ -126,33 +139,35 @@ be `"Brad Pitt"`, and another might be `"Jeffrey Armstrong"`.  You may assume
 there are no middle names or two-word first or last names.__
 
 __Which of the following will return the **_full names_** of students whose
-*first name* starts with a K?__
+*first name* starts with an A?__
 
 *Check all that apply*
 
 ```{r, include = FALSE}
-student_names <- c("Brad Pitt", "Jeffrey Armstrong", 
-                             "Marilyn Foraker", 
-                             "Karen Theobold", 
+student_names <- c("Brad Pitt", 
+                   "Jeffrey Armstrong", 
+                   "Marilyn Foraker",
+                   "Allison Theobold",
+                   "Laura Smith", 
                    "Allen Klein")
 
 ```
 
-(a) `str_extract(student_names, "^K")`
-<!-- Only selects letter K -->
-(b) `str_extract(student_names, "^K.*")`
+(a) `str_extract(student_names, "^A")`
+<!-- Only selects letter A -->
+(b) `str_extract(student_names, "^A.*")`
 <!-- Extracts first AND last name -->
-(c) `str_extract(student_names, "^K[a-z]*")`
+(c) `str_extract(student_names, "^A[a-z]*")`
 <!-- Extracts first name! -->
-(d) `str_extract(student_names, "K[a-z]* ")`
+(d) `str_extract(student_names, "A[a-z]* ")`
 <!-- Extracts first name! -->
-(e) `str_subset(student_names, "^K")`
+(e) `str_subset(student_names, "^A")`
 <!-- Extracts first AND last name.  -->
-(f) `str_subset(student_names, "^K.*")`
+(f) `str_subset(student_names, "^A.*")`
 <!-- Extracts first AND last name.  -->
-(g) `str_subset(student_names, "^K[a-z]*")`
+(g) `str_subset(student_names, "^A[a-z]*")`
 <!-- Extracts first AND last name.  -->
-(h) `str_subset(student_names, "K[a-z]*")`
+(h) `str_subset(student_names, "A[a-z]*")`
 <!-- Extracts first AND last name plus other names.  -->
 
 </br>
@@ -163,19 +178,19 @@ gender, race, and ethnicity. For some groups, there aren't many responses. So,
 you decide to lump together the smaller groups.__
 
 __Which of the following will create an "other" group for levels of `race` that
-appear fewer than 2,000 times?__
+appear fewer than 10% of the time?__
 
 *Check all that apply* 
 
 (a) `fct_lump(race)`
 <!-- wrong -->
-(b) `fct_lump_prop(race, 0.1)`
+(b) `fct_lump_prop(race, prop = 0.1)`
 <!-- correct -->
-(c) `fct_lump_n(race, 3)`
+(c) `fct_lump_n(race, n = 3)`
 <!-- wrong -->
-(d) `fct_lump_lowfreq(race, other_level = "other")`
+(d) `fct_lump_lowfreq(race, other_level = "Other")`
 <!-- wrong -->
-(e) `fct_lump_min(race, 2000)`
+(e) `fct_lump_min(race, min = 2000)`
 <!-- correct -->
 
 </br>
@@ -201,8 +216,11 @@ data %>%
   kable_styling()
 ```
 
-__What are some issues with representing the data in this way? i.e. What are 
-some implications of "lumping" the data in this manner?__
+__What are some issues with representing the data in this way?__
+
+</br>
+
+---
 
 </br>
 
@@ -288,6 +306,10 @@ min_wage %>%
 
 </br>
 
+---
+
+</br>
+
 ## Part Three:  Open-Ended Analysis [150 points]
 
 **Please submit your .Rmd and .html for this section to Canvas**
@@ -307,7 +329,13 @@ Create a write-up of approximately one printed page (including all plots and
 tables) that tells a clear story. Your write-up must include *at least* one plot
 and *at least* one summary statistic.
 
-## Part Four: Description of Code [50 points]
+</br>
+
+---
+
+</br>
+
+## Part Four: Oral Exam [50 points]
 
 Pick **one** aspect of your code from you analysis in Part Three that you are
 proud of.  Describe what your code accomplishes! Be specific and talk through
