@@ -9,6 +9,7 @@ library(tidyverse)
 library(lubridate)
 library(kableExtra)
 library(forcats)
+library(ggtext)
 ```
 
 
@@ -227,15 +228,17 @@ __What are some issues with representing the data in this way?__
 ## Part Two: Short Answer [100 points]
 
 **Please submit your .Rmd and .html for this section to Canvas**
-*Please only use the default R Markdown format for this section.*
+*Please use the default R Markdown format for this section.*
 
-For all questions, please show your work in code.
+For all questions, please show your work in code. It is expected that **all** of
+the code for each question be visible in your knitted HTML file. 
 
 ```{r, include = FALSE}
-min_wage <- read_csv(here::here("6_Midterm", "min_wage.csv"))
+min_wage <- read_csv(here::here("6_Midterm", "Minimum Wage Data.csv"))
 ```
 
-__1. How many entries in this dataset had footnote `"(b)"`?__
+__1. How many entries in this dataset had footnote `"(b)"`, where the laws 
+applied only to women and minors?__
 
 ```{r, echo = FALSE, eval = FALSE}
 min_wage %>% 
@@ -247,44 +250,60 @@ min_wage %>%
 
 </br>
 
-__2. Which states had the highest and lowest minimum wage in each year?  (Use the 
-`High.Value` dollar amount, not adjusted for inflation.)__
+__2. Which states / territories had the highest and lowest minimum wage in each
+year?  (Use the `Effective.Minimum.Wage` dollar amount.)__
+
+**Note:** You do not need to output *all* of the states. Rather, include your
+code and a preview of what the results look like. 
 
 ```{r, eval = FALSE, echo = FALSE}
 min_wage %>% 
   group_by(Year) %>% 
-  slice_max(High.Value, n = 1) %>% 
-  select(State)
+  slice_max(Effective.Minimum.Wage, n = 1) %>% 
+  select(State, Effective.Minimum.Wage)
 
 min_wage %>% 
   group_by(Year) %>% 
-  slice_min(Low.Value, n = 1) %>% 
-  select(State, High.Value)
+  slice_min(Effective.Minimum.Wage, n = 1) %>% 
+  select(State, Effective.Minimum.Wage)
 ```
 
 </br>
 
-__3. Which states had the largest change in minimum wage (difference between high 
-and low values) in each year?__
+__3. Which states / territories had the largest change in minimum wage
+(difference between high and low values) in each year? (Use the Department of 
+Labor values.)__
 
 ```{r, echo = FALSE, eval = FALSE}
 min_wage %>% 
-  mutate(wage_diff = High.Value - Low.Value) %>% 
+  mutate(wage_diff = 
+           Department.Of.Labor.Cleaned.High.Value - 
+           Department.Of.Labor.Cleaned.Low.Value
+         ) %>% 
   group_by(Year) %>% 
   slice_max(wage_diff, n = 1) %>% 
-  select(State)
+  select(State, wage_diff)
 ```
 
 </br>
 
-__4. Consider only Texas and California.  Make a plot comparing their minimum wage 
-in 2018 dollars (`Low.2018`) over time:__
+__4. Consider only Alabama, California, and Massachusetts. Make a plot comparing
+their minimum wage in 2020 dollars (`Effective.Minimum.Wage.2020.Dollars`) over
+time:__
 
 ```{r, echo = FALSE, eval = FALSE}
 min_wage %>%
-  filter(State %in% c("California", "Texas")) %>%
-  ggplot(aes(x = Year, y = Low.2018, color = State)) +
-  geom_line()
+  filter(State %in% c("California", "Alabama", "Massachusetts")) %>%
+  ggplot(aes(x = Year, 
+             y = Effective.Minimum.Wage.2020.Dollars, 
+             color = State)
+         ) +
+  geom_line() + 
+  labs(x = "Year", 
+       y = "Minimum Wage \n(Adjusted to 2020 Dollars)", 
+       title = "Effective Minimum Wage for </br> <span style = 'color: pink;'>Alabama</span>, <span style = 'color: green;'>California</span>, and <span style = 'color: blue;'>Massachusetts</span>") + 
+  theme(legend.position = "none") +
+  theme(plot.title = element_markdown())
 ```
 
 </br>
@@ -293,14 +312,15 @@ __5. Create a new data frame with the following properties:__
 
 - Each row should represent a different year of observations.
 - Each column should represent one state
-- Values should be the highest minimum wage (`High.2018`) in that state for
-that particular year
+- Values should be the highest minimum wage
+(`Department.Of.Labor.Cleaned.High.Value`) in that state for that particular
+year
 
 ```{r, echo = FALSE, eval = FALSE}
 min_wage %>% 
-  select(Year, State, High.2018) %>% 
+  select(Year, State, Department.Of.Labor.Cleaned.High.Value) %>% 
   pivot_wider(names_from = State, 
-              values_from = High.2018
+              values_from = Department.Of.Labor.Cleaned.High.Value
   )
 ```
 
