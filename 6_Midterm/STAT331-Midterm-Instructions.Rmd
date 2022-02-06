@@ -241,7 +241,7 @@ __1. How many entries in this dataset had footnote `"(b)"`, where the laws
 applied only to women and minors?__
 
 ```{r, echo = FALSE, eval = FALSE}
-min_wage %>% 
+min_wage %>%
   mutate(b_foot = str_detect(`Footnote`, "(b)")) %>% 
   count(b_foot)
 
@@ -251,10 +251,11 @@ min_wage %>%
 </br>
 
 __2. Which states / territories had the highest and lowest minimum wage in each
-year?  (Use the `Effective.Minimum.Wage` dollar amount.)__
+year? Your output should display the respective state and it's minimum wage.
+(Use the `Effective.Minimum.Wage` dollar amount.)__
 
-**Note:** You do not need to output *all* of the states. Rather, include your
-code and a preview of what the results look like. 
+*You do not need to output __all__ of the states. Rather, include your
+code and a preview of what the results look like.* 
 
 ```{r, eval = FALSE, echo = FALSE}
 min_wage %>% 
@@ -271,8 +272,9 @@ min_wage %>%
 </br>
 
 __3. Which states / territories had the largest change in minimum wage
-(difference between high and low values) in each year? (Use the Department of 
-Labor values.)__
+(difference between high and low values) in each year? Your output should
+display the respective state and it's difference in wages. (Use the Department
+of Labor values.)__
 
 ```{r, echo = FALSE, eval = FALSE}
 min_wage %>% 
@@ -291,6 +293,12 @@ __4. Consider only Alabama, California, and Massachusetts. Make a plot comparing
 their minimum wage in 2020 dollars (`Effective.Minimum.Wage.2020.Dollars`) over
 time:__
 
+*The aesthetics of your plot should be mindfully chosen. For example, what 
+method(s) will you use so the reader can easily compare the minimum wages for
+each state? Where is the most aesthetically appealing place for the legend to 
+go? What are good axis labels? What are nice colors that are easy to
+differentiate?*
+
 ```{r, echo = FALSE, eval = FALSE}
 min_wage %>%
   filter(State %in% c("California", "Alabama", "Massachusetts")) %>%
@@ -301,9 +309,11 @@ min_wage %>%
   geom_line() + 
   labs(x = "Year", 
        y = "Minimum Wage \n(Adjusted to 2020 Dollars)", 
-       title = "Effective Minimum Wage for </br> <span style = 'color: pink;'>Alabama</span>, <span style = 'color: green;'>California</span>, and <span style = 'color: blue;'>Massachusetts</span>") + 
-  theme(legend.position = "none") +
-  theme(plot.title = element_markdown())
+       title = "Effective Minimum Wage", 
+       subtitle = "(Lesser of State Minimum & Federal Minimum") + 
+  theme(legend.position= "bottom") +
+  theme(plot.title = element_text(hjust = 0.5), 
+        plot.subtitle = element_text(hjust = 0.5))
 ```
 
 </br>
@@ -335,19 +345,22 @@ min_wage %>%
 **Please submit your .Rmd and .html for this section to Canvas**
 *In this section, you __may__ use any formatting options you wish.*
 
-### How does minimum wage differ by region?
+*Keep in mind your report should look professional! That means, there should be
+either no code output, or code that can be toggled on / off.* 
 
-Decide on your own regional grouping for the states.  For example, you might 
-consider East vs. West, North vs. South, or something more nuanced.  You are welcome
-to reference any internet source to determine your grouping.
+### How do the minimum wages differ by region?
+
+Decide on your own regional grouping for the states. For example, you might 
+consider East vs. West, North vs. South, or something more nuanced. You are
+welcome to reference any internet source to determine your grouping.
 
 Compare the minimum wage between regions to come up with an interesting insight. 
 For example: Did some regions grow faster than others? Do some regions tend to
 have a higher minimum wage than others?  etc.
 
-Create a write-up of approximately one printed page (including all plots and
+Create a write-up of approximately **one** printed page (including all plots and
 tables) that tells a clear story. Your write-up must include *at least* one plot
-and *at least* one summary statistic.
+and *at least* one table of summary statistics.
 
 </br>
 
