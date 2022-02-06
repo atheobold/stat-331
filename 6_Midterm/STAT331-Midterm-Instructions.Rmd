@@ -9,7 +9,7 @@ library(tidyverse)
 library(lubridate)
 library(kableExtra)
 library(forcats)
-library(ggtext)
+library(palmerpenguins)
 ```
 
 
@@ -345,8 +345,9 @@ min_wage %>%
 **Please submit your .Rmd and .html for this section to Canvas**
 *In this section, you __may__ use any formatting options you wish.*
 
-*Keep in mind your report should look professional! That means, there should be
-either no code output, or code that can be toggled on / off.* 
+*Keep in mind your report should look professional! Use the tools you've learned
+to create a nice report that is easy to read! In your report, there should be
+either no code output, or code that can be toggled to appear / disappear.* 
 
 ### How do the minimum wages differ by region?
 
@@ -359,8 +360,8 @@ For example: Did some regions grow faster than others? Do some regions tend to
 have a higher minimum wage than others?  etc.
 
 Create a write-up of approximately **one** printed page (including all plots and
-tables) that tells a clear story. Your write-up must include *at least* one plot
-and *at least* one table of summary statistics.
+tables) that tells a clear story. Your write-up must include *at least* one 
+visualization and *at least* one table of summary statistics.
 
 </br>
 
@@ -370,6 +371,25 @@ and *at least* one table of summary statistics.
 
 ## Part Four: Oral Exam [50 points]
 
-Pick **one** aspect of your code from you analysis in Part Three that you are
-proud of.  Describe what your code accomplishes! Be specific and talk through
-each line, connecting each component together. 
+For your oral exam, you are tasked with explaining the code you produced to 
+create regional groupings. 
+
+During your exam, you are expected to describe what each line of code is doing.
+That means you need to describe: 
+
+- What action a function performs
+- What is being passed into the function as an input
+- How function arguments are used
+- What is being output by the function 
+
+For example, here is my recording talking through the following three lines of
+code <link to recording>. 
+
+```{r}
+penguins %>% 
+  group_by(species) %>% 
+  summarize(mean_bill = mean(bill_length_mm, na.rm = TRUE))
+```
+
+
+
