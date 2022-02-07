@@ -10,19 +10,18 @@ output: html_document
   * Make your own dataset by hand entering prices -- 2 points
   * Obtain a dataset from a source with no citation -- 2 points
   * Obtain a dataset with single values for each year -- 2.5 points
-  * Obtain a dataset from a reputable source with values for different years -- 
-  3 points
+  * Obtain a dataset with multiple values for each year -- 3 points
 
 - Joining the datasets -- 2 points
 
 # Making Your Case
 
-- Produce a visualization -- 2 points
+- Produce a visualization -- 3 points
 
   * Visualize the relationship between housing prices and avocado prices across
-  different cities -- 3 points
+  different cities and different years on the *same* plot -- 3 points  
   * Visualize the relationship between housing prices and avocado prices across
-  different cities on **different** plots -- 2 point
+  different cities and different years on *different* plots -- 2 points
   * Visualize relationship between housing prices and avocado
   prices **without** accounting for location -- 1 point
 
@@ -30,3 +29,4 @@ output: html_document
   
 - Make an argument as to why / why not avocados affect millennial' ability 
 to purchase a house in CA -- 1 point
+
