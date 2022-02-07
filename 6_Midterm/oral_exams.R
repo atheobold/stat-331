@@ -1,5 +1,6 @@
 
 library(googlesheets4)
+library(tidyverse)
 
 midterms <- read_sheet("https://docs.google.com/spreadsheets/d/1cAZLJJ93opbQZCPi7OZtY0DuMAeCD0i6Rxuj8AIfNhQ/edit?usp=sharing")
 
@@ -26,19 +27,13 @@ wed_exams <- midterms %>%
                               word(name, start = 2, end = 3), 
                               word(name, start = 2)
                               ), 
-         morning = if_else(str_detect(time, pattern = "am"), 
-                           time, 
-                           NA_character_), 
-         afternoon = if_else(str_detect(time, pattern = "pm"), 
-                             time, 
-                             NA_character_)
-         ) %>% 
-  select(-name, -time) %>%
-  pivot_longer(morning:afternoon, names_to = "time_of_day", 
-               values_to = "time") %>% 
-  mutate(time = str_extract_all(time, pattern = ".*[^(am|pm)]"), 
+         time_of_day = case_when(str_detect(time, pattern = "am") ~ "morning",
+                                 str_detect(time, pattern = "pm") ~ "afternoon"
+                                 ), 
+         time = str_extract_all(time, pattern = ".*[^(am|pm)]"), 
          time = unlist(time)
-         )
+         ) %>% 
+  select(-name, -section)
 
 wed_morning <- wed_exams %>% 
   filter(time_of_day == "morning",
@@ -64,19 +59,13 @@ thurs_exams <- midterms %>%
                              word(name, start = 2, end = 3), 
                              word(name, start = 2)
          ), 
-         morning = if_else(str_detect(time, pattern = "am"), 
-                           time, 
-                           NA_character_), 
-         afternoon = if_else(str_detect(time, pattern = "pm"), 
-                             time, 
-                             NA_character_)
-  ) %>% 
-  select(-name, -time) %>%
-  pivot_longer(morning:afternoon, names_to = "time_of_day", 
-               values_to = "time") %>% 
-  mutate(time = str_extract_all(time, pattern = ".*[^(am|pm)]"), 
+         time_of_day = case_when(str_detect(time, pattern = "am") ~ "morning",
+                                 str_detect(time, pattern = "pm") ~ "afternoon"
+         ), 
+         time = str_extract_all(time, pattern = ".*[^(am|pm)]"), 
          time = unlist(time)
-  )
+  ) %>% 
+  select(-name, -section)
 
 thurs_morning <- thurs_exams %>% 
   filter(time_of_day == "morning",
@@ -101,26 +90,20 @@ fri_exams <- midterms %>%
                              word(name, start = 2, end = 3), 
                              word(name, start = 2)
          ), 
-         morning = if_else(str_detect(time, pattern = "am"), 
-                           time, 
-                           NA_character_), 
-         afternoon = if_else(str_detect(time, pattern = "pm"), 
-                             time, 
-                             NA_character_)
-  ) %>% 
-  select(-name, -time) %>%
-  pivot_longer(morning:afternoon, names_to = "time_of_day", 
-               values_to = "time") %>% 
-  mutate(time = str_extract_all(time, pattern = ".*[^(am|pm)]"), 
+         time_of_day = case_when(str_detect(time, pattern = "am") ~ "morning",
+                                 str_detect(time, pattern = "pm") ~ "afternoon"
+         ), 
+         time = str_extract_all(time, pattern = ".*[^(am|pm)]"), 
          time = unlist(time)
-  )
+  ) %>% 
+  select(-name, -section)
 
-fri_morning <- wed_exams %>% 
+fri_morning <- fri_exams %>% 
   filter(time_of_day == "morning",
          !is.na(time)) %>%
   arrange(desc(time))
 
-fri_afternoon <- wed_exams %>% 
+fri_afternoon <- fri_exams %>% 
   filter(time_of_day == "afternoon",
          !is.na(time)) %>% 
   arrange(time)
