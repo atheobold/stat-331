@@ -66,13 +66,13 @@ the problem.
   which answers the question.**
 -  Submit both your `.Rmd` and `.html` files on Canvas by the end of the
   allotted time. 
-- Only your knitted file will be graded, so make sure the knitted output
+- Only your knitted HTML file will be graded, so make sure the knitted output
 contains all your answers!
   
 ### The Dataset
 
-Parts Two, Three, and Four of this exam pertain to the dataset `min_wage.csv`
-posted in the Midterm Module on Canvas.
+Parts Two, Three, and Four of this exam pertain to the dataset 
+`Minimum Wage Data.csv` posted in the Midterm Module on Canvas.
 
 Documentation for this dataset can be found [here](https://github.com/Lislejoem/Minimum-Wage-by-State-1968-to-2017/tree/master).
 
@@ -106,7 +106,7 @@ __Which of the following is an accurate statement about `a`?__
 
 (a) `a` is an atomic vector.
 (b) `a` is a numeric vector.
-(c) `a` has the object class `integer`.
+(c) `a` has an `integer` data type.
 (d) `length(a)` is equal to `1`.
 (e) `a + c(1,4,7)` will give an error.
 (f) `as.character(a)` will return `"10"`
@@ -351,9 +351,10 @@ either no code output, or code that can be toggled to appear / disappear.*
 
 ### How do the minimum wages differ by region?
 
-Decide on your own regional grouping for the states. For example, you might 
-consider East vs. West, North vs. South, or something more nuanced. You are
-welcome to reference any internet source to determine your grouping.
+Decide on your own regional grouping for the states. Your grouping is required
+to have __*at least* three groups__. For example, you might consider East vs.
+Central vs. West or something more nuanced. You are welcome to reference any
+internet source to determine your grouping.
 
 Compare the minimum wage between regions to come up with an interesting insight. 
 For example: Did some regions grow faster than others? Do some regions tend to
@@ -383,7 +384,7 @@ That means you need to describe:
 - What is being output by the function 
 
 For example, here is my recording talking through the following three lines of
-code <link to recording>. 
+code <https://voca.ro/12APWFXv5dkx>. 
 
 ```{r}
 penguins %>% 
