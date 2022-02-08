@@ -127,6 +127,8 @@ str(mystery_object)
 
 __What object structure is `mystery_object`?__
 
+*Check all that apply* 
+
 (a) A vector
 (c) A matrix
 (d) A data frame
