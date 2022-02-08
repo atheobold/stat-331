@@ -194,6 +194,18 @@ appear fewer than 10% of the time?__
 (e) `fct_lump_min(race, min = 2000)`
 <!-- correct -->
 
+```{r, include = FALSE}
+x <- factor(rep(LETTERS[1:7], 
+                times = c(40, 10, 10, 10, 10, 10, 10)))
+
+x %>% 
+  table()
+
+x %>% fct_lump_prop(0.1) %>% table()
+x %>% fct_lump_min(10) %>% table()
+
+```
+
 </br>
 
 __5. Suppose, your resulting "lumped" demographic table looks like this:__ 
