@@ -38,11 +38,13 @@ wed_exams <- midterms %>%
 wed_morning <- wed_exams %>% 
   filter(time_of_day == "morning",
          !is.na(time)) %>%
+  select(time, first_name, last_name) %>% 
   arrange(desc(time))
 
 wed_afternoon <- wed_exams %>% 
   filter(time_of_day == "afternoon",
          !is.na(time)) %>% 
+  select(time, first_name, last_name) %>% 
   arrange(time)
 
 
@@ -70,11 +72,13 @@ thurs_exams <- midterms %>%
 thurs_morning <- thurs_exams %>% 
   filter(time_of_day == "morning",
          !is.na(time)) %>%
+  select(time, first_name, last_name) %>% 
   arrange(desc(time))
 
 thurs_afternoon <- thurs_exams %>% 
   filter(time_of_day == "afternoon",
          !is.na(time)) %>% 
+  select(time, first_name, last_name) %>% 
   arrange(time)
 
 ############################## FRIDAY ####################################
@@ -101,11 +105,13 @@ fri_exams <- midterms %>%
 fri_morning <- fri_exams %>% 
   filter(time_of_day == "morning",
          !is.na(time)) %>%
+  select(time, first_name, last_name) %>% 
   arrange(desc(time))
 
 fri_afternoon <- fri_exams %>% 
   filter(time_of_day == "afternoon",
          !is.na(time)) %>% 
+  select(time, first_name, last_name) %>% 
   arrange(time)
 
 
