@@ -3,6 +3,7 @@
   <head>
     <title>More About Function Arguments</title>
     <meta charset="utf-8" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="slide-style.css" type="text/css" />
   </head>
@@ -60,13 +61,14 @@ class: inverse
 
 ---
 
-.larger[`mutate_at()`]
+.larger[`across()`]
 
 
 ```r
 penguins %&gt;% 
-  mutate_at(vars(bill_length_mm:body_mass_g), 
-            standardize)
+  mutate(across(.cols = bill_length_mm:body_mass_g,
+                .fns = standardize)
+  )
 ```
 
 ```
@@ -108,7 +110,7 @@ stdize_column &lt;- function(dat, variable) {
 }
 ```
 
-*(Notice how we relied on the existing function `stdize()` inside the new function, for clarity!)*
+*(Notice how we relied on the existing function `standarize()` inside the new function, for clarity!)*
 
 ---
 
@@ -122,9 +124,9 @@ stdize_column(penguins, body_mass_g)
 ```
 
 ```
-## Error: Problem with `mutate()` input `variable`.
+## Error: Problem with `mutate()` column `variable`.
+## i `variable = standardize(variable)`.
 ## x object 'body_mass_g' not found
-## i Input `variable` is `standardize(variable)`.
 ```
 
 --
@@ -144,7 +146,7 @@ Functions that use **unquoted** variable names as arguments are called
 
 
 .pull-left[
-**Easier**:
+**Tidy**:
 
 
 ```r
@@ -161,11 +163,11 @@ penguins$body_mass_g
 --
 
 .pull-right[
-**Harder**: 
+**Untidy**: 
 
 
 ```r
-penguins[, "body_mass_g"]
+penguins["body_mass_g"]
 ```
 
 
@@ -207,9 +209,9 @@ class: middle, center, inverse
 
 
 ```r
-stdize_column &lt;- function(dat, variable) {
-  dat[[variable]] &lt;- standardize(dat[[variable]])
-  return(dat)
+stdize_column &lt;- function(data, variable) {
+  data[[variable]] &lt;- standardize(data[[variable]])
+  return(data)
 }
 
 stdize_column(penguins, "body_mass_g")
@@ -234,28 +236,13 @@ stdize_column(penguins, "body_mass_g")
 
 ---
 
-.larger[Option 2 -- `vars()`]
-
-The `vars()` function produces a _quosure_ object, which can be used to extract
-variables. 
-
---
-
-.bitlarger[**This only works for `mutate()` type functions, that do calculations on the variable.**]
 
 ---
 
+.larger[Option 2 -- Tunnel] 
 
-
-
-&lt;code class ='r hljs remark-code'&gt;stdize_column &lt;- function(dat, variable) {&lt;br&gt;&amp;nbsp;&amp;nbsp;dat &lt;- dat %&gt;%&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;mutate_at(variable, standardize)&lt;br&gt;&amp;nbsp;&amp;nbsp;return(dat)&lt;br&gt;}&lt;br&gt;&lt;br&gt;stdize_column(penguins, &lt;span style="background-color:#ffff7f"&gt;vars&lt;/span&gt;(body_mass_g))&lt;/code&gt;
-
----
-
-.larger[Option 3 -- Tunnel] 
-
-In February 2020 **rlang** introduced the curly-curly `{{` operator to simplify
-writing functions around tidyverse pipelines. 
+In February 2020 **rlang** introduced the curly-curly `{{ }}` operator to
+simplify writing functions around tidyverse pipelines. 
 
 --
 
@@ -268,7 +255,7 @@ data frames) through function arguments!
 
 &lt;/br&gt; 
 
-[link to **tidyverse** article](https://www.tidyverse.org/blog/2020/02/glue-strings-and-tidy-eval/)
+[link to article about how building functions with variable names has changed over the years](https://www.bryanshalloway.com/2020/06/25/using-across-to-build-functions-with-dplyr-with-notes-on-legacy-approaches/)
 
 ---
 

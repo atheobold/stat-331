@@ -161,6 +161,7 @@ pos_neg_zero <- function(x){
   state <- case_when(x > 0 ~ "Greater than 0!", 
                      
                      x < 0 ~ "Less than 0!", 
+                     
                      TRUE ~ "Equal to 0!")
   return(state)
 }

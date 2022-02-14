@@ -80,12 +80,13 @@ class: inverse
 
 ---
 
-.larger[`mutate_at()`]
+.larger[`across()`]
 
 ```{r}
 penguins %>% 
-  mutate_at(vars(bill_length_mm:body_mass_g), 
-            standardize)
+  mutate(across(.cols = bill_length_mm:body_mass_g,
+                .fns = standardize)
+  )
 ```
 
 ---
@@ -109,7 +110,8 @@ stdize_column <- function(dat, variable) {
 }
 ```
 
-*(Notice how we relied on the existing function `stdize()` inside the new function, for clarity!)*
+*(Notice how we relied on the existing function `standarize()` inside the new
+function, for clarity!)*
 
 ---
 
@@ -138,7 +140,7 @@ Functions that use **unquoted** variable names as arguments are called
 
 
 .pull-left[
-**Easier**:
+**Tidy**:
 
 ```{r, eval = FALSE}
 penguins %>% pull(body_mass_g)
@@ -153,10 +155,10 @@ penguins$body_mass_g
 --
 
 .pull-right[
-**Harder**: 
+**Untidy**: 
 
 ```{r, eval = FALSE}
-penguins[, "body_mass_g"]
+penguins["body_mass_g"]
 ```
 
 
@@ -196,9 +198,9 @@ class: middle, center, inverse
 ---
 
 ```{r}
-stdize_column <- function(dat, variable) {
-  dat[[variable]] <- standardize(dat[[variable]])
-  return(dat)
+stdize_column <- function(data, variable) {
+  data[[variable]] <- standardize(data[[variable]])
+  return(data)
 }
 
 stdize_column(penguins, "body_mass_g")
@@ -206,59 +208,80 @@ stdize_column(penguins, "body_mass_g")
 
 ---
 
-.larger[Option 2 -- `vars()`]
+.larger[Option 2 -- Tunnel] 
 
-The `vars()` function produces a _quosure_ object, which can be used to extract
-variables. 
+In February 2020 **rlang** introduced the curly-curly `{{ }}` operator to
+simplify writing functions around tidyverse pipelines. 
 
 --
 
-.bitlarger[**This only works for `mutate()` type functions, that do calculations on the variable.**]
+With the "embracing operator" (`{{`) you can tunnel data-variables (i.e. columns
+from the data frames) through function arguments! 
+
+<!-- The curly-curly operator {{ }} for function arguments is a bit special because it forces the function argument and immediately defuses it. The defused expression is substituted in place, ready to be evaluated in another context, such as the data frame. -->
+
+--
+
+**This only works for `select()` type functions, that use the literal name of
+the variable to subset the data.**
+
+
+[Article on How Building Functions with Variable Names has Changed Over the Years](https://www.bryanshalloway.com/2020/06/25/using-across-to-build-functions-with-dplyr-with-notes-on-legacy-approaches/)
 
 ---
 
-```{r vars, echo = FALSE, eval = FALSE}
+.larger[Recall]
+
+.pull-left[
+
+```{r stdcol}
 stdize_column <- function(dat, variable) {
   dat <- dat %>%
-    mutate_at(variable, standardize)
+    mutate(
+      variable = standardize(variable)
+    )
   return(dat)
 }
 
-stdize_column(penguins, vars(body_mass_g))
+stdize_column(penguins, body_mass_g)
 ```
+]
 
-```{r, echo = FALSE}
-decorate("vars", eval = FALSE) %>%
-  flair("vars")
-```
+.pull-right[
+The problem here is that `mutate()` defuses the R code it was supplied. 
+
+Instead we want it to see `body_mass_g = standardize(body_mass_g)`. 
+
+This is why we need injection!
+
+We need to modify that piece of code by injecting the code supplied to the
+function in place of `variable`.
+]
 
 ---
 
-.larger[Option 3 -- Tunnel] 
+,larger[What is data masking?}
 
-In February 2020 **rlang** introduced the curly-curly `{{` operator to simplify
-writing functions around tidyverse pipelines. 
+.pull-left[
+
+![](images/rlang.png)
+]
+
+.pull-right[
+
+]
 
 --
 
-With the `{{` operator you can tunnel data-variables (i.e. columns from the
-data frames) through function arguments! 
 
---
-
-**This only works for `pull()` and `select()` type functions, that use the literal name of the variable to subset the data.**
-
-</br> 
-
-[link to **tidyverse** article](https://www.tidyverse.org/blog/2020/02/glue-strings-and-tidy-eval/)
+[Link to **rlang** article](https://rlang.r-lib.org/reference/topic-data-mask.html)
 
 ---
-
 
 ```{r tunnel, eval = FALSE, echo = FALSE}
-stdize_column <- function(dat, variable) {
-  new_var <- dat %>%
-    pull( {{ variable }} ) %>%
+stdize_column <- function(data, variable) {
+  new_var <- data %>%
+    mutate( {{ variable }} ) %>%
     standardize()
   return(new_var)
 }
@@ -271,6 +294,15 @@ decorate("tunnel", eval = FALSE) %>%
   flair("{{ variable }}")
 ```
 
+---
+
+.larger[What if I want to modify multiple columns?]
+
+--
+
+.large[Our friend `across()`!]
+
+
 
 ---
 
@@ -279,6 +311,7 @@ class: center, middle, inverse
 .huge-text[Function Writing Tips]
 
 ---
+
 .larger[Tip 1]
 
 .bitlarger[**Keep thinking about object types and structures!!!**]

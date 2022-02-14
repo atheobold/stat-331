@@ -146,10 +146,18 @@ my_vec <- c(39, 1.87, 48, 11, 8, 45, 21, 5, 12, 33, 9, 11, 108, 4, 18, 5, 16,
             48.65, 33.3, 40.28, 19.04)
 
 my_vec <- every_other(my_vec, start = 2)
+# Now has length 54! 
+
 my_vec <- divide_and_round(my_vec)
+
 my_vec <- every_other(my_vec, start = 1)
+# Now has 27!
+
 my_vec <- shorten(my_vec, 350)
+# Now has 12!
+
 my_vec <- my_vec[no_nines_or_twelves(my_vec)]
+# Now has 6! 
 
 my_vec <- sort(my_vec)
 

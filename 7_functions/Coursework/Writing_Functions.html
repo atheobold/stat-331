@@ -145,7 +145,7 @@ a.sourceLine {
 <li><p>Extend your use of good R coding style</p></li>
 </ul>
 <hr />
-<p>▶️ Watch Videos: 45 minutes</p>
+<p>▶️ Watch Videos: 22 minutes</p>
 <ul>
 <li>🔗 Link to <strong>all</strong> Slides from Videos: <a href="https://app.box.com/s/bctcjsbysmpv0vs84izzeqk09sx7mz00">here</a></li>
 </ul>
@@ -156,27 +156,27 @@ a.sourceLine {
 <div id="why-write-a-function" class="section level1">
 <h1>Why Write a Function?</h1>
 <p>You might be coming into this chapter wondering, “Why would I write a function?”. Especially, if thus far you’ve been able to do everything with built-in functions and / or reusing your code a few times.</p>
-<p>The critical motivation behind functions is the “don’t repeat yourself” (DRY) principle. In general, “you should consider writing a function whenever copied and pasted your code more than twice (i.e. you now have three copies of the same code)” (Wickham &amp; Grolemund, 2020).</p>
+<p>The critical motivation behind functions is the “don’t repeat yourself” (DRY) principle. In general, “you should consider writing a function whenever copied and pasted your code <strong>more than twice</strong> (i.e. you now have three copies of the same code)” (Wickham &amp; Grolemund, 2020).</p>
 <p>One of my favorite papers, <em>Best Practices for Scientific Computing</em>, summarizes this idea in a slightly different way:</p>
 <blockquote>
 <p>Anything that is repeated in two or more places is more difficult to maintain. Every time a change or correction is made, multiple locations must be updated, which increases the chance of errors and inconsistencies. To avoid this, programmers follow the DRY Principle, which applies to both data and code.</p>
 </blockquote>
-<p>The DRY Principle applies at two scales: small and large. At small scales, researchers (<strong>you</strong>) should work to modularize code instead of copying and pasting. Modularizing your code helps you remember what the code is doing as a single mental chunk. This makes your code easier to understand, since there is less to remember! Another perk is that your modularized code can also be more easily repurposed for other projects. At larger scales, it is vital that scientific programmers (<strong>you</strong>) re-use code instead of rewriting it (Wilson et al., 2014).</p>
+<p>The DRY Principle applies at two scales: small and large. At small scales, researchers (<strong>you</strong>) should work to modularize code instead of copying and pasting. Modularizing your code helps you remember what the code is doing as a single mental chunk. This makes your code easier to understand, since there is less to remember! Another perk is that your modularized code can also be more easily re-purposed for other projects. At larger scales, it is vital that scientific programmers (<strong>you</strong>) re-use code instead of rewriting it (Wilson et al., 2014).</p>
 <p>If you are interested in reading more about these “best practices” you can find the article here: <a href="https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001745" class="uri">https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001745</a></p>
 <hr />
 </div>
 <div id="writing-functions" class="section level1">
 <h1>Writing Functions</h1>
-<p>▶️ <a href="http://somup.com/crh6eXFmMK">Required Video: Why write a function? – 5 minutes</a></p>
-<p>▶️ <a href="http://somup.com/crh6euFmNj">Required Video: Components of a function – 10 minutes</a></p>
-<p>▶️ <a href="http://somup.com/crh6F9FJY9">Required Video: More about function arguments – 12 minutes</a></p>
-<p>▶️ <a href="http://somup.com/crh6q6FJ3o">Required Video: More about function returns – 9 minutes</a></p>
-<p>▶️ <a href="http://somup.com/crh6eBFmNK">Required Video: Function environments – 6 minutes</a></p>
+<p>📖 <a href="https://r4ds.had.co.nz/functions.html">Recommended Reading: <em>R4DS</em> – Functions</a></p>
+<p>▶️ <a href="http://somup.com/crh6eXFmMK">Recommended Video: Why write a function? – 5 minutes</a></p>
+<p>▶️ <a href="http://somup.com/crh6euFmNj">Recommended Video: Components of a function – 10 minutes</a></p>
+<!-- ▶️ [Recommended Video: The gritty details of function arguments -- 12 minutes](link) -->
+<!-- ▶️ [Recommended Video: Do you need a `return()` statement? -- 9 minutes](link) -->
+<p>▶️ <a href="http://somup.com/crh6eBFmNK">Recommended Video: Function environments – 6 minutes</a></p>
 <p>💻 <a href="https://rstudio.cloud/learn/primers/6">Required Tutorial: RStudio Primer – Writing Functions</a></p>
 <ul>
 <li>I <strong>highly recommend</strong> you work through <em>every</em> tutorial except Loops!</li>
 </ul>
-<p>📖 <a href="https://r4ds.had.co.nz/functions.html">Recommended Reading: <em>R4DS</em> – Functions</a></p>
 <hr />
 <p>✅ <strong>Check-in: Simple Functions</strong></p>
 <p>Fill in the necessary code to write a function called <code>times_seven()</code>. The function should take a single argument and multiply the input by 7.</p>
@@ -210,16 +210,14 @@ a.sourceLine {
 <li>1</li>
 <li>-1</li>
 <li>30</li>
-<li>An error defined in the function <code>add_or_subtract</code></li>
-<li>An error defined in a different function, that is called from inside <code>add_or_subtract</code></li>
+<li>An error defined by the function <code>add_or_subtract</code></li>
+<li>An error defined in a different function, which is called inside the <code>add_or_subtract</code> function</li>
 </ol>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">add_or_subtract</span>(<span class="dv">5</span>, <span class="dv">6</span>, <span class="at">type =</span> <span class="st">&quot;subtract&quot;</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">add_or_subtract</span>(<span class="st">&quot;orange&quot;</span>)</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">add_or_subtract</span>(<span class="dv">5</span>, <span class="dv">6</span>, <span class="at">type =</span> <span class="st">&quot;multiply&quot;</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">add_or_subtract</span>(<span class="st">&quot;orange&quot;</span>, <span class="at">type =</span> <span class="st">&quot;multiply&quot;</span>)</span></code></pre></div>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">add_or_subtract</span>(<span class="dv">5</span>, <span class="dv">6</span>, <span class="at">type =</span> <span class="st">&quot;multiply&quot;</span>)</span></code></pre></div>
 <p><strong>Question 2:</strong></p>
 <p>Consider the following code:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>first_num <span class="ot">&lt;-</span> <span class="dv">5</span></span>
@@ -240,9 +238,7 @@ a.sourceLine {
 <hr />
 <p>✅ <strong>Check-in: Functions and Data Wrangling</strong></p>
 <p>Write a function called <code>find_car_make()</code> that takes as input the name of a car, and returns only the “make”, or the company that created the car. For example, <code>find_car_make(&quot;Toyota Camry&quot;)</code> should return <code>&quot;Toyota&quot;</code> and <code>find_car_make(&quot;Ford Anglica&quot;)</code> should return <code>&quot;Ford&quot;</code>. (You can assume that the first word of a car name is always its make.)</p>
-<p><em><strong>Hint:</strong></em> The <code>word()</code> function from <strong>stringr</strong> may be useful to you!</p>
-<p>Once you’ve made your function, try it out on the built-in dataset <code>mtcars</code>. Use the function to create a new column in the data called <code>make</code> that gives the</p>
-<p><em><strong>Hint:</strong></em> You should start by using the function <code>dplyr::rownames_to_column()</code>, so that the car names are a variable in the data frame instead of row labels.</p>
+<p>Once you’ve made your function, try it out on the built-in dataset <code>mtcars</code>. In these data the car information is included as rownames. Use the <code>rownames_to_column()</code>function to create a new column in the data called <code>make</code> that gives the make and model of each car.</p>
 <hr />
 <div id="good-code-style" class="section level2">
 <h2>Good Code Style</h2>
@@ -287,12 +283,12 @@ a.sourceLine {
 <li>They should not rely on any information besides what is given as input.</li>
 <li><em>(Relying on other <em>functions</em> is fine, though</em>)</li>
 <li>They should not alter the Global Environment</li>
-<li><em>(do not put <code>library()</code> statements inside functions!)</em></li>
+<li><em>Functions should <strong>never</strong> load or install packages!</em></li>
 </ul></li>
 </ol>
 <hr />
 <p>✅ <strong>Check-in: Function Design</strong></p>
-<p>Identify <em>five</em> major violations of design principles for the following function:</p>
+<p>Identify <strong><em>five</em></strong> major violations of design principles for the following function:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ugh <span class="ot">&lt;-</span> <span class="cf">function</span>(dataset) {</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(tidyverse)</span>

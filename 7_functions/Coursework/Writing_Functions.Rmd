@@ -30,7 +30,7 @@ This week you will learn to:
 
 ---
 
-`r emo::ji("play button")` Watch Videos: 45 minutes
+`r emo::ji("play button")` Watch Videos: 22 minutes
   
   * `r emo::ji("link")` Link to **all** Slides from Videos: [here](https://app.box.com/s/bctcjsbysmpv0vs84izzeqk09sx7mz00)
 
@@ -50,8 +50,8 @@ built-in functions and / or reusing your code a few times.
 
 The critical motivation behind functions is the "don't repeat yourself" (DRY) 
 principle. In general, "you should consider writing a function whenever 
-copied and pasted your code more than twice (i.e. you now have three copies of
-the same code)" (Wickham & Grolemund, 2020). 
+copied and pasted your code __more than twice__ (i.e. you now have three copies
+of the same code)" (Wickham & Grolemund, 2020). 
 
 One of my favorite papers, *Best Practices for Scientific Computing*, summarizes
 this idea in a slightly different way: 
@@ -66,7 +66,7 @@ researchers (**you**) should work to modularize code instead of copying and
 pasting. Modularizing your code helps you remember what the code is doing as a
 single mental chunk. This makes your code easier to understand, since there is 
 less to remember! Another perk is that your modularized code can also be more 
-easily repurposed for other projects. At larger scales, it is vital that
+easily re-purposed for other projects. At larger scales, it is vital that
 scientific programmers (**you**) re-use code instead of rewriting it (Wilson et
 al., 2014).  
 
@@ -78,21 +78,21 @@ the article here:
 
 # Writing Functions
 
-`r emo::ji("play button")` [Required Video: Why write a function? -- 5 minutes](http://somup.com/crh6eXFmMK)
+`r emo::ji("book")` [Recommended Reading: *R4DS* -- Functions](https://r4ds.had.co.nz/functions.html)
 
-`r emo::ji("play button")` [Required Video: Components of a function -- 10 minutes](http://somup.com/crh6euFmNj)
+`r emo::ji("play button")` [Recommended Video: Why write a function? -- 5 minutes](http://somup.com/crh6eXFmMK)
 
-`r emo::ji("play button")` [Required Video: More about function arguments -- 12 minutes](http://somup.com/crh6F9FJY9)
+`r emo::ji("play button")` [Recommended Video: Components of a function -- 10 minutes](http://somup.com/crh6euFmNj)
 
-`r emo::ji("play button")` [Required Video: More about function returns -- 9 minutes](http://somup.com/crh6q6FJ3o)
+<!-- `r emo::ji("play button")` [Recommended Video: The gritty details of function arguments -- 12 minutes](link) -->
 
-`r emo::ji("play button")` [Required Video: Function environments -- 6 minutes ](http://somup.com/crh6eBFmNK)
+<!-- `r emo::ji("play button")` [Recommended Video: Do you need a `return()` statement? -- 9 minutes](link) -->
+
+`r emo::ji("play button")` [Recommended Video: Function environments -- 6 minutes ](http://somup.com/crh6eBFmNK)
 
 `r emo::ji("computer")` [Required Tutorial: RStudio Primer -- Writing Functions](https://rstudio.cloud/learn/primers/6)
 
 - I **highly recommend** you work through _every_ tutorial except Loops! 
-
-`r emo::ji("book")` [Recommended Reading: *R4DS* -- Functions](https://r4ds.had.co.nz/functions.html)
 
 ---
 
@@ -101,7 +101,7 @@ the article here:
 Fill in the necessary code to write a function called `times_seven()`. The 
 function should take a single argument and multiply the input by 7. 
 
-This function should check that the argument is numeric.
+This function should check that the argument is numeric. 
 
 This function should also excitedly announce (print) "I love sevens!" if the
 argument to the function is a 7.
@@ -158,8 +158,9 @@ of the following will be output?
 i) 1
 ii) -1
 iii) 30
-iv) An error defined in the function `add_or_subtract`
-v) An error defined in a different function, that is called from inside `add_or_subtract`
+iv) An error defined by the function `add_or_subtract`
+v) An error defined in a different function, which is called inside the 
+`add_or_subtract` function
 
 ```{r, eval = FALSE}
 add_or_subtract(5, 6, type = "subtract")
@@ -168,7 +169,6 @@ add_or_subtract("orange")
 
 add_or_subtract(5, 6, type = "multiply")
 
-add_or_subtract("orange", type = "multiply")
 ```
 
 **Question 2:**
@@ -203,20 +203,26 @@ and returns only the "make", or the company that created the car.  For example,
 `find_car_make("Ford Anglica")` should return `"Ford"`. (You can assume that the
 first word of a car name is always its make.)
 
-_**Hint:**_ The `word()` function from **stringr** may be useful to you! 
-
-Once you've made your function, try it out on the built-in dataset `mtcars`. 
-Use the function to create a new column in the data called `make` that gives the
-
-_**Hint:**_ You should start by using the function `dplyr::rownames_to_column()`,
-so that the car names are a variable in the data frame instead of row labels.
+Once you've made your function, try it out on the built-in dataset `mtcars`. In
+these data the car information is included as rownames. Use the
+`rownames_to_column()`function to create a new column in the data called `make`
+that gives the make and model of each car. 
 
 ```{r, include = FALSE}
 
+# Using word()
 find_car_make <- function(x){
   make <- word(x, 1)
   return(make)
 }
+
+# Using str_split()
+find_car_make <- function(x){
+  # Simplify will make a matrix
+  info <- str_split(x, pattern = "\\s", simplify = TRUE)
+  return(info[, 1])
+}
+
 
 mtcars %>% 
   rownames_to_column(var = "car") %>% 
@@ -261,7 +267,8 @@ be found here: <https://style.tidyverse.org/functions.html>
 
 ### Summary
 
-Designing functions is somewhat subjective, but there are a few principles that apply:
+Designing functions is somewhat subjective, but there are a few principles that
+apply:
 
 1. Choose a good, descriptive **names** 
     + Your function name should describe what it does, and usually involves a
@@ -285,13 +292,13 @@ Designing functions is somewhat subjective, but there are a few principles that 
     + They should not rely on any information besides what is given as input.
     + *(Relying on other _functions_ is fine, though*)
     + They should not alter the Global Environment
-    + *(do not put `library()` statements inside functions!)*
+    + *Functions should __never__ load or install packages!*
 
 ---
 
 `r emo::ji("check")` **Check-in: Function Design** 
 
-Identify *five* major violations of design principles for the following
+Identify ***five*** major violations of design principles for the following
 function:
 
 ```{r, eval = FALSE}
