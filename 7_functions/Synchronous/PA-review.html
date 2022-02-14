@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Functions 🎉</title>
+    <title>Functions 🥳</title>
     <meta charset="utf-8" />
     <meta name="author" content="Stat 331" />
-    <meta name="date" content="2021-05-11" />
+    <meta name="date" content="2022-02-14" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="slide-style.css" type="text/css" />
@@ -13,9 +13,9 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Functions 🎉
+# Functions 🥳
 ### Stat 331
-### May 11, 2021
+### February 14, 2022
 
 ---
 
@@ -43,50 +43,221 @@ class: inverse, center, middle
 
 ---
 
-.larger[`times_seven()`]
+class: inverse, center
+.huge-text[`print()` versus `return()`]
 
-
+---
 
 &lt;center&gt;
-**What happens when you run this?**
-&lt;/center&gt;
+
+.larger[`return()`]
+
+&lt;/center&gt; 
+&lt;/br&gt;
+
+.pull-left[
+
+```r
+add_something &lt;- function(x, something = 2) {
+
+  return(x + something)
+  
+}
+```
+]
+
+.pull-right[
+
+```r
+add_something(7, 4)
+```
+
+```
+## [1] 11
+```
+]
+
+---
+
+&lt;center&gt;
+
+.larger[`print()`]
+
+&lt;/center&gt; 
+&lt;/br&gt;
+
+.pull-left[
+
+```r
+add_something &lt;- function(x, something = 2) {
+
+  print(x + something)
+  
+}
+```
+]
+
+.pull-right[
+
+```r
+add_something(7, 4)
+```
+
+```
+## [1] 11
+```
+]
+
+---
+
+class: middle, inverse
+
+.larger[Can you `print()` *and* `return()`?] 
+
+--
 
 
 ```r
-my_vec &lt;- c(7, 8, 9)
+add_something &lt;- function(x, something = 2) {
+  
+  if (x == 4) {
+    
+    print("I love 4s!")
+    
+  }
+  
+  return(x + something)
+  
+}
+```
 
-times_seven(my_vec)
+---
+
+class: middle
+
+.larger[Returning Errors!]
+
+--
+
+
+```r
+add_something &lt;- function(x, something = 2) {
+  
+  if (!is.numeric(x)) {
+    
+    stop("Please enter a number!")
+    
+  }
+  
+  return(x + something)
+  
+}
 ```
 
 --
 
 
 ```r
-times_seven(my_vec)
+add_something("bob")
 ```
 
 ```
-## Warning in if (x == 7) {: the condition has length &gt; 1 and only the first
+## Error in add_something("bob"): Please enter a number!
+```
+
+
+---
+
+class: middle
+
+.pull-left[
+.bitlarger[How would you check if *both* `x` and `something` were numeric?]
+]
+
+.pull-right[
+
+```r
+add_something &lt;- function(x, something = 2) {
+  
+  if (!is.numeric(x)) {
+    
+    stop("Please enter a number!")
+    
+  }
+  
+  return(x + something)
+  
+}
+```
+]
+
+---
+
+class: center, middle, inverse
+
+.huge-text[Vectorizing]
+
+---
+
+class: center 
+
+.larger[`times_three()`]
+
+.pull-left[
+
+```r
+times_three &lt;- function(x){
+  stopifnot(is.numeric(x))
+  
+  if(x == 3){
+    print("I love threes!")
+  }
+  return(x*3)
+}
+```
+]
+
+.pull-right[
+
+**What happens when you run this?**
+
+
+```r
+my_vec &lt;- c(7, 8, 9, 3)
+
+times_three(my_vec)
+```
+]
+
+--
+
+
+```
+## Warning in if (x == 3) {: the condition has length &gt; 1 and only the first
 ## element will be used
 ```
 
 ```
-## [1] "I love sevens!"
-```
-
-```
-## [1] 49 56 63
+## [1] 21 24 27  9
 ```
 
 ---
 
 .larger[Vectorized Conditions]
 
-- `if()` and `elseif()` take single inputs
+.pull-left[
+`if()` and `elseif()` take one input  
+
+That means, they **are not** "vectorized"  
+]
 
 --
 
-- `if_else()` and `ifelse()` can take vector inputs
+.pull-right[
+`if_else()` and `ifelse()` can take a vector of inputs  
+
+That means, they **are** "vectorized"  
+]
 
 ---
 
@@ -117,7 +288,7 @@ if_else(my_vec == 9, NA_real_, my_vec)
 ```
 
 ```
-## [1]  7  8 NA
+## [1]  7  8 NA  3
 ```
 
 ---

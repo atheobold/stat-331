@@ -1,6 +1,6 @@
 ---
 title: "Functions `r emo::ji('party')`"
-date: "May 11, 2021"
+date: "February 14, 2022"
 author: "Stat 331"
 output:
   xaringan::moon_reader:
@@ -59,47 +59,197 @@ class: inverse, center, middle
 
 ---
 
-.larger[`times_seven()`]
+class: inverse, center
+.huge-text[`print()` versus `return()`]
 
-```{r, echo = FALSE}
-times_seven <- function(x){
-  stopifnot(is.numeric(x))
-  
-  if(x == 7){
-    print("I love sevens!")
-  }
-  return(x*7)
-}
-
-my_vec <- c(7, 8, 9)
-
-```
+---
 
 <center>
-**What happens when you run this?**
-</center>
 
-```{r, eval = FALSE}
-my_vec <- c(7, 8, 9)
+.larger[`return()`]
 
-times_seven(my_vec)
+</center> 
+</br>
+
+.pull-left[
+```{r}
+add_something <- function(x, something = 2) {
+
+  return(x + something)
+  
+}
 ```
+]
+
+.pull-right[
+```{r}
+add_something(7, 4)
+
+```
+]
+
+---
+
+<center>
+
+.larger[`print()`]
+
+</center> 
+</br>
+
+.pull-left[
+```{r}
+add_something <- function(x, something = 2) {
+
+  print(x + something)
+  
+}
+```
+]
+
+.pull-right[
+```{r}
+add_something(7, 4)
+
+```
+]
+
+---
+
+class: middle, inverse
+
+.larger[Can you `print()` *and* `return()`?] 
 
 --
 
 ```{r}
-times_seven(my_vec)
+add_something <- function(x, something = 2) {
+  
+  if (x == 4) {
+    
+    print("I love 4s!")
+    
+  }
+  
+  return(x + something)
+  
+}
+```
+
+---
+
+class: middle
+
+.larger[Returning Errors!]
+
+--
+
+```{r}
+add_something <- function(x, something = 2) {
+  
+  if (!is.numeric(x)) {
+    
+    stop("Please enter a number!")
+    
+  }
+  
+  return(x + something)
+  
+}
+```
+
+--
+
+```{r, error = TRUE}
+add_something("bob")
+```
+
+
+---
+
+class: middle
+
+.pull-left[
+.bitlarger[How would you check if *both* `x` and `something` were numeric?]
+]
+
+.pull-right[
+```{r}
+add_something <- function(x, something = 2) {
+  
+  if (!is.numeric(x)) {
+    
+    stop("Please enter a number!")
+    
+  }
+  
+  return(x + something)
+  
+}
+```
+]
+
+---
+
+class: center, middle, inverse
+
+.huge-text[Vectorizing]
+
+---
+
+class: center 
+
+.larger[`times_three()`]
+
+.pull-left[
+```{r}
+times_three <- function(x){
+  stopifnot(is.numeric(x))
+  
+  if(x == 3){
+    print("I love threes!")
+  }
+  return(x*3)
+}
+
+```
+]
+
+.pull-right[
+
+**What happens when you run this?**
+
+```{r, eval = FALSE}
+my_vec <- c(7, 8, 9, 3)
+
+times_three(my_vec)
+```
+]
+
+--
+
+```{r, echo = FALSE}
+my_vec <- c(7, 8, 9, 3)
+times_three(my_vec)
 ```
 
 ---
 
 .larger[Vectorized Conditions]
 
-- `if()` and `elseif()` take single inputs
+.pull-left[
+`if()` and `elseif()` take one input  
+
+That means, they **are not** "vectorized"  
+]
 
 --
 
-- `if_else()` and `ifelse()` can take vector inputs
+.pull-right[
+`if_else()` and `ifelse()` can take a vector of inputs  
+
+That means, they **are** "vectorized"  
+]
 
 ---
 
