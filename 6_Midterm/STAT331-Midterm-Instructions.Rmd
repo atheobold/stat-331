@@ -285,7 +285,7 @@ min_wage %>%
 
 </br>
 
-__3. Which states / territories had the largest change in minimum wage
+__3. Which states / territories had the largest difference in minimum wage
 (difference between high and low values) in each year? Your output should
 display the respective state and it's difference in wages. (Use the Department
 of Labor values.)__
