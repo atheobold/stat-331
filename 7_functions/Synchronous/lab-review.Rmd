@@ -158,7 +158,8 @@ class: inverse, center, middle
 
 ```{r stdcol}
 std_column_01 <- function(data, variable) {
-  stopifnot(is.data.frame(data) & is.numeric(variable))
+  stopifnot(is.data.frame(data), 
+            is.numeric(variable))
   
   data <- data %>%
     mutate(
@@ -253,7 +254,8 @@ class: middle, center, inverse
 
 ```{r}
 std_column_01 <- function(data, variable) {
-  stopifnot(is.data.frame(data) & is.character(variable))
+  stopifnot(is.data.frame(data), 
+            is.character(variable))
   
   data[[variable]] <- std_to_01(data[[variable]])
   return(data)

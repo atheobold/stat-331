@@ -134,7 +134,8 @@ class: inverse, center, middle
 
 ```r
 std_column_01 &lt;- function(data, variable) {
-  stopifnot(is.data.frame(data) &amp; is.numeric(variable))
+  stopifnot(is.data.frame(data), 
+            is.numeric(variable))
   
   data &lt;- data %&gt;%
     mutate(
@@ -161,7 +162,7 @@ std_column_01(penguins, body_mass_g)
 ```
 
 ```
-## Error in stopifnot(is.data.frame(data) &amp; is.numeric(variable)): object 'body_mass_g' not found
+## Error in stopifnot(is.data.frame(data), is.numeric(variable)): object 'body_mass_g' not found
 ```
 
 --
@@ -239,7 +240,8 @@ class: middle, center, inverse
 
 ```r
 std_column_01 &lt;- function(data, variable) {
-  stopifnot(is.data.frame(data) &amp; is.character(variable))
+  stopifnot(is.data.frame(data), 
+            is.character(variable))
   
   data[[variable]] &lt;- std_to_01(data[[variable]])
   return(data)
