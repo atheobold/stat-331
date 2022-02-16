@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Missing Data &amp; Scaling Variables</title>
+    <title>Writing Functions to Work with Variables</title>
     <meta charset="utf-8" />
-    <meta name="author" content="Stat 331" />
-    <meta name="date" content="2021-05-13" />
+    <meta name="author" content="Dr. Allison Theobold" />
+    <meta name="date" content="2022-02-16" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="slide-style.css" type="text/css" />
   </head>
@@ -12,25 +17,511 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Missing Data &amp; Scaling Variables
-### Stat 331
-### May 13, 2021
+# Writing Functions to Work with Variables
+### Dr. Allison Theobold
+### February 16, 2022
 
 ---
 
 
-class: center, middle, inverse
 
-.larger[Missing Data]
+
+
+
+
+class: middle, inverse
+
+.larger[Standardizing Between 0 and 1]
+
+
+
+```r
+std_to_01 &lt;- function(var) {
+  stopifnot(is.numeric(var))
+  
+  num &lt;- var - min(var, na.rm = TRUE)
+  denom &lt;- max(var, na.rm = TRUE) - min(var, na.rm = TRUE)
+  
+  return(num / denom)
+}
+```
 
 --
 
-.larger[**are important**]
+&lt;center&gt;
+
+.large[*Could our function be more efficient?*]
 
 ---
 
+class: middle
+
+.huge[Still...] 
+
+.large[**We haven't eliminated copy-and-pasting!**] 
+
+
+```r
+penguins %&gt;% 
+  mutate(bill_length_mm = std_to_01(bill_length_mm), 
+         bill_depth_mm = std_to_01(bill_depth_mm), 
+         flipper_length_mm = std_to_01(flipper_length_mm), 
+         body_mass_g = std_to_01(body_mass_g)
+  )
+```
+
+--
+
+&lt;center&gt;
+
+**What should we do?** 
+
+
+---
+
+class: middle
+
+.huge[Familiar Option]
+
+--
+
+&lt;center&gt;
+
+.larger[`across()`]
+
+&lt;/center&gt;
+
+
+```r
+penguins %&gt;% 
+  mutate(across(.cols = bill_length_mm:body_mass_g,
+                .fns = std_to_01)
+  )
+```
+
+```
+## # A tibble: 344 x 8
+##    species island    bill_length_mm bill_depth_mm flipper_length_~
+##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;
+##  1 Adelie  Torgersen         0.255          0.667            0.153
+##  2 Adelie  Torgersen         0.269          0.512            0.237
+##  3 Adelie  Torgersen         0.298          0.583            0.390
+##  4 Adelie  Torgersen        NA             NA               NA    
+##  5 Adelie  Torgersen         0.167          0.738            0.356
+##  6 Adelie  Torgersen         0.262          0.893            0.305
+##  7 Adelie  Torgersen         0.247          0.560            0.153
+##  8 Adelie  Torgersen         0.258          0.774            0.390
+##  9 Adelie  Torgersen         0.0727         0.595            0.356
+## 10 Adelie  Torgersen         0.36           0.845            0.305
+## # ... with 334 more rows, and 3 more variables:
+## #   body_mass_g &lt;dbl&gt;, sex &lt;fct&gt;, year &lt;int&gt;
+```
+
+---
+
+class: inverse, center, middle
+
+.huge[New Option]
+
+--
+
+.larger[.honey[Variables as Arguments!]]
+
+---
+
+.larger[Let's give it a try!]
+
+
+```r
+std_column_01 &lt;- function(data, variable) {
+  stopifnot(is.data.frame(data) &amp; is.numeric(variable))
+  
+  data &lt;- data %&gt;%
+    mutate(
+      variable = std_to_01(variable)
+    )
+  return(data)
+}
+```
+
+--
+
+&lt;/br&gt;
+&lt;center&gt;
+Notice how I relied on the existing function `std_to_01()` inside the new
+function, for clarity!
+
+---
+
+.huge[Alas...]
+
+
+```r
+std_column_01(penguins, body_mass_g)
+```
+
+```
+## Error in stopifnot(is.data.frame(data) &amp; is.numeric(variable)): object 'body_mass_g' not found
+```
+
+--
+
+&lt;center&gt;
+
+.larger[**What happened?**]
+
+---
+
+class: middle 
+
+.larger[Tidy evaluation]
+
+Functions that use **unquoted** variable names as arguments are called
+***nonstandard evaluation*** or ***tidy evaluation***.
+
+--
+
+
 .pull-left[
-.larger[Looking for Patterns]
+**Tidy**:
+
+
+```r
+penguins %&gt;% pull(body_mass_g)
+```
+
+
+
+```r
+penguins$body_mass_g
+```
+]
+
+--
+
+.pull-right[
+**Untidy**: 
+
+
+```r
+penguins["body_mass_g"]
+```
+
+
+
+```r
+penguins[["body_mass_g"]]
+```
+]
+
+---
+
+class: middle, center, inverse
+
+.huge[.hand[What to do?]]
+
+---
+
+.larger[Option 1 🤷] 
+
+--
+
+&lt;/br&gt;
+
+.bitlarger[**Just don't use it in your functions.**]
+
+&lt;/br&gt;
+
+.bitlarger[**Harder to read / use, but safe.**]
+
+---
+
+
+```r
+std_column_01 &lt;- function(data, variable) {
+  stopifnot(is.data.frame(data) &amp; is.character(variable))
+  
+  data[[variable]] &lt;- std_to_01(data[[variable]])
+  return(data)
+}
+
+std_column_01(penguins, "bill_length_mm")
+```
+
+```
+## # A tibble: 344 x 8
+##    species island    bill_length_mm bill_depth_mm flipper_length_~
+##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;            &lt;int&gt;
+##  1 Adelie  Torgersen         0.255           18.7              181
+##  2 Adelie  Torgersen         0.269           17.4              186
+##  3 Adelie  Torgersen         0.298           18                195
+##  4 Adelie  Torgersen        NA               NA                 NA
+##  5 Adelie  Torgersen         0.167           19.3              193
+##  6 Adelie  Torgersen         0.262           20.6              190
+##  7 Adelie  Torgersen         0.247           17.8              181
+##  8 Adelie  Torgersen         0.258           19.6              195
+##  9 Adelie  Torgersen         0.0727          18.1              193
+## 10 Adelie  Torgersen         0.36            20.2              190
+## # ... with 334 more rows, and 3 more variables:
+## #   body_mass_g &lt;int&gt;, sex &lt;fct&gt;, year &lt;int&gt;
+```
+
+---
+
+.larger[Option 2 -- Tunnel] 
+
+--
+
+.pull-left[
+
+![](images/rlang.png)
+
+In February 2020 **rlang** introduced the "injection" `{{ }}` operator to
+simplify writing functions around tidyverse pipelines. 
+]
+
+--
+
+.pull-right[
+With the `{{ }}` operator you can tunnel data-variables (i.e. columns
+from the data frames) through function arguments! 
+
+&lt;/br&gt; 
+
+**This only works for `select()` type functions, that use the literal name of
+the variable to subset the data.**
+]
+
+---
+
+.larger[Recall Our Broken Function]
+
+.pull-left[
+
+
+```r
+std_column_01 &lt;- function(data, variable) {
+  data &lt;- data %&gt;%
+    mutate(
+      variable = std_to_01(variable)
+    )
+  return(data)
+}
+
+std_column_01(penguins, body_mass_g)
+```
+
+```
+## Error: Problem with `mutate()` column `variable`.
+## i `variable = std_to_01(variable)`.
+## x object 'body_mass_g' not found
+```
+]
+
+.pull-right[
+
+The problem here is that `mutate()` defuses the R code it was supplied. 
+
+Instead we want it to see `body_mass_g = standardize(body_mass_g)`. 
+
+**This is why we need injection!**
+
+]
+
+---
+
+
+
+
+&lt;code class ='r hljs remark-code'&gt;std_column_01 &lt;- function(data, variable) {&lt;br&gt;&amp;nbsp;&amp;nbsp;stopifnot(is.data.frame(data))&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;br&gt;&amp;nbsp;&amp;nbsp;data %&gt;%&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;mutate( &lt;span style="background-color:#ffff7f"&gt;{{ variable }}&lt;/span&gt; = std_to_01( &lt;span style="background-color:#ffff7f"&gt;{{ variable }}&lt;/span&gt; )&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;)&lt;br&gt;}&lt;/code&gt;
+
+--
+
+.pull-left[
+
+```
+## Error: &lt;text&gt;:5:28: unexpected '='
+## 4:   data %&gt;%
+## 5:     mutate( {{ variable }} =
+##                               ^
+```
+]
+
+.pull-right[
+.huge[
+😭
+]
+]
+
+---
+
+.larger[The `:=` Operator 😄 ]
+
+.pull-left-narrow[
+
+The left hand side of `=` is also diffused! 
+
+
+&lt;!-- R is very strict about the kind of expressions supported on the LHS of `=`. --&gt;
+
+The "walrus operator" `:=` is an alias of `=`.  
+
+You can use it to supply names, e.g. a := b is equivalent to a = b. 
+
+]
+
+--
+
+.pull-right-wide[
+
+&lt;/br&gt;
+
+
+```r
+std_column_01 &lt;- function(data, variable) {
+  stopifnot(is.data.frame(data))
+  
+  data %&gt;%
+    mutate( {{ variable }} := std_to_01( {{ variable }} )
+            )
+}
+```
+]
+
+---
+
+.larger[What if I want to modify multiple columns?]
+
+--
+
+.pull-left-narrow[
+&lt;/br&gt;
+&lt;/br&gt;
+.large[Our friend `across()`!]
+
+]
+
+--
+
+.pull-right[
+
+
+```r
+std_column_01 &lt;- function(data, variables) {
+  stopifnot(is.data.frame(data))
+  
+  data %&gt;%
+    mutate( 
+      across(
+      .cols = {{ variables }}, 
+      .fns = std_to_01
+      )
+    )
+}
+```
+]
+
+--
+
+
+```r
+std_column_01(penguins, bill_length_mm:body_mass_g)
+```
+
+---
+
+class: center, middle, inverse
+
+.larger[Alright, I buy this, but what is .honey[*actually*] happening when you tunnel?]
+
+---
+
+class: center, middle
+
+.larger[R Environments]
+
+In normal R programming objects are defined in the current environment, for 
+instance in the global environment or the environment of a function.
+
+--
+
+&lt;img src="images/R_environments_no_data.jpg" width="60%" height="50%" /&gt;
+
+&lt;!-- If evaluation was performed only in the dataframe, we'd lose track of these --&gt;
+&lt;!-- objects and functions necessary to perform computations! --&gt;
+
+---
+
+class: center, middle
+
+.larger[Data Masking]
+
+To keep these objects and functions in scope, the data frame is inserted at the bottom of the current chain of environments. It comes first and has precedence over the user environment. In other words, it masks the user environment.
+
+&lt;img src="images/R_environments.jpg" width="60%" height="50%" style="display: block; margin: auto;" /&gt;
+
+---
+
+.larger[Environment Pronouns]
+
+Masking blends the data and the user environment, giving priority to the
+data environment. 
+
+So, R can sometimes use a dataframe column when you really intended to use a
+local object.
+
+--
+
+.pull-left[
+
+```r
+cyl &lt;- seq(from = 1, 
+           to = 1000, 
+           by = 2)
+
+summarise(mtcars, mean(cyl))
+```
+
+```
+##   mean(cyl)
+## 1    6.1875
+```
+]
+
+--
+
+.pull-right[
+
+```r
+mtcars %&gt;%
+  dplyr::summarise(
+    mean_data = mean(.data$cyl),
+    mean_env = mean(.env$cyl)
+  )
+```
+
+```
+##   mean_data mean_env
+## 1    6.1875      500
+```
+]
+
+---
+
+class: center, middle, inverse
+
+.huge[Missing Data]
+
+--
+
+.huge[.honey[are important!]]
+
+---
+
+class: center, middle
+
+.pull-left[
+.huge[Looking for Patterns]
 ]
 
 .pull-right[
@@ -43,63 +534,74 @@ class: center, middle, inverse
 
 --
 
-- Without inspection:
+**Without inspection:** 
 
-  * Observations are "missing **completely** at random" 
+&gt; Observations are "missing **completely** at random" 
 
 &lt;!-- When observations of a variable are missing completely at random, the missing observations are a random subset of all observations; the missing and observed values will have similar distributions. --&gt;
 
+&lt;/br&gt;
+
 --
 
-- With information about the "missingness" 
+**With information about the "missingness":** 
 
-  * Observations are "missing at random"
+&gt; Observations are "missing at random"
 
 &lt;!-- Missing at random means there might be systematic differences between the missing and observed values, but these can be entirely explained by other observed variables. --&gt;
 
 
 ---
 
-class: inverse, center
+class: middle, center
 
-.larger[**For example**]
-
---
-
-.large[**If** fish length measurements are missing at random, conditional on month, year, and river section,]
+.larger[.rhubarb[For example]]
 
 --
 
-.large[**then** the distributions of lengths will be similar for fish of the same 
-month, year, and river section.]
+.large[.bayberry[If] fish length measurements are missing at random,
+conditional on month, year, and river section,]
+
+--
+
+.large[.rhubarb[then] the distributions of lengths will be similar for fish
+of the same month, year, and river section.]
 
 ---
 
 class: inverse, center, middle
 
-.huge-text[Scaling Variables]
+.huge[Scaling Variables]
 
 ---
 
 class: middle
 
-.larger[Why Scale?]
+.pull-left[
 
---
+.larger[Why Scale?]
 
 - (More) difficult to compare 
 
 - (More) difficult to model 
-
----
-
-class: middle
-
-.larger[Why not Scale?]
+]
 
 --
 
+.pull-right[
+
+.larger[Why not Scale?]
+
 - Difficult to interpret
+]
+
+---
+
+.larger[Some Interesting Reads]
+
+[Article on How Building Functions with Variable Names has Changed Over the Years](https://www.bryanshalloway.com/2020/06/25/using-across-to-build-functions-with-dplyr-with-notes-on-legacy-approaches/)
+
+[**rlang** Article on Data Masking ](https://rlang.r-lib.org/reference/topic-data-mask.html)
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
