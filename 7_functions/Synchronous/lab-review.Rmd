@@ -266,7 +266,7 @@ std_column_01(penguins, "bill_length_mm")
 
 ---
 
-.larger[Option 2 -- Tunnel] 
+.larger[Option 2 -- Injection] 
 
 --
 
@@ -281,13 +281,13 @@ simplify writing functions around tidyverse pipelines.
 --
 
 .pull-right[
-With the `{{ }}` operator you can tunnel data-variables (i.e. columns
-from the data frames) through function arguments! 
+With the `{{ }}` operator you can inject the name of data-variables (i.e. 
+columns from the data frames) into function arguments! 
 
 </br> 
 
-**This only works for `select()` type functions, that use the literal name of
-the variable to subset the data.**
+**This only works for `select()` type functions, that use a literal (tidy) name
+of the variable to subset the data.**
 ]
 
 ---
@@ -352,7 +352,7 @@ std_column_01 <- function(data, variable) {
 
 .pull-right[
 .huge[
-`r emo::ji('sad')`
+`r emo::ji('cry')`
 ]
 ]
 

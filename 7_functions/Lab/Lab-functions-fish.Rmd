@@ -154,27 +154,27 @@ fish %>%
 <!-- ``` -->
 
 
-### Task 3 -- Creating a Summary Table
+<!-- ### Task 3 -- Creating a Summary Table -->
 
-Create a table displaying how the the mean `length` and `weight` for Westslope
-Cutthroat Trout (WCT) varied over the different sampling years. The table should
-have:
+<!-- Create a table displaying how the the mean `length` and `weight` for Westslope -->
+<!-- Cutthroat Trout (WCT) varied over the different sampling years. The table should -->
+<!-- have: -->
 
-- different values of `year` as (separate) columns
-- the median `length` and mean `weight` as (separate) rows 
+<!-- - different values of `year` as (separate) columns -->
+<!-- - the median `length` and mean `weight` as (separate) rows  -->
 
-```{r, include = FALSE}
-fish %>%
-  filter(species == "WCT") %>% 
-  group_by(year) %>% 
-  summarize(median_length = median(length, na.rm = TRUE), 
-            median_weight = median(weight, na.rm = TRUE)) %>% 
-  pivot_longer(cols = c(`median_length`, `median_weight`), 
-               names_to = "measurement", 
-               values_to = "value") %>% 
-  pivot_wider(names_from = year, 
-              values_from = value)
-```
+<!-- ```{r, include = FALSE} -->
+<!-- fish %>% -->
+<!--   filter(species == "WCT") %>%  -->
+<!--   group_by(year) %>%  -->
+<!--   summarize(median_length = median(length, na.rm = TRUE),  -->
+<!--             median_weight = median(weight, na.rm = TRUE)) %>%  -->
+<!--   pivot_longer(cols = c(`median_length`, `median_weight`),  -->
+<!--                names_to = "measurement",  -->
+<!--                values_to = "value") %>%  -->
+<!--   pivot_wider(names_from = year,  -->
+<!--               values_from = value) -->
+<!-- ``` -->
 
 ---
 
