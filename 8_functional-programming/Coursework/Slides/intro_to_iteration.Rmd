@@ -76,6 +76,34 @@ class: center, middle
 
 ]
 
+---
+
+.larger[Rescaling Variables]
+
+```{r, eval = FALSE}
+BlackfootFish$length <- (BlackfootFish$length - min(BlackfootFish$length, na.rm = TRUE)) /
+  (max(BlackfootFish$length, na.rm = TRUE) - min(BlackfootFish$length, na.rm = TRUE))
+
+BlackfootFish$weight <- (BlackfootFish$weight - min(BlackfootFish$weight, na.rm = TRUE)) /
+  (max(BlackfootFish$weight, na.rm = TRUE) - min(BlackfootFish$length, na.rm = TRUE))
+```
+
+---
+
+.larger[Removing Duplication]
+
+```{r}
+std_to_01 <- function(x){
+  stopifnot(is.numeric(x), 
+            is.vector(x), 
+            length(x) > 1)
+  
+  rng <- range(x)
+  # subtract min and divide by range
+  ( x - rng[1] ) / ( rng[2] - rng[1] ) %>% 
+    return()
+}
+```
 
 ---
 
@@ -95,37 +123,19 @@ penguins %>%
 
 ```{r}
 penguins %>% 
-  summarise_at(vars(bill_length_mm:body_mass_g), mean, na.rm = TRUE)
+  summarise(across(.cols = bill_length_mm:body_mass_g,
+                   .fns = mean, na.rm = TRUE
+                   )
+  )
 ```
 
 ---
-
-.larger[Rescaling Variables]
-
-```{r}
-penguins %>% 
-  mutate(bill_length_mm = standardize(bill_length_mm), 
-         bill_depth_mm = standardize(bill_depth_mm), 
-         flipper_length_mm = standardize(flipper_length_mm), 
-         body_mass_g = standardize(body_mass_g))
-```
-
----
-
-.larger[Removing Duplication]
-
-```{r}
-penguins %>% 
-  mutate_at(vars(bill_length_mm:body_mass_g), standardize)
-```
-
----
-
-.larger[Iteration Paradigms]
-
---
 
 class: inverse
+
+.huge-text[Iteration Paradigms]
+
+---
 
 .pull-left[
 .bitlarger[**Imperative Programming**]

@@ -35,18 +35,17 @@ library(lubridate)
 
 ### Videos
 
-`r emo::ji("play button")` [Introduction to Iteration (6 minutes)](http://somup.com/crhbeDF9eR)
+`r emo::ji("play button")` [Introduction to Iteration (6 minutes)](https://www.youtube.com/watch?v=7YF6mwTMNZw)
 
-`r emo::ji("play button")` [Iteration with `for()` loops (9 minutes)](http://somup.com/crhbbHFR3u)
+`r emo::ji("play button")` [Iteration with `for()` loops (In Production!)]()
 
 `r emo::ji("play button")` [Iteration with the `apply()` family (7 minutes)](https://www.youtube.com/watch?v=NadUAnlrh-M)
  
-`r emo::ji("play button")` [(Iteration with the `map()` family (6 minutes)](https://www.youtube.com/watch?v=FPD3a6IHO6w)
+`r emo::ji("play button")` [Iteration with the `map()` family (6 minutes)](https://www.youtube.com/watch?v=FPD3a6IHO6w)
 
 ### Tutorial
 
 `r emo::ji("computer")` [Required Tutorial: Iteration](https://rstudio.cloud/learn/primers/5)
-
 
 ### Extra Resources
 
@@ -139,15 +138,16 @@ penguins %>%
 </br>
 
 Recall that in the last unit, we discussed the challenge of standardizing many
-columns in a data frame.  For example, we wanted to standardize all the numeric 
-variables in the `penguins` dataset.
-
-Here is the function we wrote for that:
+columns in a data frame.  For example, If we wanted to standardize a numeric 
+variable to be centered at the mean and scaled by the standard deviation, we 
+could use the following function: 
 
 ```{r}
-standardize <- function(data) {
-  deviations <- data - mean(data, na.rm = TRUE)
-  newdata <- deviations / sd(data, na.rm = TRUE)
+standardize <- function(vec) {
+  stopifnot(is.numeric(vec))
+  
+  deviations <- vec - mean(vec, na.rm = TRUE)
+  newdata <- deviations / sd(vec, na.rm = TRUE)
   return(newdata)
 }
 ```
@@ -173,24 +173,26 @@ penguins %>%
 
 **Question 3:** 
 
-Use appropriate `map` functions, along with `scale()`, to create
+Use appropriate `map` functions, along with `standardize()`, to create
 a standardized version of the measurement variables from the `penguins` dataset
 (`bill_length_mm`, `bill_depth_mm`, `flipper_length_mm`, `body_mass_g`).
 
 Do this **without** copy-pasting lines and changing `bill_length_mm` to
 `bill_depth_mm`, etc.
 
-I recommend looking into `map_df()` or `map_at()`! 
+I recommend looking into `map_df()`, `map_if()`, or `map_at()`! 
 
 ```{r, include = FALSE}
-
-penguins %>%
-  map_at(vars(bill_length_mm:body_mass_g), 
-         standardize)
 
 penguins %>% 
   select(bill_length_mm:body_mass_g) %>% 
   map_df(., standardize)
 
+penguins %>%
+  map_at(vars(bill_length_mm:body_mass_g), 
+         standardize)
+
+penguins %>%
+  map_if(is.numeric, standardize)
 ```
 
