@@ -3,87 +3,117 @@ title: "Grading Guide - Lab 7"
 output: html_document
 ---
 
-## Report
+## Report Formatting
 
-Please flag at the beginning if the HTML file for the report:
+**4**: The report has **all** the following, 
 
-- prints messages / warnings (e.g., when the data is loaded, when the plots are
-made)
-- prints the dataset or previews of the dataset (e.g., `View(fish)` or 
-`head(fish)`)
+- Easy to locate headers / titles for question numbers
+- No warnings from code
+- No messages from code
+- No output of data previews
 
-## Code Format 
+**3**: The report has one of the following, 
 
-While grading, please flag if the formatting of the code is poor (e.g., there 
-are not spaces before and after `=`, there are not new lines after every ` %>%`, there are not new lines
-after every `+`)
+- No headers / titles for question numbers 
+- A preview of the data (e.g., `glimpse(avocado)`)
 
+**Redo if above conditions are not met**
+
+</br>
+
+## Code Formatting 
+
+**4**: Code formatting adheres to the tidyverse styling guide. At a bare
+minimum, the code has the following:
+  
+  * spaces around `=` signs 
+  * spaces after `,`s
+  * new lines after `+`s
+  * new lines after `%>%`s
+  * no lines of code that wrap across multiple lines
+
+**3**: No more than two occurrences of code formatting which does not adhere
+to styling guide
+
+**Redo if above conditions are not met**
+
+---
 
 ## Part One: Summaries and Plots
 
 ### Task 1 
 
-- How many observations have missing values? 
+**4**: Outputs a table showing **only** the number of missing values for each 
+variable in the dataset
 
-  * **4**: have code to find the number of missing values -- correct
-  answer of 1796 (can just be printed)
-  * **Redo**: If only say 1796 with no code
+**3**: Outputs more information than is necessary, but shows that weight is the 
+only variable with missing values
 
-```{r, eval = FALSE}
-na_dim <- fish %>% 
-  drop_na() %>% 
-  dim()
+**Redo**: If neither of the above conditions are met
 
-og_dim <- fish %>% 
-  dim() 
-
-og_dim[1] - na_dim[1]
-
-```
-
-- What variable(s) have missing values present? 
-
-  * **4**: have code to show that `weight` is only variable with missing
-  values (can use `summary()` or more complicated approach)
-  * **Redo**: If only say "weight" with no code
 
 ```{r, eval = FALSE}
-fish <- fish %>%
-  mutate_if(is.character, as_factor)
+## Examples of 4
 
-# Simple approach
 fish %>% 
-  summary()
+  summarize(across(
+    .cols = everything(), 
+    .fns = ~sum(is.na(.) == TRUE)
+    )
+  ) 
 
-# More complicated approach
-fish %>% 
-  summarise_at(vars(everything()), ~ sum(is.na(.x)))
+colSums(is.na(fish))
+
+## Example of 3
+
+summary(fish)
+
 ```
  
+</br>
 
 ### Task 2 
 
-- Create a thoughtful visualization exploring the frequency of missing values
-across the different years, sections, and trips.
+- Absolutely every answer must have:
 
-  * Absolutely every answer must have:
-    + filter include only missing values (`filter()`)
-    + grouped counts for the number of missing observations (`group_by()` + `count()` or `summarize()`) 
-    + barplot of counts (with `geom_bar()` or `geom_col()`)
-    + If **any** of these are not met, the response earns a "Redo"
+  * grouped counts for the number of missing observations
+  (`group_by()` + `count()` or `group_by()` + `summarize()`) 
+  * barplot of counts (with `geom_bar()` or `geom_col()`)
+  
+If **any** of these are not met, the response earns a "Redo"
 
-  * **4** -- Must have:
+
+**4** -- Must have:
     + `fill` for one variable & `facet_wrap()` for the other variable
-    + nice axis labels, stating the y-axis is "counts of observations with missing values"
-    + transform `year` into a factor to get all of the years printed on the x-axis
+    + axis labels stating what is being plotted 
+    + the values of the years must be legible (on y-axis or rotated)
 
-  * **3** -- Must have: 
+**3** -- Must have: 
     + `fill` for one variable & `facet_wrap()` for the other variable
-    + nice axis labels, stating the y-axis is "counts of observations with missing values"
-   
-  * **Redo**: If the response **does not** have *at least* 2 of the criteria for a 4
+    + axis labels stating what is being plotted 
+
+**Redo**: If neither of the above conditions are met
+
 
 ```{r, eval = FALSE}
+## Example of a 4
+
+fish %>% 
+  filter(is.na(weight)) %>% 
+  group_by(year, section, trip) %>% 
+  count(is.na(weight)) %>% 
+  mutate(trip = as.factor(trip), 
+         year = as.factor(year)) %>% 
+  ggplot(aes(y = year, x = n, fill = trip)) + 
+  geom_col() + 
+  facet_wrap(vars(section)) + 
+  labs(y = "Sample Year", 
+       x = "Number Missing", 
+       fill = "Trip Number") +
+  scale_fill_brewer(palette = "Paired")
+
+## Example of a 3 
+
 fish %>% 
   filter(is.na(weight)) %>% 
   group_by(year, section, trip) %>% 
@@ -93,90 +123,14 @@ fish %>%
   ggplot(aes(x = year, y = n, fill = trip)) + 
   geom_col() + 
   facet_wrap(vars(section)) + 
-  labs(x = "Year of Sample", 
-       y = "Number of Missing Fish Weights", 
-       fill = "Trip Number") 
-```
-
-
-### Task 3 (similar to Task 2)
-
-- Create a thoughtful visualization exploring how the number of fish captured 
-differed each year, for each section of river. 
-
-  * Absolutely every answer must have:
-    + grouped counts for the number of observations (`group_by()` + `count()` or `summarize()`) 
-    + barplot of counts (with `geom_bar()` or `geom_col()`)
-    + If **either** of these are not met, the response earns a "Redo"
-
-  * **4** -- Must have:
-    + `fill` for one variable & `facet_wrap()` for the other variable
-    + nice axis labels, stating the y-axis is "counts of observations"
-    + transform `year` into a factor to get all of the years printed on the x-axis
-    (Note if they rotated the axis labels to print nicer!)
-
-  * **3** -- Must have: 
-    + `fill` for one variable & `facet_wrap()` for the other variable
-    + nice axis labels, stating the y-axis is "counts of observations with missing values"
-   
-  * **Redo**: If the response **does not** have *at least* 2 of the criteria for a 4
-
-```{r, eval = FALSE}
-# Counts of fish captured
-fish %>% 
-  group_by(year, section, species) %>% 
-  count() %>% 
-  mutate(year = as.factor(year)) %>% 
-  ggplot(aes(x = year, y = n, fill = species)) + 
-  geom_col() + 
-  facet_wrap(vars(section)) + 
-  labs(x = "Year of Sample", 
-       y = "Number of Fish Captured", 
-       fill = "Species of Fish") + 
-  theme(axis.text.x = element_text(angle = 60, hjust = 1))
-
-# Proportion of fish captured
-fish %>% 
-  group_by(year, section, species) %>% 
-  count() %>% 
-  mutate(year = as.factor(year)) %>% 
-  ggplot(aes(x = year, y = n, fill = species)) + 
-  geom_col(position = "fill") + 
-  facet_wrap(vars(section)) + 
-  labs(x = "Year of Sample", 
-       y = "Proportion of Fish Captured", 
-       fill = "Species of Fish") + 
-  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+  labs(y = "Sample Year", 
+       x = "Number Missing", 
+       fill = "Trip Number") +
+  scale_fill_brewer(palette = "Paired")
 
 ```
 
-
-### Task 4 
-
-
-Create a table displaying the mean `length` and `weight` of the fish caught over
-the different sampling years. The table should have:
-
-- different values of `year` as (separate) columns
-- the mean `length` and mean `weight` as (separate) rows 
-
-
-  * **4** -- Use a double pivot (`pivot_longer()` then `pivot_wider()`)
-  * **Redo** -- If a double pivot is not used
-
-
-```{r, eval = FALSE}
-fish %>% 
-  group_by(year) %>% 
-  summarize(mean_length = mean(length, na.rm = TRUE), 
-            mean_weight = mean(weight, na.rm = TRUE)) %>% 
-  pivot_longer(cols = c(`mean_length`, `mean_weight`), 
-               names_to = "measurement", 
-               values_to = "value") %>% 
-  pivot_wider(names_from = year, 
-              values_from = value)
-```
-
+---
 
 ## Part Two:  Adjust the Data (Function Writing)
 

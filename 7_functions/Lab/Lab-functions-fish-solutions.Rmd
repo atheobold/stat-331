@@ -76,12 +76,17 @@ measurement errors.
 *Think about outputting both pieces of information in __one__ table!* 
 
 ```{r, echo = TRUE}
+## Using across()
 fish %>% 
   summarize(across(
     .cols = everything(), 
     .fns = ~sum(is.na(.) == TRUE)
     )
   ) 
+
+## Using colSums()
+colSums(is.na(fish))
+
 ```
 
 ### Task 2 -- Visualizing Missing Data
@@ -101,7 +106,7 @@ fish %>%
          year = as.factor(year)) %>% 
   ggplot(aes(y = year, x = n, fill = trip)) + 
   geom_col() + 
-  facet_wrap(vars(section)) + 
+  facet_wrap(~section) + 
   labs(y = "Sample Year", 
        x = "Number Missing", 
        fill = "Trip Number") +
@@ -117,30 +122,6 @@ fish %>%
         legend.position = "none")
 
 ```
-
-### Task 3 -- Creating a Summary Table
-
-Create a table displaying how the the mean `length` and `weight` for Westslope
-Cutthroat Trout (WCT) varied over the different sampling years. The table should
-have:
-
-- different values of `year` as (separate) columns
-- the mean `length` and mean `weight` as (separate) rows 
-
-```{r}
-fish %>%
-  filter(species == "WCT") %>% 
-  group_by(year) %>% 
-  summarize(mean_length = mean(length, na.rm = TRUE), 
-            mean_weight = mean(weight, na.rm = TRUE)) %>% 
-  pivot_longer(cols = c(`mean_length`, `mean_weight`), 
-               names_to = "measurement", 
-               values_to = "value") %>% 
-  pivot_wider(names_from = year, 
-              values_from = value)
-```
-
-</br>
 
 ---
 
