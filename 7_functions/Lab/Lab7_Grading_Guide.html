@@ -232,16 +232,43 @@ summary(fish)</code></pre>
 </ul></li>
 </ul>
 <p>If <strong>any</strong> of these are not met, the response earns a “Redo”</p>
-<p><strong>4</strong> – Must have: + <code>fill</code> for one variable &amp; <code>facet_wrap()</code> for the other variable + axis labels stating what is being plotted + the values of the years must be legible (on y-axis or rotated)</p>
-<p><strong>3</strong> – Must have: + <code>fill</code> for one variable &amp; <code>facet_wrap()</code> for the other variable + axis labels stating what is being plotted</p>
+<p><strong>4</strong> – Must have:</p>
+<ul>
+<li><code>fill</code> for one variable &amp; <code>facet_wrap()</code> for the other variable</li>
+<li>axis labels stating what is being plotted</li>
+<li>the values of the years must be legible (on y-axis or at an angle on x-axis)</li>
+</ul>
+<p><strong>3</strong> – Must have:</p>
+<ul>
+<li><code>fill</code> for one variable &amp; <code>facet_wrap()</code> for the other variable</li>
+<li>axis labels stating what is being plotted</li>
+</ul>
 <p><strong>Redo</strong>: If neither of the above conditions are met</p>
-<pre class="r"><code>fish %&gt;% 
+<pre class="r"><code>## Example of a 4
+
+fish %&gt;% 
   filter(is.na(weight)) %&gt;% 
   group_by(year, section, trip) %&gt;% 
   count(is.na(weight)) %&gt;% 
   mutate(trip = as.factor(trip), 
          year = as.factor(year)) %&gt;% 
   ggplot(aes(y = year, x = n, fill = trip)) + 
+  geom_col() + 
+  facet_wrap(vars(section)) + 
+  labs(y = &quot;Sample Year&quot;, 
+       x = &quot;Number Missing&quot;, 
+       fill = &quot;Trip Number&quot;) +
+  scale_fill_brewer(palette = &quot;Paired&quot;)
+
+## Example of a 3 
+
+fish %&gt;% 
+  filter(is.na(weight)) %&gt;% 
+  group_by(year, section, trip) %&gt;% 
+  count(is.na(weight)) %&gt;% 
+  mutate(trip = as.factor(trip), 
+         year = as.factor(year)) %&gt;% 
+  ggplot(aes(x = year, y = n, fill = trip)) + 
   geom_col() + 
   facet_wrap(vars(section)) + 
   labs(y = &quot;Sample Year&quot;, 
@@ -255,45 +282,44 @@ summary(fish)</code></pre>
 <h2>Part Two: Adjust the Data (Function Writing)</h2>
 <div id="task-1-1" class="section level3">
 <h3>Task 1</h3>
-<p>Let’s transform the repeated process above into a <code>rescale()</code> function.</p>
-<ul>
-<li><p>The function should take a single vector as its argument.</p>
-<ul>
-<li><strong>4</strong> – Must have:
+<p>To return the scaled vector, the function can either, (1) use a <code>return()</code> statement, or (2) output the result</p>
+<p><strong>4</strong> – Must have:</p>
 <ul>
 <li>store <code>range()</code> in an object</li>
-<li>use object with <code>range()</code> elements (e.g. <code>range[1]</code>) to calculate scaled values</li>
-<li>explicit return (e.g. <code>return(scaled)</code>)</li>
-</ul></li>
-<li><strong>3</strong>
-<ul>
-<li>If the <code>min()</code> function is called twice <strong>or</strong> if there is not an explicit return</li>
-</ul></li>
-<li><strong>Redo</strong>
-<ul>
-<li>If the <code>min()</code> function is called twice <strong>and</strong> there is not an explicit return</li>
-</ul></li>
-</ul></li>
+<li>use object (e.g. <code>rng[1]</code>) to calculate scaled values</li>
 </ul>
-<pre class="r"><code>rescale &lt;- function(x){
+<p><strong>3</strong>: If the <code>min()</code> function is called once and saved to an object</p>
+<p><strong>Redo</strong>: If the <code>min()</code> function is called twice</p>
+<pre class="r"><code># Example of 4s
+rescale &lt;- function(x){
   rng &lt;- range(x, na.rm = TRUE)
   scaled &lt;-  (x - rng[1]) / (rng[2] - rng[1])
+  return(scaled)
+}
+
+rescale &lt;- function(x){
+  rng &lt;- range(x, na.rm = TRUE)
+  (x - rng[1]) / (rng[2] - rng[1])
+}
+
+## Example of 3
+rescale &lt;- function(x){
+  min &lt;- min(x, na.rm = TRUE)
+  scaled &lt;-  (x - min) / (max(x, na.rm = TRUE) - min)
   return(scaled)
 }</code></pre>
 </div>
 <div id="task-2-1" class="section level3">
 <h3>Task 2</h3>
-<p>Now, let’s incorporate some checks into your function! Modify your previous code to create the following checks:</p>
+<p><strong>4</strong> – Must have:</p>
 <ul>
-<li><p>the function should stop if the input is not numeric</p></li>
-<li><p>the function should stop if the length of the vector is not greater than 1</p>
-<ul>
-<li><p><strong>4</strong> – Must have:</p></li>
-<li><p>Conditional checks for whether an input is numeric (<code>is.numeric(x)</code>) <strong>and</strong> if the vector’s length is strictly greater than 1 (<code>length(x) &gt; 1</code>) (Note if the checks allow for the function to be vectorized!)</p></li>
-<li><p><strong>Redo</strong> – If one of the above checks is incorrect</p></li>
-</ul></li>
+<li><code>stopifnot(is.numeric(&lt;input&gt;))</code> to check if the input is numeric</li>
+<li><code>stopifnot(length(&lt;input&gt;) &gt; 1)</code> to check if the input is greater than 1</li>
 </ul>
-<pre class="r"><code>rescale &lt;- function(x){
+<p><strong>3.5</strong>: If <code>stopifnot()</code> is called <em>twice</em>, once for each check.</p>
+<p><strong>3</strong> – Implements the above checks using <code>if()</code> statements rather than <code>stopifnot()</code> statements</p>
+<p><strong>Redo</strong>: If none of the above conditions are met</p>
+<pre class="r"><code>rescale_01 &lt;- function(x){
   stopifnot(is.numeric(x), 
             length(x) &gt; 1)
   
@@ -305,55 +331,77 @@ summary(fish)</code></pre>
 <div id="task-3" class="section level3">
 <h3>Task 3</h3>
 <p>Test your function on a simple vector.</p>
+<p><strong>4</strong> – Must have:</p>
 <ul>
-<li><p><strong>4</strong> – If there is evidence of a check</p></li>
-<li><p><strong>Redo</strong> – If there is not evidence of a check</p></li>
+<li>Uses <code>rescale_01()</code> function on example vector provided (<code>x &lt;- c(1:25, NA)</code>)</li>
+<li>Uses <code>min()</code> to verify the min of the output is 0</li>
+<li>Uses <code>max()</code> to verify the max of the output is 1</li>
 </ul>
+<p><strong>3</strong> – Does not call <code>min()</code> or <code>max()</code> explicitly but confirms minimum and maximum</p>
+<p><strong>Redo</strong> – If there is not evidence of a check</p>
 <pre class="r"><code>x &lt;- c(1:25, NA)
 
-rescale(x)</code></pre>
+rescaled &lt;- rescale_01(x)
+min(rescaled)
+max(rescaled)</code></pre>
 </div>
 <div id="task-4" class="section level3">
 <h3>Task 4</h3>
-<p>Next, let’s test the function on the <code>length</code> column of the <code>BlackfootFish</code> dataset.</p>
+<p><strong>4</strong> – Must have:</p>
 <ul>
-<li><p>Make side-by-side plots of the original values of <code>length</code> and the rescaled values of <code>length</code>.</p>
-<ul>
-<li><p><strong>4</strong> – Must have:</p></li>
-<li><p>two histograms of <code>length</code> variable (unscaled and scaled)</p></li>
-<li><p>different y-axis labels: (1) stating the units of the original measurements (mm), and (2) stating the values are scaled (e.g. “Scaled Fish Lengths”)</p></li>
-<li><p>side-by-side plots (either using <code>grid.arrange()</code> or code chunk specifications)</p></li>
-<li><p><strong>3</strong> – If <strong>one</strong> of the following is true for the response</p>
-<ul>
-<li>does not use <code>geom_histogram()</code></li>
-<li>does not change y-axis labels</li>
-</ul></li>
-<li><p><strong>Redo</strong> – If the plots are not side-by-side <strong>or</strong> if both of the statments above (for a <strong>3</strong>) are true</p></li>
-</ul></li>
+<li><p>Two plots of any of the following types: <code>geom_histogram()</code>, <code>geom_density()</code>, or <code>geom_boxplot()</code></p></li>
+<li><p>Different axis labels stating which plot has the original measurements (in mm) and which plot has the scaled values</p></li>
+<li><p>Side-by-side plots, stacked horizontally <em>not</em> vertically</p></li>
 </ul>
+<p><strong>Redo</strong>: If the above conditions are met</p>
 <pre class="r"><code>original &lt;- fish %&gt;% 
   ggplot(aes(x = length)) + 
-  geom_histogram(binwidth = 45) + 
-  labs(x = &quot;Fish Length (mm)&quot;)
+  geom_histogram(binwidth = 45) +
+  labs(x = &quot;Original Values of Fish Length (mm)&quot;)
 
 scaled &lt;- fish %&gt;% 
-  mutate(length_scaled = rescale(length)) %&gt;%  
+  mutate(length_scaled = rescale_01(length)) %&gt;%  
   ggplot(aes(x = length_scaled)) + 
   geom_histogram(binwidth = .04) + 
-  labs(x = &quot;Scaled Fish Lengths (Scaled with Minimum and Range)&quot;)
+  labs(x = &quot;Rescaled Values of Fish Length&quot;)
+
 
 grid.arrange(original, scaled, nrow = 1)</code></pre>
 </div>
-<div id="task-5-incorrectly-labeled-as-task-4" class="section level3">
-<h3>Task 5 (incorrectly labeled as Task 4)</h3>
-<p>Use your <code>rescale()</code> function to rescale <strong>both</strong> the <code>length</code> and <code>weight</code> columns. <strong>I expect that you only call the <code>rescale()</code> function <em>one</em> time!</strong></p>
+<div id="task-5" class="section level3">
+<h3>Task 5</h3>
+<p><strong>4</strong> – Must have the following:</p>
 <ul>
-<li><strong>4</strong> – If the response uses <code>mutate_at()</code> to scale the variables</li>
-<li><strong>Redo</strong> – If the response calls the <code>rescale()</code> function twices</li>
+<li><strong>Two</strong> inputs: the data, the variables to modify (as one input)</li>
+<li>Check to verify data input is a <code>data.frame</code></li>
+<li>Uses <code>mutate()</code> to modify the variables</li>
+<li>Uses <code>across()</code> and injection (<code>{{ }}</code>) to access variables to modify</li>
+<li>Uses existing <code>rescale_01()</code> function to modify variables</li>
+<li>Outputs the rescaled data</li>
 </ul>
-<pre class="r"><code>fish &lt;- fish %&gt;% 
-  mutate_at(vars(length:weight), 
-            rescale)</code></pre>
+<p><strong>3</strong> – If all of the above conditions are met <em>except</em> for the dataframe check</p>
+<p><strong>Redo</strong> – If the above conditions are not met</p>
+<pre class="r"><code>rescale_column &lt;- function(data, variables){
+  stopifnot(is.data.frame(data))
+  
+  data %&gt;% 
+    mutate(
+      across(.cols = {{ variables }}, 
+             .fns = rescale_01)
+    )
+}</code></pre>
+</div>
+<div id="task-6" class="section level3">
+<h3>Task 6</h3>
+<p><strong>4</strong> – Must have the following:</p>
+<ul>
+<li>Calls <code>rescale_column()</code> function</li>
+<li>Inputs <code>fish</code> data</li>
+<li>Inputs <code>length</code> and <code>weight</code> columns (in one argument)</li>
+<li>Outputs rescaled data (as preview or as raw output)</li>
+</ul>
+<p><strong>Redo</strong> – If the above conditions are not met</p>
+<pre class="r"><code>rescale_column(fish, length:weight)</code></pre>
 </div>
 </div>
 

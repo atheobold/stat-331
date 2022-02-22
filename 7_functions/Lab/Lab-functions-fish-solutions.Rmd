@@ -76,17 +76,12 @@ measurement errors.
 *Think about outputting both pieces of information in __one__ table!* 
 
 ```{r, echo = TRUE}
-## Using across()
 fish %>% 
   summarize(across(
     .cols = everything(), 
-    .fns = ~sum(is.na(.) == TRUE)
+    .fns = ~ sum(is.na(.) == TRUE)
     )
   ) 
-
-## Using colSums()
-colSums(is.na(fish))
-
 ```
 
 ### Task 2 -- Visualizing Missing Data
@@ -101,12 +96,12 @@ across the different years, sections, and trips.
 fish %>% 
   filter(is.na(weight)) %>% 
   group_by(year, section, trip) %>% 
-  count(is.na(weight)) %>% 
+  count() %>% 
   mutate(trip = as.factor(trip), 
          year = as.factor(year)) %>% 
   ggplot(aes(y = year, x = n, fill = trip)) + 
   geom_col() + 
-  facet_wrap(~section) + 
+  facet_wrap(vars(section)) + 
   labs(y = "Sample Year", 
        x = "Number Missing", 
        fill = "Trip Number") +
@@ -118,8 +113,13 @@ fish %>%
       " on Blackfoot River"
     )
   ) + 
-  theme(plot.title = ggtext::element_markdown(), 
-        legend.position = "none")
+  theme(plot.title = ggtext::element_markdown(size = 24), 
+        legend.position = "none",
+        axis.text.x = element_text(size = 12), 
+        axis.text.y = element_text(size = 12), 
+        axis.title = element_text(size = 16),
+        strip.text.x = element_text(size = 12)
+        )
 
 ```
 
@@ -211,8 +211,8 @@ rescaled vector is 1 and the minimum is 0!
 x <- c(1:25, NA)
 
 rescaled <- rescale_01(x)
-min(rescaled)
-max(rescaled)
+min(rescaled, na.rm = TRUE)
+max(rescaled, na.rm = TRUE)
 ```
 
 ### Task 4 - Performing a More Difficult Test
@@ -231,7 +231,7 @@ can play around with the `fig.show` and `out.width` options of your code chunk (
 original <- fish %>% 
   ggplot(aes(x = length)) + 
   geom_histogram(binwidth = 45) +
-  labs(x = "Original Values of Fish Length")
+  labs(x = "Original Values of Fish Length (mm)")
 
 scaled <- fish %>% 
   mutate(length_scaled = rescale_01(length)) %>%  
@@ -260,7 +260,7 @@ should call the original `rescale_01()` function you wrote previously.
 rescale_column <- function(data, variables){
   data %>% 
     mutate(
-      across(.cols = {{variables}}, 
+      across(.cols = {{ variables }}, 
              .fns = rescale_01)
     )
 }
@@ -275,6 +275,8 @@ columns.
 **I expect that you only call the `rescale()` function _one_ time!**  
 
 ```{r}
-fish <- rescale_column(fish, length:weight)
+rescale_column(fish, length:weight) %>% 
+  select(length:weight) %>% 
+  head()
 ```
 

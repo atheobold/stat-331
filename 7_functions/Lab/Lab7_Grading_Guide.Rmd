@@ -82,15 +82,16 @@ summary(fish)
   
 If **any** of these are not met, the response earns a "Redo"
 
-
 **4** -- Must have:
-    + `fill` for one variable & `facet_wrap()` for the other variable
-    + axis labels stating what is being plotted 
-    + the values of the years must be legible (on y-axis or rotated)
+
+- `fill` for one variable & `facet_wrap()` for the other variable
+- axis labels stating what is being plotted 
+- the values of the years must be legible (on y-axis or at an angle on x-axis)
 
 **3** -- Must have: 
-    + `fill` for one variable & `facet_wrap()` for the other variable
-    + axis labels stating what is being plotted 
+
+- `fill` for one variable & `facet_wrap()` for the other variable
+- axis labels stating what is being plotted 
 
 **Redo**: If neither of the above conditions are met
 
@@ -136,51 +137,58 @@ fish %>%
 
 ### Task 1
 
-Let's transform the repeated process above into a `rescale()` function.  
+To return the scaled vector, the function can either, (1) use a `return()` 
+statement, or (2) output the result
 
-- The function should take a single vector as its argument.
+**4** -- Must have:
 
-  * **4** -- Must have:
-    + store `range()` in an object 
-    + use object with `range()` elements (e.g. `range[1]`) to calculate scaled
-    values
-    + explicit return (e.g. `return(scaled)`)
-    
-  * **3**
-    + If the `min()` function is called twice **or** if there is not an
-    explicit return
-    
-  * **Redo** 
-    + If the `min()` function is called twice **and** there is not an
-    explicit return
+- store `range()` in an object 
+- use object (e.g. `rng[1]`) to calculate scaled values
+
+**3**: If the `min()` function is called once and saved to an object
+
+**Redo**: If the `min()` function is called twice
 
 
 ```{r, eval = FALSE}
+# Example of 4s
 rescale <- function(x){
   rng <- range(x, na.rm = TRUE)
   scaled <-  (x - rng[1]) / (rng[2] - rng[1])
   return(scaled)
 }
+
+rescale <- function(x){
+  rng <- range(x, na.rm = TRUE)
+  (x - rng[1]) / (rng[2] - rng[1])
+}
+
+## Example of 3
+rescale <- function(x){
+  min <- min(x, na.rm = TRUE)
+  scaled <-  (x - min) / (max(x, na.rm = TRUE) - min)
+  return(scaled)
+}
+
 ```
 
 
 ### Task 2
 
-Now, let's incorporate some checks into your function! Modify your previous code
-to create the following checks: 
+**4** -- Must have:
 
-- the function should stop if the input is not numeric
-- the function should stop if the length of the vector is not greater than 1 
+- `stopifnot(is.numeric(<input>))` to check if the input is numeric
+- `stopifnot(length(<input>) > 1)` to check if the input is greater than 1 
 
-  * **4** -- Must have:
-   + Conditional checks for whether an input is numeric (`is.numeric(x)`) 
-   **and** if the vector's length is strictly greater than 1 (`length(x) > 1`)
-   (Note if the checks allow for the function to be vectorized!)
-  
-  + **Redo** -- If one of the above checks is incorrect
+**3.5**: If `stopifnot()` is called *twice*, once for each check. 
+
+**3** -- Implements the above checks using `if()` statements rather than 
+`stopifnot()` statements
+
+**Redo**: If none of the above conditions are met
 
 ```{r, eval = FALSE}
-rescale <- function(x){
+rescale_01 <- function(x){
   stopifnot(is.numeric(x), 
             length(x) > 1)
   
@@ -195,69 +203,96 @@ rescale <- function(x){
 
 Test your function on a simple vector. 
 
-  - **4** -- If there is evidence of a check
-  
-  - **Redo** -- If there is not evidence of a check
+**4** -- Must have:
+
+  - Uses `rescale_01()` function on example vector provided (`x <- c(1:25, NA)`)
+  - Uses `min()` to verify the min of the output is 0
+  - Uses `max()` to verify the max of the output is 1
+
+**3** -- Does not call `min()` or `max()` explicitly but confirms minimum and 
+maximum
+
+**Redo** -- If there is not evidence of a check
 
 ```{r, eval = FALSE}
 
 x <- c(1:25, NA)
 
-rescale(x)
-
+rescaled <- rescale_01(x)
+min(rescaled)
+max(rescaled)
 ```
 
 ### Task 4
 
-Next, let's test the function on the `length` column of the `BlackfootFish`
-dataset.
+**4** -- Must have:
 
-- Make side-by-side plots of the original values of `length` and the rescaled
-values of `length`. 
+- Two plots of any of the following types: `geom_histogram()`,
+`geom_density()`, or `geom_boxplot()`
 
-  * **4** -- Must have:
-   +  two histograms of `length` variable (unscaled and scaled) 
-   + different y-axis labels: (1) stating the units of the original measurements
-   (mm), and (2) stating the values are scaled (e.g. "Scaled Fish Lengths")
-   + side-by-side plots (either using `grid.arrange()` or code chunk specifications)
-  
-  * **3** -- If **one** of the following is true for the response
-    + does not use `geom_histogram()`
-    + does not change y-axis labels
+- Different axis labels stating which plot has the original measurements (in mm)
+and which plot has the scaled values
 
-  * **Redo** -- If the plots are not side-by-side **or** if both of the 
-  statments above (for a **3**) are true 
+- Side-by-side plots, stacked horizontally *not* vertically
 
+**Redo**: If the above conditions are met
 
 ```{r, eval = FALSE}
-
 original <- fish %>% 
   ggplot(aes(x = length)) + 
-  geom_histogram(binwidth = 45) + 
-  labs(x = "Fish Length (mm)")
+  geom_histogram(binwidth = 45) +
+  labs(x = "Original Values of Fish Length (mm)")
 
 scaled <- fish %>% 
-  mutate(length_scaled = rescale(length)) %>%  
+  mutate(length_scaled = rescale_01(length)) %>%  
   ggplot(aes(x = length_scaled)) + 
   geom_histogram(binwidth = .04) + 
-  labs(x = "Scaled Fish Lengths (Scaled with Minimum and Range)")
+  labs(x = "Rescaled Values of Fish Length")
+
 
 grid.arrange(original, scaled, nrow = 1)
-
 ```
 
 
-### Task 5 (incorrectly labeled as Task 4)
+### Task 5
 
-Use your `rescale()` function to rescale **both** the `length` and `weight` 
-columns. **I expect that you only call the `rescale()` function _one_ time!**  
+**4** -- Must have the following: 
 
-  - **4** -- If the response uses `mutate_at()` to scale the variables 
-  - **Redo** -- If the response calls the `rescale()` function twices
+  - **Two** inputs: the data, the variables to modify (as one input)
+  - Check to verify data input is a `data.frame`
+  - Uses `mutate()` to modify the variables
+  - Uses `across()` and injection (`{{ }}`) to access variables to modify
+  - Uses existing `rescale_01()` function to modify variables
+  - Outputs the rescaled data
 
+**3** -- If all of the above conditions are met *except* for the dataframe 
+check
+
+**Redo** -- If the above conditions are not met
 
 ```{r, eval = FALSE}
-fish <- fish %>% 
-  mutate_at(vars(length:weight), 
-            rescale)
+rescale_column <- function(data, variables){
+  stopifnot(is.data.frame(data))
+  
+  data %>% 
+    mutate(
+      across(.cols = {{ variables }}, 
+             .fns = rescale_01)
+    )
+}
+```
+
+### Task 6
+
+**4** -- Must have the following:
+
+- Calls `rescale_column()` function
+- Inputs `fish` data
+- Inputs `length` and `weight` columns (in one argument)
+- Outputs rescaled data (as preview or as raw output)
+
+**Redo** -- If the above conditions are not met
+
+```{r, eval = FALSE}
+rescale_column(fish, length:weight)
 ```
