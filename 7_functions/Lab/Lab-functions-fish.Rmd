@@ -336,9 +336,15 @@ index of a fish:
 $$\text{condition index} = \frac{weight}{length^3} \times 100$$
 ```{r, echo = FALSE, eval = FALSE}
 find_condition <- function(data, length_var, weight_var){
+  # Function assumes:
+  # weight is in grams
+  # length is in centimeters
   data %>% 
     mutate(condition := 
-             ( {{ weight_var}} / ({{ length_var }} ^ 3) ) * 100
+             ( 
+               ( {{ weight_var}} / ({{ length_var }} ^ 3) )
+               * 100
+               )
     )
 }
 ```
@@ -358,9 +364,12 @@ Make a thoughtful visualization of how fish conditions have varied over the
 duration of this study. 
 
 ```{r, echo = FALSE, eval = FALSE}
-fish <- find_condition(fish, length, weight)
+fish_condition <- fish %>% 
+  # Convers length to centimeters from millimeters
+  mutate(length_cm = length / 10) %>% 
+  find_condition(length_cm, weight)
 
-fish %>% 
+fish_condition %>% 
   ggplot(aes(y = condition, x = year)) + 
   geom_jitter()
 ```
