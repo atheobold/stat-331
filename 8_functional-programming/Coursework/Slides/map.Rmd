@@ -42,13 +42,6 @@ style_duo_accent(
   text_font_size     = "30px"
 )
 
-
-standardize <- function(data) {
-  stopifnot(is.numeric)
-  deviations <- data - mean(data, na.rm = TRUE)
-  newdata <- deviations / sd(data, na.rm = TRUE)
-  return(newdata)
-}
 ```
 
 .larger[The best option: the `map` family] 

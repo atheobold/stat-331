@@ -32,9 +32,8 @@ library(flair)
 library(palmerpenguins)
 
 style_duo_accent(
-  primary_color = "#26116c",
-  secondary_color = "#fd5e53",
-  title_slide_text_color = "#85858C",
+  primary_color      = "#0F4C81", # pantone classic blue
+  secondary_color    = "#B6CADA", # pantone baby blue
   header_font_google = google_font("Raleway"),
   text_font_google   = google_font("Raleway", "300", "300i"),
   code_font_google   = google_font("Source Code Pro"),
@@ -102,6 +101,11 @@ for (i in seq_along(penguins_measurements)) {
     output[[i]] <- mean(penguins_measurements[[i]], na.rm = TRUE)
 }
 ```
+
+```{r}
+output
+```
+
 
 
 ---

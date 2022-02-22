@@ -155,10 +155,10 @@ a.sourceLine {
 </div>
 <div id="videos" class="section level3">
 <h3>Videos</h3>
-<p>▶️ <a href="http://somup.com/crhbeDF9eR">Introduction to Iteration (6 minutes)</a></p>
-<p>▶️ <a href="http://somup.com/crhbbHFR3u">Iteration with <code>for()</code> loops (9 minutes)</a></p>
+<p>▶️ <a href="https://www.youtube.com/watch?v=7YF6mwTMNZw">Introduction to Iteration (6 minutes)</a></p>
+<p>▶️ <a href="https://www.youtube.com/watch?v=sxIX9lzPjDQ">Iteration with <code>for()</code> loops (10 minutes)</a></p>
 <p>▶️ <a href="https://www.youtube.com/watch?v=NadUAnlrh-M">Iteration with the <code>apply()</code> family (7 minutes)</a></p>
-<p>▶️ <a href="https://www.youtube.com/watch?v=FPD3a6IHO6w">(Iteration with the <code>map()</code> family (6 minutes)</a></p>
+<p>▶️ <a href="https://www.youtube.com/watch?v=FPD3a6IHO6w">Iteration with the <code>map()</code> family (6 minutes)</a></p>
 </div>
 <div id="tutorial" class="section level3">
 <h3>Tutorial</h3>
@@ -212,13 +212,14 @@ a.sourceLine {
 <p></br></p>
 <hr />
 <p></br></p>
-<p>Recall that in the last unit, we discussed the challenge of standardizing many columns in a data frame. For example, we wanted to standardize all the numeric variables in the <code>penguins</code> dataset.</p>
-<p>Here is the function we wrote for that:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>standardize <span class="ot">&lt;-</span> <span class="cf">function</span>(data) {</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  deviations <span class="ot">&lt;-</span> data <span class="sc">-</span> <span class="fu">mean</span>(data, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  newdata <span class="ot">&lt;-</span> deviations <span class="sc">/</span> <span class="fu">sd</span>(data, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(newdata)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Recall that in the last unit, we discussed the challenge of standardizing many columns in a data frame. For example, If we wanted to standardize a numeric variable to be centered at the mean and scaled by the standard deviation, we could use the following function:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>standardize <span class="ot">&lt;-</span> <span class="cf">function</span>(vec) {</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="fu">is.numeric</span>(vec))</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  deviations <span class="ot">&lt;-</span> vec <span class="sc">-</span> <span class="fu">mean</span>(vec, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  newdata <span class="ot">&lt;-</span> deviations <span class="sc">/</span> <span class="fu">sd</span>(vec, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(newdata)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p><strong>Question 2:</strong> Why does the following not work?</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
@@ -231,9 +232,9 @@ a.sourceLine {
 <!-- ``` -->
 <!-- This means that `map_dbl()` expects that the result should have length 1!  -->
 <p><strong>Question 3:</strong></p>
-<p>Use appropriate <code>map</code> functions, along with <code>scale()</code>, to create a standardized version of the measurement variables from the <code>penguins</code> dataset (<code>bill_length_mm</code>, <code>bill_depth_mm</code>, <code>flipper_length_mm</code>, <code>body_mass_g</code>).</p>
+<p>Use appropriate <code>map</code> functions, along with <code>standardize()</code>, to create a standardized version of the measurement variables from the <code>penguins</code> dataset (<code>bill_length_mm</code>, <code>bill_depth_mm</code>, <code>flipper_length_mm</code>, <code>body_mass_g</code>).</p>
 <p>Do this <strong>without</strong> copy-pasting lines and changing <code>bill_length_mm</code> to <code>bill_depth_mm</code>, etc.</p>
-<p>I recommend looking into <code>map_df()</code> or <code>map_at()</code>!</p>
+<p>I recommend looking into <code>map_df()</code>, <code>map_if()</code>, or <code>map_at()</code>!</p>
 </div>
 </article>
 </div>

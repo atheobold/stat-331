@@ -4,6 +4,7 @@
     <title>Introduction to Iteration</title>
     <meta charset="utf-8" />
     <meta name="author" content="Stat 331" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="slide-style.css" type="text/css" />
   </head>
@@ -48,6 +49,36 @@ class: center, middle
 
 ]
 
+---
+
+.larger[Rescaling Variables]
+
+
+```r
+BlackfootFish$length &lt;- (BlackfootFish$length - min(BlackfootFish$length, na.rm = TRUE)) /
+  (max(BlackfootFish$length, na.rm = TRUE) - min(BlackfootFish$length, na.rm = TRUE))
+
+BlackfootFish$weight &lt;- (BlackfootFish$weight - min(BlackfootFish$weight, na.rm = TRUE)) /
+  (max(BlackfootFish$weight, na.rm = TRUE) - min(BlackfootFish$length, na.rm = TRUE))
+```
+
+---
+
+.larger[Removing Duplication]
+
+
+```r
+std_to_01 &lt;- function(x){
+  stopifnot(is.numeric(x), 
+            is.vector(x), 
+            length(x) &gt; 1)
+  
+  rng &lt;- range(x)
+  # subtract min and divide by range
+  ( x - rng[1] ) / ( rng[2] - rng[1] ) %&gt;% 
+    return()
+}
+```
 
 ---
 
@@ -63,7 +94,7 @@ penguins %&gt;%
 ```
 
 ```
-## # A tibble: 1 x 4
+## # A tibble: 1 × 4
 ##   mean_bill_length mean_bill_depth mean_flipper_length mean_mass
 ##              &lt;dbl&gt;           &lt;dbl&gt;               &lt;dbl&gt;     &lt;dbl&gt;
 ## 1             43.9            17.2                201.     4202.
@@ -76,11 +107,14 @@ penguins %&gt;%
 
 ```r
 penguins %&gt;% 
-  summarise_at(vars(bill_length_mm:body_mass_g), mean, na.rm = TRUE)
+  summarise(across(.cols = bill_length_mm:body_mass_g,
+                   .fns = mean, na.rm = TRUE
+                   )
+  )
 ```
 
 ```
-## # A tibble: 1 x 4
+## # A tibble: 1 × 4
 ##   bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
 ##            &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt;
 ## 1           43.9          17.2              201.       4202.
@@ -88,68 +122,11 @@ penguins %&gt;%
 
 ---
 
-.larger[Rescaling Variables]
-
-
-```r
-penguins %&gt;% 
-  mutate(bill_length_mm = standardize(bill_length_mm), 
-         bill_depth_mm = standardize(bill_depth_mm), 
-         flipper_length_mm = standardize(flipper_length_mm), 
-         body_mass_g = standardize(body_mass_g))
-```
-
-```
-## # A tibble: 344 x 8
-##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
-##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt;
-##  1 Adelie  Torgersen         -0.883         0.784            -1.42      -0.563 
-##  2 Adelie  Torgersen         -0.810         0.126            -1.06      -0.501 
-##  3 Adelie  Torgersen         -0.663         0.430            -0.421     -1.19  
-##  4 Adelie  Torgersen         NA            NA                NA         NA     
-##  5 Adelie  Torgersen         -1.32          1.09             -0.563     -0.937 
-##  6 Adelie  Torgersen         -0.847         1.75             -0.776     -0.688 
-##  7 Adelie  Torgersen         -0.920         0.329            -1.42      -0.719 
-##  8 Adelie  Torgersen         -0.865         1.24             -0.421      0.590 
-##  9 Adelie  Torgersen         -1.80          0.480            -0.563     -0.906 
-## 10 Adelie  Torgersen         -0.352         1.54             -0.776      0.0602
-## # ... with 334 more rows, and 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;
-```
-
----
-
-.larger[Removing Duplication]
-
-
-```r
-penguins %&gt;% 
-  mutate_at(vars(bill_length_mm:body_mass_g), standardize)
-```
-
-```
-## # A tibble: 344 x 8
-##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
-##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt;
-##  1 Adelie  Torgersen         -0.883         0.784            -1.42      -0.563 
-##  2 Adelie  Torgersen         -0.810         0.126            -1.06      -0.501 
-##  3 Adelie  Torgersen         -0.663         0.430            -0.421     -1.19  
-##  4 Adelie  Torgersen         NA            NA                NA         NA     
-##  5 Adelie  Torgersen         -1.32          1.09             -0.563     -0.937 
-##  6 Adelie  Torgersen         -0.847         1.75             -0.776     -0.688 
-##  7 Adelie  Torgersen         -0.920         0.329            -1.42      -0.719 
-##  8 Adelie  Torgersen         -0.865         1.24             -0.421      0.590 
-##  9 Adelie  Torgersen         -1.80          0.480            -0.563     -0.906 
-## 10 Adelie  Torgersen         -0.352         1.54             -0.776      0.0602
-## # ... with 334 more rows, and 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;
-```
-
----
-
-.larger[Iteration Paradigms]
-
---
-
 class: inverse
+
+.huge-text[Iteration Paradigms]
+
+---
 
 .pull-left[
 .bitlarger[**Imperative Programming**]
