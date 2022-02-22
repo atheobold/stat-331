@@ -1,5 +1,5 @@
 ---
-title: "Lab: The 12 Days of Christmas"
+title: "Practice Activity 8: The 12 Days of Christmas"
 output:
   prettydoc::html_pretty:
     theme: tactile
@@ -53,33 +53,31 @@ repetitive song.
 
 ## The Repository
 
-Go to <https://github.com/atheobold/twelvedays> to find 
-the documentation for this week's lab.
+Go to <https://github.com/atheobold/twelvedays> to find some starter code for 
+this week's practice activity. 
 
 Fortunately, I have already created the main structure of the functions for you.
 Your job is to fill in the rest of the code inside the functions. 
 
-To get your own copy of the repository, you'll want to **fork** it from my
+### Accessing the Materials -- Option 1
+
+To get your own copy of these materials, you can **fork** it from my
 account (`atheobold`). Once you have your own fork, GitHub will take you to the 
 page for your copy of my `twelvedays` repository. You can then **clone** the
 repository; i.e., download a copy to your local machine by copying-and-pasting 
 the HTTPS address into a new RStudio project (the same steps you did in the 
-Practice Activity). 
+skill-up session). 
 
-![](fork_clone.gif)
+Once you have a copy of the repository, you can add, commit, and push the changes you make to **your** repository. 
 
-**Every** member of your group should have their own copy of the `twelvedays` 
-repository. You are expected to add, commit, and push the changes you make to 
-**your** repository. Unless **everyone** on your team feels comfortable, 
-**do not** collaborate on the _same_ repository! 
+### Accessing the Materials -- Option 2
 
-If you are horribly opposed to working in GitHub for this lab, you can download
-the compressed file with all of the contents for the lab. Once you have
-downloaded the repository folder, double-click the `.Rproj` file inside to
+If you are not interested in working in GitHub for this activity, you can
+download the compressed file with all of the contents for the lab. Once you
+have downloaded the repository folder, double-click the `.Rproj` file inside to
 launch your R Project.
 
-
-### A Test Dataset
+## The Data
 
 Run the code provided to load in a dataset called `xmas` that contains the crucial information about the gifts in the song. We will use this dataset to
 test out our functions as we work on them.
@@ -92,7 +90,7 @@ Note that your functions can - and should! - reference each other.
 That is, don't duplicate code; use earlier, smaller functions inside your
 larger functions.
 
-### Other packages
+## Useful Packages
 
 The packages `dplyr`, `stringr`, `glue`, and `purrr` are already loaded into
 the materials for making the `twelvedays` functions. Make sure you have each of 
@@ -101,27 +99,22 @@ these packages installed!
 If you want to rely on functions from other packages that's fine, but you will 
 need to load them in the set-up chunk.  
 
+## Advice
 
-### Advice
-
-#### Workflow
+### Workflow
 
 Make smaller versions of the `xmas` dataset (e.g., the first two days). 
 
 Once you feel confident in your function code, use the smaller version of the
 data to test the functions you write, before you test them on the full dataset. 
 
-Make sure that after each function is finished, you **commit** and **push** 
-your work to Git.
-
-
-#### Build from small pieces
+### Build from small pieces
 
 If you have some trouble getting started, I recommend writing a function that
 works in one case, and then trying to generalize.
 
-For example, in building my `sing_day` function, I might first write a version 
-called `sing_third_day` that sings
+For example, in building my `sing_day()` function, I might first write a version 
+called `sing_third_day()` that sings
 
 ```
 On the third day of Christmas, my true love gave to me:
@@ -134,7 +127,7 @@ and a patridge in a pear tree.
 
 There's a lot you can do to polish up the way the song prints.
 
-However, the goal of this lab is to practice writing functions and using
+However, the goal of this activity is to practice writing functions and using
 iteration. Don't get bogged down in details like how the song displays, or small
 grammar rules (like commas!), until you've finished the main tasks.
 
@@ -156,7 +149,12 @@ these types.
 *Hint 2:*  The following small example may be useful to you:
 
 ```{r, eval = TRUE}
-my_names <- c("Kimberly", "Trini", "Jason", "Billy", "Zach", "Tommy")
+my_names <- c("Kimberly", 
+              "Trini",
+              "Jason",
+              "Billy",
+              "Zach",
+              "Tommy")
 
 my_names %>% 
   str_replace("y$", "ies")
@@ -173,8 +171,23 @@ that gift.
 ### Test Your Function
 
 Try your function out on the smaller and then larger gift dataset.  
-(Consider: is your function *vectorized*?  It does not have to be, but you can 
-try it out if you want!)
+
+**Consider: is your function _vectorized_?  It does not have to be, but you can
+try it out if you want!**
+
+```{r, include = FALSE}
+pluralize_gift <- function(item){
+  item <- case_when(
+    ## Handle goose changing to geese
+    str_detect(item, "oo") ~  str_replace(item, "oo", "ee"), 
+    ## Handle "y" changing to "ies"
+    str_detect(item, "y$") ~ str_replace(item, "y$", "ies"),
+    ## Just use an "s" for everything else
+    TRUE ~ str_c(item, "s")
+  )
+  return(item)
+}
+```
 
 ```{r}
 
@@ -185,7 +198,6 @@ pluralize_gift(xmas$Gift.Item)
 map_chr(xmas$Gift.Item, pluralize_gift)
 
 ```
-
 
 ---
 
@@ -210,6 +222,35 @@ should return
 "ten lords a-leaping"
 ```
 
+```{r, include = FALSE}
+make_phrase <- function(num, num_word, item, verb, adjective, location) {
+  
+  ## Replace NAs with blank strings
+  item <- replace_na(item, "")
+  verb <- replace_na(verb, "")
+  adjective <- replace_na(adjective, "")
+  location <- replace_na(location, "")
+  
+  ## Figure out if a word starts with a vowel
+  vowel_start <- str_sub(item, 1, 1) %>% 
+    str_detect("[aeiou]")
+  
+  ## If the day is larger than 1, the items need pluralized! 
+  item <- if_else(num > 1, pluralize_gift(item), item) 
+  
+  ## If the word starts with a vowel, add "an" to the beginning
+  num_word <- case_when(
+    num_word == 1 & vowel_start == TRUE ~ "an",
+    num_word == 1 & vowel_start == FALSE ~ "a",
+    TRUE ~ num_word)
+
+  ## Glue all of the pieces together! 
+  glue::glue("{num_word} {adjective} {item} {verb} {location}") %>%
+    str_squish()
+}
+```
+
+
 ### Test Your Function
 
 Try your function out on the `xmas` data, by making a new variable containing 
@@ -221,23 +262,29 @@ to create numbered days and then use those in your `pmap_chr()`!
 
 
 ```{r}
-xmas <- xmas %>%
-  mutate(day.num = ___, 
-    Full.Phrase = pmap_chr(list(num = Day, 
-                                num_word = day.num, 
-                                item = Gift.Item, 
-                                verb = Verb, 
-                                adjective = Adjective, 
-                                location = Location), 
-                           make_phrase)
+xmas2 <- xmas %>%
+  mutate(day.num = as.character(english::english(Day)
+                                ), 
+    Full.Phrase = pmap_chr(
+      list(num = Day,
+           num_word = day.num,
+           item = Gift.Item,
+           verb = Verb,
+           adjective = Adjective,
+           location = Location),
+      make_phrase
+      )
   )
-
 ```
+
+
+**Your `Full.Phrase` column is the answer to this week's Practice Activity.**
+
+**Copy and paste your `Full.Phrase` column to show me the phrases you made!**
 
 ---
 
-
-## Step Three:  Iteration.
+## Challenge: Final Step -- Iteration
 
 Write a function called `sing_line()` that takes as input:
 
@@ -247,9 +294,7 @@ Write a function called `sing_line()` that takes as input:
 
 * The name of a column in the dataset that contains the phrases for each day.
 
-
 For example,
-
 
 ```{r}
 sing_line(xmas, 2, Full.Phrase)
@@ -263,98 +308,62 @@ two turtle doves and
 a partridge in a pear tree.
 ```
 
-*Hint:*  The `{{phrase_col}}` part, which I provided for you, lets you use 
+*Hint:*  The `{{ phrase_col }}` part, which I provided for you, lets you use 
 column names as arguments to a function.  Don't delete that line of code!
 
+```{r, include = FALSE}
+sing_line <- function(data, num, phrase_col) {
+  
+  ## Set up intro line
+  
+  num_word <- english::ordinal(num)
+  
+  intro <- glue::glue("On the {num_word} day of Christmas, my true love gave to me:")
+  
+  ## Sing gift phrases
+  
+  phrases <- data %>%
+    pull( {{phrase_col}} )
+  
+  ## If the number of days is larger than 1
+  ## ad an "and" to the second phrase 
+  if(num > 1){
+    phrases[2] <- str_c(phrases[2], " and")
+  }
+  
+  ## Collapse all of the gifts into a single line 
+  ## Start at the day and end at 1
+  gift_lines <- str_c(phrases[num:1], collapse = "\n")
+  
+  ## Put it together
+  
+  return( 
+    glue::glue("{intro} \n{gift_lines}")
+  )
+  
+}
+```
 
----
-
-
-## Step Four: Use Your Functions!
-
-Run the following code to test out your functions! The output should be the 
-lyrics for the entire 12 Days of Christmas song. 
+### A Small Test
 
 ```{r}
-xmas2 <- xmas %>%
-  mutate(
-    day.num = as.character(english::english(Day)), 
-    Full.Phrase = pmap_chr(list(num = Day, 
-                                num_word = day.num, 
-                                item = Gift.Item, 
-                                verb = Verb, 
-                                adjective = Adjective, 
-                                location = Location), 
-                           make_phrase)
-  )
+xmas %>% 
+sing_line(num = 2, phrase_col = Full.Phrase)
 
-map_chr(1:12, ~sing_line(xmas2, .x, Full.Phrase)) %>%
+```
+
+### A Larger Test
+
+```{r}
+map_chr(1:12, ~ sing_line(xmas2, .x, Full.Phrase)) %>%
   str_c(collapse = "\n") %>%
   cat()
 
 ```
 
-
 ---
 
+## Think Out Loud Recording
 
-## Step Five: Show Me Your Work! 
-
-#### Get it on GitHub
-
-Once you are done with all the functions, make sure you have **pushed** your
-work to GitHub.
-
-Make sure your repository contains your completed RMarkdown document and
-knitted HTML. 
-
-- Your HTML should **only** show the code for your functions and output from 
-testing / verifying that your functions perform as they should. 
-
-__If you used GitHub to store your work:__
-
-Submit the link to your GitHub repository in the Lab 8 assignment portal. 
-
-__If you downloaded the compressed folder and did not use GitHub:__
-
-Submit **both** your RMarkdown file and knitted HTML file
-
-
----
-
-
-## Grading
-
-__You will get an automatic revision for:__
-
-* Functions that do not work the way they are intended
-
-* "Hard-Coding" in functions.
-
-* Not using `map` or `apply` for iteration.
-
-* Not singing the full song.  Remember, each day, you get the gift for that day
-*and* all the prior days.
-
-
-__Minor points will be deducted for:__
-
-* Song output that displays in unappealing ways (e.g. extraneous output, extra
-white space, etc.)
-
-* Minor warning messages from functions
-
-* Forgetting to include the url to your GitHub repo
-
-
-__No points will be deducted for:__
-
-* Unvectorized functions
-
-
----
-
-
-## Challenge
-
-There is no challenge this week! 
+**What was the most difficult part of the practice activity or challenge for
+you? What did you learn while struggling with this content?** 

@@ -68,7 +68,7 @@ pluralize_gift <- function(item){
   } 
   ## Just use an "s" for everything else
   else {
-    item <- paste0(item, "s")
+    item <- str_c(item, "s")
   }
   
 }
