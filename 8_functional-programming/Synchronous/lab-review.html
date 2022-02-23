@@ -4,7 +4,8 @@
     <title>Iteration, Functions &amp; Strings</title>
     <meta charset="utf-8" />
     <meta name="author" content="Stat 331" />
-    <meta name="date" content="2021-05-20" />
+    <meta name="date" content="2022-02-23" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="slide-style.css" type="text/css" />
   </head>
@@ -14,9 +15,10 @@ class: center, middle, inverse, title-slide
 
 # Iteration, Functions &amp; Strings
 ### Stat 331
-### May 20, 2021
+### February 23, 2022
 
 ---
+
 
 
 
@@ -32,6 +34,138 @@ class: inverse, center, middle
 &lt;center&gt;
 
 .bitlarger[**Repeat the _same_ process multiple times**]
+
+---
+
+class: inverse, center, middle
+
+.larger[The `map()` family]
+
+.pull-left-narrow[
+![](images/map.png)
+]
+
+--
+
+.pull-right-wide[
+
+```r
+simple_map &lt;- function(x, f, ...) {
+  out &lt;- vector(mode = "list", length = length(x))
+  for (i in seq_along(x)) {
+    out[[i]] &lt;- f(x[[i]], ...)
+  }
+  out
+}
+```
+
+]
+
+---
+
+class: middle
+
+.larger[Single Outputs]
+
+--
+
+.pull-left[
+.large[**Familiar**]
+
+
+```r
+penguins %&gt;% 
+  summarize(
+    across(
+      .cols = where(is.numeric), 
+      .fns = mean, 
+      na.rm = TRUE
+    )
+  )
+```
+
+What type of output does this produce?
+
+]
+
+--
+
+.pull-right[
+.large[**New**]
+
+```r
+penguins %&gt;% 
+  select(where(is.numeric)) %&gt;% 
+  map_dbl(mean, na.rm = TRUE)
+```
+
+What type of output does this produce?
+
+]
+
+---
+
+class: middle
+
+.larger[Multiple Outputs]
+
+--
+
+.pull-left[
+.large[**Familiar**]
+
+```r
+penguins %&gt;% 
+  mutate(
+    across(
+      .cols = where(is.numeric), 
+      .fns = scale
+    )
+  )
+```
+
+What type of output does this produce?
+
+]
+
+--
+
+.pull-right[
+.large[**New**]
+
+```r
+penguins %&gt;% 
+  map_if(is.numeric, scale)
+```
+
+What type of output does this produce?
+
+]
+
+---
+
+class: center, middle, inverse
+
+.huge-text[.hand[So why use `map()` and not `across()`?]]
+
+---
+
+class: center, middle
+
+.larger[Single Outputs]
+
+
+---
+
+class: inverse, center, middle
+
+.larger[Today's Lab]
+
+&lt;/br&gt; 
+
+--
+
+.large[Making a Song]
 
 ---
 
@@ -252,6 +386,9 @@ bottles_song(4)
 ## No more bottles of beer on the wall, no more bottles of beer. 
 ## Go to the store and buy some more, 99 bottles of beer on the wall
 ```
+
+
+
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

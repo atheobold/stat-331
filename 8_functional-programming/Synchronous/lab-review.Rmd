@@ -1,6 +1,6 @@
 ---
 title: "Iteration, Functions & Strings"
-date: "May 20, 2021"
+date: "February 23, 2022"
 author: "Stat 331"
 output:
   xaringan::moon_reader:
@@ -30,7 +30,7 @@ library(xaringanthemer)
 library(xaringan)
 library(tidyverse)
 library(flair)
-
+library(palmerpenguins)
 
 style_duo_accent(
   primary_color      = "#0F4C81", # pantone classic blue
@@ -42,6 +42,7 @@ style_duo_accent(
 )
 ```
 
+
 class: inverse, center, middle
 
 .larger[Iteration]
@@ -52,6 +53,133 @@ class: inverse, center, middle
 <center>
 
 .bitlarger[**Repeat the _same_ process multiple times**]
+
+---
+
+class: inverse, center, middle
+
+.larger[The `map()` family]
+
+.pull-left-narrow[
+![](images/map.png)
+]
+
+--
+
+.pull-right-wide[
+```{r, eval = FALSE}
+simple_map <- function(x, f, ...) {
+  out <- vector(mode = "list", length = length(x))
+  for (i in seq_along(x)) {
+    out[[i]] <- f(x[[i]], ...)
+  }
+  out
+}
+```
+
+]
+
+---
+
+class: middle
+
+.larger[Single Outputs]
+
+--
+
+.pull-left[
+.large[**Familiar**]
+
+```{r, eval = FALSE}
+penguins %>% 
+  summarize(
+    across(
+      .cols = where(is.numeric), 
+      .fns = mean, 
+      na.rm = TRUE
+    )
+  )
+```
+
+What type of output does this produce?
+
+]
+
+--
+
+.pull-right[
+.large[**New**]
+```{r, eval = FALSE}
+penguins %>% 
+  select(where(is.numeric)) %>% 
+  map_dbl(mean, na.rm = TRUE)
+```
+
+What type of output does this produce?
+
+]
+
+---
+
+class: middle
+
+.larger[Multiple Outputs]
+
+--
+
+.pull-left[
+.large[**Familiar**]
+```{r, eval = FALSE}
+penguins %>% 
+  mutate(
+    across(
+      .cols = where(is.numeric), 
+      .fns = scale
+    )
+  )
+```
+
+What type of output does this produce?
+
+]
+
+--
+
+.pull-right[
+.large[**New**]
+```{r, eval = FALSE}
+penguins %>% 
+  map_if(is.numeric, scale)
+```
+
+What type of output does this produce?
+
+]
+
+---
+
+class: center, middle, inverse
+
+.huge-text[.hand[So why use `map()` and not `across()`?]]
+
+---
+
+class: center, middle
+
+.larger[Single Outputs]
+
+
+---
+
+class: inverse, center, middle
+
+.larger[Today's Lab]
+
+</br> 
+
+--
+
+.large[Making a Song]
 
 ---
 
