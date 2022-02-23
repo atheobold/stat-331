@@ -33,11 +33,24 @@ class: inverse, center, middle
 
 &lt;center&gt;
 
-.bitlarger[**Repeat the _same_ process multiple times**]
+.bitlarger[**Repeat the _same_ operation multiple times**]
 
 ---
 
 class: inverse, center, middle
+
+.bitlarger[.hand[Why not just use loops?]]
+
+--
+
+R is a functional programming language!  
+
+This makes it possible to wrap up loops into a function and call that function
+instead! 
+
+---
+
+class: inverse, middle
 
 .larger[The `map()` family]
 
@@ -65,7 +78,7 @@ simple_map &lt;- function(x, f, ...) {
 
 class: middle
 
-.larger[Single Outputs]
+.larger[Summary Statistics]
 
 --
 
@@ -105,9 +118,24 @@ What type of output does this produce?
 
 ---
 
+class: middle, inverse, center
+
+.bitlarger[What is `map_dbl()` doing?]
+
+
+--
+
+![](images/map_df.png)
+
+--
+
+.large[**What length of output can `f()` produce?**]
+
+---
+
 class: middle
 
-.larger[Multiple Outputs]
+.larger[Data Wrangling]
 
 --
 
@@ -146,14 +174,31 @@ What type of output does this produce?
 
 class: center, middle, inverse
 
-.huge-text[.hand[So why use `map()` and not `across()`?]]
+.bitlarger[.hand[So why use `map()` and not just use `across()`?]]
+
+--
+
+&lt;/br&gt; 
+
+.bitlarger[Not all functions are vectorized! ]
 
 ---
 
-class: center, middle
+class: middle
 
-.larger[Single Outputs]
+.larger[Where we are headed...]
 
+--
+
+
+```r
+sims %&gt;% 
+  map( 
+    ~ lm(bill_length_mm ~ ., data = .)
+      ) %&gt;% 
+  map(summary) %&gt;% 
+  map_dbl( ~ .$r.squared)
+```
 
 ---
 
@@ -165,7 +210,7 @@ class: inverse, center, middle
 
 --
 
-.large[Making a Song]
+.larger[**Making a Song!**]
 
 ---
 

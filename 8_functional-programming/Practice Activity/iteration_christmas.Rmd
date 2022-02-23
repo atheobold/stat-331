@@ -257,10 +257,14 @@ make_phrase <- function(num, num_word, item, verb, adjective, location) {
 Try your function out on the `xmas` data, by making a new variable containing 
 the daily phrases.
 
-**Hint:** The `Day.in.Words` variable isn't quite what you want! You want `12`
-to say `"twelve"` **not** `"twelfth"`. I suggest using the **english** package
-to create numbered days and then use those in your `pmap_chr()`!
+The `Day.in.Words` variable isn't quite what you want! You want `12`
+to say `"twelve"` **not** `"twelfth"`. I've added a line of code below to make a
+`day.num` variable, of the numbered days (using the **english** package). 
 
+The code below uses your function, the `day.num` variable, and the associated
+variables in the dataset to create a `Full.Phrase` column. Note the code I
+provided uses `pmap()`, which assumes your `make_phrase()` function is not 
+vectorized!
 
 ```{r}
 xmas2 <- xmas %>%

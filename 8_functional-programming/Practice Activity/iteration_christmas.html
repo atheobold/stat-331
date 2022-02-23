@@ -251,7 +251,8 @@ and a patridge in a pear tree.</code></pre>
 <div id="test-your-function-1" class="section level3">
 <h3>Test Your Function</h3>
 <p>Try your function out on the <code>xmas</code> data, by making a new variable containing the daily phrases.</p>
-<p><strong>Hint:</strong> The <code>Day.in.Words</code> variable isn’t quite what you want! You want <code>12</code> to say <code>&quot;twelve&quot;</code> <strong>not</strong> <code>&quot;twelfth&quot;</code>. I suggest using the <strong>english</strong> package to create numbered days and then use those in your <code>pmap_chr()</code>!</p>
+<p>The <code>Day.in.Words</code> variable isn’t quite what you want! You want <code>12</code> to say <code>&quot;twelve&quot;</code> <strong>not</strong> <code>&quot;twelfth&quot;</code>. I’ve added a line of code below to make a <code>day.num</code> variable, of the numbered days (using the <strong>english</strong> package).</p>
+<p>The code below uses your function, the <code>day.num</code> variable, and the associated variables in the dataset to create a <code>Full.Phrase</code> column. Note the code I provided uses <code>pmap()</code>, which assumes your <code>make_phrase()</code> function is not vectorized!</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>xmas2 <span class="ot">&lt;-</span> xmas <span class="sc">%&gt;%</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">day.num =</span> <span class="fu">as.character</span>(english<span class="sc">::</span><span class="fu">english</span>(Day)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                                ), </span>
