@@ -68,7 +68,8 @@ repository; i.e., download a copy to your local machine by copying-and-pasting
 the HTTPS address into a new RStudio project (the same steps you did in the 
 skill-up session). 
 
-Once you have a copy of the repository, you can add, commit, and push the changes you make to **your** repository. 
+Once you have a copy of the repository, you can add, commit, and push the
+changes you make to **your** repository. 
 
 ### Accessing the Materials -- Option 2
 

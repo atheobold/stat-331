@@ -205,7 +205,7 @@ pre code {
 <h3>Task 1</h3>
 <p><strong>4</strong>: Outputs a table showing <strong>only</strong> the number of missing values for each variable in the dataset</p>
 <p><strong>3</strong>: Outputs more information than is necessary, but shows that weight is the only variable with missing values</p>
-<p><strong>Redo</strong>: If neither of the above conditions are met</p>
+<p><strong>Redo</strong>: If code calls same function multiple times (instead of using <code>across()</code>)</p>
 <pre class="r"><code>## Examples of 4
 
 fish %&gt;% 
@@ -227,21 +227,24 @@ summary(fish)</code></pre>
 <ul>
 <li><p>Absolutely every answer must have:</p>
 <ul>
-<li>grouped counts for the number of missing observations (<code>group_by()</code> + <code>count()</code> or <code>group_by()</code> + <code>summarize()</code>)</li>
-<li>barplot of counts (with <code>geom_bar()</code> or <code>geom_col()</code>)</li>
+<li><p>grouped counts for the number of missing observations (<code>group_by()</code> + <code>count()</code> or <code>group_by()</code> + <code>summarize()</code>) <strong>OR</strong></p></li>
+<li><p><code>filter()</code> data to include <em>only</em> observations with missing weight</p></li>
+<li><p>barplot of counts (with <code>geom_bar()</code> or <code>geom_col()</code>)</p></li>
 </ul></li>
 </ul>
 <p>If <strong>any</strong> of these are not met, the response earns a “Redo”</p>
 <p><strong>4</strong> – Must have:</p>
 <ul>
-<li><code>fill</code> for one variable &amp; <code>facet_wrap()</code> for the other variable</li>
+<li><code>fill</code> for either <code>trip</code> or <code>section</code> &amp; <code>facet_wrap()</code> for the other variable</li>
 <li>axis labels stating what is being plotted</li>
 <li>the values of the years must be legible (on y-axis or at an angle on x-axis)</li>
+<li>counts are plotted on x- or y-axis</li>
 </ul>
 <p><strong>3</strong> – Must have:</p>
 <ul>
-<li><code>fill</code> for one variable &amp; <code>facet_wrap()</code> for the other variable</li>
+<li><code>fill</code> for either <code>trip</code> or <code>section</code> &amp; <code>facet_wrap()</code> for the other variable</li>
 <li>axis labels stating what is being plotted</li>
+<li>counts are plotted on x- or y-axis</li>
 </ul>
 <p><strong>Redo</strong>: If neither of the above conditions are met</p>
 <pre class="r"><code>## Example of a 4
@@ -288,7 +291,11 @@ fish %&gt;%
 <li>store <code>range()</code> in an object</li>
 <li>use object (e.g. <code>rng[1]</code>) to calculate scaled values</li>
 </ul>
-<p><strong>3</strong>: If the <code>min()</code> function is called once and saved to an object</p>
+<p><strong>3</strong>:</p>
+<ul>
+<li><code>min()</code> function is called once and saved to an object</li>
+<li>(optional) <code>max()</code> function is called and saved into an object</li>
+</ul>
 <p><strong>Redo</strong>: If the <code>min()</code> function is called twice</p>
 <pre class="r"><code># Example of 4s
 rescale &lt;- function(x){

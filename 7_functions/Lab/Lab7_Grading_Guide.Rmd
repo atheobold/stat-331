@@ -49,7 +49,8 @@ variable in the dataset
 **3**: Outputs more information than is necessary, but shows that weight is the 
 only variable with missing values
 
-**Redo**: If neither of the above conditions are met
+**Redo**: If code calls same function multiple times
+(instead of using `across()`)
 
 
 ```{r, eval = FALSE}
@@ -78,20 +79,25 @@ summary(fish)
 
   * grouped counts for the number of missing observations
   (`group_by()` + `count()` or `group_by()` + `summarize()`) 
+  **OR** 
+  * `filter()` data to include *only* observations with missing weight
+  
   * barplot of counts (with `geom_bar()` or `geom_col()`)
   
 If **any** of these are not met, the response earns a "Redo"
 
 **4** -- Must have:
 
-- `fill` for one variable & `facet_wrap()` for the other variable
+- `fill` for either `trip` or `section` & `facet_wrap()` for the other variable
 - axis labels stating what is being plotted 
 - the values of the years must be legible (on y-axis or at an angle on x-axis)
+- counts are plotted on x- or y-axis
 
 **3** -- Must have: 
 
-- `fill` for one variable & `facet_wrap()` for the other variable
+- `fill` for either `trip` or `section` & `facet_wrap()` for the other variable
 - axis labels stating what is being plotted 
+- counts are plotted on x- or y-axis
 
 **Redo**: If neither of the above conditions are met
 
@@ -145,7 +151,10 @@ statement, or (2) output the result
 - store `range()` in an object 
 - use object (e.g. `rng[1]`) to calculate scaled values
 
-**3**: If the `min()` function is called once and saved to an object
+**3**: 
+
+- `min()` function is called once and saved to an object
+- (optional) `max()` function is called and saved into an object
 
 **Redo**: If the `min()` function is called twice
 
