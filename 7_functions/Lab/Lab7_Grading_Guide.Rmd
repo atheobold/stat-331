@@ -244,6 +244,9 @@ and which plot has the scaled values
 
 - Side-by-side plots, stacked horizontally *not* vertically
 
+**3** -- All of the above conditions are met, but a scatterplot is 
+used instead of a boxplot, density plot, or histogram
+
 **Redo**: If the above conditions are met
 
 ```{r, eval = FALSE}
