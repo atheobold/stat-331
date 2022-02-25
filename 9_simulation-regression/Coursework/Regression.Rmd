@@ -40,7 +40,7 @@ In this module, you'll learn to compute linear regression models in R.
 
 ## Conditions of Linear Regression
 
-`r emo::ji("play button")` [Recommended Video -- Regression Assumptions(14 minutes)](https://www.youtube.com/watch?v=LD3OSSVxKMU)
+`r emo::ji("play button")` [Recommended Video -- Regression Assumptions (14 minutes)](https://www.youtube.com/watch?v=LD3OSSVxKMU)
 
 ---
 
