@@ -52,19 +52,19 @@ qnorm(.975, mean = 2, sd = 4)
 ## c
 dnorm(1.5, mean = 2, sd = 4)
 
-## d
-rnorm(100, mean = 2, sd = 4)
 ```
 
 **Question 1:** Explain in one sentence why each of the functions above produced
 the output you obtained. 
 
-**Question 2:** Explain in one sentence why
+**Question 4:** Explain in one sentence why `rnorm(mean = 0, sd = 1)` gives an
+error.
+
+**Question 5:** Explain in one sentence why
 ```
 dnorm(2, mean = 0, sd = 1)
-1 - dnorm(2, mean = 0, sd = 1)
 ```
-add up to 1.
+will always produce a number between 0 and 1. 
 
 ---
 
@@ -111,8 +111,8 @@ set.seed(1234)
 rnorm(1, mean = 0, sd = 1)
 ```
 
-(Of course, it doesn't mean the results will be the same in every subsequent
-run, unless you reset the seed in between each line of code!)
+Of course, it doesn't mean the results will be the same in every subsequent
+run if you forget or reset the seed in between each line of code!
 
 ```{r}
 set.seed(1234)
@@ -130,17 +130,7 @@ Note, though, that this only guarantees your knitted results will be the same
 *if the code has not changed*.
 
 Changing up any part of the code will re-randomize everything that comes after
-it:
-
-```{r}
-set.seed(1234)
-runif(1)
-```
-
-```{r}
-set.seed(1234)
-rnorm(1)
-```
+it!
 
 ---
 
@@ -157,7 +147,7 @@ my_samples %>%
   ggplot(aes(x = height)) +
   geom_histogram(aes(y = ..density..), 
                  binwidth = 1.75, fill = "grey") +
-  stat_function(fun = ~dnorm(.x, mean = 67, sd = 3), 
+  stat_function(fun = ~ dnorm(., mean = 67, sd = 3), 
                 col = "cornflowerblue", lwd = 2) + 
   xlim(c(55, 80))
 ```
@@ -178,10 +168,10 @@ my_samples %>%
   ggplot(aes(x = x)) +
   geom_histogram(aes(y = ..density..), 
                  binwidth = 1.75, fill = "grey", col = "white") +
-  stat_function(fun = ~dnorm(.x, mean = 67, sd = 3), 
+  stat_function(fun = ~ dnorm(., mean = 67, sd = 3), 
                 col = "cornflowerblue", lwd = 2, 
                 xlim = c(60, 75)) +
-  stat_function(fun = ~dnorm(.x, mean = 67, sd = 2), 
+  stat_function(fun = ~ dnorm(., mean = 67, sd = 2), 
                 col = "deeppink", lwd = 2, 
                 xlim = c(60, 75))
 ```
