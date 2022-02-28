@@ -4,7 +4,7 @@
     <title>Linear Regression &amp; Simulation</title>
     <meta charset="utf-8" />
     <meta name="author" content="Stat 331" />
-    <meta name="date" content="2021-05-25" />
+    <meta name="date" content="2022-02-28" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="slide-style.css" type="text/css" />
@@ -15,7 +15,7 @@ class: center, middle, inverse, title-slide
 
 # Linear Regression &amp; Simulation
 ### Stat 331
-### May 25, 2021
+### February 28, 2022
 
 ---
 
@@ -38,7 +38,7 @@ class: inverse
 .pull.right[
 
 &lt;/br&gt;
-.bitlarger[**Predictive Modeling**]
+.bitlarger[**Predictive Modeling &amp; Model Conditions**]
 ]
 
 ---
@@ -67,11 +67,6 @@ $$
 .larger[Supervised Learning]
 
 
-```r
-evals %&gt;% 
-  lm(score ~ age, data = .)
-```
-
 ```
 ## 
 ## Call:
@@ -84,24 +79,110 @@ evals %&gt;%
 
 ---
 
-.larger[Accessing Residuals &amp; Fitted Values]
+.bitlarger[Accessing Residuals &amp; Fitted Values]
+
+
+```r
+evals_lm &lt;- evals %&gt;% 
+  lm(score ~ age, data = .)
+```
+
+.column-left[
+***Objects in `evals_lm`***
+
+`$fitted.values`
+`$residuals`
+]
+
+.column-center[
+&lt;/br&gt;
+
+***Functions to extract elements from `evals_lm`***
 
 - `resid()` 
 - `fitted()`
+]
+
+.column-right[
+&lt;/br&gt;
+&lt;/br&gt;
+&lt;/br&gt;
+
+***Function to make a tibble of elements from `evals_lm`***
+
+`broom::augment()`
+]
+
+---
+
+class: middle
+
+.larger[An Example]
+
+.pull-left[
+
+
+```r
+evals_lm$residuals %&gt;% 
+  head(4)
+```
+
+```
+##          1          2          3          4 
+##  0.4518438 -0.1481562 -0.3481562  0.5518438
+```
+
+
+```r
+resid(evals_lm) %&gt;% 
+  head(4)
+```
+
+```
+##          1          2          3          4 
+##  0.4518438 -0.1481562 -0.3481562  0.5518438
+```
+
+]
+
+.pull-right[
+
+```r
+augment(evals_lm)
+```
+
+```
+## # A tibble: 463 x 8
+##    score   age .fitted  .resid    .hat .sigma   .cooksd .std.resid
+##    &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+##  1   4.7    36    4.25  0.452  0.00560  0.542 0.00197        0.837
+##  2   4.1    36    4.25 -0.148  0.00560  0.542 0.000212      -0.274
+##  3   3.9    36    4.25 -0.348  0.00560  0.542 0.00117       -0.645
+##  4   4.8    36    4.25  0.552  0.00560  0.541 0.00294        1.02 
+##  5   4.6    59    4.11  0.488  0.00471  0.541 0.00193        0.904
+##  6   4.3    59    4.11  0.188  0.00471  0.542 0.000288       0.349
+##  7   2.8    59    4.11 -1.31   0.00471  0.538 0.0139        -2.43 
+##  8   4.1    51    4.16 -0.0591 0.00232  0.542 0.0000139     -0.109
+##  9   3.4    51    4.16 -0.759  0.00232  0.541 0.00229       -1.40 
+## 10   4.5    40    4.22  0.276  0.00374  0.542 0.000488       0.510
+## # ... with 453 more rows
+```
+
+]
 
 ---
 
 .larger[Plotting Residuals]
 
 
-
-
 ```r
-ggplot(data = evals_lm, aes(y = .resid, x = .fitted )) +
+evals_lm %&gt;% 
+  augment() %&gt;% 
+  ggplot(mapping = aes(y = .resid, x = .fitted)) +
   geom_point()
 ```
 
-&lt;img src="PA-review_files/figure-html/unnamed-chunk-4-1.png" width="30%" height="20%" style="display: block; margin: auto;" /&gt;
+&lt;img src="PA-review_files/figure-html/unnamed-chunk-7-1.png" width="40%" height="40%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -119,8 +200,8 @@ specific distribution
 
 --
 
-- `p` for **probability**: i.e. compute the chance of observing a value **less
-than** `x`
+- `p` for **probability** (CDF): i.e. compute the probability of observing a
+value **less than** `x` 
 
 --
 
@@ -129,16 +210,20 @@ such that `\(P(X &lt; x) = p\)`
 
 --
 
-- `d` stands for **density**: compute the height of distribution curve
+- `d` stands for **density** (PDF): compute the height of distribution curve
 
 ---
 
 .larger[Distributions in R]
 
 - Uniform -- `unif`
+
 - Normal -- `norm`
+
 - t -- `t`
+
 - Chi-Squared -- `chisq`
+
 - Binomial -- `binom`
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
