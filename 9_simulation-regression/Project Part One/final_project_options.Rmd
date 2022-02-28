@@ -20,10 +20,10 @@ Everyone in a group will receive the same grade, unless concerns are privately
 expressed to me about member contributions in the final peer evaluation. Bonus
 Challenge Points will be divided evenly across group members.
 
-The **entire** final project is due on **Sunday, June 6th**. Since nothing is 
-due until the end of the course, it is your group's responsibility to ensure 
+The **entire** final project is due on **Saturday, March 13th**. Since nothing
+is due until the end of the course, it is your group's responsibility to ensure 
 that you are staying on top of the work. You will be given class time to 
-complete the project, both this Thursday (5/27) and next week. I am also 
+complete the project, both this Thursday and next week. I am also 
 available to answer any questions you have on Discord! 
 
 
@@ -59,8 +59,14 @@ written report, to earn additional Challenge points. These "extra" components
 may take a great deal of time, so your **entire group** should make the decision 
 as to whether you can complete the task. 
 
+## Option A: Using $\LaTeX$
 
-## Option A: Animating a Plot [+10 Challenge Points]
+<!-- Stuff about writing out regression models using LaTex -->
+
+<!-- Link to resources on writing LaTeX -->
+
+
+## Option B: Animating a Plot [+10 Challenge Points]
 
 A great extra for *any* plot is animation! The **gganimate** package makes 
 it easy to animate **ggplot2** graphics. 
@@ -76,7 +82,7 @@ If your group chooses to embark on this adventure. I would like for you to
 include your animated visualization in your written report! 
 
 
-## Option B: Shiny App [+20 Challenge Points]
+## Option C: Shiny App [+20 Challenge Points]
 
 One of the most exciting features of **R** is the package **shiny**.  
 
@@ -109,34 +115,3 @@ report, you will submit the following:
   can upload your app.
 
 * Submit to Canvas a .zip folder containing all relevant (data and code) files
-
-
-## Option C: A Blogdown Website [+20 Challenge Points]
-
-Have you always wanted to make websites to show off your data analysis?
-
-For the very dedicated, now is your chance!
-
-Use the `blogdown` package to make your very own website in **R**!
-
-This project will involve more learning-on-your-own and frustrating
-troubleshooting than any of the others.
-
-As a reward (in addition to bonus points!), you will have a personal website
-that you have built.
-
-The site should showcase in some way the data analysis you performed -- probably
-in the form of a small blog post on the site.  This analysis can be less formal,
-and less complex, than the written report.  
-
-### Resources
-
-The resources from [this workshop]([https://summer-of-blogdown.netlify.com/]) will be helpful to you.
-
-### Guidelines
-
-If your group chooses to embark on this adventure. In addition to your written 
-report, you will submit the following:
-
-- A link to your website
-
