@@ -1,6 +1,6 @@
 ---
 title: "Linear Regression & Simulation"
-date: "May 25, 2021"
+date: "February 28, 2022"
 author: "Stat 331"
 output:
   xaringan::moon_reader:
@@ -19,8 +19,13 @@ output:
 ---
 
 
-```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.width = 8, fig.height = 6}
-knitr::opts_chunk$set(fig.align = "center")
+```{r, include = FALSE}
+knitr::opts_chunk$set(fig.align = "center", 
+                      echo = FALSE, 
+                      message = FALSE, 
+                      warning = FALSE, 
+                      fig.width = 8, 
+                      fig.height = 6)
 
 options(htmltools.dir.version = FALSE)
 
@@ -61,7 +66,7 @@ class: inverse
 .pull.right[
 
 </br>
-.bitlarger[**Predictive Modeling**]
+.bitlarger[**Predictive Modeling & Model Conditions**]
 ]
 
 ---
@@ -101,22 +106,74 @@ evals %>%
 
 ---
 
-.larger[Accessing Residuals & Fitted Values]
+.bitlarger[Accessing Residuals & Fitted Values]
+
+```{r, echo = TRUE}
+evals_lm <- evals %>% 
+  lm(score ~ age, data = .)
+```
+
+.column-left[
+***Objects in `evals_lm`***
+
+`$fitted.values`
+`$residuals`
+]
+
+.column-center[
+</br>
+
+***Functions to extract elements from `evals_lm`***
 
 - `resid()` 
 - `fitted()`
+]
+
+.column-right[
+</br>
+</br>
+</br>
+
+***Function to make a tibble of elements from `evals_lm`***
+
+`broom::augment()`
+]
+
+---
+
+class: middle
+
+.larger[An Example]
+
+.pull-left[
+
+```{r, echo = TRUE}
+evals_lm$residuals %>% 
+  head(4)
+```
+
+```{r, echo = TRUE}
+resid(evals_lm) %>% 
+  head(4)
+```
+
+]
+
+.pull-right[
+```{r, echo = TRUE}
+augment(evals_lm)
+```
+
+]
 
 ---
 
 .larger[Plotting Residuals]
 
-```{r, echo = FALSE}
-evals_lm <- evals %>% 
-  lm(score ~ age, data = .)
-```
-
-```{r, out.width = "30%", out.height = "20%"}
-ggplot(data = evals_lm, aes(y = .resid, x = .fitted )) +
+```{r, echo = TRUE, out.height = "40%", out.width = "40%"}
+evals_lm %>% 
+  augment() %>% 
+  ggplot(mapping = aes(y = .resid, x = .fitted)) +
   geom_point()
 ```
 
@@ -136,8 +193,8 @@ specific distribution
 
 --
 
-- `p` for **probability**: i.e. compute the chance of observing a value **less
-than** `x`
+- `p` for **probability** (CDF): i.e. compute the probability of observing a
+value **less than** `x` 
 
 --
 
@@ -146,14 +203,18 @@ such that $P(X < x) = p$
 
 --
 
-- `d` stands for **density**: compute the height of distribution curve
+- `d` stands for **density** (PDF): compute the height of distribution curve
 
 ---
 
 .larger[Distributions in R]
 
 - Uniform -- `unif`
+
 - Normal -- `norm`
+
 - t -- `t`
+
 - Chi-Squared -- `chisq`
+
 - Binomial -- `binom`
