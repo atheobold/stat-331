@@ -106,6 +106,7 @@ fish %>%
        x = "Number Missing", 
        fill = "Trip Number") +
   scale_fill_brewer(palette = "Paired") + 
+  scale_x_continuous(breaks = seq(from = 1989, to = 2006)) +
   ggtitle(
     str_c("Missing Fish Weights for ",
       "<span style = 'color:#A6CEE3'>**Trip 1**</span>",

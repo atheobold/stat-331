@@ -135,7 +135,7 @@ c) What *object type* was returned by `summary()`?  What about by `tidy()`?
 a) What is the equation for the estimated regression line (given above)?
 
 b) Penguin Mopsy has a bill that is 5mm deeper than Penguin Gidget. How much
-longer do you expect Penguin Mopsy's bill to be?
+shorter do you expect Penguin Mopsy's bill to be?
 
 
 **Question 3: A more complex model**
