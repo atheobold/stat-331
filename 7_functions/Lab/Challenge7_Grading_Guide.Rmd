@@ -9,6 +9,9 @@ output: html_document
 - Function accepts vector inputs & Visualization is okay -- 9 points
 - Function accepts vector inputs & Visualization is not good -- 8 points
 
+- Function has generic (e.g., `x`, `y`, `variable1`, `variable2`) inputs that
+do not indicate what variables are being used where -- 1 point deduction
+
 ## Variable Name Inputs
 
 - Function accepts variable names as inputs & Visualization is great -- 10.5 points
