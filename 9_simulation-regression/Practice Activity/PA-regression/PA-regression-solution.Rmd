@@ -30,6 +30,7 @@ animal <- read_csv(here::here("9_simulation-regression",
 Compute a linear model to determine if the Duck Diet caused the animal to gain weight, lose weight, or neither.
 
 ```{r}
+
 animal_lm <- animal %>% 
   lm(weight_after ~ weight_before, data = .)
 
@@ -51,6 +52,7 @@ versus `weight_before`.
 
 ```{r}
 animal_lm %>% 
+  augment() %>% 
   ggplot(aes(x = weight_before, y = .resid)) + 
   geom_point()
 

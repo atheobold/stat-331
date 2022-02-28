@@ -123,7 +123,7 @@ set.seed(1957)
 
 my_weights <- rerun(1000, 
                     music_man(n_tromb = 76, n_cor = 110, n_reed = 1035)
-) %>% 
+                    ) %>% 
   flatten_dbl()
 ```
 

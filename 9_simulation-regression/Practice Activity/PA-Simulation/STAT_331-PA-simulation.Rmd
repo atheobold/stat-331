@@ -99,7 +99,8 @@ music_man <- function(n_tromb, n_cor, n_reed){
 set.seed(1957)
 
 my_weights <- rerun(1000, 
-                    music_man(n_tromb = 76, ...)) %>% 
+                    music_man(n_tromb = 76, ...)
+                    ) %>% 
   flatten_dbl()
 ```
 
