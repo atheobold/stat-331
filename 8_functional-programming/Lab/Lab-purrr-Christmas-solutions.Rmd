@@ -250,22 +250,20 @@ sing_line <- function(data, num, phrase_col) {
   ## Sing gift phrases
   
   phrases <- data %>%
-    pull({{phrase_col}})
-  
-  ## If the number of days is larger than 1
-  ## ad an "and" to the second phrase 
-  if(num > 1){
-    phrases[2] <- paste0(phrases[2], " and")
-  }
-  
-  ## Collapse all of the gifts into a single line 
-  ## Start at the day and end at 1
-  gift_lines <- str_c(phrases[num:1], collapse = "\n")
+    pull({{phrase_col}}) %>% 
+    ## Grab only the gifts you want
+    head(num) %>% 
+    ## Reverse the order 
+    rev() %>% 
+    ## Collapse all of the gifts into a single line 
+    glue::glue_collapse(
+      sep = ", \n", 
+      last = " and \n"
+    )
   
   ## Put it together
-  
   return( 
-    glue::glue("{intro} \n{gift_lines}")
+    glue::glue("{intro} \n{phrases}")
   )
   
 }

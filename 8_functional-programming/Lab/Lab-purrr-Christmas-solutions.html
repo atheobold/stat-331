@@ -169,7 +169,7 @@ That is, don’t duplicate code; use earlier, smaller functions inside your larg
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  } </span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Just use an &quot;s&quot; for everything else</span></span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> {</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    item <span class="ot">&lt;-</span> <span class="fu">paste0</span>(item, <span class="st">&quot;s&quot;</span>)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    item <span class="ot">&lt;-</span> <span class="fu">str_c</span>(item, <span class="st">&quot;s&quot;</span>)</span>
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
@@ -332,31 +332,29 @@ That is, don’t duplicate code; use earlier, smaller functions inside your larg
 <span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Sing gift phrases</span></span>
 <span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  phrases <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>({{phrase_col}})</span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>  <span class="do">## If the number of days is larger than 1</span></span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>  <span class="do">## ad an &quot;and&quot; to the second phrase </span></span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(num <span class="sc">&gt;</span> <span class="dv">1</span>){</span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>    phrases[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="fu">paste0</span>(phrases[<span class="dv">2</span>], <span class="st">&quot; and&quot;</span>)</span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Collapse all of the gifts into a single line </span></span>
-<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Start at the day and end at 1</span></span>
-<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>  gift_lines <span class="ot">&lt;-</span> <span class="fu">str_c</span>(phrases[num<span class="sc">:</span><span class="dv">1</span>], <span class="at">collapse =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Put it together</span></span>
-<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>( </span>
-<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>    glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">&quot;{intro} </span><span class="sc">\n</span><span class="st">{gift_lines}&quot;</span>)</span>
-<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>({{phrase_col}}) <span class="sc">%&gt;%</span> </span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    <span class="do">## Grab only the gifts you want</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(num) <span class="sc">%&gt;%</span> </span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    <span class="do">## Reverse the order </span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rev</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>    <span class="do">## Collapse all of the gifts into a single line </span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>    glue<span class="sc">::</span><span class="fu">glue_collapse</span>(</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">sep =</span> <span class="st">&quot;, </span><span class="sc">\n</span><span class="st">&quot;</span>, </span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">last =</span> <span class="st">&quot; and </span><span class="sc">\n</span><span class="st">&quot;</span></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Put it together</span></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>( </span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>    glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">&quot;{intro} </span><span class="sc">\n</span><span class="st">{phrases}&quot;</span>)</span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <div id="test-your-function-4" class="section level3">
 <h3>Test Your Function</h3>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>xmas <span class="sc">%&gt;%</span> </span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sing_line</span>(<span class="at">num =</span> <span class="dv">2</span>, <span class="at">phrase_col =</span> Full.Phrase)</span></code></pre></div>
 <pre><code>## On the second day of Christmas, my true love gave to me: 
-## two turtle doves and
+## two turtle doves and 
 ## one partridge in a pear tree</code></pre>
 </div>
 </div>
@@ -381,92 +379,92 @@ That is, don’t duplicate code; use earlier, smaller functions inside your larg
 <pre><code>## On the first day of Christmas, my true love gave to me: 
 ## a partridge in a pear tree
 ## On the second day of Christmas, my true love gave to me: 
-## two turtle doves and
+## two turtle doves and 
 ## a partridge in a pear tree
 ## On the third day of Christmas, my true love gave to me: 
-## three french hens
-## two turtle doves and
+## three french hens, 
+## two turtle doves and 
 ## a partridge in a pear tree
 ## On the fourth day of Christmas, my true love gave to me: 
-## four calling birds
-## three french hens
-## two turtle doves and
+## four calling birds, 
+## three french hens, 
+## two turtle doves and 
 ## a partridge in a pear tree
 ## On the fifth day of Christmas, my true love gave to me: 
-## five golden rings
-## four calling birds
-## three french hens
-## two turtle doves and
+## five golden rings, 
+## four calling birds, 
+## three french hens, 
+## two turtle doves and 
 ## a partridge in a pear tree
 ## On the sixth day of Christmas, my true love gave to me: 
-## six geese a-laying
-## five golden rings
-## four calling birds
-## three french hens
-## two turtle doves and
+## six geese a-laying, 
+## five golden rings, 
+## four calling birds, 
+## three french hens, 
+## two turtle doves and 
 ## a partridge in a pear tree
 ## On the seventh day of Christmas, my true love gave to me: 
-## seven swans a-swimming
-## six geese a-laying
-## five golden rings
-## four calling birds
-## three french hens
-## two turtle doves and
+## seven swans a-swimming, 
+## six geese a-laying, 
+## five golden rings, 
+## four calling birds, 
+## three french hens, 
+## two turtle doves and 
 ## a partridge in a pear tree
 ## On the eighth day of Christmas, my true love gave to me: 
-## eight maids a-milking
-## seven swans a-swimming
-## six geese a-laying
-## five golden rings
-## four calling birds
-## three french hens
-## two turtle doves and
+## eight maids a-milking, 
+## seven swans a-swimming, 
+## six geese a-laying, 
+## five golden rings, 
+## four calling birds, 
+## three french hens, 
+## two turtle doves and 
 ## a partridge in a pear tree
 ## On the ninth day of Christmas, my true love gave to me: 
-## nine ladies dancing
-## eight maids a-milking
-## seven swans a-swimming
-## six geese a-laying
-## five golden rings
-## four calling birds
-## three french hens
-## two turtle doves and
+## nine ladies dancing, 
+## eight maids a-milking, 
+## seven swans a-swimming, 
+## six geese a-laying, 
+## five golden rings, 
+## four calling birds, 
+## three french hens, 
+## two turtle doves and 
 ## a partridge in a pear tree
 ## On the tenth day of Christmas, my true love gave to me: 
-## ten lords a-leaping
-## nine ladies dancing
-## eight maids a-milking
-## seven swans a-swimming
-## six geese a-laying
-## five golden rings
-## four calling birds
-## three french hens
-## two turtle doves and
+## ten lords a-leaping, 
+## nine ladies dancing, 
+## eight maids a-milking, 
+## seven swans a-swimming, 
+## six geese a-laying, 
+## five golden rings, 
+## four calling birds, 
+## three french hens, 
+## two turtle doves and 
 ## a partridge in a pear tree
 ## On the eleventh day of Christmas, my true love gave to me: 
-## eleven pipers piping
-## ten lords a-leaping
-## nine ladies dancing
-## eight maids a-milking
-## seven swans a-swimming
-## six geese a-laying
-## five golden rings
-## four calling birds
-## three french hens
-## two turtle doves and
+## eleven pipers piping, 
+## ten lords a-leaping, 
+## nine ladies dancing, 
+## eight maids a-milking, 
+## seven swans a-swimming, 
+## six geese a-laying, 
+## five golden rings, 
+## four calling birds, 
+## three french hens, 
+## two turtle doves and 
 ## a partridge in a pear tree
 ## On the twelfth day of Christmas, my true love gave to me: 
-## twelve drummers drumming
-## eleven pipers piping
-## ten lords a-leaping
-## nine ladies dancing
-## eight maids a-milking
-## seven swans a-swimming
-## six geese a-laying
-## five golden rings
-## four calling birds
-## three french hens
-## two turtle doves and
+## twelve drummers drumming, 
+## eleven pipers piping, 
+## ten lords a-leaping, 
+## nine ladies dancing, 
+## eight maids a-milking, 
+## seven swans a-swimming, 
+## six geese a-laying, 
+## five golden rings, 
+## four calling birds, 
+## three french hens, 
+## two turtle doves and 
 ## a partridge in a pear tree</code></pre>
 </div>
 </div>
