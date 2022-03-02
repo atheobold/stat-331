@@ -127,9 +127,9 @@
       <li><a href="#the-written-report">The Written Report</a></li>
       <li><a href="#extras">Extras</a>
       <ul>
-      <li><a href="#option-a-using-latex">Option A: Using <span class="math inline">\(\LaTeX\)</span></a></li>
-      <li><a href="#option-b-animating-a-plot-10-challenge-points">Option B: Animating a Plot [+10 Challenge Points]</a></li>
-      <li><a href="#option-c-shiny-app-20-challenge-points">Option C: Shiny App [+20 Challenge Points]</a></li>
+      <li><a href="#option-a-using-latex-5-challenge-points">Option A: Using <span class="math inline">\(\LaTeX\)</span> [+5 Challenge Points]</a></li>
+      <li><a href="#option-b-creating-slick-tables-up-to-20-challenge-points">Option B: Creating Slick Tables [Up to +20 Challenge Points]</a></li>
+      <li><a href="#option-c-animating-a-plot-up-to-25-challenge-points">Option C: Animating a Plot [Up to +25 Challenge Points]</a></li>
       </ul></li>
       </ul>
     </div>
@@ -146,9 +146,9 @@
 <div id="overview" class="section level2">
 <h2>Overview</h2>
 <p>For your Final Project in Stat 331, you will use your new skills to create a “deliverable.” This project should be a thoughtful, professional creation that you will be proud to share even after this class is over.</p>
-<p>Every group is expected to complete a written report outlining the “key” features of your model and it’s predictions. Your group also has the opportunity to submit additional materials demonstrating key parts of your model through a Shiny app or Blogdown website. These additional materials will earn you additional Challenge Points. (Recall that any Challenge Points above the 100 required for that grade category are extra credit!)</p>
-<p>Everyone in a group will receive the same grade, unless concerns are privately expressed to me about member contributions in the final peer evaluation. Bonus Challenge Points will be divided evenly across group members.</p>
-<p>The <strong>entire</strong> final project is due on <strong>Saturday, March 13th</strong>. Since nothing is due until the end of the course, it is your group’s responsibility to ensure that you are staying on top of the work. You will be given class time to complete the project, both this Thursday and next week. I am also available to answer any questions you have on Discord!</p>
+<p>Every group is expected to complete a written report outlining the “key” features of your model and it’s predictions. Your group also has the opportunity to refine aspects of your to earn you additional Challenge Points. (Recall that any Challenge Points above the total required for that grade category are extra credit!)</p>
+<p>Everyone in a group will receive the same grade, unless concerns are privately expressed to me about member contributions in the final peer evaluation. <strong>Bonus Challenge points will be divided evenly across group members.</strong></p>
+<p>The <strong>entire</strong> final project is due on <strong>Saturday, March 13th</strong>. Since nothing is due until the end of the course, it is your group’s responsibility to ensure that you are staying on top of the work. You will be given class time to complete the project, both this Wednesday and next week. I am also available to answer any questions you have on Discord!</p>
 </div>
 <div id="the-written-report" class="section level1">
 <h1>The Written Report</h1>
@@ -165,44 +165,70 @@
 </div>
 <div id="extras" class="section level1">
 <h1>Extras</h1>
-<p>Your group has the opportunity to complete additional components to the written report, to earn additional Challenge points. These “extra” components may take a great deal of time, so your <strong>entire group</strong> should make the decision as to whether you can complete the task.</p>
-<div id="option-a-using-latex" class="section level2">
-<h2>Option A: Using <span class="math inline">\(\LaTeX\)</span></h2>
-</div>
-<div id="option-b-animating-a-plot-10-challenge-points" class="section level2">
-<h2>Option B: Animating a Plot [+10 Challenge Points]</h2>
-<p>A great extra for <em>any</em> plot is animation! The <strong>gganimate</strong> package makes it easy to animate <strong>ggplot2</strong> graphics.</p>
+<p>Your group has the opportunity to complete additional components to the written report, to earn additional Challenge points. These “extra” components may take a bit of time, so your <strong>entire group</strong> should make the decision as to whether you can complete the task.</p>
+<div id="option-a-using-latex-5-challenge-points" class="section level2">
+<h2>Option A: Using <span class="math inline">\(\LaTeX\)</span> [+5 Challenge Points]</h2>
+<p><span class="math inline">\(\LaTeX\)</span>, which is pronounced Lah-tech or Lay-tech, is a document preparation system for high-quality typesetting. It is most often used for medium-to-large technical or scientific documents but it can be used for almost any form of publishing. Some of the perks of using <span class="math inline">\(\LaTeX\)</span> are:</p>
+<ul>
+<li>Typesetting journal articles, technical reports, books, and slide presentations</li>
+<li>Control over large documents containing sectioning, cross-references, tables and figures</li>
+<li>Typesetting of complex mathematical formulas</li>
+<li>Advanced typesetting of mathematics with AMS-LaTeX</li>
+<li>Automatic generation of bibliographies and indexes</li>
+</ul>
+<!-- Link to resources on writing LaTeX -->
 <div id="resources" class="section level3">
 <h3>Resources</h3>
-<p>The <strong>gganimate</strong> website (<a href="https://gganimate.com/" class="uri">https://gganimate.com/</a>) has a great “Getting Started” tutorial on how to make animated visualizations.</p>
+<ul>
+<li><p><a href="https://github.com/atheobold/IntroLaTeXLesson">Dr. Theobold’s Repository from LaTeX workshop</a></p></li>
+<li><p><a href="https://www.overleaf.com/learn/latex/Mathematical_expressions">Overleaf Guide on Mathematical Expressions</a></p></li>
+</ul>
 </div>
 <div id="guidelines-1" class="section level3">
 <h3>Guidelines</h3>
-<p>If your group chooses to embark on this adventure. I would like for you to include your animated visualization in your written report!</p>
+<p>If your group chooses to embark on this adventure. I would like for you to include a nicely formatted <span class="math inline">\(\LaTeX\)</span> equation for your regression model in your written report!</p>
 </div>
 </div>
-<div id="option-c-shiny-app-20-challenge-points" class="section level2">
-<h2>Option C: Shiny App [+20 Challenge Points]</h2>
-<p>One of the most exciting features of <strong>R</strong> is the package <strong>shiny</strong>.</p>
-<p>This package allows users to make fully interactive web applications directly in <strong>R</strong>.</p>
-<p>See some examples here: <a href="https://shiny.rstudio.com/gallery/" class="uri">https://shiny.rstudio.com/gallery/</a></p>
-<p><em>Shiny</em> is awesome, and this is the extra that I would most suggest you choose, unless you have a strong preference otherwise.</p>
-<p>It will take you some extra work to learn how <strong>shiny</strong> works, and how to build your app. (Hence the bonus Challenge Points!) However, I think you’ll have fun with your results.</p>
-<p>The app should showcase in some way the data analysis you were asked to perform. This analysis can be less formal, and less complex, than written report.</p>
-<div id="resources-1" class="section level3">
-<h3>Resources</h3>
-<p><a href="https://shiny.rstudio.com/tutorial/">This site</a> has very thorough tutorials.</p>
-</div>
+<div id="option-b-creating-slick-tables-up-to-20-challenge-points" class="section level2">
+<h2>Option B: Creating Slick Tables [Up to +20 Challenge Points]</h2>
+<p>Similar to <span class="math inline">\(\LaTeX\)</span>, creating nicely formatted tables is an important aspect to creating a professional report.</p>
+<p>For formatting tables output from R, there are a variety of tools for making nicely formatted tables, but the two I recommend are:</p>
+<ul>
+<li><p>The <code>kable()</code> function from the <a href="https://bookdown.org/yihui/rmarkdown-cookbook/kable.html">kable package</a> – For a nice, basic HTML table</p></li>
+<li><p>The <a href="https://bookdown.org/yihui/rmarkdown-cookbook/kableextra.html">kableExtra package</a> – For additional styling features of your HTML table</p></li>
+</ul>
+<p>An additional package you can explore is the <a href="https://rstudio.github.io/DT/">DT Package</a>. This package creates interactive data tables, previewing different aspects of a dataset. This is a nice way to include a preview of a dataset at the beginning of a report!</p>
 <div id="guidelines-2" class="section level3">
 <h3>Guidelines</h3>
-<p>If your group chooses to embark on this adventure. In addition to your written report, you will submit the following:</p>
+<p>If your group chooses to embark on this adventure. I would like for you to include your nicely formatted table in your written report!</p>
+<p><strong>+5 Challenge Points</strong>:</p>
 <ul>
-<li>A link to your completed app from shinyapps.io.
-<ul>
-<li>At least one of your group members will need to make an account, so that you can upload your app.</li>
-</ul></li>
-<li>Submit to Canvas a .zip folder containing all relevant (data and code) files</li>
+<li>Table formatted with <code>kable()</code></li>
 </ul>
+<p><strong>+10 Challenge Points</strong>:</p>
+<ul>
+<li>Table formatted with <strong>kableExtra</strong></li>
+<li>Table created with <strong>DT</strong></li>
+</ul>
+</div>
+</div>
+<div id="option-c-animating-a-plot-up-to-25-challenge-points" class="section level2">
+<h2>Option C: Animating a Plot [Up to +25 Challenge Points]</h2>
+<p>A great extra for <em>any</em> plot is animation! There are two different packages that can help you add animations to a plot:</p>
+<ol style="list-style-type: decimal">
+<li>The <strong>gganimate</strong> package makes it easy to animate <strong>ggplot2</strong> graphics.</li>
+<li>The <strong>plotly</strong> package has it’s own interface for creating interactive plots.</li>
+</ol>
+<div id="resources-1" class="section level3">
+<h3>Resources</h3>
+<p>The <strong>gganimate</strong> website (<a href="https://gganimate.com/" class="uri">https://gganimate.com/</a>) has a great <a href="https://gganimate.com/articles/gganimate.html">“Getting Started”</a> tutorial on how to make animated visualizations.</p>
+<p>The <strong>plotly</strong> website (<a href="https://plotly.com/r/basic-charts/" class="uri">https://plotly.com/r/basic-charts/</a>) has some examples of <a href="https://plotly.com/r/basic-charts/">“Basic Charts”</a> that should help you learn the syntax of creating an interactive visualization.</p>
+</div>
+<div id="guidelines-3" class="section level3">
+<h3>Guidelines</h3>
+<p>If your group chooses to embark on this adventure. I would like for you to include your animated visualization in your written report!</p>
+<p><strong>+10 Challenge Points</strong> for first interactive plot</p>
+<p><strong>+5 Challenge Points</strong> for each subsequent interactive plot</p>
 </div>
 </div>
 </div>

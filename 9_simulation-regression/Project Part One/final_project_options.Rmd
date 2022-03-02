@@ -11,19 +11,18 @@ you will be proud to share even after this class is over.
 
 Every group is expected to complete a written report outlining the "key" 
 features of your model and it's predictions. Your group also has the opportunity 
-to submit additional materials demonstrating key parts of your model through 
-a Shiny app or Blogdown website. These additional materials will earn you
-additional Challenge Points.  (Recall that any Challenge Points above the 100
-required for that grade category are extra credit!)
+to refine aspects of your to earn you additional Challenge Points.  (Recall that
+any Challenge Points above the total required for that grade category are extra 
+credit!)
 
 Everyone in a group will receive the same grade, unless concerns are privately
-expressed to me about member contributions in the final peer evaluation. Bonus
-Challenge Points will be divided evenly across group members.
+expressed to me about member contributions in the final peer evaluation. **Bonus
+Challenge points will be divided evenly across group members.**
 
 The **entire** final project is due on **Saturday, March 13th**. Since nothing
 is due until the end of the course, it is your group's responsibility to ensure 
 that you are staying on top of the work. You will be given class time to 
-complete the project, both this Thursday and next week. I am also 
+complete the project, both this Wednesday and next week. I am also 
 available to answer any questions you have on Discord! 
 
 
@@ -51,67 +50,98 @@ You will turn in to me:
     
 * Your final report in html or pdf form.
 
-
 # Extras 
 
 Your group has the opportunity to complete additional components to the 
 written report, to earn additional Challenge points. These "extra" components 
-may take a great deal of time, so your **entire group** should make the decision 
+may take a bit of time, so your **entire group** should make the decision 
 as to whether you can complete the task. 
 
-## Option A: Using $\LaTeX$
+## Option A: Using $\LaTeX$ [+5 Challenge Points]
 
-<!-- Stuff about writing out regression models using LaTex -->
+$\LaTeX$, which is pronounced Lah-tech or Lay-tech, is a document preparation
+system for high-quality typesetting. It is most often used for medium-to-large
+technical or scientific documents but it can be used for almost any form of
+publishing. Some of the perks of using $\LaTeX$ are:
+
+- Typesetting journal articles, technical reports, books, and slide
+presentations 
+- Control over large documents containing sectioning, cross-references, tables
+and figures
+- Typesetting of complex mathematical formulas
+- Advanced typesetting of mathematics with AMS-LaTeX 
+- Automatic generation of bibliographies and indexes
 
 <!-- Link to resources on writing LaTeX -->
+### Resources 
+
+- [Dr. Theobold's Repository from LaTeX workshop](https://github.com/atheobold/IntroLaTeXLesson)
+
+- [Overleaf Guide on Mathematical Expressions](https://www.overleaf.com/learn/latex/Mathematical_expressions)
+
+### Guidelines
+
+If your group chooses to embark on this adventure. I would like for you to 
+include a nicely formatted $\LaTeX$ equation for your regression model in your
+written report! 
 
 
-## Option B: Animating a Plot [+10 Challenge Points]
+## Option B: Creating Slick Tables [Up to +20 Challenge Points]
 
-A great extra for *any* plot is animation! The **gganimate** package makes 
-it easy to animate **ggplot2** graphics. 
+Similar to $\LaTeX$, creating nicely formatted tables is an important aspect 
+to creating a professional report. 
+
+For formatting tables output from R, there are a variety of tools for making
+nicely formatted tables, but the two I recommend are: 
+
+- The `kable()` function from the [kable package](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html) -- For a 
+nice, basic HTML table
+
+- The [kableExtra package](https://bookdown.org/yihui/rmarkdown-cookbook/kableextra.html) -- For additional styling features of your HTML table
+
+An additional package you can explore is the [DT Package](https://rstudio.github.io/DT/).
+This package creates interactive data tables, previewing different aspects of 
+a dataset. This is a nice way to include a preview of a dataset at the beginning
+of a report!
+
+### Guidelines
+
+If your group chooses to embark on this adventure. I would like for you to 
+include your nicely formatted table in your written report! 
+
+**+5 Challenge Points**:
+
+- Table formatted with `kable()`
+
+**+10 Challenge Points**:
+
+- Table formatted with **kableExtra**
+- Table created with **DT**
+
+
+## Option C: Animating a Plot [Up to +25 Challenge Points]
+
+A great extra for *any* plot is animation! There are two different packages that
+can help you add animations to a plot:
+
+1. The **gganimate** package makes it easy to animate **ggplot2** graphics. 
+2. The **plotly** package has it's own interface for creating interactive plots.
 
 ### Resources
 
-The **gganimate** website (<https://gganimate.com/>) has a great "Getting 
-Started" tutorial on how to make animated visualizations. 
+The **gganimate** website (<https://gganimate.com/>) has a great
+["Getting Started"](https://gganimate.com/articles/gganimate.html) tutorial on
+how to make animated visualizations. 
+
+The **plotly** website (<https://plotly.com/r/basic-charts/>) has some examples
+of ["Basic Charts"](https://plotly.com/r/basic-charts/) that should 
+help you learn the syntax of creating an interactive visualization. 
 
 ### Guidelines
 
 If your group chooses to embark on this adventure. I would like for you to 
 include your animated visualization in your written report! 
 
+**+10 Challenge Points** for first interactive plot
 
-## Option C: Shiny App [+20 Challenge Points]
-
-One of the most exciting features of **R** is the package **shiny**.  
-
-This package allows users to make fully interactive web applications directly
-in **R**.
-
-See some examples here: https://shiny.rstudio.com/gallery/
-
-*Shiny* is awesome, and this is the extra that I would most suggest you
-choose, unless you have a strong preference otherwise.
-
-It will take you some extra work to learn how **shiny** works, and how to build
-your app.  (Hence the bonus Challenge Points!)  However, I think you'll have fun
-with your results.
-
-The app should showcase in some way the data analysis you were asked to perform.
-This analysis can be less formal, and less complex, than written report. 
-
-### Resources
-
-[This site](https://shiny.rstudio.com/tutorial/) has very thorough tutorials.
-
-### Guidelines
-
-If your group chooses to embark on this adventure. In addition to your written 
-report, you will submit the following:
-
-* A link to your completed app from shinyapps.io.  
-  + At least one of your group members will need to make an account, so that you
-  can upload your app.
-
-* Submit to Canvas a .zip folder containing all relevant (data and code) files
+**+5 Challenge Points** for each subsequent interactive plot

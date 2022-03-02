@@ -159,6 +159,3 @@ accounted for by your regression model. What does this suggest about the
 
 *Note: We are skirting around the ideas of $R^2$, which you can read more 
 about [here](https://moderndive.com/6-multiple-regression.html#rsquared).*
-
-*Hint: You should use the `kable()` function from the [kable package](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html), and 
-think about adding some extra styling features with the[kableExtra package](https://bookdown.org/yihui/rmarkdown-cookbook/kableextra.html)*
