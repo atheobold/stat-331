@@ -1,5 +1,5 @@
 ---
-title: "Challenge 8: Plotting Extras"
+title: "Challenge 9: Plotting Extras"
 output: rmdformats::readthedown
 ---
 
