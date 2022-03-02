@@ -5,13 +5,18 @@ output: rmdformats::readthedown
 
 ```{r, include = FALSE}
 library(tidyverse)
-library(readxl)
 
 knitr::opts_chunk$set(cache = TRUE)
 
-schools <- read_xlsx(here::here("9_simulation-regression", 
-                                "Project Part One", 
-                                "US_schools_data.xlsx"))
+education <- read_csv(here::here("9_simulation-regression",
+                               "Project Part One",
+                                "ratio_of_girls_to_boys_in_primary_and_secondary_education_perc.csv")
+                    )
+
+income <- read_csv(here::here("9_simulation-regression",
+                               "Project Part One",
+                              "income_per_person_gdppercapita_ppp_inflation_adjusted.csv")
+)
 ```
 
 
@@ -39,71 +44,121 @@ It is often said that 80-90% of what a "data scientist" does is clean and
 organize data, in preparation for an analysis. I have certainly found this to 
 be true.  
 
-## Pivoting Longer
+The variables you choose will each be contained in a spreadsheet. The 
+spreadsheet will look something like this:
 
-The grade (04, 08), race (AM, AS, BL, HI, HP, TR, WH), sex (A, F, M), and test
-(READING, MATHEMATICS) are spread across the columns. We need to pivot these variables to be included in **one** column each (e.g., `grade`, `race`, `sex`, 
-`test`).  
-
-**Hint:** the `names_sep` argument in `pivot_longer()` is **very** helpful here!
-
-```{r, include = FALSE}
-schools_small <- schools_small %>% 
-  pivot_longer(G04_A_A_READING:G08_TR_A_MATHEMATICS, 
-           names_to = c("grade", "race", "sex", "test"), 
-           names_sep = "_")
+```{r, echo = FALSE}
+education
 ```
 
-## Joining
+## Pivoting Longer
+
+You should notice that the values of `year` are spread across multiple columns.
+For your analysis, you will need to pivot these columns to be in a **single**
+column. 
+
+```{r, include = FALSE}
+
+k_to_thousands <- function(x){
+  
+  num <- case_when(str_detect(x, pattern = "k") ~ 
+                     as.numeric(
+                       str_extract(x, pattern = ".*[^k]") 
+                       ) * 1000, 
+                   TRUE ~ as.numeric(x)
+  )
+  return(num)
+}
+
+education_long <- education %>% 
+  pivot_longer(cols = -country, 
+               names_to = "year", 
+               values_to = "ratio_boys_to_girls")
+
+income_long <- income %>% 
+  mutate(across(.cols = -country, 
+                .fns = k_to_thousands
+                )
+         ) %>% 
+  pivot_longer(cols = -country, 
+               names_to = "year", 
+               values_to = "gdp_per_person")
+```
+
+## Data Cleaning
+
+It is possible that you will need to perform some data cleaning *before* 
+pivoting! For example, if some incomes are recorded as `36` while others are 
+recorded as `"1.1k"`, R will not allow for you to pivot your columns since
+these columns do not have the same data type! You will need to convert the 
+value of `"1.1k"` into a number *before* pivoting. 
+
+## Joining Datasets
+
+To have both of the variables in the **same** dataset, you will need to perform
+a join. The type of join is up to you, but keep in mind that the default in 
+`ggplot()` and in `lm()` is to drop all of the `NA` values before plotting or 
+fitting a regression model. 
+
+```{r, include = FALSE}
+
+ed_income <- education_long %>% 
+  left_join(income_long, 
+            by = c("year", "country")
+  )
+```
 
 
-## Regional Classification 
-
-Similar to the midterm exam, create a regional grouping for these countries. 
-As this will be presented in a written report, be mindful about how you
-classify the regions. You will need to convince me why you believe these
-different regions would have different relationships between the variables you 
-are investigating. 
-
-
-## Additional Cleaning
-
-Feel free to clean up the values of these variables! Keep in mind that these 
-are the values that will print to the visualizations you make! 
-
-For example, 
-maybe you would prefer for the `grade` variable to only have levels `"4"` and 
-`"8"`, or maybe you'd prefer `test` to have levels `"Mathematics"` and 
-`"Reading"`. I would highly recommend renaming the "A" level of `sex` to say 
-`"all"`! 
-
-You should also consider what variables you want to be factors, and if there 
-are specific orderings that you would like for them to be displayed in for your 
-visualizations! 
-
+---
 
 # Data Visualization
 
-Create **at least three** different visualizations exploring the following:
+Create **three** visualizations exploring the following:
 
-- The relationship between instructional expenditures and testing scores, and
-how this differs by regions
+1. The relationship between the two quantitative variables you are investigating
 
-- The distribution of mathematics and reading test scores
+*Keep in mind your response should be on the y-axis and your explanatory
+variable should be on the x-axis.* 
 
-- How school instructional expenditures and test scores have changed over time,
-and how this differs by region 
+2. How this relationship (from #1) has changed over time
 
-Each of these visualizations should also investigate how these relationships 
-differ based on student race and sex. 
+3. How this relationship (from #1) differs by region 
 
 
 # Linear Regression
 
 Fit a simple linear regression model for the relationship between the variables
-you selected. You will need to define which variable is the response ($y$) 
-and which variable is the explanatory ($x$). 
+you selected. Similar to your visualization, you will need to define which
+variable is the response ($y$) and which variable is the explanatory ($x$).
+
+Your final report should present the estimated regression model _and_ provide
+an interpretation for each of the coefficients output.
 
 
 ## Model Fit
 
+To assess how "good" of a regression model you have we are going to look at how
+much of the variability in the response values were accounted for by your
+regression. 
+
+The goal of regression is to account for as much variability in the response
+values as we can. Here, the variance in the fitted values represents the 
+amount of variability in the response that was accounted for by the explanatory
+variable. The variance in the residuals represents the amount of variability 
+in the responses that **has not** been accounted for. 
+
+Make a nicely formatted table that presents the following:
+
+- The variance in the response values
+- The variance in the fitted values from your regression model
+- The variance in the residuals from your regression model
+
+Discuss the proportion of the variability in the response values that was 
+accounted for by your regression model. What does this suggest about the 
+"quality" of your model?
+
+*Note: We are skirting around the ideas of $R^2$, which you can read more 
+about [here](https://moderndive.com/6-multiple-regression.html#rsquared).*
+
+*Hint: You should use the `kable()` function from the [kable package](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html), and 
+think about adding some extra styling features with the[kableExtra package](https://bookdown.org/yihui/rmarkdown-cookbook/kableextra.html)*
