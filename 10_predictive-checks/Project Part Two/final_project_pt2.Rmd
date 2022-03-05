@@ -22,15 +22,17 @@ In Part Two of this project you will:
 
 # Visualizing Simulations from the Model
 
-With your chosen model, generate predictions using the `predict()` function.
-Then, add random errors to the predictions, using the residual standard error 
-estimated from the linear regression model (acquired with `sigma()`). 
+With your simple linear regression, generate predictions using the `predict()`
+function. Then, add random errors to the predictions, using the residual
+standard error estimated from the linear regression model
+(acquired with `sigma()`). 
 
 Now, compare these simulated observations to the observed data. Generate the 
 **same** plot of the relationships modeled by the linear regression, for the
-simulated data (that you made at the end of Part One). 
+simulated data (that you made at during Part One). 
 
-Plot the visualization of the observed data and the simulated data side-by-side. Discuss how the simulated data are similar and / or different to the observed
+Plot the visualization of the observed data and the simulated data side-by-side.
+Discuss how the simulated data are similar and / or different to the observed
 data. 
 
 ---
@@ -39,14 +41,14 @@ data.
 
 Generate *at least* 1000 simulated datasets that you expect would have been 
 observed if your regression model adequately described the relationship between 
-instructional expenditures and test scores. 
+your response and explanatory variables. 
 
 Regress the observed dataset against each simulated dataset 
-(e.g. `lm(observed ~ simulated)`), and keep the $R^2$ from the regression. Keep 
+(e.g. `lm(observed ~ simulated)`), and keep the $R^2$ from each regression. Keep 
 in mind that `lm()` discards any observations with missing values (`NA`) for 
 **any** of the variables included in your model. So, you will need to remove 
 these observations *before* joining with the observed data. 
 
 Plot the distribution of the $R^2$ values from the regressions. Discuss the 
 implications of the values shown in the plot (i.e., How well does your 
-model accuracy describe the relationships present in the data?). 
+model generate data similar to what was observed?)
