@@ -113,7 +113,7 @@ ed_income <- education_long %>%
 
 # Data Visualization
 
-Create **three** visualizations exploring the following:
+Create **two** visualizations exploring the following:
 
 1. The relationship between the two quantitative variables you are investigating
 
@@ -121,9 +121,6 @@ Create **three** visualizations exploring the following:
 variable should be on the x-axis.* 
 
 2. How this relationship (from #1) has changed over time
-
-3. How this relationship (from #1) differs by region 
-
 
 # Linear Regression
 
