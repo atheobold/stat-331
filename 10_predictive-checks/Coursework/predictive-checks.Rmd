@@ -76,6 +76,7 @@ between the choice of a prior distribution and the choice of a statistical
 model, prior distributions receive a great deal of flack for how the interlace
 "subjectivity" into the statistical modeling process. 
 
+![A Bayesian snob](snob.gif)  
 Due in part to these criticisms regarding the choice of a prior distribution, it
 is common in Bayesian analyses to perform predictive checks to assess the fit of
 the model to the data at hand. While we are not fitting Bayesian models, I
@@ -88,21 +89,22 @@ p. 141).
 
 ## Predictive Checks in a Linear Regression 
 
-Under a linear regression model, we assume that the responses can be modeled as
-a function of the explanatory variables and some error: 
+Under a linear simple regression model, we assume that the responses can be
+modeled as a function of the explanatory variable and some error: 
 $$
-\text{y} = \beta_0 + \beta_1 \times x_1 + \cdots + \beta_n \times x_n + \epsilon
+\text{y} = \beta_0 + \beta_1 \times x_1 + \epsilon
 $$
 
-Specifically, in a linear model we assume that the errors ($\epsilon$) follow a 
-Normal distribution with mean 0 and standard deviation $\sigma$
-($\epsilon \sim N(0, \sigma)$). 
+In a linear model we assume that the errors ($\epsilon$) follow a Normal
+distribution with mean 0 and standard deviation $\sigma$ ($\epsilon \sim N(0, \sigma)$). 
 
 This implies that we can simulate data that we would have expected 
 to come from this model, by adding normally distributed errors to the values 
-predicted from the linear regression. By randomly generating these errors, we
-better understand what the "normality," "equal variance," and "independence"
-conditions mean.
+predicted from the linear regression. Moreover, when we randomly generating
+these errors, we better understand what the "normality," "equal variance,"
+and "independence" conditions for linear regression mean.
+
+### Connection to Model Conditions 
 
 First, we are assuming that the errors follow a Normal distribution, because
 that is the distribution we are using to generate the errors! Second, we are 
@@ -115,10 +117,10 @@ independent.
 The independence assumption is a bit more of a stretch, so let's break down 
 the components. When we assume that observations are independent, we are saying 
 that we shouldn't be able to know the $y$ value for one observation just from 
-knowing the $y$ value of another observation. If I have repeated observations 
-on the same person taking a memory test, then it's pretty likely that I can
-guess their other scores from knowing one of their scores. Since we are using a
-linear regression to model the relationship between the explanatory variable(s)
+knowing the $y$ value of another observation. If I have repeated observations, 
+like values for the same country across multiple years, then it's pretty likely
+that I can guess the value of a variable in 1991 from knowing the same
+variable's value in 1990. Since we are using a linear regression to model the relationship between the explanatory variable(s)
 and the response, this assumption can be rephrased in terms of each
 observation's residual. Specifically, knowing the residual for one observation
 shouldn't give us perfect information about the residual for another
@@ -142,7 +144,7 @@ penguin's `bill_length` as a function of their `bill_depth` and `species`.
 library(palmerpenguins)
 
 penguin_lm <- penguins %>% 
-  lm(bill_length_mm ~ bill_depth_mm*species, data  = .)
+  lm(bill_length_mm ~ bill_depth_mm, data  = .)
 ```
 
 
@@ -179,7 +181,7 @@ penguin_sigma <- sigma(penguin_lm)
 ```
 
 
-## Adding Noise to Predictions
+## Adding Errors / Noise to Predictions
 
 As stated before, under a linear regression model, we can simulate data that we
 would have expected to come from this model, by adding normally distributed
@@ -191,9 +193,9 @@ function here:
 
 ```{r}
 noise <- function(x, mean = 0, sd){
-  n <- length(x)
-  new_data <- x + rnorm(n, mean, sd)
-  return(new_data)
+  x + rnorm(length(x), 
+            mean, 
+            sd)
 }
 ```
 
@@ -203,13 +205,15 @@ these predictions in a `tibble()`, so that I can easily plot them later!
 
 ```{r}
 new_data <- tibble(predict_length = noise(penguin_predict, 
-                                          sd = penguin_sigma)
+                                          sd = penguin_sigma
+                                          )
                    )
 ```
 
 `r emo::ji("check")` **Check-in: Normal Errors**
 
-When simulating data that come from a linear regression, why should the default value for the `mean` be 0? (when passed into the `rnorm()` function)
+When simulating data that come from a linear regression, why should the default
+value for the `mean` be 0? (when passed into the `rnorm()` function)
 
 ---
 
@@ -250,7 +254,7 @@ generating process?
 ## Adding in the Observed x's 
 
 If we are interested in seeing if the observed relationships between 
-`bill_length`, `bill_depth`, and `species` are radically different from the 
+`bill_length` and `bill_depth` are radically different from the 
 simulated data, we need to add these variables into our simulated dataset. 
 
 Remember, by default `lm()` throws out any observations with missing values 
@@ -263,8 +267,8 @@ of the dataset before we bind the columns together.
 ```{r}
 new_data <- penguins %>% 
   filter(!is.na(bill_depth_mm), 
-         !is.na(bill_length_mm), 
-         !is.na(species)) %>% 
+         !is.na(bill_length_mm)
+         ) %>% 
   select(bill_length_mm, bill_depth_mm, species) %>% 
   bind_cols(new_data)
 
@@ -281,7 +285,8 @@ example, in the Gentoo penguins, there are fewer observations of long bills.
 
 ```{r, fig.width = 10, out}
 pred <- new_data %>% 
-  ggplot(aes(y = predict_length, x = bill_depth_mm, color = species)) + 
+  ggplot(aes(y = predict_length,
+             x = bill_depth_mm)) + 
   geom_point() + 
    labs(title = "Simulated Data", 
        x = "Bill Depth (mm)", 
@@ -289,12 +294,12 @@ pred <- new_data %>%
   theme(legend.position = "none")
 
 obs <- penguins %>% 
-  ggplot(aes(y = bill_length_mm, x = bill_depth_mm, color = species)) + 
+  ggplot(aes(y = bill_length_mm,
+             x = bill_depth_mm)) + 
   geom_point() + 
   labs(title = "Observed Data", 
        x = "Bill Depth (mm)", 
-       y = "Bill Length (mm)" ) + 
-  theme(legend.position = "left")
+       y = "Bill Length (mm)" )
 
 gridExtra::grid.arrange(obs, pred, nrow = 1, widths = c(0.55, 0.45))
 ```
@@ -311,7 +316,8 @@ If the simulated data were identical to the observed data, they would all fall
 on the $y = x$ line (in red). Values above the $y = x$ line correspond to
 simulated bill lengths larger than the observed bill lengths, and visa versa. 
 Overall, it appears that there are about as many over estimates as
-underestimates, but the values are not terribly close to the line.
+underestimates, but the values are not terribly close to the line implying that
+the simulated data are not very close to what was observed.
 
 ```{r}
 new_data %>% 
@@ -319,27 +325,41 @@ new_data %>%
   geom_point() + 
    labs(x = "Observed Bill Length (mm)", 
        y = "Simulated Bill Length (mm)" ) + 
-  geom_abline(slope = 1, intercept = 0, 
-              color = "red", linetype = "dashed", lwd = 1.5)
+  geom_abline(slope = 1,
+              intercept = 0, 
+              color = "red",
+              linetype = "dashed",
+              lwd = 1.5)
 
 ```
 
 We can use a statistic to summarize how "close" the simulated values and the 
 observed values are. Any statistic that captures the residuals from this 
-regression would do, but I prefer $R^2,$ since it has an easy reference value 
-for what I would expect if my model did a good job ($R^2 = 1$). 
+regression would do. I like $R^2,$ since it has an easy reference value 
+for what I would expect if my model did a good job ($R^2 \approx 1$). 
 
 I like the `glance()` function from the **broom** package, since it produces 
-a nice table output of the summary measures from a linear regression. I can 
-then use the column names of the table to select the `r.squared` column. 
-s
+a nice table output of the summary measures from a linear regression. 
+
+```{r}
+new_data %>% 
+  lm(bill_length_mm ~ predict_length, data = .) %>% 
+  glance() 
+
+```
+
+I can then use the column names of the table to `select()` the `r.squared`
+column. 
+
 ```{r}
 new_data %>% 
   lm(bill_length_mm ~ predict_length, data = .) %>% 
   glance() %>% 
   select(r.squared) %>% 
   pull()
+
 ```
+
 
 `r emo::ji("check")` **Check-in: Interpreting $R^2$**
 
@@ -372,7 +392,9 @@ as columns, we can use the `map__dfc()` function!
 nsims <- 100
 
 sims <- map_dfc(1:nsims,
-                ~tibble(sim = noise(penguin_predict, sd = penguin_sigma))) 
+                ~ tibble(sim = noise(penguin_predict, sd = penguin_sigma)
+                        )
+                ) 
 ```
 
 Since all of the columns have the same name, **dplyr** automatically adds `...` 
@@ -409,7 +431,20 @@ I can use `map()` to define a function that will be applied to each column of
 `sims`. This function regresses `bill_length_mm` on each column (`.x`) from the 
 `sims` dataset. 
 
+```{r, eval = FALSE}
+sims %>% 
+  map(~lm(bill_length_mm ~ .x, data = sims))
+```
+
+
 Next, I `map()` the `glance()` function onto each of these 100 regressions. 
+
+```{r, eval = FALSE}
+sims %>% 
+  map(~lm(bill_length_mm ~ .x, data = sims)) %>% 
+  map(glance)
+```
+
 Finally, I use `map_dbl()` to extract the `r.squared` from each of the model 
 fit summaries. 
 
@@ -468,14 +503,12 @@ similar to what was observed, we would expect $R^2$ values near 1.
 ```{r}
 tibble(sims = sim_r_sq) %>% 
   ggplot(aes(x = sims)) + 
-  geom_histogram(binwidth = 0.0105)
+  geom_histogram(binwidth = 0.01)
 ```
 
-In this plot, we see that the simulated datasets have $R^2$ vales between 0.6
-and 0.7. To me, this indicates that the data simulated under this statistical 
-model are moderately similar to what was observed. On average, our statistical 
-model does not account for about 35% of the observed variability in the
-observed penguin bill lengths. 
-
-
+In this plot, we see that the simulated datasets have $R^2$ vales between 0.03
+and 0. To me, this indicates that the data simulated under this statistical 
+model **are not at all** similar to what was observed. On average, our simulated
+data account for *at most* 3% of the variability in the observed penguin bill
+lengths. 
 
