@@ -1,6 +1,6 @@
 ---
 title: "Predictive Checks `r emo::ji('check')`"
-date: "June 1, 2021"
+date: "March 7, 20212"
 author: "Stat 331"
 output:
   xaringan::moon_reader:
@@ -64,6 +64,46 @@ class: middle, center
 
 ---
 
+class: middle, center
+
+.larger[What predictive checks **do not do**]
+
+.large[*Make predictions for __new__ observations*] 
+
+---
+
+class: center, middle
+
+.larger[**Who** does predictive checks?]
+
+--
+
+![](bayes.gif)
+
+---
+
+class: center, middle
+
+.larger[**Why** do predictive checks?]
+
+.pull-left[
+.large[**An Assessment of "Subjective" Choices**]
+]
+
+.pull-right[
+```{r, echo = FALSE, out.height = "90%", out.width = "90%"}
+knitr::include_graphics("posterior.jpg")
+```
+]
+
+---
+
+class: center, middle, inverse
+
+.larger[For the project, what is our subjective choice?]
+
+---
+
 .larger[Requirements of a "good" regression model]
 
 --
@@ -77,14 +117,6 @@ class: middle, center
 - Normality of residuals
 - Constant / Equal variance
 ]
-
----
-
-class: middle, center
-
-.larger[What predictive checks **do not do**]
-
-.large[*Make predictions for __new__ observations*] 
 
 ---
 
@@ -154,6 +186,10 @@ class: inverse, center, middle
 class: center, middle 
 
 .larger[Measure "similarity"]
+
+--
+
+$r$ -- correlation
 
 --
 
