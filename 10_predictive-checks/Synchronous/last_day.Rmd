@@ -1,6 +1,6 @@
 ---
 title: "The Last Day! `r emo::ji('cake')`"
-date: "June 3, 2021"
+date: "March 9, 2022"
 author: "Stat 331"
 output:
   xaringan::moon_reader:
@@ -27,31 +27,71 @@ library(xaringanthemer)
 library(xaringan)
 library(tidyverse)
 
-
 style_duo_accent(
-  primary_color      = "#0F4C81", # pantone classic blue
-  secondary_color    = "#B6CADA", # pantone baby blue
+  primary_color      = "#b76352", # mango
+  secondary_color    = "#34605f", # bayberry
   header_font_google = google_font("Raleway"),
   text_font_google   = google_font("Raleway", "300", "300i"),
   code_font_google   = google_font("Source Code Pro"),
-  text_font_size     = "30px"
+  header_color = "#793540", #rhubarb
+  white_color = "#F5F5F5", # lightest color
+  black_color = "#36454F", # darkest color
+  text_font_size = "30px", 
+  link_color = "#696969" #grey
 )
 ```
 
-class: inverse, center, middle
-
-.hand-large[Thank you!] 
-
----
-
-class: center, middle
-
-.larger[Learning to program online is no small feat!]
-
----
-
 class: middle, center, inverse
 
-.huge-text[`R` has so much more!]
+.huge-text[R has so much more!]
 
+---
+
+.pull-left[
+![](images/twitter.png)
+]
+
+.pull-right[
+</br>
+</br>
+</br>
+</br>
+![](images/github.png)
+]
+
+---
+
+class: center, middle, inverse
+
+.larger[Programming experiences can change your life!]
+
+---
+
+class: center, middle, inverse
+
+![](images/colorado_mesa.jpg)
+
+---
+
+class: center, middle, inverse
+
+![](images/articles.jpg)
+
+---
+
+class: center, middle, inverse
+
+.pull-left[
+![](images/carpentries.png)
+![](images/rladies.png)
+]
+
+.pull-right[
+</br>
+</br>
+</br>
+</br>
+</br>
+![](images/cal_poly.png)
+]
 
