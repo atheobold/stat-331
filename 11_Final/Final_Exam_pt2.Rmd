@@ -1,6 +1,6 @@
 ---
 title: "Final Exam - Second Half"
-author: 'Stat 331: Spring 2021'
+author: 'Stat 331: Winter 2022'
 output: rmdformats::readthedown
 ---
 
@@ -16,6 +16,7 @@ library(tidyverse)
 library(infer)
 library(palmerpenguins)
 library(MASS)
+library(broom)
 ```
 
 ```{r, eval = TRUE}
@@ -29,11 +30,13 @@ np_trails <- read_csv(here::here("11_Final",
 ### This portion of the exam should take you approximately 75-90 minutes.
 </center>
 
-The two National Parks closest to San Luis Obispo are **Kings Canyon** and
-**Sequoia**. These two parks border each other, and are managed under a single
-forest service; sometimes, they are simply referred to together as "SeKi".
+<!-- The two National Parks closest to San Luis Obispo are **Kings Canyon** and -->
+<!-- **Sequoia**. These two parks border each other, and are managed under a single -->
+<!-- forest service; sometimes, they are simply referred to together as "SeKi". -->
 
-But are they actually meaningfully different parks?  Let's find out!
+The two National Parks closest to my hometown (Grand Junction) are 
+**Arches** and **Canyonlands**. These two parks are just 25 miles apart! Are
+they actually meaningfully different parks?  Let's find out!
 
 In this section, please show your code and output, but also include appropriate
 text discussion to interpret the output and answer the question.
@@ -41,35 +44,40 @@ text discussion to interpret the output and answer the question.
 ```{r, echo = FALSE, eval = FALSE}
 seki <- np_trails %>% 
   filter(str_detect(area_name, "Kings|Sequoia") == TRUE)
+
+arches_cl <- np_trails %>% 
+  filter(str_detect(area_name, "Canyonlands|Arches") == TRUE)
+
 ```
 
 
-### Trail Steepness [50 points]
+### Trail Elevation Gain [50 points]
 
-Do these parks have different steepness of trails?
+Do the trails in these parks have different profiles of elevation gains?
 
-Create a visualization that explores the elevation gain of trails in SeKi as a
-function of the trail length, for trails in Sequoia and Kings Canyon. You should
+<!-- Create a visualization that explores the elevation gain of trails in SeKi as a -->
+<!-- function of the trail length, for trails in Sequoia and Kings Canyon. You should -->
+<!-- also include the type of trail in your visualization.  -->
+
+Create a visualization that explores the elevation gain of trails as a function
+of the trail length, for all of the trails in Arches and Canyonlands. You should
 also include the type of trail in your visualization. 
 
 Describe the relationships that you see in the visualization. At a minimum, you 
 should address the following questions:  
 
-- Does it appear that the relationship between a trail's steepness and its 
+- Does it appear that the relationship between a trail's elevation gain and its 
 length is linear?
 
-- Does it appear that the relationship between steepness and length is different
+- Does it appear that the relationship between elevation gain and length is different
 for the two national parks?
 
-- How does the relationship between steepness and length differ by the type of
+- How does the relationship between elevation gain and length differ by the type of
 trail?
 
 Your visualization should be something you would include in a written report.
-At a bare minimum you must have:  
-
-- clear axis labels
-- clear legend labels
-- meaningful plot title
+At a bare minimum you must have: clear plot labels and aesthetically appealing
+colors.
 
 ```{r, echo = FALSE, eval = FALSE}
 seki %>%
@@ -78,46 +86,52 @@ seki %>%
   geom_point() +
   stat_smooth(method = "lm") + 
   facet_wrap(~route_type)
+
+arches_cl %>%
+  mutate(length_miles = length * 3.28/ 5280) %>% 
+  ggplot(aes(x = length_miles, y = elevation_gain, color = area_name)) + 
+  geom_point() +
+  stat_smooth(method = "lm") + 
+  facet_wrap(~route_type)
 ```
 
-### Multiple Linear Regression [50 points]
+### Simple Linear Regression [50 points]
 
-We are interested in building a model for predicting the steepness of a 
-trail at SeKi. We would like for the model to explain as much variability in 
-steepness as possible, but as be as simple as possible. Thus, we will use AIC 
-as our model selection criteria. You can extract the AIC of a model using the 
-built-in `AIC()` function, like so: 
+<!-- We are interested in building a model for predicting the elevation gain of a  -->
+<!-- trail at SeKi. We would like for the model to explain as much variability in  -->
+<!-- elevation gain as possible, but as be as simple as possible.  -->
 
-```{r, echo = TRUE, eval = TRUE}
-m1 <- np_trails %>% 
-  lm(elevation_gain ~ length, data = .)
+We are interested in building a model for predicting the elevation gain of a 
+trail at Arches and Canyonlands. We would like for the model to explain as much
+variability in elevation gain as possible, but as be as simple as possible.
+Thus, we will focus on finding the simple linear regression that explains the 
+most variability in elevation gain. 
 
-AIC(m1)
-```
+We are going to use $R^2$ for our selection criteria, to find the "best" model
+that explains a trail's elevation gain. We are only going to consider the
+**quantitative** variables included in this dataset as contenders for the 
+"best" explanatory variable. Again, your final model should have ***one*** 
+explanatory variable. 
 
-AIC has a slightly different selection procedure to adjusted $R^2$. First,
-smaller values of AIC are better. Second, if two models have AIC values within 
-2 units of each other (e.g. 12 and 11.3), then you cannot say that one model is 
-"better" than the other model. Instead, you can say they have "essentially the 
-same fit." 
-
-Using AIC as the model selection criteria, find the "best" model that predicts
-a trails steepness based on the variables included in this dataset. Your model 
-should only consider variables independently (i.e. no interactions). 
-
-Report your top two models and their associated AIC values. 
+Report your top two models and their associated $R^2$ values. Your model 
+summary should be as **tidy** as possible, hence you **should not** use the
+`summary()` function to report your models!
 
 ```{r, eval = FALSE, echo = FALSE}
-large_model <- lm(elevation_gain ~ length + difficulty_rating + popularity + 
-                    avg_rating + route_type, data = np_trails)
-stepAIC(large_model, 
-        direction = "both", 
-        scope = list(lower = ~1),
-        trace = TRUE)
 
-# Final model chosen:
-final_lm <- lm(elevation_gain ~ length + difficulty_rating + 
-                 avg_rating + route_type, data = np_trails)
+arches_cl %>% 
+  select(where(is.numeric)) %>% 
+  map(~lm(elevation_gain ~ .x, data = arches_cl)) %>% 
+  map(glance) %>% 
+  map_dbl(~.$r.squared)
+
+## Best Model = Length
+
+final_lm <- lm(elevation_gain ~ length, data = arches_cl)
+
+## Second Best = Difficulty Rating
+
+
 
 ```
 
@@ -125,32 +139,44 @@ final_lm <- lm(elevation_gain ~ length + difficulty_rating +
 
 ### Predictions for Other Parks [50 points]
 
-Now, we're going to see how your model does for predicting the steepness of 
+Now, we're going to see how your model does for predicting the elevation gain of 
 trails at other national parks! We've use the `predict()` function to get the 
-predicted values for the dataset used when fitting the regression model (in 
-`lm()`), but we haven't used `predict()` to get predictions for a new dataset. 
+predicted / fitted values for the dataset used when fitting the regression model
+(in `lm()`), but we haven't used `predict()` to get predictions for a new
+dataset. 
 
 To make predictions for a new dataset, you need to (1) assemble the new dataset 
-to use, and (2) pass the new dataset into the `newdata` argument of `predict()`.
+to make predictions on, and (2) pass the new dataset into the `newdata` argument
+of `predict()`.
 
-Use the model you chose in the last part to make predictions for the steepness 
-of the trail for **all** of the other national parks (every park except 
-Sequoia & Kings Canyon). 
+<!-- Use the model you chose in the last part to make predictions for the elevation gain  -->
+<!-- of the trail for **all** of the other national parks (every park except  -->
+<!-- Sequoia & Kings Canyon).  -->
 
-With the predicted elevation gains, create a scatterplot of the
-residuals versus predicted values. Describe the relationship you see in the
-plot. 
+Use the model you chose in the last part to make predictions for the elevation
+gain of the trail for **all** of the other national parks (every park except 
+Arches & Canyonlands). 
+
+With the predicted elevation gains, create a scatterplot of the residuals versus
+predicted values. Describe the relationship you see in the plot. What does this
+imply about the predictions from your regression model?
 
 ```{r, eval = FALSE, echo = FALSE}
 
-other_parks <- np_trails %>% 
+other_parks_B <- np_trails %>% 
   filter(!str_detect(area_name, "Sequoia|Kings"))
 
-other_parks <- other_parks %>% 
-  mutate(residuals = elevation_gain - predict(final_lm, newdata = other_parks), 
-         predict_elevation = predict(final_lm, newdata = other_parks))
+other_parks_A <- np_trails %>% 
+  filter(!str_detect(area_name, "Arches|Canyonlands"))
 
-other_parks %>% 
+other_parks_A <- other_parks_A %>% 
+  mutate(residuals = 
+           elevation_gain - predict(final_lm, newdata = other_parks_A), 
+         predict_elevation = 
+           predict(final_lm, newdata = other_parks_A)
+         )
+
+other_parks_A %>% 
   ggplot(aes(x = elevation_gain, y = residuals)) + 
   geom_point()
 
@@ -163,25 +189,19 @@ other_parks %>%
 
 </br>
 
-## Part Four: Description of Code [50 points]
-
-<center>
-### This portion of the exam will be take 10 minutes over Zoom.
-</center>
+## Part Four: Essay [50 points]
 
 **Question 1**
 
-Describe how you chose your "best" model from Part Three. If you used a 
-function to iterate through a set of possible models, walk me through what the 
-function does. If you did not use iteration, describe to me how you would 
-transform your method to use iteration instead. 
+How are the predictions you made for the final similar to the simulations you 
+made for the final project? How are the predictions you made different from the 
+simulations you made for the final project?
 
 **Question 2**
 
 Suppose you are helping another student with their R code for a research project 
 they are working on. Going through their code, you notice they seem to copy and
 paste the same process multiple times in lots of different locations. What
-changes would you suggest they make? Why do you think these changes are
-important?
-
+changes would you suggest they make? How would you describe to them why these
+changes are important?
 

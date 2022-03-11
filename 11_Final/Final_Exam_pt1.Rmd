@@ -1,6 +1,6 @@
 ---
 title: "Final Exam - First Half"
-author: 'Stat 331: Spring 2021'
+author: 'Stat 331: Winter 2022'
 output: rmdformats::readthedown
 ---
 
@@ -24,20 +24,23 @@ np_trails <- read_csv(here::here("11_Final",
 
 ## Introduction
 
-This exam is due by **8:00am** on **Wednesday, June 9th**.
-Late exams will be docked by a penalty of at least 50%, possibly more.
+This exam is due by **10:00am** on **Wednesday, March 16th**.
+Late exams will receive a grade of 0. 
 **Please do not turn your exam in late!!!**
 
 Please create a new R Markdown file for parts two and three of this exam.
-Make sure your files are set up to display **all** your source code when knitted.
+Make sure your files are set up to display **all** your source code when
+knitted.
 
 Clearly mark the questions, so that I can easily find your answers to grade them.
-Please **DO NOT** use nonstandard R Markdown templates for this exam.
+Please **DO NOT** use nonstandard R Markdown templates for any portion of this
+exam.
 
 Although you are not directly graded on data exploration, cleaning, and
 adjusting, you will certainly need to do this to properly address the questions.
 
 ### Policies
+
   * You may use: any online resources, including anything posted on Canvas. 
   * You may NOT contact anyone, inside or outside this class, during the course
   of the exam.  This includes email, chat/messenger services, and posting on
@@ -57,7 +60,8 @@ adjusting, you will certainly need to do this to properly address the questions.
   report them to your professor.
 
 ### Instructions
-  * Please note that you will need to use the data documentation in order to
+
+  * Please note that you will need to use the data description in order to
   successfully complete this exam.
   * The problems on this exam do not necessarily need to be completed
   sequentially, e.g., if you cannot accomplish problem 1, you may still be able
@@ -67,7 +71,8 @@ adjusting, you will certainly need to do this to properly address the questions.
   part (b).
   * All questions should be answered **using R code**.  Make sure your code
   prints out only the information that directly answers the question.  
-  **Penalties will be given if your `.html` file has extra output beyond that which answers the question.**
+  **Penalties will be given if your `.html` file has extra output beyond that
+  which answers the question.**
   * If your code has errors that you cannot fix in time, you may also include in
   the comments explanations of your thought process, to potentially receive
   partial credit.
@@ -88,10 +93,11 @@ adjusting, you will certainly need to do this to properly address the questions.
 </center>
 
 
-__1.__ Emma is interested in writing a function that handles the various ways 
-missing values are coded by different researchers. Emma has also found three 
-ways `NA` values are coded for character vectors: `"."`, `""`, and `"NaN"`. Emma
-would like to write a function that handles all of these cases. 
+__1.__ Taylor is interested in writing a function that handles the various ways 
+missing values are coded by different researchers. Taylor has found three 
+ways `NA` values are coded by researchers in her field for character vectors:
+`"."`, `""`, and `"NaN"`. Taylor would like to write a function that handles all
+of these cases. 
 
 Consider the following function skeleton: 
 
@@ -113,7 +119,7 @@ na_function <- function(x){
 ```
 
 
-__(a)__ What should Emma insert as the values after each `~` 
+__(a)__ What should Taylor insert as the values after each `~` 
 (in place of the `____`)?
 
 - `NA`
@@ -129,58 +135,65 @@ into an `NA`. What is missing from the function that will return the value of
 
 </br> 
 
-__2.__ Emma would like to write a new function `df_na()` that takes a dataframe
+__2.__ Taylor would like to write a new function `df_na()` that takes a dataframe
 and a variable as inputs, and uses the `na_function()` to replace the values
-for the variable input. Additionally, Emma envisions using either 
-`df_na(dataset, "variable")` or `df_na(dataset, vars(variable))` as the input 
+for the variable input. Additionally, Taylor envisions using either 
+`df_na(dataset, "variable")` or `df_na(dataset, variable)` as the input 
 to the function. 
 
 Which of the following functions will correctly carry out this process? The
-function can either return the dataframe with the variable adjusted *or* a 
+function can either return the dataframe with the variable adjusted ***or*** a 
 vector with the adjusted variable.
 
 **Select all that apply**
 
 __(a)__
 ```{r, echo = TRUE}
-df_na <- function(df, var){
+df_na <- function(df, vars){
   df %>% 
-    mutate(var = na_function(var))
+    mutate(var = na_function(vars))
 }
 ```
 
 __(b)__
 ```{r, echo = TRUE}
-df_na <- function(df, var){
-  na_function(df[var])
+df_na <- function(df, vars){
+  na_function(df[vars])
 }
 ```
 
 __(c)__
-```{r, echo = TRUE}
-df_na <- function(df, var){
+```{r, echo = TRUE, eval = TRUE}
+df_na <- function(df, vars){
   df %>% 
-    mutate_at(var, na_function)
+    mutate(
+      across(.cols = {{vars}},
+             .fns = na_function
+             )
+           )
 }
 ```
 
 __(d)__
 ```{r, echo = TRUE}
-df_na <- function(df, var){
-  na_function(df[[var]])
+df_na <- function(df, vars){
+  na_function(df[[vars]])
 }
 ```
 
 </br>
 
-__3.__ Now, with the `na_function()` and `df_na()` functions in hand, Emma wants 
-to clean up an example dataset. Emma decides to use the `penguins` dataset to 
-test out these functions. Emma knows that it is better to use `map()` functions 
-to do repeated operations, but isn't sure why her code isn't working. 
+__3.__ Taylor has chosen to use one of the `df_na()` functions above that
+returns a dataframe with the character variables adjusted. Taylor now wants to
+use her function to clean up an example dataset. Taylor decides to use the `mpg`
+dataset (from the **tidyverse**) to  test out these functions. 
+
+Taylor knows that it is better to use `map()` functions to do repeated
+operations, but isn't sure why her code isn't working. 
 
 ```{r, echo = TRUE, eval = TRUE, error = TRUE}
-penguins %>% 
-  map_dfc(vars(species, island, sex), df_na)
+mpg %>% 
+  map_dfc(c(manufacturer, model, trans, drv), df_na)
 ```
 
 Which of the following are reasons for the above code returning an error?
@@ -189,38 +202,45 @@ Which of the following are reasons for the above code returning an error?
 
 __(a)__ `map_chr()` should be used instead of `map_dfc()`
 
-__(b)__ `df_na()` takes two arguments and it is only being supplied one input
+__(b)__ `df_na()` takes two inputs and it is only being supplied one input
 
-__(c)__ `vars()` is not correctly selecting the variables
+__(c)__ `across()` is not correctly selecting the variables
 
 __(d)__ `map()` functions work with vectors, not dataframes
 
 </br>
 
-__4.__ Which of the following methods could Emma use to replace the missing 
-values of the character variables in the `penguins` dataset? 
+__4.__ Which of the following methods could Taylor use to replace the missing 
+values of the character variables in the `mpg` dataset? 
 
 **Select all that apply**
 
 __(a)__ 
 
 ```{r, echo = TRUE}
-penguins %>% 
-  mutate_if(is.character, df_na)
+mpg %>% 
+  mutate(
+    across(.cols = where(is.character), 
+           .fns = df_na)
+  )
 ```
 
 __(b)__
 
 ```{r, echo = TRUE}
-penguins %>% 
-  df_na(var = vars(species, island, sex))
+mpg %>% 
+  df_na(vars = c(manufacturer, model, trans, drv))
 ```
 
 __(c)__
 
 ```{r, echo = TRUE}
-penguins %>% 
-  mutate_at(vars(species, island, sex), na_function)
+mpg %>% 
+  mutate(
+    across(.cols = c(manufacturer, model, trans, drv), 
+           .fns = na_function
+           )
+  )
 ```
 
 
@@ -228,7 +248,11 @@ __(d)__
 
 ```{r, echo = TRUE}
 penguins %>% 
-  mutate_all(~df_na(df = .))
+  mutate(
+    across(.cols = everything(), 
+           .fns = ~df_na(df = .)
+           )
+  )
 ```
 
 </br>
@@ -266,7 +290,7 @@ Variables in the data are:
 * `country_name`: Country where the trail is located
 * `_geoloc`: Latitude and longitude of trail
 * `popularity`: A score from 0 to 100 of how often the trail is used.
-* `length`: Distance covered by trail (in meters).
+* `length`: Distance covered by trail (**in meters**).
 * `elevation_gain`: How much uphill is on the trail (in meters).
 * `difficulty_rating`: Average user rating of trail difficulty
 * `route_type`: Type of trail (loop, out and back, or point to point)
@@ -288,7 +312,7 @@ library(palmerpenguins)
 
 penguins %>% 
   slice_max(n = 1, bill_length_mm) %>%
-  select(bill_length_mm)
+  pull(bill_length_mm)
 ```
 
 #### Question 1.1  [10 points]
@@ -369,13 +393,17 @@ word_counts <- tibble(
 
 #### Question 1.6 [20 points]
 
-Write a function that takes as input the dataset and the name of a National
-Park, and the following optional arguments:
+Write a function that takes two **required** inputs: 
+
+* the dataset
+* the name of a National Park
+
+Your function should also accept the following **optional** arguments:
 
 * A minimum trail length (in miles)
 * A maximum trail length (in miles)
 * A minimum trail rating
-* The type of trail
+* The type of trail (out and back, loop, or point to point)
 
 The function should return all the trails that fit the supplied criteria. You
 **may** assume that the variable names of the inputted dataset match the
@@ -384,8 +412,8 @@ The function should return all the trails that fit the supplied criteria. You
 Include the following code in your response to verify that your function works:
 
 ```{r}
-recommend_trails <- function(data, park_name, min_len = 0, 
-                             max_len = Inf, min_rating = 0, type = NULL) {
+recommend_trails <- function(data, park_name, min_len_mi = 0, 
+                             max_len_mi = Inf, min_rating = 0, type = NULL) {
   
   if (!is.null(type)) {
     data <- data %>%
@@ -398,8 +426,8 @@ recommend_trails <- function(data, park_name, min_len = 0,
     ) %>%
     filter(
       area_name == park_name,
-      length > min_len,
-      length < max_len,
+      length > min_len_mi,
+      length < max_len_mi,
       avg_rating > min_rating
     )
   
@@ -412,7 +440,7 @@ recommend_trails <- function(data, park_name, min_len = 0,
 ```{r, echo = TRUE}
 np_trails %>%
   recommend_trails("Yellowstone National Park", 
-                   min_len = 10, 
+                   min_len_mi = 10, 
                    min_rating = 4, 
                    type = "loop")
 ```
@@ -420,23 +448,33 @@ np_trails %>%
 
 #### Question 1.7 [20 points]
 
-Use your function from Question 1.6, along with a `map()` or `apply()` function,
+Use your function from Question 1.6, along with a `map()` or `apply()` function
 to recommend to me all the trails that are:
 
-- 20-40  miles long  (good for a two day backpacking trip!)
+- 20-30  miles long  (good for a two day backpacking trip!)
 
 - Rated at least a 4.5
 
 - Loop trails (I don't like to retrace my steps)
 
-- In one of the parks I can drive to from San Luis Obispo:
-    * Sequoia National Park
-    * Joshua Tree National Park
-    * Lassen Volcanic National Park
-    * Kings Canyon National Park
-    * Pinnacles National Park
-    * Death Valley National Park
-    * Redwood National Park 
+- In one of the parks closest to my hometown: 
+
+    * Arches National Park
+    * Canyonlands National Park
+    * Rocky Mountain National Park
+    * Zion National Park
+    * Bryce National Park
+    * Mesa Verde National Park
+    * Black Canyon of the Gunnison National Park
+
+
+    <!-- * Sequoia National Park -->
+    <!-- * Joshua Tree National Park -->
+    <!-- * Lassen Volcanic National Park -->
+    <!-- * Kings Canyon National Park -->
+    <!-- * Pinnacles National Park -->
+    <!-- * Death Valley National Park -->
+    <!-- * Redwood National Park  -->
 
 ```{r}
 parks <- c("Sequoia National Park",
@@ -453,166 +491,3 @@ map_dfr(parks, ~recommend_trails(np_trails, .x,
                                  type = "loop"))
 ```
 
-<!-- --- -->
-
-
-<!-- ## Part Three: Compare the Parks [150 points] -->
-
-<!-- <center> -->
-<!-- ### This portion of the exam should take you approximately 75-90 minutes. -->
-<!-- </center> -->
-
-<!-- The two National Parks closest to San Luis Obispo are **Kings Canyon** and -->
-<!-- **Sequoia**. These two parks border each other, and are managed under a single -->
-<!-- forest service; sometimes, they are simply referred to together as "SeKi". -->
-
-<!-- But are they actually meaningfully different parks?  Let's find out! -->
-
-<!-- In this section, please show your code and output, but also include appropriate -->
-<!-- text discussion to interpret the output and answer the question. -->
-
-<!-- ```{r, echo = FALSE, eval = FALSE} -->
-<!-- seki <- np_trails %>%  -->
-<!--   filter(str_detect(area_name, "Kings|Sequoia") == TRUE) -->
-<!-- ``` -->
-
-
-<!-- ### Trail Steepness [50 points] -->
-
-<!-- Do these parks have different steepness of trails? -->
-
-<!-- Create a visualization that explores the elevation gain of trails in SeKi as a -->
-<!-- function of the trail length, for trails in Sequoia and Kings Canyon. You should -->
-<!-- also include the type of trail in your visualization.  -->
-
-<!-- Describe the relationships that you see in the visualization. At a minimum, you  -->
-<!-- should address the following questions:   -->
-
-<!-- - Does it appear that the relationship between a trail's steepness and its  -->
-<!-- length is linear? -->
-
-<!-- - Does it appear that the relationship between steepness and length is different -->
-<!-- for the two national parks? -->
-
-<!-- - How does the relationship between steepness and length differ by the type of -->
-<!-- trail? -->
-
-<!-- Your visualization should be something you would include in a written report. -->
-<!-- At a bare minimum you must have:   -->
-
-<!-- - clear axis labels -->
-<!-- - clear legend labels -->
-<!-- - meaningful plot title -->
-
-<!-- ```{r, echo = FALSE, eval = FALSE} -->
-<!-- seki %>% -->
-<!--   mutate(length_miles = length * 3.28/ 5280) %>%  -->
-<!--   ggplot(aes(x = length_miles, y = elevation_gain, color = area_name)) +  -->
-<!--   geom_point() + -->
-<!--   stat_smooth(method = "lm") +  -->
-<!--   facet_wrap(~route_type) -->
-<!-- ``` -->
-
-<!-- ### Multiple Linear Regression [50 points] -->
-
-<!-- We are interested in building a model for predicting the steepness of a  -->
-<!-- trail at SeKi. We would like for the model to explain as much variability in  -->
-<!-- steepness as possible, but as be as simple as possible. Thus, we will use AIC  -->
-<!-- as our model selection criteria. You can extract the AIC of a model using the  -->
-<!-- built-in `AIC()` function, like so:  -->
-
-<!-- ```{r, echo = TRUE, eval = TRUE} -->
-<!-- m1 <- np_trails %>%  -->
-<!--   lm(elevation_gain ~ length, data = .) -->
-
-<!-- AIC(m1) -->
-<!-- ``` -->
-
-<!-- AIC has a slightly different selection procedure to adjusted $R^2$. First, -->
-<!-- smaller values of AIC are better. Second, if two models have AIC values within  -->
-<!-- 2 units of each other (e.g. 12 and 11.3), then you cannot say that one model is  -->
-<!-- "better" than the other model. Instead, you can say they have "essentially the  -->
-<!-- same fit."  -->
-
-<!-- Using AIC as the model selection criteria, find the "best" model that predicts -->
-<!-- a trails steepness based on the variables included in this dataset. Your model  -->
-<!-- should only consider variables independently (i.e. no interactions).  -->
-
-<!-- Report your top two models and their associated AIC values.  -->
-
-<!-- ```{r, eval = FALSE, echo = FALSE} -->
-<!-- large_model <- lm(elevation_gain ~ length + difficulty_rating + popularity +  -->
-<!--                     avg_rating + route_type, data = np_trails) -->
-<!-- stepAIC(large_model,  -->
-<!--         direction = "both",  -->
-<!--         scope = list(lower = ~1), -->
-<!--         trace = TRUE) -->
-
-<!-- # Final model chosen: -->
-<!-- final_lm <- lm(elevation_gain ~ length + difficulty_rating +  -->
-<!--                  avg_rating + route_type, data = np_trails) -->
-
-<!-- ``` -->
-
-<!-- </br>  -->
-
-<!-- ### Predictions for Other Parks [50 points] -->
-
-<!-- Now, we're going to see how your model does for predicting the steepness of  -->
-<!-- trails at other national parks! We've use the `predict()` function to get the  -->
-<!-- predicted values for the dataset used when fitting the regression model (in  -->
-<!-- `lm()`), but we haven't used `predict()` to get predictions for a new dataset.  -->
-
-<!-- To make predictions for a new dataset, you need to (1) assemble the new dataset  -->
-<!-- to use, and (2) pass the new dataset into the `newdata` argument of `predict()`. -->
-
-<!-- Use the model you chose in the last part to make predictions for the steepness  -->
-<!-- of the trail for **all** of the other national parks (every park except  -->
-<!-- Sequoia & Kings Canyon).  -->
-
-<!-- With the predicted elevation gains, create a scatterplot of the -->
-<!-- residuals versus predicted values. Describe the relationship you see in the -->
-<!-- plot.  -->
-
-<!-- ```{r, eval = FALSE, echo = FALSE} -->
-
-<!-- other_parks <- np_trails %>%  -->
-<!--   filter(!str_detect(area_name, "Sequoia|Kings")) -->
-
-<!-- other_parks <- other_parks %>%  -->
-<!--   mutate(residuals = elevation_gain - predict(final_lm, newdata = other_parks),  -->
-<!--          predict_elevation = predict(final_lm, newdata = other_parks)) -->
-
-<!-- other_parks %>%  -->
-<!--   ggplot(aes(x = elevation_gain, y = residuals)) +  -->
-<!--   geom_point() -->
-
-<!-- ``` -->
-
-
-<!-- </br> -->
-
-<!-- --- -->
-
-<!-- </br> -->
-
-<!-- ## Part Four: Description of Code [50 points] -->
-
-<!-- <center> -->
-<!-- ### This portion of the exam will be take 10 minutes over Zoom. -->
-<!-- </center> -->
-
-<!-- **Question 1** -->
-
-<!-- Describe how you chose your "best" model from Part Three. If you used a  -->
-<!-- function to iterate through a set of possible models, walk me through what the  -->
-<!-- function does. If you did not use iteration, describe to me how you would  -->
-<!-- transform your method to use iteration instead.  -->
-
-<!-- **Question 2** -->
-
-<!-- Suppose you are helping another student with their R code for a research project  -->
-<!-- they are working on. Going through their code, you notice they seem to copy and -->
-<!-- paste the same process multiple times in lots of different locations. What -->
-<!-- changes would you suggest they make? Why do you think these changes are -->
-<!-- important? -->
