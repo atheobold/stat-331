@@ -352,7 +352,6 @@ np_trails %>%
 ```
 
 
-
 #### Question 1.4 [10 points]
 
 How many National Parks contain the word "Canyon" somewhere in their name?
@@ -457,24 +456,25 @@ to recommend to me all the trails that are:
 
 - Loop trails (I don't like to retrace my steps)
 
-- In one of the parks closest to my hometown: 
+- In one of the parks closest to SLO:
 
-    * Arches National Park
-    * Canyonlands National Park
-    * Rocky Mountain National Park
-    * Zion National Park
-    * Bryce National Park
-    * Mesa Verde National Park
-    * Black Canyon of the Gunnison National Park
+<!-- my hometown:  -->
+
+<!--     * Arches National Park -->
+<!--     * Canyonlands National Park -->
+<!--     * Rocky Mountain National Park -->
+<!--     * Zion National Park -->
+<!--     * Bryce National Park -->
+<!--     * Mesa Verde National Park -->
+<!--     * Black Canyon of the Gunnison National Park -->
 
 
-    <!-- * Sequoia National Park -->
-    <!-- * Joshua Tree National Park -->
-    <!-- * Lassen Volcanic National Park -->
-    <!-- * Kings Canyon National Park -->
-    <!-- * Pinnacles National Park -->
-    <!-- * Death Valley National Park -->
-    <!-- * Redwood National Park  -->
+    * Sequoia National Park
+    * Joshua Tree National Park
+    * Lassen Volcanic National Park
+    * Kings Canyon National Park
+    * Pinnacles National Park
+    * Death Valley National Park
 
 ```{r}
 parks <- c("Sequoia National Park",

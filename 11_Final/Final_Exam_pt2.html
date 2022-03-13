@@ -125,7 +125,7 @@
     <div id="toc">
       <ul>
       <li><a href="#part-three-compare-the-parks-150-points">Part Three: Compare the Parks [150 points]</a></li>
-      <li><a href="#part-four-essay-50-points">Part Four: Essay [50 points]</a></li>
+      <li><a href="#part-four-essay-responses-50-points">Part Four: Essay Responses [50 points]</a></li>
       </ul>
     </div>
     <div id="postamble" data-toggle="wy-nav-shift" class="status">
@@ -145,19 +145,19 @@
 <div id="this-portion-of-the-exam-should-take-you-approximately-75-90-minutes." class="section level3">
 <h3>This portion of the exam should take you approximately 75-90 minutes.</h3>
 </center>
-<!-- The two National Parks closest to San Luis Obispo are **Kings Canyon** and -->
-<!-- **Sequoia**. These two parks border each other, and are managed under a single -->
-<!-- forest service; sometimes, they are simply referred to together as "SeKi". -->
-<p>The two National Parks closest to my hometown (Grand Junction) are <strong>Arches</strong> and <strong>Canyonlands</strong>. These two parks are just 25 miles apart! Are they actually meaningfully different parks? Let’s find out!</p>
+<p>The two National Parks closest to San Luis Obispo are <strong>Kings Canyon</strong> and <strong>Sequoia</strong>. These two parks border each other, and are managed under a single forest service; sometimes, they are simply referred to together as “SeKi”.</p>
+<!-- The two National Parks closest to my hometown (Grand Junction) are  -->
+<!-- **Arches** and **Canyonlands**. These two parks are just 25 miles apart! Are -->
+<!-- they actually meaningfully different parks?  Let's find out! -->
 <p>In this section, please show your code and output, but also include appropriate text discussion to interpret the output and answer the question.</p>
 </div>
 <div id="trail-elevation-gain-50-points" class="section level3">
 <h3>Trail Elevation Gain [50 points]</h3>
 <p>Do the trails in these parks have different profiles of elevation gains?</p>
-<!-- Create a visualization that explores the elevation gain of trails in SeKi as a -->
-<!-- function of the trail length, for trails in Sequoia and Kings Canyon. You should -->
+<p>Create a visualization that explores the elevation gain of trails in SeKi as a function of the trail length, for trails in Sequoia and Kings Canyon. You should also include the type of trail in your visualization.</p>
+<!-- Create a visualization that explores the elevation gain of trails as a function -->
+<!-- of the trail length, for all of the trails in Arches and Canyonlands. You should -->
 <!-- also include the type of trail in your visualization.  -->
-<p>Create a visualization that explores the elevation gain of trails as a function of the trail length, for all of the trails in Arches and Canyonlands. You should also include the type of trail in your visualization.</p>
 <p>Describe the relationships that you see in the visualization. At a minimum, you should address the following questions:</p>
 <ul>
 <li><p>Does it appear that the relationship between a trail’s elevation gain and its length is linear?</p></li>
@@ -168,11 +168,13 @@
 </div>
 <div id="simple-linear-regression-50-points" class="section level3">
 <h3>Simple Linear Regression [50 points]</h3>
+<p>We are interested in building a model for predicting the elevation gain of a trail at SeKi. We would like for the model to explain as much variability in elevation gain as possible, but as be as simple as possible. Thus, we will focus on finding the simple linear regression that explains the most variability in elevation gain.</p>
 <!-- We are interested in building a model for predicting the elevation gain of a  -->
-<!-- trail at SeKi. We would like for the model to explain as much variability in  -->
-<!-- elevation gain as possible, but as be as simple as possible.  -->
-<p>We are interested in building a model for predicting the elevation gain of a trail at Arches and Canyonlands. We would like for the model to explain as much variability in elevation gain as possible, but as be as simple as possible. Thus, we will focus on finding the simple linear regression that explains the most variability in elevation gain.</p>
-<p>We are going to use <span class="math inline">\(R^2\)</span> for our selection criteria, to find the “best” model that explains a trail’s elevation gain. We are only going to consider the <strong>quantitative</strong> variables included in this dataset as contenders for the “best” explanatory variable. Again, your final model should have <strong><em>one</em></strong> explanatory variable.</p>
+<!-- trail at Arches and Canyonlands. We would like for the model to explain as much -->
+<!-- variability in elevation gain as possible, but as be as simple as possible. -->
+<!-- Thus, we will focus on finding the simple linear regression that explains the  -->
+<!-- most variability in elevation gain.  -->
+<p>We are going to use <span class="math inline">\(R^2\)</span> for our selection criteria, with the goal of finding the “best” model that explains a trail’s elevation gain. We are only going to consider the <strong>quantitative</strong> variables included in this dataset as contenders for the “best” explanatory variable. Again, your final model should have <strong><em>one</em></strong> explanatory variable.</p>
 <p>Report your top two models and their associated <span class="math inline">\(R^2\)</span> values. Your model summary should be as <strong>tidy</strong> as possible, hence you <strong>should not</strong> use the <code>summary()</code> function to report your models!</p>
 <p></br></p>
 </div>
@@ -180,20 +182,20 @@
 <h3>Predictions for Other Parks [50 points]</h3>
 <p>Now, we’re going to see how your model does for predicting the elevation gain of trails at other national parks! We’ve use the <code>predict()</code> function to get the predicted / fitted values for the dataset used when fitting the regression model (in <code>lm()</code>), but we haven’t used <code>predict()</code> to get predictions for a new dataset.</p>
 <p>To make predictions for a new dataset, you need to (1) assemble the new dataset to make predictions on, and (2) pass the new dataset into the <code>newdata</code> argument of <code>predict()</code>.</p>
-<!-- Use the model you chose in the last part to make predictions for the elevation gain  -->
-<!-- of the trail for **all** of the other national parks (every park except  -->
-<!-- Sequoia & Kings Canyon).  -->
-<p>Use the model you chose in the last part to make predictions for the elevation gain of the trail for <strong>all</strong> of the other national parks (every park except Arches &amp; Canyonlands).</p>
-<p>With the predicted elevation gains, create a scatterplot of the residuals versus predicted values. Describe the relationship you see in the plot. What does this imply about the predictions from your regression model?</p>
+<p>Use the model you chose in the last part to make predictions for the elevation gain of the trail for <strong>all</strong> of the other national parks (every park except Sequoia &amp; Kings Canyon).</p>
+<!-- Use the model you chose in the last part to make predictions for the elevation -->
+<!-- gain of the trail for **all** of the other national parks (every park except  -->
+<!-- Arches & Canyonlands).  -->
+<p>With the predicted elevation gains, create a scatterplot of the residuals versus predicted values. Describe the relationship you see in the plot. What does this imply about the predictions made for other parks from your regression model?</p>
 <p></br></p>
 <hr />
 <p></br></p>
 </div>
 </div>
-<div id="part-four-essay-50-points" class="section level2">
-<h2>Part Four: Essay [50 points]</h2>
+<div id="part-four-essay-responses-50-points" class="section level2">
+<h2>Part Four: Essay Responses [50 points]</h2>
 <p><strong>Question 1</strong></p>
-<p>How are the predictions you made for the final similar to the simulations you made for the final project? How are the predictions you made different from the simulations you made for the final project?</p>
+<p>How are the predictions you made for the final similar to the simulations you made for the final project? How are the predictions you made for the final different from the simulations you made for the final project?</p>
 <p><strong>Question 2</strong></p>
 <p>Suppose you are helping another student with their R code for a research project they are working on. Going through their code, you notice they seem to copy and paste the same process multiple times in lots of different locations. What changes would you suggest they make? How would you describe to them why these changes are important?</p>
 </div>

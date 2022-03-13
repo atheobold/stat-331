@@ -30,13 +30,13 @@ np_trails <- read_csv(here::here("11_Final",
 ### This portion of the exam should take you approximately 75-90 minutes.
 </center>
 
-<!-- The two National Parks closest to San Luis Obispo are **Kings Canyon** and -->
-<!-- **Sequoia**. These two parks border each other, and are managed under a single -->
-<!-- forest service; sometimes, they are simply referred to together as "SeKi". -->
+The two National Parks closest to San Luis Obispo are **Kings Canyon** and
+**Sequoia**. These two parks border each other, and are managed under a single
+forest service; sometimes, they are simply referred to together as "SeKi".
 
-The two National Parks closest to my hometown (Grand Junction) are 
-**Arches** and **Canyonlands**. These two parks are just 25 miles apart! Are
-they actually meaningfully different parks?  Let's find out!
+<!-- The two National Parks closest to my hometown (Grand Junction) are  -->
+<!-- **Arches** and **Canyonlands**. These two parks are just 25 miles apart! Are -->
+<!-- they actually meaningfully different parks?  Let's find out! -->
 
 In this section, please show your code and output, but also include appropriate
 text discussion to interpret the output and answer the question.
@@ -55,13 +55,13 @@ arches_cl <- np_trails %>%
 
 Do the trails in these parks have different profiles of elevation gains?
 
-<!-- Create a visualization that explores the elevation gain of trails in SeKi as a -->
-<!-- function of the trail length, for trails in Sequoia and Kings Canyon. You should -->
-<!-- also include the type of trail in your visualization.  -->
+Create a visualization that explores the elevation gain of trails in SeKi as a
+function of the trail length, for trails in Sequoia and Kings Canyon. You should
+also include the type of trail in your visualization.
 
-Create a visualization that explores the elevation gain of trails as a function
-of the trail length, for all of the trails in Arches and Canyonlands. You should
-also include the type of trail in your visualization. 
+<!-- Create a visualization that explores the elevation gain of trails as a function -->
+<!-- of the trail length, for all of the trails in Arches and Canyonlands. You should -->
+<!-- also include the type of trail in your visualization.  -->
 
 Describe the relationships that you see in the visualization. At a minimum, you 
 should address the following questions:  
@@ -69,11 +69,11 @@ should address the following questions:
 - Does it appear that the relationship between a trail's elevation gain and its 
 length is linear?
 
-- Does it appear that the relationship between elevation gain and length is different
-for the two national parks?
+- Does it appear that the relationship between elevation gain and length is
+different for the two national parks?
 
-- How does the relationship between elevation gain and length differ by the type of
-trail?
+- How does the relationship between elevation gain and length differ by the type
+of trail?
 
 Your visualization should be something you would include in a written report.
 At a bare minimum you must have: clear plot labels and aesthetically appealing
@@ -97,21 +97,23 @@ arches_cl %>%
 
 ### Simple Linear Regression [50 points]
 
+We are interested in building a model for predicting the elevation gain of a
+trail at SeKi. We would like for the model to explain as much variability in
+elevation gain as possible, but as be as simple as possible. Thus, we will focus
+on finding the simple linear regression that explains the most variability in
+elevation gain. 
+
 <!-- We are interested in building a model for predicting the elevation gain of a  -->
-<!-- trail at SeKi. We would like for the model to explain as much variability in  -->
-<!-- elevation gain as possible, but as be as simple as possible.  -->
+<!-- trail at Arches and Canyonlands. We would like for the model to explain as much -->
+<!-- variability in elevation gain as possible, but as be as simple as possible. -->
+<!-- Thus, we will focus on finding the simple linear regression that explains the  -->
+<!-- most variability in elevation gain.  -->
 
-We are interested in building a model for predicting the elevation gain of a 
-trail at Arches and Canyonlands. We would like for the model to explain as much
-variability in elevation gain as possible, but as be as simple as possible.
-Thus, we will focus on finding the simple linear regression that explains the 
-most variability in elevation gain. 
-
-We are going to use $R^2$ for our selection criteria, to find the "best" model
-that explains a trail's elevation gain. We are only going to consider the
-**quantitative** variables included in this dataset as contenders for the 
-"best" explanatory variable. Again, your final model should have ***one*** 
-explanatory variable. 
+We are going to use $R^2$ for our selection criteria, with the goal of finding 
+the "best" model that explains a trail's elevation gain. We are only going to
+consider the **quantitative** variables included in this dataset as contenders
+for the "best" explanatory variable. Again, your final model should have
+***one*** explanatory variable. 
 
 Report your top two models and their associated $R^2$ values. Your model 
 summary should be as **tidy** as possible, hence you **should not** use the
@@ -132,7 +134,6 @@ final_lm <- lm(elevation_gain ~ length, data = arches_cl)
 ## Second Best = Difficulty Rating
 
 
-
 ```
 
 </br> 
@@ -149,17 +150,17 @@ To make predictions for a new dataset, you need to (1) assemble the new dataset
 to make predictions on, and (2) pass the new dataset into the `newdata` argument
 of `predict()`.
 
-<!-- Use the model you chose in the last part to make predictions for the elevation gain  -->
-<!-- of the trail for **all** of the other national parks (every park except  -->
-<!-- Sequoia & Kings Canyon).  -->
+Use the model you chose in the last part to make predictions for the elevation gain
+of the trail for **all** of the other national parks (every park except
+Sequoia & Kings Canyon).
 
-Use the model you chose in the last part to make predictions for the elevation
-gain of the trail for **all** of the other national parks (every park except 
-Arches & Canyonlands). 
+<!-- Use the model you chose in the last part to make predictions for the elevation -->
+<!-- gain of the trail for **all** of the other national parks (every park except  -->
+<!-- Arches & Canyonlands).  -->
 
 With the predicted elevation gains, create a scatterplot of the residuals versus
 predicted values. Describe the relationship you see in the plot. What does this
-imply about the predictions from your regression model?
+imply about the predictions made for other parks from your regression model?
 
 ```{r, eval = FALSE, echo = FALSE}
 
@@ -189,13 +190,13 @@ other_parks_A %>%
 
 </br>
 
-## Part Four: Essay [50 points]
+## Part Four: Essay Responses [50 points]
 
 **Question 1**
 
 How are the predictions you made for the final similar to the simulations you 
-made for the final project? How are the predictions you made different from the 
-simulations you made for the final project?
+made for the final project? How are the predictions you made for the final 
+different from the simulations you made for the final project?
 
 **Question 2**
 
