@@ -24,7 +24,7 @@ np_trails <- read_csv(here::here("11_Final",
 
 ## Introduction
 
-This exam is due by **10:00am** on **Wednesday, March 16th**.
+This exam is due by **5:00pm** on **Friday, March 18th**.
 Late exams will receive a grade of 0. 
 **Please do not turn your exam in late!!!**
 
