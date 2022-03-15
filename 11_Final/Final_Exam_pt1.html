@@ -268,12 +268,12 @@
 <p><strong>Your response should be <em>one</em> line of code!</strong></p>
 <p></br></p>
 <p><strong>2.</strong> Taylor would like to write a new function <code>df_na()</code> that takes a dataframe and a variable as inputs, and uses the <code>na_function()</code> to replace the values for the variable input. Additionally, Taylor envisions using either <code>df_na(dataset, &quot;variable&quot;)</code> or <code>df_na(dataset, variable)</code> as the input to the function.</p>
-<p>Which of the following functions will correctly carry out this process? The function can either return the dataframe with the variable adjusted <strong><em>or</em></strong> a vector with the adjusted variable.</p>
+<p>Which of the following functions will correctly carry out this process? The function can either return the dataframe with an adjusted version of the variable(s) supplied <strong><em>or</em></strong> a vector with the adjusted variable(s).</p>
 <p><strong>Select all that apply</strong></p>
 <p><strong>(a)</strong></p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df_na <span class="ot">&lt;-</span> <span class="cf">function</span>(df, vars){</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">%&gt;%</span> </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">var =</span> <span class="fu">na_function</span>(vars))</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">vars =</span> <span class="fu">na_function</span>(vars))</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p><strong>(b)</strong></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df_na <span class="ot">&lt;-</span> <span class="cf">function</span>(df, vars){</span>
@@ -393,7 +393,7 @@
 <div id="question-1.5-20-points" class="section level4">
 <h4>Question 1.5 [20 points]</h4>
 <p>What are the five common words used in trail names?</p>
-<p>Do not include besides words that mean “trail”, like “trail”, “route”, “path”, “loop”.</p>
+<p>Do not include words that mean “trail”, like “trail”, “route”, “path”, “loop”.</p>
 <p>Do not include connector words like “to”, “and”, “with”, “via”, etc.</p>
 </div>
 <div id="question-1.6-20-points" class="section level4">

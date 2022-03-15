@@ -142,8 +142,8 @@ for the variable input. Additionally, Taylor envisions using either
 to the function. 
 
 Which of the following functions will correctly carry out this process? The
-function can either return the dataframe with the variable adjusted ***or*** a 
-vector with the adjusted variable.
+function can either return the dataframe with an adjusted version of the 
+variable(s) supplied ***or*** a vector with the adjusted variable(s).
 
 **Select all that apply**
 
@@ -151,7 +151,7 @@ __(a)__
 ```{r, echo = TRUE}
 df_na <- function(df, vars){
   df %>% 
-    mutate(var = na_function(vars))
+    mutate(vars = na_function(vars))
 }
 ```
 
@@ -368,8 +368,7 @@ np_trails %>%
 
 What are the five common words used in trail names?
 
-Do not include besides words that mean "trail", like "trail", "route", "path",
-"loop".
+Do not include words that mean "trail", like "trail", "route", "path", "loop".
 
 Do not include connector words like "to", "and", "with", "via", etc.
 
