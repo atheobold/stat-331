@@ -1,0 +1,85 @@
+---
+title: "Reviewing Someone's Code and Providing **Helpful** Feedback"
+format: html
+editor: visual
+---
+
+One of my favorite sayings is:
+
+> "Programs must be written for people to read, and only incidentally for machines to execute."
+
+Good coding style is like correct punctuation: you can manage without it, butitsuremakesthingseasiertoread.
+
+### Peer Code Review
+
+Code-review has two major benefits, (1) you get feedback on the readability, tidiness, and efficiency of your code, and (2) through your review you can learn from your peers!
+
+Writing "tidy" and "efficient" code are two of the learning targets for this course. To demonstrate proficiency in these targets, you will earn "badges" from your peers. To earn a badge, your peers must mark your code as being tidy and / or efficient.
+
+### Tidy Code
+
+What does it mean to have "tidy" code? I would consider code to be "tidy" if it follows the [tidyverse style guide](https://style.tidyverse.org/syntax.html). I understand that this style guide may feel a bit overwhelming, so let me give you the **bare** **minimum** criteria for code to be considered "tidy":
+
+-   The code uses named arguments for functions (e.g., `ggplot(data = cars)` )
+
+-   The code uses whitespace around all commas and arithmetic operators (e.g., `mutate(body_mass_kg = body_mass_g / 1000, flipper_ratio = body_mass_kg /  flipper_length_mm)` )
+
+-   The code uses new lines (returns) to eliminate character wrapping (where one line runs into the next line) -- look [here](https://style.tidyverse.org/syntax.html#long-lines) for an example
+
+-   Every `+` sign (in ggplot) should end the line (a return should follow) -- look [here](https://style.tidyverse.org/ggplot2.html) for examples
+
+-   Every `%>%` or `|>` sign should end the line (a return should follow) -- look [here](https://style.tidyverse.org/pipes.html) for examples
+
+### Efficient Code
+
+Throughout this course, you will learn about what makes code "efficient." When I think about how I would define "efficient" code, I think of the *don't repeat yourself (DRY)* principle I first learned in [this paper](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001745#s5). The DRY principle is applicable to many things we will do, such as:
+
+-   filtering a dataset in multiple ways
+
+-   creating multiple new variables
+
+-   calculating multiple summary statistics
+
+In each of these examples, "efficient" code carries out the process by calling on a function **once**, whereas "inefficient" code calls on the **same** function **multiple** times. In your code review, you will be tasked with assessing the efficiency of your peer's code. I suggest you use the following guiding question during your review:
+
+> Is the **same** function being used **multiple** times?
+
+## Writing Code Reviews 
+
+The reviewer will provide feedback on the tidiness and efficiency of the code they are reviewing. I will provide some examples of helpful and unhelpful feedback, to guide your feedback. It's easy to be a jerk when making comments; don't. Think about the comments you would like to receive that would help you improve your code! Be good to each other.
+
+In general, when I give feedback I like to start off with praise for something the person did right. Starting off with something positive helps soften the blow when you receive feedback that points out places you still have room to grow.
+
+### Example Reviews
+
+    ggplot(data=mpg) + geom_point(mapping=aes(x=displ,y=hwy,color="blue"))
+
+[*My Review*]{.underline}
+
+"I really appreciate your use of named arguments, it makes it clear what each input is being used for. Your code would be much easier to read if you used spaces before and after your `=` signs and after each comma. I would also recommend hitting enter / return after each `+` sign, so that each "layer" of your plot has its own line. This makes it easier to digest what is happening at each stage of your plot."\
+
+    penguins %>% mutate(mass_flipper_ratio = body_mass_g/flipper_length_mm) %>%   group_by(species) %>% summarize(avg_mass_flipper_ratio = median(mass_flipper_ratio)) %>% arrange(avg_mass_flipper_ratio)
+
+[*My Review*]{.underline}
+
+"I really appreciate how you use spaces before and after each `=` sign, that makes it easier to read how each `=` sign is being used. I also have a suggestion for your code formatting which would make your code easier to read. If you use a return / new line after each `%>%` sign, each step of your pipeline is on its own line and it is easier to understand the process you are implementing."
+
+    colleges_clean %>%
+      filter(REGION == 7,
+             ADM_RATE > region_median,
+             TUITION_DIFF != 0) %>%
+      mutate(
+        SAT_odd = SAT_AVG %% 2 != 0
+      ) %>%
+      filter(SAT_odd == TRUE,
+             STABBR != "ID") %>%
+      mutate(
+        freshman = as.numeric(UGDS) / 4, 
+        applications = freshman / ADM_RATE
+      ) %>%
+      filter(applications < 1000, 
+             STABBR != "MT")
+
+[*My Review*]{.underline}
+
+"Your code formatting is awesome! I really appreciate your use of whitespace and returns to break up your code and make it more readable. The main suggestion I have is to pay attention to how many times you are calling the same function during your data wrangling process. For example, in your code you use the `filter()` function three times. Could you do all this filtering in **one** call to the `filter()` function? That would help make your code more efficient!"

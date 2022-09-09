@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Reviewing Someone’s Code and Providing Helpful Feedback</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+<script src="code_review_feedback_files/libs/clipboard/clipboard.min.js"></script>
+<script src="code_review_feedback_files/libs/quarto-html/quarto.js"></script>
+<script src="code_review_feedback_files/libs/quarto-html/popper.min.js"></script>
+<script src="code_review_feedback_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="code_review_feedback_files/libs/quarto-html/anchor.min.js"></script>
+<link href="code_review_feedback_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="code_review_feedback_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="code_review_feedback_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="code_review_feedback_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="code_review_feedback_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Reviewing Someone’s Code and Providing <strong>Helpful</strong> Feedback</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>One of my favorite sayings is:</p>
+<blockquote class="blockquote">
+<p>“Programs must be written for people to read, and only incidentally for machines to execute.”</p>
+</blockquote>
+<p>Good coding style is like correct punctuation: you can manage without it, butitsuremakesthingseasiertoread.</p>
+<section id="peer-code-review" class="level3">
+<h3 class="anchored" data-anchor-id="peer-code-review">Peer Code Review</h3>
+<p>Code-review has two major benefits, (1) you get feedback on the readability, tidiness, and efficiency of your code, and (2) through your review you can learn from your peers!</p>
+<p>Writing “tidy” and “efficient” code are two of the learning targets for this course. To demonstrate proficiency in these targets, you will earn “badges” from your peers. To earn a badge, your peers must mark your code as being tidy and / or efficient.</p>
+</section>
+<section id="tidy-code" class="level3">
+<h3 class="anchored" data-anchor-id="tidy-code">Tidy Code</h3>
+<p>What does it mean to have “tidy” code? I would consider code to be “tidy” if it follows the <a href="https://style.tidyverse.org/syntax.html">tidyverse style guide</a>. I understand that this style guide may feel a bit overwhelming, so let me give you the <strong>bare</strong> <strong>minimum</strong> criteria for code to be considered “tidy”:</p>
+<ul>
+<li><p>The code uses named arguments for functions (e.g., <code>ggplot(data = cars)</code> )</p></li>
+<li><p>The code uses whitespace around all commas and arithmetic operators (e.g., <code>mutate(body_mass_kg = body_mass_g / 1000, flipper_ratio = body_mass_kg /  flipper_length_mm)</code> )</p></li>
+<li><p>The code uses new lines (returns) to eliminate character wrapping (where one line runs into the next line) – look <a href="https://style.tidyverse.org/syntax.html#long-lines">here</a> for an example</p></li>
+<li><p>Every <code>+</code> sign (in ggplot) should end the line (a return should follow) – look <a href="https://style.tidyverse.org/ggplot2.html">here</a> for examples</p></li>
+<li><p>Every <code>%&gt;%</code> or <code>|&gt;</code> sign should end the line (a return should follow) – look <a href="https://style.tidyverse.org/pipes.html">here</a> for examples</p></li>
+</ul>
+</section>
+<section id="efficient-code" class="level3">
+<h3 class="anchored" data-anchor-id="efficient-code">Efficient Code</h3>
+<p>Throughout this course, you will learn about what makes code “efficient.” When I think about how I would define “efficient” code, I think of the <em>don’t repeat yourself (DRY)</em> principle I first learned in <a href="https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001745#s5">this paper</a>. The DRY principle is applicable to many things we will do, such as:</p>
+<ul>
+<li><p>filtering a dataset in multiple ways</p></li>
+<li><p>creating multiple new variables</p></li>
+<li><p>calculating multiple summary statistics</p></li>
+</ul>
+<p>In each of these examples, “efficient” code carries out the process by calling on a function <strong>once</strong>, whereas “inefficient” code calls on the <strong>same</strong> function <strong>multiple</strong> times. In your code review, you will be tasked with assessing the efficiency of your peer’s code. I suggest you use the following guiding question during your review:</p>
+<blockquote class="blockquote">
+<p>Is the <strong>same</strong> function being used <strong>multiple</strong> times?</p>
+</blockquote>
+</section>
+<section id="writing-code-reviews" class="level2">
+<h2 class="anchored" data-anchor-id="writing-code-reviews">Writing Code Reviews</h2>
+<p>The reviewer will provide feedback on the tidiness and efficiency of the code they are reviewing. I will provide some examples of helpful and unhelpful feedback, to guide your feedback. It’s easy to be a jerk when making comments; don’t. Think about the comments you would like to receive that would help you improve your code! Be good to each other.</p>
+<p>In general, when I give feedback I like to start off with praise for something the person did right. Starting off with something positive helps soften the blow when you receive feedback that points out places you still have room to grow.</p>
+<section id="example-reviews" class="level3">
+<h3 class="anchored" data-anchor-id="example-reviews">Example Reviews</h3>
+<pre><code>ggplot(data=mpg) + geom_point(mapping=aes(x=displ,y=hwy,color="blue"))</code></pre>
+<p><u><em>My Review</em></u></p>
+<p>“I really appreciate your use of named arguments, it makes it clear what each input is being used for. Your code would be much easier to read if you used spaces before and after your <code>=</code> signs and after each comma. I would also recommend hitting enter / return after each <code>+</code> sign, so that each”layer” of your plot has its own line. This makes it easier to digest what is happening at each stage of your plot.”<br>
+</p>
+<pre><code>penguins %&gt;% mutate(mass_flipper_ratio = body_mass_g/flipper_length_mm) %&gt;%   group_by(species) %&gt;% summarize(avg_mass_flipper_ratio = median(mass_flipper_ratio)) %&gt;% arrange(avg_mass_flipper_ratio)</code></pre>
+<p><u><em>My Review</em></u></p>
+<p>“I really appreciate how you use spaces before and after each <code>=</code> sign, that makes it easier to read how each <code>=</code> sign is being used. I also have a suggestion for your code formatting which would make your code easier to read. If you use a return / new line after each <code>%&gt;%</code> sign, each step of your pipeline is on its own line and it is easier to understand the process you are implementing.”</p>
+<pre><code>colleges_clean %&gt;%
+  filter(REGION == 7,
+         ADM_RATE &gt; region_median,
+         TUITION_DIFF != 0) %&gt;%
+  mutate(
+    SAT_odd = SAT_AVG %% 2 != 0
+  ) %&gt;%
+  filter(SAT_odd == TRUE,
+         STABBR != "ID") %&gt;%
+  mutate(
+    freshman = as.numeric(UGDS) / 4, 
+    applications = freshman / ADM_RATE
+  ) %&gt;%
+  filter(applications &lt; 1000, 
+         STABBR != "MT")</code></pre>
+<p><u><em>My Review</em></u></p>
+<p>“Your code formatting is awesome! I really appreciate your use of whitespace and returns to break up your code and make it more readable. The main suggestion I have is to pay attention to how many times you are calling the same function during your data wrangling process. For example, in your code you use the <code>filter()</code> function three times. Could you do all this filtering in <strong>one</strong> call to the <code>filter()</code> function? That would help make your code more efficient!”</p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
