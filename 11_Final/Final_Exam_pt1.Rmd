@@ -247,7 +247,7 @@ mpg %>%
 __(d)__
 
 ```{r, echo = TRUE}
-penguins %>% 
+mpg %>% 
   mutate(
     across(.cols = everything(), 
            .fns = ~df_na(df = .)
