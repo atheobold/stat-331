@@ -1,6 +1,6 @@
 ---
 title: "Welcome to Stat 331 & R Warm-up"
-date: "January 5, 2022"
+date: "September 20, 2022"
 author: "Dr. Allison Theobold"
 output:
   xaringan::moon_reader:
@@ -62,7 +62,7 @@ class: center, middle
 
 .bitlarger[Data Science] 
 
->Data science is an inter-disciplinary field that uses scientific methods,
+> Data science is an inter-disciplinary field that uses scientific methods,
 > processes, algorithms and systems to extract knowledge and insights from
 > structured and unstructured data.
 
@@ -102,19 +102,35 @@ class: middle
 .pull-right[
 - Lab Assignments 
 - Challenges 
-- Think Out Loud Recordings
 ]
 
 ---
 
-.larger[Team-based Learning]
+.larger[How Smart are You?]
 
-*Team-based learning* is a structured form of small-group learning
+What **criteria** would you use to **rank** yourself compared to everyone else
+in this class?
 
-- Emphasizes student preparation out of class
-- Application of knowledge in class
-- Diverse teams of 4-5 students
-- Designated role for each member
+Saying "this is not possible" or "this is not something we should be trying to
+do" is not an acceptable answer for this exercise. I want actual criteria!
+
+Be prepared to share some possible criteria. 
+
+---
+
+
+---
+
+.larger[Cooperative Learning]
+
+is a structured form of small-group learning
+
+--
+
+- Roles relate to **how** the work should be done
+  * Roles **are not** about breaking up the work intellectually
+- Roles allow each person to contribute to the group in significant ways
+  * Each person's participation is necessary to complete the task
 
 ---
 
@@ -137,16 +153,26 @@ class: middle
 
 ---
 
+.large[How We Learn Together]
+
+- No one is done until everyone is done
+- You have the right to ask **anyone** in your group for help
+- You have the duty to help **anyone** in your group who asks for help
+- Helping someone means explaining your thinking **not** giving answers or doing
+the work for them
+- Provide justification when you make a statement
+- Only ask the instructor when it's a team question
+- Think and work together--don't divide up the work
+- work within your group--no crosstalk with other groups
+- No one is as smart as all of us together! 
+
+---
+
+
 class: center
 
-.large[Mastery-based Grading]
+.large[A Bit About (Un)Grading]
 
-Score   | Justification
---------|--------------
-4       | __Master__ -- Outstanding work that exhibits comprehensive and thoughtful understanding of the content of the question, with an individualized perspective. Errors do not occur in the assignment.
-3       | __Practitioner__ -- Work reflects a solid understanding of the content of the question. Work may not exhibit original perspectives. Several errors may occur in the question. 
-R       | __Redo (Required)__ -- Work satisfies the requirements of the assignment while missing the spirit of the assignment. May be an incomplete rendering of the assignment. The work may contain inconsistencies or demonstrate limited understanding of the content. May be incoherent or poorly written. 
-1       | __Novice__ -- The work shows a lack of understanding of the assignment.
 
 ---
 
