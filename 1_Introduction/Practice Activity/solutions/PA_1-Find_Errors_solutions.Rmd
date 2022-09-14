@@ -48,9 +48,7 @@ my_symbols <- c(lower_case, upper_case, punctuation)
 
 
 ```{r}
-my_symbols <- data.frame(my_symbols)
-names(my_symbols) = "Symbol"
-#data.frame, quotes around "Symbol"
+my_symbols <- data.frame(Symbol = my_symbols)
 ```
 
 4. Find the total number of symbols we have in our data frame.  

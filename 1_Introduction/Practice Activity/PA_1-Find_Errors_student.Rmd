@@ -1,5 +1,5 @@
 ---
-title: "PA 1: Find the Mistakes"
+title: "Practice Activity 1: Find the Mistakes"
 output: html_document
 ---
 
@@ -25,7 +25,7 @@ wanted to accomplish.
 
 ## Part One: Setup
 
-Each of the following R chunks will cause an error and/or do the desired task
+Each of the following R chunks will cause an error and / or do the desired task
 incorrectly.  Find the mistake, and correct it to complete the intended action. 
 
 1. Create vectors containing the upper case letters, lower case letters, and
@@ -42,8 +42,7 @@ punctuation <- c(".", ",", "!", "?", "'", """, "(", ")", " ", "-", ";", ":")
 
 ```
 
-
-2. Make one long vector containing all the symbols.
+2. Make **one** long **vector** containing all the symbols.
 
 ```{r, eval = FALSE}
 
@@ -52,12 +51,11 @@ my_symbols <- cbind(lower_case, upper_case, punctuation)
 ```
 
 
-3. Turn the `my_symbols` vector into a data frame, with the variable name
-"Symbol"
+3. Turn the `my_symbols` vector into a data frame, with one column named 
+"Symbol".
 
 ```{r, eval = FALSE}
-my_symbols <- dataframe(my_symbols)
-names(my_symbols) = Symbol
+my_symbols <- dataframe(Symbol = my_symbols)
 ```
 
 
