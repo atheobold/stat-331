@@ -44,7 +44,7 @@ In each of these examples, "efficient" code carries out the process by calling o
 
 > Is the **same** function being used **multiple** times?
 
-## Writing Code Reviews 
+## Writing Code Reviews
 
 The reviewer will provide feedback on the tidiness and efficiency of the code they are reviewing. I will provide some examples of helpful and unhelpful feedback, to guide your feedback. It's easy to be a jerk when making comments; don't. Think about the comments you would like to receive that would help you improve your code! Be good to each other.
 
@@ -56,7 +56,7 @@ In general, when I give feedback I like to start off with praise for something t
 
 [*My Review*]{.underline}
 
-"I really appreciate your use of named arguments, it makes it clear what each input is being used for. Your code would be much easier to read if you used spaces before and after your `=` signs and after each comma. I would also recommend hitting enter / return after each `+` sign, so that each "layer" of your plot has its own line. This makes it easier to digest what is happening at each stage of your plot."\
+"I really appreciate your use of named arguments, it makes it clear what each input is being used for. Your code would be much easier to read if you used spaces before and after your `=` signs and after each comma. I would also recommend hitting enter / return after each `+` sign, so that each"layer" of your plot has its own line. This makes it easier to digest what is happening at each stage of your plot."\
 
     penguins %>% mutate(mass_flipper_ratio = body_mass_g/flipper_length_mm) %>%   group_by(species) %>% summarize(avg_mass_flipper_ratio = median(mass_flipper_ratio)) %>% arrange(avg_mass_flipper_ratio)
 
