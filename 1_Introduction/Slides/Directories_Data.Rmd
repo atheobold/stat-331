@@ -23,19 +23,22 @@ library(tidyverse)
 
 ```{r xaringan-themer, include=FALSE}
 library(xaringanthemer)
-style_duo(
-  primary_color = "#26116c",
-  secondary_color = "#fd5e53",
-  title_slide_text_color = "#fff8e7",
-  header_font_google = google_font("Roboto"),
-  text_font_google   = google_font("Roboto Condensed"),
-  code_font_google   = google_font("Droid Mono")
+style_duo_accent(
+  primary_color      = "#b76352", # mango
+  secondary_color    = "#34605f", # bayberry
+  header_font_google = google_font("Raleway"),
+  text_font_google   = google_font("Raleway", "300", "300i"),
+  code_font_google   = google_font("Source Code Pro"),
+  header_color = "#793540", #rhubarb
+  white_color = "#F5F5F5", # lightest color
+  black_color = "#36454F", # darkest color
+  text_font_size = "30px", 
+  link_color = "#a17b76" #pink
 )
 ```
 
 ## Principles of Reproducibility
 
-.large[
 The idea:  You should be able to send your project to someone else, and they can jump in and start working right away.
 
 1. Files are organized and well-named.
@@ -48,7 +51,6 @@ The idea:  You should be able to send your project to someone else, and they can
 
 5. Analysis process is well-explained and easy to read.
 
-]
 ```{r, include = FALSE}
 library(tidyverse)
 ```
@@ -167,7 +169,7 @@ class: middle
 
     * I have a project for every class I teach.
     * I have a project for every data analysis I do.
-    * I **never** open RStudio, except by clicking on a project.
+    * I **never** work in RStudio, except in a project.
 
 ---
 

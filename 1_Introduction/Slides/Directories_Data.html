@@ -11,7 +11,9 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # Directories &amp; Scientific Reproducibility
+]
 
 ---
 
@@ -22,7 +24,6 @@ class: center, middle, inverse, title-slide
 
 ## Principles of Reproducibility
 
-.large[
 The idea:  You should be able to send your project to someone else, and they can jump in and start working right away.
 
 1. Files are organized and well-named.
@@ -35,7 +36,6 @@ The idea:  You should be able to send your project to someone else, and they can
 
 5. Analysis process is well-explained and easy to read.
 
-]
 
 
 ---
@@ -56,7 +56,7 @@ getwd()
 ```
 
 ```
-## [1] "/Users/atheobol/Documents/Teaching/Stat 331/STAT-331-Online/1_Introduction/Coursework/Coursework-Directories_Data_Deliverables/Slides"
+## [1] "/Users/atheobol/Documents/Teaching/Stat 331/stat-331-allison/1_Introduction/Slides"
 ```
 
 - If you save things you have created, they save to your working directory by default.
@@ -91,7 +91,7 @@ getwd()
 ```
 
 ```
-## [1] "/Users/atheobol/Documents/Teaching/Stat 331/STAT-331-Online/1_Introduction/Coursework/Coursework-Directories_Data_Deliverables/Slides"
+## [1] "/Users/atheobol/Documents/Teaching/Stat 331/stat-331-allison/1_Introduction/Slides"
 ```
 
 This file lives in my user files `Users/`, 
@@ -162,7 +162,7 @@ class: middle
 
     * I have a project for every class I teach.
     * I have a project for every data analysis I do.
-    * I **never** open RStudio, except by clicking on a project.
+    * I **never** work in RStudio, except in a project.
 
 ---
 
@@ -243,6 +243,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable

@@ -39,8 +39,10 @@ Let's start working in `R`!
 
 ## Install R
 
-*If you already have `R` downloaded, please follow these steps anyways, to make sure
-you have the most recent version of `R`.*
+*If you already have `R` downloaded, please follow these steps anyways, to make
+sure you have the most recent version of `R`.* **Do not ignore these
+instructions.** If you neglect to update your version of R, you may find that 
+updating a package will make it so your code will not run. 
 
 Download and install R by going to [https://cloud.r-project.org/](https://cloud.r-project.org/).
 

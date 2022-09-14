@@ -56,12 +56,6 @@ You will learn how to:
 
 `r emo::ji("book")` [Required Reading: Intro to R Markdown](https://r4ds.had.co.nz/r-markdown.html)
 
-`r emo::ji("play button")` [Required Video: Introduction to R Markdown by Dr. Kelly Bodwin (8 minutes)](https://www.youtube.com/embed/Zt6MJ2m2bNk)
-
-<!-- UPDATE VIDEO WITH NEW SLIDES -->
-
-`r emo::ji("play button")` [Additional Video: Design Choices for R Mardown Documents (11 minutes)](https://www.youtube.com/watch?v=w_HV_RI1lN8)
-
 ---
 
 # `r emo::ji("question")` Extra Resources

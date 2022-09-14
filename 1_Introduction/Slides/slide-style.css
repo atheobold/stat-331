@@ -12,7 +12,7 @@
 :root {
   --dark-blue: #2c4673;
   --mango: #b76352;
-  --bay-berry: #34605f;
+  --bayberry: #34605f;
   --gray: #7b7b89;
   --pink: #a17b76;
   --honey: #ba9645;
@@ -20,10 +20,16 @@
   --rhubarb-faint: #79354050;
   --dark-blue-faint: #2c467350;
   --pink-faint: #a17b7650;
-  --bay-berry-faint: #34605f50;
+  --bayberry-faint: #34605f50;
+  --black: #000000;
 }
 
 /* Font colors */
+
+.black{
+  color: var(--black);
+}
+
 .dark-blue {
   color: var(--dark-blue);
 }
@@ -44,6 +50,10 @@
 }
 .mango{
   color: var(--mango);
+}
+
+.rhubarb-faint{
+  color: var(--rhubarb-faint);
 }
 
 
