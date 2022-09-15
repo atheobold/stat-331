@@ -26,7 +26,7 @@ Welcome!
 In this coursework, you'll get set up with the Class Discord, learn about what
 is expected of you each week, and hear some tips from me about how to succeed.
 
-[Required Video: Welcome to Stat 331 from Dr. Theobold (8 minutes)](https://www.youtube.com/watch?v=lO5Pj7Kx4iU)
+[Required Video: Welcome to Stat 331 from Dr. Theobold ()]()
 
 ## Course TODOs
 
@@ -44,10 +44,10 @@ is expected of you each week, and hear some tips from me about how to succeed.
 
 ---
 
-This is a *synchronous* **in-person** course, scheduled to meet on Mondays and
-Wednesdays for 2 hours at a time. 
+This is a *synchronous* **in-person** course, scheduled to meet on Tuesdays and
+Thursdays for 2 hours at a time. 
 
-We **will** be meeting every Monday and Wednesday this quarter, and attendance
+We **will** be meeting every Tuesday and Thursday this quarter, and attendance
 is expected. 
 
 ---
@@ -66,8 +66,8 @@ video.
 
 The office hours for this class are:
 
-#### Tuesdays & Thursdays from 3:30 - 4:30pm **in-person**
-#### Tuesdays & Thursdays from 4:30 - 5:30pm **on Discord**
+#### Tuesdays & Thursdays from 2:30 - 3:30pm **in-person**
+#### Fridays from 9:00 - 10:00am **on Discord**
 
 I will often be willing to hop on Discord and help out at other times, and I
 will answer text chat questions regularly throughout every day!
@@ -77,7 +77,7 @@ will answer text chat questions regularly throughout every day!
 ## Join the server
 
 
-Join the [Stat 331 Server (https://discord.gg/4MY346Bm)](https://discord.gg/4MY346Bm)
+Join the [Stat 331 Server (https://discord.gg/m38t5rQWUY)](https://discord.gg/m38t5rQWUY)
 to start experimenting with the interface.
 
 When you join the server, you will be given some suggestions to get started.  
@@ -234,7 +234,7 @@ Introduce yourself in the "Introductions" channel of the Discord Server.
 
 ---
 
-[Required Video: Class Structure (10 minutes)](https://www.youtube.com/watch?v=8TUyUN71JMY)
+[Required Video: Class Structure ()]()
 
 ---
 
@@ -243,67 +243,69 @@ Introduce yourself in the "Introductions" channel of the Discord Server.
 ### Coursework
 
 Each week, you will be expected to work through a sequence of readings, videos,
-and check-ins. (Much like this one!)
+and preview activities. (Much like this one!)
 
 These are meant to replace the in-class lecture experience; thus, you should
 plan to devote about 1 - 3 hours a week to this coursework. 
 
+### Preview Activities
+
+*Due Tuesdays at 8am*
+
+Before class, you’ll complete Preview Activities which will guide you through
+your first contact with new concepts.
+
+These will involve readings, videos, along with exercises to build your basic
+skill fluency. For example, you might be asked to read a chapter from the course
+textbook, watch a few videos discussing some concepts from the chapter, and then
+asked to complete some preliminary exercises intended to get you started
+thinking about how to apply the concepts from the chapter in the context of real
+data. 
+
+You’ll submit these exercises online, so that class time can be customized based
+on your understanding.
 
 ### Practice Activities
 
-*Due Tuesdays at midnight*
+*Due Wednesdays at midnight*
 
-As part of your "in-class" work, each week you will have short practice tasks to
-complete which tie the concepts from the reading and lectures together.  You
-should plan for these to take you 1-3 hours per week.
+During class, you’ll be working with your classmates to complete Practice
+Activities, which take your Preview Activities a step further. You will
+collaborate with your team to solve a puzzle, requiring that you  accomplish a
+series of tasks, each of which applies the statistical computing concepts from
+that week. The purpose of in-class time is for you to be doing statistical
+computing, with me there to guide you if / when you get lost. 
 
-The course meetings on Mondays will have at least 1-hour dedicated to working on
-these practice activities, where you will work in your team. This allows for you
-to have the ability to ask me questions during the early stages of the activity. 
+The course meetings on Tuesdays will have at least 1-hour dedicated to working
+on these practice activities, where you will work in your team. This allows for
+you to have the ability to ask me questions during the early stages of the
+activity. 
 
 ### Lab Assignments
 
 *Due Saturdays at midnight*
 
-Aside from the Final Project and Exams, the majority of your grade in this class
-comes from Lab Assignments.  You should plan to spend a large amount of time
-outside of class (5-10 hours each week) completing your Lab Assignment.
+After class, you can reinforce the material through Lab Assignments, which are
+an opportunity to demonstrate mastery of the skills that you’ve learned. If you
+got something wrong, don’t worry! You’ll have a chance to try again.
 
-Lab work is completed in **teams**. Please read the description of the team
-roles that will be circulated around. 
-
-Labs will be submitted on Canvas.
+Labs will be submitted on Canvas. All revisions to Lab Assignments will be 
+submitted to the **same** Canvas portal as the original assignment. 
 
 
 ### Challenges
 
 *Due Saturdays at midnight*
 
-Each week, your Lab Assignment will have an individual challenge, which will
-require you to learn and use skills beyond what is covered in the assignment.
-These challenges are an individualized component of your lab assignment and are 
-worth 10% of your overall grade.
+Each Lab Assignment will have a Challenge Problem, which asks you to extend
+the skills you’ve learned in class in some way. Frequently, you have the choice 
+of what you would like to learn. The only requirement is that you extend your thinking in some (measureable) way. 
 
 Although you may discuss ideas with your classmates and seek help from the usual
 sources, all code and text **absolutely must** be your own.  
 
-Challenges are worth 10 points each and are graded based on how you extend your
-understanding. There is the opportunity to more than 10 points on a Challenge
-assignment, by submitting a Challenge with impressive effort. Extra bonus points
-earn you extra credit toward your overall course grade.
-
-
-### Think Out Loud Recordings 
-
-*Due Saturdays at midnight*
-
-Each week you will record a short video explaining what the code from your 
-challenge "solution" does. Each recording will be done through FlipGrid,
-associated with a Canvas assignment.
-
-Because these assignments are intended to give you practice explaining what the 
-code is doing, full credit will be given so long as you provide a response that
-demonstrates you have spent time thinking about how to explain your code.
+Challenges will be submitted on Canvas. All revisions to Challenges will be 
+submitted to the **same** Canvas portal as the original assignment. 
 
 ---
 
@@ -313,12 +315,15 @@ demonstrates you have spent time thinking about how to explain your code.
 
 **Question 2:** What materials and technology are required for this course? 
 
-**Question 3:** In this course, what is due every Tuesday? 
+**Question 3:** In this course, Preview Activities are due by 8am every ____. 
+Practice Activities are due by midnight every ____. Lab Assignments and
+Challenges are due by midnight every ____.  
 
-**Question 4:** Revisions will be required for questions not earning at least
-what score on lab assignments?
+**Question 4:** If you receive a "Growing" on a Lab Assignment problem, what 
+should you do?
 
-**Question 5:** How will the midterm and final exams be administered?
+**Question 5:** For revisions on Lab Assignments and Challenges to be considered
+that week they need to be turned in by:
 
 **Question 6:** You have finished the week's Practice Assignment, and you want
 to know if you did it right.  You ask your friend, and she says, "Oh, I got *Luke
@@ -336,11 +341,18 @@ You copy-and-paste the solution from the Stack Overflow page into your Challenge
 submission and do not reference that you used an outside source. You have
 violated the Academic Honesty policy. 
 
+**Question 9:** Name one of the course learning targets that makes you excited.
+
+**Question 10:** Name one of the course learning targets that makes you nervous.
+
+**Question 11:** What personal goals did you write for yourself on Day 1? Why
+are you taking this class? What do you hope to learn?
+
 ---
 
 `r emo::ji("check")` Check-in 3: Team Formation Schedule Survey 
 
-[Link to Google Form](https://forms.gle/SZs2toNSAUj4stK3A)
+[Link to Google Form](https://forms.gle/n6jNr98rsJM49uTA9)
 
 ---
 
@@ -351,7 +363,7 @@ violated the Academic Honesty policy.
 Stuck on something, or have a logistical question about the course?  
 Follow these easy steps to success!
 
-## Make sure your question isn't already answered somewhere.
+### Make sure your question isn't already answered somewhere.
 
 #### Double-check the syllabus.
 
@@ -374,7 +386,7 @@ email any time an announcement is posted.
 ---
 
 
-## Ask your question on Discord
+### Ask your question on Discord
 
 If you post your question to a text channel, you will probably get a fast
 response from a classmate.  If not, you will get a response from me within 24 
@@ -383,7 +395,7 @@ hours.
 ---
 
 
-## Send a message via Canvas
+### Send a message via Canvas
 
 If your question is private, you may message me directly via Canvas.
 
@@ -405,7 +417,7 @@ result in you having a less complete understanding of the material.
 
 I encourage you to commit to giving the Coursework segments the same 
 level of attention that you would ordinarily give to in-class lecture. Put the
-same effort into the Check-In Activities that you would if you were sitting in a classroom. In return for your efforts, I promise to choose required videos and readings carefully, so that I do not waste your time.
+same effort into the Preview Activities that you would if you were sitting in a classroom. In return for your efforts, I promise to choose required videos and readings carefully, so that I do not waste your time.
 
 ![](https://media.giphy.com/media/xUNda4ziBZR0nzca9W/giphy.gif)
 
@@ -433,10 +445,10 @@ Learn to:
 
 This course makes use of team-based learning. In the first week you will be
 placed into a team that will last for the first five weeks of the course. After
-the midterm exam, you will be given the option to join a new group or stick with
-the group you've been working with thus far. 
+the midterm reflection, you will be given the option to join a new group or
+stick with the group you've been working with thus far. 
 
-Outside of your group, I encourage you to establish study buddies and/or study
+Outside of your group, I encourage you to establish study buddies and / or study
 groups early in the quarter, even if you don't know anyone yet.  
 
 The class Discord server is a great way to get started. I also hope you will
