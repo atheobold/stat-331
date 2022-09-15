@@ -1,5 +1,5 @@
 ---
-title: "Course Setup and Structure"
+title: "Course Set-up and Structure"
 author: ""
 output:
   prettydoc::html_pretty:
