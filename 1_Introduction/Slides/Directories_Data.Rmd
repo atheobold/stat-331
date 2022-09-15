@@ -129,7 +129,8 @@ Find the **path** to your class directory.
 
 ## The Beauty of R Projects
 
-An **R Project** is basically a "flag" planted in a certain directory.
+.pull-left[ An **R Project** is basically a "flag" planted in a certain
+directory.
 
 When you double click a **.Rproj** file, it does two things:
 
@@ -137,7 +138,11 @@ When you double click a **.Rproj** file, it does two things:
 
 2. Set the working directory to be wherever the .Rproj file lives.
 
-3. Link to GitHub, if setup (more on that later!)
+3. Link to GitHub, if setup (more on that later!)]
+
+.pull-right[
+![](images/project_flag.jpg)
+]
 
 ---
 
@@ -151,8 +156,8 @@ class: center
 
 </br>
 
-.bitlarger[Anyone can copy your directory, and the .Rproj will open properly on
-their computer.]
+.bitlarger[You can send anyone your folder with your .Rproj file and they will
+be able to run your code on their computer.]
 
 ---
 

@@ -6,6 +6,9 @@ output:
     theme: tactile
     highlight: github
     css: styles.css
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 ```{r setup, include=FALSE}
@@ -20,75 +23,85 @@ The theme of this lesson is good management of your files and data.
 
 You will learn how to:
 
-* Identify **folders** and **paths**.
+-   Identify **folders** and **paths**.
 
-* Create and use **R Projects**.
+-   Create and use **R Projects**.
 
-* **Load data** into R from files.
+-   **Load data** into R from files.
 
-* Deal with package challenges.
+-   Deal with package challenges.
 
-* Create R Markdown or Quarto documents with good **reproducible principles**.
+-   Create R Markdown or Quarto documents with good **reproducible
+    principles**.
 
----
+------------------------------------------------------------------------
 
 `r emo::ji("play button")` Watch Videos: 25 min
 
-`r emo::ji("book")` Readings: 15 minutes 
+`r emo::ji("book")` Readings: 15 minutes
 
-`r emo::ji("computer")` Activities: 10 min 
+`r emo::ji("computer")` Activities: 10 min
 
 `r emo::ji("check")` Check-ins: 2
 
----
+------------------------------------------------------------------------
 
 ## Principles of Reproducibility
 
-`r emo::ji("play button")` [Required Video: Directories, Paths, Projects (17 minutes)]()
+`r emo::ji("play button")` [Required Video: Directories, Paths, Projects
+(17 minutes)]()
 
-`r emo::ji("book")` [Required Reading: Workflow and Projects](https://r4ds.had.co.nz/workflow-projects.html) 
+`r emo::ji("book")` [Required Reading: Workflow and
+Projects](https://r4ds.had.co.nz/workflow-projects.html)
 
----
+------------------------------------------------------------------------
 
 ## Reproducible Deliverables
 
 ### Introduction to R Markdown
 
-`r emo::ji("book")` [Required Reading: Intro to R Markdown](https://r4ds.had.co.nz/r-markdown.html)
+`r emo::ji("book")` [Required Reading: Intro to R
+Markdown](https://r4ds.had.co.nz/r-markdown.html)
 
 ### Introduction to Quarto
 
-`r emo::ji("book")` [Required Reading: Intro to Quarto](https://quarto.org/docs/get-started/hello/rstudio.html)
+`r emo::ji("book")` [Required Reading: Intro to
+Quarto](https://quarto.org/docs/get-started/hello/rstudio.html)
 
 ### Comparison of Quarto & R Markdown
 
-`r emo::ji("play button")` [Required Video: What's the difference between Quarto and R Markdown? (17 minutes)]()
+`r emo::ji("play button")` [Required Video: What's the difference
+between Quarto and R Markdown? (17 minutes)]()
 
----
+------------------------------------------------------------------------
 
 # `r emo::ji("question")` Extra Resources
 
-* [Software Carpentry -- Project Managment with RStudio](http://swcarpentry.github.io/r-novice-gapminder/02-project-intro/index.html)
+-   [Software Carpentry -- Project Managment with
+    RStudio](http://swcarpentry.github.io/r-novice-gapminder/02-project-intro/index.html)
 
----
+------------------------------------------------------------------------
 
 `r emo::ji("check")` Check-in: RStudio Projects
 
-Take a screenshot of your class directory, showing the **R Project** and the
-folder organization, including a **Week 1** or **Practice Activity** folder.
+Take a screenshot of your class directory, showing the **R Project** and
+the folder organization, including a **Week 1** or **Practice Activity**
+folder.
 
----
+------------------------------------------------------------------------
 
 # `r emo::ji("question")` Extra Resources
 
-* [Click Here](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
-to download a cheatsheet for R Markdown.
+-   [Click
+    Here](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
+    to download a cheatsheet for R Markdown.
 
-* [This website](https://holtzy.github.io/Pimp-my-rmd/) has some tips for making
-your R Markdown documents more beautiful.
+-   [This website](https://holtzy.github.io/Pimp-my-rmd/) has some tips
+    for making your R Markdown documents more beautiful.
 
-* [This website](https://quarto.org/docs/gallery/) has a gallery of different
-types of products you can make with Quarto. I especially like the [HTML with
-advanced layout option](https://quarto-dev.github.io/quarto-gallery/page-layout/tufte.html), 
-since I really like adding comments and plots in the margins of my document. 
-
+-   [This website](https://quarto.org/docs/gallery/) has a gallery of
+    different types of products you can make with Quarto. I especially
+    like the [HTML with advanced layout
+    option](https://quarto-dev.github.io/quarto-gallery/page-layout/tufte.html),
+    since I really like adding comments and plots in the margins of my
+    document.
