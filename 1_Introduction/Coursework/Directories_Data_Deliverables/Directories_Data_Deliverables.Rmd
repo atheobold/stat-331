@@ -28,7 +28,7 @@ You will learn how to:
 
 * Deal with package challenges.
 
-* Create R Markdown documents with good **reproducible principles**.
+* Create R Markdown or Quarto documents with good **reproducible principles**.
 
 ---
 
@@ -44,7 +44,7 @@ You will learn how to:
 
 ## Principles of Reproducibility
 
-`r emo::ji("play button")` [Required Video: Directories, Paths, Projects (17 minutes)](http://somup.com/creu0fbzyn)
+`r emo::ji("play button")` [Required Video: Directories, Paths, Projects (17 minutes)]()
 
 `r emo::ji("book")` [Required Reading: Workflow and Projects](https://r4ds.had.co.nz/workflow-projects.html) 
 
@@ -55,6 +55,14 @@ You will learn how to:
 ### Introduction to R Markdown
 
 `r emo::ji("book")` [Required Reading: Intro to R Markdown](https://r4ds.had.co.nz/r-markdown.html)
+
+### Introduction to Quarto
+
+`r emo::ji("book")` [Required Reading: Intro to Quarto](https://quarto.org/docs/get-started/hello/rstudio.html)
+
+### Comparison of Quarto & R Markdown
+
+`r emo::ji("play button")` [Required Video: What's the difference between Quarto and R Markdown? (17 minutes)]()
 
 ---
 
@@ -78,3 +86,9 @@ to download a cheatsheet for R Markdown.
 
 * [This website](https://holtzy.github.io/Pimp-my-rmd/) has some tips for making
 your R Markdown documents more beautiful.
+
+* [This website](https://quarto.org/docs/gallery/) has a gallery of different
+types of products you can make with Quarto. I especially like the [HTML with
+advanced layout option](https://quarto-dev.github.io/quarto-gallery/page-layout/tufte.html), 
+since I really like adding comments and plots in the margins of my document. 
+
