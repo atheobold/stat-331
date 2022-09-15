@@ -78,22 +78,6 @@ default.
 
 ---
 
-class: center, middle
-
-# Manage your Class Directory
-
-Is it in a place you can easily find it?
-
---
-
-Does it have an informative name?
-
---
-
-Are the files inside it well-organized?
-
----
-
 class: middle 
 
 ## Paths
@@ -114,16 +98,19 @@ in a series of organized folders
 
 ---
 
-class: center
+class: center, middle
 
-</br>
-</br>
-</br>
-</br>
+# Manage your Class Directory
 
-.huge-text[Try it!]
+Is it in a place you can easily find it?
 
-Find the **path** to your class directory.
+--
+
+Does it have an informative name?
+
+--
+
+Are the files inside it well-organized?
 
 ---
 
@@ -199,14 +186,18 @@ setwd("/User/reginageorge/Desktop/R_Class/Lab_1/")
 
 --
 
-- R Markdown files ignore this code when knitting! 
+- R Markdown and Quarto ignore this code when knitting! 
 
 ---
 
-class: middle, inverse
+class: middle, center
 
 # Do this right now:
-
+</br>
 ### 1. Create a R Project in your class directory.
-
+</br>
 ### 2. Add a folder to the directory called "Week 1" or "Lab 1"
+</br>
+### 3. Click on your STAT331 R Project to open up RStudio
+</br>
+### 4. Use `getwd()` to find the **path** to your class directory.
