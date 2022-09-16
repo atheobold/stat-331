@@ -26,11 +26,7 @@ Welcome!
 In this coursework, you'll get set up with the Class Discord, learn about what
 is expected of you each week, and hear some tips from me about how to succeed.
 
-[Required Video: Welcome to Stat 331 from Dr. Theobold ()]()
-
 ## Course TODOs
-
-`r emo::ji("play")` Watch Video: 20 min
 
 `r emo::ji("book")` Readings: 15 minutes 
 
@@ -231,12 +227,6 @@ Introduce yourself in the "Introductions" channel of the Discord Server.
 ---
 
 # Course Structure
-
----
-
-[Required Video: Class Structure ()]()
-
----
 
 ## What your typical week will look like
 

@@ -1,0 +1,13 @@
+name: directories_data_deliverables
+title: Directories_Data_Deliverables
+username: atheobold
+account: atheobold
+server: rstudio.csm.calpoly.edu
+hostUrl: https://rstudio.csm.calpoly.edu/__api__
+appId: 379
+bundleId: 1027
+url: https://rstudio.csm.calpoly.edu/directories-deliverables/
+when: 1663340862.838
+lastSyncTime: 1663340862.83802
+asMultiple: FALSE
+asStatic: TRUE
