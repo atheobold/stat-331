@@ -49,7 +49,7 @@ You will learn how to:
 ## Principles of Reproducibility
 
 `r emo::ji("play button")` [Required Video: Directories, Paths, Projects
-(17 minutes)]()
+(15 minutes)](http://somup.com/c3QDczUaCa)
 
 `r emo::ji("book")` [Required Reading: Workflow and
 Projects](https://r4ds.had.co.nz/workflow-projects.html)
@@ -71,7 +71,7 @@ Quarto](https://quarto.org/docs/get-started/hello/rstudio.html)
 ### Comparison of Quarto & R Markdown
 
 `r emo::ji("play button")` [Required Video: What's the difference
-between Quarto and R Markdown? (17 minutes)]()
+between Quarto and R Markdown? (10 minutes)](http://somup.com/c3QDchUapb)
 
 ------------------------------------------------------------------------
 
@@ -79,6 +79,8 @@ between Quarto and R Markdown? (17 minutes)]()
 
 -   [Software Carpentry -- Project Managment with
     RStudio](http://swcarpentry.github.io/r-novice-gapminder/02-project-intro/index.html)
+    
+- [Bible of all things R Markdown](https://rmarkdown.rstudio.com/)
 
 ------------------------------------------------------------------------
 
@@ -93,8 +95,7 @@ folder.
 # `r emo::ji("question")` Extra Resources
 
 -   [Click
-    Here](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
-    to download a cheatsheet for R Markdown.
+    Here](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf) to download a cheatsheet for R Markdown.
 
 -   [This website](https://holtzy.github.io/Pimp-my-rmd/) has some tips
     for making your R Markdown documents more beautiful.
