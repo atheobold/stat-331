@@ -258,12 +258,8 @@ class: center, middle
 
 .bitlarger[Anatomy of a function]
 
-```{r seq, eval = FALSE, echo = FALSE}
+```{r seq, eval = FALSE}
 seq(from = 1, to = 100, by = 2)
-```
-
-```{r, echo = FALSE}
-decorate("seq", eval = FALSE)
 ```
 
 --
@@ -273,8 +269,7 @@ decorate("seq", eval = FALSE)
 **Function name:**
 
 ```{r, echo = FALSE}
-decorate("seq", eval = FALSE) %>%
-  flair("seq")
+flair("seq", eval = FALSE, pattern = "seq")
 ```
 
 --
@@ -283,9 +278,7 @@ decorate("seq", eval = FALSE) %>%
 
 
 ```{r, echo = FALSE}
-decorate("seq", eval = FALSE) %>%
-  flair("from") %>% 
-  flair("to")
+flair("seq", eval = FALSE, pattern = c("from", "to"))
 ```
 
 ---
@@ -299,8 +292,7 @@ class: center, middle
 **Optional arguments:**
 
 ```{r, echo = FALSE}
-decorate("seq", eval = FALSE) %>%
-  flair("by = 2")
+flair("seq", eval = FALSE, pattern = "by = 2")
 ```
 
 --
