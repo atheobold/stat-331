@@ -269,7 +269,8 @@ seq(from = 1, to = 100, by = 2)
 **Function name:**
 
 ```{r, echo = FALSE}
-flair("seq", eval = FALSE, pattern = "seq")
+decorate("seq", eval = FALSE) %>% 
+  flair(pattern = "seq")
 ```
 
 --
