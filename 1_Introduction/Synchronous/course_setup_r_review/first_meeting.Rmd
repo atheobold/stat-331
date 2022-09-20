@@ -1,5 +1,5 @@
 ---
-title: "Welcome to Stat 331 & R Warm-up"
+title: "Welcome to Stat 331!"
 date: "September 20, 2022"
 author: "Dr. Allison Theobold"
 output:
@@ -46,8 +46,8 @@ class: middle
 </center>
 
 This course will teach you the fundamentals of R Statistical Software and of
-statistical computing principles, extending your knowledge to more "intermediate"
-topics, such as: 
+statistical computing principles, extending your knowledge to more
+"intermediate" topics, such as: 
 
 * data wrangling
 * data visualization
@@ -62,30 +62,11 @@ class: center, middle
 
 .bitlarger[Data Science] 
 
-> Data science is an inter-disciplinary field that uses scientific methods,
-> processes, algorithms and systems to extract knowledge and insights from
-> structured and unstructured data.
-
-Wikipedia 
-
-</br> 
-
->The ability to take data — to be able to understand it, to process it, to
-> extract value from it, to visualize it, to communicate it. 
->
-
-Hal Varian, chief economist at Google and UC Berkeley professor of information sciences, business, and economics
-
----
-
-class: center 
-
-.bitlarger[What Data Science Is To Me]
-
-</br>
-</br>
-
 ![](cycle.png)
+
+> The ability to take data — to be able to understand it, to process it, to
+> extract value from it, to visualize it, to communicate it. 
+> 
 
 ---
 
@@ -93,16 +74,37 @@ class: middle
 
 .larger[Course Components]
 
-.pull-left[
+.pull-left-narrow[
+*Before Class*
+
 - Coursework
-- Check-ins
-- Practice Activities
+- Preview Activities
 ]
 
-.pull-right[
+.pull-right-wide[
+.pull-left[
+
+*During Class* 
+
+- Practice Activities
 - Lab Assignments 
-- Challenges 
 ]
+.pull-right[
+*Outside of Class* 
+
+- Challenges
+- Revisions 
+- Reflections
+- Portfolio
+]
+]
+
+---
+
+
+class: center, inverse, middle
+
+.hand-large[A Bit About (Un)Grading]]
 
 ---
 
@@ -115,9 +117,6 @@ Saying "this is not possible" or "this is not something we should be trying to
 do" is not an acceptable answer for this exercise. I want actual criteria!
 
 Be prepared to share some possible criteria. 
-
----
-
 
 ---
 
@@ -134,14 +133,18 @@ is a structured form of small-group learning
 
 ---
 
-.large[**Group Norms:**]
+.bitlarger[Group Norms]
+
+.pull-left[
 
 - Zero tolerance for: racism, sexism, homophobia, transphobia, ageism, ableism 
-- Do not make generalizations -- Use "I" statements
 
 - Respect one another
 
 - Intent and impact *both* matter
+]
+
+.pull-right[
 
 - Non-judgmental 
 
@@ -150,38 +153,45 @@ is a structured form of small-group learning
 - Embrace discomfort
 
 - Make decisions by consensus
+]
 
 ---
 
-.large[How We Learn Together]
+.bitlarger[How We Learn Together]
+
+.pull-left[
 
 - No one is done until everyone is done
-- You have the right to ask **anyone** in your group for help
-- You have the duty to help **anyone** in your group who asks for help
+
+- You have the *right* to ask **anyone** in your group for help
+
+- You have the *duty* to help **anyone** in your group who asks for help
+
+]
+
+.pull-right[
+
 - Helping someone means explaining your thinking **not** giving answers or doing
 the work for them
-- Provide justification when you make a statement
-- Only ask the instructor when it's a team question
-- Think and work together--don't divide up the work
-- work within your group--no crosstalk with other groups
-- No one is as smart as all of us together! 
+
+- Provide a justification when you make a statement
+
+- Think and work together -- don't divide up the work
+
+]
 
 ---
 
+class: center, middle
 
-class: center
-
-.large[A Bit About (Un)Grading]
-
-
----
-
-.huge-text[But I haven't used R in...]
+.hand-large[But I haven't used R in...]
 
 ---
 
 .larger[Let's start at the very beginning] 
 
+
+</br>
 
 An "object" in `R` is where we attach / map a value onto a name. 
 
@@ -203,7 +213,8 @@ y <- c(1, 2, 3, 4)
 
 </br>
 
-.hand[How could you create a vector of numbers 1 to 100 without typing them all?]
+.hand[Q: How could you create a vector of numbers 1 to 100 without typing them
+all?]
 
 ---
 
@@ -225,7 +236,7 @@ letters_numbers
 
 --
 
-.hand[How many data types can a vector contain?]
+.hand[Q: How many data types can a vector contain?]
 
 ---
 
@@ -258,8 +269,12 @@ class: center, middle
 
 .bitlarger[Anatomy of a function]
 
-```{r seq, eval = FALSE}
+```{r seq, eval = FALSE, echo = FALSE}
 seq(from = 1, to = 100, by = 2)
+```
+
+```{r, echo = FALSE}
+decorate("seq", eval = FALSE)
 ```
 
 --
@@ -279,7 +294,9 @@ decorate("seq", eval = FALSE) %>%
 
 
 ```{r, echo = FALSE}
-flair("seq", eval = FALSE, pattern = c("from", "to"))
+decorate("seq", eval = FALSE) %>% 
+  flair(pattern = "from") %>% 
+  flair(pattern = "to")
 ```
 
 ---
@@ -293,15 +310,17 @@ class: center, middle
 **Optional arguments:**
 
 ```{r, echo = FALSE}
-flair("seq", eval = FALSE, pattern = "by = 2")
+decorate("seq", eval = FALSE) %>% 
+  flair(pattern = "by")
 ```
 
 --
 
 </br>
-</br>
 
-.large[**Naming your arguments makes your code more readable!**]
+Technically, `seq(1, 100, 2)` works too, but...
+
+.large[**naming your arguments makes your code more readable!**]
 
 ---
 
@@ -383,13 +402,13 @@ Extract columns using:
 
 .pull-right[
 
-.midi[.hand[How would you extract the second row of `mat`?]
+.midi[.hand[Q: How would you extract the second row of `mat`?]
 
 
-.hand[How would you extract the third column of `mat`?]
+.hand[Q: How would you extract the third column of `mat`?]
 
 
-.hand[How would you extract rows 1-3 and columns 2-4?]
+.hand[Q: How would you extract rows 1-3 and columns 2-4?]
 
 ]]
 
@@ -399,7 +418,7 @@ Extract columns using:
 
 .pull-left[
 
-![](lists.jfif)
+![](cubby.png)
 
 ]
 
@@ -431,7 +450,7 @@ my_list
 ]
 
 .pull-right[
-- Elements are by `$`
+- Elements are denoted by `$`
   * Extract elements with `$` or `[[]]`
 
 - Items are noted by `[]`

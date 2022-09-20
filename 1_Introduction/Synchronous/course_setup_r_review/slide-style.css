@@ -91,7 +91,7 @@ h4 {
 
 .huge-text {
  font-family: 'Montserrat', sans-serif;
- font-size: 600%;
+ font-size: 400%;
  font-weight: bold;
  color: var(--classic-blue);
 }
@@ -104,13 +104,13 @@ h4 {
 
 /* Handwriting */
 .hand{
-  font-family: 'Montserrat', cursive;
+  font-family: 'Gochi Hand', cursive;
   font-weight: bold;
   color: var(--classic-blue);
   font-size: 125%;
 }
 .hand-large{
-  font-family: 'Montserat', cursive;
+  font-family: 'Gochi Hand', cursive;
   color: var(--classic-blue);
   font-size: 500%;
 }
