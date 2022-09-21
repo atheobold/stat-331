@@ -1,6 +1,6 @@
 ---
-title: "Recap of R Markdown"
-date: "April 1, 2021"
+title: "Recap of Quarto"
+date: "September 22, 2022"
 author: "Dr. Allison Theobold"
 output:
   xaringan::moon_reader:
@@ -36,14 +36,28 @@ style_duo_accent(
 )
 ```
 
-# What is Markdown?
+class: center, middle
 
-**Markdown** (without the "R") is a *markup language*.  This means special
-symbols and formatting to pretty documents.
+.larger[What is Quarto?]
+
+**Quarto** is an open-source scientific and technical publishing system built on
+Pandoc. You can weave together narrative text and code to produce elegantly
+formatted output as documents, web pages, blog posts, books and more. 
 
 --
 
-Markdown files have the **.md** extension.
+Quarto was developed to be multilingual, beginning with R, Python, Javascript,
+and Julia, with the idea that it will work even for languages that don’t yet
+exist.
+
+--
+
+Quarto is a single “batteries included” consistent system that reflects
+everything we’ve learned from R Markdown over the past 10 years.
+
+--
+
+Quarto files have the **.qmd** extension.
 
 ---
 
@@ -71,7 +85,7 @@ R Markdown files have the **.Rmd** extension.
 <center>
 
 ```{r, echo = FALSE, out.width = "50%"}
-knitr::include_graphics("copy-paste.PNG")
+knitr::include_graphics("images/copy-paste.PNG")
 ```
 
 ---
@@ -81,14 +95,14 @@ knitr::include_graphics("copy-paste.PNG")
 .pull-left[
 
 ```{r, echo = FALSE}
-knitr::include_graphics("no.PNG")
+knitr::include_graphics("images/no.PNG")
 ```
 ]
 
 .pull-right[
 
 ```{r, echo = FALSE, out.width = "80%"}
-knitr::include_graphics("yes.PNG")
+knitr::include_graphics("images/yes.PNG")
 ```
 ]
 
@@ -102,7 +116,7 @@ knitr::include_graphics("yes.PNG")
 
 # YAML
 
-![](yaml.png)
+![](images/yaml.png)
 
 ---
 class: center 
@@ -159,7 +173,7 @@ library(tidyverse)
 
 class: middle 
 
-# Knitting
+# Rendering
 
 To convert your R Markdown file to a beautiful document, click **Knit**.
 
@@ -167,15 +181,15 @@ To convert your R Markdown file to a beautiful document, click **Knit**.
 
 ---
 
-# Knitting a Document
+# Rendering a Document
 
 ![](knitting_process.png)
 
 ---
 
-# Knitting
+# Render
 
-When you click **knit**, here is what happens:
+When you click **Render**, here is what happens:
 
 --
 
@@ -183,7 +197,7 @@ When you click **knit**, here is what happens:
 
 --
 
-- The R code written in your *.Rmd* file gets run.
+- The R code written in your *.qmd* file gets run.
 
     + Any code you ran already doesn't "count"; we start from scratch.
     + The code is run *in order*.
@@ -192,8 +206,8 @@ When you click **knit**, here is what happens:
 
 - A new file is created.
 
-    + If your R Markdown file is called "Lab1.Rmd", then a file called "Lab1.html" will be created.
-    + This will save in the same folder as "Lab1.Rmd".
+    + If your Quarto file is called "Lab1.qmd", then a file called "Lab1.html" will be created.
+    + This will save in the same folder as "Lab1.qmd".
     
 ---
 
