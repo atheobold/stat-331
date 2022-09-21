@@ -61,26 +61,15 @@ Quarto files have the **.qmd** extension.
 
 ---
 
-![](https://d33wubrfki0l68.cloudfront.net/59f29676ef5e4d74685e14f801bbc10c2dbd3cef/c0688/lesson-images/markdown-1-markup.png)
+# Welcome to Quarto! 
+
+![](images/quarto_overview.png)
 
 ---
 
-# What is R Markdown?
-
-**R Markdown** (with the "R") uses regular Markdown, plus it can run and display
-**R** code.  (Other languages, too!)
-
---
-
-R Markdown files have the **.Rmd** extension.
-
 ---
 
-![](https://d33wubrfki0l68.cloudfront.net/ece57b678854545e6602a23daede51ad72da2170/21cca/lesson-images/outputs-1-word.png)
-
----
-
-# Why Use R Markdown? 
+# Why Use Quarto? 
 
 <center>
 
@@ -108,20 +97,19 @@ knitr::include_graphics("images/yes.PNG")
 
 ---
 
-# Components of an R Markdown 
+# Components of a Quarto
 
-![](https://miro.medium.com/max/1200/1*jL-whKGBhuUlU7Q2oevz9w.png)
-
----
-
-# YAML
-
-![](images/yaml.png)
+![](images/quarto_sections.jpeg)
 
 ---
-class: center 
 
-# Issues in YAML 
+.larger[YAML]
+
+![](images/quarto_yaml.png)
+
+--
+
+.larger[Issues in YAML]
 
 </br>
 </br> 
@@ -135,8 +123,8 @@ Execution halted
 
 # Markdown 
 
-**Markdown** (without the "R") is a *markup language*.  This means special
-symbols and formatting to pretty documents.
+**Markdown** is a *markup language*.  This means special symbols and formatting
+to pretty documents.
 
 \*text\* -- makes italics 
 
@@ -175,15 +163,18 @@ class: middle
 
 # Rendering
 
-To convert your R Markdown file to a beautiful document, click **Knit**.
+To convert your Quarto document a beautiful report, click **Render**.
 
-![](https://rstudioblog.files.wordpress.com/2014/06/r-markdown-formats.png)
+![](images/render.png)
+
+![](images/render_on_save.png)
+
 
 ---
 
 # Rendering a Document
 
-![](knitting_process.png)
+![](images/quarto_compile.png)
 
 ---
 
