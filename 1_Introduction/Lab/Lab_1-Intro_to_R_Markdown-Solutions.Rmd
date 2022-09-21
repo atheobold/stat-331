@@ -1,0 +1,87 @@
+---
+title: "Lab 1 Solutions"
+author: "Dr. Theobold"
+output: html_document
+---
+
+# RMarkdown Output Options
+
+```{r setup}
+knitr::opts_chunk$set(echo = TRUE, 
+                      fig.align = "center", 
+                      messages = FALSE)
+```
+
+## Setup
+
+```{r load-libraries-data, include = FALSE}
+library(tidyverse)
+```
+    
+## Car Dataset
+    
+This dataset contains information about the qualities of certain car models made
+in 1999 and 2008.
+    
+It has 234 rows and 11 variables.
+
+## Including Plots
+
+```{r pressure, echo=FALSE}
+plot(pressure, 
+     xlab = "Temperature (deg C)", 
+     ylab = "Pressure (mm)")
+```
+
+## Exploring the Cars Dataset
+
+(The plots below are only one option out of many possibilities, of course.)
+
+### Step 1: Extract the Distances
+
+```{r}
+dist <- cars$dist
+```
+
+### Step 2: Plot the Distribution of Distances
+
+*Distributions* of a single numerical variable are plotted using histograms or 
+density plots
+
+**Option 1**: Using the `hist()` function 
+
+```{r}
+hist(dist, xlab = "Stopping Distance (ft)")
+```
+
+**Option 2**: Using `ggplot()`
+
+```{r}
+dist %>% 
+  as_tibble() %>% 
+  ggplot(mapping = aes(x = value)) + 
+  geom_histogram(binwidth = 10) + 
+  labs(x = "Stopping Distance (ft)")
+```
+
+## Step 3: Stopping distance and Speed
+
+**Option 1**: Using the `plot()` function 
+
+```{r}
+plot(x = cars$speed,
+     y = cars$dist, 
+     xlab = "Stopping Distance (ft)", 
+     ylab = "Speed (mph)")
+```
+
+**Option 2**: Using `ggplot()`
+
+```{r}
+cars %>% 
+  ggplot(mapping = aes(x = speed, y = dist)) + 
+  geom_point() + 
+  labs(x = "Stopping Distance (ft)", 
+       y = "Speed (mph)")
+```
+
