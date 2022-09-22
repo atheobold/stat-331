@@ -43,7 +43,7 @@ For those of you familiar with R Markdown, you might wonder why you should bothe
 
 ##  {#unifies-extends-1 .centered data-menu-title="Unifies and extends 1" background-color="#0F1620" auto-animate="true"}
 
-::: {style="margin-top: 150px; font-size: 3em; color: #75AADB;"}
+::: {style="margin-top: 150px; font-size: 2em; color: #75AADB;"}
 Quarto **unifies** and **extends**<br>the R Markdown ecosystem
 :::
 
@@ -103,7 +103,7 @@ Such a unification effort presents a fantastic opportunity to identify and addre
 
 ##  {.centered data-menu-title="R Markdown ecosystem" background-color="#0F1620" transition="zoom"}
 
-::: {style="margin-top: 100px; font-size: 1.5em; color: #75AADB;"}
+::: {style="margin-top: 100px; font-size: 2em; color: #75AADB;"}
 Quarto highlights
 :::
 
@@ -114,7 +114,10 @@ Quarto highlights
 ::: {.column width="40%"}
 ::: bulletbox
 ::: {.fragment .fade-in-then-semi-out}
-![](images/horst_quarto_ball-1_4.png){width="50px" fig-alt="One quadrant of the Quarto logo."} Consistent implementation of attractive and handy features across outputs: tabsets, code-folding, syntax highlighting, etc.
+::: {style="font-size: 0.6em;"}
+![](images/horst_quarto_ball-1_4.png){width="50px" fig-alt="One quadrant of the Quarto logo."} 
+Consistent implementation of attractive and handy features across outputs: tabsets, code-folding, syntax highlighting, etc.
+:::
 :::
 :::
 :::
@@ -125,7 +128,9 @@ Quarto highlights
 ::: {.column width="40%"}
 ::: bulletbox
 ::: {.fragment .fade-in-then-semi-out}
+::: {style="font-size: 0.60em;"}
 ![](images/horst_quarto_ball-2_4.png){width="50px" fig-alt="Two quadrants of the Quarto logo."} More accessible defaults as well as better support for accessibility
+:::
 :::
 :::
 :::
@@ -141,7 +146,9 @@ Quarto highlights
 ::: {.column width="40%"}
 ::: bulletbox
 ::: {.fragment .fade-in-then-semi-out}
+::: {style="font-size: 0.60em;"}
 ![](images/horst_quarto_ball-3_4.png){width="50px" fig-alt="Three quadrants of the Quarto logo."} Guardrails, particularly helpful for new learners: YAML completion, informative syntax errors, etc.
+:::
 :::
 :::
 :::
@@ -152,7 +159,9 @@ Quarto highlights
 ::: {.column width="40%"}
 ::: bulletbox
 ::: {.fragment .fade-in-then-semi-out}
+::: {style="font-size: 0.6em;"}
 ![](images/horst_quarto_ball-4_4.png){width="50px" fig-alt="Four quadrants of the Quarto logo."} Support for other languages like Python, Julia, Observable, and more via Jupyter engine for executable code chunks.
+:::
 :::
 :::
 :::
@@ -295,19 +304,17 @@ Formatting the text in your document
 **Markdown** is a *markup language*. This means special symbols and formatting to pretty documents.
 :::
 
-::: {columns}
-::: {.column width="40%"}
 ::: fragment
+::: columns
+::: {.column width="45%"}
 \*text\* -- makes italics
 
 \*\*text\*\* -- makes bold text
 
 \# -- makes headers
 :::
-:::
 
-::: {.column width="40%"}
-::: fragment
+::: {.column width="35%"}
 !\[ \]( ) -- includes images or HTML links
 
 \< \> -- embeds URLs
@@ -315,10 +322,11 @@ Formatting the text in your document
 :::
 :::
 
+
 ##  {#insert-code .centered data-menu-title="R code" background-color="#0F1620" auto-animate="true"}
 
 ::: {style="margin-top: 100px; font-size: 2.2em; color: #75AADB"}
-Including R code
+R code options
 :::
 
 ::: fragment
@@ -331,17 +339,10 @@ Including R code
 The Hash Pipe
 :::
 
-::: {columns}
-::: {.column width="40%"}
 ::: sourceCode
 `#|`
 :::
-:::
-
-::: {.column width="40%"}
 ![](images/weezer.jpeg)
-:::
-:::
 
 ##  {#render .centered data-menu-title="Render" background-color="#0F1620" auto-animate="true"}
 
