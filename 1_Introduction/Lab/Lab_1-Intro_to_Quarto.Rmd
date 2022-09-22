@@ -217,9 +217,9 @@ course.
 3.  Specify a figure caption in the above code chunk (plot of the
     `pressure` data).
 
-4.  In the code chunk created in
-    (\@sec-creating-and-discussing-visualizations), specify the figures
-    should be printed side-by-side (in two columns).
+4.  In the code chunk created in **Creating and Discussing
+    Visualizations**, specify the figures should be printed side-by-side
+    (in two columns).
 
 5.  Now, make **at least one** additional modification to your Quarto
     document. Make sure you explicitly state which tip you tried; for
