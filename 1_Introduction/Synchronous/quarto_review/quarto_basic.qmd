@@ -1,0 +1,391 @@
+---
+format: revealjs
+editor: visual
+---
+
+# Hello Quarto? {.title-top-light background-image="images/horst-quarto-meteor.png" aria-label="A meteor where the head of the meteor is the Quarto logo."}
+
+##  {#report-1 .centered data-menu-title="Report 1" background-color="#0F1620" auto-animate="true"}
+
+::: {style="margin-top: 100px; font-size: 2.2em; color: #75AADB"}
+Why use Quarto?
+:::
+
+::: columns
+::: {.column width="33%"}
+::: bulletbox
+::: {.fragment .fade-in-then-semi-out}
+![](images/copy-paste.PNG)
+:::
+:::
+:::
+
+::: {.column width="33%"}
+::: bulletbox
+::: {.fragment .fade-in-then-semi-out}
+![](images/no.PNG)
+:::
+:::
+:::
+
+::: {.column width="33%"}
+::: bulletbox
+::: {.fragment .fade-in-then-semi-out}
+![](images/yes.PNG)
+:::
+:::
+:::
+:::
+
+::: notes
+For those of you familiar with R Markdown, you might wonder why you should bother transitioning to Quarto. Let me tell you more about why!
+:::
+
+##  {#unifies-extends-1 .centered data-menu-title="Unifies and extends 1" background-color="#0F1620" auto-animate="true"}
+
+::: {style="margin-top: 150px; font-size: 3em; color: #75AADB;"}
+Quarto **unifies** and **extends**<br>the R Markdown ecosystem
+:::
+
+##  {#unifies-extends-2 .centered data-menu-title="Unifies and extends 2" background-color="#0F1620" auto-animate="true"}
+
+::: {style="margin-top: 100px; font-size: 2.2em; color: #75AADB"}
+Quarto **unifies** and **extends** <br>the R Markdown ecosystem
+:::
+
+<br>
+
+::: large
+**unifies** for people who love R Markdown
+:::
+
+<br>
+
+::: {.fragment .fade-up .large fragment-index="2"}
+**extends** for people who don't know R Markdown
+:::
+
+::: notes
+It unifies it for people who love R Markdown by reducing little points of friction, so that websites, books, and slides all have a common approach.
+
+And it extends it for people who don't know RMarkdown by being a friendly way to work reproducibly and publish documents that have text and code in the same place
+:::
+
+##  {#ecosystem .centered data-menu-title="R Markdown ecosystem" background-color="#0F1620" auto-animate="true"}
+
+::: {style="margin-top: 100px; font-size: 2em; color: #75AADB;"}
+The R Markdown ecosystem
+:::
+
+![](images/rmd_ecosystem.png){fig-align="center" fig-alt="Hex logos for various packages from the R Markdown ecosystem."}
+
+::: notes
+Think of all the packages from the R Markdown universe that you've come to love and rely on over the years. Each package addresses a different need and offers a different output: for example, you can use blogdown or distill for creating websites and blogs, bookdown for writing a book, rticles for writing journal articles, etc.
+:::
+
+##  {.centered data-menu-title="R Markdown ecosystem" background-color="#0F1620" transition="zoom"}
+
+::: {style="margin-top: 100px; font-size: 1.5em; color: #75AADB;"}
+Quarto: Next generation R Markdown
+:::
+
+![](images/horst_quarto_ball_straight.png){fig-align="center" width="50%" fig-alt="Quarto logo."}
+
+::: notes
+Quarto unifies the functionality from these packages,
+
+building on Pandoc on the technical side
+
+and on the human side -- over a decade of experience developing, maintaining, and tweaking these packages as well as community feedback R Markdown extension packages.
+
+Such a unification effort presents a fantastic opportunity to identify and address gaps functionality and inefficiencies in user experience, and the process of building Quarto has been no different.
+:::
+
+##  {.centered data-menu-title="R Markdown ecosystem" background-color="#0F1620" transition="zoom"}
+
+::: {style="margin-top: 100px; font-size: 1.5em; color: #75AADB;"}
+Quarto highlights
+:::
+
+::: columns
+::: {.column width="5%"}
+:::
+
+::: {.column width="40%"}
+::: bulletbox
+::: {.fragment .fade-in-then-semi-out}
+![](images/horst_quarto_ball-1_4.png){width="50px" fig-alt="One quadrant of the Quarto logo."} Consistent implementation of attractive and handy features across outputs: tabsets, code-folding, syntax highlighting, etc.
+:::
+:::
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="40%"}
+::: bulletbox
+::: {.fragment .fade-in-then-semi-out}
+![](images/horst_quarto_ball-2_4.png){width="50px" fig-alt="Two quadrants of the Quarto logo."} More accessible defaults as well as better support for accessibility
+:::
+:::
+:::
+
+::: {.column width="5%"}
+:::
+:::
+
+::: columns
+::: {.column width="5%"}
+:::
+
+::: {.column width="40%"}
+::: bulletbox
+::: {.fragment .fade-in-then-semi-out}
+![](images/horst_quarto_ball-3_4.png){width="50px" fig-alt="Three quadrants of the Quarto logo."} Guardrails, particularly helpful for new learners: YAML completion, informative syntax errors, etc.
+:::
+:::
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="40%"}
+::: bulletbox
+::: {.fragment .fade-in-then-semi-out}
+![](images/horst_quarto_ball-4_4.png){width="50px" fig-alt="Four quadrants of the Quarto logo."} Support for other languages like Python, Julia, Observable, and more via Jupyter engine for executable code chunks.
+:::
+:::
+:::
+
+::: {.column width="5%"}
+:::
+:::
+
+::: notes
+Some highlights of these improvements include
+
+--\> consistent implementation of attractive and handy features across *all* outputs, like tabsets, code-folding, and syntax highlighting,
+
+--\> more accessible defaults as well as better support for creating accessible documents,
+
+--\> guardrails that are particularly helpful for new learners, like YAML completion and informative syntax errors,
+
+--\> and perhaps most excitingly for those who are not coming from the R ecosystem, Quarto offers support for other languages like Python, Julia, Observable, and more via the Jupyter engine for executable code chunks. And it's designed to be expandable to more engines and languages, even those that might not exist today.
+
+\[pause\] So by now I'm assuming many of you have already started playing with Quarto, or you're waiting for me to do that. So, let's dive in and see what all the Quarto fuss is about!
+:::
+
+##  {#CLI .centered data-menu-title="Quarto CLI" background-color="#0F1620"}
+
+::: {style="margin-top: 100px; font-size: 2em; color: #75AADB;"}
+Quarto CLI orchestrates each step of rendering
+:::
+
+::: {.fragment .fade-up}
+![](images/horst_qmd_render_schema.png){fig-alt="A schematic representing rendering of Quarto documents from .qmd, to knitr or jupyter, to plain text markdown, then converted by pandoc into any number of output types including html, PDF, or Word document." fig-align="center"}
+:::
+
+::: notes
+Now that you've all had a chance to see Quarto in action, you might be wondering, "how are R Markdown and Quarto different"?
+
+The main difference is that with R Markdown, the R package rmarkdown does the heavy lifting of going from the source Rmd file to the the output, using knitr for evaluating the code chunks.
+
+--\> With Quarto, on the other hand, the Quarto command line interface, or the Quarto CLI, does the orchestration of processing executable code chunks with either knitr or jupyter and then converting the resulting markdown file to the desired output.
+
+While this is technically impressive, I'll be honest, it's not exactly what sparked my interest in Quarto in the first place.
+:::
+
+##  {#change-formats .centered data-menu-title="Change formats" background-color="#0F1620"}
+
+::: {style="margin-top: 100px; font-size: 2em; color: #75AADB;"}
+Quarto makes moving between formats straightforward
+:::
+
+::: columns
+::: {.column width="33%"}
+::: fragment
+Document
+
+::: {.code-file .sourceCode .cell-code}
+{{< fa file >}} lesson-1.qmd
+:::
+
+``` yaml
+title: "Lesson 1"
+format: html
+```
+:::
+:::
+
+::: {.column width="33%"}
+::: fragment
+Presentation
+
+::: {.code-file .sourceCode .cell-code}
+{{< fa file >}} lesson-1.qmd
+:::
+
+``` yaml
+title: "Lesson 1"
+format: revealjs
+```
+:::
+:::
+
+::: {.column width="33%"}
+::: fragment
+Website
+
+::: {.code-file .sourceCode .cell-code}
+{{< fa file >}} _quarto.yml
+:::
+
+``` yaml
+project:
+  type: website
+
+website: 
+  navbar: 
+    left:
+      - lesson-1.qmd
+```
+:::
+:::
+:::
+
+::: notes
+What did spark my interest was how how straightforward it is with Quarto to move between output formats.
+
+As an educator, two things are of utmost importance to me about the tools I use to create my materials: reproducibility and ease of transition between output formats, like documents to slides to websites to books.
+
+Over the last year of using Quarto for pretty much everything, I've felt like I've finally found the tool that lets me go from one output type to the other with minimal, if any, futzing around with my source code beyond the yaml.
+For example, here are common things I produce
+
+--\> a lesson in document form <br>
+--\> the same content in presentation form <br>
+--\> the same content on a page in a website,
+
+and you can see that all that needed to change going between these formats is a few lines in the yaml.
+Nothing in the content part of my document.
+No slide breaks to remove, no citation style to change, no headings to re-level.
+This ease of transition has freed up time to focus my time on content, and that, folks, is the dream!
+:::
+
+
+
+
+##  {#preview .centered data-menu-title="Quarto preview" background-color="#0F1620" auto-animate="true"}
+
+::: {style="margin-top: 100px; font-size: 2.2em; color: #75AADB"}
+Welcome to Quarto! 
+:::
+
+::: columns
+
+::: {.column width="100%"}
+![](images/quarto_overview.png)
+:::
+:::
+
+##  {#components .centered data-menu-title="Quarto components" background-color="#0F1620" auto-animate="true"}
+
+::: {style="margin-top: 100px; font-size: 2.2em; color: #75AADB"}
+Components of a Quarto
+:::
+
+![](images/quarto_sections.jpeg){width="80%"}
+
+##  {#formatting-text .centered data-menu-title="Markdown" background-color="#0F1620" auto-animate="true"}
+
+::: {style="margin-top: 100px; font-size: 2.2em; color: #75AADB"}
+Formatting the text in your document
+:::
+
+::: {.fragment .fade-up}
+**Markdown** is a *markup language*.  This means special symbols and formatting to pretty documents.
+:::
+
+::: {columns}
+
+::: {.column width="40%"}
+::: fragment
+
+\*text\* -- makes italics 
+
+\*\*text\*\* -- makes bold text
+
+\# -- makes headers 
+:::
+:::
+
+::: {.column width="40%"}
+::: fragment
+
+\!\[ \]( ) -- includes images or HTML links
+
+< > -- embeds URLs
+:::
+:::
+:::
+
+##  {#insert-code .centered data-menu-title="R code" background-color="#0F1620" auto-animate="true"}
+
+::: {style="margin-top: 100px; font-size: 2.2em; color: #75AADB"}
+Including R code
+:::
+
+::: fragment
+![](images/quarto_code_options.png)
+:::
+
+##  {#hash-pipe .centered data-menu-title="Hashpipe" background-color="#0F1620" auto-animate="true"}
+
+::: {style="margin-top: 100px; font-size: 2.2em; color: #75AADB"}
+The Hash Pipe
+:::
+
+::: {columns}
+
+::: {.column width="40%"}
+::: {.sourceCode}
+`#|`
+:::
+:::
+
+::: {.column width="40%"}
+![](images/weezer.jpeg)
+:::
+:::
+
+##  {#render .centered data-menu-title="Render" background-color="#0F1620" auto-animate="true"}
+
+::: {style="margin-top: 100px; font-size: 2.2em; color: #75AADB"}
+Rendering your document
+:::
+
+::: {.fragment .fade-right}
+![](images/render.png)
+:::
+
+::: {.fragment .fade-left}
+![](images/render_on_save.png)
+:::
+
+::: notes
+When you click **Render**, here is what happens:
+
+- Your file is saved.
+- The R code written in your *.qmd* file gets run.
+    + Any code you ran already doesn't "count"; we start from scratch.
+    + The code is run *in order*.
+- A new file is created.
+    + If your Quarto file is called "Lab1.qmd", then a file called "Lab1.html" will be created.
+    + This will save in the same folder as "Lab1.qmd".
+:::
+
+
+##  {#try-it .centered data-menu-title="Try it" background-color="#0F1620" auto-animate="true"}
+
+::: {style="margin-top: 150px; font-size: 5em; color: #75AADB;"}
+Let's try it!
+:::

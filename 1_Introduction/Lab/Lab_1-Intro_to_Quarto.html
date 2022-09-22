@@ -66,8 +66,6 @@ code span.ot { color: #007020; }
 
 
 
-<p><strong>This Lab 1 option is for those who wish to create a Quarto
-document.</strong></p>
 <div id="setup" class="section level2">
 <h2>Setup</h2>
 <div id="make-a-stat-331-and-lab-1-folder" class="section level3">
@@ -107,11 +105,10 @@ document is.</p></li>
 <h2>Lab Instructions</h2>
 <div id="changing-the-execution-options" class="section level3">
 <h3>Changing the Execution Options</h3>
-<p>As I said in the coursework video (&lt; &gt;), we use execution
-options to specify how the R code in your Quarto document should be
-displayed. This guide <a href="https://quarto.org/docs/computations/execution-options.html" class="uri">https://quarto.org/docs/computations/execution-options.html</a>
-provides more descriptions on what option you can specify in the
-execution options.</p>
+<p>Execution options specify how the R code in your Quarto document
+should be displayed. This guide <a href="https://quarto.org/docs/computations/execution-options.html" class="uri">https://quarto.org/docs/computations/execution-options.html</a>
+provides descriptions on the options you can specify in a document’s
+execution.</p>
 <p>To start, your YAML should look something like this:</p>
 <p><img src="data:image/png;base64,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" /></p>
 <p>Similar to what you did before adding an <code>author</code> line,
@@ -130,18 +127,19 @@ YAML.</p>
 chunk. Alternatively, you can highlight the code you want to run and
 type <kbd>ctrl</kbd> + <kbd>Enter</kbd> or <kbd>⌘&lt;</kbd> +
 <kbd>Enter</kbd>.</p>
-<p>This code should output the sum of of <code>1 + 1</code>. Not an
-incredibly exciting result, but the output should make sense!</p>
-<p>Let’s spice this code up a bit. Where you used to see
-<code>1 + 1</code> write the following code:
-<code>summary(cars)</code></p>
+<p>You should see the code appear in the console, as well as the result
+of the code (<code>2</code>). Keep in mind the <code>[1]</code> before
+the <code>2</code> is vector notation. This means the result is a
+<em>vector</em> of length 1, whose first element is <code>2</code>.</p>
+<p>Let’s spice this code up a bit. Delete <code>1 + 1</code> from the
+code chunk and write the following code: <code>summary(cars)</code></p>
 <p>Now run this code. You should see a six-number summary of the
 variables <code>speed</code> and <code>dist</code> included in the
 <code>cars</code> dataset. However, if you inspect environment tab, the
 <code>cars</code> dataset should not appear!</p>
 <div id="check-the-data-documentation" class="section level3">
 <h3>Check the data documentation</h3>
-<p>In your <strong>console</strong> (<em>NOT</em> in the Quarto
+<p>In your <strong>console</strong> (<em>not</em> in the Quarto
 document), type <code>?cars</code>.</p>
 <p>Use the information that pops up in your <em>Help</em> pane in
 RStudio to fill in the blanks below. Add the questions and your
@@ -155,7 +153,7 @@ collected in ____.</em></p>
 </center>
 </div>
 </div>
-<div id="creating-a-plot" class="section level2">
+<div id="sec-creating-a-plot" class="section level2">
 <h2>Creating a Plot</h2>
 <p>Your second code chunk is just as boring as your first, so let’s
 spice it up! Replace the <code>2 * 2</code> code with the following:
@@ -166,29 +164,32 @@ the <code>pressure</code> dataset.</p>
 <p>Similar to what you did before with the <code>cars</code> dataset,
 look up the help file on the <code>pressure</code> dataset to determine
 what units <code>temperature</code> and <code>pressure</code> were
-measured in. Next, look up the help file on the <code>plot()</code>
-function to find the arguments you can use to specify the x- and y-axis
-labels.</p>
-<p>Change the x-axis and y-axis labels to reflect the units of the
-measurements. Create another section header (like you did before)
-stating what is included in this section.</p>
+measured in.</p>
+<p>Next, look up the help file on the <code>plot()</code> function to
+find the arguments you can use to specify the x- and y-axis labels.
+Change the x-axis and y-axis labels to reflect the units of measurement
+you found in the <code>pressure</code> help file.</p>
+<p>Create another section header (like you did before) stating what is
+included in this section.</p>
 <div id="inserting-a-new-code-chunk" class="section level3">
 <h3>Inserting a New Code Chunk</h3>
-<p>After the last sentence of the file, insert a new <code>R</code> code
-chunk. There are three different ways to do this:</p>
+<p>Navigate to the last sentence of the Quarto document, we’re going to
+insert a new <code>R</code> code chunk at the bottom of the
+document.</p>
+<p>There are three different ways to do this:</p>
 <ol style="list-style-type: decimal">
 <li><p>type <kbd>ctrl</kbd> + <kbd>alt</kbd> + <kbd>i</kbd> on Windows,
 or <kbd>⌘</kbd> + <kbd>⌥</kbd> + <kbd>i</kbd> on macOS,</p></li>
 <li><p>Click on the <img src="data:image/png;base64,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" /> symbol. This
 should automatically default to R code, but if you have a Python
-compiler on your computer, you might need to select R code from the
+compiler on your computer, you might need to select “R” from the
 options.</p></li>
 <li><p>If you are using the Visual editor (isn’t it fun?!), then click
 on the “Insert” button, then select “Code Chunk”, and finally select
 “R”.</p></li>
 </ol>
 </div>
-<div id="creating-and-discussing-visualizations" class="section level3">
+<div id="sec-creating-and-discussing-visualizations" class="section level3">
 <h3>Creating and Discussing Visualizations</h3>
 <p>Now, in the code chunk you just created, carry out the following
 steps:</p>
@@ -198,18 +199,18 @@ dataset (remember how we did this in the Practice Activity) and save it
 into a new object named <code>dist</code>.</p></li>
 <li><p>Step 2: Plot the distribution of the stopping distances
 (contained in <code>dist</code>).<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p></li>
-<li><p>Step 3: Create a second plot, visualizing the relationship
-between the stopping distance and speed.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p></li>
+<li><p>Step 3: Create a second plot, a scatterplot, visualizing the
+relationship between the stopping distance and speed.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p></li>
 </ul>
-<p>To earn a “Success”, make sure your plots have reasonable axis
-labels. For example, if you use the <code>dist</code> variable, your
-axis should say “Stopping Distance” with the correct units not just
+<p>To earn a “Success” on your plots, make sure each plot has reasonable
+axis labels. For example, if you use the <code>dist</code> variable,
+your axis should say “Stopping Distance” with the correct units not just
 “dist”.</p>
 <ul>
 <li><p>Step 4: Create another section header, describing the contents of
 this section.</p></li>
 <li><p>Step 5: Create a numbered list of two aspects of the plots you
-wish you could improve.</p></li>
+would like to improve.</p></li>
 </ul>
 </div>
 <div id="knit-your-document" class="section level3">
@@ -236,17 +237,28 @@ and Challenges. Each of these will involve an R Markdown file.</p>
 <h2>Challenge:</h2>
 <div id="styling-quarto-documents" class="section level3">
 <h3>Styling Quarto Documents</h3>
-<p><a href="https://quarto.org/docs/output-formats/html-basics.html" class="uri">https://quarto.org/docs/output-formats/html-basics.html</a></p>
+<p>You can find a list of every option you can use to format an HTML
+document <a href="https://quarto.org/docs/output-formats/html-basics.html">here</a></p>
+<p><a href="https://quarto.org/docs/output-formats/html-themes.html">Here</a>
+are lists of different themes you can specify in your YAML which will
+produce different stylings.</p>
+<p>For this Challenge, there are some specific additions to your
+document I would like you to make, as they will benefit you for the rest
+of the course.</p>
 <ol style="list-style-type: decimal">
-<li><p>Read through <a href="https://holtzy.github.io/Pimp-my-rmd/">this
-guide</a>, and make sure to check out the <a href="https://holtzy.github.io/Pimp-my-rmd/#theme">themes</a> and <a href="https://holtzy.github.io/Pimp-my-rmd/#template">templates</a>
-sections.</p></li>
-<li><p>Change your Lab 1 R Markdown document to use a new theme or
-template.</p></li>
-<li><p>Use <strong>at least two</strong> other tips in the guide. Make
-sure you explicitly state which tip you tried; for example, you might
-write “Here is an example of a figure with a caption:” and then show the
-figure.</p></li>
+<li><p>Specify “code folding” in your document options</p></li>
+<li><p>Specify in the code chunk options that your plot of the
+<code>pressure</code> dataset (@sec-creating-a-plot) should be center
+aligned.</p></li>
+<li><p>Specify a figure caption in the above code chunk
+(@sec-creating-a-plot).</p></li>
+<li><p>In the code chunk created in
+(@sec-creating-and-discussing-visualizations), specify the figures
+should be printed side-by-side (in two columns).</p></li>
+<li><p>Now, make <strong>at least one</strong> additional modification
+to your Quarto document. Make sure you explicitly state which tip you
+tried; for example, you might write “Here is an example of alt text:”
+followed by your alt text description.</p></li>
 <li><p>Upload your knitted (.html) document to the Challenge 1
 assignment on Canvas.</p></li>
 </ol>
