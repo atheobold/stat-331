@@ -43,7 +43,7 @@ For those of you familiar with R Markdown, you might wonder why you should bothe
 
 ##  {#unifies-extends-1 .centered data-menu-title="Unifies and extends 1" background-color="#0F1620" auto-animate="true"}
 
-::: {style="margin-top: 150px; font-size: 3em; color: #75AADB;"}
+::: {style="margin-top: 150px; font-size: 2em; color: #75AADB;"}
 Quarto **unifies** and **extends**<br>the R Markdown ecosystem
 :::
 
@@ -103,7 +103,7 @@ Such a unification effort presents a fantastic opportunity to identify and addre
 
 ##  {.centered data-menu-title="R Markdown ecosystem" background-color="#0F1620" transition="zoom"}
 
-::: {style="margin-top: 100px; font-size: 1.5em; color: #75AADB;"}
+::: {style="margin-top: 100px; font-size: 2em; color: #75AADB;"}
 Quarto highlights
 :::
 
@@ -114,7 +114,10 @@ Quarto highlights
 ::: {.column width="40%"}
 ::: bulletbox
 ::: {.fragment .fade-in-then-semi-out}
-![](images/horst_quarto_ball-1_4.png){width="50px" fig-alt="One quadrant of the Quarto logo."} Consistent implementation of attractive and handy features across outputs: tabsets, code-folding, syntax highlighting, etc.
+::: {style="font-size: 0.6em;"}
+![](images/horst_quarto_ball-1_4.png){width="50px" fig-alt="One quadrant of the Quarto logo."} 
+Consistent implementation of attractive and handy features across outputs: tabsets, code-folding, syntax highlighting, etc.
+:::
 :::
 :::
 :::
@@ -125,7 +128,9 @@ Quarto highlights
 ::: {.column width="40%"}
 ::: bulletbox
 ::: {.fragment .fade-in-then-semi-out}
+::: {style="font-size: 0.60em;"}
 ![](images/horst_quarto_ball-2_4.png){width="50px" fig-alt="Two quadrants of the Quarto logo."} More accessible defaults as well as better support for accessibility
+:::
 :::
 :::
 :::
@@ -141,7 +146,9 @@ Quarto highlights
 ::: {.column width="40%"}
 ::: bulletbox
 ::: {.fragment .fade-in-then-semi-out}
+::: {style="font-size: 0.60em;"}
 ![](images/horst_quarto_ball-3_4.png){width="50px" fig-alt="Three quadrants of the Quarto logo."} Guardrails, particularly helpful for new learners: YAML completion, informative syntax errors, etc.
+:::
 :::
 :::
 :::
@@ -152,7 +159,9 @@ Quarto highlights
 ::: {.column width="40%"}
 ::: bulletbox
 ::: {.fragment .fade-in-then-semi-out}
+::: {style="font-size: 0.6em;"}
 ![](images/horst_quarto_ball-4_4.png){width="50px" fig-alt="Four quadrants of the Quarto logo."} Support for other languages like Python, Julia, Observable, and more via Jupyter engine for executable code chunks.
+:::
 :::
 :::
 :::
@@ -258,30 +267,20 @@ What did spark my interest was how how straightforward it is with Quarto to move
 
 As an educator, two things are of utmost importance to me about the tools I use to create my materials: reproducibility and ease of transition between output formats, like documents to slides to websites to books.
 
-Over the last year of using Quarto for pretty much everything, I've felt like I've finally found the tool that lets me go from one output type to the other with minimal, if any, futzing around with my source code beyond the yaml.
-For example, here are common things I produce
+Over the last year of using Quarto for pretty much everything, I've felt like I've finally found the tool that lets me go from one output type to the other with minimal, if any, futzing around with my source code beyond the yaml. For example, here are common things I produce
 
---\> a lesson in document form <br>
---\> the same content in presentation form <br>
---\> the same content on a page in a website,
+--\> a lesson in document form <br> --\> the same content in presentation form <br> --\> the same content on a page in a website,
 
-and you can see that all that needed to change going between these formats is a few lines in the yaml.
-Nothing in the content part of my document.
-No slide breaks to remove, no citation style to change, no headings to re-level.
-This ease of transition has freed up time to focus my time on content, and that, folks, is the dream!
+and you can see that all that needed to change going between these formats is a few lines in the yaml. Nothing in the content part of my document. No slide breaks to remove, no citation style to change, no headings to re-level. This ease of transition has freed up time to focus my time on content, and that, folks, is the dream!
 :::
-
-
-
 
 ##  {#preview .centered data-menu-title="Quarto preview" background-color="#0F1620" auto-animate="true"}
 
 ::: {style="margin-top: 100px; font-size: 2.2em; color: #75AADB"}
-Welcome to Quarto! 
+Welcome to Quarto!
 :::
 
 ::: columns
-
 ::: {.column width="100%"}
 ![](images/quarto_overview.png)
 :::
@@ -302,36 +301,32 @@ Formatting the text in your document
 :::
 
 ::: {.fragment .fade-up}
-**Markdown** is a *markup language*.  This means special symbols and formatting to pretty documents.
+**Markdown** is a *markup language*. This means special symbols and formatting to pretty documents.
 :::
 
-::: {columns}
-
-::: {.column width="40%"}
 ::: fragment
-
-\*text\* -- makes italics 
+::: columns
+::: {.column width="45%"}
+\*text\* -- makes italics
 
 \*\*text\*\* -- makes bold text
 
-\# -- makes headers 
+\# -- makes headers
+:::
+
+::: {.column width="35%"}
+!\[ \]( ) -- includes images or HTML links
+
+\< \> -- embeds URLs
+:::
 :::
 :::
 
-::: {.column width="40%"}
-::: fragment
-
-\!\[ \]( ) -- includes images or HTML links
-
-< > -- embeds URLs
-:::
-:::
-:::
 
 ##  {#insert-code .centered data-menu-title="R code" background-color="#0F1620" auto-animate="true"}
 
 ::: {style="margin-top: 100px; font-size: 2.2em; color: #75AADB"}
-Including R code
+R code options
 :::
 
 ::: fragment
@@ -344,18 +339,10 @@ Including R code
 The Hash Pipe
 :::
 
-::: {columns}
-
-::: {.column width="40%"}
-::: {.sourceCode}
+::: sourceCode
 `#|`
 :::
-:::
-
-::: {.column width="40%"}
 ![](images/weezer.jpeg)
-:::
-:::
 
 ##  {#render .centered data-menu-title="Render" background-color="#0F1620" auto-animate="true"}
 
@@ -374,15 +361,14 @@ Rendering your document
 ::: notes
 When you click **Render**, here is what happens:
 
-- Your file is saved.
-- The R code written in your *.qmd* file gets run.
-    + Any code you ran already doesn't "count"; we start from scratch.
-    + The code is run *in order*.
-- A new file is created.
-    + If your Quarto file is called "Lab1.qmd", then a file called "Lab1.html" will be created.
-    + This will save in the same folder as "Lab1.qmd".
+-   Your file is saved.
+-   The R code written in your *.qmd* file gets run.
+    -   Any code you ran already doesn't "count"; we start from scratch.
+    -   The code is run *in order*.
+-   A new file is created.
+    -   If your Quarto file is called "Lab1.qmd", then a file called "Lab1.html" will be created.
+    -   This will save in the same folder as "Lab1.qmd".
 :::
-
 
 ##  {#try-it .centered data-menu-title="Try it" background-color="#0F1620" auto-animate="true"}
 
