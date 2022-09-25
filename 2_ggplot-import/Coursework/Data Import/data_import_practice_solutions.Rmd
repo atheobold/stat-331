@@ -13,17 +13,18 @@ library(here)
 
 <center> 
 
-![**Dr. Theobold's Rproject folder**](images/folder 1.png)
+![**Dr. Theobold's RStudio project folder**](images/folder 1.png)
 
 </br>
 
-![**Dr. Theobold's folders for Stat 331 Materials**](images/folder 2.png)
+![**Dr. Theobold's folders for Week 2 Stat 331 Materials**](images/folder 2.png)
 </br>
 
-![](images/folder 3.png)
+![**Dr. Theobold's folders for Week 2 Coursework Materials**](images/folder 3.png)
+
 </br>
 
-![](images/folder 4.png)
+![**Dr. Theobold's materials for Data Import**](images/folder 4.png)
 
 </br>
 
