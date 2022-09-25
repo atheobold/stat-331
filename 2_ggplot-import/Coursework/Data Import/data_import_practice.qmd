@@ -1,0 +1,49 @@
+---
+title: "Data Import Practice"
+format: html
+editor: visual
+---
+
+## Step 1: Read in the dataset `ages.csv`.
+
+```{r}
+# Code to read in the ages.csv data goes here! 
+
+
+```
+
+## Step 2: Read in the dataset `ages_tab.txt`
+
+```{r}
+# Code to read in the ages_tab.txt data goes here! 
+
+
+```
+
+## Step 3: Read in the dataset `ages_mystery.txt`
+
+```{r}
+# Code to read in the ages_mystery.txt data goes here! 
+
+
+```
+
+## Step 4: Read in the dataset `ages.xlsx`
+
+```{r}
+# Code to read in the ages.xlsx data goes here! 
+
+
+```
+
+## Step 5: Both `read.csv` and `read.table` have an optional argument called `stringsAsFactors`. Figure out what this does.
+
+## Step 6: Find a way to use `read_csv()` to read `ages.csv` with the variable "Name" as a factor and "Age" as a character.
+
+```{r}
+# Code to read in the ages.csv with "Name" as a factor and "Age" as a character goes here! 
+
+
+```
+
+------------------------------------------------------------------------
