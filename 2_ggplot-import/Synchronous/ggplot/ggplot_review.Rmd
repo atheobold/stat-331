@@ -1,6 +1,6 @@
 ---
 title: "Recap of Data Visualization with ggplot2"
-date: "January 10, 2022"
+date: "September 27, 2022"
 author: "Dr. Allison Theobold"
 output:
   xaringan::moon_reader:
