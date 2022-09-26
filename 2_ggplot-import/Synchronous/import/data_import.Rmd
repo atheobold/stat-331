@@ -43,7 +43,7 @@ class: inverse
 
 --
 
-- Should be how you open RStudio **every time**
+- Should be how you work in RStudio **every time**
 
 ---
 

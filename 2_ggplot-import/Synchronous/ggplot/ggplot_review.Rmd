@@ -75,20 +75,14 @@ class: center
 
 .larger[Histogram]
 
-.pull-left[
 ```{r, message = FALSE, fig.height = 4, fig.width = 5, warning = FALSE, fig.align = 'center'}
-ggplot(data = penguins, 
-       mapping = aes(x = bill_length_mm)) + 
+ggplot(data = penguins, mapping = aes(x = bill_length_mm)) + 
   geom_histogram()
 ```
-]
 
 --
 
-</br>
-</br>
-
-.pull-right[Is this aesthetic *global* or *local*?]
+Is this aesthetic *global* or *local*?
 
 ---
 
@@ -119,7 +113,7 @@ class: center
 .larger[Boxplot]
 
 .pull-left[
-```{r, fig.width = 5, fig.height = 4}
+```{r, fig.width = 5, fig.height = 3.5}
 ggplot(data = penguins, 
        mapping = aes(x = bill_length_mm)) + 
   geom_boxplot()
@@ -189,7 +183,7 @@ class: center
 .bitlarger[Side-by-Side Boxplots]
 
 .pull-left[
-```{r, fig.width = 6, fig.height = 5, fig.align = "center"}
+```{r, fig.width = 6, fig.height = 3.5, fig.align = "center"}
 ggplot(data = penguins, 
        mapping = aes(y = bill_length_mm,
                      x = species)) + 
@@ -198,10 +192,12 @@ ggplot(data = penguins,
 ]
 
 .pull-right[
-</br>
-</br>
-
-Can stack vertically (with categorical variable on `y`-axis) **or** horizontally (with categorical variable on `x`-axis)
+```{r, fig.width = 6, fig.height = 3.5, fig.align = "center"}
+ggplot(data = penguins, 
+       mapping = aes(x = bill_length_mm,
+                     y = species)) + 
+  geom_boxplot()
+```
 ]
 
 ---
@@ -254,11 +250,12 @@ class: center
 
 .bitlarger[Colors in Scatterplots]
 
-```{r, fig.width = 6, fig.height = 4, fig.align = 'center'}
+```{r, fig.width = 6, fig.height = 4.5, fig.align = 'center'}
 ggplot(data = penguins, 
        mapping = aes(y = bill_length_mm, 
                      x = bill_depth_mm, 
-                     color = species)) + 
+                     color = species)
+       ) + 
   geom_point()
 ```
 
@@ -268,11 +265,12 @@ class: center
 
 .bitlarger[Colors in Boxplots]
 
-```{r, fig.width = 6, fig.height = 4, fig.align = 'center'}
+```{r, fig.width = 6, fig.height = 4.5, fig.align = 'center'}
 ggplot(data = penguins, 
        mapping = aes(y = bill_length_mm, 
                      x = species, 
-                     color = sex)) + 
+                     color = sex)
+       ) + 
   geom_boxplot()
 ```
 
@@ -282,7 +280,7 @@ class: center
 
 .bitlarger[Facets in Scatterplots] 
 
-```{r, fig.width = 8, fig.height = 4, fig.align = 'center'}
+```{r, fig.width = 8, fig.height = 4.5, fig.align = 'center'}
 ggplot(data = penguins, 
        mapping = aes(y = bill_length_mm, 
                      x = bill_depth_mm, 
@@ -297,7 +295,7 @@ class: center
 
 .bitlarger[Facets in Boxplots]
 
-```{r, fig.width = 8, fig.height = 4, fig.align = 'center'}
+```{r, fig.width = 8, fig.height = 4.5, fig.align = 'center'}
 ggplot(data = penguins, 
        mapping = aes(x = bill_length_mm,
                      y = species,
