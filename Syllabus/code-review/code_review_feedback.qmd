@@ -20,7 +20,7 @@ Writing "tidy" and "efficient" code are two of the learning targets for this cou
 
 What does it mean to have "tidy" code? I would consider code to be "tidy" if it follows the [tidyverse style guide](https://style.tidyverse.org/syntax.html). I understand that this style guide may feel a bit overwhelming, so let me give you the **bare** **minimum** criteria for code to be considered "tidy":
 
--   The code uses named arguments for functions (e.g., `ggplot(data = cars)` )
+-   The code uses **named arguments** for functions (e.g., `ggplot(data = cars)` )
 
 -   The code uses whitespace around all commas and arithmetic operators (e.g., `mutate(body_mass_kg = body_mass_g / 1000, flipper_ratio = body_mass_kg /  flipper_length_mm)` )
 
