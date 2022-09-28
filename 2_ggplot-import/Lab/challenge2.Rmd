@@ -17,10 +17,9 @@ surveys <- read_csv(here("2_ggplot-import", "Lab", "surveys.csv"))
 For this week's Challenge, you will have three different options to explore.
 I've arranged these options in terms of their "spiciness," or the difficulty 
 of completing the task. You are only required to complete one task, but if you 
-are interested in exploring more than one (for bonus points!), feel free! 
+are interested in exploring more than one, feel free! 
 
-</br>
-</br>
+</br> 
 
 # `r emo::ji("pepper")` Medium -- Ridge Plots
 
@@ -39,7 +38,6 @@ need to make use of the **ggridges** package to create side-by-side density
 > (or 11) to ridge plots. You will need to install the __ggridges__ package and
 > explore the `geom_density_ridges()` function.** 
 
-</br>
 </br>
 
 # `r emo::ji("spicy")` `r emo::ji("pepper")` Spicy -- Exploring Color Themes
@@ -68,8 +66,8 @@ cdPalette_grey <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442",
 # A color deficient friendly palette with black:
 cdPalette_blk <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#F0E442", 
                    "#0072B2", "#D55E00", "#CC79A7")
-surveys %>% 
-  ggplot(aes(x = hindfoot_length, y = species, color = genus)) +
+surveys |> 
+  ggplot(aes(x = weight, y = species, color = genus)) +
   geom_boxplot() +
   scale_color_manual(values = cdPalette_grey)
 ```
@@ -88,6 +86,9 @@ data, `scale_colour_viridis_c()` for continuous data
 `scale_fill_<PALNAME>()`, where you specify the name of the palette you
 wish to use (e.g. `scale_color_aaas()`)
 
+- [This website](https://github.com/EmilHvitfeldt/r-color-palettes) provides 
+an exhaustive list of color themes available through various packages. 
+
 </br>
 
 > **In this challenge you are expected to use this information to modify the 
@@ -97,39 +98,8 @@ wish to use (e.g. `scale_color_aaas()`)
 > color specification or any of the packages listed here (or others!).** 
 
 </br>
-</br>
 
 # `r emo::ji("pepper")` `r emo::ji("pepper")` `r emo::ji("pepper")` Hot -- Exploring ggplot2 Annotation
-
-<!-- Usually plots with white background look more readable when printed. Every -->
-<!-- single component of a `ggplot()` graph can be customized using the generic  -->
-<!-- `theme()` function, as we will see below. However, there are pre-loaded themes  -->
-<!-- available that change the overall appearance of the graph without much effort.  -->
-
-<!-- For example, we can change our previous graph to have a simpler white background  -->
-<!-- using the `theme_bw()` function: -->
-
-<!-- ```{r} -->
-<!-- surveys %>%  -->
-<!--   ggplot(aes(x = species_id, y = hindfoot_length, color = genus)) + -->
-<!--   geom_boxplot() + -->
-<!--   scale_color_manual(values = cdPalette_grey) + -->
-<!--      theme_bw() -->
-<!-- ``` -->
-
-<!-- In addition to `theme_bw()`, which changes the plot background to white,  -->
-<!-- **`ggplot2`**comes with several other themes which can be useful to quickly  -->
-<!-- change the look of your visualization. The complete list of themes is available -->
-<!-- at <https://ggplot2.tidyverse.org/reference/ggtheme.html>. The [ggthemes](https://jrnold.github.io/ggthemes/reference/index.html) package -->
-<!-- provides a wide variety of options. -->
-
-<!-- </br> -->
-
-<!-- > **In this challenge you are expected to use this information to modify the  -->
-<!-- > plot you created in question 8.  -->
-<!-- > Explore the different themes available in ggplot2 and / or ggthemes. Pick a  -->
-<!-- > background theme you prefer and add that background theme to the plot.  -->
-
 
 Some data scientists have advocated that we should try to eliminate legends from
 our plots to make them more clear. Instead, we should use annotation. 
@@ -149,6 +119,8 @@ ggplot(data = surveys,
 
 Notice how I've labeled the "Neotoma" and "Perognathus" genera, so the reader
 can tell that these three boxplots are associated with this respective genus. 
+
+</br>
 
 > **In this challenge you are expected to use this information to modify the 
 > plot you created in question 10 (or 11).  
