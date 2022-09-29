@@ -1,7 +1,15 @@
 ---
 title: "Lab 2: Exploring Rodents with ggplot2"
 author: "Your name here!"
-format: html
+format: 
+  html: 
+    theme: minty
+    fontsize: 1em
+    mainfont: sans-serif
+    number-sections: true
+    number-depth: 2
+    code-block-bg: "#76b5c5"
+    highlight-style: monochrome
 editor: visual
 ---
 
@@ -168,7 +176,7 @@ __7. Facet your jittered scatterplot by `species`.__
 __8. Create side-by-side boxplots to visualize the distribution of weight within each species.__
 
 ```{r boxplot-jitter-points}
-# Code for question 8 (and 9)!
+# Code for question 8 (and 9 and 10 and 11 and 12)! :) 
 
 ```
 
@@ -184,11 +192,18 @@ jitter them a bit, using `geom_jitter()`.
 
 __10. Remove the previous layer you had and include a `geom_jitter()` layer.__
 
-That should look much better! But there is another problem! You should notice
-that in the code above there are **both** red points and black points. So, some
-of the observations are being plotted twice! 
+That should look a bit better! But its really hard to see the points when 
+everything is black. 
 
-__11. Inspect the help file for `geom_boxplot()` and see how you can remove the outliers from being plotted by `geom_boxplot()`. Make this change in the code above!__
+__11. Use the `color` argument in `geom_jitter()` to change the color of the points.__
+*You are welcome to use whatever color you wish, some of my favorites are: tomato, cadetblue, and darkseagreen* :) 
+
+Great! Now that you can see the points, you should notice something odd: there
+are two colors of points still being plotted. Some of the observations are being
+plotted twice, once from `geom_boxplot()` as outliers and again from
+`geom_jitter()`! 
+
+__12. Inspect the help file for `geom_boxplot()` and see how you can remove the outliers from being plotted by `geom_boxplot()`. Make this change in the code above!__
 
 
 # Customization
@@ -196,20 +211,20 @@ __11. Inspect the help file for `geom_boxplot()` and see how you can remove the 
 Some small changes that make **big** differences to plots. One of these changes
 are better labels for a plot's axes and legend. 
 
-__10. Using the code you created in question 8, modify the x-axis and y-axis labels to describe what is being plotted. Be sure to include any necessary units!__
+__13. Using the code you created in question 8, modify the x-axis and y-axis labels to describe what is being plotted. Be sure to include any necessary units!__
 
 ```{r}
-# Code for question 10! 
+# Code for question 13! 
 
 ```
 
 Some people (and journals) prefer for boxplots to be stacked with a specific 
 orientation! Let's practice changing the orientation of our boxplots. 
 
-__11. Flip the orientation of your boxplots from question 10. If you created side-by-side boxplots (stacked horizontally), your boxplots should be stacked vertically. If you had vertically stacked boxplots, you should stack your boxplots horizontally!__ 
+__14. Flip the orientation of your boxplots from question 10. If you created side-by-side boxplots (stacked horizontally), your boxplots should be stacked vertically. If you had vertically stacked boxplots, you should stack your boxplots horizontally!__ 
 
 ```{r}
-# Code for question 11! 
+# Code for question 14!
 
 ```
 

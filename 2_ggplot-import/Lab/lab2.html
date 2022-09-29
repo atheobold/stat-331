@@ -129,25 +129,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="lab-instructions" class="level1">
-<h1>Lab Instructions</h1>
+<section id="lab-instructions" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Lab Instructions</h1>
 <p>The questions in this lab are noted with numbers and boldface. Each question will require you produce code, whether it is one line or multiple lines.</p>
 <p>This document is quite “plain,” meaning it does not have any special formatting. As part of your demonstration of working with Quarto documents, I would encourage you to spice your documents up (e.g., declaring execution options, specifying how your figures should be output, formatting your code output).</p>
-<section id="seeking-help" class="level2">
-<h2 class="anchored" data-anchor-id="seeking-help">Seeking Help</h2>
+<section id="seeking-help" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="seeking-help"><span class="header-section-number">1.1</span> Seeking Help</h2>
 <p>Part of learning to program is learning from a variety of resources. Thus, I expect you will use resources beyond the textbook used for this course. However, there is an important balance between copying someone else’s code and <strong><em>using their code to learn</em></strong>. The <a href="https://docs.google.com/document/d/1-SSRp_mXFNgYiy4uW9tlcpxDpQH4OuMqK-Hh4v5AvZI/edit?usp=sharing">course syllabus</a> defines what is considered plagiarism in this course. Essentially, if you use external resources, I want to know about it. You can “inform” me of any resources you used by pasting the link to the resource in a code comment next to where you used that resource.</p>
 <p>You are permitted and encouraged to work with your teammates as you complete the lab assignment, but you are expected to do your own work. Copying from each other is cheating, and letting people copy from you is also cheating. Don’t do either of those things.</p>
 </section>
 </section>
-<section id="set-up" class="level1">
-<h1>Set-up</h1>
+<section id="set-up" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Set-up</h1>
 <p>In the code chunk below load in the packages necessary for your analysis. You should only need the tidyverse and here packages for this analysis, unless you decide to use additional resources.</p>
 <div class="cell">
 
 </div>
 </section>
-<section id="data-context" class="level1">
-<h1>Data Context</h1>
+<section id="data-context" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Data Context</h1>
 <p>The Portal Project is a long-term ecological study being conducted near Portal, AZ. Since 1977, the site has been used to study the interactions among rodents, ants and plants and their respective responses to climate. To study the interactions among organisms, we experimentally manipulate access to 24 study plots. This study has produced over 100 scientific papers and is one of the longest running ecological studies in the U.S.</p>
 <p>We will be investigating the animal species diversity and weights found within plots at the Portal study site. The dataset is stored as a comma separated value (CSV) file. Each row holds information for a single animal, and the columns represent:</p>
 <table class="table">
@@ -213,30 +213,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 </section>
-<section id="reading-the-data-into-r" class="level1">
-<h1>Reading the Data into R</h1>
+<section id="reading-the-data-into-r" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Reading the Data into R</h1>
 <p>We have seen in the practice activity that when importing a dataframe, the columns that contain characters (i.e., text) can be coerced (=converted) into the <code>factor</code> data type. We could set <strong><code>stringsAsFactors</code></strong> to <strong><code>FALSE</code></strong> to avoid this hidden argument to convert our data type.</p>
 <p>For this lab we will use the <strong><code>readr</code></strong> package (from the <code>tidyverse</code>) to read in the data. We’ll read in our data using the <code>read_csv()</code> function instead of the <code>read.csv()</code> function. This function <strong>does not</strong> coerce character variables to factors, a behavior that many in the R community feel is unappealing.</p>
 <p><strong>1. Using the <code>read_csv()</code> function and the <strong>here</strong> package, to write the code necessary to load in the <code>surveys.csv</code> dataset. For simplicity, name the dataset <code>surveys</code>.</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code for question 1! </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="inspecting-the-data" class="level2">
-<h2 class="anchored" data-anchor-id="inspecting-the-data">Inspecting the Data</h2>
+<section id="inspecting-the-data" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="inspecting-the-data"><span class="header-section-number">4.1</span> Inspecting the Data</h2>
 <p><strong>2. What are the dimensions of these data?</strong> <!-- You can either write code here or in the code chunk for #1, but I **must**
 see the code you used to address this question!  --></p>
 <p><strong>3. What are the data types of the variables in the dataset?</strong> <!-- You can either write code here or in the code chunk for #1, but I **must**
 see the code you used to address this question!  --></p>
 </section>
-<section id="plotting-with-ggplot2" class="level2">
-<h2 class="anchored" data-anchor-id="plotting-with-ggplot2">Plotting with <strong><code>ggplot2</code></strong></h2>
+<section id="plotting-with-ggplot2" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="plotting-with-ggplot2"><span class="header-section-number">4.2</span> Plotting with <strong><code>ggplot2</code></strong></h2>
 <p><code>ggplot()</code> graphics are built step by step by adding new elements. Adding layers in this fashion allows for extensive flexibility and customization of plots.</p>
 <p>To build a <code>ggplot()</code>, we will use the following basic template that can be used for different types of plots:</p>
 <p><code>ggplot(data = &lt;DATA&gt;, mapping = aes(&lt;VARIABLE MAPPINGS&gt;)) +  &lt;GEOM_FUNCTION&gt;()</code></p>
 <p>Let’s get started!</p>
 </section>
-<section id="scatterplot" class="level2">
-<h2 class="anchored" data-anchor-id="scatterplot">Scatterplot</h2>
+<section id="scatterplot" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="scatterplot"><span class="header-section-number">4.3</span> Scatterplot</h2>
 <p><strong>4. First, let’s create a scatterplot of the relationship between <code>weight</code> (on the x-axis) and <code>hindfoot_length</code> (on the y-axis).</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code for question 4! </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -252,8 +252,8 @@ see the code you used to address this question!  --></p>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code for question 6! </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="faceting" class="level2">
-<h2 class="anchored" data-anchor-id="faceting">Faceting</h2>
+<section id="faceting" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="faceting"><span class="header-section-number">4.4</span> Faceting</h2>
 <p>Despite our best efforts there is still a substantial amount of overplotting occurring in our scatterplot. Let’s try splitting the dataset into smaller subsets and see if that allows for us to see the trends a bit better.</p>
 <p><strong>7. Facet your jittered scatterplot by <code>species</code>.</strong></p>
 <div class="cell">
@@ -261,30 +261,32 @@ see the code you used to address this question!  --></p>
 </div>
 </section>
 </section>
-<section id="boxplots-density-ridges" class="level1">
-<h1>Boxplots &amp; Density Ridges</h1>
+<section id="boxplots-density-ridges" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Boxplots &amp; Density Ridges</h1>
 <p><strong>8. Create side-by-side boxplots to visualize the distribution of weight within each species.</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code for question 8 (and 9)!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code for question 8 (and 9 and 10 and 11 and 12)! :) </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>A fundamental complaint of boxplots is that they do not plot the raw data. However, with <strong>ggplot</strong> we can add the raw points on top of the boxplots!</p>
 <p><strong>9. Add another layer to your previous plot (above) that plots each observation.</strong></p>
 <p>Alright, this should look less than optimal. Your points should appear rather stacked on top of each other. To make them less stacked, we need to jitter them a bit, using <code>geom_jitter()</code>.</p>
 <p><strong>10. Remove the previous layer you had and include a <code>geom_jitter()</code> layer.</strong></p>
-<p>That should look much better! But there is another problem! You should notice that in the code above there are <strong>both</strong> red points and black points. So, some of the observations are being plotted twice!</p>
-<p><strong>11. Inspect the help file for <code>geom_boxplot()</code> and see how you can remove the outliers from being plotted by <code>geom_boxplot()</code>. Make this change in the code above!</strong></p>
+<p>That should look a bit better! But its really hard to see the points when everything is black.</p>
+<p><strong>11. Use the <code>color</code> argument in <code>geom_jitter()</code> to change the color of the points.</strong> <em>You are welcome to use whatever color you wish, some of my favorites are: tomato, cadetblue, and darkseagreen</em> :)</p>
+<p>Great! Now that you can see the points, you should notice something odd: there are two colors of points still being plotted. Some of the observations are being plotted twice, once from <code>geom_boxplot()</code> as outliers and again from <code>geom_jitter()</code>!</p>
+<p><strong>12. Inspect the help file for <code>geom_boxplot()</code> and see how you can remove the outliers from being plotted by <code>geom_boxplot()</code>. Make this change in the code above!</strong></p>
 </section>
-<section id="customization" class="level1">
-<h1>Customization</h1>
+<section id="customization" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Customization</h1>
 <p>Some small changes that make <strong>big</strong> differences to plots. One of these changes are better labels for a plot’s axes and legend.</p>
-<p><strong>10. Using the code you created in question 8, modify the x-axis and y-axis labels to describe what is being plotted. Be sure to include any necessary units!</strong></p>
+<p><strong>13. Using the code you created in question 8, modify the x-axis and y-axis labels to describe what is being plotted. Be sure to include any necessary units!</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code for question 10! </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code for question 13! </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Some people (and journals) prefer for boxplots to be stacked with a specific orientation! Let’s practice changing the orientation of our boxplots.</p>
-<p><strong>11. Flip the orientation of your boxplots from question 10. If you created side-by-side boxplots (stacked horizontally), your boxplots should be stacked vertically. If you had vertically stacked boxplots, you should stack your boxplots horizontally!</strong></p>
+<p><strong>14. Flip the orientation of your boxplots from question 10. If you created side-by-side boxplots (stacked horizontally), your boxplots should be stacked vertically. If you had vertically stacked boxplots, you should stack your boxplots horizontally!</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code for question 11! </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code for question 14!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 
