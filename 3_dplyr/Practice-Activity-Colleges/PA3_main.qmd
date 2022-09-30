@@ -64,13 +64,11 @@ This section will clean today's dataset, so that you can use it more easily in P
 
 ## Data download & packages
 
-First, download the template Quarto file [here (link to GitHub)](https://github.com/atheobold/stat-331/blob/main/3_dplyr/Practice-Activity-Colleges/PA3_student.qmd): 
+First, download the template Quarto file [here (link to GitHub)](https://github.com/atheobold/stat-331/blob/main/3_dplyr/Practice-Activity-Colleges/PA3_student.qmd):
 
-Next, save the file in your Stat 331 / 531 folder -- this should be in a 
-Week 3 or a Practice Activity subfolder! 
+Next, save the file in your Stat 331 / 531 folder -- this should be in a Week 3 or a Practice Activity subfolder!
 
-Now, open the `PA3_student.qmd` file. At the top of the document, we declare
-our package dependencies and load the data.
+Now, open the `PA3_student.qmd` file. At the top of the document, we declare our package dependencies and load the data.
 
 (Note that the data loading function `read_csv()` will give you an outpouring of helpful information about the dataset. If you do not see the word "error", there is nothing to be concerned about.)
 
@@ -100,7 +98,7 @@ Now we will clean the data. Alas, each of the R chunks in this section will caus
 -   The "REGION" variable.
 
 ```{r select-vars}
-colleges_clean <- colleges |> 
+colleges_clean <- colleges | > 
   select(INSTNM, CITY, STABBR, ZIP,
          ADM_RATE, SAT_AVG, UGDS,
          TUITIONFEE_IN, TUITIONFEE_OUT,
