@@ -64,7 +64,7 @@ This section will clean today's dataset, so that you can use it more easily in P
 
 ## Data download & packages
 
-First, download the template Quarto file [here()](): 
+First, download the template Quarto file [here (link to GitHub)](https://github.com/atheobold/stat-331/blob/main/3_dplyr/Practice-Activity-Colleges/PA3_student.qmd): 
 
 Next, save the file in your Stat 331 / 531 folder -- this should be in a 
 Week 3 or a Practice Activity subfolder! 
