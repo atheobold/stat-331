@@ -166,6 +166,18 @@ knitr::include_graphics("images/dplyr_hex.jpeg")
 
 ---
 
+class: center, inverse
+
+.pull-left[
+![](images/not_a_pipe.jpg)
+]
+
+.pull-right[.larger[The Pipe `|>`]]
+
+![](images/diagram_sentence.jpg)
+
+---
+
 .bitlarger[Preview Activity Review]
 
 Suppose we would like to study how the ratio of penguin body mass to flipper
