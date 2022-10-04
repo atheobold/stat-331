@@ -1,6 +1,6 @@
 ---
 title: "Recap of Data Wrangling with dplyr"
-date: "January 18, 2022"
+date: "October 4, 2022"
 author: "Dr. Allison Theobold"
 output:
   xaringan::moon_reader:
@@ -312,4 +312,6 @@ students %>%
 
 ---
 
-.larger[Your Turn: PA Exploration]
+class: inverse, middle, center
+
+.huge[Your Turn: PA Exploration]
