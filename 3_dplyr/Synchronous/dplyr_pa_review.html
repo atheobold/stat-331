@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="author" content="Dr. Allison Theobold" />
     <meta name="date" content="2022-10-04" />
-    <script src="libs/header-attrs-2.16/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
     <script src="libs/kePrint-0.0.1/kePrint.js"></script>
     <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
@@ -154,6 +154,25 @@ class: inverse, center, middle
 
 ---
 
+.bitlarger[Preview Activity Review]
+
+Suppose we would like to study how the ratio of penguin body mass to flipper
+size differs across the species. Arrange the following steps into an order that 
+accomplishes this goal (assuming the steps are connected with a `%&gt;%` or a `|&gt;`
+).
+
+`arrange(med_mass_flipper_ratio)`
+
+`group_by(species)`
+
+`penguins`
+
+`summarize(med_mass_flipper_ratio = median(mass_flipper_ratio))`
+
+`mutate(mass_flipper_ratio = body_mass_g / flipper_length_mm))`
+
+---
+
 class: center
 
 .larger[Try it out]
@@ -184,74 +203,74 @@ class: center
  &lt;/thead&gt;
 &lt;tbody&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Quinn, Dacotah &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Liberal Studies &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Segura, Doriany &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Political Science &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Abeyta, Victoria &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Business &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Hwang, Dakota &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Biology &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Mapa, Amanda &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Biology &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Turner, Christopher &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Business &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Liggett, Brittany &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Waddington, Stephanie &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; Liberal Studies &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Lamar, Daniela &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Business &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Hernandez, Martina &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Redford, Vanessa &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; Chemistry &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Tucson, Dallen &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Political Science &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Garcia, Aaron &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Liberal Studies &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Nichols, Roman &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Biology &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; al-Ozer, Nazmiyya &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Business &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Chung, Kimberly &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Business &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Bruner, Keili &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Rogers, Brandon &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; Political Science &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; el-Hashim, Nasreen &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Business &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Olson, Olivia &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Biology &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -267,26 +286,6 @@ class: center, middle
 
 
 
-&lt;code class ='r hljs remark-code'&gt;students %&gt;% &lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style="color:green"&gt;group_by(name)&lt;/span&gt; %&gt;% &lt;br&gt;&amp;nbsp;&amp;nbsp;mutate(total = sum(CRNC_f20, CRNC_w21, CRNC_s21)&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;)&lt;/code&gt;
-
-```
-
-## # A tibble: 10 × 6
-## # Groups:   name [10]
-##    name                department        CRNC_f20 CRNC_w21 CRNC_s21 total
-##    &lt;chr&gt;               &lt;chr&gt;                &lt;int&gt;    &lt;int&gt;    &lt;int&gt; &lt;int&gt;
-##  1 Abeyta, Victoria    Business                 1        1        1     3
-##  2 Lamar, Daniela      Business                 1        1        1     3
-##  3 Turner, Christopher Business                 0        3        2     5
-##  4 Liggett, Brittany   Liberal Studies          1        2        0     3
-##  5 Quinn, Dacotah      Liberal Studies          0        1        1     2
-##  6 Hernandez, Martina  Chemistry                1        2        0     3
-##  7 Mapa, Amanda        Biology                  0        0        0     0
-##  8 Hwang, Dakota       Biology                  0        0        0     0
-##  9 Bruner, Keili       Political Science        0        1        2     3
-## 10 Tucson, Dallen      Political Science        1        1        1     3
-
-```
 
 ---
 
@@ -297,20 +296,6 @@ class: center, middle
 
 
 
-&lt;code class ='r hljs remark-code'&gt;students %&gt;% &lt;br&gt;&amp;nbsp;&amp;nbsp;group_by(name) %&gt;% &lt;br&gt;&amp;nbsp;&amp;nbsp;mutate(total = sum(CRNC_f20, CRNC_w21, CRNC_s21)&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;) %&gt;% &lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style="color:blue"&gt;group_by(department)&lt;/span&gt; %&gt;% &lt;br&gt;&amp;nbsp;&amp;nbsp;summarize(final_total = sum(total)&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;)&lt;/code&gt;
-
-```
-
-## # A tibble: 5 × 2
-##   department        final_total
-##   &lt;chr&gt;                   &lt;int&gt;
-## 1 Biology                     0
-## 2 Business                   11
-## 3 Chemistry                   3
-## 4 Liberal Studies             5
-## 5 Political Science           6
-
-```
 
 ---
 
@@ -321,20 +306,6 @@ class: center, middle
 
 
 
-&lt;code class ='r hljs remark-code'&gt;students %&gt;% &lt;br&gt;&amp;nbsp;&amp;nbsp;group_by(name) %&gt;% &lt;br&gt;&amp;nbsp;&amp;nbsp;mutate(total = sum(CRNC_f20, CRNC_w21, CRNC_s21)&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;) %&gt;% &lt;br&gt;&amp;nbsp;&amp;nbsp;group_by(department) %&gt;% &lt;br&gt;&amp;nbsp;&amp;nbsp;summarize(final_total = sum(total)&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;) %&gt;% &lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style="color:turquoise"&gt;arrange&lt;/span&gt;(desc(final_total))&lt;/code&gt;
-
-```
-
-## # A tibble: 5 × 2
-##   department        final_total
-##   &lt;chr&gt;                   &lt;int&gt;
-## 1 Business                   11
-## 2 Political Science           6
-## 3 Liberal Studies             5
-## 4 Chemistry                   3
-## 5 Biology                     0
-
-```
 
 ---
 

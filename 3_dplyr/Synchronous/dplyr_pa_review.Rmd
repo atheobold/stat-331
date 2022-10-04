@@ -166,6 +166,25 @@ knitr::include_graphics("images/dplyr_hex.jpeg")
 
 ---
 
+.bitlarger[Preview Activity Review]
+
+Suppose we would like to study how the ratio of penguin body mass to flipper
+size differs across the species. Arrange the following steps into an order that 
+accomplishes this goal (assuming the steps are connected with a `%>%` or a `|>`
+).
+
+`arrange(med_mass_flipper_ratio)`
+
+`group_by(species)`
+
+`penguins`
+
+`summarize(med_mass_flipper_ratio = median(mass_flipper_ratio))`
+
+`mutate(mass_flipper_ratio = body_mass_g / flipper_length_mm))`
+
+---
+
 class: center
 
 .larger[Try it out]
