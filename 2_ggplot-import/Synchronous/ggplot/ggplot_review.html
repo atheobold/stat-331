@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="author" content="Dr. Allison Theobold" />
     <meta name="date" content="2022-09-27" />
-    <script src="libs/header-attrs-2.16/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="slide-style.css" type="text/css" />
   </head>
@@ -66,23 +66,17 @@ class: center
 
 .larger[Histogram]
 
-.pull-left[
 
 ```r
-ggplot(data = penguins, 
-       mapping = aes(x = bill_length_mm)) + 
+ggplot(data = penguins, mapping = aes(x = bill_length_mm)) + 
   geom_histogram()
 ```
 
 &lt;img src="ggplot_review_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
-]
 
 --
 
-&lt;/br&gt;
-&lt;/br&gt;
-
-.pull-right[Is this aesthetic *global* or *local*?]
+Is this aesthetic *global* or *local*?
 
 ---
 
@@ -201,10 +195,15 @@ ggplot(data = penguins,
 ]
 
 .pull-right[
-&lt;/br&gt;
-&lt;/br&gt;
 
-Can stack vertically (with categorical variable on `y`-axis) **or** horizontally (with categorical variable on `x`-axis)
+```r
+ggplot(data = penguins, 
+       mapping = aes(x = bill_length_mm,
+                     y = species)) + 
+  geom_boxplot()
+```
+
+&lt;img src="ggplot_review_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -221,7 +220,7 @@ ggplot(data = penguins,
   facet_wrap(~ species)
 ```
 
-&lt;img src="ggplot_review_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="ggplot_review_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -236,7 +235,7 @@ ggplot(data = penguins,
   geom_point()
 ```
 
-&lt;img src="ggplot_review_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="ggplot_review_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -268,11 +267,12 @@ class: center
 ggplot(data = penguins, 
        mapping = aes(y = bill_length_mm, 
                      x = bill_depth_mm, 
-                     color = species)) + 
+                     color = species)
+       ) + 
   geom_point()
 ```
 
-&lt;img src="ggplot_review_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="ggplot_review_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -285,11 +285,12 @@ class: center
 ggplot(data = penguins, 
        mapping = aes(y = bill_length_mm, 
                      x = species, 
-                     color = sex)) + 
+                     color = sex)
+       ) + 
   geom_boxplot()
 ```
 
-&lt;img src="ggplot_review_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="ggplot_review_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -307,7 +308,7 @@ ggplot(data = penguins,
   facet_wrap(~ species)
 ```
 
-&lt;img src="ggplot_review_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="ggplot_review_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -325,7 +326,7 @@ ggplot(data = penguins,
   facet_wrap(~ island)
 ```
 
-&lt;img src="ggplot_review_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="ggplot_review_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 

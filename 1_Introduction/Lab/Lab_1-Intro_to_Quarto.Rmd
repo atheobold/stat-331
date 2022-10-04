@@ -73,7 +73,7 @@ Use the guide above to specify execution options that:
 
 Next, click on the "Play" button on the right of the first code chunk.
 Alternatively, you can highlight the code you want to run and type
-<kbd>ctrl</kbd> + <kbd>Enter</kbd> or <kbd>⌘\<</kbd> + <kbd>Enter</kbd>.
+<kbd>ctrl</kbd> + <kbd>Enter</kbd> or <kbd>⌘</kbd> + <kbd>Enter</kbd>.
 
 You should see the code appear in the console, as well as the result of
 the code (`2`). Keep in mind the `[1]` before the `2` is vector

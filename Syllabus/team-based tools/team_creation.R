@@ -2,7 +2,7 @@
 library(tidyverse)
 library(googlesheets4)
 
-survey <- googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/1R8-bjAfbKcItCDQt5XRW63JwGr-33iWjdsQRRzIlZDs/edit?usp=sharing")
+survey <- googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/1aF658zCvZ4jROYtXqIdZ4a1CrJS4FkG72fi6JlOlBOM/edit?resourcekey#gid=120982239")
 
 survey <- survey %>% 
   select(-Timestamp) %>% 
@@ -12,7 +12,7 @@ survey <- survey %>%
          look_for_other = 'If you selected \"Other\" above, please elaborate on your selection!', 
          gender = "How would you describe your gender identity? (select all that apply)", 
          gender_other = 'If you selected \"Prefer to self describe\" above, please elaborate on your selection!...7',
-         hispanic = "Do you identify as Hispanic / Latinx?", 
+         hispanic = "Do you identify as Hispanic or Latinx?", 
          race = "Which of the following racial groups do you identify with? (select all that apply)", 
          race_other = 'If you selected \"Prefer to self describe\" above, please elaborate on your selection!...10', 
          programming = "How would you describe your programming background? (select all that apply)", 
@@ -31,48 +31,47 @@ survey <- survey %>%
   select(-days) 
 
 course_info <- read_csv(here::here("syllabus", "team-based tools", 
-                                   "course_names.csv")
+                                   "331_531_f22.csv"), 
+                        skip = 1
                         ) %>% 
-  mutate(last = word(Student, 1, sep = ","), 
+  rename(name = 'Points Possible', 
+         section = `...5`) |> 
+  select(name, section) |> 
+  mutate(last = word(name, 1, sep = ","), 
          last = tolower(last),  
-         section = case_when(str_detect(Section, pattern = "70") == TRUE ~ "70",
-                             str_detect(Section, pattern = "71") == TRUE ~ "71", 
-                             str_detect(Section, pattern = "72") == TRUE ~ "72")
-         ) %>% 
-  select(-Student, -Section)
+         section = case_when(str_detect(section, pattern = "331") == TRUE ~ "331",
+                             str_detect(section, pattern = "531") == TRUE ~ "531", 
+                              #str_detect(section, pattern = "72") == TRUE ~ "72"
+                             )
+         ) 
 
 
-master <- left_join(course_info, survey, by = c("last")) %>% 
+master <- left_join(course_info, survey, by = c("last")) |> 
   filter(last != "student") %>% 
-  select(last, first, section, times, monday:saturday, look_for, 
-         programming, comments)
+  select(last, first, section, times, monday:saturday, look_for,
+         gender, programming, comments)
 
-# SECTION 70
+## Morning Preference
+master |>  
+  filter(times %in% c("Mornings, Evenings", "Mornings, Afternoons", "Mornings"),
+         gender != "Woman / Female / Femme", 
+         monday, 
+         wednesday) |> 
+  view()
 
-master_70 <- master %>% 
-  filter(section == "70")
+## Afternoon Preference
 
-master_70 %>% 
-  filter(times %in% c("Mornings, Evenings", "Mornings, Afternoons", "Mornings")) %>% 
+master %>% 
+  filter(times %in% c("Afternoons, Evenings", "Afternoons", 
+                      "Mornings, Afternoons"), 
+         gender != "Woman / Female / Femme") |> 
   View()
 
+## Evening Preference
 
-# SECTION 71
-
-master_71 <- master %>% 
-  filter(section == "71")
-
-master_71 %>% 
-  filter(times %in% c("Afternoons, Evenings", "Afternoons")) %>% 
-  View()
-
-
-# SECTION 72
-
-master_72 <- master %>% 
-  filter(section == "72")
-
-master_72 %>% 
-  filter(times == "Mornings, Afternoons") %>% 
+master |>  
+  filter(times %in% c("Mornings, Evenings", "Afternoons, Evenings",
+                      "Mornings, Afternoons, Evenings", "Evenings"),
+         gender != "Woman / Female / Femme") |>
   View()
 

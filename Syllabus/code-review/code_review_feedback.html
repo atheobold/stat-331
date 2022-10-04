@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.0.38">
+<meta name="generator" content="quarto-1.1.120">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,10 +11,15 @@
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
 </style>
 
 
@@ -68,7 +73,7 @@ ul.task-list{list-style: none;}
 <h3 class="anchored" data-anchor-id="tidy-code">Tidy Code</h3>
 <p>What does it mean to have “tidy” code? I would consider code to be “tidy” if it follows the <a href="https://style.tidyverse.org/syntax.html">tidyverse style guide</a>. I understand that this style guide may feel a bit overwhelming, so let me give you the <strong>bare</strong> <strong>minimum</strong> criteria for code to be considered “tidy”:</p>
 <ul>
-<li><p>The code uses named arguments for functions (e.g., <code>ggplot(data = cars)</code> )</p></li>
+<li><p>The code uses <strong>named arguments</strong> for functions (e.g., <code>ggplot(data = cars)</code> )</p></li>
 <li><p>The code uses whitespace around all commas and arithmetic operators (e.g., <code>mutate(body_mass_kg = body_mass_g / 1000, flipper_ratio = body_mass_kg /  flipper_length_mm)</code> )</p></li>
 <li><p>The code uses new lines (returns) to eliminate character wrapping (where one line runs into the next line) – look <a href="https://style.tidyverse.org/syntax.html#long-lines">here</a> for an example</p></li>
 <li><p>Every <code>+</code> sign (in ggplot) should end the line (a return should follow) – look <a href="https://style.tidyverse.org/ggplot2.html">here</a> for examples</p></li>
@@ -192,7 +197,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
