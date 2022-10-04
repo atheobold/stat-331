@@ -63,7 +63,7 @@ class: middle
 
 .pull-left[
 ```{r, eval = FALSE}
-starwars %>% 
+starwars |> 
   count(homeworld, sort = TRUE)
 ```
 
@@ -74,7 +74,7 @@ starwars %>%
 
 .pull-right[
 ```{r, echo = FALSE}
-starwars %>% 
+starwars |> 
   count(homeworld, sort = TRUE)
 ```
 
@@ -149,7 +149,7 @@ class: center, middle
 
 .pull-left-wide[
 ```{r, eval = FALSE}
-starwars %>% 
+starwars |> 
   summarise(across(height:mass, mean, na.rm = TRUE))
 
 ```
@@ -159,7 +159,7 @@ starwars %>%
 
 .large[Conditional Summarizing]
 ```{r, eval = FALSE}
-starwars %>% 
+starwars |> 
   summarise(across(where(is.numeric), mean, na.rm = TRUE))
 
 ```
@@ -168,7 +168,7 @@ starwars %>%
 .pull-right-narrow[
 </br>
 ```{r, echo = FALSE}
-starwars %>% 
+starwars |> 
   summarise(across(height:mass, mean, na.rm = TRUE))
 
 ```
@@ -177,20 +177,20 @@ starwars %>%
 </br>
 
 ```{r, echo = FALSE}
-starwars %>% 
+starwars |> 
   summarise(across(where(is.numeric), mean, na.rm = TRUE))
 ```
 ]
 
 ---
 
-.bitlarger[`r emo::ji("heart")` `%>%`]
+.bitlarger[`r emo::ji("heart")` `|>`]
 
 .pull-left[
 ```{r, eval = FALSE}
-starwars %>% 
+starwars |> 
   filter(gender == "feminine", 
-         !is.na(homeworld)) %>%
+         !is.na(homeworld)) |>
   ggplot(aes(x = gender, fill = homeworld)) + 
   geom_bar(position = "dodge") + 
   labs(x = "Gender Expression of Character", 
@@ -201,9 +201,9 @@ starwars %>%
 
 .pull-right[
 ```{r, echo = FALSE, fig.width = 6, fig.height = 6}
-starwars %>% 
+starwars |> 
   filter(gender == "feminine", 
-         !is.na(homeworld)) %>%
+         !is.na(homeworld)) |>
   ggplot(aes(x = gender, fill = homeworld)) + 
   geom_bar(position = "dodge") +
   labs(x = "Gender Expression of Character", 

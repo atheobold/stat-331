@@ -1,5 +1,5 @@
 ---
-title: "The pipe operator"
+title: "The Pipe Operator"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -37,10 +37,10 @@ style_duo_accent(
 ```
 
 ```{r, echo = FALSE, message = FALSE}
-cereals <- read_csv("../practice/cereals.csv") %>% 
+cereals <- read_csv("../practice/cereals.csv") |> 
   mutate(type = as_factor(type), 
-         mfr = as_factor(mfr)) %>% 
-  mutate_all(list(~na_if(., -1))) %>% 
+         mfr = as_factor(mfr)) |> 
+  mutate_all(list(~na_if(., -1))) |> 
   rename(temp = type)
 ```
 
@@ -55,50 +55,61 @@ the quality of the glue that most directly determines the power of the system.
 
 ---
 
-```{r, echo = FALSE, out.width = "40%", fig.align='center'}
-knitr::include_graphics("images/hex.png")
-```
+.larger[The Pipe]
 
----
-
-```{r, echo = FALSE, out.width = "60%", fig.align='center'}
-knitr::include_graphics("images/not_a_pipe.jpg")
-```
-
----
-
-# The Pipe
-
-* Part of the **magrittr** package (installs with the tidyverse)
-
---
-
-* Idea:  The **data** is the primary object, so it should come first in your code.
-
---
-
-* Idea:  Code should read **like a sentence**
-
---
-
-```{r, echo = FALSE, out.width = "80%"}
+.pull-left[
+```{r, echo = FALSE, out.width = "120%"}
 knitr::include_graphics("images/diagram_sentence.jpg")
 ```
+]
+
+.pull-right[
+* Idea:  Code should read **like a sentence**
+
+* Idea:  The **data** is the primary object, so it should come first in your
+code.
+]
 
 ---
+
+.bitlarger[A Brief History of the Pipe]
+
+.pull-left[
+The original pipe (`%>%`) was part of the **magrittr** package
+]
+
+.pull-right[
+```{r, echo = FALSE, out.width = "60%"}
+knitr::include_graphics("images/not_a_pipe.jpg")
+```
+]
+
+--
+
+.pull-left[
+The pipe because ubiquitous with data wrangling, so R version 4.1.0 created 
+the "native" pipe. 
+]
+]
+.pull-right[
+![](images/native_pipe.jpg)
+]
+
+---
+
 
 # The Pipe
 
 ```{r, eval = FALSE}
-dr_theobold %>%
+dr_theobold |>
   do_a_dance()
 ```
 
 --
 
 ```{r, eval = FALSE}
-dr_theobold %>%
-  put_on("cool hat") %>%
+dr_theobold |>
+  put_on("cool hat") |>
   do_a_dance(type = "macarena")
 ```
 
@@ -115,15 +126,15 @@ knitr::include_graphics("images/pipe.png")
 # The Pipe
 
 ```{r, echo = FALSE}
-decorate('cereals %>% summary()', eval = FALSE) %>% 
-  flair("%>%") %>% 
+decorate('cereals |> summary()', eval = FALSE) |> 
+  flair("|>") |> 
   flair_funs(color = "teal")
 ```
 
 is the same as
 
 ```{r, echo = FALSE}
-decorate('summary(cereals)', eval = FALSE) %>% 
+decorate('summary(cereals)', eval = FALSE) |> 
   flair_funs(color = "teal")
 ```
 
@@ -133,16 +144,16 @@ decorate('summary(cereals)', eval = FALSE) %>%
 What do you think the following will do?
 
 ```{r, eval = FALSE}
-cereals %>%
-  filter(mfr == "Q") %>%
+cereals |>
+  filter(mfr == "Q") |>
   arrange(calories)
 ```
 
 --
 
 ```{r, echo = FALSE}
-cereals %>%
-  filter(mfr == "Q") %>%
+cereals |>
+  filter(mfr == "Q") |>
   arrange(calories)
 ```
 
@@ -154,9 +165,9 @@ cereals %>%
 What do you think the following will do?
 
 ```{r, eval = FALSE}
-cereals %>%
-  filter(mfr == "Q") %>%
-  group_by(temp) %>% 
+cereals |>
+  filter(mfr == "Q") |>
+  group_by(temp) |> 
   arrange(sugars)
 ```
 
@@ -164,8 +175,8 @@ cereals %>%
 --
 
 ```{r, echo = FALSE}
-cereals %>%
-  filter(mfr == "Q") %>%
-  group_by(temp) %>% 
-  arrange(sugars)
+cereals |>
+  filter(mfr == "Q") |>
+  group_by(temp) |> 
+  arrange(sugars) 
 ```

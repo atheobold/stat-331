@@ -37,9 +37,9 @@ style_duo_accent(
 ```
 
 ```{r, echo = FALSE, message = FALSE}
-cereals <- read_csv("../practice/cereals.csv") %>% 
+cereals <- read_csv("../practice/cereals.csv") |> 
   mutate(type = as_factor(type), 
-         mfr = as_factor(mfr)) %>% 
+         mfr = as_factor(mfr)) |> 
   rename(temp = type)
 ```
 
@@ -57,21 +57,21 @@ Want a histogram of the calories for just *cold* cereals?  Pipe it through
 ---
 
 ```{r pipe, eval = FALSE, echo = FALSE}
-cereals %>%
-  filter(temp == "C") %>%
+cereals |>
+  filter(temp == "C") |>
   ggplot(aes(x = calories)) +
     geom_histogram(binwidth = 17)
 ```
 
 ```{r, echo = FALSE}
-decorate("pipe", message = FALSE, eval = FALSE) %>% 
-  flair(pattern = "%>%") %>% 
+decorate("pipe", message = FALSE, eval = FALSE) |> 
+  flair(pattern = "|>") |> 
   flair(pattern = "+")
 ```
 
 ```{r, echo = FALSE, out.width = "35%", fig.align='center'}
-cereals %>%
-  filter(temp == "C") %>%
+cereals |>
+  filter(temp == "C") |>
   ggplot(aes(x = calories)) +
     geom_histogram(binwidth = 17)
 ```

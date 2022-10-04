@@ -182,8 +182,7 @@ class: center, inverse
 
 Suppose we would like to study how the ratio of penguin body mass to flipper
 size differs across the species. Arrange the following steps into an order that 
-accomplishes this goal (assuming the steps are connected with a `%>%` or a `|>`
-).
+accomplishes this goal (assuming the steps are connected with a `|>`).
 
 `arrange(med_mass_flipper_ratio)`
 
@@ -228,7 +227,7 @@ students <- tibble(name = randomNames(n = 10),
                    CRNC_s21 = rbinom(10, size = 5, prob = 0.2)
                    )
 
-knitr::kable(slice_sample(students, n = 10)) %>% 
+knitr::kable(slice_sample(students, n = 10)) |> 
   kableExtra::kable_styling()
 ```
 
@@ -241,15 +240,15 @@ class: center, middle
 .large[Step 1: Get totals for each student]
 
 ```{r name-totals, echo = FALSE, eval = FALSE}
-students %>% 
-  group_by(name) %>% 
+students |> 
+  group_by(name) |> 
   mutate(total = sum(CRNC_f20, CRNC_w21, CRNC_s21)
          ) 
 
 ```
 
 ```{r, echo = FALSE}
-decorate_chunk("name-totals", eval = TRUE) %>% 
+decorate_chunk("name-totals", eval = TRUE) |> 
   flair(pattern = "group_by(name)", color = "green")
 ```
 
@@ -260,17 +259,17 @@ class: center, middle
 .large[Step 2: Get department totals]
 
 ```{r dept-totals, echo = FALSE, eval = FALSE}
-students %>% 
-  group_by(name) %>% 
+students |> 
+  group_by(name) |> 
   mutate(total = sum(CRNC_f20, CRNC_w21, CRNC_s21)
-         ) %>% 
-  group_by(department) %>% 
+         ) |> 
+  group_by(department) |> 
   summarize(final_total = sum(total)
             )
 ```
 
 ```{r, echo = FALSE}
-decorate_chunk("dept-totals", eval = TRUE) %>% 
+decorate_chunk("dept-totals", eval = TRUE) |> 
   flair(pattern = "group_by(department)", color = "blue")
 ```
 
@@ -281,18 +280,18 @@ class: center, middle
 .large[Step 3: Arrange the totals]
 
 ```{r arrange, echo = FALSE, eval = FALSE}
-students %>% 
-  group_by(name) %>% 
+students |> 
+  group_by(name) |> 
   mutate(total = sum(CRNC_f20, CRNC_w21, CRNC_s21)
-         ) %>% 
-  group_by(department) %>% 
+         ) |> 
+  group_by(department) |> 
   summarize(final_total = sum(total)
-            ) %>% 
+            ) |> 
   arrange(desc(final_total))
 ```
 
 ```{r, echo = FALSE}
-decorate_chunk("arrange", eval = TRUE) %>% 
+decorate_chunk("arrange", eval = TRUE) |> 
   flair(pattern = "arrange", color = "turquoise")
 ```
 
@@ -306,9 +305,9 @@ Often you are interested in **one** specific summary statistic!
 
 .pull-left[
 ```{r}
-students %>% 
-  group_by(department) %>% 
-  count() 
+students |> 
+  group_by(department) |> 
+  count(sort = TRUE) 
 ```
 ]
 
@@ -316,9 +315,9 @@ students %>%
 
 .pull-right[
 ```{r}
-students %>% 
-  group_by(department) %>% 
-  count() %>% 
+students |> 
+  group_by(department) |> 
+  count() |> 
   filter(department == "Political Science")
 ```
 ]
@@ -334,10 +333,10 @@ class: middle
 - Extracts entries from dataframes
 
 ```{r}
-students %>% 
-  group_by(department) %>% 
-  count() %>% 
-  filter(department == "Political Science") %>% 
+students |> 
+  group_by(department) |> 
+  count() |> 
+  filter(department == "Political Science") |> 
   pull()
 ```
 

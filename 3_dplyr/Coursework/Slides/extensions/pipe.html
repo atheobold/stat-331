@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>The pipe operator</title>
+    <title>The Pipe Operator</title>
     <meta charset="utf-8" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
@@ -11,7 +11,9 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# The pipe operator
+.title[
+# The Pipe Operator
+]
 
 ---
 
@@ -33,37 +35,50 @@ the quality of the glue that most directly determines the power of the system.
 
 ---
 
-&lt;img src="images/hex.png" width="40%" style="display: block; margin: auto;" /&gt;
+.larger[The Pipe]
 
----
+.pull-left[
+&lt;img src="images/diagram_sentence.jpg" width="120%" /&gt;
+]
 
-&lt;img src="images/not_a_pipe.jpg" width="60%" style="display: block; margin: auto;" /&gt;
-
----
-
-# The Pipe
-
-* Part of the **magrittr** package (installs with the tidyverse)
-
---
-
-* Idea:  The **data** is the primary object, so it should come first in your code.
-
---
-
+.pull-right[
 * Idea:  Code should read **like a sentence**
 
---
-
-&lt;img src="images/diagram_sentence.jpg" width="80%" /&gt;
+* Idea:  The **data** is the primary object, so it should come first in your
+code.
+]
 
 ---
+
+.bitlarger[A Brief History of the Pipe]
+
+.pull-left[
+The original pipe (`%&gt;%`) was part of the **magrittr** package
+]
+
+.pull-right[
+&lt;img src="images/not_a_pipe.jpg" width="60%" /&gt;
+]
+
+--
+
+.pull-left[
+The pipe because ubiquitous with data wrangling, so R version 4.1.0 created 
+the "native" pipe. 
+]
+]
+.pull-right[
+![](images/native_pipe.jpg)
+]
+
+---
+
 
 # The Pipe
 
 
 ```r
-dr_theobold %&gt;%
+dr_theobold |&gt;
   do_a_dance()
 ```
 
@@ -71,8 +86,8 @@ dr_theobold %&gt;%
 
 
 ```r
-dr_theobold %&gt;%
-  put_on("cool hat") %&gt;%
+dr_theobold |&gt;
+  put_on("cool hat") |&gt;
   do_a_dance(type = "macarena")
 ```
 
@@ -87,7 +102,7 @@ dr_theobold %&gt;%
 # The Pipe
 
 
-&lt;code class ='r hljs remark-code'&gt;cereals &lt;span style="background-color:#ffff7f"&gt;%&gt;%&lt;/span&gt; &lt;span style="color:teal"&gt;summary&lt;/span&gt;()&lt;/code&gt;
+&lt;code class ='r hljs remark-code'&gt;cereals &lt;span style="background-color:#ffff7f"&gt;|&gt;&lt;/span&gt; &lt;span style="color:teal"&gt;summary&lt;/span&gt;()&lt;/code&gt;
 
 is the same as
 
@@ -101,8 +116,8 @@ What do you think the following will do?
 
 
 ```r
-cereals %&gt;%
-  filter(mfr == "Q") %&gt;%
+cereals |&gt;
+  filter(mfr == "Q") |&gt;
   arrange(calories)
 ```
 
@@ -110,7 +125,7 @@ cereals %&gt;%
 
 
 ```
-## # A tibble: 8 x 16
+## # A tibble: 8 × 16
 ##   name       mfr   temp  calories protein   fat sodium fiber carbo sugars potass
 ##   &lt;chr&gt;      &lt;fct&gt; &lt;fct&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
 ## 1 Puffed Ri… Q     C           50       1     0      0   0      13      0     15
@@ -134,9 +149,9 @@ What do you think the following will do?
 
 
 ```r
-cereals %&gt;%
-  filter(mfr == "Q") %&gt;%
-  group_by(temp) %&gt;% 
+cereals |&gt;
+  filter(mfr == "Q") |&gt;
+  group_by(temp) |&gt; 
   arrange(sugars)
 ```
 
@@ -145,7 +160,7 @@ cereals %&gt;%
 
 
 ```
-## # A tibble: 8 x 16
+## # A tibble: 8 × 16
 ## # Groups:   temp [2]
 ##   name       mfr   temp  calories protein   fat sodium fiber carbo sugars potass
 ##   &lt;chr&gt;      &lt;fct&gt; &lt;fct&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
@@ -209,6 +224,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable
