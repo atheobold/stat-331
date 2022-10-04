@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.0.38">
+<meta name="generator" content="quarto-1.1.120">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,10 +11,15 @@
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
 </style>
 
 
@@ -57,10 +62,15 @@ ul.task-list{list-style: none;}
 <p>Your first reflection will be submitted at the end of this week (October 9). This will be your first experience writing a narrative about your learning and your accomplishments, so I do not expect for it to be perfect! But, I do expect you to take this process seriously and put honest effort into writing your reflection.</p>
 <section id="reflection-outline" class="level3">
 <h3 class="anchored" data-anchor-id="reflection-outline">Reflection Outline</h3>
-<p>Here is a skeleton of what I want you to address in your reflection.</p>
-<ul>
-<li>An assessment of the grade you believe you have earned for the course. Consider this a proposal. Your reflection provides “evidence” in favor of your proposed grade.</li>
-</ul>
+<p>The following are questions I expect you to address in your reflection:</p>
+<ol type="1">
+<li>What learning targets have you demonstrated an understanding of?</li>
+<li>How have you demonstrated a commitment to continued learning?</li>
+<li>How have you grown as a team member and leader?</li>
+<li>How have you contributed to creating a respectful classroom learning community?</li>
+<li>Are you accomplishing the goals you outlined for yourself at the start of the course?</li>
+</ol>
+<p>At the end of your reflection, you need to tell me what grade you believe you have earned thus far in STAT 331. Consider this a proposal. Your reflection provides “evidence” in favor of your proposed grade. Your proposal should be based on the <a href="https://docs.google.com/document/d/1-SSRp_mXFNgYiy4uW9tlcpxDpQH4OuMqK-Hh4v5AvZI/edit#heading=h.1qwjvdqxd3i2">grade guidelines</a> we developed together as a class.</p>
 </section>
 <section id="length-requirements" class="level3">
 <h3 class="anchored" data-anchor-id="length-requirements">Length Requirements</h3>
@@ -142,7 +152,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
