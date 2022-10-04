@@ -30,8 +30,15 @@ a class.
 
 ### Length Requirements
 
-I would appreciate it if your reflection is no more than 2-pages double spaced. If your reflection is less than half a page, you haven't written enough. You can choose to write your reflection in whatever software you wish, but I will only accept HTML, PDF, and Word documents. *Note:* You can make all these documents in Quarto!
+I would appreciate it if your reflection is no more than 2-pages double spaced.
+If your reflection is less than half a page, you haven't written enough. You can
+choose to write your reflection in whatever software you wish, but I will only
+accept HTML, PDF, and Word documents. *Note:* You can make all these documents
+in Quarto!
 
 ### What you can expect from me
 
-Similar to your lab assignments, I will provide feedback on your reflection, celebrating your accomplishments and pointing out any places we don't see eye-to-eye. It is possible your grade and my grade do not agree, but that is where the conversation starts!
+Similar to your lab assignments, I will provide feedback on your reflection,
+celebrating your accomplishments and pointing out any places we don't see
+eye-to-eye. It is possible your grade and my grade do not agree, but that is
+where the conversation starts!
