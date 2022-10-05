@@ -1,6 +1,6 @@
 ---
 title: " `r emo::ji('speech')` A Few More Data Wrangling Tools </br>"
-date: "</br> January 19, 2022"
+date: "</br> October 6, 2022"
 author: "</br> Dr. Allison Theobold"
 output:
   xaringan::moon_reader:
