@@ -1,28 +1,31 @@
 ---
 title: "Lab 3: Hip-Hop Lyrics"
-author: ""
-output:
-  prettydoc::html_pretty:
-    theme: tactile
-    highlight: github
-    css: styles.css
+format: 
+  html: 
+    theme: minty
+    fontsize: 1em
+    mainfont: sans-serif
+    number-sections: true
+    number-depth: 2
+    code-block-bg: "#76b5c5"
+    highlight-style: monochrome
+editor: visual
+execute: 
+  echo: false
+  warning: false
+  message: false
+  eval: false
 ---
-
-```{r global_options, include=FALSE}
-knitr::opts_chunk$set(fig.width=12, fig.height=8, fig.path='Figs/',
-                      echo=FALSE, warning=FALSE, message=FALSE,eval=FALSE)
-
-```
 
 ## Instructions and Tips
 
-Please submit an HTML document created using R Markdown.
+Please submit an HTML document created using Quarto **and** your associated Quarto document. 
 
-* The first chunk of your R Markdown document should be to set the
-*global chunk options*.
-
-* The second chunk of your R Markdown document should be to
+* The first chunk of your Quarto document should be to
 *declare your libraries* (probably only `tidyverse` for now).
+
+* The second chunk of your Quarto document should be to *load in your data*
+(using the `here()` function!). 
 
 * Make sure you address **all the questions** in these instructions.
 
@@ -37,17 +40,19 @@ Please submit an HTML document created using R Markdown.
 * Be sure to **save** your work regularly (*Ctrl/Cmd+S* or *File > Save* or the
 floppy disk icon)
 
-* Be sure to **knit** your file every so often, to check for errors and make
+* Be sure to **render** your file every so often, to check for errors and make
 sure it looks nice.
 
-    + Make your R Markdown document does not contain `View(dataset)` or `install.packages("package")`, both of these will prevent knitting.
+    + Make your Quarto document does not contain `View(dataset)` 
+    or `install.packages("package")`, both of these will prevent rendering.
     
-    + Check your R Markdown document for moments when you looked at the data by
+    + Check your Quarto document for moments when you looked at the data by
     typing the name of the data frame.  Leaving these in means the whole dataset
-    will print out!
+    will print out and this looks unprofessional. 
     
-    + If all else fails, you can set your *chunk option* or *global option* to
-    `error = TRUE`, which will allow the file to knit even if errors are present.
+    + If all else fails, you can set your execution options to
+    `error: true`, which will allow the file to render even if errors are
+    present.
     
 ---
 
@@ -79,7 +84,8 @@ You can download the data [at this Dropbox link](https://www.dropbox.com/s/5d8fw
 Provide a brief overview (2-4 sentences) of the dataset. (It is always good
 practice to start an analysis by getting a feel for the data and providing a
 quick summary for readers.) You do **not** need to show any source code for this
-question, although you probably want to use code to get information.
+question, although you probably want to use code to get some information about 
+the dataset.
 
 #### 2. 
 
@@ -132,11 +138,8 @@ Helpful functions:  `select()`, `distinct(___, .keep_all = TRUE)`,
 
 Make at least two plots to display the demographic information of the subjects
 in this study.  You do not need to discuss these plots, but make sure they are
-appropriate to the data types and have informative titles and axis labels.
-
-Functions:  `ggplot()`, `geom_histogram()`, `geom_boxplot()`, `geom_bar()`,
-`geom_col()`, `facet_wrap()`, `labs()`
-
+appropriate to the data types and have informative titles and axis labels. Feel 
+free to use the skills you learned in Challenge 3 to enhance your plots! 
 
 ### Familiar words
 
@@ -147,29 +150,29 @@ a. People below the age of 20
 b. Non-white women
 c. White men above the age of 30
 
-Helpful functions: `filter()`, `arrange()`, `desc()`, `slice_max()`,
+Helpful functions: `filter()`, `group_by()`, `summarize()`, `slice_max()`,
 `slice_min()`
 
 ### Study Subjects
 
 
 A joke among the [Tidy Tuesday](https://www.tidytuesday.com/) community is that
-Justin Bieber was one of the
-subjects in this study. Bieber, a white male, from a relatively small town
-(10,000-60,000 people) in Ontario would have been 17-23 at the time of the
-study.
+Justin Bieber was one of the subjects in this study. Bieber, a white male, from
+a relatively small town (10,000-60,000 people) in Ontario would have been 17-23
+at the time of the study.
 
 Determine which subject you believe is secretly Bieber, justify your answer.
-
 *Hint: Refer again to the dataset description.  There is another clue about Bieber's identity.*
 
 ---
 
 ## Challenge
 
-### Published Comparisons
+Your challenge should be submitted as a separate file, not included at the 
+bottom of your Lab 3 file. Please submit both a rendered HTML file **and** the
+source code (Quarto document). 
 
-*(Turn your challenge in as a separate html file from the lab.)*
+### Published Comparisons
 
 In the published article ([You Know What It Is: Learning Words through Listening to Hip-Hop](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0028248)), 
 the author presents a series of comparisons about the variables which most 
@@ -189,15 +192,12 @@ variables you are interested in!*
 
 Helpful functions: `select()`, `group_by()`, `summarize()`, `across()`
 
-**In your Think Out Loud Recording you will be expected to explain your thought process and the code you produced.**
-
-
 ### Study Design Critique
 
 Myself, members of the Tidy Tuesday community, and previous 331 students have
 voiced concerns regarding the design and social context of this study. 
 
-Re-read the [variable description (link)](http://conservancy.umn.edu/bitstream/handle/11299/116327/5/explanationAAEHiphopChesley.txt) to see how participants were recruited for participation in this study. 
+Re-read the [data description (link)](http://conservancy.umn.edu/bitstream/handle/11299/116327/5/explanationAAEHiphopChesley.txt) to see how participants were recruited for participation in this study. 
 
 You are welcome to read additional details regarding aspects of the study in the
 published paper:
