@@ -1,6 +1,6 @@
 ---
 title: "Recap of Relational Data"
-date: "January 24, 2022"
+date: "October 10, 2022"
 author: "Dr. Allison Theobold"
 output:
   xaringan::moon_reader:
@@ -28,6 +28,7 @@ library(xaringanthemer)
 library(xaringan)
 library(tidyverse)
 library(kableExtra)
+library(flair)
 
 style_duo_accent(
   primary_color      = "#b76352", # mango
@@ -89,25 +90,25 @@ class: center
 ![](figures/surveys_relate.jpeg)
 
 ```{r, echo = FALSE}
-surveys %>% 
-  head() %>% 
-  kable() %>% 
+surveys  |>  
+  head() |> 
+  kable() |> 
   kable_styling()
 ```
 
 </br>
 
 ```{r, echo = FALSE, eval = FALSE}
-plots %>% 
-  head(n = 1) %>% 
-  kable() %>% 
+plots |> 
+  head(n = 1) |> 
+  kable() |> 
   kable_styling()
 ```
 
 ```{r, echo = FALSE, eval = FALSE}
-species %>% 
-  head(n = 2) %>% 
-  kable() %>% 
+species |> 
+  head(n = 2) |> 
+  kable() |> 
   kable_styling()
 ```
 
@@ -119,29 +120,31 @@ class: center, middle
 
 Matches pairs of observations when "keys" are equal
 
-<center>
-![](figures/inner_join.png)
+```{r, echo = FALSE, out.width = "100%"}
+knitr::include_graphics("figures/inner_join.png")
+```
+
 ---
 
 class: center
 
 .larger[**Mean Weights**]
 
-```{r, eval = FALSE}
-surveys_weight <- surveys %>% 
-  group_by(species_id) %>% 
+```
+surveys_weight <- surveys |> 
+  group_by(species_id) |> 
   summarize(mean_weight = mean(weight))
 ```
 
 ```{r, echo = FALSE}
-surveys_weight <- surveys %>% 
-  filter(!is.na(weight)) %>% 
-  group_by(species_id) %>% 
+surveys_weight <- surveys |> 
+  filter(!is.na(weight)) |> 
+  group_by(species_id) |> 
   summarize(mean_weight = mean(weight)) 
 
-surveys_weight %>% 
-  head() %>% 
-  kable() %>% 
+surveys_weight |> 
+  head() |> 
+  kable() |> 
   kable_styling()
 
 ```
@@ -153,17 +156,21 @@ class: center
 .larger[**Adding Information**]
 
 ```{r, eval = FALSE}
-surveys_weight %>% 
+surveys_weight |> 
   inner_join(species, by = "species_id")
 ```
 
 ```{r, echo = FALSE}
-surveys_weight %>% 
-  inner_join(species, by = "species_id") %>% 
-  head() %>% 
-  kable() %>% 
+surveys_weight |> 
+  inner_join(species, by = "species_id") |> 
+  head() |> 
+  kable() |> 
   kable_styling()
 ```
+
+--
+
+**Would another mutating join resulted in the same dataset?**
 
 ---
 
@@ -196,15 +203,15 @@ class: center
 
 .pull-left[
 ```{r, eval = FALSE}
-surveys_weight %>% 
+surveys_weight |> 
   semi_join(species, by = "species_id")
 ```
 
 ```{r, echo = FALSE}
-surveys_weight %>% 
-  semi_join(species, by = "species_id") %>% 
-  head(n = 5) %>% 
-  kable() %>% 
+surveys_weight |> 
+  semi_join(species, by = "species_id") |> 
+  head(n = 5) |> 
+  kable() |> 
   kable_styling()
 ```
 ]
@@ -229,16 +236,16 @@ class: center
 
 .pull-left[
 ```{r, eval = FALSE}
-species %>% 
+species |> 
   anti_join(surveys_weight, by = "species_id")
 ```
 
 ```{r, echo = FALSE}
-species %>% 
-  anti_join(surveys_weight, by = "species_id") %>% 
-  select(species_id, species) %>% 
-  head(n = 3) %>% 
-  kable() %>% 
+species |> 
+  anti_join(surveys_weight, by = "species_id") |> 
+  select(species_id, species) |> 
+  head(n = 3) |> 
+  kable() |> 
   kable_styling()
 ```
 ]
@@ -261,11 +268,47 @@ class: middle
 
 --
 
-- Including observations with **`%in%`** 
-  * Similar to **`semi_join()`**
+Including observations with **`%in%`** 
+
+```{r include, eval = FALSE, echo = FALSE}
+surveys |> 
+  filter(!species_id %in% c("BA", "DM", "DS")
+         )
+```
+
+```{r, echo = FALSE}
+decorate(x = "include", eval = FALSE) |> 
+  flair(pattern = "%in%")
+```
 
 --
 
-- Excluding observations with **`!%in%`**
-  * Similar to **`anti_join()`**
+<center>
 
+.bitlarger[Similar to **`semi_join()`**!]
+
+---
+
+class: middle
+
+.larger[Connections to Data Cleaning]
+
+--
+
+Excluding observations with **`!%in%`**
+
+```{r not-include, eval = FALSE, echo = FALSE}
+surveys |> 
+  filter(!species_id %in% c("AB", "AH", "AS")
+         )
+```
+
+```{r, echo = FALSE}
+decorate(x = "not-include", eval = FALSE) |> 
+  flair(pattern = "%in%") |> 
+  flair(pattern = "!")
+```
+
+<center>
+
+.bitlarger[Similar to **`anti_join()`**!]

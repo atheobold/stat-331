@@ -4,8 +4,8 @@
     <title>Recap of Relational Data</title>
     <meta charset="utf-8" />
     <meta name="author" content="Dr. Allison Theobold" />
-    <meta name="date" content="2022-01-24" />
-    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
+    <meta name="date" content="2022-10-10" />
+    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
     <script src="libs/kePrint-0.0.1/kePrint.js"></script>
     <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
@@ -15,9 +15,15 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # Recap of Relational Data
+]
+.author[
 ### Dr. Allison Theobold
-### January 24, 2022
+]
+.date[
+### October 10, 2022
+]
 
 ---
 
@@ -163,18 +169,17 @@ class: center, middle
 
 Matches pairs of observations when "keys" are equal
 
-&lt;center&gt;
-![](figures/inner_join.png)
+&lt;img src="figures/inner_join.png" width="100%" style="display: block; margin: auto;" /&gt;
+
 ---
 
 class: center
 
 .larger[**Mean Weights**]
 
-
-```r
-surveys_weight &lt;- surveys %&gt;% 
-  group_by(species_id) %&gt;% 
+```
+surveys_weight &lt;- surveys |&gt; 
+  group_by(species_id) |&gt; 
   summarize(mean_weight = mean(weight))
 ```
 
@@ -221,7 +226,7 @@ class: center
 
 
 ```r
-surveys_weight %&gt;% 
+surveys_weight |&gt; 
   inner_join(species, by = "species_id")
 ```
 
@@ -281,6 +286,10 @@ surveys_weight %&gt;%
 &lt;/tbody&gt;
 &lt;/table&gt;
 
+--
+
+**Would another mutating join resulted in the same dataset?**
+
 ---
 
 .pull-left[
@@ -313,7 +322,7 @@ class: center
 .pull-left[
 
 ```r
-surveys_weight %&gt;% 
+surveys_weight |&gt; 
   semi_join(species, by = "species_id")
 ```
 
@@ -368,7 +377,7 @@ class: center
 .pull-left[
 
 ```r
-species %&gt;% 
+species |&gt; 
   anti_join(surveys_weight, by = "species_id")
 ```
 
@@ -412,14 +421,37 @@ class: middle
 
 --
 
-- Including observations with **`%in%`** 
-  * Similar to **`semi_join()`**
+Including observations with **`%in%`** 
+
+
+
+
+&lt;code class ='r hljs remark-code'&gt;surveys |&gt; &lt;br&gt;&amp;nbsp;&amp;nbsp;filter(!species_id &lt;span style="background-color:#ffff7f"&gt;%in%&lt;/span&gt; c("BA", "DM", "DS")&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;)&lt;/code&gt;
 
 --
 
-- Excluding observations with **`!%in%`**
-  * Similar to **`anti_join()`**
+&lt;center&gt;
 
+.bitlarger[Similar to **`semi_join()`**!]
+
+---
+
+class: middle
+
+.larger[Connections to Data Cleaning]
+
+--
+
+Excluding observations with **`!%in%`**
+
+
+
+
+&lt;code class ='r hljs remark-code'&gt;surveys |&gt; &lt;br&gt;&amp;nbsp;&amp;nbsp;filter(&lt;span style="background-color:#ffff7f"&gt;!&lt;/span&gt;species_id &lt;span style="background-color:#ffff7f"&gt;%in%&lt;/span&gt; c("AB", "AH", "AS")&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;)&lt;/code&gt;
+
+&lt;center&gt;
+
+.bitlarger[Similar to **`anti_join()`**!]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
@@ -469,6 +501,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable
