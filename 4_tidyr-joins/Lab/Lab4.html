@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Lab 4: Avocado Prices</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+<script src="Lab4_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Lab4_files/libs/quarto-html/quarto.js"></script>
+<script src="Lab4_files/libs/quarto-html/popper.min.js"></script>
+<script src="Lab4_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Lab4_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Lab4_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Lab4_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Lab4_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Lab4_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Lab4_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Lab 4: Avocado Prices</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="instructions" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Instructions</h1>
+<p>I advise you to focus particularly on:</p>
+<ul>
+<li><p>Setting chunk options carefully.</p></li>
+<li><p>Making sure you don’t print out more output than you need to.</p></li>
+<li><p>Making your code readable and nicely formatted. (You <strong>will</strong> get feedback on your code style from your peers!)</p></li>
+<li><p>Thinking through your desired result <strong>before</strong> writing any code.</p></li>
+</ul>
+<hr>
+</section>
+<section id="introduction-set-up" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Introduction &amp; Set-up</h1>
+<p>In this lab we’re going to be looking at avocado prices.</p>
+<p>The dataset comes to us from Kaggle and represents weekly retail scan data. It is available to download from Canvas under the name <code>avocado.csv</code>. A description of the data can be found <a href="https://www.kaggle.com/neuromusic/avocado-prices">here.</a></p>
+<p><strong>0.</strong> Create a Quarto file, load the data, and declare your package dependencies.</p>
+<p><strong>1.</strong> Briefly describe the dataset. What information does it contain?</p>
+<p><strong>2.</strong> Clean the data in any way you see fit. In particular, look carefully at the <code>region</code> variable. Notice that the category <code>"LosAngeles"</code> is contained in <code>"California"</code>, which is contained in <code>"West"</code>, which is contained in <code>"TotalUS"</code>. Think about how you want to handle this issue in your analysis.</p>
+<hr>
+</section>
+<section id="exercises" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Exercises</h1>
+<p><strong>3.</strong> Which major region sold the most organic, small Hass avocados in 2017?</p>
+<p><strong>4.</strong> Use the <code>separate()</code> function to split the <code>Date</code> variable into year, month, and day. In which month is the highest volume of avocado sales?</p>
+<p><strong>5.</strong> Which metro area regions sold the most total avocados? Plot side-by-side boxplots of total volume for only the five regions with the highest averages for the <code>Total Volume</code> variable.</p>
+<hr>
+</section>
+<section id="reshaping" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Reshaping</h1>
+<p>The following four California regions are in this dataset: <code>"LosAngeles"</code>, <code>"SanDiego"</code>, <code>"Sacramento"</code>, and <code>"SanFrancisco"</code>. Answer the following questions about these California regions <strong>only</strong>.</p>
+<p><strong>6.</strong> In which regions is the price of organic versus conventional avocados most different? Support your answer with a few summary statistics and a visualization.</p>
+<p><strong>7.</strong> The following plot shows, for all four California regions, the proportion of the mean Hass avocado sales that are small, large, or extra large; conventional vs.&nbsp;organic. Recreate the plot.</p>
+<p><em>Hint: This will require restructuring of your data!</em></p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Lab4_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<hr>
+</section>
+<section id="challenge" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Challenge</h1>
+<p>A joke in the media is that Millennials can’t afford houses, because they spend all their money buying avocado toast. Let’s use this dataset to address that claim.</p>
+<p>Find or make a dataset with house prices for these four California regions. Join this dataset with your California avocado dataset. Use your new joined dataset to make an argument about the relationship between house prices and avocado prices/sales. Support your argument with a plot.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

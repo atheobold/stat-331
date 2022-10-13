@@ -1,22 +1,28 @@
 ---
 title: "Lab 4: Avocado Prices"
-subtitle: "Stat 331"
-output: rmdformats::readthedown
+format: 
+  html: 
+    theme: minty
+    fontsize: 1em
+    mainfont: sans-serif
+    number-sections: true
+    number-depth: 2
+    code-block-bg: "#76b5c5"
+    highlight-style: monochrome
+editor: visual
+execute: 
+  echo: true
+  warning: false
+  message: false
+  eval: true
+  include: true
 ---
 
-```{r global_options, include = FALSE}
-knitr::opts_chunk$set(fig.width = 12,
-                      fig.height = 8,
-                      fig.path = 'Figs/',
-                      echo = TRUE,
-                      warning = FALSE,
-                      message = FALSE,
-                      eval = TRUE,
-                      include = TRUE)
+```{r set-up, include = FALSE}
 
 library(tidyverse)
 
-avocado <- read_csv(here::here("4_tidyr-joins", "Lab", "avocado.csv")) %>% 
+avocado <- read_csv(here::here("4_tidyr-joins", "Lab", "avocado.csv")) |> 
   rename(
     Size_Small = `4046`,
     Size_Large = `4225`,
@@ -27,15 +33,12 @@ cali <- tibble(region = c("LosAngeles", "SanDiego",
                           "Sacramento", "SanFrancisco")
                )
 
-cali_avo <- avocado %>% 
+cali_avo <- avocado |> 
   semi_join(cali, by = "region")
 ```
 
 
 # Instructions
-
-**Every member of the group must submit an .html and .Rmd file to the Lab 4
-assignment portal!**
 
 I advise you to focus particularly on:
 
@@ -43,8 +46,8 @@ I advise you to focus particularly on:
 
 * Making sure you don't print out more output than you need to.
 
-* Making your code readable and nicely formatted. (You **will** be graded on
-code style.)
+* Making your code readable and nicely formatted. (You **will** get feedback on
+your code style from your peers!)
 
 * Thinking through your desired result **before** writing any code.
 
@@ -58,11 +61,11 @@ The dataset comes to us from Kaggle and represents weekly retail scan data.
 It is available to download from Canvas under the name `avocado.csv`.  A
 description of the data can be found [here.](https://www.kaggle.com/neuromusic/avocado-prices)
 
-__0.__ Create an R Markdown file, load the data, and declare your package
+__0.__ Create a Quarto file, load the data, and declare your package
 dependencies. 
 
 
-__1.__ Briefly describe the dataset.  What information does it contain?
+__1.__ Briefly describe the dataset. What information does it contain?
 
 
 __2.__ Clean the data in any way you see fit. In particular, look carefully at
@@ -108,17 +111,17 @@ or extra large; conventional vs. organic.  Recreate the plot.
 
 
 ```{r, echo = FALSE}
-cali_avo %>% 
-  group_by(region, type) %>%
-  summarize(across(.cols = Size_Small:Size_XL, .fns = mean)) %>%
+cali_avo |> 
+  group_by(region, type) |>
+  summarize(across(.cols = Size_Small:Size_XL, .fns = mean)) |>
   pivot_longer(Size_Small:Size_XL, 
                names_to = "Size", 
-               values_to = "Mean_Sold") %>%
+               values_to = "Mean_Sold") |>
   mutate(
     Size = factor(Size, 
                   levels = c("Size_Small", "Size_Large", "Size_XL"),
                   labels = c("Small", "Large", "Extra Large"))
-  ) %>%
+  ) |>
   ggplot(aes(x = region, y = Mean_Sold, fill = Size)) +
   geom_col(position = "fill") + 
   facet_wrap(~type) + 
