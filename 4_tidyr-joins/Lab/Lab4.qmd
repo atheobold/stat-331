@@ -1,18 +1,25 @@
 ---
 title: "Lab 4: Avocado Prices"
-subtitle: "Stat 331"
-output: rmdformats::readthedown
+format: 
+  html: 
+    theme: minty
+    fontsize: 1em
+    mainfont: sans-serif
+    number-sections: true
+    number-depth: 2
+    code-block-bg: "#76b5c5"
+    highlight-style: monochrome
+editor: visual
+execute: 
+  echo: true
+  warning: false
+  message: false
+  eval: true
+  include: true
 ---
 
-```{r global_options, include = FALSE}
-knitr::opts_chunk$set(fig.width = 12,
-                      fig.height = 8,
-                      fig.path = 'Figs/',
-                      echo = TRUE,
-                      warning = FALSE,
-                      message = FALSE,
-                      eval = TRUE,
-                      include = TRUE)
+```{r data}
+#| include: false
 
 library(tidyverse)
 
@@ -43,8 +50,8 @@ I advise you to focus particularly on:
 
 * Making sure you don't print out more output than you need to.
 
-* Making your code readable and nicely formatted. (You **will** be graded on
-code style.)
+* Making your code readable and nicely formatted. (You **will** get feedback 
+from you peers on code style.)
 
 * Thinking through your desired result **before** writing any code.
 
@@ -58,7 +65,7 @@ The dataset comes to us from Kaggle and represents weekly retail scan data.
 It is available to download from Canvas under the name `avocado.csv`.  A
 description of the data can be found [here.](https://www.kaggle.com/neuromusic/avocado-prices)
 
-__0.__ Create an R Markdown file, load the data, and declare your package
+__0.__ Create a Quarto file, load the data, and declare your package
 dependencies. 
 
 
@@ -108,6 +115,8 @@ or extra large; conventional vs. organic.  Recreate the plot.
 
 
 ```{r, echo = FALSE}
+#| echo: false
+
 cali_avo %>% 
   group_by(region, type) %>%
   summarize(across(.cols = Size_Small:Size_XL, .fns = mean)) %>%

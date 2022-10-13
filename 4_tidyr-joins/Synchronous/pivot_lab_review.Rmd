@@ -1,6 +1,6 @@
 ---
 title: "Lab 4 -- Warm-up"
-date: "January 26, 2022"
+date: "October 13, 2022"
 author: "Dr. Allison Theobold"
 output:
   xaringan::moon_reader:
