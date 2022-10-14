@@ -11,7 +11,7 @@ format:
     highlight-style: monochrome
 editor: visual
 execute: 
-  echo: false
+  echo: true
 ---
 
 Today you will be tidying untidy data to explore the relationship between 
@@ -64,7 +64,6 @@ calculated on the assumption that, where financial years do not correspond to
 calendar years, spending is distributed evenly through the year. 
 Figures in constant (2017) and current US $, as a share of GDP and per capita 
 are presented according to calendar year. 
-
 The availability of data varies considerably by country, but for a majority of 
 countries that were independent at the time, data is available from at least the
 late 1950s. Estimates for regional military expenditure have been extended 
@@ -105,10 +104,10 @@ number of rows you want to be skipped *before* reading in the data.
 Finally, `read_xlsx()` also has a `n_max` argument, where you specify the 
 maximum number of rows of data to read in.
 
-__1.__ Modify the code below to read the miliary expenditures data into your
+__1.__ Modify the code below to read the military expenditures data into your
 work space. 
 
-```{r, message = FALSE}
+```{r, eval = FALSE}
 library(readxl) 
 library(tidyverse)
 
@@ -148,11 +147,11 @@ don't want.
 Run the code below to read in the "Regional totals" dataset, making any 
 necessary modifications to the path. 
 
-```{r, message = FALSE}
+```{r, eval = FALSE}
 cont_region <- read_xlsx(here::here("data",
                                     "gov_spending_per_capita.xlsx"), 
                       sheet = "Regional totals", 
-                      skip = 14) %>% 
+                      skip = 14) |> 
   filter(Region != "World total (including Iraq)", 
          Region != "World total (excluding Iraq)")
 
@@ -164,8 +163,8 @@ are retained, we should remember our friendly `%in%` function! However, if you
 think about the code below, you should notice that this code retains only the 
 values we wanted to remove! 
 
-```{r}
-military_clean %>% 
+```{r, eval = FALSE}
+military_clean |> 
   filter(Country %in% cont_region$Region)
 ```
 
@@ -193,28 +192,27 @@ correct capitalization **and** punctuation!
 
 ## Data Organization
 
-The comparison I am interested in looking at the military expenditures of 
-different countries across every year in the data. Something like this:  
+The comparison I am interested in looking at the military expenditures across
+every year in the data. Something like this:  
 
 <https://app.box.com/embed/s/ed74ynmti87pk8oats4jdbhwb5rqf7cm?sortColumn=date&view=list>
 
-Unfortunately, this requires that each year is it's own column! 
+Unfortunately, this requires that every year is included in one column! 
 
-To tidy a dataset like this, we need to gather those columns into a new pair of
-variables. To do this process we need three parameters:  
+To tidy a dataset like this, we need to pivot the columns of years from wide 
+format to long format. To do this process we need three parameters:  
 
 * The set of columns that represent values, not variables. In these data, those
-are all the columns from `"1988"` to `"2018"`.  
+are all the columns from `1988` to `2018`.  
 
-* The name of the variable to move the column names to. In these data, this 
-could be `"Year"`. 
+* The name of the variable that should be created to move these columns into. In
+these data, this could be `"Year"`. 
 
-* The name of the variable to move the column values to. In these data, this 
-could be labeled `"Spending"`. 
+* The name of the variable that should be created to move these column's values
+into. In these data, this could be labeled `"Spending"`. 
 
-All of these pieces together form the arguments to the `pivot_longer()`
+Each of these pieces form the three required arguments to the `pivot_longer()`
 function. 
-
 
 __4.__ Pivot the cleaned up `military` dataset to a "longer" orientation. Save 
 this new "long" version as a new dataset (**do not** overwrite your cleaned 
@@ -236,4 +234,7 @@ labels!
 
 What year was the second largest military expenditure? What country had this
 expenditure? 
+
+
+**Bonus**: What is the reason for this large expenditure? 
 
