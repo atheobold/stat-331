@@ -1,17 +1,24 @@
 ---
-title: "Practice Activity Clue:  Dates and Times"
-output:
-  prettydoc::html_pretty:
-    theme: tactile
-    highlight: github
-    css: styles.css
+title: "Practice Activity 5:  Dates and Times"
+format: 
+  html: 
+    theme: minty
+    fontsize: 1em
+    mainfont: sans-serif
+    number-sections: true
+    number-depth: 2
+    code-block-bg: "#76b5c5"
+    highlight-style: monochrome
+editor: visual
+execute: 
+  echo: false
+  include: false
+  eval: false
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, 
-                      include = FALSE,
-                      eval = FALSE)
 
+```{r setup}
+#| include: false
 library(tidyverse)
 library(lubridate)
 ```
@@ -30,8 +37,8 @@ people who entered the building last year, and what date and time they entered,
 in Pacific Standard Time (PST). This dataset is available [here](https://app.box.com/s/3a37j0bvfhk9b5m48w1cqqlv3evp5dug), named
 `suspects_times.csv`.
 
-Unfortunately, the date and time of the murder is not known.  You have been
-hired to crack the case.  Use the clues below to discover the murderer's
+Unfortunately, the date and time of the murder is not known. You have been
+hired to crack the case. Use the clues below to discover the murderer's
 identity.
 
 ```{r}
@@ -59,7 +66,8 @@ suspects <- read_csv(here::here("5_strings-factors-dates",
 ```
 
 
-1. Based on the sunburn patterns on the body, the murder was not committed in the morning.
+1. Based on the sunburn patterns on the body, the murder was not committed in
+the morning.
 
 ```{r}
 suspects <- suspects %>% 
@@ -110,7 +118,7 @@ suspects <- suspects %>%
 
 
 5. The Killer left behind a birthday card at the scene of the crime.  The date
-is smudged, but the day of the month is shown to be 22.  It is thought that
+is smudged, but the number of the month is shown to be 22.  It is thought that
 perhaps this murder took place less than two days after the Killer's birthday.
 
 ```{r}
@@ -134,12 +142,14 @@ epoch <- ymd_hms("1970-01-01 0:0:0",
 suspects <- suspects %>% 
   mutate(minutes  = difftime(Time.Spotted,
                              epoch, 
-                             units = "mins"))  %>%
+                             units = "mins")
+         )  %>%
   filter(as.integer(minutes) %% 10 == 0) 
 ```
 
 
 Who is the killer? (Only one name should remain.)
+
 
 
 
