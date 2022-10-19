@@ -1,6 +1,6 @@
 ---
 title: "Regular Expressions"
-date: "February 2, 2022"
+date: "October 20, 2022"
 author: "Dr. Allison Theobold"
 output:
   xaringan::moon_reader:
@@ -165,7 +165,7 @@ Use `str_detect()`!
 
 class: center, middle
 
-.larger[Want to see what string(s) have certain values?]
+.larger[Want to see what string(s) have certain patterns?]
 
 --
 
@@ -211,4 +211,4 @@ class: center, middle
 
 --
 
-Use `str_c()`!
+Use `str_c()` or `str_squish()`!
