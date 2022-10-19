@@ -1,0 +1,29 @@
+---
+title: "Lab 5: Factors in Visualizations"
+format: 
+  html: 
+    theme: minty
+    fontsize: 1em
+    mainfont: sans-serif
+    number-sections: true
+    number-depth: 2
+    code-block-bg: "#76b5c5"
+    highlight-style: monochrome
+editor: visual
+execute: 
+  echo: true
+  warning: false
+  message: false
+  eval: true
+  include: true
+---
+
+Change two plots using factor functions
+
+- collapse levels into new level
+- remove levels
+- rename levels
+- reorder level
+
+* change ordering to be largest to smallest 
+* change ordering of legend to match grouping in plot
