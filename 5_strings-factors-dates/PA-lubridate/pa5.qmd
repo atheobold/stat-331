@@ -16,30 +16,19 @@ execute:
   eval: false
 ---
 
-
 ```{r setup}
 #| include: false
 library(tidyverse)
 library(lubridate)
 ```
 
-
 ## Solve the mystery
 
-One of the most famous mysteries in California history is the identity of the 
-so-called "Zodiac Killer", who murdered 7 people in Northern California between
-1968 and 1969.
+One of the most famous mysteries in California history is the identity of the so-called "Zodiac Killer", who murdered 7 people in Northern California between 1968 and 1969.
 
-A new murder was committed last year in California, suspected to be the work of
-a new Zodiac Killer on the loose.  Fortunately, a camera was planted at the
-location where the body was found.  The FBI has provided you with a list of
-people who entered the building last year, and what date and time they entered,
-in Pacific Standard Time (PST). This dataset is available [here](https://app.box.com/s/3a37j0bvfhk9b5m48w1cqqlv3evp5dug), named
-`suspects_times.csv`.
+A new murder was committed last year in California, suspected to be the work of a new Zodiac Killer on the loose. Fortunately, a camera was planted at the location where the body was found. The FBI has provided you with a list of people who entered the building last year, and what date and time they entered, in Pacific Standard Time (PST). This dataset is available [here](https://app.box.com/s/3a37j0bvfhk9b5m48w1cqqlv3evp5dug), named `suspects_times.csv`.
 
-Unfortunately, the date and time of the murder is not known. You have been
-hired to crack the case. Use the clues below to discover the murderer's
-identity.
+Unfortunately, the date and time of the murder is not known. You have been hired to crack the case. Use the clues below to discover the murderer's identity.
 
 ```{r}
 # 214 total suspects
@@ -47,109 +36,20 @@ suspects <- read_csv(here::here("5_strings-factors-dates",
                                 "PA-lubridate",
                                 "suspect_times.csv")
                      )
-
-# ted <- suspects %>% 
-#   filter(Name == "Ted Cruz") %>%
-#   mutate(
-#   Time.Spotted = force_tz(ymd_hms(Time.Spotted), "America/Los_Angeles")
-# )
-# 
-# am(ted$Time.Spotted)
-# 
-# wday(ted$Time.Spotted, label = TRUE)
-# 
-# month(ted$Time.Spotted)
-# 
-# hour(with_tz(ted$Time.Spotted, tz = "GMT"))
-# 
-# as.numeric(ted$Time.Spotted)
 ```
 
+1.  Based on the sunburn patterns on the body, the murder was not committed in the morning.
 
-1. Based on the sunburn patterns on the body, the murder was not committed in
-the morning.
+2.  The room where the murder was committed is closed Tuesdays and Thursdays, so the murder did not happen on those days.
 
-```{r}
-suspects <- suspects %>% 
-  mutate(
-  Time.Spotted = force_tz(ymd_hms(Time.Spotted), "America/Los_Angeles")
-  ) %>% 
-  filter(!am(Time.Spotted)) 
-# Down to 112
-```
+3.  It is believed that the murder was committed within 5 weeks (35 days) of Thanksgiving, 2018.
 
+4.  It was discovered that just before being murdered, the victim tried to send a text to their sister in Iceland, saying "Goodnight over there!"
 
-2. The room where the murder was committed is closed Tuesdays and Thursdays,
-so the murder did not happen on those days.
+5.  The Killer left behind a birthday card at the scene of the crime. The date is smudged, but the number of the month is shown to be 22. It is thought that perhaps this murder took place less than two days after the Killer's birthday.
 
-```{r}
-suspects <- suspects %>% 
-  filter(!(wday(Time.Spotted, label = TRUE) %in% c("Tue", "Thu")
-           )
-         )
-## Down to 77
-```
+6.  The Killer is amused by our efforts, and he has sent us a cryptic clue:
 
-
-3. It is believed that the murder was committed within 5 weeks (35 days) of Thanksgiving, 2018. 
-
-```{r}
-tgiving <- make_date(year = 2018, 
-                     month = 11, 
-                     day = 22)
-
-suspects <- suspects %>% 
-  filter(Time.Spotted >= tgiving - 35,
-         Time.Spotted <= tgiving + 35) 
-
-## Down to 13
-```
-
-
-4. It was discovered that just before being murdered, the victim tried to send
-a text to their sister in Iceland, saying "Goodnight over there!"
-
-```{r}
-suspects <- suspects %>% 
-  filter(pm(with_tz(Time.Spotted, "GMT"))) 
-
-## Down to 5
-```
-
-
-5. The Killer left behind a birthday card at the scene of the crime.  The date
-is smudged, but the number of the month is shown to be 22.  It is thought that
-perhaps this murder took place less than two days after the Killer's birthday.
-
-```{r}
-suspects <- suspects %>% 
-  filter(mday(Time.Spotted) <= 24 & mday(Time.Spotted) >= 22) 
-
-## Down to 2
-```
-
-
-6. The Killer is amused by our efforts, and he has sent us a cryptic clue:
-
-> "The number of minutes between Jan 1, 1970 at midnight and the time I arrived
-on the scene is divisible by 10."
-
-
-```{r}
-epoch <- ymd_hms("1970-01-01 0:0:0",
-                 tz = "America/Los_Angeles")
-
-suspects <- suspects %>% 
-  mutate(minutes  = difftime(Time.Spotted,
-                             epoch, 
-                             units = "mins")
-         )  %>%
-  filter(as.integer(minutes) %% 10 == 0) 
-```
-
+> "The number of minutes between Jan 1, 1970 at midnight and the time I arrived on the scene is divisible by 10."
 
 Who is the killer? (Only one name should remain.)
-
-
-
-
