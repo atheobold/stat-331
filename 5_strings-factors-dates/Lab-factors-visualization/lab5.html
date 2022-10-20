@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Lab 5: Factors in Visualizations</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+<script src="lab5_files/libs/clipboard/clipboard.min.js"></script>
+<script src="lab5_files/libs/quarto-html/quarto.js"></script>
+<script src="lab5_files/libs/quarto-html/popper.min.js"></script>
+<script src="lab5_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="lab5_files/libs/quarto-html/anchor.min.js"></script>
+<link href="lab5_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="lab5_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="lab5_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="lab5_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="lab5_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Lab 5: Factors in Visualizations</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<div class="cell">
+
+</div>
+<p>The inspiration for this lab comes from the plotting “best practices” that I’ve learned over the years. My main inspiration is <a href="https://www.youtube.com/watch?v=h5cTacaWE6I">Will Chase’s 2020 RStudio Conference Presentation</a> – Glamour of Graphics <a href="https://www.williamrchase.com/slides/assets/player/KeynoteDHTMLPlayer.html#0">(slides)</a>.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Fun fact! The inspiration for the presentation title came from Dr.&nbsp;Kelly Bodwin!</p>
+</div>
+</div>
+<section id="revisiting-lab-2" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="revisiting-lab-2"><span class="header-section-number">1</span> Revisiting Lab 2</h2>
+<p>Let’s start with the side-by-side boxplots you created in Week 2, to visualize the distribution of weight within each species (not species ID!).</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="lab5_files/figure-html/boxplot-jitter-points-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>As you should expect with a character variable, the boxplots go in alphabetical order. This looks rather jumbled, so let’s put our factor skills to work!</p>
+<p><strong>1. Reorder the boxplots so the weights go in descending order.</strong></p>
+<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Danger
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You are required to use functions from <code>forcats</code> to complete this task.</p>
+</div>
+</div>
+<div class="cell">
+
+</div>
+<p><strong>2. Now that you’ve reordered, look at your y-axis label. That’s long! Let’s take Will Chase’s advice and move the y-axis label to the top of the plot.</strong></p>
+<div class="cell">
+
+</div>
+</section>
+<section id="time-series-plot" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="time-series-plot"><span class="header-section-number">2</span> Time-Series Plot</h2>
+<p>This week, we focused on learning skills related to working with dates, but we have yet to make a very common type of plot – the time-series plot. We’ll use this plot to motivate a second type of factor reordering!</p>
+<p><strong>1. Create a visualization how weights vary for each genus over the duration of the study.</strong></p>
+<div class="cell">
+
+</div>
+<p>Alright, there are a lot of measurements over time! Let’s use our dplyr skills to summarize each year and plot the summaries.</p>
+<p><strong>2. Calculate and plot the mean weight for each year (for each genus).</strong></p>
+<div class="cell">
+
+</div>
+<p>This should look much less busy! However, you should notice that the legend still goes in alphabetical order.</p>
+<p><strong>3. Reorder the boxplots so the weights go in descending order.</strong></p>
+<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Danger
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You are required to use functions from <code>forcats</code> to complete this task.</p>
+</div>
+</div>
+<div class="cell">
+
+</div>
+<p><strong>4. Now that you’ve reordered, look at your legend’s label. That’s terrible! Let’s give the legend a new title <em>and</em> move the information from the y-axis to the plot title.</strong></p>
+<div class="cell">
+
+</div>
+</section>
+<section id="caputures-over-the-week" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="caputures-over-the-week"><span class="header-section-number">3</span> Caputures over the Week</h2>
+<p>For our final exploration, we will consider the number of rodents captured throughout the week – transitioning to visualizations of categorical variables.</p>
+<p><strong>1. Create a visualization of the number of rodents captured each day of the week.</strong></p>
+<div class="cell">
+
+</div>
+<p>As you might have expected, the ordering of the days of the week is not what we would like.</p>
+<p><strong>2. Change the order of the day of the week to go Monday through Sunday.</strong></p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You can choose to keep the days named as they are (e.g., Mon, Sun), or you can choose to rename the days to their full names (e.g., Monday, Sunday).</p>
+</div>
+</div>
+<div class="cell">
+
+</div>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Your plot <strong>should not</strong> make people tilt their heads to read it! Be mindful in choosing which variable goes on which axis and if / how you use axis labels.</p>
+</div>
+</div>
+<p>It should be very clear that there are more rodents captured on the weekend than during the week. But, let’s explore if this is still the case if we use a “Weekday” / “Weekend” classification system instead.</p>
+<p><strong>3. Collapse Monday through Friday into a <code>"Weekday"</code> level, and collapse Saturday and Sunday into a <code>"Weekend"</code> level. Plot the number of rodents captured between the two groups.</strong></p>
+<div class="cell">
+
+</div>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Your plot <strong>should not</strong> make people tilt their heads to read it! Be mindful in choosing which variable goes on which axis and if / how you use axis labels.</p>
+</div>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
