@@ -108,20 +108,6 @@ __*__ -- Occurs 0 or more times
 
 ---
 
-class: middle, inverse
-
-.larger[Your turn!]
-
-.large[Write a regular expression that search for words that:  
-
-- end with a vowel
-- start with x, y, or z 
-- *do not* contain x, y, or z
-- contain British spelling
-]
-
----
-
 class: center
 
 .larger[Creating Groups & Referencing Groups]
@@ -144,6 +130,23 @@ Groups can be referenced based on their position
 ```
 "(.)(.)\\2\\1"
 ```
+--
+
+**What type of word does the last regex search for?**
+
+---
+
+class: middle, inverse
+
+.larger[Your turn!]
+
+.large[Write a regular expression that search for words that:  
+
+- end with a vowel
+- start with x, y, or z 
+- *do not* contain x, y, or z
+- contain British spelling
+]
 
 ---
 
@@ -211,4 +214,4 @@ class: center, middle
 
 --
 
-Use `str_c()` or `str_squish()`!
+Use `str_c()` or `str_flatten()`!

@@ -32,17 +32,15 @@ surveys <- read_csv(
   )
 ```
 
-The inspiration for this lab comes from the plotting "best practices" that I've
-learned over the years. My main inspiration is [Will Chase's 2020 RStudio Conference Presentation](https://www.youtube.com/watch?v=h5cTacaWE6I) -- Glamour of Graphics [(slides)](https://www.williamrchase.com/slides/assets/player/KeynoteDHTMLPlayer.html#0). 
+The inspiration for this lab comes from the plotting "best practices" that I've learned over the years. My main inspiration is [Will Chase's 2020 RStudio Conference Presentation](https://www.youtube.com/watch?v=h5cTacaWE6I) -- Glamour of Graphics [(slides)](https://www.williamrchase.com/slides/assets/player/KeynoteDHTMLPlayer.html#0).
 
-:::{.callout-note}
+::: callout-note
 Fun fact! The inspiration for the presentation title came from Dr. Kelly Bodwin!
 :::
 
 ## Revisiting Lab 2
 
-Let's start with the side-by-side boxplots you created in Week 2, to visualize
-the distribution of weight within each species (not species ID!).
+Let's start with the side-by-side boxplots you created in Week 2, to visualize the distribution of weight within each species (not species ID!).
 
 ```{r boxplot-jitter-points}
 #| eval: true
@@ -55,12 +53,11 @@ surveys |>
        y = "Species")
 ```
 
-As you should expect with a character variable, the boxplots go in alphabetical
-order. This looks rather jumbled, so let's put our factor skills to work! 
+As you should expect with a character variable, the boxplots go in alphabetical order. This looks rather jumbled, so let's put our factor skills to work!
 
-__1. Reorder the boxplots so the weights go in descending order.__
+**1. Reorder the boxplots so the weights go in descending order.**
 
-:::{.callout-caution}
+::: callout-caution
 You are required to use functions from `forcats` to complete this task.
 :::
 
@@ -72,7 +69,7 @@ surveys |>
   geom_boxplot()
 ```
 
-__2. Now that you've reordered, look at your y-axis label. That's long! Let's take Will Chase's advice and move the y-axis label to the top of the plot.__
+**2. Now that you've reordered, look at your y-axis label. That's long! Let's take Will Chase's advice and move the y-axis label to the top of the plot.**
 
 ```{r reorder-axis-label}
 surveys |> 
@@ -87,11 +84,9 @@ surveys |>
 
 ## Time-Series Plot
 
-This week, we focused on learning skills related to working with dates, but 
-we have yet to make a very common type of plot -- the time-series plot. We'll 
-use this plot to motivate a second type of factor reordering!
+This week, we focused on learning skills related to working with dates, but we have yet to make a very common type of plot -- the time-series plot. We'll use this plot to motivate a second type of factor reordering!
 
-__1. Create a visualization how weights vary for each genus over the duration of the study.__
+**1. Create a visualization how weights vary for each genus over the duration of the study.**
 
 ```{r weight-over-time}
 surveys |> 
@@ -104,9 +99,9 @@ surveys |>
 
 ```
 
-Alright, there are a lot of measurements over time! Let's use our dplyr skills to summarize each year and plot the summaries. 
+Alright, there are a lot of measurements over time! Let's use our dplyr skills to summarize each year and plot the summaries.
 
-__2. Calculate and plot the mean weight for each year (for each genus).__
+**2. Calculate and plot the mean weight for each year (for each genus).**
 
 ```{r means-over-time}
 surveys |> 
@@ -119,11 +114,11 @@ surveys |>
 
 ```
 
-This should look much less busy! However, you should notice that the legend still goes in alphabetical order. 
- 
-__3. Reorder the boxplots so the weights go in descending order.__
+This should look much less busy! However, you should notice that the legend still goes in alphabetical order.
 
-:::{.callout-caution}
+**3. Reorder the boxplots so the weights go in descending order.**
+
+::: callout-caution
 You are required to use functions from `forcats` to complete this task.
 :::
 
@@ -141,7 +136,7 @@ surveys |>
   geom_line()
 ```
 
-__4. Now that you've reordered, look at your legend's label. That's terrible! Let's give the legend a new title *and* move the information from the y-axis to the plot title.__
+**4. Now that you've reordered, look at your legend's label. That's terrible! Let's give the legend a new title *and* move the information from the y-axis to the plot title.**
 
 ```{r reorder2-legend}
 surveys |> 
@@ -160,13 +155,11 @@ surveys |>
        title = "Mean Weight (gm) for Different Genera")
 ```
 
-
 ## Caputures over the Week
 
-For our final exploration, we will consider the number of rodents captured
-throughout the week -- transitioning to visualizations of categorical variables.
+For our final exploration, we will consider the number of rodents captured throughout the week -- transitioning to visualizations of categorical variables.
 
-__1. Create a visualization of the number of rodents captured each day of the week.__
+**1. Create a visualization of the number of rodents captured each day of the week.**
 
 ```{r day-captures}
 surveys |> 
@@ -177,13 +170,12 @@ surveys |>
 
 ```
 
-As you might have expected, the ordering of the days of the week is not what we
-would like. 
+As you might have expected, the ordering of the days of the week is not what we would like.
 
-__2. Change the order of the day of the week to go Monday through Sunday.__ 
+**2. Change the order of the day of the week to go Monday through Sunday.**
 
-:::{.callout-note}
-You can choose to keep the days named as they are (e.g., Mon, Sun), or you can choose to rename the days to their full names (e.g., Monday, Sunday). 
+::: callout-note
+You can choose to keep the days named as they are (e.g., Mon, Sun), or you can choose to rename the days to their full names (e.g., Monday, Sunday).
 :::
 
 ```{r day-reorder}
@@ -213,19 +205,13 @@ surveys |>
 
 ```
 
-:::{.callout-warning}
-Your plot **should not** make people tilt their heads to read it! Be mindful in
-choosing which variable goes on which axis and if / how you use axis labels. 
+::: callout-warning
+Your plot **should not** make people tilt their heads to read it! Be mindful in choosing which variable goes on which axis and if / how you use axis labels.
 :::
 
+It should be very clear that there are more rodents captured on the weekend than during the week. But, let's explore if this is still the case if we use a "Weekday" / "Weekend" classification system instead.
 
-It should be very clear that there are more rodents captured on the weekend
-than during the week. But, let's explore if this is still the case if we use a
-"Weekday" / "Weekend" classification system instead. 
-
-
-__3. Collapse Monday through Friday into a `"Weekday"` level, and collapse Saturday and Sunday into a `"Weekend"` level. Plot the number of rodents captured between the two groups.__
-
+**3. Collapse Monday through Friday into a `"Weekday"` level, and collapse Saturday and Sunday into a `"Weekend"` level. Plot the number of rodents captured between the two groups.**
 
 ```{r weekend-captures}
 surveys |> 
@@ -245,7 +231,6 @@ surveys |>
 
 ```
 
-:::{.callout-warning}
-Your plot **should not** make people tilt their heads to read it! Be mindful in
-choosing which variable goes on which axis and if / how you use axis labels. 
+::: callout-warning
+Your plot **should not** make people tilt their heads to read it! Be mindful in choosing which variable goes on which axis and if / how you use axis labels.
 :::
