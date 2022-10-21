@@ -1,0 +1,116 @@
+---
+title: "Version Control"
+format: 
+  html: 
+    theme: minty
+    fontsize: 1em
+    mainfont: sans-serif
+    number-sections: true
+    number-depth: 2
+    code-block-bg: "#76b5c5"
+    highlight-style: monochrome
+editor: visual
+execute: 
+  echo: false
+---
+
+```{r}
+#| include: false
+library(tidyverse)
+library(flair)
+library(lubridate)
+```
+
+------------------------------------------------------------------------
+
+`r emo::ji("book")` Readings: 15 minutes
+
+`r emo::ji("computer")` Activities: 45-60 minutes
+
+`r emo::ji("check")` Check-ins: 1
+
+------------------------------------------------------------------------
+
+## What is Version Control?
+
+If you are unfamiliar with the idea of version control, [this article](https://about.gitlab.com/topics/version-control/) describes what the principles of version control are. 
+
+tl;dr -- Version control is a system that (1) allows you to store your files in the cloud, (2) track change in those files over time, and (3) share your files with others. 
+
+## What is Git and GitHub?
+
+`r emo::ji("book")` [**Required Reading** -- Why Git? Why GitHub?](https://happygitwithr.com/big-picture.html)
+
+## Using Git
+
+### Step 1: Register a GitHub Account
+
+Instructions here: <https://happygitwithr.com/github-acct.html>
+
+`r emo::ji("check")` **Check-in: GitHub Account**
+
+Copy and paste the link to your GitHub profile! 
+
+### Step 2: Install Git
+
+You can find instructions here: <https://happygitwithr.com/install-git.html>
+
+:::{.callout-warning}
+You will need to restart RStudio for it to detect Git on your machine! 
+:::
+
+### Step 4: Setup a Personal Access Token
+
+`r emo::ji("book")` [**Required Reading** -- What is a PAT?](https://happygitwithr.com/https-pat.html#https-pat)
+
+Instructions on generating a PAT: <https://happygitwithr.com/https-pat.html#get-a-pat>
+
+:::{.callout-note}
+To carry out the process described in this step, you will need to install the 
+**usethis** R package. 
+:::
+
+### Step 5: Store Your PAT
+
+Instructions on storing your PAT: <https://happygitwithr.com/https-pat.html#call-an-r-function-to-store-your-credentials> 
+
+:::{.callout-note}
+The **gitcreds** package is required in this step, but it should be automatically installed with the **usethis** package. 
+:::
+
+#### Did you have errors in Step 5? 
+
+If so, see this resources: <https://happygitwithr.com/https-pat.html#pat-troubleshooting> 
+
+### Step 6: Make a Final Portfolio Repository
+
+I've created a template repository for you to use for your final portfolio. You can find the repository [here](https://github.com/atheobold/STAT331_portfolio_template). 
+
+You need to create a copy of this repository for yourself. In GitHub, this is called "Forking" a repository. Instructions on forking a repository can be found here: <https://docs.github.com/en/get-started/quickstart/fork-a-repo> 
+
+### Step 7: Clone Repository into RStudio
+
+Now that you have a copy of the STAT331 portfolio template, you need to clone the project into RStudio, so you can put your files inside it! 
+
+Instructions on cloning the repository into RStudio are here: <https://happygitwithr.com/rstudio-git-github.html#clone-the-test-github-repository-to-your-computer-via-rstudio> 
+
+:::{.callout-note}
+Only read section 12.3!
+:::
+
+### Step 8: Change Your README.md File
+
+Instructions here: <https://happygitwithr.com/rstudio-git-github.html#make-local-changes-save-commit> 
+
+
+### Step 9: Push Your Changes
+
+Instructions here: <https://happygitwithr.com/rstudio-git-github.html#push-your-local-changes-online-to-github>
+
+### Step 10: Verify the Changes
+
+Instructions here: <https://happygitwithr.com/rstudio-git-github.html#confirm-the-local-change-propagated-to-the-github-remote-1>
+
+`r emo::ji("check")` **Check-in: Final Portfolio Template**
+
+Copy and paste the link to your GitHub repository! 
