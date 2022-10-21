@@ -61,26 +61,7 @@ As you should expect with a character variable, the boxplots go in alphabetical 
 You are required to use functions from `forcats` to complete this task.
 :::
 
-```{r reorder}
-surveys |> 
-  ggplot(mapping = aes(x = weight, y = fct_reorder(species, weight))
-         ) + 
-  geom_jitter(color = "tomato", alpha = 0.05) + 
-  geom_boxplot()
-```
-
 **2. Now that you've reordered, look at your y-axis label. That's long! Let's take Will Chase's advice and move the y-axis label to the top of the plot.**
-
-```{r reorder-axis-label}
-surveys |> 
-  ggplot(mapping = aes(x = weight, y = fct_reorder(species, weight))
-         ) + 
-  geom_jitter(color = "tomato", alpha = 0.05) + 
-  geom_boxplot() + 
-  labs(y = "", 
-       title = "Weight of Captured Species", 
-       x = "Weight (gm)")
-```
 
 ## Time-Series Plot
 
@@ -88,87 +69,25 @@ This week, we focused on learning skills related to working with dates, but we h
 
 **1. Create a visualization how weights vary for each genus over the duration of the study.**
 
-```{r weight-over-time}
-surveys |> 
-  group_by(genus, year) |> 
-  summarize(mean_weight = mean(weight)) |> 
-  ggplot(mapping = aes(x = year, y = mean_weight, 
-                       color = genus)
-         ) + 
-  geom_line()
-
-```
-
 Alright, there are a lot of measurements over time! Let's use our dplyr skills to summarize each year and plot the summaries.
 
 **2. Calculate and plot the mean weight for each year (for each genus).**
 
-```{r means-over-time}
-surveys |> 
-  group_by(genus, year) |> 
-  summarize(mean_weight = mean(weight)) |> 
-  ggplot(mapping = aes(x = year, y = mean_weight, 
-                       color = genus)
-         ) + 
-  geom_line()
-
-```
-
 This should look much less busy! However, you should notice that the legend still goes in alphabetical order.
 
-**3. Reorder the boxplots so the weights go in descending order.**
+**3. Reorder the lines so the weights go in descending order.**
 
 ::: callout-caution
 You are required to use functions from `forcats` to complete this task.
 :::
 
-```{r reorder2}
-surveys |> 
-  group_by(genus, year) |> 
-  summarize(mean_weight = mean(weight)) |> 
-  ggplot(mapping = aes(x = year, 
-                       y = mean_weight, 
-                       color = fct_reorder2(.f = genus, 
-                                            .x = year, 
-                                            .y = mean_weight)
-                       )
-         ) + 
-  geom_line()
-```
-
-**4. Now that you've reordered, look at your legend's label. That's terrible! Let's give the legend a new title *and* move the information from the y-axis to the plot title.**
-
-```{r reorder2-legend}
-surveys |> 
-  group_by(genus, year) |> 
-  summarize(mean_weight = mean(weight)) |> 
-  ggplot(mapping = aes(x = year, 
-                       y = mean_weight, 
-                       color = fct_reorder2(.f = genus, 
-                                            .x = year, 
-                                            .y = mean_weight)
-                       )
-         ) + 
-  geom_line() + 
-  labs(color = "Genus", 
-       y = "", 
-       title = "Mean Weight (gm) for Different Genera")
-```
+**4. Now that you've reordered the lines, look at your legend's label. That's terrible! Let's give the legend a new title *and* move the information from the y-axis to the plot title.**
 
 ## Caputures over the Week
 
 For our final exploration, we will consider the number of rodents captured throughout the week -- transitioning to visualizations of categorical variables.
 
 **1. Create a visualization of the number of rodents captured each day of the week.**
-
-```{r day-captures}
-surveys |> 
-  group_by(day_of_week) |> 
-  count() |> 
-  ggplot(mapping = aes(x = day_of_week, y = n)) +
-  geom_col()
-
-```
 
 As you might have expected, the ordering of the days of the week is not what we would like.
 
@@ -178,33 +97,6 @@ As you might have expected, the ordering of the days of the week is not what we 
 You can choose to keep the days named as they are (e.g., Mon, Sun), or you can choose to rename the days to their full names (e.g., Monday, Sunday).
 :::
 
-```{r day-reorder}
-surveys |> 
-  mutate(day_of_week = as.factor(day_of_week), 
-         day_of_week = fct_recode(day_of_week, 
-                                   "Monday" = "Mon", 
-                                   "Tuesday" = "Tue", 
-                                   "Wednesday" = "Wed", 
-                                   "Thursday" = "Thu", 
-                                   "Friday" = "Fri", 
-                                   "Saturday" = "Sat", 
-                                   "Sunday" = "Sun"), 
-         day_of_week = fct_relevel(day_of_week, 
-                                   "Monday", 
-                                   "Tuesday", 
-                                   "Wednesday", 
-                                   "Thursday", 
-                                   "Friday", 
-                                   "Saturday", 
-                                   "Sunday")
-         ) |> 
-  group_by(day_of_week) |> 
-  count() |> 
-  ggplot(mapping = aes(y = day_of_week, x = n)) +
-  geom_col()
-
-```
-
 ::: callout-warning
 Your plot **should not** make people tilt their heads to read it! Be mindful in choosing which variable goes on which axis and if / how you use axis labels.
 :::
@@ -212,24 +104,6 @@ Your plot **should not** make people tilt their heads to read it! Be mindful in 
 It should be very clear that there are more rodents captured on the weekend than during the week. But, let's explore if this is still the case if we use a "Weekday" / "Weekend" classification system instead.
 
 **3. Collapse Monday through Friday into a `"Weekday"` level, and collapse Saturday and Sunday into a `"Weekend"` level. Plot the number of rodents captured between the two groups.**
-
-```{r weekend-captures}
-surveys |> 
-  mutate(day_of_week = as.factor(day_of_week), 
-         weekend = fct_collapse(day_of_week, 
-                                Weekday = c("Mon", "Tue", "Wed", "Thu", "Fri"), 
-                                Weekend = c("Sat", "Sun")
-                                ), 
-         day_of_week = fct_relevel(weekend, 
-                                   "Weekday", 
-                                   "Weekend")
-         ) |> 
-  group_by(weekend) |> 
-  count() |> 
-  ggplot(mapping = aes(y = weekend, x = n)) +
-  geom_col()
-
-```
 
 ::: callout-warning
 Your plot **should not** make people tilt their heads to read it! Be mindful in choosing which variable goes on which axis and if / how you use axis labels.
