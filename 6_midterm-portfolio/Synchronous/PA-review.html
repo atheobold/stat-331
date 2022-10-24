@@ -4,7 +4,7 @@
     <title>Version Control 💻</title>
     <meta charset="utf-8" />
     <meta name="author" content="Stat 331" />
-    <meta name="date" content="2021-05-18" />
+    <meta name="date" content="2022-10-25" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="slide-style.css" type="text/css" />
@@ -13,9 +13,15 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # Version Control 💻
+]
+.author[
 ### Stat 331
-### May 18, 2021
+]
+.date[
+### October 25, 2022
+]
 
 ---
 
@@ -28,63 +34,33 @@ class: inverse
 .pull-left[
 ![](images/git.png) 
 
+.large[
 - Language for version control
 - Developed by Linus Torvalds (Linux, Android, Chrome OS)
 - Uses command line or GUI
 ]
-
+]
 
 .pull-right[
 ![](images/github.jpeg)
+.large[
 - Cloud-based hosting service
 - Basic services are free
 - Advanced services are paid 
 (Similar to RStudio) 
 ]
-
+]
 ---
+
+class: middle, center, inverse
 
 .larger[A Formidable Opponent]
 
-.pull-left[
 ![](images/git_hard.png)
-]
-
---
-
-.pull-right[
-
-- The 2012 Git User’s Survey identified two areas in need of help
-  * The user interface (71%)
-  * The documentation (75%)
-
-&lt;!-- - "What do you hate about Git?" --&gt;
-&lt;!--   * "too complex for many users" --&gt;
-&lt;!--   * "requires steep learning curve for newbies" --&gt;
-&lt;!--   * "dark corners" --&gt;
-]
 
 ---
 
-.larger[Some Unsavory Practices]
-
-&lt;img src="images/GH_ice.jpeg" width="50%" style="display: block; margin: auto;" /&gt;
-
----
-
-.larger[Other Options]
-
-.pull-left[
-![](images/mercurial.png)
-]
-
-.pull-right[
-![](images/sourcetree.png)
-![](images/bitbucket.png)
-]
-
----
-
+class: center, inverse
 
 .larger[Git Workflow]
 
@@ -92,21 +68,18 @@ class: inverse
 
 ---
 
+class: center, inverse
+
 .larger[Making Changes]
 
 &lt;img src="images/add_files.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 ---
 
-.larger[Local vs. Remote]
-
-&lt;img src="images/local_main.png" width="60%" style="display: block; margin: auto;" /&gt;
-
----
+class: center, inverse
 
 .pull-left-narrow[
-.larger[Collab- 
-orating]
+.larger[Collabor-ating]
 ]
 
 .pull-right-wide[
@@ -161,6 +134,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable

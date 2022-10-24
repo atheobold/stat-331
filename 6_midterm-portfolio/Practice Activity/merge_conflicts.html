@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.120">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Collaborating within a GitHub Repo</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="merge_conflicts_files/libs/clipboard/clipboard.min.js"></script>
+<script src="merge_conflicts_files/libs/quarto-html/quarto.js"></script>
+<script src="merge_conflicts_files/libs/quarto-html/popper.min.js"></script>
+<script src="merge_conflicts_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="merge_conflicts_files/libs/quarto-html/anchor.min.js"></script>
+<link href="merge_conflicts_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="merge_conflicts_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="merge_conflicts_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="merge_conflicts_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="merge_conflicts_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Collaborating within a GitHub Repo</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>This activity will give you a taste of what working collaboratively in Github looks like.</p>
+<section id="set-up" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Set-up</h1>
+<p>I believe learning about merge conflicts is best done in small groups! I want for you to assign each group member a number, since you will be referencing it as you work through this activity.</p>
+</section>
+<section id="creating-a-repo" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Creating a Repo</h1>
+<p><strong>Member 3</strong>:</p>
+<ul>
+<li>Create a new Github repository titled “stat-331-PA8”</li>
+<li>Click on the “Settings” tab</li>
+<li>Click on “Manage access”</li>
+<li>Click on “Invite a collaborator”</li>
+</ul>
+<p>Add your other group members to the repository using their username or email</p>
+</section>
+<section id="accessing-the-repo" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Accessing the Repo</h1>
+<p><strong>All other Members</strong> (e.g.&nbsp;1, 2, 4, and 5):</p>
+<ul>
+<li>Verify repository invite in your email</li>
+<li>Open the repository in Github</li>
+</ul>
+</section>
+<section id="cloning-the-repo" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Cloning the Repo</h1>
+<p><strong>Every</strong> member:</p>
+<ul>
+<li>Clone the repository into a new RStudio project
+<ul>
+<li>Copy the HTTPS address from the repo</li>
+<li>Create a new folder called “PA6” on your desktop</li>
+<li>Click on “New project” in RStudio</li>
+<li>Choose Version Control”</li>
+<li>Choose “Git”</li>
+<li>Paste the HTTPS address in the repository address line</li>
+<li>Click on the “Browse” button to navigate to your PA6 folder (on your desktop)</li>
+<li>Create the project!</li>
+</ul></li>
+</ul>
+</section>
+<section id="pulling-changes-from-the-repo" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Pulling Changes from the Repo</h1>
+<p>Take turns in completing the exercise, only one member at a time:</p>
+<ul>
+<li><strong>Member 1</strong>:
+<ul>
+<li>Create a new Quarto file (using the standard template)</li>
+<li>Title the document “Practice Activity 6”</li>
+<li>Save the document as <code>PA6.qmd</code></li>
+<li>Render the document</li>
+<li>Commit <strong>both</strong> the <code>PA6.qmd</code> and <code>PA6.html</code> files with an explanatory message</li>
+<li>Push the changes to the repository</li>
+</ul></li>
+</ul>
+<p><strong>All other members:</strong> Pull the changes that were made!</p>
+</section>
+<section id="pushing-changes-not-pulling" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Pushing Changes &amp; Not Pulling</h1>
+<ul>
+<li><strong>Member 2</strong>:
+<ul>
+<li>Change the author name in the document to have everyone’s <em>first</em> names</li>
+<li>Render the document</li>
+<li>Commit the changes</li>
+<li>Push the changes</li>
+</ul></li>
+</ul>
+<p><strong>All other members:</strong> Do not pull the changes that were made!</p>
+</section>
+<section id="making-the-same-changes" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Making The Same Changes</h1>
+<ul>
+<li><strong>Member 4</strong> (or 3 if there are only three group members):
+<ul>
+<li>Change the author name in the document to have everyone’s first <strong>and</strong> last names.</li>
+<li>Render the document</li>
+<li>Commit your changes</li>
+<li>Push your changes</li>
+</ul></li>
+</ul>
+<p><strong>You will get an error!</strong></p>
+<ul>
+<li>Pull the changes from the repo</li>
+<li>Review the document with the merge conflict (Note how the conflicting lines are marked!)</li>
+<li>Resolve the conflict with the preferred change</li>
+<li>Commit your changes</li>
+<li>Push the changes to the repository</li>
+</ul>
+<p><strong>All other members:</strong> Do not pull the changes that were made!</p>
+</section>
+<section id="making-different-changes" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Making Different Changes</h1>
+<ul>
+<li><p><strong>Member 1</strong>:</p>
+<ul>
+<li>Change the first code chunk to find the product of 13 times 13.</li>
+<li>Render the document</li>
+<li>Commit your changes</li>
+<li>Push your changes</li>
+</ul></li>
+</ul>
+<p><strong>You will get an error, read it, and pull.</strong></p>
+<p>No merge conflicts should occur. Now push your changes.</p>
+<p><strong>All other members:</strong> Do not pull the changes that were made!</p>
+</section>
+<section id="making-the-same-changes-again" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Making the Same Changes (Again)</h1>
+<ul>
+<li><p><strong>Member 2</strong>:</p>
+<ul>
+<li>Change the first code chunk to find the product of 11 times 11.</li>
+<li>Render the document</li>
+<li>Commit your changes</li>
+<li>Push the changes to the repository</li>
+</ul></li>
+</ul>
+<p><strong>You will get an error.</strong></p>
+<ul>
+<li>Pull the changes from the repo</li>
+<li>Review the document with the merge conflict</li>
+<li>Clear the merge conflict by choosing the correct/preferred change</li>
+<li>Commit your changes</li>
+<li>Push you changes</li>
+</ul>
+<hr>
+</section>
+<section id="final-document" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Final Document</h1>
+<p><strong>All members:</strong> Pull, and observe the changes in your document.</p>
+</section>
+<section id="submission" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> Submission</h1>
+<p>How does Git mark the start of lines with a merge conflict? Specifically, I want the <strong>four capital letter characters</strong> with which every conflict is marked.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

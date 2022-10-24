@@ -1,6 +1,6 @@
 ---
 title: "Version Control `r emo::ji('computer')`"
-date: "May 18, 2021"
+date: "October 25, 2022"
 author: "Stat 331"
 output:
   xaringan::moon_reader:
@@ -44,65 +44,33 @@ class: inverse
 .pull-left[
 ![](images/git.png) 
 
+.large[
 - Language for version control
 - Developed by Linus Torvalds (Linux, Android, Chrome OS)
 - Uses command line or GUI
 ]
-
+]
 
 .pull-right[
 ![](images/github.jpeg)
+.large[
 - Cloud-based hosting service
 - Basic services are free
 - Advanced services are paid 
 (Similar to RStudio) 
 ]
-
+]
 ---
+
+class: middle, center, inverse
 
 .larger[A Formidable Opponent]
 
-.pull-left[
 ![](images/git_hard.png)
-]
-
---
-
-.pull-right[
-
-- The 2012 Git User’s Survey identified two areas in need of help
-  * The user interface (71%)
-  * The documentation (75%)
-
-<!-- - "What do you hate about Git?" -->
-<!--   * "too complex for many users" -->
-<!--   * "requires steep learning curve for newbies" -->
-<!--   * "dark corners" -->
-]
 
 ---
 
-.larger[Some Unsavory Practices]
-
-```{r, echo = FALSE, out.width = "50%"}
-knitr::include_graphics("images/GH_ice.jpeg")
-```
-
----
-
-.larger[Other Options]
-
-.pull-left[
-![](images/mercurial.png)
-]
-
-.pull-right[
-![](images/sourcetree.png)
-![](images/bitbucket.png)
-]
-
----
-
+class: center, inverse
 
 .larger[Git Workflow]
 
@@ -112,6 +80,8 @@ knitr::include_graphics("images/working_github.jpeg")
 
 ---
 
+class: center, inverse
+
 .larger[Making Changes]
 
 ```{r, echo = FALSE, out.width = "60%"}
@@ -120,17 +90,10 @@ knitr::include_graphics("images/add_files.png")
 
 ---
 
-.larger[Local vs. Remote]
-
-```{r, echo = FALSE, out.width = "60%"}
-knitr::include_graphics("images/local_main.png")
-```
-
----
+class: center, inverse
 
 .pull-left-narrow[
-.larger[Collab- 
-orating]
+.larger[Collabor-ating]
 ]
 
 .pull-right-wide[

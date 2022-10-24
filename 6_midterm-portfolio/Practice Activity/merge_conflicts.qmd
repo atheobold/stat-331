@@ -1,26 +1,23 @@
 ---
-title: "Practice Activity 8 -- Merge conflicts"
-date: "`r Sys.Date()`"
-output:
-  rmdformats::downcute:
-    self_contained: true
+title: "Collaborating within a GitHub Repo"
+format: 
+  html: 
+    theme: minty
+    fontsize: 1em
+    mainfont: sans-serif
+    number-sections: true
+    number-depth: 2
+    code-block-bg: "#76b5c5"
+    highlight-style: monochrome
+editor: visual
+execute: 
+  echo: false
 ---
 
-
-```{r setup, include=FALSE}
+```{r setup}
+#| include: false
 library(knitr)
 library(rmdformats)
-
-## Global options
-options(max.print="75")
-opts_chunk$set(echo=FALSE,
-	             cache=TRUE,
-               prompt=FALSE,
-               tidy=TRUE,
-               comment=NA,
-               message=FALSE,
-               warning=FALSE)
-opts_knit$set(width=75)
 ```
 
 This activity will give you a taste of what working collaboratively in Github 
@@ -60,13 +57,13 @@ Add your other group members to the repository using their username or email
 
 - Clone the repository into a new RStudio project
   * Copy the HTTPS address from the repo
+  * Create a new folder called "PA6" on your desktop
   * Click on "New project" in RStudio
   * Choose Version Control"
   * Choose "Git"
   * Paste the HTTPS address in the repository address line
-  * Navigate to your Stat 331 folder to save your folder somewhere that makes 
-  sense
-  * Open the project! 
+  * Click on the "Browse" button to navigate to your PA6 folder (on your desktop)
+  * Create the project! 
   
   
 # Pulling Changes from the Repo
@@ -74,11 +71,11 @@ Add your other group members to the repository using their username or email
 Take turns in completing the exercise, only one member at a time:
 
 - **Member 1**: 
-  * Create a new RMarkdown file (using the standard template)
-  * Title the document "Practice Activity 8" 
-  * Save the document as `PA8.Rmd`
-  * Knit the document 
-  * Commit **both** the `PA8.Rmd` and `PA8.html` files with an explanatory
+  * Create a new Quarto file (using the standard template)
+  * Title the document "Practice Activity 6" 
+  * Save the document as `PA6.qmd`
+  * Render the document 
+  * Commit **both** the `PA6.qmd` and `PA6.html` files with an explanatory
   message
   * Push the changes to the repository
   
@@ -88,19 +85,18 @@ Take turns in completing the exercise, only one member at a time:
 
 - **Member 2**: 
   * Change the author name in the document to have everyone's *first* names
-  * Knit the document
+  * Render the document
   * Commit the changes
   * Push the changes 
   
 **All other members:** Do not pull the changes that were made! 
 
-
 # Making The Same Changes
 
 - **Member 4** (or 3 if there are only three group members): 
-  * Change the author name in the document to have everyone's first **and** last 
+  * Change the author name in the document to have everyone's first **and** last
   names. 
-  * Knit the document
+  * Render the document
   * Commit your changes 
   * Push your changes
 
@@ -113,13 +109,14 @@ Take turns in completing the exercise, only one member at a time:
   * Commit your changes
   * Push the changes to the repository 
   
+**All other members:** Do not pull the changes that were made! 
+
 # Making Different Changes
 
-- **Member 5** (or 1 if there are only three group members): 
+- **Member 1**: 
 
-  * Change the plot of `temperature` and `pressure` (`plot(pressure)`) to use 
-  `ggplot()` rather than `plot()`
-  * Knit the document
+  * Change the first code chunk to find the product of 13 times 13. 
+  * Render the document
   * Commit your changes
   * Push your changes 
   
@@ -127,15 +124,14 @@ Take turns in completing the exercise, only one member at a time:
 
 No merge conflicts should occur. Now push your changes.
 
+**All other members:** Do not pull the changes that were made! 
 
 # Making the Same Changes (Again)
 
-- **Member 3**:
+- **Member 2**:
 
-  * Change the plot of `temperature` and `pressure` (`plot(pressure)`) to use 
-  `ggplot()` rather than `plot()`
-  * Specify x- and y-axis labels 
-  * Knit the document 
+  * Change the first code chunk to find the product of 11 times 11.
+  * Render the document 
   * Commit your changes
   * Push the changes to the repository
   
@@ -148,6 +144,8 @@ No merge conflicts should occur. Now push your changes.
   * Push you changes
   
 
+---
+
 # Final Document 
 
 **All members:** Pull, and observe the changes in your document.
@@ -155,7 +153,8 @@ No merge conflicts should occur. Now push your changes.
 
 # Submission
 
-How does Git mark the start and end of lines with a merge conflict? Specifically, 
-I want the characters, not the commit number. 
+How does Git mark the start of lines with a merge conflict? Specifically, I want
+the **four capital letter characters** with which every conflict is marked.
+
 
 
