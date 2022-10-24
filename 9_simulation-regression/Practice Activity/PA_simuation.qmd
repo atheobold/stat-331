@@ -1,6 +1,17 @@
 ---
-title: "PA: Simulation"
-output: rmdformats::html_docco
+title: "Practice Activity 9.2: Simulation"
+format: 
+  html: 
+    theme: minty
+    fontsize: 1em
+    mainfont: sans-serif
+    number-sections: true
+    number-depth: 2
+    code-block-bg: "#76b5c5"
+    highlight-style: monochrome
+editor: visual
+execute: 
+  echo: false
 ---
 
 ```{r setup, include=FALSE}
