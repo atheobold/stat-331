@@ -1,12 +1,19 @@
 ---
 title: "Lab 7: Functions and Fish"
-author: ""
-output:
-  prettydoc::html_pretty:
-    theme: tactile
-    highlight: github
-    css: style.css
+format: 
+  html: 
+    theme: minty
+    fontsize: 1em
+    mainfont: sans-serif
+    number-sections: true
+    number-depth: 2
+    code-block-bg: "#76b5c5"
+    highlight-style: monochrome
+editor: visual
+execute: 
+  echo: false
 ---
+
 
 The goal of this lab is learn more about exploring missing data and to teach you
 to write modular code. 
@@ -76,15 +83,6 @@ measurement errors.
 
 *Think about outputting both pieces of information in __one__ table!* 
 
-```{r, include = FALSE}
-fish %>% 
-  summarize(across(
-    .cols = everything(), 
-    .fns = ~sum(is.na(.) == TRUE)
-    )
-  ) 
-```
-
 ### Task 2 -- Visualizing Missing Data
 
 Unfortunately, these missing values are not for only one `year`, `trip`, or
@@ -92,89 +90,6 @@ Unfortunately, these missing values are not for only one `year`, `trip`, or
 
 Create a thoughtful visualization exploring the frequency of missing values
 across the different years, sections, and trips. 
-
-```{r, include = FALSE}
-fish %>% 
-  filter(is.na(weight)) %>% 
-  group_by(year, section, trip) %>% 
-  count(is.na(weight)) %>% 
-  mutate(trip = as.factor(trip), 
-         year = as.factor(year)) %>% 
-  ggplot(aes(y = year, x = n, fill = trip)) + 
-  geom_col() + 
-  facet_wrap(vars(section)) + 
-  labs(y = "Sample Year", 
-       x = "Number Missing", 
-       fill = "Trip Number") +
-  scale_fill_brewer(palette = "Paired") + 
-  ggtitle(
-    str_c("Missing Fish Weights for ",
-      "<span style = 'color:#A6CEE3'>**Trip 1**</span>",
-      " and <span style = 'color:#1F87B4'>**Trip 2**</span>",
-      " on Blackfoot River"
-    )
-  ) + 
-  theme(plot.title = ggtext::element_markdown(), 
-        legend.position = "none")
-
-```
-
-
-<!-- ### Task 3 -->
-
-<!-- Create a thoughtful visualization exploring how the number of fish captured  -->
-<!-- differed each year, for each section of river.  -->
-
-<!-- ```{r, include = FALSE, fig.show = 'hold', out.width = "50%"} -->
-
-<!-- fish %>%  -->
-<!--   group_by(year, section, species) %>%  -->
-<!--   count() %>%  -->
-<!--   mutate(year = as.factor(year)) %>%  -->
-<!--   ggplot(aes(x = year, y = n, fill = species)) +  -->
-<!--   geom_col(position = "fill") +  -->
-<!--   facet_wrap(vars(section)) +  -->
-<!--   labs(x = "Year of Sample",  -->
-<!--        y = "Proportion of Fish Captured",  -->
-<!--        fill = "Species of Fish") +  -->
-<!--   theme(axis.text.x = element_text(angle = 60, hjust = 1)) -->
-
-<!-- fish %>%  -->
-<!--   group_by(year, section, species) %>%  -->
-<!--   count() %>%  -->
-<!--   mutate(year = as.factor(year)) %>%  -->
-<!--   ggplot(aes(x = year, y = n, fill = species)) +  -->
-<!--   geom_col(position = "fill") +  -->
-<!--   facet_wrap(vars(section)) +  -->
-<!--   labs(x = "Year of Sample",  -->
-<!--        y = "Proportion of Fish Captured",  -->
-<!--        fill = "Species of Fish") +  -->
-<!--   theme(axis.text.x = element_text(angle = 60, hjust = 1)) -->
-
-<!-- ``` -->
-
-
-<!-- ### Task 3 -- Creating a Summary Table -->
-
-<!-- Create a table displaying how the the mean `length` and `weight` for Westslope -->
-<!-- Cutthroat Trout (WCT) varied over the different sampling years. The table should -->
-<!-- have: -->
-
-<!-- - different values of `year` as (separate) columns -->
-<!-- - the median `length` and mean `weight` as (separate) rows  -->
-
-<!-- ```{r, include = FALSE} -->
-<!-- fish %>% -->
-<!--   filter(species == "WCT") %>%  -->
-<!--   group_by(year) %>%  -->
-<!--   summarize(median_length = median(length, na.rm = TRUE),  -->
-<!--             median_weight = median(weight, na.rm = TRUE)) %>%  -->
-<!--   pivot_longer(cols = c(`median_length`, `median_weight`),  -->
-<!--                names_to = "measurement",  -->
-<!--                values_to = "value") %>%  -->
-<!--   pivot_wider(names_from = year,  -->
-<!--               values_from = value) -->
-<!-- ``` -->
 
 ---
 
@@ -225,15 +140,6 @@ Let's transform the repeated process above into a `rescale_01()` function.
 *Think about the "efficiency" of your function. Are you calling the __same__ 
 function multiple times?*
 
-```{r, echo = FALSE}
-rescale_01 <- function(x){
-  rng <- range(x, na.rm = TRUE)
-  scaled <-  (x - rng[1]) / (rng[2] - rng[1])
-  return(scaled)
-}
-```
-
-
 ### Task 2 -- Adding Stops
 
 Now, let's incorporate some checks into your function! Modify your previous code
@@ -241,17 +147,6 @@ to create the following checks:
 
 - the function should stop if the input vector is not numeric
 - the function should stop if the length of the vector is not greater than 1 
-
-```{r, echo = FALSE}
-rescale_01 <- function(x){
-  stopifnot(is.numeric(x), 
-            length(x) > 1)
-  
-  rng <- range(x, na.rm = TRUE)
-  scaled <-  (x - rng[1]) / (rng[2] - rng[1])
-  return(scaled)
-}
-```
 
 *No need to write code here, simply add these stops to your code from Task 1!*
 
@@ -262,9 +157,7 @@ First, test your function on a simple vector. Verify that the maximum of your
 rescaled vector is 1 and the minimum is 0!
 
 ```{r, echo = TRUE}
-
 x <- c(1:25, NA)
-
 ```
 
 ### Task 4 - Performing a More Difficult Test
@@ -275,25 +168,6 @@ dataset.
 - Make side-by-side plots of the original values of `length` and the rescaled
 values of `length`. 
 
-*Hint:* The **gridExtra** package has a `grid.arrange()` function that allows 
-for you to arrange multiple `ggplot()` objects into rows and columns. Or, you 
-can play around with the `fig.show` and `out.width` options of your code chunk (<https://bookdown.org/yihui/rmarkdown-cookbook/figures-side.html>). 
-
-```{r, include = FALSE}
-original <- fish %>% 
-  ggplot(aes(x = length)) + 
-  geom_histogram(binwidth = 45)
-
-scaled <- fish %>% 
-  mutate(length_scaled = rescale_01(length)) %>%  
-  ggplot(aes(x = length_scaled)) + 
-  geom_histogram(binwidth = .04)
-
-
-grid.arrange(original, scaled, nrow = 1)
-
-```
-        
 ### Task 5 -- Incorportaing Variables
 
 Suppose you would for your `rescale()` function to perform operations on a 
@@ -304,17 +178,6 @@ rescaled.
 Create a `rescale_column()` that accepts two arguments, (1) a dataframe, and 
 (2) the name(s) of the variable(s) to be rescaled. The body of the function
 should call the original `rescale_01()` function you wrote previously.
-
-```{r, include = FALSE}
-
-rescale_column <- function(data, variables){
-  data %>% 
-    mutate(
-      across(.cols = {{variables}}, 
-             .fns = rescale_01)
-    )
-}
-```
 
 ### Task 6 -- Another Function Test
 
@@ -334,22 +197,6 @@ following simple equation can be used to calculate the approximate condition
 index of a fish:
 
 $$\text{condition index} = \frac{weight}{length^3} \times 100$$
-```{r, echo = FALSE, eval = FALSE}
-find_condition <- function(data, length_var, weight_var){
-  # Function assumes:
-  # weight is in grams
-  # length is in centimeters
-  data %>% 
-    mutate(condition := 
-             ( 
-               ( {{ weight_var}} / ({{ length_var }} ^ 3) )
-               * 100
-               )
-    )
-}
-```
-
-
 ### Part 1 
 
 Write a function which calculates the condition index of a fish, given inputs
@@ -363,22 +210,4 @@ accept variable names as inputs!*
 Make a thoughtful visualization of how fish conditions have varied over the 
 duration of this study. 
 
-```{r, echo = FALSE, eval = FALSE}
-fish_condition <- fish %>% 
-  # Convers length to centimeters from millimeters
-  mutate(length_cm = length / 10) %>% 
-  find_condition(length_cm, weight)
-
-fish_condition %>% 
-  ggplot(aes(y = condition, x = year)) + 
-  geom_jitter()
-```
-
-
----
-
-## Think Out Loud Recording
-
-Walk through the components of your condition function. Be sure to describe 
-what each part is doing! 
 

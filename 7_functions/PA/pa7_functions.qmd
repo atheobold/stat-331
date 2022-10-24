@@ -1,11 +1,17 @@
 ---
-title: "Puzzle Activity: Writing Functions"
-author: ""
-output:
-  prettydoc::html_pretty:
-    theme: tactile
-    highlight: github
-    css: styles.css
+title: "Practice Activity: Writing Functions"
+format: 
+  html: 
+    theme: minty
+    fontsize: 1em
+    mainfont: sans-serif
+    number-sections: true
+    number-depth: 2
+    code-block-bg: "#76b5c5"
+    highlight-style: monochrome
+editor: visual
+execute: 
+  echo: false
 ---
 
 ```{r setup, include=FALSE}
@@ -158,3 +164,4 @@ my_vec
 
 If you have done everything correctly, your final vector will be six numbers
 long. Google these six numbers to find a TV show as your final answer.
+
