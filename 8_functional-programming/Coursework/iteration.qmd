@@ -1,10 +1,17 @@
 ---
 title: "Iteration"
-output:
-  prettydoc::html_pretty:
-    theme: leonids 
-    highlight: github
-    css: style.css
+format: 
+  html: 
+    theme: minty
+    fontsize: 1em
+    mainfont: sans-serif
+    number-sections: true
+    number-depth: 2
+    code-block-bg: "#76b5c5"
+    highlight-style: monochrome
+editor: visual
+execute: 
+  echo: false
 ---
 
 ```{r setup, include=FALSE}
@@ -102,16 +109,12 @@ penguins %>%
   map(median, na.rm = TRUE)
 ```
 
-<!-- Returns a list! -->
-
 _(b)_
 ```{r, eval = FALSE}
 penguins %>% 
   select(bill_length_mm:body_mass_g) %>% 
   map_dbl(median, na.rm = TRUE)
 ```
-
-<!-- Correct! -->
 
 _(c)_
 ```{r, eval = FALSE}
@@ -120,16 +123,12 @@ penguins %>%
   sapply(., median, na.rm = TRUE)
 ```
 
-<!-- Correct! -->
-
 _(d)_
 ```{r, eval = FALSE}
 penguins %>% 
   select(bill_length_mm:body_mass_g) %>% 
   lapply(., function(x) median(x, na.rm = TRUE))
 ```
-
-<!-- Returns a list! -->
 
 </br>
 
@@ -161,15 +160,6 @@ penguins %>%
   )
 ```
 
-<!-- The `map_dbl()` function expects a single output from a list or atomic vector. -->
-<!-- If you use `safely(standardize)` you should get the following error:  -->
-
-<!-- ``` -->
-<!-- Error: Result 1 must be a single double, not a list of length 2 -->
-<!-- ``` -->
-
-<!-- This means that `map_dbl()` expects that the result should have length 1!  -->
-
 
 **Question 3:** 
 
@@ -181,18 +171,3 @@ Do this **without** copy-pasting lines and changing `bill_length_mm` to
 `bill_depth_mm`, etc.
 
 I recommend looking into `map_df()`, `map_if()`, or `map_at()`! 
-
-```{r, include = FALSE}
-
-penguins %>% 
-  select(bill_length_mm:body_mass_g) %>% 
-  map_df(., standardize)
-
-penguins %>%
-  map_at(vars(bill_length_mm:body_mass_g), 
-         standardize)
-
-penguins %>%
-  map_if(is.numeric, standardize)
-```
-
