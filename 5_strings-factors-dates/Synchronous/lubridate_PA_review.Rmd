@@ -1,6 +1,6 @@
 ---
 title: "Practice Activity Warm-up"
-date: "January 31, 2022"
+date: "October 18, 2022"
 author: "Dr. Allison Theobold"
 output:
   xaringan::moon_reader:
@@ -40,25 +40,21 @@ style_duo_accent(
 )
 ```
 
-```{r, eval = FALSE, include = FALSE}
-embed_video <- function(src, type = "video/mp4", width = "320", height = "240", 
-                     attribute = "controls", placeholder = "") {
-                        
-  if (knitr::is_html_output()) {
-    sprintf("<audio width='%3$s' height='%4$s' %5$s>
-               <source src='%1$s' type='%2$s'>
-            </audio>", src, type, width, height, attribute)
-  } else print(placeholder)
+class: center, inverse
 
-}
+.larger[**Grades**]
 
-embed_video("bumi_tail.mp4")`
+--
 
+```{r, echo = FALSE, out.width = "80%"}
+knitr::include_graphics("images/nyu_prof.png")
 ```
+
+---
 
 class: center, inverse
 
-.larger[Dates] 
+.larger[**Dates**] 
 
 <img src="https://pbs.twimg.com/media/CQ6A-NdWwAAncW-.png" width=300>
 

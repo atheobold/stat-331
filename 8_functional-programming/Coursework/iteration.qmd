@@ -1,0 +1,173 @@
+---
+title: "Iteration"
+format: 
+  html: 
+    theme: minty
+    fontsize: 1em
+    mainfont: sans-serif
+    number-sections: true
+    number-depth: 2
+    code-block-bg: "#76b5c5"
+    highlight-style: monochrome
+editor: visual
+execute: 
+  echo: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, include = FALSE}
+library(tidyverse)
+library(palmerpenguins)
+library(lubridate)
+```
+
+`r emo::ji("play")` Watch Videos: 30 minutes
+  
+  * `r emo::ji("link")` Link to **all** Slides from Videos: [here](https://app.box.com/s/ae5f0yollihcggzr6bghkwabkdz2y7g9)
+
+`r emo::ji("book")` Readings: 45-60 minutes   
+
+`r emo::ji("computer")` Activities: 60 minutes  
+  
+`r emo::ji("check")` Check-ins: 2 (included in 1 assignment on Canvas)
+
+---
+
+### Reading
+
+`r emo::ji("book")` [Recommended Reading -- *R for Data Science*: Iteration](https://r4ds.had.co.nz/iteration.html)
+
+### Videos
+
+`r emo::ji("play button")` [Introduction to Iteration (6 minutes)](https://www.youtube.com/watch?v=7YF6mwTMNZw)
+
+`r emo::ji("play button")` [Iteration with `for()` loops (10 minutes)](https://www.youtube.com/watch?v=sxIX9lzPjDQ)
+
+`r emo::ji("play button")` [Iteration with the `apply()` family (7 minutes)](https://www.youtube.com/watch?v=NadUAnlrh-M)
+ 
+`r emo::ji("play button")` [Iteration with the `map()` family (6 minutes)](https://www.youtube.com/watch?v=FPD3a6IHO6w)
+
+### Tutorial
+
+`r emo::ji("computer")` [Required Tutorial: Iteration](https://rstudio.cloud/learn/primers/5)
+
+### Extra Resources
+
+:::: {style="display: flex;"}
+
+::: {}
+Cheatsheet for purrr functions:  [here](https://github.com/rstudio/cheatsheets/blob/master/purrr.pdf)
+:::
+
+::: {}
+```{r, echo = FALSE, out.width = "45%"}
+knitr::include_graphics("images/purrr_hex.jpeg")
+```
+:::
+
+::::
+
+:::: {style="display: flex;"}
+
+::: {}
+Lessons and Examples by the one and only Jenny Bryan: [here](https://jennybc.github.io/purrr-tutorial/index.html)
+:::
+
+::: {}
+```{r, echo = FALSE, out.width = "35%"}
+knitr::include_graphics("images/jenny_bryan.png")
+```
+:::
+
+::::
+
+
+A More In-depth Exploration of Functionals -- [*Advanced R*](https://adv-r.hadley.nz/functionals.html)
+
+</br>
+
+***
+
+`r emo::ji("check")` **Check-in: Functional Programming**
+
+**Question 1:**
+
+Suppose we would like to find the median of the measurement variables 
+(`bill_length_mm`, `bill_depth_mm`, `flipper_length_mm`, `body_mass_g`) from the
+`penguins` dataset (from the **palmerpenguins** package). Which of the following
+will produce a **vector** of the median of every measurement variable?
+
+*Select all that apply!*
+
+_(a)_
+```{r, eval = FALSE}
+penguins %>% 
+  select(bill_length_mm:body_mass_g) %>% 
+  map(median, na.rm = TRUE)
+```
+
+_(b)_
+```{r, eval = FALSE}
+penguins %>% 
+  select(bill_length_mm:body_mass_g) %>% 
+  map_dbl(median, na.rm = TRUE)
+```
+
+_(c)_
+```{r, eval = FALSE}
+penguins %>% 
+  select(bill_length_mm:body_mass_g) %>% 
+  sapply(., median, na.rm = TRUE)
+```
+
+_(d)_
+```{r, eval = FALSE}
+penguins %>% 
+  select(bill_length_mm:body_mass_g) %>% 
+  lapply(., function(x) median(x, na.rm = TRUE))
+```
+
+</br>
+
+***
+
+</br>
+
+Recall that in the last unit, we discussed the challenge of standardizing many
+columns in a data frame.  For example, If we wanted to standardize a numeric 
+variable to be centered at the mean and scaled by the standard deviation, we 
+could use the following function: 
+
+```{r}
+standardize <- function(vec) {
+  stopifnot(is.numeric(vec))
+  
+  deviations <- vec - mean(vec, na.rm = TRUE)
+  newdata <- deviations / sd(vec, na.rm = TRUE)
+  return(newdata)
+}
+```
+
+**Question 2:** Why does the following not work?
+
+```{r, eval = FALSE}
+penguins %>%
+  mutate(
+    body_mass_g = map_dbl(body_mass_g, standardize)
+  )
+```
+
+
+**Question 3:** 
+
+Use appropriate `map` functions, along with `standardize()`, to create
+a standardized version of the measurement variables from the `penguins` dataset
+(`bill_length_mm`, `bill_depth_mm`, `flipper_length_mm`, `body_mass_g`).
+
+Do this **without** copy-pasting lines and changing `bill_length_mm` to
+`bill_depth_mm`, etc.
+
+I recommend looking into `map_df()`, `map_if()`, or `map_at()`! 

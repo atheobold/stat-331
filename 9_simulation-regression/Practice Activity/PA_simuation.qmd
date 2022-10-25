@@ -1,0 +1,121 @@
+---
+title: "Practice Activity 9.2: Simulation"
+format: 
+  html: 
+    theme: minty
+    fontsize: 1em
+    mainfont: sans-serif
+    number-sections: true
+    number-depth: 2
+    code-block-bg: "#76b5c5"
+    highlight-style: monochrome
+editor: visual
+execute: 
+  echo: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set()
+
+library(purrr)
+
+set.seed(1957)
+```
+
+A man named Professor Harold Hill wanders into your small town.  He claims to be selling top-quality instruments for a marching band.  He begins selling his instruments to all the children in town.
+
+You are suspicious of Professor Hill, and think that perhaps he is selling instruments made of subpar materials, to scam the townsfolk.
+
+You do some research on the weights of properly crafted brass instruments, and you learn the following facts:
+
+* Trombones weights are Normally distributed, with a mean weight of 4.6 pounds and a standard deviation of 0.8 pounds.
+
+* Trumpet weights are Uniformly distributed between 1.5 and 3.5 pounds.
+
+* Reed instruments (like clarinets, bassoons, and saxophones) have weights that 
+are Chi-Square distributed with 4 degrees of freedom.
+
+# Remember
+
+**Four Types of Calculations**
+
+- `p` -- stands for probability (left tail area for a given value of x)
+- `r` -- stands for random (for generating data)
+- `q` -- stands for quantile (for a given probability)
+- `d` -- stands for density (of the distribution at a given value of x)
+
+**Distributions**
+
+- The Normal distribution functions end with `norm`
+- The Uniform distribution functions end with `unif`
+- The Chi-Square distribution functions end with `chisq`
+
+# Warmup
+
+* What is the 95th percentile for trumpet weight?
+
+* What is the 10th percentile for trombone weight?
+
+* About what percent of trombones do you expect to be more than 5 pounds?
+
+* About what percent of reed instruments do you expect to be more than 5 pounds?
+
+* Simulate 100 random trombone weights.  How many of them were below 4 pounds?
+
+
+# Catching a Con
+
+You manage to intercept a shipping notice for delivery to Professor Hill.  It says the following:
+
+
+```
+Wells Fargo Shipment 1957
+
+To:  Harold Hill, Mason City, Iowa
+From:  Music Factory, Gary, Indiana
+
+Items included:
+    Trombones: 76
+    Cornets: 110
+    Saxophones: 542
+    Clarinets: 318
+    Bassoons: 175
+    
+Total Shipped Weight: 4532 lbs.
+
+```
+
+This is your chance to catch Professor Hill in his lie!
+
+First, write a function that samples the correct number of weights of trombones,
+cornets (trumpets), and reed instruments (saxophones, clarinets, bassoons), and
+then returns the total weight of the shipment.
+
+Then, use that function to create random samples of the total weight of 1000 
+possible shipments. 
+
+(Some code is provided for you below. Do not change the seed!)
+
+```{r, eval = FALSE}
+music_man <- function(n_tromb, n_cor, n_reed){
+  
+  trombones <- rnorm(n_tromb, ...)
+  cornets <- ...
+  reeds <- ...
+  
+  return()
+  
+}
+
+set.seed(1957)
+
+my_weights <- rerun(1000, 
+                    music_man(n_tromb = 76, ...)
+                    ) %>% 
+  flatten_dbl()
+```
+
+
+How many of these samples had a weight less than Prof. Hill's shipment?
+Do you believe Professor Hill is lying, or not?
+

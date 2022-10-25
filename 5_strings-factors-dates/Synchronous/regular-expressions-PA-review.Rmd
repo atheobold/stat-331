@@ -1,6 +1,6 @@
 ---
 title: "Regular Expressions"
-date: "February 2, 2022"
+date: "October 20, 2022"
 author: "Dr. Allison Theobold"
 output:
   xaringan::moon_reader:
@@ -17,6 +17,12 @@ output:
           </div>
         </div>
 ---
+
+<!-- Feedback from Kevin to incorporate! -->
+
+<!-- - LEAD WITH MOTIVATING EXAMPLE! -->
+<!-- - more concrete syntax examples (similar to gr(e|a)y example) -->
+<!-- - compare literal string "abc" with group of characters "(abc)" -->
 
 
 ```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.width = 8, fig.height = 6}
@@ -108,20 +114,6 @@ __*__ -- Occurs 0 or more times
 
 ---
 
-class: middle, inverse
-
-.larger[Your turn!]
-
-.large[Write a regular expression that search for words that:  
-
-- end with a vowel
-- start with x, y, or z 
-- *do not* contain x, y, or z
-- contain British spelling
-]
-
----
-
 class: center
 
 .larger[Creating Groups & Referencing Groups]
@@ -144,6 +136,23 @@ Groups can be referenced based on their position
 ```
 "(.)(.)\\2\\1"
 ```
+--
+
+**What type of word does the last regex search for?**
+
+---
+
+class: middle, inverse
+
+.larger[Your turn!]
+
+.large[Write a regular expression that search for words that:  
+
+- end with a vowel
+- start with x, y, or z 
+- *do not* contain x, y, or z
+- contain British spelling
+]
 
 ---
 
@@ -165,7 +174,7 @@ Use `str_detect()`!
 
 class: center, middle
 
-.larger[Want to see what string(s) have certain values?]
+.larger[Want to see what string(s) have certain patterns?]
 
 --
 
@@ -211,4 +220,4 @@ class: center, middle
 
 --
 
-Use `str_c()`!
+Use `str_c()` or `str_flatten()`!

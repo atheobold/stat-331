@@ -1,0 +1,44 @@
+---
+title: "Practice Activity 9.1: Regression"
+format: 
+  html: 
+    theme: minty
+    fontsize: 1em
+    mainfont: sans-serif
+    number-sections: true
+    number-depth: 2
+    code-block-bg: "#76b5c5"
+    highlight-style: monochrome
+editor: visual
+execute: 
+  echo: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(include = FALSE, eval = FALSE)
+
+library(tidyverse)
+```
+
+# Data
+
+The dataset "mystery_animal.csv" contains the weights of a particular animal
+before and after a year of eating only roasted duck.
+
+
+# Linear Regression 
+
+Fit a linear regression to determine if the Duck Diet is associated with the 
+animal gaining weight, losing weight, or neither.
+
+
+# Residuals  
+
+Plot the residuals (observed value minus predicted value) of your linear model
+versus `weight_before`. 
+
+
+# Mystery Animal
+
+What animal do you see? 
+

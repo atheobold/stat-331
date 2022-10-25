@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Factors, Strings, &amp; Dates</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+<script src="factors_strings_dates_files/libs/clipboard/clipboard.min.js"></script>
+<script src="factors_strings_dates_files/libs/quarto-html/quarto.js"></script>
+<script src="factors_strings_dates_files/libs/quarto-html/popper.min.js"></script>
+<script src="factors_strings_dates_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="factors_strings_dates_files/libs/quarto-html/anchor.min.js"></script>
+<link href="factors_strings_dates_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="factors_strings_dates_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="factors_strings_dates_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="factors_strings_dates_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="factors_strings_dates_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Factors, Strings, &amp; Dates</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<hr>
+<p>▶️ Watch Videos: 25 minutes</p>
+<p>📖 Readings: 30-60 minutes</p>
+<p>💻 Activities: 45-60 minutes</p>
+<p>✅ Check-ins: 2</p>
+<hr>
+<section id="factors" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Factors</h1>
+<p>📖 <a href="https://r4ds.had.co.nz/factors.html">Required Reading: <em>R4DS</em> – Factors with forcats</a></p>
+<p>▶️ <a href="http://somup.com/crfTrOF3tN">Required Video: Factors with forcats</a></p>
+<hr>
+<p>✅ <strong>Check-in: Functions from forcats</strong></p>
+<p>Answer the questions based on the reading, video, <strong>forcats</strong> <a href="https://forcats.tidyverse.org/reference/index.html">website</a>, or <strong>forcats</strong> <a href="https://www.rstudio.com/resources/cheatsheets/">cheat sheet</a>.</p>
+<p><strong>Q1</strong> Which of the following tasks can <code>fct_recode()</code> accomplish?</p>
+<ul>
+<li>changes the values of the factor levels</li>
+<li>reorders the levels of a factor</li>
+<li>remove levels of a factor you don’t want</li>
+<li>collapse levels of a factor into a new level</li>
+</ul>
+<p><strong>Q2</strong> Which of the following tasks can <code>fct_relevel()</code> accomplish?</p>
+<ul>
+<li>reorders the levels of a factor</li>
+<li>changes the values of the factor levels</li>
+<li>remove levels of a factor you don’t want</li>
+<li>collapse levels of a factor into a new level</li>
+</ul>
+<p><strong>Q3</strong> What is the main difference between <code>fct_collapse()</code> and <code>fct_recode()</code>?</p>
+<ul>
+<li><code>fct_recode()</code> uses strings to create factor levels</li>
+<li><code>fct_recode()</code> uses groups to create factor levels</li>
+<li><code>fct_recode()</code> cannot create an “Other” group</li>
+</ul>
+<p><strong>Q4</strong> What ordering do you get with <code>fct_reorder()</code>?</p>
+<ul>
+<li>largest to smallest based on another variable</li>
+<li>order of appearance</li>
+<li>largest to smallest based on counts</li>
+<li>alphabetical order</li>
+</ul>
+<p><strong>Q5</strong> What ordering do you get with <code>fct_inorder()</code>?</p>
+<ul>
+<li>order of appearance</li>
+<li>alphabetical order</li>
+<li>largest to smallest based on counts</li>
+<li>largest to smallest based on another variable</li>
+</ul>
+<p><em>Feel free to share answers with your classmates in the Discord server, to make sure you understand.</em></p>
+<p>✅ <strong>Check-in: Apply your skills</strong></p>
+<p>In your <em>colleges_clean</em> dataset (<a href="https://www.dropbox.com/s/bt5hvctdevhbq6j/colleges.csv?dl=1">from Practice Activity 3</a>), adjust the <code>REGION</code> variable to have nicer or clearer labels and/or better categories.</p>
+<hr>
+</section>
+<section id="strings" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Strings</h1>
+<p>📖 <a href="https://r4ds.had.co.nz/strings.html">Required Reading: <em>R4DS</em> – Strings</a></p>
+<p>▶️ <a href="https://www.youtube.com/watch?v=Oo_MtXwpi2Q">Required Video – Strings with stringr</a></p>
+<hr>
+<p>✅ <strong>Check-in: Functions from stringr</strong></p>
+<p>Answer the questions based on the reading, video, <strong>stringr</strong> <a href="https://stringr.tidyverse.org/reference/index.html">website</a>, or <strong>stringr</strong> <a href="https://www.rstudio.com/resources/cheatsheets/">cheat sheet</a>.</p>
+<p><strong>Q1</strong> Which of the follow are differences between <code>length()</code> and <code>str_length()</code>?</p>
+<ul>
+<li><code>length()</code> gives the number of elements in a vector</li>
+<li><code>str_length()</code> gives the number of characters in a string</li>
+<li><code>str_length()</code> gives the number of strings in a vector</li>
+<li><code>length()</code> gives the dimensions of a dataframe</li>
+</ul>
+<p><strong>Q2</strong> What of the following is true about <code>str_replace()</code>?</p>
+<ul>
+<li><code>str_replace()</code> replaces the first instance of the pattern</li>
+<li><code>str_replace()</code> replaces the last instance of the pattern</li>
+<li><code>str_replace()</code> replaces every instance of the pattern</li>
+</ul>
+<p><strong>Q3</strong> <code>str_trim()</code> allows you to remove whitespace on what sides</p>
+<ul>
+<li>both</li>
+<li>left</li>
+<li>right</li>
+</ul>
+<p><strong>Q4</strong> Which of the following does <code>str_sub()</code> use to create a substring?</p>
+<ul>
+<li>starting position</li>
+<li>ending position</li>
+<li>pattern to search for</li>
+</ul>
+<p><strong>Q5</strong> Which of the following does <code>str_subset()</code> use to create a substring?</p>
+<ul>
+<li>starting position</li>
+<li>ending position</li>
+<li>pattern to search for</li>
+</ul>
+<p><strong>Q6</strong> What does the collapse argument do in str_c()?</p>
+<ul>
+<li>specifies a string to be used when combining inputs into a single string</li>
+<li>specifies whether the string should be collapsed</li>
+</ul>
+<p><em>Feel free to share answers with your classmates in the Discord server, to make sure you understand.</em></p>
+<p>✅ <strong>Check-in: Apply your skills</strong></p>
+<p>Using your <em>colleges_clean</em> dataset, answer these questions:</p>
+<p><strong>Question 1:</strong> How <em>exactly</em> does Cal Poly’s name appear in this dataset?</p>
+<p><strong>Question 2:</strong> How many colleges have the word “University” in their name?</p>
+<p><strong>Question 3:</strong> Which college has the <em>longest</em> name? The <em>shortest</em> name?</p>
+<hr>
+</section>
+<section id="dates" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Dates</h1>
+<p>▶️ <a href="http://somup.com/crfTrLF3U3">Required Video: DateTime Objects with lubridate</a></p>
+<p>📖 <a href="https://r4ds.had.co.nz/dates-and-times.html">Required Reading: <em>R4DS</em> – Dates and Times</a></p>
+<p><strong>Extra Resources</strong></p>
+<ul>
+<li><p><a href="https://www.cyclismo.org/tutorial/R/time.html">A more in-depth discussion of the POSIXlt and POSIXct data classes.</a></p></li>
+<li><p><a href="https://data.library.virginia.edu/working-with-dates-and-time-in-r-using-the-lubridate-package/">A tutorial on lubridate</a> - scroll down for details on intervals if you have trouble with <code>%within%</code> and <code>%--%</code></p></li>
+</ul>
+<hr>
+<p>✅ <strong>Check-in: Functions from lubridate</strong></p>
+<p>Answer the questions based on the reading, video, <strong>lubridate</strong> <a href="https://lubridate.tidyverse.org/reference/index.html">website</a>, or <strong>lubridate</strong> <a href="https://www.rstudio.com/resources/cheatsheets/">cheat sheet</a>.</p>
+<p><strong>Q1</strong> Which of the following is true about the year() function?</p>
+<ul>
+<li><code>year()</code> extracts the year of a datetime object</li>
+<li><code>year()</code> creates a duration object to be added to a datetime</li>
+</ul>
+<p><strong>Q3</strong> What <code>tz</code> would you use for San Luis Obispo?</p>
+<!-- tz = "America/Los_Angeles" -->
+<p><strong>Q3</strong> Which of the following is true about the <code>%within%</code> operator?</p>
+<ul>
+<li>it checks if a date is included in an interval</li>
+<li>it returns a logical value</li>
+<li>it creates an interval with a start and end time</li>
+</ul>
+<p><strong>Q4</strong> Which of the following is true about the <code>%--%</code> operator?</p>
+<ul>
+<li>it creates an interval with a start and end time</li>
+<li>it returns a logical value</li>
+<li>it checks if a date is included in an interval</li>
+</ul>
+<p><strong>Q5</strong> What day does the <code>make_date()</code> function use as default if no <code>day</code> argument is provided?</p>
+<p><em>Feel free to share answers with your classmates in the Discord server, to make sure you understand.</em></p>
+<p>✅ <strong>Check-in: Apply your skills</strong></p>
+<p>(Answer the following using code (even if you know the answer already).</p>
+<p>First, use the <code>make_date()</code> function to save your birthday as a Datetime object in R.</p>
+<ul>
+<li><p>What day of the week does/did your birthday fall on in 2023?</p></li>
+<li><p>On what day of the week should you plan your 50th birthday party?</p></li>
+<li><p>Find the date that is exactly 9 months before the day you were born. If it falls on a holiday, think about the implications.</p></li>
+</ul>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,0 +1,103 @@
+---
+title: "Version Control `r emo::ji('computer')`"
+date: "October 25, 2022"
+author: "Stat 331"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["xaringan-themer.css", "slide-style.css"]
+    nature:
+      highlightStyle: solarized-light
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+---
+
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.width = 8, fig.height = 6}
+knitr::opts_chunk$set(fig.align = "center")
+
+options(htmltools.dir.version = FALSE)
+
+library(xaringanthemer)
+library(xaringan)
+library(tidyverse)
+
+
+style_duo_accent(
+  primary_color      = "#0F4C81", # pantone classic blue
+  secondary_color    = "#B6CADA", # pantone baby blue
+  header_font_google = google_font("Raleway"),
+  text_font_google   = google_font("Raleway", "300", "300i"),
+  code_font_google   = google_font("Source Code Pro"),
+  text_font_size     = "30px"
+)
+```
+
+class: inverse
+
+.pull-left[
+![](images/git.png) 
+
+.large[
+- Language for version control
+- Developed by Linus Torvalds (Linux, Android, Chrome OS)
+- Uses command line or GUI
+]
+]
+
+.pull-right[
+![](images/github.jpeg)
+.large[
+- Cloud-based hosting service
+- Basic services are free
+- Advanced services are paid 
+(Similar to RStudio) 
+]
+]
+---
+
+class: middle, center, inverse
+
+.larger[A Formidable Opponent]
+
+![](images/git_hard.png)
+
+---
+
+class: center, inverse
+
+.larger[Git Workflow]
+
+```{r, echo = FALSE, out.width = "50%"}
+knitr::include_graphics("images/working_github.jpeg")
+```
+
+---
+
+class: center, inverse
+
+.larger[Making Changes]
+
+```{r, echo = FALSE, out.width = "60%"}
+knitr::include_graphics("images/add_files.png")
+```
+
+---
+
+class: center, inverse
+
+.pull-left-narrow[
+.larger[Collabor-ating]
+]
+
+.pull-right-wide[
+```{r, echo = FALSE, out.width = "80%"}
+knitr::include_graphics("images/collab.png")
+```
+]
