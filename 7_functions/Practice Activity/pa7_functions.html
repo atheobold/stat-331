@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Practice Activity 7: Writing Functions</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+<script src="pa7_functions_files/libs/clipboard/clipboard.min.js"></script>
+<script src="pa7_functions_files/libs/quarto-html/quarto.js"></script>
+<script src="pa7_functions_files/libs/quarto-html/popper.min.js"></script>
+<script src="pa7_functions_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="pa7_functions_files/libs/quarto-html/anchor.min.js"></script>
+<link href="pa7_functions_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="pa7_functions_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="pa7_functions_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="pa7_functions_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="pa7_functions_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Practice Activity 7: Writing Functions</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>This activity will ask you to write several small functions, then use them to unscramble a message.</p>
+<p>Many of the functions have been started for you below, but none of them are complete as-is.</p>
+<hr>
+<p><strong>Question 1</strong></p>
+<p>Write a function called <code>divide_and_round()</code>, which takes a number or vector of numbers, divides them all by their smallest value, and rounds the results to the nearest whole number.</p>
+<p>Test it by running the code below the function.</p>
+<div class="cell">
+
+</div>
+<hr>
+<p><strong>Question 2</strong></p>
+<p>Write a function called <code>no_nines_or_twelves()</code>, which takes a number or vector of numbers and returns <code>TRUE</code> if the number(s) <strong>are not</strong> divisible by 9 or 12, and returns <code>FALSE</code> otherwise.</p>
+<p>Test it by running the code below the function.</p>
+<div class="cell">
+
+</div>
+<hr>
+<p><strong>Question 3</strong></p>
+<p>Write a function called <code>every_other()</code> which takes a vector and returns every other value in the vector.</p>
+<p><strong>Do not</strong> use a <code>for()</code> loop to do this! Accomplish this with the <code>seq_along()</code> function, bracket subsetting (<code>[]</code>), and modulus arithmetic (<code>%%</code>).</p>
+<p>Include an optional argument called “start” which lets you choose where to start skipping; that is, if <code>start = 1</code>, the function returns the 1st, 3rd, 5th, etc. values and if <code>start = 2</code>, the function returns the 2nd, 4th, 6th, etc. values.</p>
+<p>Test it by running the code below the function.</p>
+<div class="cell">
+
+</div>
+<hr>
+<p><strong>Question 4</strong></p>
+<p>Write a function called <code>shorten()</code> which takes a vector, drops the values <strong>before</strong> the cumulative sum is greater than a provided number, and returns the remaining values.</p>
+<p><strong>Do not</strong> use a <code>while()</code> loop to do this! Accomplish this with the <code>cumsum()</code> function and bracketing.</p>
+<p>Be sure to test your function!</p>
+<div class="cell">
+
+</div>
+<hr>
+<p><strong>Question 5</strong></p>
+<p>Once you have written your four functions correctly, copy-paste and run the following code:</p>
+<div class="cell">
+
+</div>
+<p>If you have done everything correctly, your final vector will be six numbers long. Google these six numbers to find a TV show as your final answer.</p>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

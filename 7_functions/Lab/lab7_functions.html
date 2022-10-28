@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Lab 7: Functions and Fish</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="lab7_functions_files/libs/clipboard/clipboard.min.js"></script>
+<script src="lab7_functions_files/libs/quarto-html/quarto.js"></script>
+<script src="lab7_functions_files/libs/quarto-html/popper.min.js"></script>
+<script src="lab7_functions_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="lab7_functions_files/libs/quarto-html/anchor.min.js"></script>
+<link href="lab7_functions_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="lab7_functions_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="lab7_functions_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="lab7_functions_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="lab7_functions_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Lab 7: Functions and Fish</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>The goal of this lab is learn more about exploring missing data and to teach you to write modular code.</p>
+<section id="the-data" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="the-data"><span class="header-section-number">1</span> The Data</h2>
+<p>This lab’s dataset concerns mark-recapture data on fish from the Blackfoot River, outside of Helena, Montana.</p>
+<p><img src="images/blackfoot_river.jpg" class="img-fluid"></p>
+<p>Mark-recapture is a common method used by Ecologists to estimate an animal population’s size, when it is impossible to conduct a census (count every animal). This method works by “tagging” animals with a tracking device, so scientists can track their movement and / or presence.</p>
+<div class="column">
+<div class="column" style="width:45%;">
+<p><img src="images/grizzly.jpg" class="img-fluid"></p>
+</div>
+<div class="column" style="width:45%;">
+<p><img src="images/condor.jpg" class="img-fluid"></p>
+</div>
+<div class="column" style="width:45%;">
+<p><img src="images/fish.PNG" class="img-fluid"></p>
+</div>
+</div>
+<p>You may download the <code>BlackfootFish.csv</code> dataset on Canvas.</p>
+</section>
+<section id="part-one-summaries-and-plots" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="part-one-summaries-and-plots"><span class="header-section-number">2</span> Part One: Summaries and Plots</h2>
+</section>
+<section id="midterm-review" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="midterm-review"><span class="header-section-number">3</span> (Midterm Review)</h2>
+<section id="task-1-summarizing-missing-data" class="level3">
+<h3 class="anchored" data-anchor-id="task-1-summarizing-missing-data">Task 1 – Summarizing Missing Data</h3>
+<p>The measurements of each fish captured were taken by a Biologist on a raft. This lack of “laboratory setting” opens the door to the possibility of measurement errors.</p>
+<ul>
+<li><p>How many observations have missing values?</p></li>
+<li><p>What variable(s) have missing values present?</p></li>
+</ul>
+<p><em>Think about outputting both pieces of information in <strong>one</strong> table!</em></p>
+</section>
+<section id="task-2-visualizing-missing-data" class="level3">
+<h3 class="anchored" data-anchor-id="task-2-visualizing-missing-data">Task 2 – Visualizing Missing Data</h3>
+<p>Unfortunately, these missing values are not for only one <code>year</code>, <code>trip</code>, or <code>section</code> of river.</p>
+<p>Create a thoughtful visualization exploring the frequency of missing values across the different years, sections, and trips.</p>
+<hr>
+</section>
+</section>
+<section id="part-two-adjusting-the-data-function-writing" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="part-two-adjusting-the-data-function-writing"><span class="header-section-number">4</span> Part Two: Adjusting the Data (Function Writing)</h2>
+<p>If I wanted to rescale every quantitative variable in my dataset so that the variables have values between 0 and 1. I could use the following formula:</p>
+<p><br></p>
+<p><span class="math display">\[y_{scaled} = \frac{y_i - min\{y_1, y_2,..., y_n\}}{max\{y_1, y_2,..., y_n\}
+- min\{y_1, y_2,..., y_n\}}\]</span></p>
+<p><br></p>
+<p>The following <code>R</code> code would carry out this rescaling procedure for the <code>length</code> and <code>weight</code> columns of the data:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>BlackfootFish<span class="sc">$</span>length <span class="ot">&lt;-</span> (BlackfootFish<span class="sc">$</span>length <span class="sc">-</span> <span class="fu">min</span>(BlackfootFish<span class="sc">$</span>length, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">/</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  (<span class="fu">max</span>(BlackfootFish<span class="sc">$</span>length, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">-</span> <span class="fu">min</span>(BlackfootFish<span class="sc">$</span>length, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>BlackfootFish<span class="sc">$</span>weight <span class="ot">&lt;-</span> (BlackfootFish<span class="sc">$</span>weight <span class="sc">-</span> <span class="fu">min</span>(BlackfootFish<span class="sc">$</span>weight, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">/</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  (<span class="fu">max</span>(BlackfootFish<span class="sc">$</span>weight, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">-</span> <span class="fu">min</span>(BlackfootFish<span class="sc">$</span>length, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This process of duplicating an action multiple times makes it difficult to understand the intent of the process. Additionally, it makes it very difficult to spot the mistakes. <em>Did you spot the mistake in the weight conversion?</em></p>
+<p>Often you will find yourself in the position of needing to find a function that performs a specific task, but you do not know of a function or a library that would help you. You could spend time Googling for a solution, but in the amount of time it takes you to find something you could have already written your own function!</p>
+<section id="task-1-writing-a-function" class="level3">
+<h3 class="anchored" data-anchor-id="task-1-writing-a-function">Task 1 – Writing a Function</h3>
+<p>Let’s transform the repeated process above into a <code>rescale_01()</code> function.</p>
+<ul>
+<li>The function should take a single vector as its input.</li>
+<li>The function should return the rescaled vector.</li>
+</ul>
+<p><em>Think about the “efficiency” of your function. Are you calling the <strong>same</strong> function multiple times?</em></p>
+</section>
+<section id="task-2-adding-stops" class="level3">
+<h3 class="anchored" data-anchor-id="task-2-adding-stops">Task 2 – Adding Stops</h3>
+<p>Now, let’s incorporate some checks into your function! Modify your previous code to create the following checks:</p>
+<ul>
+<li>the function should stop if the input vector is not numeric</li>
+<li>the function should stop if the length of the vector is not greater than 1</li>
+</ul>
+<p><em>No need to write code here, simply add these stops to your code from Task 1!</em></p>
+</section>
+<section id="task-3---performing-a-simple-test" class="level3">
+<h3 class="anchored" data-anchor-id="task-3---performing-a-simple-test">Task 3 - Performing a Simple Test</h3>
+<p>First, test your function on a simple vector. Verify that the maximum of your rescaled vector is 1 and the minimum is 0!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>, <span class="cn">NA</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="task-4---performing-a-more-difficult-test" class="level3">
+<h3 class="anchored" data-anchor-id="task-4---performing-a-more-difficult-test">Task 4 - Performing a More Difficult Test</h3>
+<p>Next, let’s test the function on the <code>length</code> column of the <code>BlackfootFish</code> dataset.</p>
+<ul>
+<li>Make side-by-side plots of the original values of <code>length</code> and the rescaled values of <code>length</code>.</li>
+</ul>
+</section>
+<section id="task-5-incorportaing-variables" class="level3">
+<h3 class="anchored" data-anchor-id="task-5-incorportaing-variables">Task 5 – Incorportaing Variables</h3>
+<p>Suppose you would for your <code>rescale()</code> function to perform operations on a variable within a dataset. Ideally, your function would take a dataframe and a variable name as inputs and return a dataframe where the variable has been rescaled.</p>
+<p>Create a <code>rescale_column()</code> that accepts two arguments, (1) a dataframe, and (2) the name(s) of the variable(s) to be rescaled. The body of the function should call the original <code>rescale_01()</code> function you wrote previously.</p>
+</section>
+<section id="task-6-another-function-test" class="level3">
+<h3 class="anchored" data-anchor-id="task-6-another-function-test">Task 6 – Another Function Test</h3>
+<p>Alright, now let’s put your <code>rescale_column()</code> function to work! Use your <code>rescale_column()</code> function to rescale <strong>both</strong> the <code>length</code> and <code>weight</code> columns.</p>
+<p><strong>I expect that you only call the <code>rescale()</code> function <em>one</em> time!</strong></p>
+<hr>
+</section>
+</section>
+<section id="challenge-incorporating-multiple-inputs" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="challenge-incorporating-multiple-inputs"><span class="header-section-number">5</span> Challenge: Incorporating Multiple Inputs</h2>
+<p>A frequently used measurement for fish health is a “condition index.” <a href="https://en.wikipedia.org/wiki/Condition_index_in_fish">(Wikepedia article)</a> The following simple equation can be used to calculate the approximate condition index of a fish:</p>
+<p><span class="math display">\[\text{condition index} = \frac{weight}{length^3} \times 100\]</span> ### Part 1</p>
+<p>Write a function which calculates the condition index of a fish, given inputs of weight and length.</p>
+<p><em>Consider whether your function will accept vectors as inputs or if it will accept variable names as inputs!</em></p>
+<section id="part-2" class="level3">
+<h3 class="anchored" data-anchor-id="part-2">Part 2</h3>
+<p>Make a thoughtful visualization of how fish conditions have varied over the duration of this study.</p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

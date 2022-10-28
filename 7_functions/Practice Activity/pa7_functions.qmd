@@ -1,5 +1,5 @@
 ---
-title: "Practice Activity: Writing Functions"
+title: "Practice Activity 7: Writing Functions"
 format: 
   html: 
     theme: minty
@@ -12,11 +12,8 @@ format:
 editor: visual
 execute: 
   echo: false
+  eval: false
 ---
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
-```
 
 This activity will ask you to write several small functions, then use them to
 unscramble a message.
@@ -56,6 +53,7 @@ Write a function called `no_nines_or_twelves()`, which takes a number or
 vector of numbers and returns `TRUE` if the number(s) **are not** divisible
 by 9 or 12, and returns `FALSE` otherwise.
 
+Test it by running the code below the function.
 
 ```{r}
 no_nines_or_twelves <- function(nums){
@@ -83,6 +81,8 @@ arithmetic (`%%`).
 Include an optional argument called "start" which lets you choose where to start
 skipping; that is, if `start = 1`, the function returns the 1st, 3rd, 5th, etc.
 values and if `start = 2`, the function returns the 2nd, 4th, 6th, etc. values.  
+
+Test it by running the code below the function.
 
 ```{r}
 every_other <- function(vec){
@@ -143,6 +143,7 @@ my_vec <- c(39, 1.87, 48, 11, 8, 45, 21, 5, 12, 33, 9, 11, 108, 4, 18, 5, 16,
             26.59, 23.04, 19.82, 50.73, 39.56, 43.79, 30.22, 85.85, 5.78, 78.85,
             29.52, 66.27, 44.06, 27.28, 24.43, 64.32, 3.35, 67.45, 46.72, 48.44,
             48.65, 33.3, 40.28, 19.04)
+
 my_vec <- every_other(my_vec, start = 2)
 # Should have 54 elements! 
 
