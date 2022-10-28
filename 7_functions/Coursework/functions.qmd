@@ -97,14 +97,16 @@ the article here:
 
 `r emo::ji("computer")` [Required Tutorial: RStudio Primer -- Writing Functions](https://rstudio.cloud/learn/primers/6)
 
-- I **highly recommend** you work through _every_ tutorial except Loops! 
+::: {.callout-tip}
+I **highly recommend** you work through _every_ tutorial except Loops! 
+:::
 
 ---
 
 `r emo::ji("check")` **Check-in: Simple Functions** 
 
 Fill in the necessary code to write a function called `times_seven()`. The 
-function should take a single argument and multiply the input by 7. 
+function should take a single argument (`x`) and multiply the input by 7. 
 
 This function should check that the argument is numeric. 
 
