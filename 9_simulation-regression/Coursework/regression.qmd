@@ -1,0 +1,151 @@
+---
+title: "Linear Regression"
+format: 
+  html: 
+    theme: minty
+    fontsize: 1em
+    mainfont: sans-serif
+    number-sections: true
+    number-depth: 2
+    code-block-bg: "#76b5c5"
+    highlight-style: monochrome
+editor: visual
+execute: 
+  echo: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, include = FALSE}
+library(tidyverse)
+library(palmerpenguins)
+```
+
+In this module, you'll learn to compute linear regression models in R.
+
+`r emo::ji("play button")` Watch Videos: 30 minutes
+
+-   `r emo::ji("link")` Link to **all** Slides from Videos: [here](https://app.box.com/s/zcnbbt2xepty8ztg56ikdgdxz8oiyvws)
+
+`r emo::ji("book")` Readings: 45-60 minutes
+
+`r emo::ji("computer")` Activities: 30 minutes
+
+`r emo::ji("check")` Check-ins: 1
+
+------------------------------------------------------------------------
+
+## Review of Simple (Basic) Linear Regression
+
+`r emo::ji("book")` [Recommended Reading -- *Modern Dive* : Basic Regression](https://moderndive.com/5-regression.html)
+
+`r emo::ji("play")` [Recommended Video -- Simple Linear Regression (17 minutes)](https://www.youtube.com/watch?v=1IMpg1ukMpY)
+
+## Conditions of Linear Regression
+
+`r emo::ji("play button")` [Recommended Video -- Regression Assumptions (14 minutes)](https://www.youtube.com/watch?v=LD3OSSVxKMU)
+
+------------------------------------------------------------------------
+
+## Visualizing Linear Regression
+
+```{r, message = FALSE, warning = FALSE}
+library(palmerpenguins)
+
+penguins %>%
+  ggplot(aes(x = bill_depth_mm, y = bill_length_mm)) +
+  geom_point() +
+  stat_smooth(method = "lm") + 
+  labs(x = "Bill Depth (mm)", 
+       y = "Bill Length (mm)")
+```
+
+## Fitting Linear Regression Models in R -- Supervised Learning
+
+```{r}
+my_model <- penguins %>%
+  lm(bill_length_mm ~ bill_depth_mm, data = .)
+```
+
+<!-- *Note:* The `lm()` function **does not** have the data as the first argument,  -->
+
+<!-- which is why there is a `.` in the `data =` argument. This tells `lm()` where -->
+
+<!-- to insert the data that I piped in.  -->
+
+<!-- Alternatively, you could do the following: -->
+
+<!-- ```{r, eval = FALSE} -->
+
+<!-- my_model <- lm(bill_length_mm ~ bill_depth_mm, data = penguins) -->
+
+<!-- ``` -->
+
+## Accessing Model Estimates
+
+### Raw Coefficients
+
+This is what is output when you just call the name of the linear model object you created (`my_model`). Notice, the output doesn't give you much information and it looks kind of bad.
+
+```{r}
+my_model
+```
+
+### Model Summary
+
+This is what is output when you use the `summary()` function on a linear model object. Notice, the output gives you a lot of information, some of which is really not that useful. And, the output is quite messy!
+
+```{r}
+summary(my_model)
+```
+
+### Tidy Model Summary
+
+The `tidy()` function from the broom package takes a linear model object and puts the "important" information into a tidy tibble output.
+
+Ah! Just right!
+
+```{r}
+broom::tidy(my_model) 
+```
+
+If you are sad that you no longer have the statistics about the model fit (e.g., R-squared, adjusted R-squared, $\sigma$), you can use the `glance()` function from the broom package to grab those!
+
+```{r}
+broom::glance(my_model)
+```
+
+------------------------------------------------------------------------
+
+`r emo::ji("check")` **Check-in: Linear Regression**
+
+**Question 1: Code**
+
+a)  In the code above, what does the `data = .` argument in the `lm()` function do?
+
+b)  What happens if you switch the order of `bill_length_mm` and `bill_depth_mm` in the `lm()` formula?
+
+c)  What *object type* was returned by `summary()`? What about by `tidy()`?
+
+**Question 2: Interpretation**
+
+a)  What is the equation for the estimated regression line (given above)?
+
+b)  Penguin Mopsy has a bill that is 5mm deeper than Penguin Gidget. How much shorter do you expect Penguin Mopsy's bill to be?
+
+**Question 3: A more complex model**
+
+Run the following code, and explore the results:
+
+```{r}
+my_model_2 <- penguins %>%
+  lm(bill_length_mm ~ bill_depth_mm*species, data = .)
+```
+
+a)  Make a plot illustrating `my_model_2`. Upload a picture of your plot! *(Hint: Think about what needs to change in the aesthetic of the plot featured previously?)*
+
+b)  Which model of the two models explains the most variance in `bill_length_mm`?
+
+c)  Do the three species of penguin have the same bill shape (i.e., the relationship between length and depth)? How do you know?

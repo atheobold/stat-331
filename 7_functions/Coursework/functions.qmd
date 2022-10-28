@@ -16,6 +16,8 @@ execute:
 
 ```{r}
 #| include: false
+#| echo: false
+
 library(tidyverse)
 library(lubridate)
 ```
@@ -199,50 +201,9 @@ these data the car information is included as rownames. Use the
 `rownames_to_column()`function to create a new column in the data called `make`
 that gives the make and model of each car. 
 
-```{r, include = FALSE}
-
-# Using word()
-find_car_make <- function(x){
-  make <- word(x, 1)
-  return(make)
-}
-
-# Using str_split()
-find_car_make <- function(x){
-  # Simplify will make a matrix
-  info <- str_split(x, pattern = "\\s", simplify = TRUE)
-  return(info[, 1])
-}
-
-
-mtcars %>% 
-  rownames_to_column(var = "car") %>% 
-  mutate(make = find_car_make(car))
-
-```
-
 ---
 
-## Good Code Style
-
----
-
-Consider the following two chunks of code:
-
-```{r, eval = FALSE}
-some_data<-penguins%>%group_by(species)%>%summarize(av=mean(body_mass_g,0,TRUE))
-```
-
-```{r, eval = FALSE}
-avg_by_species <-
-  penguins %>% 
-    group_by(species) %>% 
-    summarize(
-      avg_mass = mean(body_mass_g, na.rm = TRUE)
-    )
-```
-
-Which one is easier to read?  The second one, of course!
+## Styling Functions
 
 Part of writing reproducible and shareable code is following good
 **style guidelines**.  Mostly, this means choosing good object names and using

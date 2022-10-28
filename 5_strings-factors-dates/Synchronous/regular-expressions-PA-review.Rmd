@@ -18,6 +18,12 @@ output:
         </div>
 ---
 
+<!-- Feedback from Kevin to incorporate! -->
+
+<!-- - LEAD WITH MOTIVATING EXAMPLE! -->
+<!-- - more concrete syntax examples (similar to gr(e|a)y example) -->
+<!-- - compare literal string "abc" with group of characters "(abc)" -->
+
 
 ```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.width = 8, fig.height = 6}
 knitr::opts_chunk$set(message = FALSE, 
