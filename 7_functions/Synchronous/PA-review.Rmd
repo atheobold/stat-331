@@ -55,9 +55,15 @@ class: middle, center
 
 Less Error Prone
 
+<!-- You eliminate the chance of making incidental mistakes when you copy and paste -->
+
 Don't Repeat Yourself
 
+<!-- You can give a function an evocative name that makes your code easier to understand. -->
+
 Efficient
+
+<!-- As requirements change, you only need to update code in one place, instead of many. -->
 
 ---
 
@@ -278,14 +284,43 @@ That means, they **are** "vectorized"
 --
 
 ```{r, error = TRUE}
-if_else(my_vec == 9, NA, my_vec)
+fix_na <- function(x) {
+  if_else(x %in% c(997, 998, 999), NA, x)
+}
+
+test <- c(995, 997, 1000, 999)
+
+fix_na(test)
 ```
+
+---
+
+.larger[A family of `NA`s]
+
+If your `FALSE` data type is numerical, then your `TRUE` data type must be 
+numerical! 
 
 --
 
+.pull-left-wide[
 ```{r}
-if_else(my_vec == 9, NA_real_, my_vec)
+fix_na <- function(x) {
+  if_else(x %in% c(997, 998, 999), NA_real_, x)
+}
+
+fix_na(test)
 ```
+]
+
+--
+
+.pull-right-narrow[
+Other options within the `NA` family:
+
+- `NA_character_`
+- `NA_integer_`
+- `NA_complex_`
+]
 
 ---
 

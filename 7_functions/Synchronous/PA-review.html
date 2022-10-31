@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Functions 🎂</title>
+    <title>Functions 🎉</title>
     <meta charset="utf-8" />
     <meta name="author" content="Stat 331" />
     <meta name="date" content="2022-11-01" />
@@ -14,7 +14,7 @@
 class: center, middle, inverse, title-slide
 
 .title[
-# Functions 🎂
+# Functions 🎉
 ]
 .author[
 ### Stat 331
@@ -43,9 +43,15 @@ class: middle, center
 
 Less Error Prone
 
+&lt;!-- You eliminate the chance of making incidental mistakes when you copy and paste --&gt;
+
 Don't Repeat Yourself
 
+&lt;!-- You can give a function an evocative name that makes your code easier to understand. --&gt;
+
 Efficient
+
+&lt;!-- As requirements change, you only need to update code in one place, instead of many. --&gt;
 
 ---
 
@@ -286,7 +292,13 @@ That means, they **are** "vectorized"
 
 
 ```r
-if_else(my_vec == 9, NA, my_vec)
+fix_na &lt;- function(x) {
+  if_else(x %in% c(997, 998, 999), NA, x)
+}
+
+test &lt;- c(995, 997, 1000, 999)
+
+fix_na(test)
 ```
 
 ```
@@ -294,16 +306,39 @@ if_else(my_vec == 9, NA, my_vec)
 ## ! `false` must be a logical vector, not a double vector.
 ```
 
+---
+
+.larger[A family of `NA`s]
+
+If your `FALSE` data type is numerical, then your `TRUE` data type must be 
+numerical! 
+
 --
 
+.pull-left-wide[
 
 ```r
-if_else(my_vec == 9, NA_real_, my_vec)
+fix_na &lt;- function(x) {
+  if_else(x %in% c(997, 998, 999), NA_real_, x)
+}
+
+fix_na(test)
 ```
 
 ```
-## [1]  7  8 NA  3
+## [1]  995   NA 1000   NA
 ```
+]
+
+--
+
+.pull-right-narrow[
+Other options within the `NA` family:
+
+- `NA_character_`
+- `NA_integer_`
+- `NA_complex_`
+]
 
 ---
 

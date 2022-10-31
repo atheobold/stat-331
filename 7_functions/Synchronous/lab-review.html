@@ -4,7 +4,7 @@
     <title>Writing Functions to Work with Variables</title>
     <meta charset="utf-8" />
     <meta name="author" content="Dr. Allison Theobold" />
-    <meta name="date" content="2022-02-16" />
+    <meta name="date" content="2022-11-03" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
     <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
@@ -17,9 +17,15 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # Writing Functions to Work with Variables
+]
+.author[
 ### Dr. Allison Theobold
-### February 16, 2022
+]
+.date[
+### November 3, 2022
+]
 
 ---
 
@@ -101,20 +107,21 @@ penguins %&gt;%
 
 ```
 ## # A tibble: 344 × 8
-##    species island    bill_length_mm bill_depth_mm flipper_length_…
-##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;
-##  1 Adelie  Torgersen         0.255          0.667            0.153
-##  2 Adelie  Torgersen         0.269          0.512            0.237
-##  3 Adelie  Torgersen         0.298          0.583            0.390
-##  4 Adelie  Torgersen        NA             NA               NA    
-##  5 Adelie  Torgersen         0.167          0.738            0.356
-##  6 Adelie  Torgersen         0.262          0.893            0.305
-##  7 Adelie  Torgersen         0.247          0.560            0.153
-##  8 Adelie  Torgersen         0.258          0.774            0.390
-##  9 Adelie  Torgersen         0.0727         0.595            0.356
-## 10 Adelie  Torgersen         0.36           0.845            0.305
-## # … with 334 more rows, and 3 more variables: body_mass_g &lt;dbl&gt;,
-## #   sex &lt;fct&gt;, year &lt;int&gt;
+##    species island    bill_l…¹ bill_…² flipp…³ body_…⁴ sex    year
+##    &lt;fct&gt;   &lt;fct&gt;        &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;fct&gt; &lt;int&gt;
+##  1 Adelie  Torgersen   0.255    0.667   0.153   0.292 male   2007
+##  2 Adelie  Torgersen   0.269    0.512   0.237   0.306 fema…  2007
+##  3 Adelie  Torgersen   0.298    0.583   0.390   0.153 fema…  2007
+##  4 Adelie  Torgersen  NA       NA      NA      NA     &lt;NA&gt;   2007
+##  5 Adelie  Torgersen   0.167    0.738   0.356   0.208 fema…  2007
+##  6 Adelie  Torgersen   0.262    0.893   0.305   0.264 male   2007
+##  7 Adelie  Torgersen   0.247    0.560   0.153   0.257 fema…  2007
+##  8 Adelie  Torgersen   0.258    0.774   0.390   0.549 male   2007
+##  9 Adelie  Torgersen   0.0727   0.595   0.356   0.215 &lt;NA&gt;   2007
+## 10 Adelie  Torgersen   0.36     0.845   0.305   0.431 &lt;NA&gt;   2007
+## # … with 334 more rows, and abbreviated variable names
+## #   ¹​bill_length_mm, ²​bill_depth_mm, ³​flipper_length_mm,
+## #   ⁴​body_mass_g
 ```
 
 ---
@@ -252,25 +259,26 @@ std_column_01(penguins, "bill_length_mm")
 
 ```
 ## # A tibble: 344 × 8
-##    species island    bill_length_mm bill_depth_mm flipper_length_…
-##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;            &lt;int&gt;
-##  1 Adelie  Torgersen         0.255           18.7              181
-##  2 Adelie  Torgersen         0.269           17.4              186
-##  3 Adelie  Torgersen         0.298           18                195
-##  4 Adelie  Torgersen        NA               NA                 NA
-##  5 Adelie  Torgersen         0.167           19.3              193
-##  6 Adelie  Torgersen         0.262           20.6              190
-##  7 Adelie  Torgersen         0.247           17.8              181
-##  8 Adelie  Torgersen         0.258           19.6              195
-##  9 Adelie  Torgersen         0.0727          18.1              193
-## 10 Adelie  Torgersen         0.36            20.2              190
-## # … with 334 more rows, and 3 more variables: body_mass_g &lt;int&gt;,
-## #   sex &lt;fct&gt;, year &lt;int&gt;
+##    species island    bill_l…¹ bill_…² flipp…³ body_…⁴ sex    year
+##    &lt;fct&gt;   &lt;fct&gt;        &lt;dbl&gt;   &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt; &lt;fct&gt; &lt;int&gt;
+##  1 Adelie  Torgersen   0.255     18.7     181    3750 male   2007
+##  2 Adelie  Torgersen   0.269     17.4     186    3800 fema…  2007
+##  3 Adelie  Torgersen   0.298     18       195    3250 fema…  2007
+##  4 Adelie  Torgersen  NA         NA        NA      NA &lt;NA&gt;   2007
+##  5 Adelie  Torgersen   0.167     19.3     193    3450 fema…  2007
+##  6 Adelie  Torgersen   0.262     20.6     190    3650 male   2007
+##  7 Adelie  Torgersen   0.247     17.8     181    3625 fema…  2007
+##  8 Adelie  Torgersen   0.258     19.6     195    4675 male   2007
+##  9 Adelie  Torgersen   0.0727    18.1     193    3475 &lt;NA&gt;   2007
+## 10 Adelie  Torgersen   0.36      20.2     190    4250 &lt;NA&gt;   2007
+## # … with 334 more rows, and abbreviated variable names
+## #   ¹​bill_length_mm, ²​bill_depth_mm, ³​flipper_length_mm,
+## #   ⁴​body_mass_g
 ```
 
 ---
 
-.larger[Option 2 -- Injection] 
+.larger[Option 2 -- Embrace Injection] 
 
 --
 
@@ -314,9 +322,11 @@ std_column_01(penguins, body_mass_g)
 ```
 
 ```
-## Error: Problem with `mutate()` column `variable`.
-## ℹ `variable = std_to_01(variable)`.
-## x object 'body_mass_g' not found
+## Error in `mutate()`:
+## ! Problem while computing `variable =
+##   std_to_01(variable)`.
+## Caused by error in `stopifnot()`:
+## ! object 'body_mass_g' not found
 ```
 ]
 
@@ -653,6 +663,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable

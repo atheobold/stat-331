@@ -1,6 +1,6 @@
 ---
 title: "Writing Functions to Work with Variables"
-date: "February 16, 2022"
+date: "November 3, 2022"
 author: "Dr. Allison Theobold"
 output:
   xaringan::moon_reader:
@@ -266,7 +266,7 @@ std_column_01(penguins, "bill_length_mm")
 
 ---
 
-.larger[Option 2 -- Injection] 
+.larger[Option 2 -- Embrace Injection] 
 
 --
 
