@@ -12,20 +12,14 @@ format:
 editor: visual
 execute: 
   echo: false
+  warning: false
+  message: false
 ---
 
 The goal of this lab is learn more about exploring missing data and to teach you to write modular code.
 
-```{r global_options, include=FALSE}
-knitr::opts_chunk$set(fig.width = 14, 
-                      fig.height = 12, 
-                      warning = FALSE, 
-                      message = FALSE,
-                      echo = FALSE)
-
-```
-
-```{r setup, include=FALSE}
+```{r setup}
+#| include: false
 library(tidyverse)
 library(gridExtra)
 library(ggtext)
@@ -35,25 +29,28 @@ fish <- read.csv(here::here("7_functions", "Lab", "BlackfootFish.csv"))
 
 ## The Data
 
-This lab's dataset concerns mark-recapture data on fish from the Blackfoot River, outside of Helena, Montana.
+This lab's dataset concerns mark-recapture data on fish from the Blackfoot
+River, outside of Helena, Montana.
 
 ![](images/blackfoot_river.jpg)
 
 Mark-recapture is a common method used by Ecologists to estimate an animal population's size, when it is impossible to conduct a census (count every animal). This method works by "tagging" animals with a tracking device, so scientists can track their movement and / or presence.
 
+<center>
 ::: column
-:::{.column width="45%"}
+::: {.column width="30%"}
 ![](images/grizzly.jpg)
 :::
 
-:::{.column width="45%"}
+::: {.column width="30%"}
 ![](images/condor.jpg)
 :::
 
-:::{.column width="45%"}
+::: {.column width="30%"}
 ![](images/fish.PNG)
 :::
 :::
+</center>
 
 You may download the `BlackfootFish.csv` dataset on Canvas.
 
@@ -67,7 +64,9 @@ The measurements of each fish captured were taken by a Biologist on a raft. This
 
 -   What variable(s) have missing values present?
 
-*Think about outputting both pieces of information in **one** table!*
+<center>
+**Output both pieces of information in _one_ table!**
+</center>
 
 ### Task 2 -- Visualizing Missing Data
 
@@ -93,11 +92,14 @@ The following `R` code would carry out this rescaling procedure for the `length`
 \vspace{0.25cm}
 
 ```{r, echo = TRUE, eval = FALSE}
-BlackfootFish$length <- (BlackfootFish$length - min(BlackfootFish$length, na.rm = TRUE)) /
-  (max(BlackfootFish$length, na.rm = TRUE) - min(BlackfootFish$length, na.rm = TRUE))
 
-BlackfootFish$weight <- (BlackfootFish$weight - min(BlackfootFish$weight, na.rm = TRUE)) /
-  (max(BlackfootFish$weight, na.rm = TRUE) - min(BlackfootFish$length, na.rm = TRUE))
+BlackfootFish <- BlackfootFish |> 
+  mutate(length = (length - min(length, na.rm = TRUE)) / 
+           (max(length, na.rm = TRUE) - min(length)), 
+         weight = (weight - min(weight, na.rm = TRUE)) / 
+           (max(weight, na.rm = TRUE) - min(length, na.rm = TRUE))
+         )
+
 ```
 
 This process of duplicating an action multiple times makes it difficult to understand the intent of the process. Additionally, it makes it very difficult to spot the mistakes. *Did you spot the mistake in the weight conversion?*
@@ -124,7 +126,8 @@ Now, let's incorporate some checks into your function! Modify your previous code
 
 ### Task 3 - Performing a Simple Test
 
-First, test your function on a simple vector. Verify that the maximum of your rescaled vector is 1 and the minimum is 0!
+First, test your function on the simple vector below. Verify that the maximum of
+your rescaled vector is 1 and the minimum is 0!
 
 ```{r, echo = TRUE}
 x <- c(1:25, NA)
@@ -132,34 +135,74 @@ x <- c(1:25, NA)
 
 ### Task 4 - Performing a More Difficult Test
 
-Next, let's test the function on the `length` column of the `BlackfootFish` dataset.
+Next, let's test the function on the `length` column of the `BlackfootFish`
+dataset.
 
--   Make side-by-side plots of the original values of `length` and the rescaled values of `length`.
+Make plots of the original values of `length` and the rescaled values of
+`length`. Output your plots side-by-side, so the reader can confirm the only
+aspect that has changed is the scale.
 
 ### Task 5 -- Incorportaing Variables
 
-Suppose you would for your `rescale()` function to perform operations on a variable within a dataset. Ideally, your function would take a dataframe and a variable name as inputs and return a dataframe where the variable has been rescaled.
+Suppose you would like for your `rescale()` function to perform operations on a
+variable within a dataset. Ideally, your function would take a dataframe and a 
+variable name as inputs and return a dataframe where the variable has been
+rescaled.
 
-Create a `rescale_column()` that accepts two arguments, (1) a dataframe, and (2) the name(s) of the variable(s) to be rescaled. The body of the function should call the original `rescale_01()` function you wrote previously.
+Create a `rescale_column()` that accepts two arguments, (1) a dataframe, and
+(2) the name(s) of the variable(s) to be rescaled. The body of the function
+should call the original `rescale_01()` function you wrote previously.
+
+*Hint:* If you are struggling with this task, I would recommend reading the
+[Data frame functions](https://r4ds.hadley.nz/functions.html#data-frame-functions)
+section from the new R for Data Science book. 
 
 ### Task 6 -- Another Function Test
 
-Alright, now let's put your `rescale_column()` function to work! Use your `rescale_column()` function to rescale **both** the `length` and `weight` columns.
+Alright, now let's put your `rescale_column()` function to work! Use your `rescale_column()` function to rescale **both** the `length` and `weight`
+columns.
 
-**I expect that you only call the `rescale()` function *one* time!**
+**I expect that you carry out this process by calling the `rescale()` function
+_one_ time!**
 
 ------------------------------------------------------------------------
 
 ## Challenge: Incorporating Multiple Inputs
 
-A frequently used measurement for fish health is a "condition index." [(Wikepedia article)](https://en.wikipedia.org/wiki/Condition_index_in_fish) The following simple equation can be used to calculate the approximate condition index of a fish:
+A frequently used measurement for fish health is a "condition index." [(Wikepedia article)](https://en.wikipedia.org/wiki/Condition_index_in_fish) The following simple equation can be used to calculate the approximate condition index of a
+fish:
 
-$$\text{condition index} = \frac{weight}{length^3} \times 100$$ \### Part 1
+$$\text{condition index} = \frac{weight}{length^3} \times 100$$
 
-Write a function which calculates the condition index of a fish, given inputs of weight and length.
+### Part 1
+
+There are specific units required for the calculation of a condition index. 
+Length must be in millimeters, and weight must be in grams. Inspect the `length`
+and `weight` variables to decide if you believe these are the correct units
+associated with these measurements---this will likely require Googling what
+"typical" measurements of trout are. 
+
+Based on your research, write function(s) to handle the unlikely
+/ impossible measurements included in the dataset. Your function(s) should 
+accept three inputs (1) a vector of measurements, (2) the minimum value you 
+believe is "reasonable," and (3) the maximum value you belive is "reasonable."
+If a value falls outside these bounds, you should replace it with an `NA`. 
+
+*Hint:* If you are struggling with the structure of your function, I would 
+suggest reading the [Mutating Function](https://r4ds.hadley.nz/functions.html#mutate-functions) section from 
+the new R for Data Science book. 
+
+Use your function to modify the `length` and `weight` columns of the 
+`BlackfootFish` dataset, removing values you believe are "unreasonable." 
+
+### Part 2 
+
+Write a function which calculates the condition index of a fish, given inputs
+of weight and length.
 
 *Consider whether your function will accept vectors as inputs or if it will accept variable names as inputs!*
 
-### Part 2
+### Part 3
 
-Make a thoughtful visualization of how fish conditions have varied over the duration of this study.
+Make a thoughtful visualization of how fish conditions have varied over the
+duration of this study.

@@ -124,24 +124,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>This lab’s dataset concerns mark-recapture data on fish from the Blackfoot River, outside of Helena, Montana.</p>
 <p><img src="images/blackfoot_river.jpg" class="img-fluid"></p>
 <p>Mark-recapture is a common method used by Ecologists to estimate an animal population’s size, when it is impossible to conduct a census (count every animal). This method works by “tagging” animals with a tracking device, so scientists can track their movement and / or presence.</p>
+<center>
 <div class="column">
-<div class="column" style="width:45%;">
+<div class="column" style="width:30%;">
 <p><img src="images/grizzly.jpg" class="img-fluid"></p>
 </div>
-<div class="column" style="width:45%;">
+<div class="column" style="width:30%;">
 <p><img src="images/condor.jpg" class="img-fluid"></p>
 </div>
-<div class="column" style="width:45%;">
+<div class="column" style="width:30%;">
 <p><img src="images/fish.PNG" class="img-fluid"></p>
 </div>
 </div>
+</center>
 <p>You may download the <code>BlackfootFish.csv</code> dataset on Canvas.</p>
 </section>
-<section id="part-one-summaries-and-plots" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="part-one-summaries-and-plots"><span class="header-section-number">2</span> Part One: Summaries and Plots</h2>
-</section>
-<section id="midterm-review" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="midterm-review"><span class="header-section-number">3</span> (Midterm Review)</h2>
+<section id="part-one-summaries-and-plots-midterm-review" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="part-one-summaries-and-plots-midterm-review"><span class="header-section-number">2</span> Part One: Summaries and Plots (Midterm Review)</h2>
 <section id="task-1-summarizing-missing-data" class="level3">
 <h3 class="anchored" data-anchor-id="task-1-summarizing-missing-data">Task 1 – Summarizing Missing Data</h3>
 <p>The measurements of each fish captured were taken by a Biologist on a raft. This lack of “laboratory setting” opens the door to the possibility of measurement errors.</p>
@@ -149,7 +148,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>How many observations have missing values?</p></li>
 <li><p>What variable(s) have missing values present?</p></li>
 </ul>
-<p><em>Think about outputting both pieces of information in <strong>one</strong> table!</em></p>
+<center>
+<strong>Output both pieces of information in <em>one</em> table!</strong>
+</center>
 </section>
 <section id="task-2-visualizing-missing-data" class="level3">
 <h3 class="anchored" data-anchor-id="task-2-visualizing-missing-data">Task 2 – Visualizing Missing Data</h3>
@@ -158,8 +159,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <hr>
 </section>
 </section>
-<section id="part-two-adjusting-the-data-function-writing" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="part-two-adjusting-the-data-function-writing"><span class="header-section-number">4</span> Part Two: Adjusting the Data (Function Writing)</h2>
+<section id="part-two-adjusting-the-data-function-writing" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="part-two-adjusting-the-data-function-writing"><span class="header-section-number">3</span> Part Two: Adjusting the Data (Function Writing)</h2>
 <p>If I wanted to rescale every quantitative variable in my dataset so that the variables have values between 0 and 1. I could use the following formula:</p>
 <p><br></p>
 <p><span class="math display">\[y_{scaled} = \frac{y_i - min\{y_1, y_2,..., y_n\}}{max\{y_1, y_2,..., y_n\}
@@ -167,11 +168,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><br></p>
 <p>The following <code>R</code> code would carry out this rescaling procedure for the <code>length</code> and <code>weight</code> columns of the data:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>BlackfootFish<span class="sc">$</span>length <span class="ot">&lt;-</span> (BlackfootFish<span class="sc">$</span>length <span class="sc">-</span> <span class="fu">min</span>(BlackfootFish<span class="sc">$</span>length, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">/</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  (<span class="fu">max</span>(BlackfootFish<span class="sc">$</span>length, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">-</span> <span class="fu">min</span>(BlackfootFish<span class="sc">$</span>length, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>BlackfootFish<span class="sc">$</span>weight <span class="ot">&lt;-</span> (BlackfootFish<span class="sc">$</span>weight <span class="sc">-</span> <span class="fu">min</span>(BlackfootFish<span class="sc">$</span>weight, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">/</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  (<span class="fu">max</span>(BlackfootFish<span class="sc">$</span>weight, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">-</span> <span class="fu">min</span>(BlackfootFish<span class="sc">$</span>length, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>BlackfootFish <span class="ot">&lt;-</span> BlackfootFish <span class="sc">|&gt;</span> </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">length =</span> (length <span class="sc">-</span> <span class="fu">min</span>(length, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">/</span> </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>           (<span class="fu">max</span>(length, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">-</span> <span class="fu">min</span>(length)), </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">weight =</span> (weight <span class="sc">-</span> <span class="fu">min</span>(weight, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">/</span> </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>           (<span class="fu">max</span>(weight, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">-</span> <span class="fu">min</span>(length, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>         )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This process of duplicating an action multiple times makes it difficult to understand the intent of the process. Additionally, it makes it very difficult to spot the mistakes. <em>Did you spot the mistake in the weight conversion?</em></p>
 <p>Often you will find yourself in the position of needing to find a function that performs a specific task, but you do not know of a function or a library that would help you. You could spend time Googling for a solution, but in the amount of time it takes you to find something you could have already written your own function!</p>
@@ -195,7 +197,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="task-3---performing-a-simple-test" class="level3">
 <h3 class="anchored" data-anchor-id="task-3---performing-a-simple-test">Task 3 - Performing a Simple Test</h3>
-<p>First, test your function on a simple vector. Verify that the maximum of your rescaled vector is 1 and the minimum is 0!</p>
+<p>First, test your function on the simple vector below. Verify that the maximum of your rescaled vector is 1 and the minimum is 0!</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>, <span class="cn">NA</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -203,30 +205,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="task-4---performing-a-more-difficult-test" class="level3">
 <h3 class="anchored" data-anchor-id="task-4---performing-a-more-difficult-test">Task 4 - Performing a More Difficult Test</h3>
 <p>Next, let’s test the function on the <code>length</code> column of the <code>BlackfootFish</code> dataset.</p>
-<ul>
-<li>Make side-by-side plots of the original values of <code>length</code> and the rescaled values of <code>length</code>.</li>
-</ul>
+<p>Make plots of the original values of <code>length</code> and the rescaled values of <code>length</code>. Output your plots side-by-side, so the reader can confirm the only aspect that has changed is the scale.</p>
 </section>
 <section id="task-5-incorportaing-variables" class="level3">
 <h3 class="anchored" data-anchor-id="task-5-incorportaing-variables">Task 5 – Incorportaing Variables</h3>
-<p>Suppose you would for your <code>rescale()</code> function to perform operations on a variable within a dataset. Ideally, your function would take a dataframe and a variable name as inputs and return a dataframe where the variable has been rescaled.</p>
+<p>Suppose you would like for your <code>rescale()</code> function to perform operations on a variable within a dataset. Ideally, your function would take a dataframe and a variable name as inputs and return a dataframe where the variable has been rescaled.</p>
 <p>Create a <code>rescale_column()</code> that accepts two arguments, (1) a dataframe, and (2) the name(s) of the variable(s) to be rescaled. The body of the function should call the original <code>rescale_01()</code> function you wrote previously.</p>
+<p><em>Hint:</em> If you are struggling with this task, I would recommend reading the <a href="https://r4ds.hadley.nz/functions.html#data-frame-functions">Data frame functions</a> section from the new R for Data Science book.</p>
 </section>
 <section id="task-6-another-function-test" class="level3">
 <h3 class="anchored" data-anchor-id="task-6-another-function-test">Task 6 – Another Function Test</h3>
 <p>Alright, now let’s put your <code>rescale_column()</code> function to work! Use your <code>rescale_column()</code> function to rescale <strong>both</strong> the <code>length</code> and <code>weight</code> columns.</p>
-<p><strong>I expect that you only call the <code>rescale()</code> function <em>one</em> time!</strong></p>
+<p><strong>I expect that you carry out this process by calling the <code>rescale()</code> function <em>one</em> time!</strong></p>
 <hr>
 </section>
 </section>
-<section id="challenge-incorporating-multiple-inputs" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="challenge-incorporating-multiple-inputs"><span class="header-section-number">5</span> Challenge: Incorporating Multiple Inputs</h2>
+<section id="challenge-incorporating-multiple-inputs" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="challenge-incorporating-multiple-inputs"><span class="header-section-number">4</span> Challenge: Incorporating Multiple Inputs</h2>
 <p>A frequently used measurement for fish health is a “condition index.” <a href="https://en.wikipedia.org/wiki/Condition_index_in_fish">(Wikepedia article)</a> The following simple equation can be used to calculate the approximate condition index of a fish:</p>
-<p><span class="math display">\[\text{condition index} = \frac{weight}{length^3} \times 100\]</span> ### Part 1</p>
-<p>Write a function which calculates the condition index of a fish, given inputs of weight and length.</p>
-<p><em>Consider whether your function will accept vectors as inputs or if it will accept variable names as inputs!</em></p>
+<p><span class="math display">\[\text{condition index} = \frac{weight}{length^3} \times 100\]</span></p>
+<section id="part-1" class="level3">
+<h3 class="anchored" data-anchor-id="part-1">Part 1</h3>
+<p>There are specific units required for the calculation of a condition index. Length must be in millimeters, and weight must be in grams. Inspect the <code>length</code> and <code>weight</code> variables to decide if you believe these are the correct units associated with these measurements—this will likely require Googling what “typical” measurements of trout are.</p>
+<p>Based on your research, write function(s) to handle the unlikely / impossible measurements included in the dataset. Your function(s) should accept three inputs (1) a vector of measurements, (2) the minimum value you believe is “reasonable,” and (3) the maximum value you belive is “reasonable.” If a value falls outside these bounds, you should replace it with an <code>NA</code>.</p>
+<p><em>Hint:</em> If you are struggling with the structure of your function, I would suggest reading the <a href="https://r4ds.hadley.nz/functions.html#mutate-functions">Mutating Function</a> section from the new R for Data Science book.</p>
+<p>Use your function to modify the <code>length</code> and <code>weight</code> columns of the <code>BlackfootFish</code> dataset, removing values you believe are “unreasonable.”</p>
+</section>
 <section id="part-2" class="level3">
 <h3 class="anchored" data-anchor-id="part-2">Part 2</h3>
+<p>Write a function which calculates the condition index of a fish, given inputs of weight and length.</p>
+<p><em>Consider whether your function will accept vectors as inputs or if it will accept variable names as inputs!</em></p>
+</section>
+<section id="part-3" class="level3">
+<h3 class="anchored" data-anchor-id="part-3">Part 3</h3>
 <p>Make a thoughtful visualization of how fish conditions have varied over the duration of this study.</p>
 </section>
 </section>
