@@ -182,6 +182,13 @@ and `weight` variables to decide if you believe these are the correct units
 associated with these measurements---this will likely require Googling what
 "typical" measurements of trout are. 
 
+```{r}
+#| fig-align: "center"
+#| out-width: 30% 
+knitr::include_graphics("images/smallest_trout.jpg")
+```
+
+
 Based on your research, write function(s) to handle the unlikely
 / impossible measurements included in the dataset. Your function(s) should 
 accept three inputs (1) a vector of measurements, (2) the minimum value you 

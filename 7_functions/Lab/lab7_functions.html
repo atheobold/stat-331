@@ -227,6 +227,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="part-1" class="level3">
 <h3 class="anchored" data-anchor-id="part-1">Part 1</h3>
 <p>There are specific units required for the calculation of a condition index. Length must be in millimeters, and weight must be in grams. Inspect the <code>length</code> and <code>weight</code> variables to decide if you believe these are the correct units associated with these measurements—this will likely require Googling what “typical” measurements of trout are.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/smallest_trout.jpg" class="img-fluid figure-img" style="width:30.0%"></p>
+</figure>
+</div>
+</div>
+</div>
 <p>Based on your research, write function(s) to handle the unlikely / impossible measurements included in the dataset. Your function(s) should accept three inputs (1) a vector of measurements, (2) the minimum value you believe is “reasonable,” and (3) the maximum value you belive is “reasonable.” If a value falls outside these bounds, you should replace it with an <code>NA</code>.</p>
 <p><em>Hint:</em> If you are struggling with the structure of your function, I would suggest reading the <a href="https://r4ds.hadley.nz/functions.html#mutate-functions">Mutating Function</a> section from the new R for Data Science book.</p>
 <p>Use your function to modify the <code>length</code> and <code>weight</code> columns of the <code>BlackfootFish</code> dataset, removing values you believe are “unreasonable.”</p>
