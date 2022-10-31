@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Functions 🥳</title>
+    <title>Functions 🎂</title>
     <meta charset="utf-8" />
     <meta name="author" content="Stat 331" />
-    <meta name="date" content="2022-02-14" />
+    <meta name="date" content="2022-11-01" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="slide-style.css" type="text/css" />
@@ -13,9 +13,15 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Functions 🥳
+.title[
+# Functions 🎂
+]
+.author[
 ### Stat 331
-### February 14, 2022
+]
+.date[
+### November 1, 2022
+]
 
 ---
 
@@ -29,13 +35,21 @@ class: inverse, center, middle
 
 ---
 
+class: middle, center
+
 .larger[Why write functions?]
 
-- Less Error Prone
-- Don't Repeat Yourself
-- Efficient
+--
+
+Less Error Prone
+
+Don't Repeat Yourself
+
+Efficient
 
 ---
+
+class: center, middle, inverse
 
 .larger[Function Components]
 
@@ -43,8 +57,9 @@ class: inverse, center, middle
 
 ---
 
-class: inverse, center
-.huge-text[`print()` versus `return()`]
+class: inverse, center, middle
+
+.huge[`print()` versus `return()`]
 
 ---
 
@@ -65,6 +80,8 @@ add_something &lt;- function(x, something = 2) {
 }
 ```
 ]
+
+--
 
 .pull-right[
 
@@ -96,6 +113,8 @@ add_something &lt;- function(x, something = 2) {
 }
 ```
 ]
+
+--
 
 .pull-right[
 
@@ -195,7 +214,7 @@ add_something &lt;- function(x, something = 2) {
 
 class: center, middle, inverse
 
-.huge-text[Vectorizing]
+.huge[Vectorizing]
 
 ---
 
@@ -231,14 +250,8 @@ times_three(my_vec)
 
 --
 
-
 ```
-## Warning in if (x == 3) {: the condition has length &gt; 1 and only the first
-## element will be used
-```
-
-```
-## [1] 21 24 27  9
+Error in if (x == 3) { : the condition has length &gt; 1
 ```
 
 ---
@@ -277,7 +290,8 @@ if_else(my_vec == 9, NA, my_vec)
 ```
 
 ```
-## Error: `false` must be a logical vector, not a double vector.
+## Error in `if_else()`:
+## ! `false` must be a logical vector, not a double vector.
 ```
 
 --
@@ -338,7 +352,9 @@ pos_neg_zero(3)
 
 
 ```r
-pos_neg_zero(c(0, 1, -1))
+check &lt;- c(0, 1, -1)
+
+pos_neg_zero(check)
 ```
 
 ```
@@ -393,6 +409,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable

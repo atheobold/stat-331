@@ -1,6 +1,6 @@
 ---
 title: "Functions `r emo::ji('party')`"
-date: "February 14, 2022"
+date: "November 1, 2022"
 author: "Stat 331"
 output:
   xaringan::moon_reader:
@@ -37,6 +37,8 @@ style_duo_accent(
   code_font_google   = google_font("Source Code Pro"),
   text_font_size     = "30px"
 )
+
+my_vec <- c(7, 8, 9, 3)
 ```
 
 class: inverse, center, middle
@@ -45,13 +47,21 @@ class: inverse, center, middle
 
 ---
 
+class: middle, center
+
 .larger[Why write functions?]
 
-- Less Error Prone
-- Don't Repeat Yourself
-- Efficient
+--
+
+Less Error Prone
+
+Don't Repeat Yourself
+
+Efficient
 
 ---
+
+class: center, middle, inverse
 
 .larger[Function Components]
 
@@ -59,8 +69,9 @@ class: inverse, center, middle
 
 ---
 
-class: inverse, center
-.huge-text[`print()` versus `return()`]
+class: inverse, center, middle
+
+.huge[`print()` versus `return()`]
 
 ---
 
@@ -80,6 +91,8 @@ add_something <- function(x, something = 2) {
 }
 ```
 ]
+
+--
 
 .pull-right[
 ```{r}
@@ -106,6 +119,8 @@ add_something <- function(x, something = 2) {
 }
 ```
 ]
+
+--
 
 .pull-right[
 ```{r}
@@ -193,7 +208,7 @@ add_something <- function(x, something = 2) {
 
 class: center, middle, inverse
 
-.huge-text[Vectorizing]
+.huge[Vectorizing]
 
 ---
 
@@ -228,9 +243,8 @@ times_three(my_vec)
 
 --
 
-```{r, echo = FALSE}
-my_vec <- c(7, 8, 9, 3)
-times_three(my_vec)
+```
+Error in if (x == 3) { : the condition has length > 1
 ```
 
 ---
@@ -324,5 +338,7 @@ pos_neg_zero <- function(x){
 --
 
 ```{r}
-pos_neg_zero(c(0, 1, -1))
+check <- c(0, 1, -1)
+
+pos_neg_zero(check)
 ```
