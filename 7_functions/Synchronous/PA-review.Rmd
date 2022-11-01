@@ -53,13 +53,13 @@ class: middle, center
 
 --
 
-Less Error Prone
-
-<!-- You eliminate the chance of making incidental mistakes when you copy and paste -->
-
 Don't Repeat Yourself
 
+Less Error Prone
+
 <!-- You can give a function an evocative name that makes your code easier to understand. -->
+
+<!-- You eliminate the chance of making incidental mistakes when you copy and paste -->
 
 Efficient
 
@@ -230,7 +230,7 @@ times_three <- function(x){
   if(x == 3){
     print("I love threes!")
   }
-  return(x*3)
+  return(x * 3)
 }
 
 ```
