@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.0.38">
+<meta name="generator" content="quarto-1.1.120">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,10 +11,15 @@
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -53,7 +58,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -66,7 +71,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -96,11 +101,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </head>
 
-<body class="fullcontent">
+<body>
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-full">
 
-<main class="content" id="quarto-document-content">
+<main class="content column-page" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -125,14 +130,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="images/blackfoot_river.jpg" class="img-fluid"></p>
 <p>Mark-recapture is a common method used by Ecologists to estimate an animal population’s size, when it is impossible to conduct a census (count every animal). This method works by “tagging” animals with a tracking device, so scientists can track their movement and / or presence.</p>
 <center>
-<div class="column">
-<div class="column" style="width:30%;">
+<div class="columns">
+<div class="column" style="width:25%;">
 <p><img src="images/grizzly.jpg" class="img-fluid"></p>
-</div>
-<div class="column" style="width:30%;">
+</div><div class="column" style="width:25%;">
 <p><img src="images/condor.jpg" class="img-fluid"></p>
-</div>
-<div class="column" style="width:30%;">
+</div><div class="column" style="width:25%;">
 <p><img src="images/fish.PNG" class="img-fluid"></p>
 </div>
 </div>
@@ -151,6 +154,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <center>
 <strong>Output both pieces of information in <em>one</em> table!</strong>
 </center>
+<p><br></p>
 </section>
 <section id="task-2-visualizing-missing-data" class="level3">
 <h3 class="anchored" data-anchor-id="task-2-visualizing-missing-data">Task 2 – Visualizing Missing Data</h3>
@@ -217,6 +221,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 class="anchored" data-anchor-id="task-6-another-function-test">Task 6 – Another Function Test</h3>
 <p>Alright, now let’s put your <code>rescale_column()</code> function to work! Use your <code>rescale_column()</code> function to rescale <strong>both</strong> the <code>length</code> and <code>weight</code> columns.</p>
 <p><strong>I expect that you carry out this process by calling the <code>rescale()</code> function <em>one</em> time!</strong></p>
+<p><em>Note:</em> I advise against using functions like <code>mutate_at()</code>, which have been superseded.</p>
 <hr>
 </section>
 </section>
@@ -227,18 +232,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="part-1" class="level3">
 <h3 class="anchored" data-anchor-id="part-1">Part 1</h3>
 <p>There are specific units required for the calculation of a condition index. Length must be in millimeters, and weight must be in grams. Inspect the <code>length</code> and <code>weight</code> variables to decide if you believe these are the correct units associated with these measurements—this will likely require Googling what “typical” measurements of trout are.</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/smallest_trout.jpg" class="img-fluid figure-img" style="width:30.0%"></p>
-</figure>
+<center>
+<div class="columns">
+<div class="column" style="width:25%;">
+<p><img src="images/smallest_trout.jpg" class="img-fluid"></p>
+</div><div class="column" style="width:40%;">
+<p><img src="images/largest_trout.png" class="img-fluid"></p>
 </div>
 </div>
-</div>
-<p>Based on your research, write function(s) to handle the unlikely / impossible measurements included in the dataset. Your function(s) should accept three inputs (1) a vector of measurements, (2) the minimum value you believe is “reasonable,” and (3) the maximum value you belive is “reasonable.” If a value falls outside these bounds, you should replace it with an <code>NA</code>.</p>
-<p><em>Hint:</em> If you are struggling with the structure of your function, I would suggest reading the <a href="https://r4ds.hadley.nz/functions.html#mutate-functions">Mutating Function</a> section from the new R for Data Science book.</p>
+</center>
+<section id="replacing-impossible-measurements-with-nas" class="level4">
+<h4 class="anchored" data-anchor-id="replacing-impossible-measurements-with-nas">Replacing Impossible Measurements with <code>NA</code>s</h4>
+<p>Based on your research, write function(s) to handle the unlikely / impossible measurements included in the dataset. Your function(s) should accept three inputs (1) a vector of measurements, (2) the minimum value you believe is “reasonable,” and (3) the maximum value you believe is “reasonable.” If a value falls outside these bounds, you should replace it with an <code>NA</code>.</p>
+<p><em>Hint:</em> If you are struggling with the structure of your function, I would suggest reading the <a href="https://r4ds.hadley.nz/functions.html#mutate-functions">Mutating Function</a> section from the second edition of R for Data Science.</p>
 <p>Use your function to modify the <code>length</code> and <code>weight</code> columns of the <code>BlackfootFish</code> dataset, removing values you believe are “unreasonable.”</p>
+</section>
 </section>
 <section id="part-2" class="level3">
 <h3 class="anchored" data-anchor-id="part-2">Part 2</h3>
@@ -248,6 +256,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="part-3" class="level3">
 <h3 class="anchored" data-anchor-id="part-3">Part 3</h3>
 <p>Make a thoughtful visualization of how fish conditions have varied over the duration of this study.</p>
+</section>
+<section id="challenge-submission" class="level3">
+<h3 class="anchored" data-anchor-id="challenge-submission">Challenge Submission</h3>
+<p>Your Challenge submission should be <strong><em>separate</em></strong> from your Lab submission, meaning I should see only Parts 1-3 associated with the Challenge included in your submission.</p>
 </section>
 </section>
 
@@ -322,7 +334,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
