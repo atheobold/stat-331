@@ -25,16 +25,16 @@ library(lubridate)
 ```
 
 `r emo::ji("play")` Watch Videos: 30 minutes
-  
-  * `r emo::ji("link")` Link to **all** Slides from Videos: [here](https://app.box.com/s/ae5f0yollihcggzr6bghkwabkdz2y7g9)
 
-`r emo::ji("book")` Readings: 45-60 minutes   
+-   `r emo::ji("link")` Link to **all** Slides from Videos: [here](https://app.box.com/s/ae5f0yollihcggzr6bghkwabkdz2y7g9)
 
-`r emo::ji("computer")` Activities: 60 minutes  
-  
+`r emo::ji("book")` Readings: 45-60 minutes
+
+`r emo::ji("computer")` Activities: 60 minutes
+
 `r emo::ji("check")` Check-ins: 2 (included in 1 assignment on Canvas)
 
----
+------------------------------------------------------------------------
 
 ### Reading
 
@@ -47,7 +47,7 @@ library(lubridate)
 `r emo::ji("play button")` [Iteration with `for()` loops (10 minutes)](https://www.youtube.com/watch?v=sxIX9lzPjDQ)
 
 `r emo::ji("play button")` [Iteration with the `apply()` family (7 minutes)](https://www.youtube.com/watch?v=NadUAnlrh-M)
- 
+
 `r emo::ji("play button")` [Iteration with the `map()` family (6 minutes)](https://www.youtube.com/watch?v=FPD3a6IHO6w)
 
 ### Tutorial
@@ -56,118 +56,139 @@ library(lubridate)
 
 ### Extra Resources
 
-:::: {style="display: flex;"}
+::: {style="display: flex;"}
+<div>
 
-::: {}
-Cheatsheet for purrr functions:  [here](https://github.com/rstudio/cheatsheets/blob/master/purrr.pdf)
-:::
+Cheatsheet for purrr functions: [here](https://github.com/rstudio/cheatsheets/blob/master/purrr.pdf)
 
-::: {}
+</div>
+
+<div>
+
 ```{r, echo = FALSE, out.width = "45%"}
 knitr::include_graphics("images/purrr_hex.jpeg")
 ```
+
+</div>
 :::
 
-::::
+::: {style="display: flex;"}
+<div>
 
-:::: {style="display: flex;"}
-
-::: {}
 Lessons and Examples by the one and only Jenny Bryan: [here](https://jennybc.github.io/purrr-tutorial/index.html)
-:::
 
-::: {}
+</div>
+
+<div>
+
 ```{r, echo = FALSE, out.width = "35%"}
 knitr::include_graphics("images/jenny_bryan.png")
 ```
+
+</div>
 :::
-
-::::
-
 
 A More In-depth Exploration of Functionals -- [*Advanced R*](https://adv-r.hadley.nz/functionals.html)
 
 </br>
 
-***
+------------------------------------------------------------------------
 
 `r emo::ji("check")` **Check-in: Functional Programming**
 
 **Question 1:**
 
-Suppose we would like to find the median of the measurement variables 
-(`bill_length_mm`, `bill_depth_mm`, `flipper_length_mm`, `body_mass_g`) from the
-`penguins` dataset (from the **palmerpenguins** package). Which of the following
-will produce a **vector** of the median of every measurement variable?
+Suppose we would like to find the median of the measurement variables (`bill_length_mm`, `bill_depth_mm`, `flipper_length_mm`, `body_mass_g`) from the `penguins` dataset (from the **palmerpenguins** package). Which of the following will produce a **vector** of the median of every measurement variable?
 
 *Select all that apply!*
 
-_(a)_
+*(a)*
+
 ```{r, eval = FALSE}
-penguins %>% 
-  select(bill_length_mm:body_mass_g) %>% 
+penguins |> 
+  select(bill_length_mm:body_mass_g) |> 
   map(median, na.rm = TRUE)
 ```
 
-_(b)_
+*(b)*
+
 ```{r, eval = FALSE}
-penguins %>% 
-  select(bill_length_mm:body_mass_g) %>% 
+penguins |> 
+  select(bill_length_mm:body_mass_g) |> 
   map_dbl(median, na.rm = TRUE)
 ```
 
-_(c)_
+*(c)*
+
 ```{r, eval = FALSE}
-penguins %>% 
-  select(bill_length_mm:body_mass_g) %>% 
+penguins |> 
+  select(bill_length_mm:body_mass_g) |> 
   sapply(., median, na.rm = TRUE)
 ```
 
-_(d)_
+*(d)*
+
 ```{r, eval = FALSE}
-penguins %>% 
-  select(bill_length_mm:body_mass_g) %>% 
+penguins |> 
+  select(bill_length_mm:body_mass_g) |> 
   lapply(., function(x) median(x, na.rm = TRUE))
 ```
 
 </br>
 
-***
-
-</br>
-
-Recall that in the last unit, we discussed the challenge of standardizing many
-columns in a data frame.  For example, If we wanted to standardize a numeric 
-variable to be centered at the mean and scaled by the standard deviation, we 
-could use the following function: 
+Recall that in the last unit, we discussed the challenge of standardizing many columns in a data frame. For example, If we wanted to standardize a numeric variable to be centered at the mean and scaled by the standard deviation, we could use the following function:
 
 ```{r}
 standardize <- function(vec) {
   stopifnot(is.numeric(vec))
   
+  # Center with mean
   deviations <- vec - mean(vec, na.rm = TRUE)
+  # Scale with standard deviation
   newdata <- deviations / sd(vec, na.rm = TRUE)
+  
   return(newdata)
 }
 ```
 
-**Question 2:** Why does the following not work?
+**Question 2:** Why does the following return a vector of `NA`s?
 
 ```{r, eval = FALSE}
-penguins %>%
+penguins |>
   mutate(
     body_mass_g = map_dbl(body_mass_g, standardize)
   )
 ```
 
+(a) Because `body_mass_g` needs to be passed to `standardize()` as an argument
+(b) Because `mutate()` operates on rows, so `map_dbl()` is supplying `standardize()` with one row of `body_mass_g` at a time
+(c) Because `map_dbl()` only takes one input, so you need to use `map2_dbl()` instead
+(d) Because there is no function named `standardize()`, so it cannot be applied to the `body_mass_g` column
+(e) `body_mass_g` is not a data frame so it is not a valid argument for `map_dbl()`
 
-**Question 3:** 
+**Question 3:**
 
-Use appropriate `map` functions, along with `standardize()`, to create
-a standardized version of the measurement variables from the `penguins` dataset
-(`bill_length_mm`, `bill_depth_mm`, `flipper_length_mm`, `body_mass_g`).
+Which of the following returns a [dataframe]{.underline} with the standardized version of the numerical variables (`bill_length_mm`, `bill_depth_mm`, `flipper_length_mm`, `body_mass_g`) from the `penguins` dataset?
 
-Do this **without** copy-pasting lines and changing `bill_length_mm` to
-`bill_depth_mm`, etc.
+```{r}
+#| eval: false
+## Option (a)
+penguins |> 
+  select(bill_length_mm:body_mass_g) |> 
+  map_df(standardize)
 
-I recommend looking into `map_df()`, `map_if()`, or `map_at()`! 
+## Option (b)
+penguins |> 
+  map_at(bill_length_mm:body_mass_g, standardize)
+
+## Option (c)
+penguins |> 
+  map_if(is.numeric, standardize)
+
+## Option (d)
+penguins |> 
+  map_at(
+    c("bill_length_mm", "bill_depth_mm", "flipper_length_mm", "body_mass_g"),
+    standardize
+    )
+```
