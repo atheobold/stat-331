@@ -125,8 +125,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <center>
 <img src="christmas_tree.jpg" class="img-fluid">
 </center>
-<section id="singing-the-song" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="singing-the-song"><span class="header-section-number">1</span> Singing the Song</h2>
+<section id="singing-the-song" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Singing the Song</h1>
 <p>Alright, so you’ve already created two helper functions, <code>pluralize_gift()</code> and <code>make_phrase()</code>, which you used at the end of the Practice Activity to create a column of song phrases / lines.</p>
 <p>Today, you will use these phrases to write a function which sings the lines of song for a given day. We will then use this function to iterate through the 12 days of Christmas to get our song!</p>
 <div class="callout-note callout callout-style-default callout-captioned">
@@ -142,9 +142,8 @@ Note
 <p>Note, you will either need to copy over your functions from the Practice Activity into your new Quarto document or continue working in the Quarto file from the Practice Activity.</p>
 </div>
 </div>
-</section>
-<section id="step-three-iteration." class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="step-three-iteration."><span class="header-section-number">2</span> Step Three: Iteration.</h2>
+<section id="step-three-iteration." class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="step-three-iteration."><span class="header-section-number">1.1</span> Step Three: Iteration.</h2>
 <p>Write a function called <code>sing_line()</code> that takes as input:</p>
 <ul>
 <li><p>A dataset</p></li>
@@ -211,22 +210,35 @@ Tip
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_c</span>(<span class="at">collapse =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note that <code>.x</code> can be used exchangeably with <code>.</code>. We’ve used <code>.</code> for functions we’ve written inside the <code>across()</code> function(e.g., <code>across(.cols = everything(), .fns = ~sum(is.na(.))))</code>). I’ve chosen to use <code>.x</code> since it looks more like an object that is being input into the function!</p>
+</div>
+</div>
 <hr>
 </section>
 </section>
-<section id="step-four-use-your-functions" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="step-four-use-your-functions"><span class="header-section-number">3</span> Step Four: Use Your Functions!</h2>
+<section id="step-four-use-your-functions" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="step-four-use-your-functions"><span class="header-section-number">1.2</span> Step Four: Use Your Functions!</h2>
 <p>Run the following code to test out your functions! The output should be the lyrics for the entire 12 Days of Christmas song.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>xmas2 <span class="ot">&lt;-</span> xmas <span class="sc">|&gt;</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">day.num =</span> <span class="fu">as.character</span>(english<span class="sc">::</span><span class="fu">english</span>(Day)), </span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Full.Phrase =</span> <span class="fu">pmap_chr</span>(<span class="fu">list</span>(<span class="at">num_word =</span> day.num, </span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                                <span class="at">item =</span> Gift.Item, </span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                                <span class="at">verb =</span> Verb, </span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>                                <span class="at">adjective =</span> Adjective, </span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                                <span class="at">location =</span> Location), </span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>                           make_phrase)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Full.Phrase =</span> <span class="fu">pmap_chr</span>(<span class="at">.l =</span> <span class="fu">list</span>(<span class="at">num_word =</span> day.num, </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">item =</span> Gift.Item, </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">verb =</span> Verb, </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">adjective =</span> Adjective, </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">location =</span> Location), </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>                           <span class="at">.f =</span> make_phrase)</span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="fu">map_chr</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="sc">~</span><span class="fu">sing_line</span>(xmas2, .x, Full.Phrase)) <span class="sc">|&gt;</span></span>
@@ -235,8 +247,8 @@ Tip
 </div>
 <hr>
 </section>
-<section id="revisions" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="revisions"><span class="header-section-number">4</span> Revisions</h2>
+<section id="revisions" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="revisions"><span class="header-section-number">1.3</span> Revisions</h2>
 <p><strong>You will get an automatic revision for:</strong></p>
 <ul>
 <li><p>Functions that do not work the way they are intended</p></li>
@@ -246,9 +258,54 @@ Tip
 </ul>
 <hr>
 </section>
-<section id="challenge" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="challenge"><span class="header-section-number">5</span> Challenge</h2>
-<p>There is no challenge this week!</p>
+<section id="challenge-styling-your-song" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="challenge-styling-your-song"><span class="header-section-number">1.4</span> Challenge – Styling Your Song</h2>
+<p>It would be nice if your song output in a visually appealing way. Similar to Lab 2, for this Challenge, you will be provided with three options. You are required to do <strong>at least one</strong>, but are welcome to do more than one.</p>
+<section id="option-1" class="level3">
+<h3 class="anchored" data-anchor-id="option-1">Option 1</h3>
+<p>Ensure each phase (e.g., “two turtle doves”) of your song is printed on its own line. For example, your function should output the following for <code>sing_line(xmas, num = 2, phrase_col = Full.Phrase)</code>:</p>
+<pre><code>On the second day of Christmas, my true love gave to me: 
+two turtle doves and 
+a partridge in a pear tree</code></pre>
+</section>
+<section id="option-2" class="level3">
+<h3 class="anchored" data-anchor-id="option-2">Option 2</h3>
+<p>Ensure there are blank spaces between the different lines of the song. For example, when iterating your function, your output should look like the following:</p>
+<pre><code>On the second day of Christmas, my true love gave to me: 
+two turtle doves and 
+a partridge in a pear tree
+
+On the first day of Christmas, my true love gave to me:
+a partridge in a pear tree</code></pre>
+</section>
+<section id="option-3" class="level3">
+<h3 class="anchored" data-anchor-id="option-3">Option 3</h3>
+<p>Ensure the lines of your song are grammatically correct. There are three components you should address in making your lines grammatically correct:</p>
+<ol type="1">
+<li>Use of Commas – each line should end in a comma <em>except</em> for the last line</li>
+<li>Use of And – there should be an “and” included <em>either</em> at the <u>end</u> of the second to last line <em>or</em> at the <u>beginning</u> of the final line</li>
+<li>Use of Period – there should be a period at the end of the final line</li>
+</ol>
+<p>For example, your function should output the following for <code>sing_line(xmas, num = 3, phrase_col = Full.Phrase)</code>:</p>
+<pre><code>On the third day of Christmas, my true love gave to me: 
+three french hens, 
+two turtle doves, and 
+a partridge in a pear tree.</code></pre>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>While I am a fan of the oxford comma, you do not have to use an oxford comma for the second to last phrase of your song.</p>
+</div>
+</div>
+</section>
+</section>
 </section>
 
 </main>
