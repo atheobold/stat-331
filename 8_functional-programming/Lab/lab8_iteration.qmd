@@ -20,274 +20,109 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 library(tidyverse)
 ```
 
-
+<center>
 ![](christmas_tree.jpg)
+</center>
 
-## Introduction
+## Singing the Song
 
-The song "12 Days of Christmas", written around 1780, tells the tale of many
-gifts a person receives in the days leading up to Christmas.
-([link to lyrics](https://en.wikipedia.org/wiki/The_Twelve_Days_of_Christmas_(song)](https://en.wikipedia.org/wiki/The_Twelve_Days_of_Christmas_(song)))).  
+Alright, so you've already created two helper functions, `pluralize_gift()` and `make_phrase()`, which you used at the end of the Practice Activity to create a
+column of song phrases / lines. 
 
+Today, you will use these phrases to write a function which sings the lines of
+song for a given day. We will then use this function to iterate through the 
+12 days of Christmas to get our song!
 
-These gifts repeat and compound; on the first day, the narrator receives
+:::{.callout-note}
+Note, you will either need to copy over your functions from the Practice
+Activity into your new Quarto document or continue working in the Quarto file 
+from the Practice Activity. 
+:::
 
-```
-A partridge in a pear tree.
-```
-
-On the twelfth day, they receive
-
-```
-Twelve Drummers Drumming
-Eleven Pipers Piping
-Ten Lords a Leaping
-Nine Ladies Waiting
-Eight Maids a Milking
-Seven Swans a Swimming
-Six Geese a Laying
-Five Golden Rings
-Four Calling Birds
-Three French Hens
-Two Turtle Doves
-And a Partridge in a Pear Tree
-```
-
-Your task will be to help write a function that automatically sings this very
-repetitive song.
-
----
-
-## The Repository
-
-Go to <https://github.com/atheobold/twelvedays> to find 
-the documentation for this week's lab.
-
-Fortunately, I have already created the main structure of the functions for you.
-Your job is to fill in the rest of the code inside the functions. 
-
-To get your own copy of the repository, you'll want to **fork** it from my
-account (`atheobold`). Once you have your own fork, GitHub will take you to the 
-page for your copy of my `twelvedays` repository. You can then **clone** the
-repository; i.e., download a copy to your local machine by copying-and-pasting 
-the HTTPS address into a new RStudio project (the same steps you did in the 
-Practice Activity). 
-
-![](fork_clone.gif)
-
-**Every** member of your group should have their own copy of the `twelvedays` 
-repository. You are expected to add, commit, and push the changes you make to 
-**your** repository. Unless **everyone** on your team feels comfortable, 
-**do not** collaborate on the _same_ repository! 
-
-If you are horribly opposed to working in GitHub for this lab, you can download
-the compressed file with all of the contents for the lab. Once you have
-downloaded the repository folder, double-click the `.Rproj` file inside to
-launch your R Project.
-
-
-### A Test Dataset
-
-Run the code provided to load in a dataset called `xmas` that contains the crucial information about the gifts in the song. We will use this dataset to
-test out our functions as we work on them.
-
-```{r}
-xmas <- read.csv("https://www.dropbox.com/s/e584pryn8evm1gz/xmas.csv?dl=1")
-```
-
-Note that your functions can - and should! - reference each other.  
-That is, don't duplicate code; use earlier, smaller functions inside your
-larger functions.
-
-### Other packages
-
-The packages `dplyr`, `stringr`, `glue`, and `purrr` are already loaded into
-the materials for making the `twelvedays` functions. Make sure you have each of 
-these packages installed! 
-
-If you want to rely on functions from other packages that's fine, but you will 
-need to load them in the set-up chunk.  
-
-
-### Advice
-
-#### Workflow
-
-Make smaller versions of the `xmas` dataset (e.g., the first two days). 
-
-Once you feel confident in your function code, use the smaller version of the
-data to test the functions you write, before you test them on the full dataset. 
-
-Make sure that after each function is finished, you **commit** and **push** 
-your work to Git.
-
-
-#### Build from small pieces
-
-If you have some trouble getting started, I recommend writing a function that
-works in one case, and then trying to generalize.
-
-For example, in building my `sing_day` function, I might first write a version 
-called `sing_third_day` that sings
-
-```
-On the third day of Christmas, my true love gave to me:
-three french hens,
-two turtle doves,
-and a patridge in a pear tree.
-```
-
-#### Don't sweat the small stuff
-
-There's a lot you can do to polish up the way the song prints.
-
-However, the goal of this lab is to practice writing functions and using
-iteration. Don't get bogged down in details like how the song displays, or small
-grammar rules (like commas!), until you've finished the main tasks.
-
----
-
-## Step One:  Plurals
-
-Note that the gifts are listed in singular: for example, on day five the
-narrator receives "five golden rings", but the entry in the dataset for the gift
-on day five simply says "ring".  
-
-Using the skeleton of the `pluralize_gift()` function, complete the code so that 
-the function takes a gift and returns the appropriate plural. 
-
-*Hint 1:* Note that the gifts on days six and nine have unusual pluralization.
-You may assume that in other datasets, there will be no special cases besides
-these types.
-
-*Hint 2:*  The following small example may be useful to you:
-
-```{r, eval = TRUE}
-my_names <- c("Kimberly", "Trini", "Jason", "Billy", "Zach", "Tommy")
-
-my_names %>% 
-  str_replace("y$", "ies")
-```
-
-
-**Important:**  You should **absolutely not** "hard-code" anything into this 
-function; this function should work in general, not just for the items in the 12 
-Days of Christmas.  For example, the word "rings" should not appear anywhere in 
-the function.  I should be able to give it any gift and get back the plural of 
-that gift.
-
-
-### Test Your Function
-
-Try your function out on the smaller and then larger gift dataset.  
-(Consider: is your function *vectorized*?  It does not have to be, but you can 
-try it out if you want!)
-
-```{r}
-
-# Will work if your function is vectorized! 
-pluralize_gift(xmas$Gift.Item)
-
-# Will work if your function is not vectorized!
-map_chr(xmas$Gift.Item, pluralize_gift)
-
-```
-
-
----
-
-
-## Step Two: Creating sentences
-
-Write a function called `make_phrase()` that takes as input the necessary 
-information, and returns a phrase.  For example, 
-
-```{r}
-make_phrase(num = 10, 
-            num_word = "ten", 
-            item = "lords", 
-            verb = "a-leaping", 
-            adjective = "", 
-            location = "")
-```
-
-should return
-
-```
-"ten lords a-leaping"
-```
-
-### Test Your Function
-
-Try your function out on the `xmas` data, by making a new variable containing 
-the daily phrases.
-
-**Hint:** The `Day.in.Words` variable isn't quite what you want! You want `12`
-to say `"twelve"` **not** `"twelfth"`. I suggest using the **english** package
-to create numbered days and then use those in your `pmap_chr()`!
-
-
-```{r}
-xmas <- xmas %>%
-  mutate(day.num = ___, 
-    Full.Phrase = pmap_chr(list(num = Day, 
-                                num_word = day.num, 
-                                item = Gift.Item, 
-                                verb = Verb, 
-                                adjective = Adjective, 
-                                location = Location), 
-                           make_phrase)
-  )
-
-```
-
----
-
-
-## Step Three:  Iteration.
+## Step Three: Iteration.
 
 Write a function called `sing_line()` that takes as input:
 
-* A dataset
+-   A dataset
 
-* A number indicating which day to sing about
+-   A number indicating which day to sing about
 
-* The name of a column in the dataset that contains the phrases for each day.
-
+-   The name of a column in the dataset that contains the phrases for each day.
 
 For example,
 
-
-```{r}
+```
 sing_line(xmas, 2, Full.Phrase)
 ```
 
 should return
 
+    On the second day of Christmas, my true love sent to me:
+    two turtle doves and
+    a partridge in a pear tree.
+
+:::{.callout-tip}
+*Hint:* The `{{phrase_col}}` part, which I provided for you, lets you use column
+names as arguments to a function. Don't delete that line of code!
+:::
+
+```{r sing-day-function}
+# Produces the string for one day of the song.
+# Arguments -- dataset -- A data frame containing information about gifts
+# Arguments -- line -- The number of the line for the day you want to sing about
+# Arguments -- phrase_col -- The variable name for the column in the dataset that contains the song phrases
+# Return -- A string singing the line of the song with all gifts for the given day.
+
+sing_day <- function(dataset, line, phrase_col){
+  
+  # Step 1: Setup the intro line
+  num_word <- ____
+  
+  intro <- glue::glue("On the {num_word} day of Christmas")
+  
+  # Step 2: Sing the gift phrases
+
+    phrases <- dataset |>
+      pull( {{phrase_col}} )
+
+  ????
+    
+  ## put it together
+    
+  ????
+
+}
+
 ```
-On the second day of Christmas, my true love sent to me:
-two turtle doves and
-a partridge in a pear tree.
+
+### A Small Test
+
+```{r}
+xmas |>
+sing_line(num = 2, phrase_col = Full.Phrase)
+
 ```
 
-*Hint:*  The `{{phrase_col}}` part, which I provided for you, lets you use 
-column names as arguments to a function.  Don't delete that line of code!
+### A Larger Test
 
+```{r}
+map_chr(1:12, ~ sing_line(xmas2, .x, Full.Phrase)) |>
+  str_c(collapse = "\n") |>
+  cat()
 
----
+```
 
+------------------------------------------------------------------------
 
 ## Step Four: Use Your Functions!
 
-Run the following code to test out your functions! The output should be the 
-lyrics for the entire 12 Days of Christmas song. 
+Run the following code to test out your functions! The output should be the lyrics for the entire 12 Days of Christmas song.
 
 ```{r}
-xmas2 <- xmas %>%
+xmas2 <- xmas |>
   mutate(
     day.num = as.character(english::english(Day)), 
-    Full.Phrase = pmap_chr(list(num = Day, 
-                                num_word = day.num, 
+    Full.Phrase = pmap_chr(list(num_word = day.num, 
                                 item = Gift.Item, 
                                 verb = Verb, 
                                 adjective = Adjective, 
@@ -295,73 +130,28 @@ xmas2 <- xmas %>%
                            make_phrase)
   )
 
-map_chr(1:12, ~sing_line(xmas2, .x, Full.Phrase)) %>%
-  str_c(collapse = "\n") %>%
+map_chr(1:12, ~sing_line(xmas2, .x, Full.Phrase)) |>
+  str_c(collapse = "\n") |>
   cat()
 
 ```
 
+------------------------------------------------------------------------
 
----
+## Revisions 
 
+**You will get an automatic revision for:**
 
-## Step Five: Show Me Your Work! 
+-   Functions that do not work the way they are intended
 
-#### Get it on GitHub
+-   "Hard-Coding" in functions.
 
-Once you are done with all the functions, make sure you have **pushed** your
-work to GitHub.
+-   Not using `map()` or `apply()` for iteration.
 
-Make sure your repository contains your completed RMarkdown document and
-knitted HTML. 
+-   Not singing the full song. Remember, each day, you get the gift for that day *and* all the prior days.
 
-- Your HTML should **only** show the code for your functions and output from 
-testing / verifying that your functions perform as they should. 
-
-__If you used GitHub to store your work:__
-
-Submit the link to your GitHub repository in the Lab 8 assignment portal. 
-
-__If you downloaded the compressed folder and did not use GitHub:__
-
-Submit **both** your RMarkdown file and knitted HTML file
-
-
----
-
-
-## Grading
-
-__You will get an automatic revision for:__
-
-* Functions that do not work the way they are intended
-
-* "Hard-Coding" in functions.
-
-* Not using `map` or `apply` for iteration.
-
-* Not singing the full song.  Remember, each day, you get the gift for that day
-*and* all the prior days.
-
-
-__Minor points will be deducted for:__
-
-* Song output that displays in unappealing ways (e.g. extraneous output, extra
-white space, etc.)
-
-* Minor warning messages from functions
-
-* Forgetting to include the url to your GitHub repo
-
-
-__No points will be deducted for:__
-
-* Unvectorized functions
-
-
----
-
+------------------------------------------------------------------------
 
 ## Challenge
 
-There is no challenge this week! 
+There is no challenge this week!

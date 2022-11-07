@@ -1,0 +1,124 @@
+---
+title: "Practice Activity 8: The 12 Days of Christmas"
+format: html
+editor: visual
+---
+
+```{r packages}
+#| include: false
+library(dplyr)
+library(glue)
+library(stringr)
+library(purrr)
+```
+
+
+### A Test Dataset
+
+Run the code below to load up a dataset called `xmas` that contains the crucial information about the gifts in the song. We will use this dataset to test out our functions as we work on them.
+
+```{r}
+xmas <- read.csv("https://www.dropbox.com/s/e584pryn8evm1gz/xmas.csv?dl=1")
+```
+
+---
+
+## Step One:  Plurals
+
+Note that the gifts are listed in singular: for example, on day five the
+narrator receives "five golden rings", but the entry in the dataset for the gift on day five simply says "ring".  
+
+Using the skeleton of the `pluralize_gift()` function, complete the code so that the function takes a gift and returns the appropriate plural. 
+
+```{r pluralize-function}
+# Function that takes a noun and makes it plural
+# Arguments -- gift -- A string or vector of strings
+# Return -- A string or vector of strings with the pluralized words
+
+pluralize_gift <- function(gift){
+
+gift <- gift %>%
+  str_replace()
+
+return(gift)
+
+}
+```
+
+### Test Your Function
+
+Try your function out on the smaller and then larger gift dataset. Consider: is your function _vectorized_?  It does not have to be, but you can try it out if you want!
+
+```{r pluralize-test}
+
+## This will work if your function is vectorized!
+pluralize_gift(xmas$Gift.Item)
+
+## This will work if your function is not vectorized!
+purrr::map_chr(xmas$Gift.Item, pluralize_gift)
+
+```
+
+
+---
+
+## Step Two: Creating sentences
+
+Write a function called `make_phrase()` that takes as input the necessary
+information, and returns a phrase.  For example, 
+
+```
+make_phrase(num_word = "ten", 
+            item = "lords", 
+            verb = "a-leaping", 
+            adjective = "", 
+            location = "")
+```
+
+should return
+
+```
+"ten lords a-leaping"
+```
+
+```{r phrase-function}
+make_phrase <- function(num_word, item, verb, adjective, location) {
+  
+  ## Step 1: Replace NAs with blank strings
+  verb <- str_replace_na(verb, "")
+  
+  ## Step 2: If the day is larger than 1, the items need pluralized! 
+  
+  ## Step 3: If the word starts with a vowel, add "an" to the beginning
+  
+  ## Step 4: Glue all of the pieces together! 
+
+}
+```
+
+
+### Test Your Function
+
+Try your function out on the `xmas` data, by making a new variable containing the daily phrases. Notice I've provided you with the code to iterate through each row of the dataset to create a phrase--all you need to do is provide the necessary inputs into `pmap_chr()`. 
+
+```{r}
+xmas2 <- xmas %>%
+  mutate(day.num = as.character(english::english(Day)
+                                ), 
+    Full.Phrase = pmap_chr(
+      list(num = Day,
+           num_word = day.num,
+           item = Gift.Item,
+           verb = Verb,
+           adjective = Adjective,
+           location = Location),
+      make_phrase
+      )
+  )
+```
+
+## Submission
+
+Your `Full.Phrase` column is the answer to this week's Practice Activity.
+
+**Copy and paste your `Full.Phrase` column to show me the phrases you made!**
