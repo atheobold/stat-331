@@ -141,7 +141,7 @@ class: middle, inverse, center
 
 --
 
-![](images/map_df.png)
+![](images/map.png)
 
 --
 
@@ -195,23 +195,6 @@ class: center, middle, inverse
 </br> 
 
 .bitlarger[Not all functions are vectorized! ]
-
----
-
-class: middle
-
-.larger[Where we are headed...]
-
---
-
-```{r, eval = FALSE}
-sims %>% 
-  map( 
-    ~ lm(bill_length_mm ~ ., data = .)
-      ) %>% 
-  map(summary) %>% 
-  map_dbl( ~ .$r.squared)
-```
 
 ---
 
@@ -411,7 +394,6 @@ bottles_lyrics <- function(n){
   
   if(n == 0){
     lyrics <- glue::glue("No more bottles of beer on the wall, no more bottles of beer. \nGo to the store and buy some more, 99 bottles of beer on the wall")
-    
   } else{
   lyrics <- glue::glue("{n} bottles of beer on the wall, {n} bottles of beer \nTake one down, pass it around, {n -1} bottles of beer on the wall")
   }
