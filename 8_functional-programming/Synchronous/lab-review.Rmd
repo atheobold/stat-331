@@ -1,5 +1,5 @@
 ---
-title: "Iteration, Functions & Strings"
+title: "Putting Together a Song!"
 date: "November 10, 2022"
 author: "Stat 331"
 output:
@@ -43,5 +43,30 @@ style_duo_accent(
 ```
 
 
+class: center, middle, inverse
 
-slides about pmap!
+.huge-text[What is `pmap()` doing?]
+
+---
+
+![](images/pmap.png)
+
+---
+
+class: center, middle, inverse
+
+.huge-text[Where are we going today?]
+
+---
+
+.bitlarger[Step 1 -- Write a `sing_day()` function]
+
+--
+
+.bitlarger[Step 2 -- Iterate your `sing_day()` function over a set of days]
+
+--
+
+.bitlarger[Step 3 -- Style you output!]
+
+
