@@ -32,6 +32,73 @@ class: center, middle, inverse, title-slide
 
 class: center, middle, inverse
 
+.huge-text[How to get side-by-side plots?]
+
+---
+
+.bitlarger[Getting Creative...]
+
+.pull-left[
+&lt;img src="lab-review_files/figure-html/unnamed-chunk-2-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+&lt;center&gt;
+
+**Some Options**
+
+rotating your axes!
+
+making sure people don't tilt their head!
+
+using non-default colors!
+
+changing the font and / or font size!
+
+**adding your legend to your title!**
+]
+
+---
+
+.bitlarger[Legend Colors in Plot Title]
+
+
+```r
+labs(title = str_c("Missing Fish Weights for ",
+      "&lt;span style = 'color:#A6CEE3'&gt;**Trip 1**&lt;/span&gt;",
+      " and &lt;span style = 'color:#1F87B4'&gt;**Trip 2**&lt;/span&gt;"),
+      subtitle = "by Section of Blackfoot River"
+    )
+```
+
+--
+
+&lt;center&gt;
+.large[How did I figure out the colors???]
+&lt;/center&gt;
+
+--
+
+
+```r
+library(RColorBrewer)
+brewer.pal(n = 2, name = "Paired")
+```
+
+```
+[1] "#A6CEE3" "#1F78B4"
+```
+
+---
+
+class: center, middle, inverse
+
+.larger[Back to the 12 Days of Christmas...]
+
+---
+
+class: center, middle, inverse
+
 .huge-text[What is `pmap()` doing?]
 
 ---
