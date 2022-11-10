@@ -1,5 +1,5 @@
 ---
-title: "Putting Together a Song!"
+title: "A Plan for the Rest of the Quarter!"
 date: "November 10, 2022"
 author: "Stat 331"
 output:
@@ -44,6 +44,55 @@ style_duo_accent(
 fish <- read_csv(here::here("7_functions", "Lab", "BlackfootFish.csv"))
 ```
 
+class: center, middle
+
+.larger[What the next two weeks look like...]
+
+---
+
+.larger[Learning Targets]
+
+**Weeks 9 & 10**
+
+- *DSM-1*: I can simulate data from a variety of probability models.
+
+- *DSM-2*: I can fit a linear regression and extract necessary summary measures.
+
+- *DVS-6*: I can create tables which make my summaries clear to the reader.
+
+- *DVS-7*: I show creativity in my tables.
+
+---
+
+.larger[How your supporting artifacts should look...]
+
+.pull-left[
+**Goal:** Demonstration of targets in Lab Assignment(s) and / or Challenge(s)
+]
+.pull-right[
+**Notes:** I added WD-7 (pivoting) this morning & removed DSM-3 (simulation for regression)
+]
+---
+
+.larger[Revisions]
+
+The final round of revisions will be accepted on **Sunday, November 27**. 
+
+You can revise any Lab Assignment or Challenge one additional time before
+including it in the portfolio.
+
+- You **do not** need to submit the revised Lab / Challenge to Canvas
+- You **do** need to indicate what you are presenting is an
+additional revision done for the portfolio
+- You **will not** receive feedback on revisions done for the portfolio
+
+---
+
+class: center, middle, inverse
+
+.huge-text[Lab 7 Recap]
+
+---
 
 class: center, middle, inverse
 
