@@ -12,10 +12,11 @@ format:
 editor: visual
 execute: 
   echo: true
+  eval: false
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```{r packages}
+#| include: false
 
 library(tidyverse)
 
@@ -35,17 +36,17 @@ Note, you will either need to copy over your functions from the Practice Activit
 
 ## Step Three: Iteration.
 
-Write a function called `sing_line()` that takes as input:
+Write a function called `sing_day()` that takes as input:
 
--   A dataset
+-   A dataset (input as a dataframe)
 
--   A number indicating which day to sing about
+-   A number indicating which day to sing about (input as an integer)
 
--   The name of a column in the dataset that contains the phrases for each day.
+-   The name of a column in the dataset that contains the phrases for each day (input as an tidy name)
 
 For example,
 
-    sing_line(xmas, 2, Full.Phrase)
+    sing_day(xmas2, 2, Full.Phrase)
 
 should return
 
@@ -54,7 +55,9 @@ should return
     a partridge in a pear tree.
 
 ::: callout-tip
-*Hint:* The `{{phrase_col}}` part, which I provided for you, lets you use column names as arguments to a function. Don't delete that line of code!
+*Hint 1:* The `{{phrase_col}}` part, which I provided for you, lets you use column names as arguments to a function. Don't delete that line of code!
+
+**Hint 2:** The `ordinal()` function from the **english** package could be helpful when coverting the `line` input (e.g., 1) to a word (e.g., "first").  
 :::
 
 ```{r sing-day-function}
@@ -67,6 +70,7 @@ should return
 sing_day <- function(dataset, line, phrase_col){
   
   # Step 1: Setup the intro line
+  # Hint: You need to convert a number (e.g., 1) to a word (e.g., first)
   num_word <- ____
   
   intro <- glue::glue("On the {num_word} day of Christmas")
@@ -89,23 +93,10 @@ sing_day <- function(dataset, line, phrase_col){
 ### A Small Test
 
 ```{r}
-xmas |>
+xmas2 |>
 sing_line(num = 2, phrase_col = Full.Phrase)
 
 ```
-
-### A Larger Test
-
-```{r}
-map_chr(1:12, ~ sing_line(xmas2, .x, Full.Phrase)) |>
-  str_c(collapse = "\n") |>
-  cat()
-
-```
-
-::: callout-note
-Note that `.x` can be used exchangeably with `.`. We've used `.` for functions we've written inside the `across()` function(e.g., `across(.cols = everything(), .fns = ~sum(is.na(.))))`). I've chosen to use `.x` since it looks more like an object that is being input into the function!
-:::
 
 ------------------------------------------------------------------------
 
@@ -131,6 +122,12 @@ map_chr(1:12, ~sing_line(xmas2, .x, Full.Phrase)) |>
 
 ```
 
+::: callout-note
+Note that `.x` can be used exchangeably with `.`. We've used `.` for functions we've written inside the `across()` function(e.g., `across(.cols = everything(), .fns = ~sum(is.na(.))))`). I've chosen to use `.x` since it looks more like an object that is being input into the function!
+:::
+
+
+
 ------------------------------------------------------------------------
 
 ## Revisions
@@ -141,7 +138,7 @@ map_chr(1:12, ~sing_line(xmas2, .x, Full.Phrase)) |>
 
 -   "Hard-Coding" in functions.
 
--   Not using `map()` or `apply()` for iteration.
+-   Not using the `map()` code supplied to iterate your function.
 
 -   Not singing the full song. Remember, each day, you get the gift for that day *and* all the prior days.
 
@@ -149,9 +146,13 @@ map_chr(1:12, ~sing_line(xmas2, .x, Full.Phrase)) |>
 
 ## Challenge -- Styling Your Song
 
-It would be nice if your song output in a visually appealing way. Similar to Lab 2, for this Challenge, you will be provided with three options. You are required to do **at least one**, but are welcome to do more than one.
+It would be nice if your song output in a visually appealing way. Similar to Lab 2, for this Challenge, you will be provided with three options. You are required to do **at least two**, but are welcome to do more than one.
 
 ### Option 1
+
+Remove any additional spaces between words, such that there should only be **one** whitespace character between words and **no** whitespace at the beginning or end of each phrase. 
+
+### Option 2
 
 Ensure each phase (e.g., "two turtle doves") of your song is printed on its own line. For example, your function should output the following for `sing_line(xmas, num = 2, phrase_col = Full.Phrase)`:
 
@@ -159,7 +160,7 @@ Ensure each phase (e.g., "two turtle doves") of your song is printed on its own 
     two turtle doves and 
     a partridge in a pear tree
 
-### Option 2
+### Option 3
 
 Ensure there are blank spaces between the different lines of the song. For example, when iterating your function, your output should look like the following:
 
@@ -170,7 +171,7 @@ Ensure there are blank spaces between the different lines of the song. For examp
     On the first day of Christmas, my true love gave to me:
     a partridge in a pear tree
 
-### Option 3
+### Option 4
 
 Ensure the lines of your song are grammatically correct. There are three components you should address in making your lines grammatically correct:
 
@@ -186,5 +187,5 @@ For example, your function should output the following for `sing_line(xmas, num 
     a partridge in a pear tree.
 
 ::: callout-note
-While I am a fan of the oxford comma, you do not have to use an oxford comma for the second to last phrase of your song. 
+While I am a fan of the oxford comma, you do not have to use an oxford comma for the second to last phrase of your song.
 :::
