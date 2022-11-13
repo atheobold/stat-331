@@ -2,6 +2,7 @@
 title: "Practice Activity 9.1: Regression"
 format: 
   html: 
+    self-contained: true
     theme: minty
     fontsize: 1em
     mainfont: sans-serif
@@ -12,33 +13,36 @@ format:
 editor: visual
 execute: 
   echo: false
+  include: false
+  eval: false
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(include = FALSE, eval = FALSE)
+```{r setup}
+#| include: false
 
 library(tidyverse)
 ```
 
 # Data
 
-The dataset "mystery_animal.csv" contains the weights of a particular animal
-before and after a year of eating only roasted duck.
+The dataset "mystery_animal.csv" contains the weights of a particular animal before and after a year of eating only roasted duck.
 
+# Linear Regression
 
-# Linear Regression 
+Fit a linear regression to determine if the Duck Diet is associated with the animal gaining weight, losing weight, or neither.
 
-Fit a linear regression to determine if the Duck Diet is associated with the 
-animal gaining weight, losing weight, or neither.
+# Residuals
 
+Plot the residuals (observed value minus predicted value) of your linear model versus `weight_before`.
 
-# Residuals  
-
-Plot the residuals (observed value minus predicted value) of your linear model
-versus `weight_before`. 
-
+:::{.callout-tip}
+There are a few different ways to obtain your residuals. My favorite is the 
+`augment()` function from the **broom** package. I like this option a lot
+because it gives you all of the information from your linear regression in a 
+tidy [tibble]{.underline}! Each row has the explanatory and response values, the fitted / 
+predicted value (`.fitted`), and the residual (`.resid`). 
+:::
 
 # Mystery Animal
 
-What animal do you see? 
-
+What animal do you see?
