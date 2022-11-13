@@ -138,9 +138,3 @@ breakdown between the three spellings in CA?  What about in PA?
 4. Perform a Chi-Square test on this data, to determine if CA and PA have different
 distributions of spellings of "Allan".
 
----
-
-## Challenge
-
-Perform an analysis of your own, using any names you choose!  Your analysis must
-include a plot, a hypothesis test or regression model, and accompanying clear discussion.

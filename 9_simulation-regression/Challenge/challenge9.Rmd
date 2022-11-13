@@ -4,7 +4,7 @@ output: rmdformats::readthedown
 ---
 
 This Challenge is intended to help you spice up *at least one* of the
-visualizations your group has made for the Final Project. By no means do you 
+visualizations you are using for your Final Portfolio. By no means do you 
 need to make all of these additions. 
 
 Personally, when I think about making "professional" or "publication ready" 
