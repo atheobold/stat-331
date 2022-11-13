@@ -2,6 +2,7 @@
 title: "Distributions and Simulation"
 format: 
   html: 
+    self-contained: true
     theme: minty
     fontsize: 1em
     mainfont: sans-serif
@@ -58,17 +59,15 @@ dnorm(1.5, mean = 2, sd = 4)
 
 ```
 
-**Question 1:** Explain in one sentence why each of the functions above produced the output you obtained.
+**Question 1:** Explain why each of the functions above produced the output you obtained.
 
-**Question 4:** Explain in one sentence why `rnorm(mean = 0, sd = 1)` gives an error.
-
-**Question 5:** Explain in one sentence why `dnorm(2, mean = 0, sd = 1)` will always produce a number between 0 and 1.
+**Question 4:** Why does `rnorm(mean = 0, sd = 1)` give an error?
 
 ------------------------------------------------------------------------
 
 ## Setting a Random Number Seed
 
-Functions like `rnorm()` rely on something called **pseudorandomness**. Because computers can never be *truly* random, complicated processes are implemented to make "random" number generation be so unpredictable as to behave like true randomness.
+Functions like `rnorm()` rely on something called pseudo-randomness. Because computers can never be *truly* random, complicated processes are implemented to make "random" number generation be so unpredictable as to behave like true randomness.
 
 This means that projects involving simulation are harder to make **reproducible**. For example, here are two identical lines of code that give different results!
 
@@ -80,7 +79,7 @@ rnorm(1, mean = 0, sd = 1)
 rnorm(1, mean = 0, sd = 1)
 ```
 
-Fortunately, pseudorandomness depends on a **seed**, which is an arbitrary number where the randomizing process starts. Normally, R will choose the seed for you, from a pre-generated vector:
+Fortunately, pseudo-randomness depends on a **seed**, which is an arbitrary number where the randomizing process starts. Normally, R will choose the seed for you, from a pre-generated vector:
 
 ```{r}
 head(.Random.seed)
