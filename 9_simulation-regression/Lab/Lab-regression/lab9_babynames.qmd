@@ -1,0 +1,149 @@
+---
+title: "Lab 9: Baby Names"
+format: 
+  html: 
+    theme: minty
+    fontsize: 1em
+    mainfont: sans-serif
+    number-sections: true
+    number-depth: 2
+    code-block-bg: "#76b5c5"
+    highlight-style: monochrome
+editor: visual
+execute: 
+  echo: true
+  eval: false
+  include: false
+---
+
+```{r setup}
+#| include: false
+library(tidyverse)
+```
+
+## The Data
+
+Our dataset in this lab concerns baby names and their popularity over time. The dataset `babies_ca.csv` has information about baby names in California from 1940-2016. For each year, and for each name with at least 50 recorded babies born, we are given the counts of how many babies had that name.
+
+```{r}
+babies_ca <- read.csv(
+  here::here("9_simulation-regression",
+             "Lab",
+             "Lab-regression",
+             "babies_ca.csv")
+  )
+```
+
+At [this link](https://www.dropbox.com/sh/czm61yzmvzl6xfb/AABEFdpy02aNRhZ_vcxrVAQSa?dl=0), you can find the names for ALL 50 states, in separate datasets organized by first letter.
+
+## Is my name not cool any more?
+
+Let's take a look at how the name "Kelly" has changed over time.
+
+1.  Make a plot showing the number of babies named "Allison" born each year in CA. Color the plot to show the sex assigned at birth to these babies.
+
+::: {.callout-danger}
+The dataset has a column titled `Gender`, which contains two values `"F"` and `"M"`, representing "Female" and "Male". The sex someone was assigned at birth is different from their gender identity [(definitions)](https://www.plannedparenthood.org/learn/gender-identity/sex-gender-identity). Thus, this variable should be renamed to `Sex` or `Sex Assigned at Birth`.
+:::
+
+2.  I was born in 1989. Let's look at only the time frame since I was named. Narrow down the dataset to only 1989 onward.
+
+3.  Create a linear model with the year as the explanatory variable, and the
+number of Allisons as the response. Summarize the results, and plot the model.
+
+4.  Plot the *residuals* of the model, that is, the actual values minus the
+predicted values. Comment on the residuals - do you see any patterns?
+
+:::{.callout-tip}
+The `augment()` function from the **broom** package may be helpful!
+:::
+
+4.  Now include `Sex` as an explanatory variable in the regression model. Specifically, `Sex` should have **both** a "main effect" and an "interaction
+effect" with `Year`. 
+
+Plot the model and the residuals, and comment on any patterns in the residuals.
+
+5.  What do you conclude from this model?
+
+## Spelling by state
+
+In middle school I was **so** upset with my parents for not naming me "Allyson".
+Past my pre-teen rebellion, I'm happy with my name and am impressed when
+baristas spell it "Allison" instead of "Alison". But I don't have it as bad as
+my good friend Allan.
+
+1.  Narrow the California dataset down to only male-assigned babies named
+"Allan", "Alan", or "Allen". Make a plot comparing the popularity of these names
+over time.
+
+2.  In California, Allan's spelling of his name is the least common of the three
+- but perhaps it's not such an unusual name for his home state of Pennsylvania.
+Compute the total number of babies born with each spelling of "Allan" in 2000,
+in Pennsylvania and in California.
+
+3.  Convert your total counts to overall percents. That is, what was the percent breakdown between the three spellings in CA? What about in PA?
+
+---
+
+## Challenge 9 
+
+## Option A: Using $\LaTeX$ [+5 Challenge Points]
+
+$\LaTeX$, which is pronounced Lah-tech or Lay-tech, is a document preparation
+system for high-quality typesetting. It is most often used for medium-to-large
+technical or scientific documents but it can be used for almost any form of
+publishing. Some of the perks of using $\LaTeX$ are:
+
+- Typesetting journal articles, technical reports, books, and slide
+presentations 
+- Control over large documents containing sectioning, cross-references, tables
+and figures
+- Typesetting of complex mathematical formulas
+- Advanced typesetting of mathematics with AMS-LaTeX 
+- Automatic generation of bibliographies and indexes
+
+<!-- Link to resources on writing LaTeX -->
+### Resources 
+
+- [Dr. Theobold's Repository from LaTeX workshop](https://github.com/atheobold/IntroLaTeXLesson)
+
+- [Overleaf Guide on Mathematical Expressions](https://www.overleaf.com/learn/latex/Mathematical_expressions)
+
+### Guidelines
+
+If your group chooses to embark on this adventure. I would like for you to 
+include a nicely formatted $\LaTeX$ equation for your regression model in your
+written report! 
+
+
+## Option B: Creating Slick Tables [Up to +20 Challenge Points]
+
+Similar to $\LaTeX$, creating nicely formatted tables is an important aspect 
+to creating a professional report. 
+
+For formatting tables output from R, there are a variety of tools for making
+nicely formatted tables, but the two I recommend are: 
+
+- The `kable()` function from the [kable package](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html) -- For a 
+nice, basic HTML table
+
+- The [kableExtra package](https://bookdown.org/yihui/rmarkdown-cookbook/kableextra.html) -- For additional styling features of your HTML table
+
+An additional package you can explore is the [DT Package](https://rstudio.github.io/DT/).
+This package creates interactive data tables, previewing different aspects of 
+a dataset. This is a nice way to include a preview of a dataset at the beginning
+of a report!
+
+### Guidelines
+
+If your group chooses to embark on this adventure. I would like for you to 
+include your nicely formatted table in your written report! 
+
+**+5 Challenge Points**:
+
+- Table formatted with `kable()`
+
+**+10 Challenge Points**:
+
+- Table formatted with **kableExtra**
+- Table created with **DT**
