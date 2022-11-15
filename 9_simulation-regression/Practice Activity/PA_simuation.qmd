@@ -88,7 +88,9 @@ Then, use that function to create random samples of the total weight of 1000 pos
 
 (Some code is provided for you below. Do not change the seed!)
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
+#| echo: true
 music_man <- function(n_tromb, n_cor, n_reed){
   
   trombones <- rnorm(n_tromb, ...)
