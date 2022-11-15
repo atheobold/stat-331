@@ -66,8 +66,8 @@ penguins %>%
 ## Fitting Linear Regression Models in R -- Supervised Learning
 
 ```{r}
-my_model <- penguins %>%
-  lm(bill_length_mm ~ bill_depth_mm, data = .)
+my_model <- penguins |>
+  lm(bill_length_mm ~ bill_depth_mm, data = _)
 ```
 
 ## Accessing Model Estimates
@@ -110,7 +110,7 @@ broom::glance(my_model)
 
 **Question 1: Code**
 
-a)  In the code above, why is the `.` being used? 
+a)  In the code above, why is the `_` being used?
 
 b)  True or False -- If you switch the order of `bill_length_mm` and `bill_depth_mm` in the `lm()` formula nothing happens.
 

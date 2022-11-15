@@ -1,6 +1,6 @@
 ---
 title: "Linear Regression & Simulation"
-date: "February 28, 2022"
+date: "November 15, 2022"
 author: "Stat 331"
 output:
   xaringan::moon_reader:
@@ -66,7 +66,7 @@ class: inverse
 .pull.right[
 
 </br>
-.bitlarger[**Predictive Modeling & Model Conditions**]
+.bitlarger[**Predictive Modeling**]
 ]
 
 ---
@@ -79,14 +79,6 @@ $$
 --
 
 .pull-left[
-
-</br>
-<center>
-$\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 \cdot x$
-
-]
-
-.pull-right[
 ```{r 2, echo = FALSE, fig.width = 5, fig.height = 4, fig.align = 'center'}
 ggplot(data = bdims, aes(y = wgt, x = hgt)) + 
   geom_point() +
@@ -95,22 +87,84 @@ ggplot(data = bdims, aes(y = wgt, x = hgt)) +
 ```
 ]
 
+.pull-right[
+
+</br>
+<center>
+$\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 \cdot x$
+
+$\epsilon_i \sim N(0, \sigma^2)$
+]
+
 ---
 
-.larger[Supervised Learning]
+.larger[Fitting a Linear Regression]
 
-```{r}
-evals %>% 
+```{r, echo= TRUE}
+lm(score ~ age, data = evals)
+```
+
+---
+
+.larger[Using the `|>`]
+
+```{r, echo = TRUE, eval = FALSE}
+evals |>
   lm(score ~ age, data = .)
 ```
+
+--
+
+```
+Error in is.data.frame(data): object '.' not found
+```
+--
+
+</br>
+</br>
+
+<center>
+
+.large[**What happened???**]
+
+---
+
+class: middle, inverse
+
+.larger[Placeholder]
+
+Piping is an infix operator (e.g., `2 + 2`) that pipes the LHS of the pipe into
+the **first** argument of the function on RHS of the pipe
+
+.pull-left[
+```{r, echo = TRUE, eval = FALSE}
+evals %>%
+  lm(score ~ age, data = .)
+```
+
+With `%>%`, if the LHS **should not** be used in the **first** argument, a `.`
+can be used to reference where the LHS should go.
+]
+
+.pull-right[
+```{r, echo = TRUE, eval = FALSE}
+evals |>
+  lm(score ~ age, data = _)
+```
+
+`|>` **does not** have a placeholder. However, as of R 4.2, `|>` can use `_` as
+a placeholder but only with **named** arguments.
+]
+
+[Interesting blog about differences by Isabella Velásquez](https://towardsdatascience.com/understanding-the-native-r-pipe-98dea6d8b61b)
 
 ---
 
 .bitlarger[Accessing Residuals & Fitted Values]
 
 ```{r, echo = TRUE}
-evals_lm <- evals %>% 
-  lm(score ~ age, data = .)
+evals_lm <- evals |> 
+  lm(score ~ age, data = _)
 ```
 
 .column-left[
@@ -148,12 +202,12 @@ class: middle
 .pull-left[
 
 ```{r, echo = TRUE}
-evals_lm$residuals %>% 
+evals_lm$residuals |> 
   head(4)
 ```
 
 ```{r, echo = TRUE}
-resid(evals_lm) %>% 
+resid(evals_lm) |> 
   head(4)
 ```
 
@@ -161,7 +215,7 @@ resid(evals_lm) %>%
 
 .pull-right[
 ```{r, echo = TRUE}
-augment(evals_lm)
+broom::augment(evals_lm)
 ```
 
 ]
@@ -171,8 +225,8 @@ augment(evals_lm)
 .larger[Plotting Residuals]
 
 ```{r, echo = TRUE, out.height = "40%", out.width = "40%"}
-evals_lm %>% 
-  augment() %>% 
+evals_lm |> 
+  broom::augment() |> 
   ggplot(mapping = aes(y = .resid, x = .fitted)) +
   geom_point()
 ```
@@ -194,7 +248,7 @@ specific distribution
 --
 
 - `p` for **probability** (CDF): i.e. compute the probability of observing a
-value **less than** `x` 
+value **less than** `x` (cumulative)
 
 --
 
@@ -204,6 +258,7 @@ such that $P(X < x) = p$
 --
 
 - `d` stands for **density** (PDF): compute the height of distribution curve
+(absolute)
 
 ---
 
