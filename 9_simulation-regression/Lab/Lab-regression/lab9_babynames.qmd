@@ -36,16 +36,13 @@ begins with "A", you should download the `StateNames_A.csv` dataset from the
 link above. 
 
 ```{r}
+#| include: false
 babies_a <- read.csv(
   here::here("9_simulation-regression",
              "Lab",
              "Lab-regression",
              "StateNames_A.csv")
   )
-
-allisons <- babies_a |> 
-  filter(Name == "Allison") |> 
-  rename(Sex = Gender)
 ```
 
 
