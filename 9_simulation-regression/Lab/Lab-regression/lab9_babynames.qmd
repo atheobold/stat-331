@@ -111,7 +111,14 @@ instances of these names.
 For this Challenge you will explore how to generate nice looking tables for HTML
 documents. There are many packages for generating tables, but I prefer the 
 `kable()` function from the **knitr** package for *simple* tables and the 
-`datatable()` function from the **DT** package for *more sophisticated* tables. 
+`datatable()` function from the **DT** package for *more sophisticated* tables.
+
+I would recommend you think of tables no different from the visualizations
+you've been making. We want **all** aspects of our tables to be clear to the 
+reader, so the comparisons we want them to make are straightforward. Tables are
+also a great avenue to display creativity! In fact, there is a yearly 
+[RStudio table contest](https://www.rstudio.com/blog/rstudio-table-contest-2022/), and [here](https://community.rstudio.com/c/table-gallery/64) is a gallery of
+the award winning tables! 
 
 #### Part 1 -- Formatting Basic Tables
 
@@ -138,6 +145,10 @@ custom formatting of columns, or allowing the user to interact with the table
 beginning of your lab report. 
 
 #### Part 3 (Optional, but fun!) 
+
+For this portion of the Challenge, you are tasked with using $\LaTeX$ to 
+format your regression equation in #6. Keep in mind our estimated regression 
+equation indicates the response ($y$) is estimated with a hat ($\hat{y}$)! 
 
 $\LaTeX$, which is pronounced Lah-tech or Lay-tech, is a document preparation
 system for high-quality typesetting. It is most often used for medium-to-large
