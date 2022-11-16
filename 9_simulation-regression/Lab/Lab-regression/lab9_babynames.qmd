@@ -2,6 +2,7 @@
 title: "Lab 9: Baby Names"
 format: 
   html: 
+    self-contained: true
     theme: minty
     fontsize: 1em
     mainfont: sans-serif
@@ -23,71 +24,123 @@ library(tidyverse)
 
 ## The Data
 
-Our dataset in this lab concerns baby names and their popularity over time. The dataset `babies_ca.csv` has information about baby names in California from 1940-2016. For each year, and for each name with at least 50 recorded babies born, we are given the counts of how many babies had that name.
-
-```{r}
-babies_ca <- read.csv(
-  here::here("9_simulation-regression",
-             "Lab",
-             "Lab-regression",
-             "babies_ca.csv")
-  )
-```
-
-At [this link](https://www.dropbox.com/sh/czm61yzmvzl6xfb/AABEFdpy02aNRhZ_vcxrVAQSa?dl=0), you can find the names for ALL 50 states, in separate datasets organized by first letter.
+Our dataset(s) in this lab concerns baby names and their popularity over time. 
+At [this link](https://www.dropbox.com/sh/czm61yzmvzl6xfb/AABEFdpy02aNRhZ_vcxrVAQSa?dl=0), you can find the names for ALL 50 states, in separate datasets organized by
+first letter. For each year, and for each name with at least 50 recorded babies
+born, we are given the counts of how many babies had that name.
 
 ## Is my name not cool any more?
 
-Let's take a look at how the name "Kelly" has changed over time.
+Let's take a look at how the name "Allison" has changed over time. As my name 
+begins with "A", you should download the `StateNames_A.csv` dataset from the 
+link above. 
 
-1.  Make a plot showing the number of babies named "Allison" born each year in CA. Color the plot to show the sex assigned at birth to these babies.
+```{r}
+babies_a <- read.csv(
+  here::here("9_simulation-regression",
+             "Lab",
+             "Lab-regression",
+             "StateNames_A.csv")
+  )
 
-::: {.callout-danger}
-The dataset has a column titled `Gender`, which contains two values `"F"` and `"M"`, representing "Female" and "Male". The sex someone was assigned at birth is different from their gender identity [(definitions)](https://www.plannedparenthood.org/learn/gender-identity/sex-gender-identity). Thus, this variable should be renamed to `Sex` or `Sex Assigned at Birth`.
+allisons <- babies_a |> 
+  filter(Name == "Allison") |> 
+  rename(Sex = Gender)
+```
+
+
+## Summarizing & Visualizing the Number of Allisons
+
+1. Make a summary table of the number of babies named "Allison" for each state 
+and the sex of the baby. Specifically, each state should be its own row and each 
+sex should have its own column. Additionally, if there were no babies born with 
+the name "Allison" for that combination of year, state, & sex the table should
+have a value of 0 (not an `NA`). 
+
+:::{.callout-caution}
+The dataset has a column titled `Gender`, which contains two values `"F"` and `"M"`, representing "Female" and "Male". The sex someone was assigned at birth is different from their gender identity [(definitions)](https://www.plannedparenthood.org/learn/gender-identity/sex-gender-identity). Thus, this variable should be renamed to `Sex` or `Sex at Birth`.
 :::
 
-2.  I was born in 1989. Let's look at only the time frame since I was named. Narrow down the dataset to only 1989 onward.
+2. You should have seen in the table above that "Allison" is a name given
+overwhelmingly to babies assigned female at birth. So, `filter` the data to 
+include only babies assigned `F`emale at birth. 
 
-3.  Create a linear model with the year as the explanatory variable, and the
-number of Allisons as the response. Summarize the results, and plot the model.
+3. Make a visualization showing how the popularity of the name "Allison" has
+changed over the years. 
 
-4.  Plot the *residuals* of the model, that is, the actual values minus the
+## Modeling the Number of Allisons
+
+4. Create a linear model with the year as the explanatory variable, and the
+number of Allisons as the response. 
+
+5. Visualize the regression model. 
+
+6. Write out the estimated regression equation. 
+
+7.  Plot the *residuals* of the model, that is, the actual values minus the
 predicted values. Comment on the residuals - do you see any patterns?
 
-:::{.callout-tip}
+::: {.callout-tip}
 The `augment()` function from the **broom** package may be helpful!
 :::
 
-4.  Now include `Sex` as an explanatory variable in the regression model. Specifically, `Sex` should have **both** a "main effect" and an "interaction
-effect" with `Year`. 
+8.  What do you conclude from this model?
 
-Plot the model and the residuals, and comment on any patterns in the residuals.
-
-5.  What do you conclude from this model?
-
-## Spelling by state
+## Spelling by State
 
 In middle school I was **so** upset with my parents for not naming me "Allyson".
 Past my pre-teen rebellion, I'm happy with my name and am impressed when
 baristas spell it "Allison" instead of "Alison". But I don't have it as bad as
-my good friend Allan.
+my good friend Allan! 
 
-1.  Narrow the California dataset down to only male-assigned babies named
-"Allan", "Alan", or "Allen". Make a plot comparing the popularity of these names
-over time.
+1.  Narrow the A name dataset (downloaded previously) down to only male-assigned
+babies named "Allan", "Alan", or "Allen". Make a plot comparing the popularity
+of these names over time.
 
 2.  In California, Allan's spelling of his name is the least common of the three
 - but perhaps it's not such an unusual name for his home state of Pennsylvania.
 Compute the total number of babies born with each spelling of "Allan" in 2000,
-in Pennsylvania and in California.
+in Pennsylvania and in California. Specifically, each spelling should be its own
+column and each state should have its own row. Similar to before, a `0` 
+(not an `NA`) should be used to represent locations where there were no
+instances of these names. 
 
 3.  Convert your total counts to overall percents. That is, what was the percent breakdown between the three spellings in CA? What about in PA?
 
 ---
 
-## Challenge 9 
+## Challenge 9 -- Creating Nice Tables
 
-## Option A: Using $\LaTeX$ [+5 Challenge Points]
+For this Challenge you will explore how to generate nice looking tables for HTML
+documents. There are many packages for generating tables, but I prefer the 
+`kable()` function from the **knitr** package for *simple* tables and the 
+`datatable()` function from the **DT** package for *more sophisticated* tables. 
+
+#### Part 1 -- Formatting Basic Tables
+
+Use the `kable()` function from the [kable package](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html) to create
+nice, basic HTML tables for [**every**]{.underline} table in this lab. 
+
+Similar to axis labels in visualizations, **every** column name in a table
+should describe what it contains. For example, a column of `n` is less
+explanatory than `Frequency of Babies`. 
+
+#### Part 2 - Formatting Nicer Tables
+
+There are two options for creating nicer tables, (1) the [kableExtra package](https://bookdown.org/yihui/rmarkdown-cookbook/kableextra.html) and the
+[DT Package](https://rstudio.github.io/DT/). This part of the Challenge has two
+tasks:
+
+1. Use either the DT or kableExtra packages to spice up **at least one** of 
+your tables. Some ideas on how to "spice up" a table: change the font and / or
+font size, adding striping and / or cell borders to the table, creating 
+custom formatting of columns, or allowing the user to interact with the table 
+(e.g., filtering columns, editing cells). 
+
+2. Use the DT package to include an interactive preview of the dataset at the
+beginning of your lab report. 
+
+#### Part 3 (Optional, but fun!) 
 
 $\LaTeX$, which is pronounced Lah-tech or Lay-tech, is a document preparation
 system for high-quality typesetting. It is most often used for medium-to-large
@@ -105,45 +158,6 @@ and figures
 <!-- Link to resources on writing LaTeX -->
 ### Resources 
 
-- [Dr. Theobold's Repository from LaTeX workshop](https://github.com/atheobold/IntroLaTeXLesson)
-
 - [Overleaf Guide on Mathematical Expressions](https://www.overleaf.com/learn/latex/Mathematical_expressions)
 
-### Guidelines
-
-If your group chooses to embark on this adventure. I would like for you to 
-include a nicely formatted $\LaTeX$ equation for your regression model in your
-written report! 
-
-
-## Option B: Creating Slick Tables [Up to +20 Challenge Points]
-
-Similar to $\LaTeX$, creating nicely formatted tables is an important aspect 
-to creating a professional report. 
-
-For formatting tables output from R, there are a variety of tools for making
-nicely formatted tables, but the two I recommend are: 
-
-- The `kable()` function from the [kable package](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html) -- For a 
-nice, basic HTML table
-
-- The [kableExtra package](https://bookdown.org/yihui/rmarkdown-cookbook/kableextra.html) -- For additional styling features of your HTML table
-
-An additional package you can explore is the [DT Package](https://rstudio.github.io/DT/).
-This package creates interactive data tables, previewing different aspects of 
-a dataset. This is a nice way to include a preview of a dataset at the beginning
-of a report!
-
-### Guidelines
-
-If your group chooses to embark on this adventure. I would like for you to 
-include your nicely formatted table in your written report! 
-
-**+5 Challenge Points**:
-
-- Table formatted with `kable()`
-
-**+10 Challenge Points**:
-
-- Table formatted with **kableExtra**
-- Table created with **DT**
+- [Dr. Theobold's Repository from a LaTeX workshop](https://github.com/atheobold/IntroLaTeXLesson)
