@@ -49,26 +49,25 @@ babies_a <- read.csv(
 ## Summarizing & Visualizing the Number of Allisons
 
 1. Make a summary table of the number of babies named "Allison" for each state 
-and the sex of the baby. Specifically, each state should be its own row and each 
-sex should have its own column. Additionally, if there were no babies born with 
-the name "Allison" for that combination of year, state, & sex the table should
-have a value of 0 (not an `NA`). 
+and the sex of the baby. Specifically, each state should be its own row and each sex should have its own column. Additionally, if there were no babies born with the name "Allison" for that combination of state & sex the table should
+have a value of 0 (not an `NA`). To be clear, there should be **one** row per
+state, which means you need to `summarize()` all the years for each state.  
 
 :::{.callout-caution}
 The dataset has a column titled `Gender`, which contains two values `"F"` and `"M"`, representing "Female" and "Male". The sex someone was assigned at birth is different from their gender identity [(definitions)](https://www.plannedparenthood.org/learn/gender-identity/sex-gender-identity). Thus, this variable should be renamed to `Sex` or `Sex at Birth`.
 :::
 
 2. You should have seen in the table above that "Allison" is a name given
-overwhelmingly to babies assigned female at birth. So, `filter` the data to 
-include only babies assigned `F`emale at birth. 
+overwhelmingly to babies assigned "female" at birth. So, `filter` the data to 
+include only babies assigned `F`emale at birth. (No output needed for this question)
 
 3. Make a visualization showing how the popularity of the name "Allison" has
-changed over the years. 
+changed over the years. To be clear, each year should have **one** observation--the total number of Allisons born that year. 
 
 ## Modeling the Number of Allisons
 
 4. Create a linear model with the year as the explanatory variable, and the
-number of Allisons as the response. 
+number of Allisons as the response. Similar to #4, each year should have **one** observation--the total number of Allisons born that year. 
 
 5. Visualize the regression model. 
 
@@ -81,7 +80,7 @@ predicted values. Comment on the residuals - do you see any patterns?
 The `augment()` function from the **broom** package may be helpful!
 :::
 
-8.  What do you conclude from this model?
+8.  What do you conclude from this model? Is my name not cool anymore? 
 
 ## Spelling by State
 

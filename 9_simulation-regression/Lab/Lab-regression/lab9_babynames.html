@@ -2569,7 +2569,7 @@ vertical-align: -.125em;
 <section id="summarizing-visualizing-the-number-of-allisons" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="summarizing-visualizing-the-number-of-allisons"><span class="header-section-number">3</span> Summarizing &amp; Visualizing the Number of Allisons</h2>
 <ol type="1">
-<li>Make a summary table of the number of babies named “Allison” for each state and the sex of the baby. Specifically, each state should be its own row and each sex should have its own column. Additionally, if there were no babies born with the name “Allison” for that combination of year, state, &amp; sex the table should have a value of 0 (not an <code>NA</code>).</li>
+<li>Make a summary table of the number of babies named “Allison” for each state and the sex of the baby. Specifically, each state should be its own row and each sex should have its own column. Additionally, if there were no babies born with the name “Allison” for that combination of state &amp; sex the table should have a value of 0 (not an <code>NA</code>). To be clear, there should be <strong>one</strong> row per state, which means you need to <code>summarize()</code> all the years for each state.</li>
 </ol>
 <div class="callout-caution callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -2585,14 +2585,14 @@ Danger
 </div>
 </div>
 <ol start="2" type="1">
-<li><p>You should have seen in the table above that “Allison” is a name given overwhelmingly to babies assigned female at birth. So, <code>filter</code> the data to include only babies assigned <code>F</code>emale at birth.</p></li>
-<li><p>Make a visualization showing how the popularity of the name “Allison” has changed over the years.</p></li>
+<li><p>You should have seen in the table above that “Allison” is a name given overwhelmingly to babies assigned “female” at birth. So, <code>filter</code> the data to include only babies assigned <code>F</code>emale at birth. (No output needed for this question)</p></li>
+<li><p>Make a visualization showing how the popularity of the name “Allison” has changed over the years. To be clear, each year should have <strong>one</strong> observation–the total number of Allisons born that year.</p></li>
 </ol>
 </section>
 <section id="modeling-the-number-of-allisons" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="modeling-the-number-of-allisons"><span class="header-section-number">4</span> Modeling the Number of Allisons</h2>
 <ol start="4" type="1">
-<li><p>Create a linear model with the year as the explanatory variable, and the number of Allisons as the response.</p></li>
+<li><p>Create a linear model with the year as the explanatory variable, and the number of Allisons as the response. Similar to #4, each year should have <strong>one</strong> observation–the total number of Allisons born that year.</p></li>
 <li><p>Visualize the regression model.</p></li>
 <li><p>Write out the estimated regression equation.</p></li>
 <li><p>Plot the <em>residuals</em> of the model, that is, the actual values minus the predicted values. Comment on the residuals - do you see any patterns?</p></li>
@@ -2611,7 +2611,7 @@ Tip
 </div>
 </div>
 <ol start="8" type="1">
-<li>What do you conclude from this model?</li>
+<li>What do you conclude from this model? Is my name not cool anymore?</li>
 </ol>
 </section>
 <section id="spelling-by-state" class="level2" data-number="5">
