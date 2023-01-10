@@ -1,25 +1,31 @@
 ---
 title: "Introduction to R & RStudio"
-author: ""
-output:
-  prettydoc::html_pretty:
-    theme: tactile
-    highlight: github
-    css: styles.css
+format: 
+  html: 
+    self-contained: true
+    theme: minty
+    fontsize: 1em
+    mainfont: sans-serif
+    number-sections: true
+    number-depth: 2
+    code-block-bg: "#76b5c5"
+    highlight-style: monochrome
+editor: visual
+execute: 
+  echo: true
+  eval: false
+  include: true
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-```{r, include = FALSE}
+```{r packages}
+#| include: false
 library(tidyverse)
 library(flair)
 ```
 
 Let's start working in `R`!
 
-![](typing_R.gif)
+![](images/typing_R.gif)
 
 </br>
 
@@ -37,12 +43,23 @@ Let's start working in `R`!
 
 ---
 
-## Install R
+## Checking your R version
 
-*If you already have `R` downloaded, please follow these steps anyways, to make
-sure you have the most recent version of `R`.* **Do not ignore these
-instructions.** If you neglect to update your version of R, you may find that 
-updating a package will make it so your code will not run. 
+If you already have `R` downloaded, you need to confirm that you have the most
+up to date version of `R`. **Do not ignore these instructions.** If you neglect
+to update your version of R, you may find that updating a package will make it
+so your code will not run. 
+
+- Step 1: Open RStudio
+- Step 2: At the top of the the Console it will say what version of R you are
+using
+
+![](images/r_version.png)
+
+If the version **is not** 4.2.2 (like the image above), you need to update your
+version of R! 
+
+## Install R
 
 Download and install R by going to [https://cloud.r-project.org/](https://cloud.r-project.org/).
 
@@ -57,22 +74,28 @@ If you are a **Windows** user:
 
 If you are a **Linux** user: 
 
-Click on “Download R for Linux” and choose your distribution for more information on installing `R` for your setup.
+Click on “Download R for Linux” and choose your distribution for more
+information on installing `R` for your setup.
 
 
 If you are **macOS** user: 
 
 * Click on “Download R for (Mac) OS X”
 
-* Under “Latest release:” click on R-X.X.X.pkg, where R-X.X.X is the version number. For example, the latest version of R as of February 15, 2021 was R-4.0.4.
+* Under “Latest release:” click on R-X.X.X.pkg, where R-X.X.X is the version
+number. For example, the latest version of R as of January 1, 2023 was R-4.2.2 
+(Innocent & Trusting).
 
-If you would like a video tutorial on installing R, here is one: [](https://vimeo.com/203516510)
+If you would like a video tutorial on installing R, here is one:
+[](https://vimeo.com/203516510)
 
 #### Troubleshooting for Macs
 
-First, identify which version of OSx you are running.  [How-to](https://support.apple.com/en-us/HT201260)
+First, identify which version of OSx you are running. 
+[How-to](https://support.apple.com/en-us/HT201260)
 
-Next, find out which version of `R` your computer can run.  [Link](https://cran.r-project.org/bin/macosx/)
+Next, find out which version of `R` your computer can run. 
+[Link](https://cran.r-project.org/bin/macosx/)
 
 If this version is 3.5 or later, download the latest version that your computer
 can handle.
@@ -92,17 +115,24 @@ times to do your work.
 RStudio is an Integrated Development Environment (IDE) for `R`. What does that
 mean? Well, if you think of `R` as a language, which it is, you can think of
 RStudio as a program that helps you write and work in the language. RStudio
-makes programming in `R` much easier and I suggest that you use it!
+makes programming in `R` much easier and this course requires you to use it!
+
+If you already have RStudio, you need to double check if you have the most 
+recent version. You **cannot** create Quarto documents unless you have the 
+most recent version of RStudio. 
+
+- Step 1: Open RStudio
+- Step 2: Click on "Help" in the upper menu
+- Step 3: Click on "Check for Updates" 
+
+If there are no updates to RStudio since you installed it, you are good to go! 
+If you need to update RStudio, you will be sent to Posit (the parent company) to
+download the most recent version of RStudio desktop. 
 
 RStudio can be downloaded [here](https://rstudio.com/products/rstudio/download/)
 
-If you already have RStudio:
-
-You **do not** need an update if your RStudio logo looks like this: <img src='../../../Images/rstudio_images/rs_icon_new.png' height='25' width='50'>
-
-You **do** need an update if your RStudio logo looks like this: <img src='../../../Images/rstudio_images/rs_icon_old.png' height='25' width='25'>
-
-If you would like a video tutorial on downloading RStudio, here is one: <https://vimeo.com/203516968>
+If you would like a video tutorial on downloading RStudio, here is one:
+<https://vimeo.com/203516968>
 
 ---
 
@@ -120,17 +150,6 @@ If you would like a video tutorial on downloading RStudio, here is one: <https:/
 
 ---
 
-`r emo::ji("check")` Check-in: Introduction to R & RStudio
-
-**Question 1:** What does it mean for R to be **"open-source"**?
-
-a) Users are required to share all the code they write.
-b) Private companies must pay the *R Core Group* to use R.
-c) Developers cannot charge for the use of their R software.
-d) Anyone can change the base functionality of R.
-
----
-
 # Introduction to RStudio
 
 `r emo::ji("book")` [Required Reading: A tour of RStudio, BasicsBasics1](https://rladiessydney.org/courses/ryouwithme/01-basicbasics-1/)
@@ -144,7 +163,7 @@ d) Anyone can change the base functionality of R.
 * [Click Here](https://github.com/rstudio/cheatsheets/blob/main/rstudio-ide.pdf) 
 to download a "cheatsheet" (easy reference page) for RStudio.
 
-* [Click Here](https://youtu.be/cnQ-v1UUWyE) to watch another walkthrough video for touring
+* [Click Here](https://youtu.be/cnQ-v1UUWyE) to watch another walk through video for touring
 RStudio.
 
 ---
@@ -187,14 +206,25 @@ packages.
 
 `r emo::ji("check")` Check-in: Introduction to R & RStudio  
 
+**Question 1:** What does it mean for R to be **"open-source"**?
+
+a) Users are required to share all the code they write.
+b) Private companies must pay the *R Core Group* to use R.
+c) Developers cannot charge for the use of their R software.
+d) Anyone can change the base functionality of R.
+
+
 **Question 2:** How often do you need to install a package on your computer? 
+
+a) Every time you restart R.
+b) Only once. Afterwards, R can find the package on your hard drive when it needs to.
+c) Never, as long as you are connected to the internet.
+d) Every time you restart your computer.
 
 **Question 3:** What is the tidyverse? 
 
-**Question 4:** Correct the following sentences, so that they make sense.
-
-1. "I wrote RStudio code to make a beautiful plot."
-
-2. "I can't get R to open!"
-
-3. "Can I send you my RStudio so you can check out if my code is correct? "
+a) A word processing program for R.
+b? An alternate universe where everyone is an R programmer.
+c) A collection of packages that work well together and provide tools for common
+data science tasks.
+d) A code style that reads like poetry.
