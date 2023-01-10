@@ -1,6 +1,6 @@
 ---
 title: "Welcome to Stat 331!"
-date: "September 20, 2022"
+date: "January 10, 2023"
 author: "Dr. Allison Theobold"
 output:
   xaringan::moon_reader:
