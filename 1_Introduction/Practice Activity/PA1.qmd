@@ -1,10 +1,17 @@
 ---
 title: "Practice Activity 1: Find the Mistakes"
-output: html_document
+format: 
+  html:
+    self-contained: true
+editor: visual
+execute: 
+  echo: true
+  eval: false
 ---
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r packages}
+#| include: false
+
 library(tidyverse)
 ```
 
@@ -31,7 +38,7 @@ incorrectly.  Find the mistake, and correct it to complete the intended action.
 1. Create vectors containing the upper case letters, lower case letters, and
 some punctuation marks.
 
-```{r, eval = FALSE}
+```{r}
 lower_case <- c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
                 "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z")
 
@@ -44,8 +51,7 @@ punctuation <- c(".", ",", "!", "?", "'", """, "(", ")", " ", "-", ";", ":")
 
 2. Make **one** long **vector** containing all the symbols.
 
-```{r, eval = FALSE}
-
+```{r}
 my_symbols <- cbind(lower_case, upper_case, punctuation)
 
 ```
@@ -54,22 +60,25 @@ my_symbols <- cbind(lower_case, upper_case, punctuation)
 3. Turn the `my_symbols` vector into a data frame, with one column named 
 "Symbol".
 
-```{r, eval = FALSE}
+```{r}
 my_symbols <- dataframe(Symbol = my_symbols)
+
 ```
 
 
 4. Find the total number of symbols we have in our data frame.  
 
-```{r, eval = FALSE}
+```{r}
 len <- length(my_symbols)
+
 ```
 
 
 5. Create a new variable in your dataframe that assigns a number to each symbol.
 
-```{r, eval = FALSE}
+```{r}
 my_symbols%Num <- 1:len
+
 ```
 
 
@@ -196,11 +205,12 @@ you can find about modulus in R!
 Use your final vector of numbers as indices for my_symbols to discover the final
 message, by running the following code:
 
-```{r, eval = FALSE}
+```{r}
 stringr::str_c(my_symbols$Symbol[top_secret], collapse = "")
 ```
 
 
 Google the first line of this message, if you do not recognize it, to see what
 poem it is.
+
 
