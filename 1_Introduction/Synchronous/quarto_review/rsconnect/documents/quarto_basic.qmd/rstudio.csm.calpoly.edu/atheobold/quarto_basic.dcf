@@ -5,9 +5,9 @@ account: atheobold
 server: rstudio.csm.calpoly.edu
 hostUrl: https://rstudio.csm.calpoly.edu/__api__
 appId: 448
-bundleId: 1035
-url: https://rstudio.csm.calpoly.edu/content/67031d15-dde6-4e58-be7d-25c2fafd83e0/
-when: 1663871766.37915
-lastSyncTime: 1663871766.37916
+bundleId: 1108
+url: https://rstudio.csm.calpoly.edu/quarto-intro/
+when: 1673554868.35073
+lastSyncTime: 1673554868.35074
 asMultiple: FALSE
 asStatic: TRUE
