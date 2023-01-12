@@ -83,13 +83,13 @@ top_secret <- read_csv("https://www.dropbox.com/s/k72h1zewk4gtqep/PA_Secret_Code
 
 By altering this top secret set of numbers, you will be able to create a message. Write your own code to complete the steps, **in the order given** below.
 
-1.  Add 14 to every number.
+6.  Add 14 to every number.
 
-2.  Multiply every number by 18, then subtract 257.
+7.  Multiply every number by 18, then subtract 257.
 
-3.  Use the `exp()` function to exponentiate every number.
+8.  Use the `exp()` function to exponentiate every number.
 
-4.  Square every number.
+9.  Square every number.
 
 **Hint:** To update a vector after performing an operation, you *overwrite* the existing object with its updated counterpart. This looks something like this:
 
@@ -98,7 +98,7 @@ By altering this top secret set of numbers, you will be able to create a message
 where the original value(s) in `x` have had 12 added to them, and the resulting values are put back in to the object named `x`.
 
 ```{r}
-## Code to carry out steps 1-4 
+## Code to carry out steps 6-9 
 
 
 ```
@@ -110,25 +110,26 @@ where the original value(s) in `x` have had 12 added to them, and the resulting 
 ```{r}
 # Write code to verify that there are 352 numbers with values **below** 17
 
+top_secret < 17
 
 ```
 
 Next, carry out the following steps:
 
-5.  Turn your vector of numbers into a matrix with 5 columns.
+10.  Turn your vector of numbers into a matrix with 5 columns.
 
-6.  Separately from your top secret numbers, create a vector of all the even numbers between 1 and 382. Name it "evens". That is, "evens" should contain 2, 4, 6, 8 ..., 382.
+11.  Separately from your top secret numbers, create a vector of all the even numbers between 1 and 382. Name it "evens". That is, "evens" should contain 2, 4, 6, 8 ..., 382.
 
-7.  Subtract the "evens" vector from the first column of your secret message matrix.
+12.  Subtract the "evens" vector from the first column of your secret message matrix.
 
-8.  Subtract 100 from all numbers 18-24th rows of the 3rd column.
+13.  Subtract 100 from all numbers 18-24th rows of the 3rd column.
 
-9.  Multiply all numbers in the 4th and 5th column by 2.
+14.  Multiply all numbers in the 4th and 5th column by 2.
 
-10. Turn your matrix back into a vector.
+15. Turn your matrix back into a vector.
 
 ```{r}
-## Code to carry out steps 5-10
+## Code to carry out steps 10-15
 
 
 ```
@@ -143,16 +144,16 @@ Next, carry out the following steps:
 
 ```
 
-11. Take the square root of all numbers in indices 38 to 465.
+16. Take the square root of all numbers in indices 38 to 465.
 
-12. Use the `round()` function to round all numbers to the nearest whole number.
+17. Use the `round()` function to round all numbers to the nearest whole number.
 
-13. Replace all instances of the number 39 with 20.
+18. Replace all instances of the number 39 with 20.
 
 *Hint:* Step 13 requires another relational comparison, but this time it is equality. Equality in R is checked with a double equal sign rather than a single equal sign!
 
 ```{r}
-# Code for steps 11-13
+# Code for steps 16-18
 
 ```
 
