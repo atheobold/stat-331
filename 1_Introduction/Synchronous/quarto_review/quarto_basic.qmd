@@ -313,7 +313,7 @@ Formatting the text in your document
 \# -- makes headers
 :::
 
-::: {.column width="35%"}
+::: {.column width="45%"}
 !\[ \]( ) -- includes images or HTML links
 
 \< \> -- embeds URLs
