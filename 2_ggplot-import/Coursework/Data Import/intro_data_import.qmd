@@ -1,18 +1,24 @@
 ---
 title: "Introduction to Reading in Data"
-author: ""
-output:
-  prettydoc::html_pretty:
-    theme: tactile
-    highlight: github
-    css: styles.css
+format: 
+  html: 
+    self-contained: true
+    theme: minty
+    fontsize: 1em
+    mainfont: sans-serif
+    number-sections: true
+    number-depth: 2
+    code-block-bg: "#76b5c5"
+    highlight-style: monochrome
+editor: visual
+execute: 
+  echo: true
+  eval: false
+  include: true
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-```{r, include = FALSE}
+```{r}
+#| include: false
 library(tidyverse)
 library(flair)
 ```
@@ -26,13 +32,13 @@ library(flair)
 `r emo::ji("check")` Check-ins: 1
 
 
-## Loading Data Into R 
+# Loading Data Into R 
 
-### Where does my data live?
+## Where does my data live?
 
 `r emo::ji("play button")` [Required Video: Data Locations and the {here} package (8 minutes)](https://www.youtube.com/watch?v=jvWwrELLEw8)
 
-### How do I load my data?
+## How do I load my data?
 
 `r emo::ji("book")` [Required Reading: Data Import](https://r4ds.had.co.nz/data-import.html)
 
@@ -60,16 +66,29 @@ following tasks:
 6. Find a way to use `read_csv()` to read `ages.csv` with the variable "Name" as
 a factor and "Age" as a character.
 
-
 ---
 
-`r emo::ji("check")` Check-in: Loading Data 
+## `r emo::ji("check")` Check-in: Loading Data 
 
-**Question 1**
+**Question 1** -- Which functions could you use to load in the ages.csv dataset?
 
-What line of code did you use -- **including the `here()` function** -- to read
-in `ages.csv` dataset?
+- `read_csv()`
+- `read_delim()`
+- `read_tsv()`
+ 
+**Question 2** -- Which functions could you use to load in the ages_tab.txt
+dataset? 
 
-**Question 2**
+- `read_tsv()`
+- `read_csv()`
+- `read_delim()`
 
-What does the `stringsAsFactors` argument in `read.csv()` do?
+**Question 3** -- What `delim` option do you need to declare to load in the
+ages_mystery.txt dataset?
+
+- `delim = " "`
+- `delim = "|"`
+- `delim = "\t"`
+
+**Question 4** -- **True or False** -- The `read_csv()` function automatically
+converts strings (character variables) to factors 

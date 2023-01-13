@@ -1,9 +1,27 @@
 ---
-title: "Data Import Practice"
-output: html_document
+title: "Data Import Practice -- Solutions"
+format: 
+  html: 
+    self-contained: true
+    theme: minty
+    fontsize: 1em
+    mainfont: sans-serif
+    number-sections: true
+    number-depth: 2
+    code-block-bg: "#76b5c5"
+    highlight-style: monochrome
+editor: visual
+execute: 
+  echo: true
+  eval: false
+  include: true
 ---
 
-```{r, message = FALSE, warning = FALSE}
+
+```{r}
+#| message: false
+#| warning: false
+
 library(tidyverse)
 library(readxl)
 library(here)
@@ -91,3 +109,4 @@ read_csv(here("2_ggplot_import", "Coursework", "Data Import", "Ages_Data", "ages
          # You can find this in the help file for read_csv() in the examples at the bottom!
          )
 ```
+
