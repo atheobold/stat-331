@@ -1,18 +1,24 @@
 ---
 title: "Introduction to ggplot"
-author: ""
-output:
-  prettydoc::html_pretty:
-    theme: tactile
-    highlight: github
-    css: styles.css
+format: 
+  html: 
+    self-contained: true
+    theme: minty
+    fontsize: 1em
+    mainfont: sans-serif
+    number-sections: true
+    number-depth: 3
+    code-block-bg: "#76b5c5"
+    highlight-style: monochrome
+editor: visual
+execute: 
+  echo: true
+  eval: false
+  include: true
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-```{r, include = FALSE}
+```{r}
+#| include: false
 library(tidyverse)
 library(flair)
 ```
@@ -62,16 +68,24 @@ in *R for Data Science*.
 
 `r emo::ji("book")` [Required Reading: Data Visualisation](https://r4ds.had.co.nz/data-visualisation.html). 
 
+`r emo::ji("computer")` [Required Tutorial: Data Visualization Basics](https://rstudio.cloud/learn/primers/1.1)
 
-## Getting Started with **ggplot2** 
+::: {.callout-tip}
+After working through the tutorial, if you feel more detail would be helpful,
+consider the following readings:
+
+`r emo::ji("question")` [Modern Dive: Chapter 2](https://moderndive.com/2-viz.html)
+:::
+
+### Introduction to Data Visualization with ggplot2 
 
 `r emo::ji("play button")` [Required Video: Why ggplot2? (4 minutes)](https://www.youtube.com/watch?v=5c-8yPCwVzs)
 
 `r emo::ji("play button")` [Required Video: ggplot2 First Steps (4 minutes)](https://www.youtube.com/watch?v=1Jmbfh6GotI)
 
-`r emo::ji("check")` Check-in: Introduction to Data Visualization with ggplot2 
+#### `r emo::ji("check")` Check-in
 
-**Question 1:** With the `mpg` dataset, make a scatterplot of `hwy` versus
+**Question 1** -- With the `mpg` dataset, make a scatterplot of `hwy` versus
 `cty`. Which of these correctly describe the relationship seen in the plot? 
 
 - positive
@@ -81,17 +95,17 @@ in *R for Data Science*.
 - linear
 - non-linear
 
-**Question 2:** What specifically does the code `ggplot(data = mpg)` do? 
+**Question 2** -- What specifically does the code `ggplot(data = mpg)` do? 
 
 - Creates a blank plot
 - Makes a scatterplot of the first two variables in the `mpg` dataset
 - Creates a ggplot with the `mpg` dataset
 
-</br>
+### Aesthetics
 
 `r emo::ji("play button")` [Required Video: What is an aesthetic? (7 minutes)](https://www.youtube.com/watch?v=oYVuzW_t93w)
 
-`r emo::ji("check")` Check-in: Introduction to Data Visualization with ggplot2
+#### `r emo::ji("check")` Check-in
 
 ```{r}
 ggplot(data = mpg) +
@@ -104,7 +118,6 @@ ggplot(data = mpg) +
 - y
 - color
 - data
-
 
 **Question 4:** Which of following changes would color the points blue? 
 
@@ -125,47 +138,54 @@ ggplot(data = mpg, mapping = aes(color = "blue)) +
 geom_point(mapping = aes(x = displ, y = hwy))
 ```
 
-</br>
+### geoms
 
 `r emo::ji("play button")` [Required Video: What is a geometric object?](https://www.youtube.com/watch?v=pMC2l2YhjMI)
 
 
-`r emo::ji("check")` Check-in: Introduction to Data Visualization with ggplot2
+#### `r emo::ji("check")` Check-in
 
 **Question 4:** Match each plot with the `geom_XXX()` function used to create
 it! 
 
+::: columns
+::: {.column width="50%"}
 - Line Chart
 - Boxplot 
 - Histogram
 - Area Chart
+:::
 
+:::{.column width="50"}
 - `geom_point()`
 - `geom_line()`
 - `geom_histogram()`
 - `geom_area()`
-
-</br> 
-
-`r emo::ji("computer")` [Required Tutorial: Data Visualization Basics](https://rstudio.cloud/learn/primers/1.1)
-
-After working through the tutorial, if you feel more detail would be helpful,
-consider the following readings:
-
-* `r emo::ji("question")` [Modern Dive: Chapter 2](https://moderndive.com/2-viz.html)
-
+:::
+:::
 
 ## Getting a Bit Fancier
 
 In this section we dig a bit deeper into how we can make our code more efficient
 and other ways we can add additional variables to our plots. 
 
+### Global vs. local aesthetics
+
 `r emo::ji("play button")` [Required Video: Global vs. local aesthetics (4 minutes)](http://youtu.be/y3BWlYa7q-Q?hd=1)
 
-`r emo::ji("check")` Check-in: Introduction to Data Visualization with ggplot2 
+#### `r emo::ji("check")` Check-in
 
 **Question 5:** Match the code to the type of aesthetics that are being used:
-Global or Local
+
+::: columns
+::: {.column width="20%"}
+**Global**
+
+**Local**
+
+:::
+
+:::{.column width="80%"}
 
 ```
 ggplot(data = mpg, mapping = aes(x = mpg, y = hwy)) + geom_point()
@@ -174,31 +194,40 @@ ggplot(data = mpg, mapping = aes(x = mpg, y = hwy)) + geom_point()
 ```
 ggplot(data = mpg) + geom_point(mapping = aes(x = mpg, y = hwy))
 ```
+:::
+:::
 
-</br> 
+
+### Facets 
 
 `r emo::ji("play button")` [Required Video: Adding a third variable with facets](http://somup.com/crffbHbH1h)
 
 
-## Data Transformations
+### Data transformations
 
 `r emo::ji("play button")` [Required Video: What is being plotted? (6 minutes)](http://somup.com/crffb8bH1x)
 
-`r emo::ji("check")` Check-in: Introduction to Data Visualization with ggplot2
+#### `r emo::ji("check")` Check-in
 
 **Question 6:** Match the stat function with its associated geom function. 
 
+::: columns
+::: {.column width="50%"}
 - `stat_count()`
 - `stat_identity()`
+:::
 
+:::{.column width="50%"}
 - `geom_bar()`
 - `geom_col()`
+:::
+:::
 
-</br>
+### Changing the positions of bars 
 
 `r emo::ji("play button")` [Required Video: How do I change positions?](http://somup.com/crffFibH1R)
 
-`r emo::ji("check")` Check-in: Introduction to Data Visualization with ggplot2
+#### `r emo::ji("check")` Check-in
 
 **Question 7:** What arguments for `geom_jitter()` control the amount of 
 jittering? 
@@ -214,11 +243,11 @@ jittering?
 
 </br>
 
-## Plot Customizations 
+### Plot Customizations 
 
 `r emo::ji("play button")` [Required Video: Axis labels, color themes, and legends, oh my! (7 minutes)](http://somup.com/crffFDbHiU)
 
-`r emo::ji("check")` Check-in: Introduction to Data Visualization with ggplot2
+#### `r emo::ji("check")` Check-in
 
 **Question 8:** What can the `labs()` function do? (select all that apply)
 
