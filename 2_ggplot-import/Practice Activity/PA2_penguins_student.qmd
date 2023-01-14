@@ -150,21 +150,9 @@ address the questions below.
 
 ## If you finish early...take everything you know, and use it for evil (+1 Token)
 
-::: {.column-margin}
-![Winners of the Ugliest Plot Competition](ugly_plot.jpg)
-:::
-
 The textbook spent lots of time showing you how to create different types of graphics, but I spent a lot less time showing you all of the different ways you could customize graphics in `ggplot2`. I want you to create the ugliest version of the scatterplot you created in (8) above, and then explain why, exactly, you made the decisions you did, and which principles of good graphics you’ve intentionally violated.
 
-::: {.column-margin}
-![](even_uglier_plot.jpg)
-:::
-
 Ugliness is subjective, so the goal here is for you to explore the different ways you can customize the finer details of graphics. Make sure your finished masterpiece has appropriate axis labels and a title (after all, even ugly plots need to be correctly labeled!). You are free to add additional variables and layers, modify the aesthetics used, and leverage other packages. Let's see your creativity shine through!
-
-::: {.column-margin}
-![](ugly_pie_chart.jpg)
-:::
 
 ```{r ugly-graphic}
 
