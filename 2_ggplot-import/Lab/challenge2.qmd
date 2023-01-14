@@ -1,11 +1,23 @@
 ---
 title: "Challenge 2: Spicing things up with ggplot2"
-output: html_document
+format: 
+  html: 
+    theme: minty
+    fontsize: 1em
+    mainfont: sans-serif
+    number-sections: true
+    number-depth: 2
+    code-block-bg: "#76b5c5"
+    highlight-style: monochrome
+editor: visual
+execute: 
+  echo: true
+  messsge: false
 ---
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(echo = TRUE, 
-                      message = FALSE)
+
+```{r}
+#| include: false
 
 library(tidyverse)
 library(here)
