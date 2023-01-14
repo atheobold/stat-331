@@ -1,0 +1,301 @@
+---
+title: "Course Set-up and Structure"
+format: 
+  html: 
+    self-contained: true
+    theme: minty
+    fontsize: 1em
+    mainfont: sans-serif
+    number-sections: true
+    number-depth: 2
+    code-block-bg: "#76b5c5"
+    highlight-style: monochrome
+editor: visual
+execute: 
+  echo: true
+  eval: false
+  include: false
+---
+
+```{r packages}
+#| include: false
+library(tidyverse)
+library(flair)
+library(emo)
+```
+
+Welcome!
+
+In this coursework, you'll get set up with the Class Discord, learn about what is expected of you each week, and hear some tips from me about how to succeed.
+
+## Course TODOs
+
+`r emo::ji("book")` Readings: 15 minutes
+
+`r emo::ji("computer")` Activities: 0 min
+
+`r emo::ji("check")` Check-ins: 3
+
+------------------------------------------------------------------------
+
+# Synchronous Meetings
+
+This is a *synchronous* **in-person** course, scheduled to meet on Tuesdays and Thursdays for 2 hours at a time.
+
+We **will** be meeting every Tuesday and Thursday this quarter, and attendance is expected.
+
+------------------------------------------------------------------------
+
+# Using the Class Discord
+
+We'll be using Discord to interact with our peers and group members.
+
+Discord is a platform for text chatting, voice chatting, and screen sharing.
+
+In particular, course office hours are held **in-person**. The office hours for this class are:
+
+#### Tuesdays & Thursdays from 12:30 - 1:30pm **in-person**
+
+#### Wednesdays from 2:00 - 3:00pm in-person
+
+I am available for individual appointments on Wednesdays from 3:00 to 3:30pm. Appointments to meet **must** be made made *at least* 24 hours in advance through Calendly, using the following link: <https://calendly.com/allisontheobold>
+
+## Join the server
+
+Join the [Stat 331 Server (https://discord.gg/tZ5aFhhN)](https://discord.gg/yTSy4K59) to start experimenting with the interface.
+
+When you join the server, you will be given some suggestions to get started.
+
+![](../../Images/screencast_gifs/welcome_discord.png)
+
+I recommend you click through these - and in particular, it is probably a good idea to download the desktop version of Discord, and perhaps to install it on your phone if you wish.
+
+## Set up your account
+
+### Verify your email
+
+To use this Discord server, you **must** have a verified email.
+
+Nobody (including your professors) will be able to see this email, and it does not have to be your Cal Poly email. This is simply to keep the server from being overrun by temporary accounts.
+
+### Create your identity
+
+The first thing you should do is decide what name and picture you would like to use.
+
+![](../../Images/screencast_gifs/pic.gif)
+
+I would like to **strongly** encourage you to use your **real name and picture**, so that everyone can get to know you. However, if you prefer to remain anonymous, you are free to do so.
+
+![](../../Images/screencast_gifs/pic_name.gif)
+
+(Please do not be like Regina and use the name of another student, however!\
+This kind of impersonation will result in a permanent ban from the server.)
+
+### Decide about privacy and notifications
+
+The default settings on the channel are probably just fine for you.\
+Feel free to make any changes that work for you, though.
+
+You can change your message notifications:
+
+![](../../Images/screencast_gifs/notifications.gif)
+
+You can edit your privacy settings, although most things are already private:
+
+![](../../Images/screencast_gifs/privacy.gif)
+
+### Connect other apps
+
+You can connect other apps to Discord, either for productivity or just for fun.
+
+![](../../Images/screencast_gifs/connect_spotify.gif)
+
+## Using the Channels
+
+The server is made up of many channels. Some are text chatrooms, while some are "Voice Channels" that connect you via audio to everyone else in the channel.
+
+### Text Channels
+
+Use the `#general` channel for anything and everything:
+
+![](../../Images/screencast_gifs/saying_hi.gif)
+
+If your question is about course logistics, rather than the material itself, consider using the `#class-logistics` channel:
+
+![](../../Images/screencast_gifs/logistics.gif)
+
+You can use the specific weekly channels to ask questions about the material...
+
+![](../../Images/screencast_gifs/github.gif)
+
+... or the specific lab assignment.
+
+![](../../Images/screencast_gifs/code_in_chat.gif)
+
+Notice that you can use tick marks (```` ``` ````), like in R Markdown, to make your code appear in a formatted code box.
+
+### Voice Channels
+
+To join a voice channel, simply click it! Make sure you are careful about when you are muted or unmuted.
+
+![](../../Images/screencast_gifs/voice_channel.gif)
+
+The extra "Side Chat" channels are limited to 4 or 8 people, if you would like to start an impromptu study conversation without being heard by me and / or the rest of the class. (I'll only drop in if you invite us!)
+
+Voice channels can also be used for people to "Go Live", and share their screen with everyone else.
+
+![](../../Images/screencast_gifs/going_live.gif)
+
+While this will usually be something professors use to demonstrate code, you can go live, too! But you may need to download the desktop version of Discord to do so.
+
+### Private messages
+
+It is also easy to send private messages, to your professor or to each other. These private messages can also easily be used to launch a private video chat and / or screen sharing.
+
+![](../../Images/screencast_gifs/private_message.gif)
+
+## Creating your own server
+
+Last but not least - for the teams you are a part of, you may want to use Discord to communicate with each other about the weekly assignments. You can do this by creating your own server! You can easily hop between servers during work parties, to ask each other questions or just to take a break and chat about life.
+
+![](../../Images/screencast_gifs/new_server.gif)
+
+## See you at the Party!
+
+## `r emo::ji("check")` Check-in 1: Discord Server
+
+Introduce yourself in the "Introductions" channel of the Discord Server.
+
+------------------------------------------------------------------------
+
+# Course Structure
+
+## What your typical week will look like
+
+### Coursework
+
+Each week, you will be expected to work through a sequence of readings, videos, and preview activities. (Much like this one!)
+
+These are meant to replace the in-class lecture experience; thus, you should plan to devote about 1 - 3 hours a week to this coursework.
+
+### Preview Activities
+
+*Due Tuesdays at 8am*
+
+Before class, you'll complete Preview Activities which will guide you through your first contact with new concepts.
+
+These will involve readings, videos, along with exercises to build your basic skill fluency. For example, you might be asked to read a chapter from the course textbook, watch a few videos discussing some concepts from the chapter, and then asked to complete some preliminary exercises intended to get you started thinking about how to apply the concepts from the chapter in the context of real data.
+
+You'll submit these exercises online, so that class time can be customized based on your understanding.
+
+### Practice Activities
+
+*Due Wednesdays at midnight*
+
+During class, you'll be working with your classmates to complete Practice Activities, which take your Preview Activities a step further. You will collaborate with your team to solve a puzzle, requiring that you accomplish a series of tasks, each of which applies the statistical computing concepts from that week. The purpose of in-class time is for you to be doing statistical computing, with me there to guide you if / when you get lost.
+
+The course meetings on Tuesdays will have at least 1-hour dedicated to working on these practice activities, where you will work in your team. This allows for you to have the ability to ask me questions during the early stages of the activity.
+
+### Lab Assignments
+
+*Due Sundays at midnight*
+
+After class, you can reinforce the material through Lab Assignments, which are an opportunity to demonstrate mastery of the skills that you've learned. If you got something wrong, don't worry! You'll have a chance to try again.
+
+Labs will be submitted on Canvas. All revisions to Lab Assignments will be submitted to the **same** Canvas portal as the original assignment.
+
+### Challenges
+
+*Due Sundays at midnight*
+
+Each Lab Assignment will have a Challenge Problem, which asks you to extend the skills you've learned in class in some way. Frequently, you have the choice of what you would like to learn. The only requirement is that you extend your thinking in some (measureable) way.
+
+Although you may discuss ideas with your classmates and seek help from the usual sources, all code and text **absolutely must** be your own.
+
+Challenges will be submitted on Canvas. All revisions to Challenges will be submitted to the **same** Canvas portal as the original assignment.
+
+## `r emo::ji("check")` Check-in 2: Syllabus Quiz
+
+**Question 1:** Where are my office hours held?
+
+**Question 2:** What materials and technology are required for this course?
+
+**Question 3:** In this course, Preview Activities are due by 8am every \_\_\_\_. Practice Activities are due by midnight every \_\_\_\_. Lab Assignments and Challenges are due by midnight every \_\_\_\_.
+
+**Question 4:** If you receive a "Growing" on a Lab Assignment problem, what should you do?
+
+**Question 5:** You have finished the week's Practice Assignment, and you want to know if you did it right. You ask your friend, and she says, "Oh, I got *Luke Skywalker* as my answer." This is a violation of the Academic Honesty policy.
+
+**Question 6:** You and a friend have been working on Lab 1 together. You finish up and want to go to bed, but she is still a little confused. You email her your file, and say, "Don't copy this, just look how I did it so you can figure it out." Have you violated Academic Honesty policies?
+
+**Question 7:** You have been working on Challenge 1 for what feels like forever and it seems like you are making little to no progress. You type the prompt into Google and "Wham!" the first result is a Stack Overflow page with a solution. You copy-and-paste the solution from the Stack Overflow page into your Challenge submission and do not reference that you used an outside source. You have violated the Academic Honesty policy.
+
+**Question 8:** Name one of the course learning targets that makes you excited.
+
+**Question 9:** Name one of the course learning targets that makes you nervous.
+
+**Question 10:** What personal goals did you write for yourself on Day 1? Why are you taking this class? What do you hope to learn?
+
+------------------------------------------------------------------------
+
+# What to do when you have questions
+
+Stuck on something, or have a logistical question about the course?\
+Follow these easy steps to success!
+
+### Make sure your question isn't already answered somewhere.
+
+#### Double-check the syllabus.
+
+![](https://www.sc.edu/about/offices_and_divisions/cte/events_calendar/spring_2016/images/developing_course_syllabus.png)
+
+#### Double-check the instructions for the assignment.
+
+Remember that most details will appear in the Coursework pages or in the Lab Assignment instructions - **not** in the submission links on Canvas.
+
+#### Double-check the Announcements
+
+On the "Account" section of Canvas, under "Notifications", make sure your preferences are updated for Announcements. We recommend opting to receive an email any time an announcement is posted.
+
+![](../../Images/screencast_gifs/notifications.png)
+
+### Ask your question on Discord
+
+If you post your question to a text channel, you will probably get a fast response from a classmate. If not, you will get a response from me within 24 hours.
+
+------------------------------------------------------------------------
+
+# Tips for succeeding in this class:
+
+## Take the Coursework pages as seriously as you take in-person lecture.
+
+Flipped classrooms puts you in the driver seat of mastering the course material. It can be tempting to cut corners to save yourself time, but this will likely result in you having a less complete understanding of the material.
+
+I encourage you to commit to giving the Coursework segments the same level of attention that you would ordinarily give to in-class lecture. Put the same effort into the Preview Activities that you would if you were sitting in a classroom. In return for your efforts, I promise to choose required videos and readings carefully, so that I do not waste your time.
+
+![](https://media.giphy.com/media/xUNda4ziBZR0nzca9W/giphy.gif)
+
+## Google is your friend.
+
+The R community has an enormous aresenal of online learning resources. I've linked a few on the "Extra Resources" module in Canvas, but you can always find more!
+
+![](https://media3.giphy.com/media/3oKIPmM4hkQIf4p5T2/source.gif)
+
+Learn to:
+
+-   Google for tutorials and examples
+-   Use [Stack Overflow](https://stackoverflow.com/)
+-   Ask questions on Twitter
+-   Make good use of the vast and welcoming R network on the internet
+
+## Use your team for your benefit!
+
+This course makes use of team-based learning. In the first week you will be placed into a team that will last for the first five weeks of the course. After the midterm reflection, you will be given the option to join a new group or stick with the group you've been working with thus far.
+
+Outside of your group, I encourage you to establish study buddies and / or study groups early in the quarter, even if you don't know anyone yet.
+
+The class Discord server is a great way to get started. I also hope you will be proactive about setting up your own video chat sessions, phone calls, Google Docs, group chats, etc. (How many different platforms can you talk about Stat 331 on? Facebook? Snapchat? Instagram? TikTok? Bumble???)
+
+I hope that we will all be purposeful and creative about finding ways to work as a team.
+
+![](https://media1.tenor.com/images/73929a723ee5cde85b313407cd4e4640/tenor.gif?itemid=13261612)

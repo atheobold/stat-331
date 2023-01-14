@@ -1,0 +1,106 @@
+---
+title: "Reproducibility: Directories and Deliverables"
+format: 
+  html: 
+    self-contained: true
+    theme: minty
+    fontsize: 1em
+    mainfont: sans-serif
+    number-sections: true
+    number-depth: 2
+    code-block-bg: "#76b5c5"
+    highlight-style: monochrome
+editor: visual
+execute: 
+  echo: true
+  eval: false
+  include: false
+---
+
+```{r packages}
+#| include: false
+
+library(tidyverse)
+```
+
+The theme of this lesson is good management of your files and data.
+
+You will learn how to:
+
+-   Identify **folders** and **paths**.
+
+-   Create and use **R Projects**.
+
+-   **Load data** into R from files.
+
+-   Deal with package challenges.
+
+-   Create R Markdown or Quarto documents with good **reproducible
+    principles**.
+
+------------------------------------------------------------------------
+
+`r emo::ji("play button")` Watch Videos: 15 min
+
+`r emo::ji("book")` Readings: 15 minutes
+
+`r emo::ji("computer")` Activities: 10 min
+
+`r emo::ji("check")` Check-ins: 2
+
+------------------------------------------------------------------------
+
+## Principles of Reproducibility
+
+`r emo::ji("play button")` [Required Video: Directories, Paths, Projects
+(15 minutes)](http://somup.com/c3QDczUaCa)
+
+`r emo::ji("book")` [Required Reading: Workflow and
+Projects](https://r4ds.had.co.nz/workflow-projects.html)
+
+### `r emo::ji("question")` Extra Resources
+
+- [Software Carpentry -- Project Managment with RStudio](http://swcarpentry.github.io/r-novice-gapminder/02-project-intro/index.html)
+
+------------------------------------------------------------------------
+
+`r emo::ji("check")` Check-in: RStudio Projects
+
+Take a screenshot of your class directory, showing the **R Project** and
+the folder organization, including a **Week 1** or **Preview Activity**
+folder.
+
+::: {.callout-caution}
+Your RStudio project **cannot** be in a folder stored on OneDrive or iCloud! 
+Storing your project in this location will cause your code to periodically not
+run and I cannot help you fix it. 
+
+[Here](https://www.youtube.com/watch?v=Ai-HV_7TmL4) is a video showing how you
+need to set-up your STAT 331 folder and RStudio Project. 
+:::
+
+------------------------------------------------------------------------
+
+## Reproducible Deliverables
+
+We will be using Quarto documents in this course. To compile a Quarto document,
+you first need to download the Quarto software. You can do that [here](). 
+
+### Introduction to Quarto
+
+`r emo::ji("book")` [Required Reading: Intro to Quarto](https://r4ds.hadley.nz/quarto.html)
+
+------------------------------------------------------------------------
+
+# `r emo::ji("question")` Extra Resources
+
+- I absolutely love [this blog](https://mine-cetinkaya-rundel.github.io/quarto-tip-a-day/)
+by Mine Çetinkaya-Rundel for all of the additions you can make to your Quarto 
+documents. 
+
+- Poke around the [gallery of cool Quarto documents](https://quarto.org/docs/gallery/). 
+Here are some of my favorites:  
+  * [Interactive document published to the web](https://quarto-dev.github.io/quarto-gallery/articles/html/html.html)
+  * [Advanced Layout with HTML](https://quarto-dev.github.io/quarto-gallery/page-layout/tufte.html)
+  
+

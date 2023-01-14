@@ -1,0 +1,286 @@
+---
+title: "Lab 1: Introduction to Quarto"
+format: 
+  html: 
+    self-contained: true
+    theme: minty
+    fontsize: 1em
+    mainfont: sans-serif
+    number-sections: true
+    number-depth: 3
+    code-block-bg: "#76b5c5"
+    highlight-style: monochrome
+editor: visual
+execute: 
+  echo: true
+  eval: false
+  include: true
+---
+
+```{r packages}
+#| include: false
+
+library(tidyverse)
+```
+
+## Setup
+
+### Make a Stat 331 and Lab 1 Folder
+
+1.  If you have not already, create a folder on your computer called
+    "Stat 331" / "Stat 531" or similar.
+
+2.  Create an RStudio Project **inside** of this folder.
+
+3.  Inside your Stat 331 folder, create another folder called either
+    "Week 1" or "Labs".
+
+4.  Inside of this folder, create another folder called "Lab 1".
+
+## Create your Lab 1 File
+
+To create a Quarto document, you need to have Quarto installed on your
+computer. Do do this go to the following link
+<https://quarto.org/docs/get-started/>.
+
+1. Once you have Quarto installed, open RStudio on your computer.
+
+2. In RStudio, go to "File" \> "New File" \> "Quarto Document..."
+
+3. Change the title of your document to "Lab 1"
+
+4. Change the author of your document to your full name (first and last)
+
+5. Keep the "HTML" box selected 
+
+6. Click on "Create"
+
+7.  Save the Quarto file as "lab1" in your "Week 1" or "Labs" folder. The file
+should automatically save with a `.qmd` (Quarto) extension. You don't have to 
+name your file "lab", but the name you choose **cannot** have spaces and it
+should describe what the document is.
+
+## Lab Instructions
+
+### Changing the HTML Options
+
+By default, when you click on "Render" the Quarto file will generate a folder
+of all the images associated with your HTML file. This **is not** what we want! 
+We want our HTML files to be self contained, including everything our reader 
+needs to see. 
+
+To have a self contained HTML file, you need to change the options for your
+document. When modifying `format` options, Quarto relies on new lines and
+indentation to declare the options. So, your modified HTML format should look
+like:
+
+```{r}
+#| eval: false
+format: 
+  html:
+    self-contained: true
+```
+
+The `self-contained: true` is an option for the `html` format, stating that 
+yes (`true`) the document should be `self-contained`. 
+
+### Changing the Execution Options
+
+Similar to a `format` line, an `execute` line specifies the options for how the
+R code in your Quarto document should be displayed. This guide
+<https://quarto.org/docs/computations/execution-options.html> provides
+descriptions on the options you can specify in a document's execution.
+
+To start, your YAML should look something like this:
+
+![](images/yaml.png)
+Use the guide above to add `execute` options that ensure:
+
+-   your source code is **always** output on the page
+-   your document will render even if there are errors
+
+### Running the Provided Code
+
+![](images/play.png) Next, click on the "Play" button on the right of the first
+code chunk. Alternatively, you can highlight the code you want to
+run and type <kbd>ctrl</kbd> + <kbd>Enter</kbd> or <kbd>⌘</kbd> +
+<kbd>Enter</kbd>.
+
+You should see the code appear in the console, as well as the result of
+the code (`2`). Keep in mind the `[1]` before the `2` is vector
+notation. This means the result is a *vector* of length 1, whose first
+element is `2`.
+
+Let's spice this code up a bit! Delete `1 + 1` from the code chunk and
+write the following code: 
+
+```{r}
+#| eval: false
+summary(cars)
+```
+
+Now run this code. You should see a six-number summary of the variables
+`speed` and `dist` included in the `cars` dataset. However, if you
+inspect environment tab, the `cars` dataset should not appear!
+
+### Check the data documentation
+
+In your **console** (*not* in the Quarto document), type `?cars`.
+
+Use the information that pops up in your Help pane in RStudio to fill
+in the blanks below. Add the questions and your responses **after** the R
+code chunk. 
+
+<center>
+
+*This dataset contains information about \_\_\_\_. The data was
+collected in \_\_\_\_.*
+
+*It has \_\_\_ rows and \_\_\_\_ variables.*
+
+</center>
+ 
+*Before* the code chunk, create a section header (using `#`s) that describes the
+contents of the section (e.g., Cars Dataset).
+
+## Creating a Plot {#sec-creating-a-plot}
+
+Your second code chunk is just as boring as your first, so let's spice
+it up! Replace the `2 * 2` code with the following: 
+
+```{r}
+#| eval: false
+plot(pressure)
+```
+
+Now, run this code chunk! You should see a scatterplot of the
+relationship between temperature and pressure of mercury, contained in
+the `pressure` dataset.
+
+Similar to what you did before with the `cars` dataset, look up the help
+file on the `pressure` dataset (`?pressure`) to determine what units
+`temperature` and `pressure` were measured in.
+
+Next, look up the help file on the `plot()` function (`?plot`) to find the
+arguments you can use to specify the x- and y-axis labels. Change the
+x-axis and y-axis labels to reflect the units of measurement you found for these
+variables in the `pressure` help file.
+
+Create another section header (like you did before) stating what is
+included in this section.
+
+### Inserting a New Code Chunk
+
+Navigate to the last sentence of the Quarto document, we're going to
+insert a new `R` code chunk at the bottom of the document.
+
+There are three different ways to do this:
+
+1.  type <kbd>ctrl</kbd> + <kbd>alt</kbd> + <kbd>i</kbd> on Windows, or
+    <kbd>⌘</kbd> + <kbd>⌥</kbd> + <kbd>i</kbd> on macOS,
+
+2.  Click on the ![](images/insert_code.png) symbol. This should
+    automatically default to R code, but if you have a Python compiler
+    on your computer, you might need to select "R" from the options.
+
+3.  If you are using the Visual editor (isn't it fun?!), then click on
+    the "Insert" button, then select "Code Chunk", and finally select
+    "R".
+
+### Creating and Discussing Visualizations {#sec-creating-and-discussing-visualizations}
+
+Now, in the code chunk you just created, carry out the following steps:
+
+-   Step 1: Extract the distance column of the `cars` dataset (remember
+    how we did this in the Practice Activity) and save it into a new
+    object named `dist`.
+
+-   Step 2: Plot the *distribution*[^1] of the stopping distances (contained
+    in `dist`).[^2]
+
+-   Step 3: Create a second plot, a scatterplot, visualizing the
+    relationship between the stopping distance and speed.[^3]
+
+[^1]: Note that the *distribution* of a single numerical variable can be 
+    visualized with: a histogram or a density curve. Arguably, a boxplot doesn't
+    visualize the distribution, so it would not be a good choice. 
+[^2]: You are permitted to use whatever code you would prefer. This task
+    can be completed with the `plot()` function, but if you would rather
+    use `ggplot()` you are more than welcome to. We will be getting
+    there next week!
+
+[^3]: See previous footnote!
+
+::: {.callout-tip}
+To earn a "Success" on your plots, make sure each plot has reasonable
+axis labels. For example, if you use the `dist` variable, your axis
+should say "Stopping Distance" with the correct units not just "dist".
+:::
+
+-   Step 4: Create another section header, describing the contents of
+    this section.
+
+-   Step 5: Create a *bulleted* list of **two** aspects of the plots you would
+    like to improve.
+
+### Render your document
+
+To render your document as an **html** file, you click on the "Render" button.
+
+If you run into trouble rendering your document, try running your code
+chunks again in order, and see if you can find the problem.
+
+Another common issue is deleting the tick marks (```` /``` ````) that
+surround your code chunks. If you notice that the code chunks are not
+showing a "Play" button, or that they are not highlighted in gray,
+double check your tick marks!
+
+### Turn it in!
+
+Upload the knitted document to Canvas!
+
+> You'll be doing this same process for all your future Lab Assignments
+> and Challenges. Each of these will involve an R Markdown file.
+
+---
+
+## Challenge: Styling Quarto Documents
+
+You can find a list of every option you can use to format an HTML
+document [here](https://quarto.org/docs/output-formats/html-basics.html)
+
+[Here](https://quarto.org/docs/output-formats/html-themes.html) are
+lists of different themes you can specify in your YAML which will
+produce different stylings.
+
+For this Challenge, there are some specific additions to your document I
+would like you to make, as they will benefit you for the rest of the
+course.
+
+1.  Add "code folding" to your document options
+
+2.  In @sec-creating-a-plot change your code chunk options to ensure that your
+plot of the `pressure` dataset is center aligned. 
+
+3.  Add a figure caption to the above code chunk (the plot of the
+    `pressure` data).
+
+4.  In @sec-creating-and-discussing-visualizations change your code chunk
+options to specify that the two visualizations should be printed side-by-side
+(in two columns).
+    
+::: {.callout-tip}
+There are many ways to do this, but to earn a "Success" I want you to use the 
+built-in options from Quarto! That means using `par(mfrow = c(1, 2))` 
+**will not** earn you a "Success". 
+:::
+
+5.  Now, make **at least one** additional modification to your Quarto
+    document. Make sure you explicitly state which tip you tried; for
+    example, you might write "Here is an example of alt text:" followed
+    by your alt text description.
+
+6.  Upload your rendered (.html) document **and** Quarto file (.qmd) to the
+Challenge 1 assignment on Canvas.
+    
+    

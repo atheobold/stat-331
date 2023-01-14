@@ -6,6 +6,7 @@ format:
 editor: visual
 execute: 
   echo: true
+  eval: false
 ---
 
 ```{r packages}
@@ -14,28 +15,21 @@ execute:
 library(tidyverse)
 ```
 
-Today you will be creating and manipulating vectors, lists, and data frames to
-uncover a top secret message.
+Today you will be creating and manipulating vectors, lists, and data frames to uncover a top secret message.
 
 Some advice:
 
-* Use the course Discord server to ask questions! 
+-   Work with those around you
 
-* Google is your friend!  If an error is confusing, copy it into Google and see
-what other people are saying.  If you don't know how to do something, search for
-it.
+-   Google is your friend! If an error is confusing, copy it into Google and see what other people are saying. If you don't know how to do something, search for it.
 
-* Just because there is no error message doesn't mean everything went smoothly.
-Use the console to check each step and make sure you have accomplished what you
-wanted to accomplish.
+-   Just because there is no error message doesn't mean everything went smoothly. Use the console to check each step and make sure you have accomplished what you wanted to accomplish.
 
 ## Part One: Setup
 
-Each of the following R chunks will cause an error and / or do the desired task
-incorrectly.  Find the mistake, and correct it to complete the intended action. 
+Each of the following R chunks will cause an error and / or do the desired task incorrectly. Find the mistake, and correct it to complete the intended action.
 
-1. Create vectors containing the upper case letters, lower case letters, and
-some punctuation marks.
+1.  Create vectors containing the upper case letters, lower case letters, and some punctuation marks.
 
 ```{r}
 lower_case <- c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
@@ -51,11 +45,9 @@ punctuation <- c(".", ",", "!", "?", "'", """, "(", ")", " ", "-", ";", ":")
 2. Make **one** long **vector** containing all the symbols.
 
 ```{r}
-
 my_symbols <- cbind(lower_case, upper_case, punctuation)
 
 ```
-
 
 3. Turn the `my_symbols` vector into a data frame, with one column named 
 "Symbol".
@@ -78,7 +70,6 @@ len <- length(my_symbols)
 my_symbols%Num <- 1:len
 ```
 
-
 ## Part Two: Decoding the secret message.
 
 This chunk will load up the encoded secret message as a vector:
@@ -90,28 +81,27 @@ top_secret <- read_csv("https://www.dropbox.com/s/k72h1zewk4gtqep/PA_Secret_Code
 
 ```
 
-By altering this top secret set of numbers, you will be able to create a message.
-Write your own code to complete the steps, **in the order given** below.
+By altering this top secret set of numbers, you will be able to create a
+message. Write your own code to complete the steps, **in the order given** below.
 
-6. Add 14 to every number.
+6.  Add 14 to every number.
 
-7. Multiply every number by 18, then subtract 257.
+7.  Multiply every number by 18, then subtract 257.
 
-8. Use the `exp()` function to exponentiate every number.
+8.  Use the `exp()` function to exponentiate every number.
 
-9. Square every number.
+9.  Square every number.
 
-**Hint:** To update a vector after performing an operation, you *overwrite* the 
+**Hint:** To update a vector after performing an operation, you *overwrite* the
 existing object with its updated counterpart. This looks something like this:
 
 `x <- x + 12`,
 
-where the original value(s) in `x` have had 12 added to them, and the resulting 
-values are put back in to the object named `x`. 
+where the original value(s) in `x` have had 12 added to them, and the resulting
+values are put back in to the object named `x`.
 
 ```{r}
-## Code to carry out steps 1-4 
-
+## Code to carry out steps 6-9 
 
 ```
 
@@ -126,7 +116,6 @@ FALSEs as numbers, since TRUE = 1 and FALSE = 0 in R land.
 
 ```{r}
 # Write code to verify that there are 352 numbers with values **below** 17
-
 
 ```
 
@@ -148,7 +137,7 @@ matrix.
 15. Turn your matrix back into a vector.
 
 ```{r}
-## Code to carry out steps 5-10
+## Code to carry out steps 10-15
 
 
 ```
@@ -166,22 +155,20 @@ checkpoint, but here you will need to subset values from your vector!
 
 ```
 
-
 16. Take the square root of all numbers in indices 38 to 465.
 
 17. Use the `round()` function to round all numbers to the nearest whole number.
 
 18. Replace all instances of the number 39 with 20.
 
-*Hint:* Step 13 requires another relational comparison, but this time it is 
+*Hint:* Step 18 requires another relational comparison, but this time it is 
 equality. Equality in R is checked with a double equal sign rather than a single 
 equal sign! 
 
 ```{r}
-# Code for steps 11-13
+# Code for steps 16-18
 
 ```
-
 
 **Checkpoint:** Headquarters has informed you that your final message should
 have 344 even numbers.
@@ -189,13 +176,12 @@ have 344 even numbers.
 *Hint:* Checking for divisibility is an interesting operation that isn't done
 much in R. Modulus is the operation you are interested in, where you are
 checking for whether the numbers are divisible by 2, with no remainder. See what
-you can find about modulus in R! 
+you can find about modulus in R!
 
 ```{r}
 # Code to verify how many even numbers are in your top_secret vector
 
 ```
-
 
 ## Part 3: The secret message!
 
@@ -209,5 +195,3 @@ stringr::str_c(my_symbols$Symbol[top_secret], collapse = "")
 
 Google the first line of this message, if you do not recognize it, to see what
 poem it is.
-
-

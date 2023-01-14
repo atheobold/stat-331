@@ -1,6 +1,6 @@
 ---
 title: "Welcome to Stat 331!"
-date: "September 20, 2022"
+date: "January 12, 2023"
 author: "Dr. Allison Theobold"
 output:
   xaringan::moon_reader:
@@ -55,6 +55,20 @@ statistical computing principles, extending your knowledge to more
 * reproducible presentations 
 * writing efficient and well-documented `R` code
 * programming simulations
+
+---
+
+class: middle, center
+
+.larger[About Me...]
+
+```{r, echo = FALSE, out.width = c("35%", "25%", "25%"), out.height = "20%", fig.show = 'hold', fig.align='default'}
+knitr::include_graphics(c("wedding.png", "skiing.JPG", "bumi.JPG"))
+```
+
+Ph.D. in Statistics from Montana State University
+
+B.S. in Mathematics from Colorado Mesa University
 
 ---
 

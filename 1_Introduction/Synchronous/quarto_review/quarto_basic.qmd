@@ -115,8 +115,7 @@ Quarto highlights
 ::: bulletbox
 ::: {.fragment .fade-in-then-semi-out}
 ::: {style="font-size: 0.6em;"}
-![](images/horst_quarto_ball-1_4.png){width="50px" fig-alt="One quadrant of the Quarto logo."} 
-Consistent implementation of attractive and handy features across outputs: tabsets, code-folding, syntax highlighting, etc.
+![](images/horst_quarto_ball-1_4.png){width="50px" fig-alt="One quadrant of the Quarto logo."} Consistent implementation of attractive and handy features across outputs: tabsets, code-folding, syntax highlighting, etc.
 :::
 :::
 :::
@@ -314,14 +313,13 @@ Formatting the text in your document
 \# -- makes headers
 :::
 
-::: {.column width="35%"}
+::: {.column width="45%"}
 !\[ \]( ) -- includes images or HTML links
 
 \< \> -- embeds URLs
 :::
 :::
 :::
-
 
 ##  {#insert-code .centered data-menu-title="R code" background-color="#0F1620" auto-animate="true"}
 
@@ -342,6 +340,7 @@ The Hash Pipe
 ::: sourceCode
 `#|`
 :::
+
 ![](images/weezer.jpeg)
 
 ##  {#render .centered data-menu-title="Render" background-color="#0F1620" auto-animate="true"}

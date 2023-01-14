@@ -67,17 +67,24 @@ Efficient
 
 ---
 
+<!-- Show unannotated function composition, then progress the slides -->
+
+<!-- Give example with and without default argument -->
+
 class: center, middle, inverse
 
 .larger[Function Components]
 
 ![](images/function.jpg)
 
+
 ---
 
 class: inverse, center, middle
 
 .huge[`print()` versus `return()`]
+
+<!-- Big picture for why this is important -->
 
 ---
 
@@ -161,6 +168,10 @@ add_something <- function(x, something = 2) {
 
 class: middle
 
+<!-- lead with motivating example for returning errors -->
+
+<!-- discuss relationship between stop() and return() -- only relevant in function environments -->
+
 .larger[Returning Errors!]
 
 --
@@ -185,6 +196,12 @@ add_something <- function(x, something = 2) {
 add_something("bob")
 ```
 
+
+---
+
+<!-- Add slide / exercise on truth tables  -->
+
+<!-- Live code conditions -->
 
 ---
 
@@ -281,7 +298,11 @@ That means, they **are** "vectorized"
 
 - Requires `TRUE` and `FALSE` to be the **same** data type
 
---
+---
+
+<!-- Give motivating example of missing value coding -->
+
+<!-- Show screenshot of missing value df -->
 
 ```{r, error = TRUE}
 fix_na <- function(x) {
@@ -301,6 +322,8 @@ If your `FALSE` data type is numerical, then your `TRUE` data type must be
 numerical! 
 
 --
+
+<!-- Note that there is no return in this function -->
 
 .pull-left-wide[
 ```{r}
@@ -325,6 +348,8 @@ Other options within the `NA` family:
 ---
 
 .larger[Multiple Checks]
+
+<!-- talk about where there are three return() statements -->
 
 ```{r}
 pos_neg_zero <- function(x){
@@ -377,3 +402,18 @@ check <- c(0, 1, -1)
 
 pos_neg_zero(check)
 ```
+
+---
+
+<!-- Add slide on debugging strategies! -->
+
+---
+
+<!-- Make slides on key points for PA -->
+
+---
+
+Add summary slides at end 
+
+- stop() vs stopifnot()
+- stop() vs return()
