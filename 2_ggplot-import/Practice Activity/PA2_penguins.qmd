@@ -1,0 +1,183 @@
+---
+title: "PA 2: Using Data Visualization to Find the Penguins"
+format: 
+  html: 
+    self-contained: true
+execute: 
+  echo: true
+  eval: false
+  error: true
+  code-fold: true
+---
+
+<!-- Insert your setup code chunk here. This is just good practice. -->
+
+Download the PA2-penguins.qmd template from Canvas and save it in a
+reasonable location (e.g., the Week 2 folder or the Practice Activity folder)
+
+Today you will be exploring different types of visualizations to uncover which
+species of penguins reside on different islands.
+
+Some advice:
+
++ Work with those around you
+
++ If you aren't sure how to make a specific plot or how to customize a plot,
+look over the class text for this week and make use of the [R graphics cheat sheets](https://earobinson95.github.io/stat331-calpoly-text/02-tidy-data-and-basics-of-graphics.html#rgraphics).
+
++ Google is your friend! If you aren't sure how to accomplish a certain task,
+type what you are trying to accomplish into Google and see what other people are
+saying. Generally, adding `ggplot` to the end of your search will help make your
+search results more relevant!
+
+## Getting Started
+
+We will be creating visualizations using the `ggplot2` package.
+
+For this activity, we will be exploring the `penguins` data from the
+`palmerpenguins` package, which has [fantastic documentation with really awesome artwork](https://allisonhorst.github.io/palmerpenguins/). So, you will need to
+install the **palmerpenguins** package.
+
+### Installing a new R package
+
+To install a package, you have two options: 
+
+1. Use the Packages tab
+2. Use the Console 
+
+For option 1, click on "Packages" in the lower right corner. Once you are in the
+Packages tab, ) click on the "Install" button. Type in the name of the package
+you want to install, check the "Install dependencies" box, and click "Install". 
+
+For option 2, you can type the following code into the Console: 
+`install.packages("palmerpenguins")`
+
+::: {.callout-caution}
+You should **never** include code to install a package in your Quarto file for
+two reasons:
+
+1. it is inefficient -- the package will install *every time* you render your 
+document  
+2. it is invasive -- if someone is running your code, you are forcing changes to
+their computer
+:::
+
+## Creating a Set-up Code Chunk
+
+1.  Insert a code chunk at the beginning of your document (directly under the
+YAML).
+2.  Name the code chunk *setup*.
+3.  Specify the code chunk option **with the hashpipe `#|`** that the messages
+from loading in the packages should not be included.
+4.  Load in either the `tidyverse` or `ggplot2` package -- not both!
+5.  Load in the `palmerpenguins` package.
+
+::: callout-note
+Naming your code chunks with informative names that describe what is contained 
+in them is good practice for creating object names in R. Moreover, by naming the
+code chunk "setup", you can use the navigation bar at the bottom of the Quarto
+file to navigate to specific sections of your code. 
+:::
+
+## Working with the `penguins` data
+
+Datasets that are included in R packages can be worked with without you ever 
+seeing them in your Environment tab! Crazy! I like to be able to see the dataset
+I'm working with so I prefer to run code that pulls the `penguins` data into my
+R environment.
+
+```{r pengins-data}
+data(penguins)
+```
+
+6. Get to know your data, what are the variables and what units are they
+measured in? What does each row represent?
+
+
+## Exploring Visualizations with ggplot2
+
+::: callout-note
+Throughout your exploration of different visualizations, you should **always** 
+make sure to give your plots reader friendly axes labels!
+:::
+
+7. Create a barchart of the number of observations for each `species`. Fill the
+bars with color based on the `species` of the penguin. 
+
+```{r barplot}
+
+```
+
+8. Create a scatterplot of the relationship between the bill length
+(`bill_length_mm`) and bill depth (`bill_depth_mm`).
+
+```{r scatterplot}
+
+```
+
+9. Add an aesthetic to differentiate the species by color.
+
+```{r scatterplot-species}
+
+```
+
+10. Add the location of the penguins, `island`, to your visualization. There may
+be more than one method to address this, however, one method will more easily
+address the questions below.
+
+```{r scatterplot-species-island}
+
+```
+
+## Canvas Quiz
+
+::: callout-tip
+### Use the plots you created to address the following questions on Canvas:
+
+1.  Which species of penguins is represented **least** in the Palmer Penguins data set?
+
+2.  Which species of penguins are found on Biscoe Island?
+
+3.  Which species of penguins are found on Dream Island?
+
+4.  Which species of penguins are found on Torgersen Island?
+
+5.  Color deficiencies can make differentiating groups difficult - which aesthetic could you add to your plot to double encode species?
+:::
+
+## If you finish early...take everything you know, and use it for evil (+1 Token)
+
+::: {.column-margin}
+![Winners of the Ugliest Plot Competition](ugly_plot.jpg)
+:::
+
+The textbook spent lots of time showing you how to create different types of graphics, but I spent a lot less time showing you all of the different ways you could customize graphics in `ggplot2`. I want you to create the ugliest version of the scatterplot you created in (8) above, and then explain why, exactly, you made the decisions you did, and which principles of good graphics you’ve intentionally violated.
+
+::: {.column-margin}
+![](even_uglier_plot.jpg)
+:::
+
+Ugliness is subjective, so the goal here is for you to explore the different ways you can customize the finer details of graphics. Make sure your finished masterpiece has appropriate axis labels and a title (after all, even ugly plots need to be correctly labeled!). You are free to add additional variables and layers, modify the aesthetics used, and leverage other packages. Let's see your creativity shine through!
+
+::: {.column-margin}
+![](ugly_pie_chart.jpg)
+:::
+
+```{r ugly-graphic}
+
+```
+
+Once you have created the ugliest graphic you can, [save your plot](https://r4ds.hadley.nz/data-visualize.html#sec-ggsave), and upload it to
+the [shared google slides](https://docs.google.com/presentation/d/19u5djgMsPLtxoM-rfAQuLyP89B4nYdW8uBhNAEJQoS8/edit?usp=sharing) along with how you modified the
+chart---share your code!---your explanation as to why you made the decisions you
+did, and which principles of good graphics you’ve intentionally violated.
+
+To receive your Token, upload your visualization to the shared Google slides by
+**Sunday, January 22nd at 5:00pm**. We want to be able to look at them during
+class next week!
+
+### Useful References
+
+ + [Customizing ggplot2 graphics](http://r-statistics.co/Complete-Ggplot2-Tutorial-Part2-Customizing-Theme-With-R-Code.html)
+ + [A group-created slideshow of awful graphics](https://docs.google.com/presentation/d/1ixRsGI8BWgT2zA5AbB61eMLUbJgObvBCZt-OnZDzvX4/edit#slide=id.p)
+
