@@ -1,0 +1,312 @@
+---
+title: "Recap of Data Visualization with ggplot2"
+date: "September 27, 2022"
+author: "Dr. Allison Theobold"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["xaringan-themer.css", "slide-style.css"]
+    nature:
+      highlightStyle: solarized-light
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+---
+
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.width = 8, fig.height = 6}
+knitr::opts_chunk$set(message = FALSE, 
+                      warning = FALSE, 
+                      fig.align = "center")
+
+library(palmerpenguins)
+library(tidyverse)
+library(ggridges)
+library(gridExtra)
+```
+
+.pull-left[
+```{r, echo = FALSE}
+penguins %>% 
+  ggplot(aes(x = bill_length_mm, y = species, fill = sex)) + 
+  geom_density_ridges(alpha = 0.5, scale = 1) + 
+  labs(x = "Bill Length (mm)", 
+       y = "Penguin Species", 
+       fill = "Penguin Sex")
+
+```
+]
+
+.pull-right[
+
+</br>
+</br> 
+
+.hand[What are the `aes`thetics in this plot? 
+
+What `geom`etric object is being plotted?]
+]
+---
+
+class: middle, inverse
+
+.bitlarger[Univariate (One Variable) Visualizations -- For Numerical Data]
+
+--
+
+- Histogram 
+
+--
+
+- Boxplot
+
+--
+
+- Density Plot
+
+---
+
+class: center
+
+.larger[Histogram]
+
+```{r, message = FALSE, fig.height = 4, fig.width = 5, warning = FALSE, fig.align = 'center'}
+ggplot(data = penguins, mapping = aes(x = bill_length_mm)) + 
+  geom_histogram()
+```
+
+--
+
+Is this aesthetic *global* or *local*?
+
+---
+
+class: middle
+
+.pull-left[
+.larger[Pros]
+- Easy to inspect
+
+- Higher bars represent where data are relatively more common 
+
+- Inspect shape of a distribution (skewed or symmetric) 
+
+- Identify modes
+]
+
+.pull-right[
+.larger[Cons]
+- **Do not** plot raw data, plot summaries (counts) of the data! 
+
+- Sensitive to `binwidth`
+]
+
+---
+
+class: center
+
+.larger[Boxplot]
+
+.pull-left[
+```{r, fig.width = 5, fig.height = 3.5}
+ggplot(data = penguins, 
+       mapping = aes(x = bill_length_mm)) + 
+  geom_boxplot()
+```
+]
+
+.pull-right[
+
+- What calculations are necessary to create a boxplot? 
+
+- What are strengths of a boxplot? 
+
+- What are weaknesses of a boxplot?
+
+]
+
+---
+
+class: center
+
+.larger[Density Plot]
+
+.pull-left[
+```{r, fig.width = 6, fig.height = 4}
+ggplot(data = penguins, 
+       mapping = aes(x = bill_length_mm)) + 
+  geom_density()
+```
+]
+
+.pull-right[
+- A smooth approximation to a variable's distribution 
+- Plots density (as a proportion) on the y-axis
+
+</br> 
+
+- What are the strengths of a density plot?  
+- What are the weaknesses of a density plot? 
+]
+
+---
+
+class: middle, inverse
+
+.bitlarger[Bivariate (Two Variables) Visualizations -- For Numerical Data]
+
+--
+
+- Side-by-Side Boxplots 
+
+--
+
+- Side-by-Side Density Plots (Ridge Plots)
+
+--
+
+- Scatterplots 
+
+--
+
+- Faceted Histograms 
+
+---
+
+class: center
+
+.bitlarger[Side-by-Side Boxplots]
+
+.pull-left[
+```{r, fig.width = 6, fig.height = 3.5, fig.align = "center"}
+ggplot(data = penguins, 
+       mapping = aes(y = bill_length_mm,
+                     x = species)) + 
+  geom_boxplot()
+```
+]
+
+.pull-right[
+```{r, fig.width = 6, fig.height = 3.5, fig.align = "center"}
+ggplot(data = penguins, 
+       mapping = aes(x = bill_length_mm,
+                     y = species)) + 
+  geom_boxplot()
+```
+]
+
+---
+
+class: center
+
+.bitlarger[Faceted Histograms] 
+
+```{r, fig.width = 8, fig.height = 5, fig.align = "center", echo = TRUE}
+ggplot(data = penguins,
+       mapping = aes(x = bill_length_mm)) + 
+  geom_histogram(binwidth = 3) + 
+  facet_wrap(~ species)
+```
+
+---
+
+class: center
+
+.bitlarger[Scatterplots]
+
+```{r, fig.width = 6, fig.height = 5, fig.align = 'center'}
+ggplot(data = penguins, 
+       mapping = aes(y = bill_length_mm, x = bill_depth_mm)) + 
+  geom_point()
+```
+
+---
+
+class: middle
+
+.bitlarger[**Multivariate Plots**]
+
+There are two main methods for adding a third (or fourth) variable into a 
+data visualization: 
+
+- Colors: 
+  * creates colors for every level of a categorical variable
+  * creates a gradient for different values of a quantitative variable
+
+--
+
+- Facets: 
+  * creates subplots for every level of a variable
+  * labels each sub-plot with the value of the variable
+
+---
+
+class: center
+
+.bitlarger[Colors in Scatterplots]
+
+```{r, fig.width = 6, fig.height = 4.5, fig.align = 'center'}
+ggplot(data = penguins, 
+       mapping = aes(y = bill_length_mm, 
+                     x = bill_depth_mm, 
+                     color = species)
+       ) + 
+  geom_point()
+```
+
+---
+
+class: center
+
+.bitlarger[Colors in Boxplots]
+
+```{r, fig.width = 6, fig.height = 4.5, fig.align = 'center'}
+ggplot(data = penguins, 
+       mapping = aes(y = bill_length_mm, 
+                     x = species, 
+                     color = sex)
+       ) + 
+  geom_boxplot()
+```
+
+---
+
+class: center
+
+.bitlarger[Facets in Scatterplots] 
+
+```{r, fig.width = 8, fig.height = 4.5, fig.align = 'center'}
+ggplot(data = penguins, 
+       mapping = aes(y = bill_length_mm, 
+                     x = bill_depth_mm, 
+                     color = sex)) + 
+  geom_point() + 
+  facet_wrap(~ species)
+```
+
+---
+
+class: center
+
+.bitlarger[Facets in Boxplots]
+
+```{r, fig.width = 8, fig.height = 4.5, fig.align = 'center'}
+ggplot(data = penguins, 
+       mapping = aes(x = bill_length_mm,
+                     y = species,
+                     fill = sex)) + 
+  geom_boxplot(alpha = 0.3) + 
+  facet_wrap(~ island)
+```
+
+---
+
+class: center, middle, inverse
+
+.huge[Your Turn!]
+

@@ -1,0 +1,388 @@
+---
+title: "ggplot & Importing data review"
+author: "STAT 331"
+format: 
+  revealjs:
+    logo: images/ggplot2.png
+    theme: night
+    self-contained: true
+editor: visual
+execute: 
+  warning: false
+  message: false
+---
+
+# Data Visualizations with **ggplot2**
+
+```{r packages}
+#| echo: false
+
+library(palmerpenguins)
+library(tidyverse)
+library(ggridges)
+library(gridExtra)
+```
+
+##
+
+```{r aesthetics}
+#| echo: false
+penguins %>% 
+  ggplot(aes(x = bill_length_mm, y = species, fill = sex)) + 
+  geom_density_ridges(alpha = 0.5, scale = 1) + 
+  labs(x = "Bill Length (mm)", 
+       y = "Penguin Species", 
+       fill = "Penguin Sex")
+
+```
+
+. . .
+
+What are the `aes`thetics in this plot? 
+
+What `geom`etric object is being plotted?
+
+## {background-color="#34605f"}
+
+::: {style="margin-top: 100px; font-size: 2em; color: #000000;"}
+Univariate (One Variable) Visualizations -- For Numerical Data
+:::
+
+::: {.incremental}
+::: {style="color:#000000;"}
+- Histogram 
+- Boxplot
+- Density Plot
+:::
+:::
+
+## Histogram
+
+```{r hist}
+#| fig-height: 4
+#| fig-width: 5
+#| fig-align: center
+#| echo: true
+#| code-line-numbers: "|3"
+
+ggplot(data = penguins, mapping = aes(x = bill_length_mm)) + 
+  geom_histogram() +
+  labs(x = "Bill Length (mm)")
+```
+
+. . .
+
+<center>
+::: {style="color:#ba9645;"}
+Is this aesthetic *global* or *local*?
+:::
+</center>
+
+---
+
+::: columns
+::: {.column width="50"}
+### Pros
+
+- Easy to inspect
+- Higher bars represent where data are relatively more common
+- Inspect shape of a distribution (skewed or symmetric)
+- Identify modes
+:::
+
+::: {.column width="50"}
+### Cons
+- **Do not** plot raw data, plot summaries (counts) of the data!
+- Sensitive to `binwidth`
+:::
+:::
+
+## Boxplot
+
+::: columns
+::: {.column width="70%"}
+```{r boxplot}
+#| fig-width: 5
+#| fig-height: 3.5
+#| echo: true
+#| code-line-numbers: "|3"
+
+ggplot(data = penguins,
+       mapping = aes(x = bill_length_mm)) +
+  geom_boxplot() + 
+  labs(x = "Bill Length (mm)")
+```
+:::
+
+::: {.column width="30%"}
+- What calculations are necessary to create a boxplot?
+
+- What are strengths of a boxplot?
+
+- What are weaknesses of a boxplot?
+:::
+:::
+
+## Density Plot
+
+::: columns
+::: {.column width="70%"}
+```{r density}
+#| fig-width: 6
+#| echo: true
+#| fig-height: 4
+#| code-line-numbers: "|3"
+ggplot(data = penguins,
+       mapping = aes(x = bill_length_mm)) +
+  geom_density()
+```
+:::
+
+::: {.column width="30%"}
+- A smooth approximation to a variable's distribution
+- Plots density (as a proportion) on the y-axis
+:::
+:::
+
+## {background-color="#34605f"}
+
+::: {style="margin-top: 100px; font-size: 2em; color: #000000;"}
+Bivariate (Two Variables) Visualizations -- For Numerical Data
+:::
+
+::: {.incremental}
+::: {style="color: #000000;"}
+
+- Side-by-Side Boxplots
+
+- Side-by-Side Density Plots (Ridge Plots)
+
+- Scatterplots
+
+- Faceted Histograms
+:::
+:::
+
+## Side-by-Side Boxplots {.scrollable}
+::: columns
+::: {.column width="50"}
+```{r horizontal-boxplot}
+#| fig-width: 6
+#| fig-height: 3.5
+#| fig-align: center
+#| echo: true
+ggplot(data = penguins,
+       mapping = aes(y = bill_length_mm,
+                     x = species)) +
+  geom_boxplot() + 
+  labs(x = "Penguin Species", 
+       y = "Bill Length (mm)")
+```
+:::
+
+::: {.column width="50"}
+```{r vertical-boxplot}
+#| fig-width: 6
+#| fig-height: 3.5
+#| fig-align: center
+#| echo: true
+ggplot(data = penguins,
+       mapping = aes(x = bill_length_mm,
+                     y = species)) +
+  geom_boxplot() + 
+  labs(y = "Penguin Species", 
+      x  = "Bill Length (mm)")
+
+```
+:::
+:::
+
+. . .
+
+<center>
+::: {style="color: #ba9645;"}
+**Which do you prefer?**
+:::
+</center>
+
+## Faceted Histograms
+
+```{r facet-hist}
+#| fig-width: 8
+#| fig-height: 4
+#| fig-align: center
+#| echo: true
+#| output-location: fragment
+#| code-line-numbers: "|4"
+
+ggplot(data = penguins,
+       mapping = aes(x = bill_length_mm)) +
+  geom_histogram(binwidth = 3) +
+  facet_wrap(~ species) +
+  labs(x = "Bill Length (mm)", 
+       title = "Frequency of Captured Penguins by Species")
+```
+
+## Scatterplots
+
+```{r scatterplot}
+#| fig-width: 6
+#| fig-height: 5
+#| fig-align: center
+#| output-location: fragment
+#| echo: true
+#| code-line-numbers: "|3"
+
+ggplot(data = penguins,
+       mapping = aes(y = bill_length_mm, x = bill_depth_mm)) +
+  geom_point() +
+  labs(x = "Bill Depth (mm)", 
+       y = "Bill Length (mm)")
+```
+
+## {background-color="#34605f"}
+
+::: {style="margin-top: 100px; font-size: 2em; color: #000000;"}
+Multivariate Plots 
+:::
+
+::: {style="color: #000000; font-size: 0.75em;"}
+There are two main methods for adding a third (or fourth) variable into a
+data visualization:
+
+::: columns
+::: {.column width="50%"}
+**Colors**
+
+  * creates colors for every level of a categorical variable
+  * creates a gradient for different values of a quantitative variable
+:::
+
+::: {.column width="50%"}
+**Facets**
+
+  * creates subplots for every level of a variable
+  * labels each sub-plot with the value of the variable
+:::
+:::
+:::
+
+## Colors in Scatterplots
+
+```{r scatterplot-color}
+#| fig-width: 6
+#| fig-height: 4.5
+#| fig-align: center
+#| echo: true
+#| code-line-numbers: "|4,9"
+
+ggplot(data = penguins,
+       mapping = aes(y = bill_length_mm,
+                     x = bill_depth_mm,
+                     color = species)
+       ) +
+  geom_point() +
+  labs(x = "Bill Depth (mm)", 
+       y = "Bill Length (mm)", 
+       color = "Penguin Species")
+```
+
+## Colors in Boxplots
+
+```{r boxplot-color}
+#| fig-width: 6
+#| fig-height: 3.5
+#| fig-align: center
+#| echo: true
+#| code-line-numbers: "|4,9"
+
+ggplot(data = penguins,
+       mapping = aes(y = bill_length_mm,
+                     x = species,
+                     color = sex)
+       ) +
+  geom_boxplot() +
+  labs(x = "Penguin Species", 
+       y = "Bill Length (mm)", 
+       color = "Sex")
+```
+
+
+## Facets in Scatterplots
+
+```{r scatterplot-facets}
+#| fig-width: 8
+#| fig-height: 4.5
+#| fig-align: center
+#| echo: true
+#| code-line-numbers: "|6"
+
+ggplot(data = penguins,
+       mapping = aes(y = bill_length_mm,
+                     x = bill_depth_mm,
+                     color = sex)) +
+  geom_point() +
+  facet_wrap(~ species) + 
+  labs(x = "Bill Depth (mm)", 
+       y = "Bill Length (mm)", 
+       color = "Sex")
+  
+```
+
+## Facets in Boxplots
+
+```{r boxplot-facets}
+#| fig-width: 8
+#| fig-height: 3.5
+#| fig-align: center
+#| echo: true
+#| code-line-numbers: "|6"
+ggplot(data = penguins,
+       mapping = aes(x = bill_length_mm,
+                     y = species,
+                     fill = sex)) +
+  geom_boxplot(alpha = 0.3) +
+  facet_wrap(~ island) + 
+  labs(x = "Bill Depth (mm)", 
+       y = "Bill Length (mm)", 
+       fill = "Sex")
+```
+
+# Importing Data
+
+## R Projects! {.larger}
+
+-   Self contained
+
+-   Flag where R should look for files
+
+-   Allow for us to *easily* use `here()` to find files
+
+-   Should be how you work in RStudio **every time**
+
+<center>
+![](images/here_data_load.jpeg)
+</center>
+
+## **Why** use `here()` to read in your data?
+
+Working in R? Rendering a document? `here()` uses the **same** path to load in
+data!
+
+</br>
+
+. . .
+
+Never set a relative / full path or change your working directory!!!
+
+```
+setwd("/Users/atheobol/Documents/Teaching/Stat 331/stat-331-allison")
+```
+
+</br>
+
+. . .
+
+Need to share your materials? Share your RProject!
+
+## Your turn!
