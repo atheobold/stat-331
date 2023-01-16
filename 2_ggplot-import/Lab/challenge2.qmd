@@ -9,67 +9,65 @@ format:
     number-depth: 2
     code-block-bg: "#76b5c5"
     highlight-style: monochrome
+    self-contained: true
 editor: visual
 execute: 
   echo: true
   messsge: false
 ---
 
-
 ```{r}
 #| include: false
 
 library(tidyverse)
 library(here)
+library(ggsci)
 
 surveys <- read_csv(here("2_ggplot-import", "Lab", "surveys.csv"))
 
 ```
 
 For this week's Challenge, you will have three different options to explore.
-I've arranged these options in terms of their "spiciness," or the difficulty 
-of completing the task. You are only required to complete one task, but if you 
-are interested in exploring more than one, feel free! 
-
-</br> 
+I've arranged these options in terms of their "spiciness," or the difficulty
+of completing the task. You are only required to complete one task, but if you
+are interested in exploring more than one, feel free!
 
 # `r emo::ji("pepper")` Medium -- Ridge Plots
 
-In question 10 and 11 you use side-by-side boxplots to visualize the
-distribution of weight within each species. Boxplots have [substantial flaws](https://www.data-to-viz.com/caveat/boxplot.html), namely that they
-disguise distributions with multiple modes. 
+In questions 8-14, you used side-by-side boxplots to visualize the distribution
+of weight within each species. Boxplots have [substantial flaws](https://www.data-to-viz.com/caveat/boxplot.html), namely that they
+disguise distributions with multiple modes.
 
 A "superior" alternative is the density plot. However, **ggplot2** does not
 allow for side-by-side density plots using `geom_density()`. Instead, we will
 need to make use of the **ggridges** package to create side-by-side density
-(ridge) plots. 
+(ridge) plots.
 
-</br> 
+</br>
 
-> **For this challenge you are to change the plot you created in question 10
-> (or 11) to ridge plots. You will need to install the __ggridges__ package and
-> explore the `geom_density_ridges()` function.** 
+> **For this challenge you are to change the plot you created in question 13 
+> (or 14) to a ridge plots. You will need to install the **ggridges** package
+> and explore the `geom_density_ridges()` function.**
 
 </br>
 
 # `r emo::ji("spicy")` `r emo::ji("pepper")` Spicy -- Exploring Color Themes
 
-The built in `ggplot()` color scheme may not be what you were looking for, but 
-don't worry! There are many other color palettes available to use!  
+The built in `ggplot()` color scheme may not be what you were looking for, but
+don't worry! There are many other color palettes available to use!
 
-You can change the colors used by `ggplot()` a few different ways.  
+You can change the colors used by `ggplot()` a few different ways.
 
-### Manual Specification 
+## Manual Specification
 
-Add the `scale_color_manual()` or `scale_fill_manual()` functions to your 
-plot and directly specify the colors you want to use. You can either:  
+Add the `scale_color_manual()` or `scale_fill_manual()` functions to your plot and directly specify the colors you want to use. You can either:
 
-- defining a vector of colors right there 
-(e.g. `values = c("blue", "black", "red", "green")`)  
+-   defining a vector of colors right there (e.g. `values = c("blue", "black", "red", "green")`)
 
-- creating a vector of colors using hex numbers and storing it in an object and
-calling it (see example below)
-  * If you are interested in using specific hex colors, I like the [image color picker app](https://imagecolorpicker.com/en) to find the colors I want. 
+-   creating a vector of colors using hex numbers and storing it in an object
+and calling it (see example below)
+
+    -   If you are interested in using specific hex colors, I like the [image color picker app](https://imagecolorpicker.com/en) to find the colors I want.
 
 ```{r}
 # A color deficient friendly palette with gray:
@@ -78,66 +76,102 @@ cdPalette_grey <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442",
 # A color deficient friendly palette with black:
 cdPalette_blk <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#F0E442", 
                    "#0072B2", "#D55E00", "#CC79A7")
-surveys |> 
-  ggplot(aes(x = weight, y = species, color = genus)) +
+
+ggplot(data = surveys, aes(x = weight, y = species, color = genus)) +
   geom_boxplot() +
-  scale_color_manual(values = cdPalette_grey)
+  scale_color_manual(values = cdPalette_grey) +
+  labs(title = "Weights for Different Species of Rodent",
+       y = "", 
+       x = "Weight (grams)", 
+       color = "Genus of Rodent") + 
+  scale_x_log10()
 ```
 
-### Package Specification 
+## Package Specification
 
-Install a package and use it's available color scales. Popular options 
-include:  
+Install a package and use it's available color scales. Popular options include:
 
-- `RColorBrewer` -- change colors by using `scale_fill_brewer()` or `scale_colour_brewer()` 
+-   `RColorBrewer` -- change colors by using `scale_fill_brewer()` or `scale_colour_brewer()`
 
-- `viridis` -- change colors by using `scale_colour_viridis_d()` for discrete
+-   `viridis` -- change colors by using `scale_colour_viridis_d()` for discrete
 data, `scale_colour_viridis_c()` for continuous data
 
-- `ggsci` -- change colors by using `scale_color_<PALNAME>()` or
-`scale_fill_<PALNAME>()`, where you specify the name of the palette you
-wish to use (e.g. `scale_color_aaas()`)
+-   `ggsci` -- change colors by using `scale_color_<PALNAME>()` or `scale_fill_<PALNAME>()`, where you specify the name of the palette you wish to
+use (e.g. `scale_color_aaas()`)
 
-- [This website](https://github.com/EmilHvitfeldt/r-color-palettes) provides 
-an exhaustive list of color themes available through various packages. 
+-   [This website](https://github.com/EmilHvitfeldt/r-color-palettes) provides an exhaustive list of color themes available through various packages.
+
+::: {.callout-tip}
+When including colors in our plots it is also important to consider how readers
+who are not able to see the full color spectrum will interpret our plot. There
+are many references to see if your color palette is friendly to color
+deficiencies. 
+:::
 
 </br>
 
-> **In this challenge you are expected to use this information to modify the 
-> plot you created in question 10 (or 11).  
-> First, you are to color the boxplots based on `genus`.  
-> Next, you are to change the colors used for `genus` using either manual 
-> color specification or any of the packages listed here (or others!).** 
+> **For this challenge you are expected to use this information to modify the
+> plot you created in question 13 or 14 (or the density ridges!). 
+> First, you are to `color` the boxplots based on `genus`.
+> Next, you are to change the colors used for `genus` using either manual
+> color specification or any of the packages listed here (or others!).**
 
 </br>
 
 # `r emo::ji("pepper")` `r emo::ji("pepper")` `r emo::ji("pepper")` Hot -- Exploring ggplot2 Annotation
 
 Some data scientists have advocated that we should try to eliminate legends from
-our plots to make them more clear. Instead, we should use annotation. 
+our plots to make them more clear. Instead, we should use annotation.
 
-We can add an annotation to a `ggplot()` using the `annotate()` function like
-so:
+We can add an annotation to a `ggplot()` using the `annotate()` function like so:
 
 ```{r}
-ggplot(data = surveys, 
-       mapping = aes(y = species, x = hindfoot_length, color = genus)) +
+ggplot(data = surveys, aes(x = weight, y = species, color = genus)) +
   geom_boxplot() +
-  scale_color_manual(values = cdPalette_grey) + 
-  annotate("text", y = 1, x = 55, label = "Neotoma") +
-  annotate("text", y = 4, x = 55, label = "Perognathus") 
+  labs(title = "Weights for Different Species of Rodent", 
+       y = "",
+       x = "Weight (grams)", 
+       color = "Genus of Rodent")+
+  scale_color_viridis_d() +
+  annotate("text", y = 1, x = 400, label = "Neotoma") +
+  annotate("text", y = 6, x = 300, label = "Sigmodon") + 
+  xlim(0, 450) +
+  theme_dark() 
   
 ```
 
-Notice how I've labeled the "Neotoma" and "Perognathus" genera, so the reader
-can tell that these three boxplots are associated with this respective genus. 
+Notice how I've labeled the "Neotoma" and "Sigmodon" genera, so the reader
+can tell that these three boxplots are associated with this respective genus.
+
+::: {.callout-tip}
+It is often easier to see colors with a darker background. Changing the theme
+of the background to `theme_dark()` does just that. There are lots of themes that
+change the background of a plot -- check them out in the `?theme_dark()` help
+page. 
+:::
 
 </br>
 
-> **In this challenge you are expected to use this information to modify the 
-> plot you created in question 10 (or 11).  
-> First, you are to color the boxplots based on `genus`.  
-> Next, you are to add annotations for each genus, next to the boxplot(s) 
-> associated with that genus.   
-> Finally, you are expected to use the `theme()` function to remove the color
-> legend from the plot, since it is no longer needed!**
+> **For this challenge you are expected to use this information to modify the
+> plot you created in question 13 or 14 (or the density ridges!). 
+> First, you are to color the boxplots based on `genus`.
+> Next, you are to add annotations for each genus, next to the boxplot(s)
+> associated with that genus. Finally, you are expected to use the `theme()`
+> function to remove the color legend from the plot, since it is no longer
+> needed!**
+
+# Challenge 1 Submission
+
+Once you have completed your challenge(s) you should upload your rendered HTML
+file to Canvas. 
+
+**Separate from Lab 1**
+
+Your Challenge 1 file **must** be separate from your Lab 1 file. Yes, some of
+the code for the Challenge is the same as Lab 1 -- you can copy and paste this
+code into a **new** Quarto file. Your Challenge 1 submission should only included code necessary for completing the Challenge, nothing else. 
+
+**Only the HTML**
+
+I will only be looking over your HTML file, so **all** of your code needs to 
+be visible. There should be no hidden code in your Quarto file!
