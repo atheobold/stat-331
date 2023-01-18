@@ -355,6 +355,13 @@ ggplot(data = penguins,
 
 ## R Projects! {.larger}
 
+::: columns
+::: {.column width="50%"}
+![Artwork by @allison_horst](images/here.png)
+:::
+
+:::{.column width="50%"}
+::: {style="font-size: 0.75em;"}
 -   Self contained
 
 -   Flag where R should look for files
@@ -362,14 +369,15 @@ ggplot(data = penguins,
 -   Allow for us to *easily* use `here()` to find files
 
 -   Should be how you work in RStudio **every time**
-
-<center>![](images/here_data_load.jpeg)</center>
+:::
+:::
+:::
 
 ## **Why** use `here()` to read in your data?
 
 ::: columns
 ::: {.column width="50%"}
-![Artwork by @allison_horst](images/here.png)
+![Artwork by @allison_horst](images/setwd_vs_rproj_horst.png)
 :::
 
 :::{.column width="50%"}
@@ -389,3 +397,6 @@ data!
 :::
 
 ## Your turn!
+
+<center>![](images/here_data_load.jpeg)</center>
+
