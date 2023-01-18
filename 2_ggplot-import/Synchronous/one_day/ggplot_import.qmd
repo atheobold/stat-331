@@ -23,7 +23,7 @@ library(ggridges)
 library(gridExtra)
 ```
 
-##
+## 
 
 ```{r aesthetics}
 #| echo: false
@@ -38,21 +38,21 @@ penguins %>%
 
 . . .
 
-What are the `aes`thetics in this plot? 
+What are the `aes`thetics in this plot?
 
 What `geom`etric object is being plotted?
 
-## {background-color="#34605f"}
+##  {background-color="#34605f"}
 
 ::: {style="margin-top: 100px; font-size: 2em; color: #000000;"}
 Univariate (One Variable) Visualizations -- For Numerical Data
 :::
 
-::: {.incremental}
+::: incremental
 ::: {style="color:#000000;"}
-- Histogram 
-- Boxplot
-- Density Plot
+-   Histogram
+-   Boxplot
+-   Density Plot
 :::
 :::
 
@@ -73,27 +73,30 @@ ggplot(data = penguins, mapping = aes(x = bill_length_mm)) +
 . . .
 
 <center>
+
 ::: {style="color:#ba9645;"}
 Is this aesthetic *global* or *local*?
 :::
+
 </center>
 
----
+------------------------------------------------------------------------
 
 ::: columns
 ::: {.column width="50"}
 ### Pros
 
-- Easy to inspect
-- Higher bars represent where data are relatively more common
-- Inspect shape of a distribution (skewed or symmetric)
-- Identify modes
+-   Easy to inspect
+-   Higher bars represent where data are relatively more common
+-   Inspect shape of a distribution (skewed or symmetric)
+-   Identify modes
 :::
 
 ::: {.column width="50"}
 ### Cons
-- **Do not** plot raw data, plot summaries (counts) of the data!
-- Sensitive to `binwidth`
+
+-   **Do not** plot raw data, plot summaries (counts) of the data!
+-   Sensitive to `binwidth`
 :::
 :::
 
@@ -115,11 +118,11 @@ ggplot(data = penguins,
 :::
 
 ::: {.column width="30%"}
-- What calculations are necessary to create a boxplot?
+-   What calculations are necessary to create a boxplot?
 
-- What are strengths of a boxplot?
+-   What are strengths of a boxplot?
 
-- What are weaknesses of a boxplot?
+-   What are weaknesses of a boxplot?
 :::
 :::
 
@@ -139,31 +142,31 @@ ggplot(data = penguins,
 :::
 
 ::: {.column width="30%"}
-- A smooth approximation to a variable's distribution
-- Plots density (as a proportion) on the y-axis
+-   A smooth approximation to a variable's distribution
+-   Plots density (as a proportion) on the y-axis
 :::
 :::
 
-## {background-color="#34605f"}
+##  {background-color="#34605f"}
 
 ::: {style="margin-top: 100px; font-size: 2em; color: #000000;"}
 Bivariate (Two Variables) Visualizations -- For Numerical Data
 :::
 
-::: {.incremental}
+::: incremental
 ::: {style="color: #000000;"}
+-   Side-by-Side Boxplots
 
-- Side-by-Side Boxplots
+-   Side-by-Side Density Plots (Ridge Plots)
 
-- Side-by-Side Density Plots (Ridge Plots)
+-   Scatterplots
 
-- Scatterplots
-
-- Faceted Histograms
+-   Faceted Histograms
 :::
 :::
 
 ## Side-by-Side Boxplots {.scrollable}
+
 ::: columns
 ::: {.column width="50"}
 ```{r horizontal-boxplot}
@@ -200,9 +203,11 @@ ggplot(data = penguins,
 . . .
 
 <center>
+
 ::: {style="color: #ba9645;"}
 **Which do you prefer?**
 :::
+
 </center>
 
 ## Faceted Histograms
@@ -240,29 +245,28 @@ ggplot(data = penguins,
        y = "Bill Length (mm)")
 ```
 
-## {background-color="#34605f"}
+##  {background-color="#34605f"}
 
 ::: {style="margin-top: 100px; font-size: 2em; color: #000000;"}
-Multivariate Plots 
+Multivariate Plots
 :::
 
 ::: {style="color: #000000; font-size: 0.75em;"}
-There are two main methods for adding a third (or fourth) variable into a
-data visualization:
+There are two main methods for adding a third (or fourth) variable into a data visualization:
 
 ::: columns
 ::: {.column width="50%"}
 **Colors**
 
-  * creates colors for every level of a categorical variable
-  * creates a gradient for different values of a quantitative variable
+-   creates colors for every level of a categorical variable
+-   creates a gradient for different values of a quantitative variable
 :::
 
 ::: {.column width="50%"}
 **Facets**
 
-  * creates subplots for every level of a variable
-  * labels each sub-plot with the value of the variable
+-   creates subplots for every level of a variable
+-   labels each sub-plot with the value of the variable
 :::
 :::
 :::
@@ -306,7 +310,6 @@ ggplot(data = penguins,
        y = "Bill Length (mm)", 
        color = "Sex")
 ```
-
 
 ## Facets in Scatterplots
 
@@ -360,29 +363,29 @@ ggplot(data = penguins,
 
 -   Should be how you work in RStudio **every time**
 
-<center>
-![](images/here_data_load.jpeg)
-</center>
+<center>![](images/here_data_load.jpeg)</center>
 
 ## **Why** use `here()` to read in your data?
 
-Working in R? Rendering a document? `here()` uses the **same** path to load in
+::: columns
+::: {.column width="50%"}
+![Artwork by @allison_horst](images/here.png)
+:::
+
+:::{.column width="50%"}
+::: {style="font-size: 0.75em;"}
+- Never set a relative / full path or change your working directory!!!
+
+```{r}
+#| eval: false
+#| echo: true
+setwd("/Users/atheobol/Documents/Teaching/Stat 331/stat-331-allison")`
+```
+
+- Working in R? Rendering a document? `here()` uses the **same** path to load in
 data!
-
-</br>
-
-. . .
-
-Never set a relative / full path or change your working directory!!!
-
-```
-setwd("/Users/atheobol/Documents/Teaching/Stat 331/stat-331-allison")
-```
-
-</br>
-
-. . .
-
-Need to share your materials? Share your RProject!
+:::
+:::
+:::
 
 ## Your turn!
