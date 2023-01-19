@@ -63,7 +63,7 @@ Univariate (One Variable) Visualizations -- For Numerical Data
 #| fig-width: 5
 #| fig-align: center
 #| echo: true
-#| code-line-numbers: "|3"
+#| code-line-numbers: "|2"
 
 ggplot(data = penguins, mapping = aes(x = bill_length_mm)) + 
   geom_histogram() +
@@ -126,6 +126,10 @@ ggplot(data = penguins,
 :::
 :::
 
+## 
+
+![Image by Allison Horst](images/boxplot_horst.png)
+
 ## Density Plot
 
 ::: columns
@@ -137,7 +141,8 @@ ggplot(data = penguins,
 #| code-line-numbers: "|3"
 ggplot(data = penguins,
        mapping = aes(x = bill_length_mm)) +
-  geom_density()
+  geom_density() + 
+  labs(x = "Bill Length (mm)")
 ```
 :::
 
@@ -225,7 +230,8 @@ ggplot(data = penguins,
   geom_histogram(binwidth = 3) +
   facet_wrap(~ species) +
   labs(x = "Bill Length (mm)", 
-       title = "Frequency of Captured Penguins by Species")
+       title = "Frequency of Captured Penguins by Species", 
+       y = "")
 ```
 
 ## Scatterplots
