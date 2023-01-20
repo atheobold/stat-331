@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.120">
+<meta name="generator" content="quarto-1.2.269">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -100,11 +100,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </head>
 
-<body class="fullcontent">
+<body>
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
-<main class="content" id="quarto-document-content">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</div>
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -116,6 +117,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="quarto-title-meta">
 
     
+  
     
   </div>
   
@@ -127,9 +129,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 data-number="0.1" class="anchored" data-anchor-id="dealing-with-errors"><span class="header-section-number">0.1</span> Dealing with errors</h2>
 <p>As you work through this PA, you will encounter some code that does not work as you want it to. Don’t despair! Errors (when R is unable to run your code) and bugs (when the code doesn’t do what you hoped) are a natural part of coding. Even the best of the best deal with these problems regularly - learning to track down the issue is a skill that you can learn and practice.</p>
 </section>
-<section id="advice-for-dealing-with-errors" class="level2" data-number="0.2">
+<section id="advice-for-dealing-with-errors" class="level2 page-columns page-full" data-number="0.2">
 <h2 data-number="0.2" class="anchored" data-anchor-id="advice-for-dealing-with-errors"><span class="header-section-number">0.2</span> Advice for dealing with errors</h2>
-<p><strong>Errors can be sneaky - check results <em>often</em></strong></p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/debugging_fire.jpeg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Image by Allison Horst</figcaption><p></p>
+</figure>
+</div>
+</div></div><p><strong>Errors can be sneaky - check results <em>often</em></strong></p>
 <p>If a chunk of code runs smoothly without giving you any error or warnings this <strong>does not</strong> necessarily mean it accomplished the desired task.</p>
 <p>It is a good habit to check the results of your code <strong>every time</strong> you finish a task. In general, I would recommend completing the following tasks <strong>every time</strong> you write a code chunk.</p>
 <ul>
@@ -157,10 +167,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>This section will clean today’s dataset, so that you can use it more easily in Part Two.</p>
 <section id="data-download-packages" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="data-download-packages"><span class="header-section-number">1.1</span> Data download &amp; packages</h2>
-<p>First, download the template Quarto file <a href="https://github.com/atheobold/stat-331/blob/main/3_dplyr/Practice-Activity-Colleges/PA3_student.qmd">here (link to GitHub)</a>:</p>
-<p>Next, save the file in your Stat 331 / 531 folder – this should be in a Week 3 or a Practice Activity subfolder!</p>
+<p>First, <a href="PA3_student.qmd">download the template PA3 Quarto file</a>:</p>
+<p>Next, save the file in your Stat 331 / 531 folder – this should be in a Week 3 or a Practice Activity 3 subfolder!</p>
 <p>Now, open the <code>PA3_student.qmd</code> file. At the top of the document, we declare our package dependencies and load the data.</p>
-<p>(Note that the data loading function <code>read_csv()</code> will give you an outpouring of helpful information about the dataset. If you do not see the word “error”, there is nothing to be concerned about.)</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Reading in data
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note that the data loading function <code>read_csv()</code> will give you an outpouring of helpful information about the dataset. If you do not see the word “error”, there is nothing to be concerned about.</p>
+</div>
+</div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -182,7 +204,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>The “REGION” variable.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>colleges_clean <span class="ot">&lt;-</span> colleges <span class="sc">|&gt;</span> </span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>colleges_clean <span class="ot">&lt;-</span> colleges <span class="sc">|</span> <span class="er">&gt;</span> </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(INSTNM, CITY, STABBR, ZIP,</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>         ADM_RATE, SAT_AVG, UGDS,</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>         TUITIONFEE_IN, TUITIONFEE_OUT,</span>
@@ -211,32 +233,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">REGION =</span> <span class="fu">as.factor</span>(REGION)</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><strong>Step 6:</strong> Create a new variable called TUITION_DIFF which contains the difference between in and out of state costs.</p>
+<p><strong>Step 6:</strong> Create a new variable called <code>TUITION_DIFF</code> which contains the difference between in and out of state costs.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>colleges_clean <span class="ot">&lt;-</span> colleges_clean <span class="sc">|&gt;</span> </span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    TUITION_DIFF <span class="ot">=</span> TUITIONFEE_OUT <span class="sc">-</span> TUITIONFEE_IN</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Step 7:</strong> Remove every row with missing data.</p>
-<p><strong><em>Note</em>:</strong> This is not always a great idea! Usually, even if <em>some</em> of the information is missing, we don’t want to throw out the entire row. This time, however, we’ll be lazy.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>colleges_clean <span class="ot">&lt;-</span> colleges_clean <span class="sc">|&gt;</span> </span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop.na</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Lastly, notice that each of these steps started with</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This is not always a great idea! Usually, even if <em>some</em> of the information is missing, we don’t want to throw out the entire row. This time, however, we’ll be lazy.</p>
+</div>
+</div>
+<p><strong>Notice that each of these steps started with:</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>colleges_clean <span class="ot">&lt;-</span> colleges_clean <span class="sc">|&gt;</span> ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>That is pretty redundant! Instead, we could perform all these tasks as one long “pipeline.”</p>
 <p><strong>Step 8:</strong> Combine your (fixed) code chunks into a <strong>single</strong> code chunk that carries out all of the steps necessary to clean the data.</p>
-<p><strong>Note:</strong> Think about coding efficiency – you <strong>should not</strong> have multiple calls to the <strong>same</strong> function!</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code combining ALL of your previous steps into ONE pipeline</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Think about coding efficiency – you <strong>should not</strong> have multiple calls to the <strong>same</strong> function!</p>
+</div>
 </div>
 </section>
 </section>
 <section id="part-two-identify-the-mystery-college" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Part Two: Identify the mystery college</h1>
-<p>Wow! Your best friend Ephelia has been accepted to her top choice college! Unfortunately, Ephelia is a very mysterious person, and she won’t tell you directly which college this is. You’ll have to use her clues to figure out which school is her dream school.</p>
+<p>Wow! Your best friend Ephelia has been accepted to her top choice college! Unfortunately, Ephelia is a very mysterious person, and they won’t tell you directly which college this is. You’ll have to use their clues to figure out which school is their dream school.</p>
 <p>Clues:</p>
 <ol type="1">
 <li><p>This college is located in Region 7.</p></li>
@@ -293,7 +336,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -329,24 +389,42 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
 });
 </script>

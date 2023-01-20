@@ -12,15 +12,26 @@ format:
 editor: visual
 execute: 
   eval: false
+resources: 
+  - PA3_student.qmd
 ---
 
-Today you will be using the dplyr package to clean a dataset and then using that cleaned dataset to figure out what college Ephelia has been accepted to.
+Today you will be using the dplyr package to clean a dataset and then using that
+cleaned dataset to figure out what college Ephelia has been accepted to.
 
 ## Dealing with errors
 
-As you work through this PA, you will encounter some code that does not work as you want it to. Don't despair! Errors (when R is unable to run your code) and bugs (when the code doesn't do what you hoped) are a natural part of coding. Even the best of the best deal with these problems regularly - learning to track down the issue is a skill that you can learn and practice.
+As you work through this PA, you will encounter some code that does not work as
+you want it to. Don't despair! Errors (when R is unable to run your code) and
+bugs (when the code doesn't do what you hoped) are a natural part of coding.
+Even the best of the best deal with these problems regularly - learning to track
+down the issue is a skill that you can learn and practice.
 
 ## Advice for dealing with errors
+
+::: {.column-margin}
+![Image by Allison Horst](images/debugging_fire.jpeg)
+:::
 
 **Errors can be sneaky - check results *often***
 
@@ -64,13 +75,18 @@ This section will clean today's dataset, so that you can use it more easily in P
 
 ## Data download & packages
 
-First, download the template Quarto file [here (link to GitHub)](https://github.com/atheobold/stat-331/blob/main/3_dplyr/Practice-Activity-Colleges/PA3_student.qmd):
+First, [download the template PA3 Quarto file](PA3_student.qmd):
 
-Next, save the file in your Stat 331 / 531 folder -- this should be in a Week 3 or a Practice Activity subfolder!
+Next, save the file in your Stat 331 / 531 folder -- this should be in a Week 3 or a Practice Activity 3 subfolder!
 
 Now, open the `PA3_student.qmd` file. At the top of the document, we declare our package dependencies and load the data.
 
-(Note that the data loading function `read_csv()` will give you an outpouring of helpful information about the dataset. If you do not see the word "error", there is nothing to be concerned about.)
+::: {.callout-note}
+## Reading in data
+
+Note that the data loading function `read_csv()` will give you an outpouring of helpful information about the dataset. If you do not see the word "error", there is nothing to be concerned about.
+:::
+
 
 ```{r setup}
 #| warning: false
@@ -134,7 +150,7 @@ colleges_clean |>
 )
 ```
 
-**Step 6:** Create a new variable called TUITION_DIFF which contains the difference between in and out of state costs.
+**Step 6:** Create a new variable called `TUITION_DIFF` which contains the difference between in and out of state costs.
 
 ```{r mutate-differences}
 colleges_clean <- colleges_clean |> 
@@ -143,18 +159,19 @@ colleges_clean <- colleges_clean |>
 
 **Step 7:** Remove every row with missing data.
 
-***Note*****:** This is not always a great idea! Usually, even if *some* of the information is missing, we don't want to throw out the entire row. This time, however, we'll be lazy.
-
 ```{r drop-na}
 colleges_clean <- colleges_clean |> 
   drop.na()
 ```
 
-Lastly, notice that each of these steps started with
+::: {.callout-note}
+This is not always a great idea! Usually, even if *some* of the information is missing, we don't want to throw out the entire row. This time, however, we'll be lazy.
+:::
+
+**Notice that each of these steps started with:**
 
 ```{r all-together}
 #| eval: false
-
 colleges_clean <- colleges_clean |> ...
 ```
 
@@ -162,17 +179,13 @@ That is pretty redundant! Instead, we could perform all these tasks as one long 
 
 **Step 8:** Combine your (fixed) code chunks into a **single** code chunk that carries out all of the steps necessary to clean the data.
 
-**Note:** Think about coding efficiency -- you **should not** have multiple calls to the **same** function!
-
-```{r combine}
-# Code combining ALL of your previous steps into ONE pipeline
-
-
-```
+::: {.callout-tip}
+Think about coding efficiency -- you **should not** have multiple calls to the **same** function!
+:::
 
 # Part Two: Identify the mystery college
 
-Wow! Your best friend Ephelia has been accepted to her top choice college! Unfortunately, Ephelia is a very mysterious person, and she won't tell you directly which college this is. You'll have to use her clues to figure out which school is her dream school.
+Wow! Your best friend Ephelia has been accepted to her top choice college! Unfortunately, Ephelia is a very mysterious person, and they won't tell you directly which college this is. You'll have to use their clues to figure out which school is their dream school.
 
 Clues:
 
