@@ -23,35 +23,27 @@ library(tidyverse)
 library(flair)
 ```
 
-Now that we've refreshed how to work with different types of objects in R, let's
-start visualizing!
+Now that we've refreshed how to work with different types of objects in R, let's start visualizing!
 
-> "The simple graph has brought more information to the data analysist's mind
-> than any other device."
-> -- John Tukey
+> "The simple graph has brought more information to the data analysist's mind than any other device." -- John Tukey
 
-`r emo::ji("play button")` Watch Videos: 50 minutes  
+`r emo::ji("play button")` Watch Videos: 50 minutes
 
-  - I've broken the videos up into smaller ~5 minute increments! 
+-   I've broken the videos up into smaller \~5 minute increments!
 
-`r emo::ji("book")` Readings: 45 minutes   
+`r emo::ji("book")` Readings: 45 minutes
 
-  - I've added an optional video on how to take notes in a programming textbook [here](http://somup.com/crffFPbHQ2). 
+-   I've added an optional video on how to take notes in a programming textbook [here](http://somup.com/crffFPbHQ2).
 
-`r emo::ji("computer")` Activities: 30-45 minutes  
-  
-  - You'll be working through the textbook exercises for each section. 
+`r emo::ji("computer")` Activities: 30-45 minutes
+
+-   You'll be working through the textbook exercises for each section.
 
 `r emo::ji("check")` Check-ins: 1 (broken out by sections)
 
-
 ## Loading in the **ggplot2** Package
 
-This week we will be taking a deep dive into data visualization, using the 
-**ggplot2** package. The ggplot2 package is included in the **tidyverse**
-package that you have already downloaded! To load in the ggplot2 package, you
-will either need to run the code to load in the entire tidyverse package *or*
-load in the ggplot2 package directly. 
+This week we will be taking a deep dive into data visualization, using the **ggplot2** package. The ggplot2 package is included in the **tidyverse** package that you have already downloaded! To load in the ggplot2 package, you will either need to run the code to load in the entire tidyverse package *or* load in the ggplot2 package directly.
 
 ```{r, eval = FALSE, echo = TRUE}
 library(tidyverse)
@@ -61,23 +53,21 @@ OR
 library(ggplot2)
 ```
 
-## Data Visualization with **ggplot2** 
+## Data Visualization with **ggplot2**
 
-This coursework will walk you through the different sections of Chapter Three 
-in *R for Data Science*. 
+This coursework will walk you through the different sections of Chapter Three in *R for Data Science*.
 
-`r emo::ji("book")` [Required Reading: Data Visualisation](https://r4ds.had.co.nz/data-visualisation.html). 
+`r emo::ji("book")` [Required Reading: Data Visualisation](https://r4ds.hadley.nz/data-visualize.html).
 
 `r emo::ji("computer")` [Required Tutorial: Data Visualization Basics](https://rstudio.cloud/learn/primers/1.1)
 
-::: {.callout-tip}
-After working through the tutorial, if you feel more detail would be helpful,
-consider the following readings:
+::: callout-tip
+After working through the tutorial, if you feel more detail would be helpful, consider the following readings:
 
 `r emo::ji("question")` [Modern Dive: Chapter 2](https://moderndive.com/2-viz.html)
 :::
 
-### Introduction to Data Visualization with ggplot2 
+### Introduction to Data Visualization with ggplot2
 
 `r emo::ji("play button")` [Required Video: Why ggplot2? (4 minutes)](https://www.youtube.com/watch?v=5c-8yPCwVzs)
 
@@ -85,21 +75,20 @@ consider the following readings:
 
 #### `r emo::ji("check")` Check-in
 
-**Question 1** -- With the `mpg` dataset, make a scatterplot of `hwy` versus
-`cty`. Which of these correctly describe the relationship seen in the plot? 
+**Question 1** -- With the `mpg` dataset, make a scatterplot of `hwy` versus `cty`. Which of these correctly describe the relationship seen in the plot?
 
-- positive
-- strong
-- negative
-- weak
-- linear
-- non-linear
+-   positive
+-   strong
+-   negative
+-   weak
+-   linear
+-   non-linear
 
-**Question 2** -- What specifically does the code `ggplot(data = mpg)` do? 
+**Question 2** -- What specifically does the code `ggplot(data = mpg)` do?
 
-- Creates a blank plot
-- Makes a scatterplot of the first two variables in the `mpg` dataset
-- Creates a ggplot with the `mpg` dataset
+-   Creates a blank plot
+-   Makes a scatterplot of the first two variables in the `mpg` dataset
+-   Creates a ggplot with the `mpg` dataset
 
 ### Aesthetics
 
@@ -114,60 +103,51 @@ ggplot(data = mpg) +
 
 **Question 3:** What aesthetics does this plot contain?
 
-- x
-- y
-- color
-- data
+-   x
+-   y
+-   color
+-   data
 
-**Question 4:** Which of following changes would color the points blue? 
+**Question 4:** Which of following changes would color the points blue?
 
-```
-ggplot(data = mpg) +
-geom_point(mapping = aes(x = displ, y = hwy, 
-           color = blue))
-```
+    ggplot(data = mpg) +
+    geom_point(mapping = aes(x = displ, y = hwy, 
+               color = blue))
 
-```
-ggplot(data = mpg) +
-geom_point(mapping = aes(x = displ, y = hwy) 
-           color = "blue")
-```
+    ggplot(data = mpg) +
+    geom_point(mapping = aes(x = displ, y = hwy) 
+               color = "blue")
 
-```
-ggplot(data = mpg, mapping = aes(color = "blue)) +
-geom_point(mapping = aes(x = displ, y = hwy))
-```
+    ggplot(data = mpg, mapping = aes(color = "blue)) +
+    geom_point(mapping = aes(x = displ, y = hwy))
 
 ### geoms
 
 `r emo::ji("play button")` [Required Video: What is a geometric object?](https://www.youtube.com/watch?v=pMC2l2YhjMI)
 
-
 #### `r emo::ji("check")` Check-in
 
-**Question 4:** Match each plot with the `geom_XXX()` function used to create
-it! 
+**Question 4:** Match each plot with the `geom_XXX()` function used to create it!
 
 ::: columns
 ::: {.column width="50%"}
-- Line Chart
-- Boxplot 
-- Histogram
-- Area Chart
+-   Line Chart
+-   Boxplot
+-   Histogram
+-   Area Chart
 :::
 
-:::{.column width="50"}
-- `geom_point()`
-- `geom_line()`
-- `geom_histogram()`
-- `geom_area()`
+::: {.column width="50"}
+-   `geom_point()`
+-   `geom_line()`
+-   `geom_histogram()`
+-   `geom_area()`
 :::
 :::
 
 ## Getting a Bit Fancier
 
-In this section we dig a bit deeper into how we can make our code more efficient
-and other ways we can add additional variables to our plots. 
+In this section we dig a bit deeper into how we can make our code more efficient and other ways we can add additional variables to our plots.
 
 ### Global vs. local aesthetics
 
@@ -182,26 +162,18 @@ and other ways we can add additional variables to our plots.
 **Global**
 
 **Local**
-
 :::
 
-:::{.column width="80%"}
+::: {.column width="80%"}
+    ggplot(data = mpg, mapping = aes(x = mpg, y = hwy)) + geom_point()
 
-```
-ggplot(data = mpg, mapping = aes(x = mpg, y = hwy)) + geom_point()
-```
-
-```
-ggplot(data = mpg) + geom_point(mapping = aes(x = mpg, y = hwy))
-```
+    ggplot(data = mpg) + geom_point(mapping = aes(x = mpg, y = hwy))
 :::
 :::
 
-
-### Facets 
+### Facets
 
 `r emo::ji("play button")` [Required Video: Adding a third variable with facets](http://somup.com/crffbHbH1h)
-
 
 ### Data transformations
 
@@ -209,41 +181,40 @@ ggplot(data = mpg) + geom_point(mapping = aes(x = mpg, y = hwy))
 
 #### `r emo::ji("check")` Check-in
 
-**Question 6:** Match the stat function with its associated geom function. 
+**Question 6:** Match the stat function with its associated geom function.
 
 ::: columns
 ::: {.column width="50%"}
-- `stat_count()`
-- `stat_identity()`
+-   `stat_count()`
+-   `stat_identity()`
 :::
 
-:::{.column width="50%"}
-- `geom_bar()`
-- `geom_col()`
+::: {.column width="50%"}
+-   `geom_bar()`
+-   `geom_col()`
 :::
 :::
 
-### Changing the positions of bars 
+### Changing the positions of bars
 
 `r emo::ji("play button")` [Required Video: How do I change positions?](http://somup.com/crffFibH1R)
 
 #### `r emo::ji("check")` Check-in
 
-**Question 7:** What arguments for `geom_jitter()` control the amount of 
-jittering? 
+**Question 7:** What arguments for `geom_jitter()` control the amount of jittering?
 
-- width
-- height
-- stat
-- position
-- na.rm
-- show.legend
-- data
-- mapping
+-   width
+-   height
+-   stat
+-   position
+-   na.rm
+-   show.legend
+-   data
+-   mapping
 
 </br>
 
-### Plot Customizations 
+### Plot Customizations
 
 `r emo::ji("play button")` [Required Video: Axis labels, color themes, and legends, oh my! (7 minutes)](http://somup.com/crffFDbHiU)
 
@@ -251,8 +222,8 @@ jittering?
 
 **Question 8:** What can the `labs()` function do? (select all that apply)
 
-- Customize the x-axis label
-- Customize the y-axis label
-- Customize the legend label
-- Customize the plot title
-- Add a caption to the plot
+-   Customize the x-axis label
+-   Customize the y-axis label
+-   Customize the legend label
+-   Customize the plot title
+-   Add a caption to the plot

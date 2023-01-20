@@ -2653,7 +2653,7 @@ vertical-align: -.125em;
 <section id="data-visualization-with-ggplot2" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="data-visualization-with-ggplot2"><span class="header-section-number">2</span> Data Visualization with <strong>ggplot2</strong></h2>
 <p>This coursework will walk you through the different sections of Chapter Three in <em>R for Data Science</em>.</p>
-<p>📖 <a href="https://r4ds.had.co.nz/data-visualisation.html">Required Reading: Data Visualisation</a>.</p>
+<p>📖 <a href="https://r4ds.hadley.nz/data-visualize.html">Required Reading: Data Visualisation</a>.</p>
 <p>💻 <a href="https://rstudio.cloud/learn/primers/1.1">Required Tutorial: Data Visualization Basics</a></p>
 <div class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -2711,11 +2711,13 @@ Tip
 <p><strong>Question 4:</strong> Which of following changes would color the points blue?</p>
 <pre><code>ggplot(data = mpg) +
 geom_point(mapping = aes(x = displ, y = hwy, 
-           color = blue))</code></pre>
-<pre><code>ggplot(data = mpg) +
+           color = blue))
+
+ggplot(data = mpg) +
 geom_point(mapping = aes(x = displ, y = hwy) 
-           color = &quot;blue&quot;)</code></pre>
-<pre><code>ggplot(data = mpg, mapping = aes(color = &quot;blue)) +
+           color = &quot;blue&quot;)
+
+ggplot(data = mpg, mapping = aes(color = &quot;blue)) +
 geom_point(mapping = aes(x = displ, y = hwy))</code></pre>
 </section>
 </section>
@@ -2759,8 +2761,9 @@ geom_point(mapping = aes(x = displ, y = hwy))</code></pre>
 <p><strong>Global</strong></p>
 <p><strong>Local</strong></p>
 </div><div class="column" style="width:80%;">
-<pre><code>ggplot(data = mpg, mapping = aes(x = mpg, y = hwy)) + geom_point()</code></pre>
-<pre><code>ggplot(data = mpg) + geom_point(mapping = aes(x = mpg, y = hwy))</code></pre>
+<pre><code>ggplot(data = mpg, mapping = aes(x = mpg, y = hwy)) + geom_point()
+
+ggplot(data = mpg) + geom_point(mapping = aes(x = mpg, y = hwy))</code></pre>
 </div>
 </div>
 </section>

@@ -42,31 +42,26 @@ library(flair)
 
 ## How do I load my data?
 
-`r emo::ji("book")` [Required Reading: Data Import](https://r4ds.had.co.nz/data-import.html)
+`r emo::ji("book")` [Required Reading: Data Import](https://r4ds.hadley.nz/data-import.html)
 
 `r emo::ji("play button")` [Required Video: Loading Data (6 minutes)](https://www.youtube.com/watch?v=Kp4tJYCAvUs)
 
-`r emo::ji("computer")` Download the [Ages_Data.zip folder](Ages_Data.zip) and
-the [data_import_practice.qmd](data_import_practice.qmd) files. Save these files
-in your Stat 331 folder, possibly inside a subfolder named "Activities" or
-"Week 2".
+`r emo::ji("computer")` Download the [Ages_Data.zip folder](Ages_Data.zip) and the [data_import_practice.qmd](data_import_practice.qmd) files. Save these files in your Stat 331 folder, possibly inside a subfolder named "Activities" or "Week 2".
 
-::: {.callout-tip}
+::: callout-tip
 ## Extracting zip folders
+
 You will need to **extract** the contents of the `ages.zip` file, that means you will need to uncompress the files from the folder for RStudio to know where to get the data from.
 :::
 
-Now, open your STAT 331 RStudio Project. Next, open the
-`data_import_practice.qmd` file and write the code necessary to carry out the
-following tasks:
+Now, open your STAT 331 RStudio Project. Next, open the `data_import_practice.qmd` file and write the code necessary to carry out the following tasks:
 
 1.  Read in the dataset `ages.csv`.
 2.  Read in the dataset `ages_tab.txt`
 3.  Read in the dataset `ages_mystery.txt`
 4.  Read in the dataset `ages.xlsx`
 5.  Both `read.csv()` and `read.table()` have an optional argument called `stringsAsFactors`. Figure out what this does.
-6.  Find a way to use `read_csv()` to read `ages.csv` with the variable "Name"
-as a factor and "Age" as a character.
+6.  Find a way to use `read_csv()` to read `ages.csv` with the variable "Name" as a factor and "Age" as a character.
 
 ------------------------------------------------------------------------
 
