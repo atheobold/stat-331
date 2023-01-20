@@ -21,7 +21,7 @@ The questions in this lab are noted with numbers and boldface. Each question wil
 
 This document is quite "plain," meaning it does not have any special formatting. As part of your demonstration of working with Quarto documents, I would encourage you to spice your documents up (e.g., declaring execution options, specifying how your figures should be output, formatting your code output).
 
-::: {.callout-caution}
+::: callout-caution
 ## Seeking Help
 
 Part of learning to program is learning from a variety of resources. Thus, I expect you will use resources beyond the textbook used for this course. However, there is an important balance between copying someone else's code and ***using their code to learn***. The [course syllabus](https://docs.google.com/document/d/1-SSRp_mXFNgYiy4uW9tlcpxDpQH4OuMqK-Hh4v5AvZI/edit?usp=sharing) defines what is considered plagiarism in this course. Essentially, if you use external resources, I want to know about it. You can "inform" me of any resources you used by pasting the link to the resource in a code comment next to where you used that resource.
@@ -216,16 +216,11 @@ Flip the orientation of your boxplots from question 10. If you created side-by-s
 
 # Lab 1 Submission
 
-Once you have completed your lab you should upload **both** your rendered HTML file and your Quarto file to Canvas.
+For Lab 2 you will submit **only** your HTML file. Your HTML file is required to
+have the following specifications in the YAML options (at the top of your document):
 
-**Code Visibility**
+- be self-contained (`self-contained: true`)
+- include your source code (`code-tools: true`)
+- include all your code and output (`echo: true`)
 
-All of your code needs to be visible! There should be no hidden code in your Quarto file! That means, there should be no `#| include: false` or `#| echo: false` options in your code chunks.
-
-::: callout-tip
-If you want to remove messages or warnings from your output, you can do this with `#| message: false` or `#| warning: false`options.
-:::
-
-**Visualization Visibility**
-
-By default Quarto documents do not produce self-contained HTML files. This is not what we want! Your HTML file **must** be self contained, so **all** the visualizations are included in the file. Please follow the Lab 1 instructions to ensure your HTML file is self contained.
+**If any of the options are not included, your Lab 2 or Challenge 2 assignment will receive an "Incomplete" and you will be required to submit a revision.** 
