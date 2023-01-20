@@ -1,5 +1,5 @@
 ---
-title: "Practice Activity 3: Data Wrangling with dplyr 🏫"
+title: "Practice Activity 3: Data Wrangling with dplyr"
 format: html
 editor: visual
 ---
