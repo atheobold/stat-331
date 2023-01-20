@@ -9,6 +9,7 @@ format:
     number-depth: 2
     code-block-bg: "#76b5c5"
     highlight-style: monochrome
+    self-contained: true
 editor: visual
 execute: 
   eval: false
