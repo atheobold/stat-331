@@ -13,8 +13,6 @@ format:
 editor: visual
 execute: 
   eval: false
-resources: 
-  - PA3_student.qmd
 ---
 
 Today you will be using the dplyr package to clean a dataset and then using that cleaned dataset to figure out what college Ephelia has been accepted to.
