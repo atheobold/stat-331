@@ -1,0 +1,228 @@
+---
+title: "Lab 3: Hip-Hop Lyrics"
+format: 
+  html: 
+    self-contained: true
+    code-tools: true
+    toc: true
+editor: visual
+execute: 
+  echo: false
+  warning: false
+  message: false
+---
+
+[Download starter .qmd file](lab3-hiphop-lyrics.qmd)
+
+[Download `hiphop.csv`](hiphop.csv)
+
+::: callout-warning
+Save **both** your .qmd file and your data set in the same folder within your
+Stat 331 directory! **DO NOT** open your .qmd file straight from your downloads folder.
+:::
+
+::: {.callout-tip collapse="true"}
+-   The first chunk of your Quarto document should be to *declare your libraries* (probably only `tidyverse` for now).
+-   The second chunk of your Quarto document should be to *load in your data* (using the `here()` function!).
+-   Make sure you address **all the questions** in these instructions.
+-   If a question requires **any** type of calculation, **you should provide code for your answer!**
+-   I have provided hints about functions that might be useful to you. You are **not required** to use these functions.
+-   You may have to Google to solve some of these!
+-   Be sure to **save** your work regularly (`Ctrl/Cmd + S` or `File > Save` or the floppy disk icon)
+-   Be sure to **render** your file every so often, to check for errors and make sure it looks nice.
+    -   Make your Quarto document does not contain `View(dataset)` or `install.packages("package")`, both of these will prevent rendering.
+    -   Check your Quarto document for moments when you looked at the data by typing the name of the data frame. Leaving these in means the whole dataset will print out and this looks unprofessional.
+    -   If all else fails, you can set your execution options to `error: true`, which will allow the file to render even if errors are present.
+:::
+
+### Data Set
+
+The data set `hiphop` contains results from a study conducted by a linguist at the University of Minnesota. The researcher was interested in predicting musical taste based on familiarity with African American English (AAE). 168 subjects participated in the study, and each was asked to define 64 different AAE terms. The definitions given were used to create a `familiarity` score for each subject for each term. This score quantifies how well the subject knew the term on a scale of 1-5 (1 = not at all, 5 = very well). Before tackling the problems, study the description of each variable [here](http://conservancy.umn.edu/bitstream/handle/11299/116327/5/explanationAAEHiphopChesley.txt).
+
+**1. Load the appropriate R packages and import the data set, `hiphop`.**
+
+```{r packages}
+# code chunk for loading packages and importing the data
+
+```
+
+### Summary
+
+**2. Provide a brief overview (2-4 sentences) of the data set.**
+
+```{r dataset-explore}
+# you may want to use code to answer this question
+
+```
+
+::: callout-note
+It is always good practice to start an analysis by getting a feel for the data and providing a quick summary for readers. You do not need to show any source code for this question, although you probably want to use code to get some information about the data set.
+:::
+
+**3. What are the rows of this data set?**
+
+::: callout-warning
+It is not one person per row!
+:::
+
+```{r rows}
+# you may want to use code to answer this question
+
+```
+
+**4. Missing values for some of the variables were replaced with other values. How were missing values replaced? What do you believe are some benefits and drawbacks of doing this?**
+
+```{r missing}
+# you may want to use code to answer this question
+
+```
+
+**5. Clean the data set in whichever ways you see fit. This might mean adjusting *variable type*, for example from `character` to `factor`, or dealing with missing data. Assign your cleaned data set to a new data set named `hiphop_clean` -- use this data set going forward.**
+
+::: callout-tip
+Helpful functions: `mutate()`, `as.factor()`
+
+Likert scales (1-5) will be read by R as numeric values and MUST be converted to factors.
+
+It would be most efficient to use `across()` in combination with `mutate()` to complete this task.
+:::
+
+```{r}
+# code chunk for Q5
+
+```
+
+**6. How many unique AAE words were studied in this data set?**
+
+::: callout-tip
+Helpful functions: `distinct()`, `count()`
+:::
+
+```{r}
+# code chunk for Q6
+
+```
+
+**7. Make a new variable that re-categorizes `ethnic` into only two groups, "white" and "non-white", to simplify your data.**
+
+::: callout-tip
+Helpful functions: `mutate()`, `if_else()`
+:::
+
+```{r}
+# code chunk for Q7
+
+```
+
+**8. It is fairly common for researchers to collapse ethnic or racial categories similar to what you just did. What are some issues with representing the data in this way?**
+
+**9. What are the demographics of the people in this study? Investigate the variables `sex`, `age`, and `ethnic` and summarize your findings in 1-3 complete sentences.**
+
+::: callout-tip
+You'll need to first manipulate your data to have each person represented only once.
+
+Helpful functions: `select()`, `distinct(___, .keep_all = TRUE)`, `count()`, `summary()`
+:::
+
+```{r}
+# code chunk for Q8
+
+```
+
+**10. Make at least two plots to display the demographic information of the subjects in this study.**
+
+::: callout-note
+You do not need to discuss these plots, but make sure they are appropriate to the data types and have informative titles and axis labels. Feel free to use the skills you learned in Challenge 2 to enhance your plots!
+:::
+
+```{r}
+# code chunk for Q9
+
+```
+
+### Familiar words
+
+For each demographic group listed below, determine which word(s) in this study was(were) the most **and** least familiar on average.
+
+::: callout-tip
+Helpful functions: `filter()`, `group_by()`, `summarize()`, `slice_max()`, `slice_min()`
+
+Useful variables: `word`, `familiarity`, `sex`, `age`, `ethnic`
+:::
+
+**11. People below the age of 20.**
+
+```{r}
+# code chunk for Q10
+
+```
+
+**12. Non-white women.**
+
+```{r}
+# code chunk for Q11
+
+```
+
+**13. White men above the age of 30.**
+
+```{r}
+# code chunk for Q12
+
+```
+
+### Study Subjects
+
+A joke among the [Tidy Tuesday](https://www.tidytuesday.com/) community is that Justin Bieber was one of the subjects in this study. Bieber, a white male, from a relatively small town (10,000-60,000 people) in Ontario would have been 17-23 at the time of the study.
+
+**14. Determine which subject you believe is secretly Bieber, justify your answer.**
+
+::: callout-tip
+Refer again to the data set description. There is another clue about Bieber's identity.
+:::
+
+```{r}
+# code chunk for Q13
+
+```
+
+## Challenge 3: Group Comparisons & Data Ethics
+
+::: callout-note
+Your challenge should be submitted as a **separate file**, **not** at the bottom of your Lab 3 file. Please submit your rendered HTML file.
+
+Make sure to include the following Quarto options in the YAML for your `challenge3.qmd` file:
+
+-   `self-contained: true`
+-   `echo: true`
+-   `code-tools: true`
+
+You might just want to copy the YAML from this lab, or create a copy of this lab and delete the unnecessary parts. You may still need some of your data cleaning steps from the lab.
+:::
+
+### Published Comparisons
+
+In the published article ([You Know What It Is: Learning Words through Listening to Hip-Hop](https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0028248&type=printable)), the author presents a series of comparisons about the variables which most explain an individual's familiarity with African American English (AAE).
+
+Let us instead compare the number of artists participants reported liking for each genre. Specifically, you will determine which music genre most differentiates each of the demographic groups provided.
+
+> Which genre had much higher average (mean or median) reported artists in one group than the other.
+>
+> -   Male versus Female
+> -   White versus Non-White
+
+::: callout-tip
+You might find it helpful to first create a new data set with only the variables you are interested in! Look at the Music Variables in the data set description along with the demographics of interest.
+
+Helpful functions: `select()`, `group_by()`, `summarize()`, `across()`
+
+Other useful operations in R: `mean()`, `diff()`, `abs()`, `which.max()`
+:::
+
+### Study Design Critique -- Data Ethics
+
+Myself, members of the Tidy Tuesday community, and previous 331 students have voiced concerns regarding the design and social context of this study.
+
+You've already read the [data description (link)](http://conservancy.umn.edu/bitstream/handle/11299/116327/5/explanationAAEHiphopChesley.txt) regarding how participants were recruited for participation in this study. **Now**, you need to read additional details regarding aspects of the study in the published paper: [You Know What It Is: Learning Words through Listening to Hip-Hop](https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0028248&type=printable).
+
+> Based on the design of this study and its context (African American English), what are **at least two** concerns you have? Keep in mind this critique aligns with conversations regarding data ethics. Thus, your concerns need to address the racial aspects of the design of this study.

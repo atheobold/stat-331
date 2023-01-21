@@ -17,20 +17,15 @@ resources:
   - PA3_student.qmd
 ---
 
-Today you will be using the dplyr package to clean a dataset and then using that
-cleaned dataset to figure out what college Ephelia has been accepted to.
+Today you will be using the dplyr package to clean a dataset and then using that cleaned dataset to figure out what college Ephelia has been accepted to.
 
 ## Dealing with errors
 
-As you work through this PA, you will encounter some code that does not work as
-you want it to. Don't despair! Errors (when R is unable to run your code) and
-bugs (when the code doesn't do what you hoped) are a natural part of coding.
-Even the best of the best deal with these problems regularly - learning to track
-down the issue is a skill that you can learn and practice.
+As you work through this PA, you will encounter some code that does not work as you want it to. Don't despair! Errors (when R is unable to run your code) and bugs (when the code doesn't do what you hoped) are a natural part of coding. Even the best of the best deal with these problems regularly - learning to track down the issue is a skill that you can learn and practice.
 
 ## Advice for dealing with errors
 
-::: {.column-margin}
+::: column-margin
 ![Image by Allison Horst](images/debugging_fire.jpeg)
 :::
 
@@ -76,18 +71,17 @@ This section will clean today's dataset, so that you can use it more easily in P
 
 ## Data download & packages
 
-First, [download the template PA3 Quarto file](PA3_student.qmd):
+First, [Download starter .qmd file](PA3_main.qmd):
 
 Next, save the file in your Stat 331 / 531 folder -- this should be in a Week 3 or a Practice Activity 3 subfolder!
 
 Now, open the `PA3_student.qmd` file. At the top of the document, we declare our package dependencies and load the data.
 
-::: {.callout-note}
+::: callout-note
 ## Reading in data
 
 Note that the data loading function `read_csv()` will give you an outpouring of helpful information about the dataset. If you do not see the word "error", there is nothing to be concerned about.
 :::
-
 
 ```{r setup}
 #| warning: false
@@ -165,7 +159,7 @@ colleges_clean <- colleges_clean |>
   drop.na()
 ```
 
-::: {.callout-note}
+::: callout-note
 This is not always a great idea! Usually, even if *some* of the information is missing, we don't want to throw out the entire row. This time, however, we'll be lazy.
 :::
 
@@ -180,7 +174,7 @@ That is pretty redundant! Instead, we could perform all these tasks as one long 
 
 **Step 8:** Combine your (fixed) code chunks into a **single** code chunk that carries out all of the steps necessary to clean the data.
 
-::: {.callout-tip}
+::: callout-tip
 Think about coding efficiency -- you **should not** have multiple calls to the **same** function!
 :::
 
