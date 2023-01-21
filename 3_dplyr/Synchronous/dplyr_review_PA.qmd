@@ -1,0 +1,368 @@
+---
+title: "Recap of Data Wrangling with dplyr"
+author: "STAT 331"
+format: 
+  revealjs:
+    logo: images/
+    theme: night
+    self-contained: true
+editor: visual
+execute: 
+  warning: false
+  message: false
+  echo: false
+---
+
+
+```{r packages}
+#| include: false
+library(xaringanthemer)
+library(xaringan)
+library(tidyverse)
+library(flair)
+library(ggridges)
+library(gridExtra)
+library(randomNames)
+```
+
+## Ugliest Plot
+
+<https://docs.google.com/presentation/d/19u5djgMsPLtxoM-rfAQuLyP89B4nYdW8uBhNAEJQoS8/edit?usp=sharing>
+
+## The tidyverse Philosophy 
+
+![](images/hal_abelson.jpeg)
+
+---
+
+## A Vignette
+
+. . .
+
+`subset()`
+
+> Return subsets of vectors, matrices or data frames which
+> meet conditions.
+
+. . .
+
+::: columns
+::: {.column width="40%"}
+`subset` argument states how the **rows** of the dataframe should be filtered
+
+```{r}
+#| eval: false
+#| echo: true
+#| code-line-numbers: false
+subset(surveys, 
+       subset = 
+         species_id == "DS")
+```
+
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="50%"}
+`select` argument states what **columns** should be selected from the
+dataframe
+
+```{r}
+#| eval: false
+#| echo: true
+#| code-line-numbers: false
+subset(surveys, 
+       subset = species_id == "DS", 
+       select = c(weight, 
+                  hindfoot_length)
+       )
+```
+:::
+:::
+
+##  {background-color="#D4D4D4"}
+
+<center>
+::: {style="margin-top: 100px; font-size: 2em; color: #000000;"}
+We want functions that accomplish **one** task!
+:::
+</center>
+
+![](images/protest3.jpg)
+
+##  {background-color="#D4D4D4"}
+
+<center>
+::: {style="margin-top: 100px; font-size: 2em; color: #000000;"}
+We want functions with **intuitive** names!
+:::
+</center>
+
+![](images/protest2.jpeg)
+
+## Data Wrangling Verbs
+
+::: columns
+::: {.column width="40%"}
+![](images/dplyr.png)
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="55%"}
+`filter()`
+
+`select()`
+
+`mutate()`
+
+`summarize()`
+
+`arrange()`
+
+`group_by()`
+:::
+:::
+
+---
+
+##  {background-color="#D4D4D4"}
+
+::: {style="font-size: 2em; color: #000000;"}
+Brainstorm definitions for each verb
+:::
+
+::: columns
+::: {.column width="30%"}
+`filter()`
+
+`select()`
+
+`mutate()`
+
+`group_by()`
+
+`summarize()`
+
+`arrange()`
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="65%"}
+
+:::
+:::
+
+---
+
+## 
+
+::: columns
+::: {.column width="55"}
+::: {style="font-size: 1.5em;"}
+The Pipe `|>`
+:::
+:::
+
+::: {.column width="25%"}
+```{r}
+#| fig-height: 2
+#| fig-width: 2
+knitr::include_graphics("images/pipe.png")
+```
+:::
+
+::: {.column width="25%"}
+```{r}
+#| fig-height: 2
+#| fig-width: 2
+knitr::include_graphics("images/not_a_pipe.jpg")
+```
+:::
+:::
+
+<center>
+![](images/pipe_process.png)
+</center>
+
+---
+
+## Preview Activity Review
+
+Suppose we would like to study how the ratio of penguin body mass to flipper
+size differs across the species. Arrange the following steps into an order that 
+accomplishes this goal (assuming the steps are connected with a `|>`).
+
+`arrange(med_mass_flipper_ratio)`
+
+`group_by(species)`
+
+`penguins`
+
+`summarize(med_mass_flipper_ratio = median(mass_flipper_ratio))`
+
+`mutate(mass_flipper_ratio = body_mass_g / flipper_length_mm))`
+
+---
+
+## A Different Context 
+
+You have data on each Cal Poly student for the 2020-2021 academic year.
+You are tasked with reporting how the number of CR/NC courses students take
+differs based on department.
+
+. . .
+
+```{r}
+#| echo: false
+students <- tibble(name = randomNames(n = 10), 
+                   department = c(rep("Business", 3), 
+                                  rep("Liberal Studies", 2),
+                                  "Chemistry",
+                                  rep("Biology", 2), 
+                                  rep("Political Science", 2)
+                                  ), 
+                   CRNC_f20 = rbinom(10, size = 5, prob = 0.2),
+                   CRNC_w21 = rbinom(10, size = 5, prob = 0.2),
+                   CRNC_s21 = rbinom(10, size = 5, prob = 0.2)
+                   )
+
+knitr::kable(slice_sample(students, n = 10)) |> 
+  kableExtra::kable_styling()
+```
+
+. . .
+
+##  {background-color="#D4D4D4"}
+
+::: {style="margin-top: 100px; font-size: 3em; color: #000000;"}
+
+__What data wrangling operations would you use?__
+
+__What order would you use to accomplish this goal?__
+
+:::
+
+##  {background-color="#D4D4D4"}
+
+::: {style="margin-top: 100px; font-size: 4em; color: #000000;"}
+Problem Statement:
+:::
+
+Department totals for number of CR / NC courses]
+
+---
+
+##  {background-color="#D4D4D4"}
+
+::: {style="margin-top: 100px; font-size: 2em; color: #000000;"}
+Step 1: Get totals for each student
+:::
+
+```{r name-totals}
+#| eval: false
+#| echo: false
+#| code-line-numbers: "|2"
+
+students |> 
+  group_by(name) |> 
+  mutate(total = sum(CRNC_f20, CRNC_w21, CRNC_s21)
+         ) 
+
+```
+
+##  {background-color="#D4D4D4"}
+
+::: {style="margin-top: 100px; font-size: 2em; color: #000000;"}
+Step 2: Get department totals
+:::
+
+
+```{r dept-totals, echo = FALSE, eval = FALSE}
+#| echo: false
+#| eval: false
+#| code-line-numbers: "|4"
+
+students |> 
+  group_by(name) |> 
+  mutate(total = sum(CRNC_f20, CRNC_w21, CRNC_s21)
+         ) |> 
+  group_by(department) |> 
+  summarize(final_total = sum(total)
+            )
+```
+
+##  {background-color="#D4D4D4"}
+
+::: {style="margin-top: 100px; font-size: 2em; color: #000000;"}
+Step 3: Arrange the totals
+:::
+
+```{r arrange, echo = FALSE, eval = FALSE}
+students |> 
+  group_by(name) |> 
+  mutate(total = sum(CRNC_f20, CRNC_w21, CRNC_s21)
+         ) |> 
+  group_by(department) |> 
+  summarize(final_total = sum(total)
+            ) |> 
+  arrange(desc(final_total))
+```
+
+## Getting Specific
+
+Often you are interested in **one** specific summary statistic!
+
+::: columns
+::: {.column width="40%"}
+```{r}
+students |> 
+  group_by(department) |> 
+  count(sort = TRUE) 
+```
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="55%"}
+```{r}
+students |> 
+  group_by(department) |> 
+  count() |> 
+  filter(department == "Political Science")
+```
+:::
+:::
+
+## A Handy Tool
+
+`pull()` 
+
+- Extracts entries from dataframes
+
+. . .
+
+```{r}
+students |> 
+  group_by(department) |> 
+  count() |> 
+  filter(department == "Political Science") |> 
+  pull()
+```
+
+## Your Turn: PA Exploration
+
+- Find your group
+- Introduce yourself
+- Decide on team roles (will change each week)
+  * Reporter -- Types the solutions
+  * Editor -- Asks professor **team** questions, double checks what is typed
+  * Facilitator -- Leads discussion, makes sure everyone understands the task
+  * Captain -- Encourages participation, enforces norms, brings conversation
+  back if it deviates
+

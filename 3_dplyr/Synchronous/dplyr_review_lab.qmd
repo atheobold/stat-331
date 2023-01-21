@@ -1,0 +1,195 @@
+---
+title: "A Few More Data Wrangling Tools"
+author: "STAT 331"
+format: 
+  revealjs:
+    logo: images/ggplot2.png
+    theme: night
+    self-contained: true
+editor: visual
+execute: 
+  warning: false
+  message: false
+---
+
+```{r packages}
+#| include: false
+
+library(xaringanthemer)
+library(xaringan)
+library(tidyverse)
+library(flair)
+```
+
+class: middle
+
+.larger\[A few words about `drop_na()`\]
+
+--
+
+-   Easy tool to remove missing values
+
+--
+
+-   Unilaterally removes **any** row with a missing value for **any** variable
+
+--
+
+-   **But** you can specify what columns it should look at for missing values!
+
+------------------------------------------------------------------------
+
+.larger\[Summarizing Frequencies\]
+
+`count()` -- counts the values of one or more **categorical** variables
+
+.pull-left\[
+
+```{r, eval = FALSE}
+starwars |> 
+  count(homeworld, sort = TRUE)
+```
+
+-   `sort` specifies if the resulting tibble should be sorted in descending order \]
+
+--
+
+.pull-right\[
+
+```{r, echo = FALSE}
+starwars |> 
+  count(homeworld, sort = TRUE)
+```
+
+\]
+
+------------------------------------------------------------------------
+
+.larger\[Unique Groups\]
+
+`distinct()` -- selects the unique / distinct rows from a dataset
+
+--
+
+<center>.large\[**Arguments**\]</center>
+
+-   `...` -- variables to use when determining uniqueness
+    -   can use multiple!
+
+--
+
+-   `.keep_all` -- decides if all of the columns should be kept
+    -   `FALSE` is default!
+
+------------------------------------------------------------------------
+
+.larger\[Discritizing Variables\]
+
+--
+
+-   `if_else()`
+    -   Useful when there are two options
+
+--
+
+-   `case_when()`
+    -   Useful when there are three or more options
+
+------------------------------------------------------------------------
+
+class: middle, center, inverse
+
+.hand\[.larger\[What if I want to perform the same operation across multiple columns?\]\]
+
+------------------------------------------------------------------------
+
+class: center, middle
+
+.larger\[`across()`\]
+
+> makes it easy to apply the same transformation to multiple columns, allowing you to use `select()` semantics inside in "data-masking" functions like `summarise()` and `mutate()`
+
+--
+
+</br>
+
+.large\[`across(.cols = everything(), .fns = NULL, ...)`\]
+
+`.cols` -- columns in data to select\
+`.fns` -- functions to apply to selected columns\
+`...` -- addtional arguments for the function calls (from `.fns`)
+
+------------------------------------------------------------------------
+
+.larger\[Summarizing Multiple Columns\]
+
+.pull-left-wide\[
+
+```{r, eval = FALSE}
+starwars |> 
+  summarise(across(height:mass, mean, na.rm = TRUE))
+
+```
+
+</br> </br>
+
+.large\[Conditional Summarizing\]
+
+```{r, eval = FALSE}
+starwars |> 
+  summarise(across(where(is.numeric), mean, na.rm = TRUE))
+
+```
+
+\]
+
+.pull-right-narrow\[ </br>
+
+```{r, echo = FALSE}
+starwars |> 
+  summarise(across(height:mass, mean, na.rm = TRUE))
+
+```
+
+</br> </br>
+
+```{r, echo = FALSE}
+starwars |> 
+  summarise(across(where(is.numeric), mean, na.rm = TRUE))
+```
+
+\]
+
+------------------------------------------------------------------------
+
+.bitlarger\[`r emo::ji("heart")` `|>`\]
+
+.pull-left\[
+
+```{r, eval = FALSE}
+starwars |> 
+  filter(gender == "feminine", 
+         !is.na(homeworld)) |>
+  ggplot(aes(x = gender, fill = homeworld)) + 
+  geom_bar(position = "dodge") + 
+  labs(x = "Gender Expression of Character", 
+       fill = "Homeworld")
+  
+```
+
+\]
+
+.pull-right\[
+
+```{r, echo = FALSE, fig.width = 6, fig.height = 6}
+starwars |> 
+  filter(gender == "feminine", 
+         !is.na(homeworld)) |>
+  ggplot(aes(x = gender, fill = homeworld)) + 
+  geom_bar(position = "dodge") +
+  labs(x = "Gender Expression of Character", 
+       fill = "Homeworld")
+  
+```
+
+\]
