@@ -192,32 +192,57 @@ knitr::include_graphics("images/not_a_pipe.jpg")
 
 ## Preview Activity Review
 
+::: columns
+::: {.column width="35%"}
+::: {style="font-size: 0.9em;"}
 Suppose we would like to study how the ratio of penguin body mass to flipper
 size differs across the species. Arrange the following steps into an order that 
 accomplishes this goal (assuming the steps are connected with a `|>`).
+:::
+:::
 
-`arrange(med_mass_flipper_ratio)`
+::: {.column width="5%"}
+:::
 
-`group_by(species)`
+::: {.column width="60%"}
+```{r}
+#| eval: false
+#| echo: true
+#| code-line-numbers: false
 
-`penguins`
+arrange(med_mass_flipper_ratio)
 
-`summarize(med_mass_flipper_ratio = median(mass_flipper_ratio))`
+group_by(species)
 
-`mutate(mass_flipper_ratio = body_mass_g / flipper_length_mm))`
+penguins
 
----
+summarize(med_mass_flipper_ratio = 
+            median(mass_flipper_ratio))
 
-## A Different Context 
+mutate(mass_flipper_ratio = 
+         body_mass_g / flipper_length_mm)
+```
+:::
+:::
 
+##  {background-color="#D4D4D4"}
+
+<center>
+::: {style="font-size: 1.5em; color: #000000;"}
+A Different Context 
+:::
+</center>
+
+::: {style="font-size: 1.25m;"}
 You have data on each Cal Poly student for the 2020-2021 academic year.
-You are tasked with reporting how the number of CR/NC courses students take
-differs based on department.
-
-. . .
+You are tasked with reporting how the number of CR/NC courses students took
+differed based on department.
+:::
 
 ```{r}
 #| echo: false
+#| code-overflow: scroll
+
 students <- tibble(name = randomNames(n = 10), 
                    department = c(rep("Business", 3), 
                                   rep("Liberal Studies", 2),
@@ -230,31 +255,26 @@ students <- tibble(name = randomNames(n = 10),
                    CRNC_s21 = rbinom(10, size = 5, prob = 0.2)
                    )
 
-knitr::kable(slice_sample(students, n = 10)) |> 
-  kableExtra::kable_styling()
+slice_sample(students, n = 10) |> 
+  knitr::kable() |> 
+  kableExtra::kable_styling(font_size = 20)
 ```
-
-. . .
 
 ##  {background-color="#D4D4D4"}
 
-::: {style="margin-top: 100px; font-size: 3em; color: #000000;"}
+::: {style="font-size: 3em; color: #000000;"}
+Problem Statement:
+:::
+
+Department totals for number of CR / NC courses
+
+</br>
+
+. . .
 
 __What data wrangling operations would you use?__
 
 __What order would you use to accomplish this goal?__
-
-:::
-
-##  {background-color="#D4D4D4"}
-
-::: {style="margin-top: 100px; font-size: 4em; color: #000000;"}
-Problem Statement:
-:::
-
-Department totals for number of CR / NC courses]
-
----
 
 ##  {background-color="#D4D4D4"}
 
@@ -263,13 +283,13 @@ Step 1: Get totals for each student
 :::
 
 ```{r name-totals}
-#| eval: false
-#| echo: false
+#| output: false
+#| echo: true
 #| code-line-numbers: "|2"
 
 students |> 
   group_by(name) |> 
-  mutate(total = sum(CRNC_f20, CRNC_w21, CRNC_s21)
+  mutate(total_CRNC = sum(CRNC_f20, CRNC_w21, CRNC_s21)
          ) 
 
 ```
@@ -282,16 +302,16 @@ Step 2: Get department totals
 
 
 ```{r dept-totals, echo = FALSE, eval = FALSE}
-#| echo: false
-#| eval: false
-#| code-line-numbers: "|4"
+#| echo: true
+#| output: false
+#| code-line-numbers: "|5"
 
 students |> 
   group_by(name) |> 
-  mutate(total = sum(CRNC_f20, CRNC_w21, CRNC_s21)
+  mutate(total_CRNC = sum(CRNC_f20, CRNC_w21, CRNC_s21)
          ) |> 
   group_by(department) |> 
-  summarize(final_total = sum(total)
+  summarize(final_total = sum(total_CRNC)
             )
 ```
 
@@ -301,15 +321,19 @@ students |>
 Step 3: Arrange the totals
 :::
 
-```{r arrange, echo = FALSE, eval = FALSE}
+```{r arrange}
+#| echo: true
+#| output-location: fragment
+#| code-line-numbers: "|8"
+
 students |> 
   group_by(name) |> 
-  mutate(total = sum(CRNC_f20, CRNC_w21, CRNC_s21)
+  mutate(total_CRNC = sum(CRNC_f20, CRNC_w21, CRNC_s21)
          ) |> 
   group_by(department) |> 
-  summarize(final_total = sum(total)
+  summarize(dept_total = sum(total_CRNC)
             ) |> 
-  arrange(desc(final_total))
+  arrange(desc(dept_total))
 ```
 
 ## Getting Specific
@@ -317,8 +341,9 @@ students |>
 Often you are interested in **one** specific summary statistic!
 
 ::: columns
-::: {.column width="40%"}
+::: {.column width="35%"}
 ```{r}
+#| echo: true
 students |> 
   group_by(department) |> 
   count(sort = TRUE) 
@@ -328,8 +353,9 @@ students |>
 ::: {.column width="5%"}
 :::
 
-::: {.column width="55%"}
+::: {.column width="60%"}
 ```{r}
+#| echo: true
 students |> 
   group_by(department) |> 
   count() |> 
@@ -347,11 +373,13 @@ students |>
 . . .
 
 ```{r}
+#| echo: true
+#| output-location: fragment
 students |> 
   group_by(department) |> 
   count() |> 
   filter(department == "Political Science") |> 
-  pull()
+  pull(n)
 ```
 
 ## Your Turn: PA Exploration
