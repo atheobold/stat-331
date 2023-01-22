@@ -69,7 +69,14 @@ This section will clean today's dataset, so that you can use it more easily in P
 
 ## Data download & packages
 
-First, [Download starter .qmd file](PA3_main.qmd):
+First, [Download starter .qmd file](PA3_main.qmd). 
+
+::: {.callout-caution}
+# Add your preferred YAML
+The downloaded file **does not** contain an YAML, you need to 
+include your own. This allows you to specify how you would like 
+your rendered HTML to look! The sky is the limit! 
+:::
 
 Next, save the file in your Stat 331 / 531 folder -- this should be in a Week 3 or a Practice Activity 3 subfolder!
 
