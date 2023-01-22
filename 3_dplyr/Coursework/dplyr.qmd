@@ -36,8 +36,7 @@ When you are finished with the readings and videos, you should be able to...
 
 -   Describe to someone what a function conflict is
 
--   Describe to someone the similarities and differences between a `list`, a
-`data.frame`, and a `tibble`
+-   Describe to someone the similarities and differences between a `list`, a `data.frame`, and a `tibble`
 
 -   Identify the **structure** of an object
 
@@ -59,8 +58,7 @@ When you are finished with the readings and videos, you should be able to...
 
 -   Use `group_by()` to perform groupwise operations
 
--   Use the pipe operator (`|>` or `|>`) to chain together data wrangling
-operations
+-   Use the pipe operator (`|>` or `|>`) to chain together data wrangling operations
 
 ## Presentation Slides
 
@@ -80,14 +78,13 @@ $\hspace{0.25in}$ `r emo::ji("link")` [Link to **All** Presentation Slides](http
 
 `r emo::ji("play button")` [Required Video: Why do I get this message when I load the tidyverse? -- 8 minutes](http://somup.com/crf6q4b920)
 
-::: {.callout-note}
+::: callout-note
 ## Removing messages from your HTML file
-To remove the package loading / data loading messages, you have two options: 
 
-1. Globally turn off all messages by specifying  `message: false` as an
-`execute` option in your YAML 
-2. Locally turn off messages for a specific code chunk by specifying 
-`#| message: false` as a code chunk option
+To remove the package loading / data loading messages, you have two options:
+
+1.  Globally turn off all messages by specifying `message: false` as an `execute` option in your YAML
+2.  Locally turn off messages for a specific code chunk by specifying `#| message: false` as a code chunk option
 :::
 
 ------------------------------------------------------------------------
@@ -121,10 +118,10 @@ d)  The elements of the list must all have names.
 
 Tibbles are described as "opinionated" dataframes. Which of the following are true about a `tibble`'s behavior? (Select all that apply)
 
-a) `tibble`s only print the first 10 rows of a dataset
-b) `tibble`s allow for non-syntactic variable names, like `:)`
-c) `tibble`s never convert strings to factors
-d) `tibble`s create row names
+a)  `tibble`s only print the first 10 rows of a dataset
+b)  `tibble`s allow for non-syntactic variable names, like `:)`
+c)  `tibble`s never convert strings to factors
+d)  `tibble`s create row names
 
 ------------------------------------------------------------------------
 
@@ -150,17 +147,35 @@ d) `tibble`s create row names
 
 ## dplyr Verbs
 
+::: columns
+::: {.column width="40%"}
 `r emo::ji("play button")` [Required Video: `filter()` -- 11 minutes](https://youtu.be/pPI-prhLYqI)
 
 `r emo::ji("play button")` [Required Video: `select()` -- 6 minutes](https://youtu.be/OInnmiccHt8)
 
 `r emo::ji("play button")` [Required Video: `mutate()` -- 9 minutes](https://youtu.be/QWyUnQ2EzPs)
 
+</br>
+</br>
+
 `r emo::ji("play button")` [Required Video: `arrange()` -- 7 minutes](https://youtu.be/4Qhdc81mpvo)
 
 `r emo::ji("play button")` [Required Video: `summarize()`-- 8 minutes](http://somup.com/crflYibWZw)
 
 `r emo::ji("play button")` [Required Video: `group_by()` -- 6 minutes](http://somup.com/crflqbbWFy)
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="55%"}
+![](images/filter_horst.png)
+
+</br>
+
+![](images/mutate_horst.png)
+:::
+:::
 
 ## The Pipe Operator
 
@@ -223,8 +238,9 @@ mutate(
   
 ```
 
-::: {.callout-tip}
-## Try running the code! 
+::: callout-tip
+## Try running the code!
+
 You can check your answers using the `penguins` data from the **palmerpenguins** R package!
 :::
 
@@ -293,7 +309,8 @@ penguins |>
   summarize(mean(body_mass_g))
 ```
 
-::: {.callout-tip}
-## Try running the code! 
+::: callout-tip
+## Try running the code!
+
 You can check your answers using the `penguins` data from the **palmerpenguins** R package!
 :::

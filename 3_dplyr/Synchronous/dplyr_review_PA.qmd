@@ -168,18 +168,17 @@ The Pipe `|>`
 :::
 :::
 
-::: {.column width="25%"}
+::: {.column width="15%"}
+:::
+
+::: {.column width="15%"}
 ```{r}
-#| fig-height: 2
-#| fig-width: 2
 knitr::include_graphics("images/pipe.png")
 ```
 :::
 
-::: {.column width="25%"}
+::: {.column width="15%"}
 ```{r}
-#| fig-height: 2
-#| fig-width: 2
 knitr::include_graphics("images/not_a_pipe.jpg")
 ```
 :::

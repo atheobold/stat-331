@@ -24,76 +24,79 @@ library(tidyverse)
 library(flair)
 ```
 
-
 In this lesson, you will learn:
 
-* The importance of nicely formatted code and how to adhere to 
-style "guidelines"
+-   The importance of nicely formatted code and how to adhere to style "guidelines"
 
-* How to **reshape** your dataset by pivoting *longer* or *wider*
+-   How to **reshape** your dataset by pivoting *longer* or *wider*
 
-* How to use **mutating joins** and **filtering joins** to combine different
-datasets with related information.
+-   How to use **mutating joins** and **filtering joins** to combine different datasets with related information.
 
+------------------------------------------------------------------------
 
----
+`r emo::ji("play button")` Watch Videos: 25 minutes
 
-`r emo::ji("play button")` Watch Videos: 25 minutes  
+`r emo::ji("book")` Readings: 30-60 minutes
 
-`r emo::ji("book")` Readings: 30-60 minutes   
+`r emo::ji("computer")` Activities: 45-60 minutes
 
-`r emo::ji("computer")` Activities: 45-60 minutes  
-  
 `r emo::ji("check")` Check-ins: 2
 
+------------------------------------------------------------------------
 
----
+# Code Style
 
-# Code Style 
+`r emo::ji("check")` **Check-in: *Code Style***
 
-`r emo::ji("check")` **Check-in: _Code Style_**
+You've been spending time and getting feedback on the formatting of your code. Based on what you've read, address the following questions.
 
-You've been spending time and getting feedback on the formatting of your code. 
-Based on what you've read, address the following questions. 
+**Question 1:** Based on the tidyverse style guide, where should whitespace (blank spaces) go?
 
-**Question 1:** Based on the tidyverse style guide, where should whitespace
-(blank spaces) go? 
+-   Before and after every `+` sign
 
-- Before and after every `+` sign
+-   Before and after every `%>%`
 
-- Before and after every `%>%`
+-   Before and after every athematic operator (`+`, `-`, `*`, `/`)
 
-- Before and after every athematic operator (`+`, `-`, `*`, `/`)
+-   After every comma
 
-- After every comma
+-   Before every comma
 
-- Before every comma
+**Question 2:** How many characters per line should you strive to have in your R code (and RMarkdown files)?
 
-**Question 2:** How many characters per line should you strive to have in your 
-R code (and RMarkdown files)?
+::: columns
+::: {.column width="40%"}
+**Question 3:** Based on the styleguide, which of the following are **bad** object names?
 
-**Question 3:** Based on the styleguide, which of the following are **bad**
-object names?
+-   `data`
 
-- `data`
+-   `cereals_data`
 
-- `cereals_data`
+-   `cereals.data`
 
-- `cereals.data`
+-   `cerealsData`
 
-- `cerealsData`
+-   `cerealsdata`
 
-- `cerealsdata`
+-   `cereals_data1`
 
-- `cereals_data1`
+-   `cereals_data_clean`
+:::
 
-- `cereals_data_clean`
+::: {.column width="5%"}
+:::
 
----
+::: {.column width="55%"}
+![](images/different_cases_horst.png)
+:::
+:::
+
+
+------------------------------------------------------------------------
 
 # Reshaping Data
 
----
+------------------------------------------------------------------------
 
 ## Tidy Data and Reshaping
 
@@ -107,21 +110,19 @@ object names?
 
 `r emo::ji("book")` [Optional Reading: *R4DS* 12.4-12.5 (Separate / Unite and Missing Values)](https://r4ds.had.co.nz/tidy-data.html) -- A few more tricks for data cleaning / wrangling, if you're interested!
 
+------------------------------------------------------------------------
 
----
+`r emo::ji("check")` **Check-in: *Pivoting***
 
-`r emo::ji("check")` **Check-in: _Pivoting_**
+-   Download the `cereal.csv` data here: <https://app.box.com/s/zcr1fijnwxs27nvtxn4p38p3sgtxl4bt>
 
-- Download the `cereal.csv` data here: [https://app.box.com/s/zcr1fijnwxs27nvtxn4p38p3sgtxl4bt](https://app.box.com/s/zcr1fijnwxs27nvtxn4p38p3sgtxl4bt)
+**Question 1:** Create a new dataset called `cereals_long`, that has three columns:
 
-**Question 1:** Create a new dataset called `cereals_long`, that has three
-columns:
+-   The `name` of the cereal
 
-* The `name` of the cereal
+-   A column called `Nutrient` with values `"protein"`, `"fat"`, or `"fiber"`.
 
-* A column called `Nutrient` with values `"protein"`, `"fat"`, or `"fiber"`.
-
-* A column called `Amount` with the corresponding amount of the nutrient.
+-   A column called `Amount` with the corresponding amount of the nutrient.
 
 ```{r, include = FALSE}
 
@@ -137,32 +138,27 @@ cereals_long <- cereals %>%
   
 ```
 
-
----
+------------------------------------------------------------------------
 
 # Joining data
 
----
+------------------------------------------------------------------------
 
 `r emo::ji("book")` [Required Reading: *R4DS* Chapter 13 (Relational Data)](https://r4ds.had.co.nz/relational-data.html)
 
-
 `r emo::ji("book")` [Required Reading: Mutating Joins](https://www.garrickadenbuie.com/project/tidyexplain/)
 
-::: {.callout-important}
-Note: We **will not** be using `spread()` and `gather()` in this course, as
-they are deprecated functions!
+::: callout-important
+Note: We **will not** be using `spread()` and `gather()` in this course, as they are deprecated functions!
 :::
 
-::: {.callout-note}
-Because these chapters do a __much__
-better job visualizing the concepts, I've chosen not to record additional
-videos. 
+::: callout-note
+Because these chapters do a **much** better job visualizing the concepts, I've chosen not to record additional videos.
 :::
 
----
+------------------------------------------------------------------------
 
-`r emo::ji("check")` **Check-in: _Practice with Joins_**
+`r emo::ji("check")` **Check-in: *Practice with Joins***
 
 The following code creates three datasets:
 
@@ -203,9 +199,7 @@ prof_course
 course_info
 ```
 
-These datasets contain information about five Cal Poly professors, their
-educational history, the classes they are able to teach, and the number of
-sections of each class that need to be assigned.
+These datasets contain information about five Cal Poly professors, their educational history, the classes they are able to teach, and the number of sections of each class that need to be assigned.
 
 **a) Combine datasets 1 and 2 to make this dataset:**
 
@@ -241,7 +235,6 @@ prof_info %>%
 
 ```
 
-
 **c) Combine datasets 2 and 3 to make this dataset:**
 
 ```{r, echo = FALSE, message = FALSE}
@@ -271,4 +264,3 @@ prof_course %>%
   left_join(course_info)
 
 ```
-
