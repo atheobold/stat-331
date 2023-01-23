@@ -3,7 +3,7 @@ title: "Recap of Data Wrangling with dplyr"
 author: "STAT 331"
 format: 
   revealjs:
-    logo: images/
+    logo: images/dplyr.png
     theme: night
     self-contained: true
 editor: visual
@@ -13,27 +13,121 @@ execute:
   echo: false
 ---
 
-
 ```{r packages}
 #| include: false
-library(xaringanthemer)
-library(xaringan)
 library(tidyverse)
-library(flair)
-library(ggridges)
-library(gridExtra)
+library(showtext)
 library(randomNames)
+library(palmerpenguins)
 ```
 
 ## Ugliest Plot
 
 <https://docs.google.com/presentation/d/19u5djgMsPLtxoM-rfAQuLyP89B4nYdW8uBhNAEJQoS8/edit?usp=sharing>
 
-## The tidyverse Philosophy 
+## 
+
+![](images/nyt.png)
+
+::: columns
+::: {.column width="60%"}
+::: {style="font-size: 0.75em;"}
+> Serif fonts “have an extra flourish that makes it look pretty for many
+>people, but can clutter what is on the page and that’s what makes it
+> harder to distinguish for people with visual disabilities than just
+> having a very clean font with no extra bits and pieces around it.”
+:::
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="35%"}
+![](images/times_vs_calibri.png)
+:::
+:::
+
+## Changing Font in **ggplot2**
+
+. . .
+
+**Option 1:** Using your system's fonts
+
+::: columns
+::: {.column width="25%"}
+```{r}
+#| echo: true
+#| code-line-numbers: false
+windowsFonts()
+```
+
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="70%"}
+```{r}
+#| output-location: slide
+#| echo: true
+#| code-line-numbers: false
+#| warning: false
+ggplot(data = penguins, 
+       mapping = aes(x = bill_length_mm, 
+                     y = bill_depth_mm)) +
+  geom_point() +
+  labs(title = "Penguins from the Palmer Archipelago",
+       x = "Bill Length (mm)",
+       y = "Bill Depth (mm)") + 
+  theme(plot.title    = element_text(family = "sans", size = 28),,
+        axis.title.x  = element_text(family = "serif", size = 28), 
+        axis.title.y = element_text(family = "mono", size = 28)
+        )
+```
+:::
+:::
+
+## 
+
+**Option 2:** [**showtext** R package](https://r-graph-gallery.com/custom-fonts-in-R-and-ggplot2.html)
+
+```{r}
+#| echo: false
+## Need to run showtext_auto() before start plotting!
+
+showtext_auto()
+font_add_google("Gochi Hand", "gochi")
+font_add_google("Montserrat", "montserrat")
+```
+
+```{r}
+#| echo: true
+#| output-location: slide
+#| code-line-numbers: false
+
+font_add_google("Gochi Hand", "gochi")
+font_add_google("Montserrat", "montserrat")
+
+ggplot(data = penguins, 
+       mapping = aes(x = bill_length_mm, 
+                     y = bill_depth_mm)) +
+  geom_point() +
+  labs(title = "Penguins from the Palmer Archipelago",
+       x = "Bill Length (mm)",
+       y = "Bill Depth (mm)") + 
+  theme(plot.title = element_text(family = "montserrat", size = 40),
+        axis.title.y = element_text(family = "gochi", size = 40),
+        axis.title.x = element_text(family = "gochi", size = 40)
+  )
+
+```
+
+
+## The tidyverse Philosophy
 
 ![](images/hal_abelson.jpeg)
 
----
+------------------------------------------------------------------------
 
 ## A Vignette
 
@@ -41,8 +135,7 @@ library(randomNames)
 
 `subset()`
 
-> Return subsets of vectors, matrices or data frames which
-> meet conditions.
+> Return subsets of vectors, matrices or data frames which meet conditions.
 
 . . .
 
@@ -58,15 +151,13 @@ subset(surveys,
        subset = 
          species_id == "DS")
 ```
-
 :::
 
 ::: {.column width="5%"}
 :::
 
 ::: {.column width="50%"}
-`select` argument states what **columns** should be selected from the
-dataframe
+`select` argument states what **columns** should be selected from the dataframe
 
 ```{r}
 #| eval: false
@@ -84,9 +175,11 @@ subset(surveys,
 ##  {background-color="#D4D4D4"}
 
 <center>
+
 ::: {style="margin-top: 100px; font-size: 2em; color: #000000;"}
 We want functions that accomplish **one** task!
 :::
+
 </center>
 
 ![](images/protest3.jpg)
@@ -94,9 +187,11 @@ We want functions that accomplish **one** task!
 ##  {background-color="#D4D4D4"}
 
 <center>
+
 ::: {style="margin-top: 100px; font-size: 2em; color: #000000;"}
 We want functions with **intuitive** names!
 :::
+
 </center>
 
 ![](images/protest2.jpeg)
@@ -126,7 +221,7 @@ We want functions with **intuitive** names!
 :::
 :::
 
----
+------------------------------------------------------------------------
 
 ##  {background-color="#D4D4D4"}
 
@@ -153,11 +248,10 @@ Brainstorm definitions for each verb
 :::
 
 ::: {.column width="65%"}
-
 :::
 :::
 
----
+------------------------------------------------------------------------
 
 ## 
 
@@ -184,20 +278,16 @@ knitr::include_graphics("images/not_a_pipe.jpg")
 :::
 :::
 
-<center>
-![](images/pipe_process.png)
-</center>
+<center>![](images/pipe_process.png)</center>
 
----
+------------------------------------------------------------------------
 
 ## Preview Activity Review
 
 ::: columns
 ::: {.column width="35%"}
 ::: {style="font-size: 0.9em;"}
-Suppose we would like to study how the ratio of penguin body mass to flipper
-size differs across the species. Arrange the following steps into an order that 
-accomplishes this goal (assuming the steps are connected with a `|>`).
+Suppose we would like to study how the ratio of penguin body mass to flipper size differs across the species. Arrange the following steps into an order that accomplishes this goal (assuming the steps are connected with a `|>`).
 :::
 :::
 
@@ -228,15 +318,15 @@ mutate(mass_flipper_ratio =
 ##  {background-color="#D4D4D4"}
 
 <center>
+
 ::: {style="font-size: 1.5em; color: #000000;"}
-A Different Context 
+A Different Context
 :::
+
 </center>
 
 ::: {style="font-size: 1.25m;"}
-You have data on each Cal Poly student for the 2020-2021 academic year.
-You are tasked with reporting how the number of CR/NC courses students took
-differed based on department.
+You have data on each Cal Poly student for the 2020-2021 academic year. You are tasked with reporting how the number of CR/NC courses students took differed based on department.
 :::
 
 ```{r}
@@ -272,9 +362,9 @@ Department totals for number of CR / NC courses
 
 . . .
 
-__What data wrangling operations would you use?__
+**What data wrangling operations would you use?**
 
-__What order would you use to accomplish this goal?__
+**What order would you use to accomplish this goal?**
 
 ##  {background-color="#D4D4D4"}
 
@@ -299,7 +389,6 @@ students |>
 ::: {style="margin-top: 100px; font-size: 2em; color: #000000;"}
 Step 2: Get department totals
 :::
-
 
 ```{r dept-totals, echo = FALSE, eval = FALSE}
 #| echo: true
@@ -366,9 +455,9 @@ students |>
 
 ## A Handy Tool
 
-`pull()` 
+`pull()`
 
-- Extracts entries from dataframes
+-   Extracts entries from dataframes
 
 . . .
 
@@ -384,12 +473,10 @@ students |>
 
 ## Your Turn: PA Exploration
 
-- Find your group
-- Introduce yourself
-- Decide on team roles (will change each week)
-  * Reporter -- Types the solutions
-  * Editor -- Asks professor **team** questions, double checks what is typed
-  * Facilitator -- Leads discussion, makes sure everyone understands the task
-  * Captain -- Encourages participation, enforces norms, brings conversation
-  back if it deviates
-
+-   Find your group
+-   Introduce yourself
+-   Decide on team roles (will change each week)
+    -   Reporter -- Types the solutions
+    -   Editor -- Asks professor **team** questions, double checks what is typed
+    -   Facilitator -- Leads discussion, makes sure everyone understands the task
+    -   Captain -- Encourages participation, enforces norms, brings conversation back if it deviates
