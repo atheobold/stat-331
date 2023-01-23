@@ -14,182 +14,209 @@ execute:
 
 ```{r packages}
 #| include: false
-
-library(xaringanthemer)
-library(xaringan)
 library(tidyverse)
-library(flair)
 ```
 
-class: middle
+##  {background-color="#D4D4D4"}
 
-.larger\[A few words about `drop_na()`\]
+::: {style="margin-top: 100px; font-size: 2em; color: #000000;"}
+A few words about `drop_na()`
+:::
 
---
+. . .
 
+::: {.incremental}
 -   Easy tool to remove missing values
-
---
-
 -   Unilaterally removes **any** row with a missing value for **any** variable
-
---
-
 -   **But** you can specify what columns it should look at for missing values!
+:::
 
-------------------------------------------------------------------------
+##
 
-.larger\[Summarizing Frequencies\]
+::: {style="margin-top: 50px; font-size: 2em; color: #dd5227;"}
+Summarizing Frequencies
+:::
 
+. . .
+
+::: columns
+::: {.column width="40%"}
 `count()` -- counts the values of one or more **categorical** variables
+:::
 
-.pull-left\[
+::: {.column width="5%"}
+:::
 
-```{r, eval = FALSE}
+::: {.column width="55%"}
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: false
 starwars |> 
-  count(homeworld, sort = TRUE)
+  count(homeworld)
 ```
+:::
+:::
 
--   `sort` specifies if the resulting tibble should be sorted in descending order \]
+. . .
 
---
+::: columns
+::: {.column width="40%"}
+The `sort` argument specifies if the resulting tibble should be sorted in
+descending order
+:::
 
-.pull-right\[
+::: {.column width="5%"}
+:::
 
-```{r, echo = FALSE}
+::: {.column width="55%"}
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: false
 starwars |> 
-  count(homeworld, sort = TRUE)
+  count(homeworld, 
+        sort = TRUE)
 ```
+:::
+:::
 
-\]
 
-------------------------------------------------------------------------
+##
 
-.larger\[Unique Groups\]
+::: {style="margin-top: 50px; font-size: 2em; color: #dd5227;"}
+Finding Unique Groups
+:::
+
+. . .
 
 `distinct()` -- selects the unique / distinct rows from a dataset
 
---
+. . .
 
-<center>.large\[**Arguments**\]</center>
+<center>
+::: {style="font-size: 1.5em;"}
+**Arguments**
+:::
+</center>
 
+::: {.incremental}
 -   `...` -- variables to use when determining uniqueness
     -   can use multiple!
 
---
-
 -   `.keep_all` -- decides if all of the columns should be kept
     -   `FALSE` is default!
+:::
 
-------------------------------------------------------------------------
+##
 
-.larger\[Discritizing Variables\]
+::: {style="margin-top: 50px; font-size: 2em; color: #dd5227;"}
+Discritizing Variables
+:::
 
---
-
+::: {.incremental}
 -   `if_else()`
     -   Useful when there are two options
 
---
-
 -   `case_when()`
     -   Useful when there are three or more options
+:::
 
-------------------------------------------------------------------------
+##
 
-class: middle, center, inverse
+![](images/case_when_horst.png)
 
-.hand\[.larger\[What if I want to perform the same operation across multiple columns?\]\]
+##  {background-color="#D4D4D4"}
 
-------------------------------------------------------------------------
+::: {style="margin-top: 50px; font-size: 2em; color: #000000;"}
+What if I want to perform the same operation across multiple columns?
+:::
 
-class: center, middle
+##
 
-.larger\[`across()`\]
+::: {style="margin-top: 50px; font-size: 2em; color: #dd5227;"}
+`across()`
+:::
 
-> makes it easy to apply the same transformation to multiple columns, allowing you to use `select()` semantics inside in "data-masking" functions like `summarise()` and `mutate()`
+. . .
 
---
+> makes it easy to apply the same transformation to multiple columns, allowing
+> you to use `select()` semantics inside in "data-masking" functions like
+> `summarise()` and `mutate()`
+
+. . .
 
 </br>
 
-.large\[`across(.cols = everything(), .fns = NULL, ...)`\]
+::: {style="font-size: 1.25em;"}
+`across(.cols = everything(), .fns = NULL, ...)`
+:::
 
-`.cols` -- columns in data to select\
-`.fns` -- functions to apply to selected columns\
-`...` -- addtional arguments for the function calls (from `.fns`)
+<!-- `.cols` -- columns in data to select -->
+<!-- `.fns` -- functions to apply to selected columns -->
+<!-- `...` -- additional arguments for the function calls (from `.fns`) -->
 
-------------------------------------------------------------------------
+##
 
-.larger\[Summarizing Multiple Columns\]
+::: {style="margin-top: 50px; font-size: 2em; color: #dd5227;"}
+Summarizing Multiple Columns
+:::
 
-.pull-left-wide\[
+. . .
 
-```{r, eval = FALSE}
+
+```{r}
+#| output-location: fragment
+#| echo: true
 starwars |> 
-  summarise(across(height:mass, mean, na.rm = TRUE))
+  summarise(
+    across(
+      height:mass, 
+      mean, 
+      na.rm = TRUE
+      )
+    )
+```
+
+##
+
+::: {style="margin-top: 50px; font-size: 2em; color: #dd5227;"}
+Conditional Summarizing
+:::
+
+```{r}
+#| output-location: fragment
+#| echo: true
+starwars |> 
+  summarise(
+    across(
+      where(is.numeric), 
+      mean, 
+      na.rm = TRUE
+      )
+    )
 
 ```
 
-</br> </br>
+##
 
-.large\[Conditional Summarizing\]
+![](images/across_horst.png)
 
-```{r, eval = FALSE}
+## `r emo::ji("heart")` `|>`
+
+```{r}
+#| echo: true
+#| output-location: fragment
+#| out-width: 60%
+#| fig-align: center
 starwars |> 
-  summarise(across(where(is.numeric), mean, na.rm = TRUE))
-
-```
-
-\]
-
-.pull-right-narrow\[ </br>
-
-```{r, echo = FALSE}
-starwars |> 
-  summarise(across(height:mass, mean, na.rm = TRUE))
-
-```
-
-</br> </br>
-
-```{r, echo = FALSE}
-starwars |> 
-  summarise(across(where(is.numeric), mean, na.rm = TRUE))
-```
-
-\]
-
-------------------------------------------------------------------------
-
-.bitlarger\[`r emo::ji("heart")` `|>`\]
-
-.pull-left\[
-
-```{r, eval = FALSE}
-starwars |> 
-  filter(gender == "feminine", 
-         !is.na(homeworld)) |>
-  ggplot(aes(x = gender, fill = homeworld)) + 
+  drop_na(homeworld) |> 
+  filter(gender == "feminine") |>
+  ggplot(mapping = aes(x = homeworld, fill = homeworld)) + 
   geom_bar(position = "dodge") + 
-  labs(x = "Gender Expression of Character", 
-       fill = "Homeworld")
+  labs(title = "Homeworlds of Feminine Starwars Characters", 
+       x = "") + 
+  theme(legend.position = "none")
   
 ```
 
-\]
-
-.pull-right\[
-
-```{r, echo = FALSE, fig.width = 6, fig.height = 6}
-starwars |> 
-  filter(gender == "feminine", 
-         !is.na(homeworld)) |>
-  ggplot(aes(x = gender, fill = homeworld)) + 
-  geom_bar(position = "dodge") +
-  labs(x = "Gender Expression of Character", 
-       fill = "Homeworld")
-  
-```
-
-\]
