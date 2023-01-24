@@ -21,11 +21,12 @@ Today you will be using the dplyr package to clean a dataset and then using that
 
 As you work through this PA, you will encounter some code that does not work as you want it to. Don't despair! Errors (when R is unable to run your code) and bugs (when the code doesn't do what you hoped) are a natural part of coding. Even the best of the best deal with these problems regularly - learning to track down the issue is a skill that you can learn and practice.
 
-## Advice for dealing with errors
-
 ::: column-margin
 ![Image by Allison Horst](images/debugging_fire.jpeg)
 :::
+
+::: {.callout-tip collapse="true"}
+## Advice for dealing with errors
 
 **Errors can be sneaky - check results *often***
 
@@ -62,25 +63,17 @@ Some tricks:
 -   Copy-paste the exact error message into Google. Chances are, somebody else had a similar problem and got a similar message.
 
 -   Include package names in your search terms. For example, "bar plot in ggplot" is a better search than "bar plot in R".
+:::
 
 # Part One: Data import and cleaning
 
-This section will clean today's dataset, so that you can use it more easily in Part Two.
+## Access the PA3 Quarto file
+
+First, the individual appointed the "Reporter" for the team should [access the Practice Activity through through Posit Cloud](https://posit.cloud/content/5280164).
+
+Once you have the Practice Activity open, click on the `PA3_student.qmd` file to open the Practice Activity 3 Quarto file. 
 
 ## Data download & packages
-
-First, [Download starter .qmd file](PA3_main.qmd). 
-
-::: {.callout-caution}
-# Add your preferred YAML
-The downloaded file **does not** contain an YAML, you need to 
-include your own. This allows you to specify how you would like 
-your rendered HTML to look! The sky is the limit! 
-:::
-
-Next, save the file in your Stat 331 / 531 folder -- this should be in a Week 3 or a Practice Activity 3 subfolder!
-
-Now, open the `PA3_student.qmd` file. At the top of the document, we declare our package dependencies and load the data.
 
 ::: callout-note
 ## Reading in data
