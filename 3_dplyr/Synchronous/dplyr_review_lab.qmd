@@ -3,7 +3,7 @@ title: "A Few More Data Wrangling Tools"
 author: "STAT 331"
 format: 
   revealjs:
-    logo: images/ggplot2.png
+    logo: images/dplyr.png
     theme: night
     self-contained: true
 editor: visual
@@ -16,6 +16,31 @@ execute:
 #| include: false
 library(tidyverse)
 ```
+
+##  {background-color="#D4D4D4"}
+
+::: {style="margin-top: 100px; font-size: 2em; color: #000000;"}
+Defining Grades in 331
+:::
+
+. . .
+
+</br>
+
+- A: **Superior** Attainment of Course Objectives
+
+- B: **Good** Attainment of Course Objectives
+
+- C: **Acceptable** Attainment of Course Objectives
+
+- D: **Poor** Attainment of Course Objectives
+
+::: aside
+::: {style="color: #dd5227;"}
+[STAT 331 / 531 Syllabus](https://docs.google.com/document/d/1-SSRp_mXFNgYiy4uW9tlcpxDpQH4OuMqK-Hh4v5AvZI/edit?usp=sharing)
+:::
+:::
+
 
 ##  {background-color="#D4D4D4"}
 
@@ -206,17 +231,72 @@ starwars |>
 
 ```{r}
 #| echo: true
-#| output-location: fragment
+#| output-location: slide
 #| out-width: 60%
 #| fig-align: center
+
 starwars |> 
   drop_na(homeworld) |> 
   filter(gender == "feminine") |>
-  ggplot(mapping = aes(x = homeworld, fill = homeworld)) + 
+  ggplot(mapping = aes(y = homeworld, fill = homeworld)) + 
   geom_bar(position = "dodge") + 
   labs(title = "Homeworlds of Feminine Starwars Characters", 
-       x = "") + 
-  theme(legend.position = "none")
+       y = "") + 
+  theme(legend.position = "none", 
+        plot.title = element_text(size = 28), 
+        axis.text.x = element_text(size = 20),
+        axis.text.y = element_text(size = 20), 
+        axis.title.x = element_text(size = 24)
+        )
   
 ```
 
+. . .
+
+</br>
+
+If you use a `|>` instead of a `+`: 
+
+```
+Error in `validate_mapping()`:
+Did you use %>% instead of +?
+```
+
+
+# Implication of Data Ethics
+
+## Data Science Oath
+
+::: {style="font-size: 0.65em;"}
+> I will not be ashamed to say, “I know not,” nor will I fail to call in my colleagues when the skills of another are needed for solving a problem.
+
+> I will respect the privacy of my data subjects, for their data are not disclosed to me that the world may know, so I will tread with care in matters of privacy and security.
+
+> I will remember that my data are not just numbers without meaning or context, but represent real people and situations, and that my work may lead to unintended societal consequences, such as inequality, poverty, and disparities due to algorithmic bias.
+:::
+
+::: aside
++ [National Academy of Sciences](https://en.wikipedia.org/wiki/National_Academy_of_Sciences)
++ [Data Values and Principles](https://datapractices.org/manifesto/)
+:::
+
+## ASA Ethical Guidelines
+
+::: {style="font-size: 0.9em;"}
+The American Statistical Association’s Ethical Guidelines for Statistical Practice are intended to help statistics practitioners make decisions ethically. Additionally, the ethical guidelines aim to promote accountability by informing those who rely on statistical analysis of the standards they should expect.
+:::
+
+::: aside
+[Ethical Guidelines for Statistical Practice](https://www.amstat.org/your-career/ethical-guidelines-for-statistical-practice)
+
+:::
+
+## Institutional Review Board
+
+::: {style="font-size: 0.9em;"}
+IRB reviews help to ensure that research participants are protected from research-related risks and treated ethically, a necessary prerequisite for maintaining the public’s trust in the research enterprise and allowing science to advance for the common good.
+:::
+
+::: callout-note
+[Watch a video about IRB](https://www.youtube.com/watch?v=U8fme1boEbE&ab_channel=U.S.DepartmentofHealthandHumanServices) to learn more.
+:::
