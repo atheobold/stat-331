@@ -20,6 +20,36 @@ library(tidyverse)
 ##  {background-color="#D4D4D4"}
 
 ::: {style="margin-top: 100px; font-size: 2em; color: #000000;"}
+Peer Code Review
+:::
+
+. . .
+
+::: {style="font-size: 1.25em;"}
+```
+ggplot(data = surveys, mapping = aes(x=hindfoot_length,y= weight)) +  
+  geom_jitter(alpha=.2,color='tomato')+ facet_wrap(~species)+geom_boxplot(outlier.shape = NA)+labs(
+    title ='Weight to hindfoot comparison'
+  )+ xlab('length (mm)')+ylab('Weight(g)')
+```
+:::
+
+. . .
+
+</br>
+</br>
+
+::: {style="font-size: 1.5em;color: #dd5227"}
+
+What feedback would you give?
+
+:::
+
+
+
+##  {background-color="#D4D4D4"}
+
+::: {style="margin-top: 100px; font-size: 2em; color: #000000;"}
 Defining Grades in 331
 :::
 
@@ -27,20 +57,19 @@ Defining Grades in 331
 
 </br>
 
-- A: **Superior** Attainment of Course Objectives
+-   A: **Superior** Attainment of Course Objectives
 
-- B: **Good** Attainment of Course Objectives
+-   B: **Good** Attainment of Course Objectives
 
-- C: **Acceptable** Attainment of Course Objectives
+-   C: **Acceptable** Attainment of Course Objectives
 
-- D: **Poor** Attainment of Course Objectives
+-   D: **Poor** Attainment of Course Objectives
 
 ::: aside
 ::: {style="color: #dd5227;"}
 [STAT 331 / 531 Syllabus](https://docs.google.com/document/d/1-SSRp_mXFNgYiy4uW9tlcpxDpQH4OuMqK-Hh4v5AvZI/edit?usp=sharing)
 :::
 :::
-
 
 ##  {background-color="#D4D4D4"}
 
@@ -50,13 +79,13 @@ A few words about `drop_na()`
 
 . . .
 
-::: {.incremental}
+::: incremental
 -   Easy tool to remove missing values
 -   Unilaterally removes **any** row with a missing value for **any** variable
 -   **But** you can specify what columns it should look at for missing values!
 :::
 
-##
+## 
 
 ::: {style="margin-top: 50px; font-size: 2em; color: #dd5227;"}
 Summarizing Frequencies
@@ -87,8 +116,7 @@ starwars |>
 
 ::: columns
 ::: {.column width="40%"}
-The `sort` argument specifies if the resulting tibble should be sorted in
-descending order
+The `sort` argument specifies if the resulting tibble should be sorted in descending order
 :::
 
 ::: {.column width="5%"}
@@ -106,8 +134,7 @@ starwars |>
 :::
 :::
 
-
-##
+## 
 
 ::: {style="margin-top: 50px; font-size: 2em; color: #dd5227;"}
 Finding Unique Groups
@@ -120,34 +147,34 @@ Finding Unique Groups
 . . .
 
 <center>
+
 ::: {style="font-size: 1.5em;"}
 **Arguments**
 :::
+
 </center>
 
-::: {.incremental}
+::: incremental
 -   `...` -- variables to use when determining uniqueness
     -   can use multiple!
-
 -   `.keep_all` -- decides if all of the columns should be kept
     -   `FALSE` is default!
 :::
 
-##
+## 
 
 ::: {style="margin-top: 50px; font-size: 2em; color: #dd5227;"}
 Discritizing Variables
 :::
 
-::: {.incremental}
+::: incremental
 -   `if_else()`
     -   Useful when there are two options
-
 -   `case_when()`
     -   Useful when there are three or more options
 :::
 
-##
+## 
 
 ![](images/case_when_horst.png)
 
@@ -157,7 +184,7 @@ Discritizing Variables
 What if I want to perform the same operation across multiple columns?
 :::
 
-##
+## 
 
 ::: {style="margin-top: 50px; font-size: 2em; color: #dd5227;"}
 `across()`
@@ -165,9 +192,7 @@ What if I want to perform the same operation across multiple columns?
 
 . . .
 
-> makes it easy to apply the same transformation to multiple columns, allowing
-> you to use `select()` semantics inside in "data-masking" functions like
-> `summarise()` and `mutate()`
+> makes it easy to apply the same transformation to multiple columns, allowing you to use `select()` semantics inside in "data-masking" functions like `summarise()` and `mutate()`
 
 . . .
 
@@ -178,17 +203,18 @@ What if I want to perform the same operation across multiple columns?
 :::
 
 <!-- `.cols` -- columns in data to select -->
+
 <!-- `.fns` -- functions to apply to selected columns -->
+
 <!-- `...` -- additional arguments for the function calls (from `.fns`) -->
 
-##
+## 
 
 ::: {style="margin-top: 50px; font-size: 2em; color: #dd5227;"}
 Summarizing Multiple Columns
 :::
 
 . . .
-
 
 ```{r}
 #| output-location: fragment
@@ -203,7 +229,7 @@ starwars |>
     )
 ```
 
-##
+## 
 
 ::: {style="margin-top: 50px; font-size: 2em; color: #dd5227;"}
 Conditional Summarizing
@@ -223,7 +249,7 @@ starwars |>
 
 ```
 
-##
+## 
 
 ![](images/across_horst.png)
 
@@ -255,20 +281,17 @@ starwars |>
 
 </br>
 
-If you use a `|>` instead of a `+`: 
+If you use a `|>` instead of a `+`:
 
-```
-Error in `validate_mapping()`:
-Did you use %>% instead of +?
-```
-
+    Error in `validate_mapping()`:
+    Did you use %>% instead of +?
 
 # Implication of Data Ethics
 
 ## Data Science Oath
 
 ::: {style="font-size: 0.65em;"}
-> I will not be ashamed to say, “I know not,” nor will I fail to call in my colleagues when the skills of another are needed for solving a problem.
+> I will not be ashamed to say, "I know not," nor will I fail to call in my colleagues when the skills of another are needed for solving a problem.
 
 > I will respect the privacy of my data subjects, for their data are not disclosed to me that the world may know, so I will tread with care in matters of privacy and security.
 
@@ -276,25 +299,24 @@ Did you use %>% instead of +?
 :::
 
 ::: aside
-+ [National Academy of Sciences](https://en.wikipedia.org/wiki/National_Academy_of_Sciences)
-+ [Data Values and Principles](https://datapractices.org/manifesto/)
+-   [National Academy of Sciences](https://en.wikipedia.org/wiki/National_Academy_of_Sciences)
+-   [Data Values and Principles](https://datapractices.org/manifesto/)
 :::
 
 ## ASA Ethical Guidelines
 
 ::: {style="font-size: 0.9em;"}
-The American Statistical Association’s Ethical Guidelines for Statistical Practice are intended to help statistics practitioners make decisions ethically. Additionally, the ethical guidelines aim to promote accountability by informing those who rely on statistical analysis of the standards they should expect.
+The American Statistical Association's Ethical Guidelines for Statistical Practice are intended to help statistics practitioners make decisions ethically. Additionally, the ethical guidelines aim to promote accountability by informing those who rely on statistical analysis of the standards they should expect.
 :::
 
 ::: aside
 [Ethical Guidelines for Statistical Practice](https://www.amstat.org/your-career/ethical-guidelines-for-statistical-practice)
-
 :::
 
 ## Institutional Review Board
 
 ::: {style="font-size: 0.9em;"}
-IRB reviews help to ensure that research participants are protected from research-related risks and treated ethically, a necessary prerequisite for maintaining the public’s trust in the research enterprise and allowing science to advance for the common good.
+IRB reviews help to ensure that research participants are protected from research-related risks and treated ethically, a necessary prerequisite for maintaining the public's trust in the research enterprise and allowing science to advance for the common good.
 :::
 
 ::: callout-note
