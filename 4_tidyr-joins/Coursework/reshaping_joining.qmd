@@ -9,28 +9,29 @@ format:
     number-depth: 2
     code-block-bg: "#76b5c5"
     highlight-style: monochrome
+    self-contained: true
+    table-of-contents: true
 editor: visual
 execute: 
-  echo: false
+  echo: true
+resources: 
+  - Slides/cereal.csv
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-### change this if icons local
-```
-
-```{r, include = FALSE}
+```{r}
+#| include: false
 library(tidyverse)
-library(flair)
 ```
 
 In this lesson, you will learn:
 
--   The importance of nicely formatted code and how to adhere to style "guidelines"
+-   The importance of nicely formatted code and how to adhere to style
+"guidelines"
 
 -   How to **reshape** your dataset by pivoting *longer* or *wider*
 
--   How to use **mutating joins** and **filtering joins** to combine different datasets with related information.
+-   How to use **mutating joins** and **filtering joins** to combine different
+datasets with related information.
 
 ------------------------------------------------------------------------
 
@@ -40,7 +41,7 @@ In this lesson, you will learn:
 
 `r emo::ji("computer")` Activities: 45-60 minutes
 
-`r emo::ji("check")` Check-ins: 2
+`r emo::ji("check")` Check-ins: 3
 
 ------------------------------------------------------------------------
 
@@ -50,7 +51,7 @@ In this lesson, you will learn:
 
 You've been spending time and getting feedback on the formatting of your code. Based on what you've read, address the following questions.
 
-**Question 1:** Based on the tidyverse style guide, where should whitespace (blank spaces) go?
+**Question 1:** Based on the [tidyverse style guide](https://style.tidyverse.org/), where should whitespace (blank spaces) go?
 
 -   Before and after every `+` sign
 
@@ -91,16 +92,15 @@ You've been spending time and getting feedback on the formatting of your code. B
 :::
 :::
 
-
-------------------------------------------------------------------------
-
 # Reshaping Data
-
-------------------------------------------------------------------------
 
 ## Tidy Data and Reshaping
 
-`r emo::ji("book")` [Required Reading: *R4DS* 12.1-12.3 (Tidy Data)](https://r4ds.had.co.nz/tidy-data.html)
+::: {.column-margin}
+![](images/05-tidyr.png)
+:::
+
+`r emo::ji("book")` [Required Reading: *R4DS* Chapter 6 (Data tidying)](https://r4ds.hadley.nz/data-tidy.html)
 
 `r emo::ji("play button")` [Required Video: Data Layouts -- 7 minutes](http://somup.com/crfFrmF6VQ)
 
@@ -108,13 +108,9 @@ You've been spending time and getting feedback on the formatting of your code. B
 
 `r emo::ji("play button")` [Required Video: Pivoting Wider -- 9 minutes](http://somup.com/crfqebF63k)
 
-`r emo::ji("book")` [Optional Reading: *R4DS* 12.4-12.5 (Separate / Unite and Missing Values)](https://r4ds.had.co.nz/tidy-data.html) -- A few more tricks for data cleaning / wrangling, if you're interested!
+### `r emo::ji("check")` **Check-in 4.1: *Pivoting***
 
-------------------------------------------------------------------------
-
-`r emo::ji("check")` **Check-in: *Pivoting***
-
--   Download the `cereal.csv` data here: <https://app.box.com/s/zcr1fijnwxs27nvtxn4p38p3sgtxl4bt>
+Download the [`cereal.csv` data here](Slides/cereal.csv). 
 
 **Question 1:** Create a new dataset called `cereals_long`, that has three columns:
 
@@ -124,59 +120,39 @@ You've been spending time and getting feedback on the formatting of your code. B
 
 -   A column called `Amount` with the corresponding amount of the nutrient.
 
-```{r, include = FALSE}
-
-cereals <- read_csv(here::here("4_tidyr-joins", "Coursework", "Slides", 
-                               "cereal.csv")
-                    )
-
-cereals_long <- cereals %>% 
-  select(name, protein:fiber) %>% 
-  pivot_longer(protein:fiber, 
-               names_to = "Nutrient", 
-               values_to = "Amount")
-  
-```
-
-------------------------------------------------------------------------
-
 # Joining data
 
-------------------------------------------------------------------------
-
-`r emo::ji("book")` [Required Reading: *R4DS* Chapter 13 (Relational Data)](https://r4ds.had.co.nz/relational-data.html)
-
-`r emo::ji("book")` [Required Reading: Mutating Joins](https://www.garrickadenbuie.com/project/tidyexplain/)
-
-::: callout-important
-Note: We **will not** be using `spread()` and `gather()` in this course, as they are deprecated functions!
-:::
+`r emo::ji("book")` [Required Reading: *R4DS* Chapter 21 (Joins)](https://r4ds.hadley.nz/joins.html)
 
 ::: callout-note
 Because these chapters do a **much** better job visualizing the concepts, I've chosen not to record additional videos.
 :::
 
-------------------------------------------------------------------------
+### `r emo::ji("check")` **Check-in: *Practice with Joins***
 
-`r emo::ji("check")` **Check-in: *Practice with Joins***
-
-The following code creates three datasets:
+The following code creates three datasets / tibbles:
 
 ```{r}
-prof_info <- data.frame(
-  professor = 
-    c("Bodwin", "Glanz", "Carlton", "Sun", "Theobold"),
-  undergrad_school = 
-    c("Harvard", "Cal Poly", "Berkeley", "Harvard", "Colorado Mesa University"),
-  grad_school = 
-    c("UNC", "Boston University", "UCLA", "Stanford", "Montana State University")
+prof_info <- tibble(
+  professor = c("Bodwin", 
+                "Glanz", 
+                "Robinson",
+                "Theobold"),
+  undergrad_school = c("Harvard", 
+                       "Cal Poly",
+                       "Winona State University",
+                       "Colorado Mesa University"),
+  grad_school = c("UNC", 
+                  "Boston University", 
+                  "University of Nebraska-Lincoln",
+                  "Montana State University")
 )
 
-prof_course <- data.frame(
-  professor = c("Bodwin", "Glanz", "Carlton", "Theobold"),
+prof_course <- tibble(
+  professor = c("Bodwin", "Robinson", "Theobold", "Carlton"),
   Stat_331 = c(TRUE, TRUE, TRUE, TRUE),
-  Stat_330 = c(FALSE, TRUE, TRUE, FALSE),
-  Stat_431 = c(TRUE, TRUE, FALSE, TRUE)
+  Stat_330 = c(FALSE, TRUE, FALSE, FALSE),
+  Stat_431 = c(TRUE, TRUE, TRUE, FALSE)
 )
 
 course_info <- data.frame(
@@ -203,64 +179,40 @@ These datasets contain information about five Cal Poly professors, their educati
 
 **a) Combine datasets 1 and 2 to make this dataset:**
 
-```{r, echo = FALSE, message = FALSE}
-
-prof_info %>% 
-  inner_join(prof_course)
-
 ```
-
-```{r, include = FALSE}
-## OR 
-
-prof_info %>%
-  right_join(prof_course)
-
+  <chr>     <chr>                    <chr>                          <lgl>    <lgl>    <lgl>   
+1 Bodwin    Harvard                  UNC                            TRUE     FALSE    TRUE    
+2 Glanz     Cal Poly                 Boston University              TRUE     TRUE     TRUE    
+3 Robinson  Winona State University  University of Nebraska-Lincoln TRUE     TRUE     TRUE    
+4 Theobold  Colorado Mesa University Montana State University       TRUE     FALSE    TRUE 
 ```
 
 **b) Combine datasets 1 and 2 to make this dataset:**
 
-```{r, echo = FALSE, message = FALSE}
-
-prof_info %>% 
-  left_join(prof_course, by = "professor")
-
 ```
-
-```{r, include = FALSE}
-## OR 
-
-prof_info %>% 
-  full_join(prof_course, by = "professor")
-
+  professor Stat_331 Stat_330 Stat_431 undergrad_school         grad_school                   
+  <chr>     <lgl>    <lgl>    <lgl>    <chr>                    <chr>                         
+1 Bodwin    TRUE     FALSE    TRUE     Harvard                  UNC                           
+2 Robinson  TRUE     TRUE     TRUE     Winona State University  University of Nebraska-Lincoln
+3 Theobold  TRUE     FALSE    TRUE     Colorado Mesa University Montana State University      
+4 Carlton   TRUE     FALSE    FALSE    NA                       NA      
 ```
 
 **c) Combine datasets 2 and 3 to make this dataset:**
 
-```{r, echo = FALSE, message = FALSE}
-prof_course %>%
-  pivot_longer(Stat_331:Stat_431, 
-               names_to = "course",
-               values_to = "can_teach") %>%
-  inner_join(course_info)
-
 ```
-
-```{r, include = FALSE}
-## OR
-
-prof_course %>%
-  pivot_longer(Stat_331:Stat_431, 
-               names_to = "course",
-               values_to = "can_teach") %>%
-  right_join(course_info)
-
-## OR
-
-prof_course %>%
-  pivot_longer(Stat_331:Stat_431, 
-               names_to = "course",
-               values_to = "can_teach") %>%
-  left_join(course_info)
-
+   professor course   can_teach num_sections
+   <chr>     <chr>    <lgl>            <dbl>
+ 1 Bodwin    Stat_331 TRUE                 8
+ 2 Bodwin    Stat_330 FALSE                3
+ 3 Bodwin    Stat_431 TRUE                 1
+ 4 Robinson  Stat_331 TRUE                 8
+ 5 Robinson  Stat_330 TRUE                 3
+ 6 Robinson  Stat_431 TRUE                 1
+ 7 Theobold  Stat_331 TRUE                 8
+ 8 Theobold  Stat_330 FALSE                3
+ 9 Theobold  Stat_431 TRUE                 1
+10 Carlton   Stat_331 TRUE                 8
+11 Carlton   Stat_330 FALSE                3
+12 Carlton   Stat_431 FALSE                1
 ```
