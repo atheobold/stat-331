@@ -1,0 +1,51 @@
+---
+title: "Midterm Grade Reflection"
+author: "Your Name Goes Here"
+format: 
+  html: 
+    self-contained: true
+layout: margin-left
+editor: visual
+---
+
+[**My Grade:**]{.underline} I believe my grade equivalent to course work
+evidenced below to be an __.
+
+[**Learning Objective Evidence:**]{.underline} State the Lab or Challenge
+assignment where you believe you have demonstrated proficiency with the
+specified learning target
+
+::: {layout-ncol="2" layout-align="left"}
+**Working with Data**  
+WD-1:  
+WD-2:  
+WD-3:  
+WD-4:  
+WD-5:  
+WD-6:  
+WD-7:  
+
+**Reproducibility**  
+R-1:  
+R-2:  
+R-3:  
+
+**Data Visualization & Summarization**  
+DVS-1:  
+DVS-2:  
+DVS-3:  
+DVS-4:  
+DVS-5:  
+
+**Program Efficiency**  
+PE-1:  
+PE-4:  
+:::
+
+[**Revising My Thinking:**]{.underline}
+
+
+[**Extending My Thinking:**]{.underline}
+
+
+[**Peer Support & Collaboration:**]{.underline}

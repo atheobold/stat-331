@@ -1,33 +1,46 @@
 ---
 title: "Week 4 Reflection Prompt"
-format: html
+format: 
+  html: 
+    self-contained: true
 editor: visual
+resources: 
+  - reflection_template.qmd
 ---
 
 Your first reflection will be submitted at the end of this week (February 9). 
 This will be your first experience writing a narrative about your learning and
 your accomplishments, so I do not expect for it to be perfect! But, I do expect
-you to take this process seriously and put honest effort into writing your
+you to take this process seriously and put honest effort into writing your 
 reflection.
+
+[Download the template reflection Quarto file here](reflection_template.qmd)
 
 ### Reflection Outline
 
-The following are questions I expect you to address in your reflection:
+I expect the following to be addressed in your reflection:
 
 1.  What learning targets have you demonstrated an understanding of?
 2.  How have you demonstrated a commitment to continued learning?
 3.  How have you grown as a team member and leader?
 4.  How have you contributed to creating a respectful classroom learning community?
-5.  Are you accomplishing the goals you outlined for yourself at the start of the course?
 
-At the end of your reflection, you need to tell me what grade you believe you
-have earned thus far in STAT 331. Consider this a proposal. Your reflection
-provides "evidence" in favor of your proposed grade. Your proposal should be
-based on the [grade guidelines](https://docs.google.com/document/d/1-SSRp_mXFNgYiy4uW9tlcpxDpQH4OuMqK-Hh4v5AvZI/edit#heading=h.1qwjvdqxd3i2) we developed together as a class.
+At the beginning of your reflection, you need to state what grade you believe
+you have earned ***thus far*** in STAT 331. Consider this a proposal. Your
+reflection provides "evidence" in favor of your proposed grade. Your proposal
+should be based on the [grade guidelines](https://docs.google.com/document/d/1-SSRp_mXFNgYiy4uW9tlcpxDpQH4OuMqK-Hh4v5AvZI/edit#heading=h.1qwjvdqxd3i2) we developed together as a class.
 
 ### Length Requirements
 
-I would appreciate it if your reflection is no more than 2-pages double spaced. If your reflection is less than half a page, you haven't written enough. You can choose to write your reflection in whatever software you wish, but I will only accept HTML, PDF, and Word documents. *Note:* You can make all these documents in Quarto!
+I would appreciate it if your reflection is **no more than 2-pages double
+spaced**. If your reflection is less than half a page, you haven't written
+enough. I will only accept HTML, PDF, and Word documents.
+
+::: {.callout-warning}
+In order to render PDFs, you will need to install a $\LaTeX$ compiler. A 
+popular choice is [MiKTeX](https://miktex.org/download), but there are many 
+other options available. 
+:::
 
 ### What you can expect from me
 
