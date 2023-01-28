@@ -9,14 +9,20 @@ format:
     number-depth: 2
     code-block-bg: "#76b5c5"
     highlight-style: monochrome
+    self-contained: true
 editor: visual
 execute: 
   echo: true
+resources: 
+  - data/gov_spending_per_capita.xlsx
 ---
 
-Today you will be tidying untidy data to explore the relationship between countries of the world and military spending.
+Today you will be tidying untidy data to explore the relationship between
+countries of the world and military spending.
 
 ## Some Reminders as You Work
+
+::: {.callout-tip collapse="true"}
 
 **Two heads are better than one**
 
@@ -41,6 +47,7 @@ Some tricks:
 -   Copy-paste the exact error message into Google. Chances are, somebody else had a similar problem and got a similar message.
 
 -   Include package names in your search terms. For example, "long data in tidyr" is a better search than "long data in R".
+:::
 
 ## Data for Today's Activity
 
@@ -52,7 +59,8 @@ SIPRI military expenditure data is based on open sources only.
 
 ## Data Inspection
 
-**Download the data on Canvas. Open the Excel file and inspect the file.**
+1. Download the [`gov_spending_per_capita.xlsx`](data/gov_spending_per_capita.xlsx) data. 
+2. Open the Excel file and inspect the file.
 
 First, you should notice that there are ten different sheets included in the dataset. We are interested in the sheet labeled "Share of Govt. spending" which contains information about the share of government spending that is allocated to military spending.
 
@@ -64,15 +72,22 @@ Rather than copying this one sheet into a new Excel file and deleting the first 
 
 The `read_xlsx()` function has a `sheet` argument, where you specify the name of the sheet that you want to use.
 
-**Note:** The name must be passed in as a string (in quotations)!
+::: {.callout-note}
+The name of the `sheet` must be passed in as a string (in quotations)!
+:::
 
-The `read_xlsx()` function also has a `skip` argument, where you specify the number of rows you want to be skipped *before* reading in the data.
+The `read_xlsx()` function also has a `skip` argument, where you specify the
+number of rows you want to be skipped *before* reading in the data.
 
-Finally, `read_xlsx()` also has a `n_max` argument, where you specify the maximum number of rows of data to read in.
+Finally, `read_xlsx()` also has a `n_max` argument, where you specify the
+maximum number of rows of data to read in.
 
-**1.** Modify the code below to read the military expenditures data into your work space.
+**1. Modify the code below to read the military expenditures data into your
+work space.**
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
+
 library(readxl) 
 library(tidyverse)
 
@@ -85,21 +100,41 @@ military <- read_xlsx(here::here("data",
 
 ## Data Cleaning
 
-<!-- Add blurb on clean names from janitor -->
+### Missing Values
 
 In addition to `NA`s, missing or unavailable values were coded two ways.
 
-**2.** Find these two methods and write the code to replace these values with NAs. Save the mutated dataset into a new object named `military_clean`.
+**2. Find these two methods and write the code to replace these values with
+NAs. Save the mutated dataset into a new object named `military_clean`.**
+
+::: {.callout-tip}
+Notice how you are mutating *every* variable in the dataset? That sounds like 
+a great place for `across()`! Additionally, you might find the `na_if()`
+function helpful. 
+:::
 
 Because of the use of characters to mark missing values, all of the columns 1988 through 2019 were read in a characters.
 
-**3.** Mutate these columns to all be numeric data types, instead of a character data type. Save these changes into an updated version of `military_clean`.
+**3. Mutate these columns to all be numeric data types, instead of a character 
+data type. Save these changes into an updated version of `military_clean`.**
 
-If you give the `Country` column a look, you'll see that there are names of continents **and** regions included. These names are only included to make it simpler to find countries, as they contain no data.
+::: {.callout-tip}
+Again, it looks like you want to use the **same** function *across* a set of 
+variables. What function might be helpful???
+:::
 
-Luckily for us, these region names were also stored in the "Regional totals" sheet. We can us the `Region` column of this dataset to filter out the names we don't want.
+### Incorrect Regions
 
-Run the code below to read in the "Regional totals" dataset, making any necessary modifications to the path.
+If you give the `Country` column a look, you'll see that there are names of
+continents **and** regions included. These names are only included to make it
+simpler to find countries, as they contain no data.
+
+Luckily for us, these region names were also stored in the "Regional totals"
+sheet. We can us the `Region` column of this dataset to filter out the names we
+don't want.
+
+Run the code below to read in the "Regional totals" dataset, making any
+necessary modifications to the path.
 
 ```{r, eval = FALSE}
 cont_region <- read_xlsx(here::here("data",
@@ -111,53 +146,94 @@ cont_region <- read_xlsx(here::here("data",
 
 ```
 
-If you think about `filter()`ing data, so that only certain values of a variable are retained, we should remember our friendly `%in%` function! However, if you think about the code below, you should notice that this code retains only the values we wanted to remove!
+If you think about `filter()`ing data, so that only certain values of a variable
+are retained, we should remember our friendly `%in%` function! However, if you
+think about the code below, you should notice that this code retains only the
+values we wanted to remove!
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
+
 military_clean |> 
   filter(Country %in% cont_region$Region)
 ```
 
-Unfortunately, R doesn't come with a built-in `!%in%` function. However, a clever way to filter out observations you don't want is with a join. A tool tailored just for this scenario is the `anti_join()` function. This function will return all of the rows of one dataset **without** a match in another dataset.
+Unfortunately, R doesn't come with a built-in `!%in%` function. However, a
+clever way to filter out observations you don't want is with a join. A tool
+tailored just for this scenario is the `anti_join()` function. This function will return all of the rows of one dataset **without** a match in another dataset.
 
-**4.** Use the `anti_join()` function to filter out the `Country` values we don't want in the `military_clean` dataset. The `by` argument needs to be filled with the name(s) of the variables that the two datasets should be joined with.
+**4. Use the `anti_join()` function to filter out the `Country` values we don't
+want in the `military_clean` dataset. The `by` argument needs to be filled with
+the name(s) of the variables that the two datasets should be joined with.**
 
-**Hint:** To join by different variables on `x` and `y`, use a named vector. For example, `by = c("a" = "b")` will match `x$a` to `y$b`.
+::: {.callout-tip}
+To join by different variables on `x` and `y`, use a named vector. For example,
+`by = c("a" = "b")` will match `x$a` to `y$b`.
+:::
 
-### Part One Answer
+## Part One Answer
 
-What regions were not removed from the `military_clean` dataset? Use their correct capitalization **and** punctuation!
+What regions were not removed from the `military_clean` dataset? Use their
+correct capitalization **and** punctuation!
+
+::: {.callout-tip}
+Looking at the dataset, you should notice that the continents included in the 
+`Country` column have missing values for the `1988` to `2019` columns. Use this
+information to locate what continents still remain!
+:::
+
+::: {.callout-caution}
+Using `across()` in `filter()` was deprecated in dplyr 1.0.8. It is 
+advised to use `if_any()` or `if_all()` instead. For help on these functions, 
+pull up their help file!
+:::
 
 ## Data Organization
 
-The comparison I am interested in looking at the military expenditures across every year in the data. Something like this:
+The comparison I am interested in looking at the military expenditures across
+every year in the data. Something like this:
 
-<https://app.box.com/embed/s/ed74ynmti87pk8oats4jdbhwb5rqf7cm?sortColumn=date&view=list>
+![](desired_plot.png)
 
 Unfortunately, this requires that every year is included in one column!
 
-To tidy a dataset like this, we need to pivot the columns of years from wide format to long format. To do this process we need three parameters:
+To tidy a dataset like this, we need to pivot the columns of years from wide
+format to long format. To do this process we need three parameters:
 
--   The set of columns that represent values, not variables. In these data, those are all the columns from `1988` to `2018`.
+- The set of columns that represent values, not variables. In these data, those
+are all the columns from `1988` to `2018`.
 
--   The name of the variable that should be created to move these columns into. In these data, this could be `"Year"`.
+- The name of the variable that should be created to move these columns into.
+In these data, this could be `"Year"`.
 
--   The name of the variable that should be created to move these column's values into. In these data, this could be labeled `"Spending"`.
+-  The name of the variable that should be created to move these column's values
+into. In these data, this could be labeled `"Spending"`.
 
-Each of these pieces form the three required arguments to the `pivot_longer()` function.
+Each of these pieces form the three required arguments to the `pivot_longer()`
+function.
 
-**4.** Pivot the cleaned up `military` dataset to a "longer" orientation. Save this new "long" version as a new dataset (**do not** overwrite your cleaned up dataset)!
+**4. Pivot the cleaned up `military` dataset to a "longer" orientation. Save
+this new "long" version as a new dataset.**
+
+::: {.callout-caution}
+**Do not** overwrite your cleaned up dataset! Save your longer data as a new
+object!
+:::
 
 ## Data Visualization Exploration
 
-Now that we've transformed the data, let's create a plot to explore the military spending across the years.
+Now that we've transformed the data, let's create a plot to explore the military
+spending across the years.
 
-**5.** Create side-by-side boxplots of the military spending for each year.
+**5. Create side-by-side boxplots of the military spending for each year.**
 
-**Hint:** Place the `Year` variable on an axis that makes it easier to read the labels!
+::: {.callout-tip}
+Place the `Year` variable on an axis that makes it easier to read the labels!
+:::
 
-### Part Two Answer
+## Part Two Answer
 
-What year was the second largest military expenditure? What country had this expenditure?
+What year was the second largest military expenditure? What country had this 
+expenditure?
 
 **Bonus**: What is the reason for this large expenditure?
