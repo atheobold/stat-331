@@ -8,13 +8,17 @@ resources:
   - reflection_template.qmd
 ---
 
-Your first reflection will be submitted at the end of this week (February 9). 
-This will be your first experience writing a narrative about your learning and
-your accomplishments, so I do not expect for it to be perfect! But, I do expect
-you to take this process seriously and put honest effort into writing your 
-reflection.
+Your first reflection will be submitted at the end of this week (February 9). This will be your first experience writing a narrative about your learning and your accomplishments, so I do not expect for it to be perfect! But, I do expect you to take this process seriously and put honest effort into writing your reflection.
 
 [Download the template reflection Quarto file here](reflection_template.qmd)
+
+::: callout-caution
+# Add your preferred YAML
+
+The downloaded file **does not** contain an YAML, you need to include your own.
+This allows you to specify how you would like your rendered HTML to look! The
+sky is the limit!
+:::
 
 ### Reflection Outline
 
@@ -25,21 +29,14 @@ I expect the following to be addressed in your reflection:
 3.  How have you grown as a team member and leader?
 4.  How have you contributed to creating a respectful classroom learning community?
 
-At the beginning of your reflection, you need to state what grade you believe
-you have earned ***thus far*** in STAT 331. Consider this a proposal. Your
-reflection provides "evidence" in favor of your proposed grade. Your proposal
-should be based on the [grade guidelines](https://docs.google.com/document/d/1-SSRp_mXFNgYiy4uW9tlcpxDpQH4OuMqK-Hh4v5AvZI/edit#heading=h.1qwjvdqxd3i2) we developed together as a class.
+At the beginning of your reflection, you need to state what grade you believe you have earned ***thus far*** in STAT 331. Consider this a proposal. Your reflection provides "evidence" in favor of your proposed grade. Your proposal should be based on the [grade guidelines](https://docs.google.com/document/d/1-SSRp_mXFNgYiy4uW9tlcpxDpQH4OuMqK-Hh4v5AvZI/edit#heading=h.1qwjvdqxd3i2) we developed together as a class.
 
 ### Length Requirements
 
-I would appreciate it if your reflection is **no more than 2-pages double
-spaced**. If your reflection is less than half a page, you haven't written
-enough. I will only accept HTML, PDF, and Word documents.
+I would appreciate it if your reflection is **no more than 2-pages double spaced**. If your reflection is less than half a page, you haven't written enough. I will only accept HTML, PDF, and Word documents.
 
-::: {.callout-warning}
-In order to render PDFs, you will need to install a $\LaTeX$ compiler. A 
-popular choice is [MiKTeX](https://miktex.org/download), but there are many 
-other options available. 
+::: callout-warning
+In order to render PDFs, you will need to install a $\LaTeX$ compiler. A popular choice is [MiKTeX](https://miktex.org/download), but there are many other options available.
 :::
 
 ### What you can expect from me
