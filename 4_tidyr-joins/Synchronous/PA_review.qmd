@@ -297,5 +297,9 @@ Tidy Data
 Pivoting Longer
 :::
 
+```{r}
+#| out-width: 75%
 
-![](images/pivot_longer_surveys.png)
+knitr::include_graphics("images/pivot_longer_surveys.png")
+```
+
