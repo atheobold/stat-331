@@ -1,0 +1,301 @@
+---
+title: "Recap of Relational Data"
+author: "STAT 331"
+format: 
+  revealjs:
+    logo: images/tidyr.png
+    theme: night
+    self-contained: true
+editor: visual
+execute: 
+  warning: false
+  message: false
+  echo: false
+---
+
+```{r set-up}
+#| include: false
+
+library(tidyverse)
+library(kableExtra)
+
+surveys <- read_csv("data/surveys.csv")
+plots <- read_csv("data/plots.csv")
+species <- read_csv("data/species.csv")
+
+```
+
+##  {background-color="#D4D4D4"}
+
+::: {style="font-size: 3em; color: #000000;"}
+Relational Data
+:::
+
+. . .
+
+::: columns
+::: {.column width="45%"}
+::: {style="font-size: 2em; color: #154c79;"}
+Mutating joins
+:::
+
+*Adds information* from a new dataframe to observations in an existing dataframe
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="45%"}
+::: {style="font-size: 2em; color: #873e23;"}
+Filtering joins
+:::
+
+*Filters observations* based on values in new dataframe
+:::
+:::
+
+## 
+
+::: {style="font-size: 3em;"}
+Keys
+:::
+
+
+::: columns
+::: {.column width="40%"}
+-   Uniquely identifies an observation in a dataset
+
+-   Relate datasets to each other
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="55%"}
+![](images/key.jpeg)
+:::
+:::
+
+## 
+
+![](images/surveys_relate.jpeg)
+
+## 
+
+`surveys`
+
+```{r}
+surveys  |>  
+  head(2) |> 
+  kable() |> 
+  kable_styling()
+```
+
+</br>
+
+::: columns
+::: {.column width="45%"}
+`plots`
+
+```{r}
+plots |> 
+  head(n = 2) |> 
+  kable() |> 
+  kable_styling()
+```
+
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="45%"}
+
+`species`
+
+```{r species-head}
+species |> 
+  head(n = 2) |> 
+  kable() |> 
+  kable_styling()
+```
+
+:::
+:::
+
+##
+
+::: {style="font-size: 2em"}
+**Mean Weights**
+:::
+
+```{r}
+#| eval: false
+#| echo: true
+surveys_weight <- surveys |>
+  drop_na(weight) |> 
+  group_by(species_id) |> 
+  summarize(mean_weight = mean(weight))
+```
+
+```{r}
+#| echo: false
+
+surveys_weight <- surveys |> 
+  filter(!is.na(weight)) |> 
+  group_by(species_id) |> 
+  summarize(mean_weight = mean(weight)) 
+
+surveys_weight |> 
+  head() |> 
+  kable() |> 
+  kable_styling()
+
+```
+
+
+## 
+
+::: {style="font-size: 3em; color: #873e23;"}
+Filtering joins
+:::
+
+::: {style="font-size: 2em;"}
+*Keeping Observations*
+:::
+
+```{r}
+knitr::include_graphics("images/semi_join.png")
+```
+
+## 
+
+::: {style="font-size: 2em;"}
+`semi_join()`
+:::
+
+```{r}
+#| echo: true
+#| eval: false
+
+surveys_weight |> 
+  semi_join(species, by = "species_id")
+```
+
+```{r}
+surveys_weight |> 
+  semi_join(species, by = "species_id") |> 
+  head(n = 5) |> 
+  kable() |> 
+  kable_styling()
+```
+
+
+##
+
+::: {style="font-size: 3em; color: #873e23;"}
+Filtering joins
+:::
+
+::: {style="font-size: 2em;"}
+*Removing Observations*
+:::
+
+```{r}
+#| echo: false
+knitr::include_graphics("images/anti_join.png")
+```
+
+## 
+
+::: {style="font-size: 2em;"}
+`anti_join()`
+:::
+
+```{r}
+#| eval: false
+#| echo: true
+
+species |> 
+  anti_join(surveys_weight, by = "species_id")
+```
+
+```{r}
+species |> 
+  anti_join(surveys_weight, by = "species_id") |> 
+  select(species_id, species) |> 
+  head(n = 3) |> 
+  kable() |> 
+  kable_styling()
+```
+
+
+## 
+
+::: {style="font-size: 3em;"}
+Connecting to Data Cleaning
+:::
+
+. . .
+
+
+Including observations with **`%in%`** 
+
+```{r include}
+#| eval: false
+#| echo: true
+surveys |> 
+  filter(species_id %in% c("BA", "DM", "DS")
+         )
+```
+
+. . .
+
+</br>
+
+::: {style="font-size: 1.5em; color: #154c79;"}
+Similar to **`semi_join()`**!
+:::
+
+
+## 
+
+::: {style="font-size: 3em;"}
+Connecting to Data Cleaning
+:::
+
+. . .
+
+Excluding observations with **`!%in%`**
+
+```{r not-include}
+#| eval: false
+#| echo: true
+surveys |> 
+  filter(!species_id %in% c("AB", "AH", "AS")
+         )
+```
+
+. . .
+
+::: {style="font-size: 1.5em; color: #154c79;"}
+Similar to **`anti_join()`**!
+:::
+
+## 
+
+::: {style="font-size: 3em;"}
+Tidy Data
+:::
+
+![](images/tidy-data.png)
+
+
+##  {background-color="#D4D4D4"}
+
+::: {style="font-size: 3em; color: #000000;"}
+Pivoting Longer
+:::
+
+
+![](images/pivot_longer_surveys.png)

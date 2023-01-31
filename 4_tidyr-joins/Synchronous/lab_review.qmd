@@ -1,0 +1,164 @@
+---
+title: "Untitled"
+format: revealjs
+editor: visual
+---
+
+
+class: center, middle
+
+.larger[.rhubarb[Inner Join]]
+
+Matches pairs of observations when "keys" are equal
+
+```{r, echo = FALSE, out.width = "100%"}
+knitr::include_graphics("figures/inner_join.png")
+```
+
+---
+
+class: center
+
+.larger[**Mean Weights**]
+
+```
+surveys_weight <- surveys |> 
+  group_by(species_id) |> 
+  summarize(mean_weight = mean(weight))
+```
+
+```{r, echo = FALSE}
+surveys_weight <- surveys |> 
+  filter(!is.na(weight)) |> 
+  group_by(species_id) |> 
+  summarize(mean_weight = mean(weight)) 
+
+surveys_weight |> 
+  head() |> 
+  kable() |> 
+  kable_styling()
+
+```
+
+---
+
+class: center
+
+.larger[**Adding Information**]
+
+```{r, eval = FALSE}
+surveys_weight |> 
+  inner_join(species, by = "species_id")
+```
+
+```{r, echo = FALSE}
+surveys_weight |> 
+  inner_join(species, by = "species_id") |> 
+  head() |> 
+  kable() |> 
+  kable_styling()
+```
+
+--
+
+**Would another mutating join resulted in the same dataset?**
+
+---
+
+.pull-left[
+.larger[.honey[Mutating Joins]]
+
+- Left Join: Everything is kept in the dataset **on the left**
+
+- Right Join: Everything is kept in the dataset **on the right**
+
+- Full Join: Everything is kept in **both** datasets
+
+]
+
+--
+
+.pull-right[
+</br>
+![](figures/joins.JPG)   
+]
+
+
+class: center, middle
+
+.larger[Handy Helpers]
+
+
+--
+
+
+.large[`rename()`] -- Change names of columns
+
+--
+
+.large[`separate()`] -- Separate values of a variable
+
+---
+
+class: middle, center
+
+.larger[Semi- and Anti-Join]
+
+--
+
+.pull-left[ `semi_join()`
+- Keeps values **found** in another dataset
+]
+
+--
+
+.pull-right[ `anti_join()`
+- Keeps values **not found** in another dataset
+]
+
+---
+
+class: center
+
+.huge[.rhubarb[Some words about resources]]
+
+--
+
+![](figures/stack_overflow.PNG)
+
+.pull-left[.larger[**Using**]]
+
+.pull-right[.larger[**Learning**]]
+
+---
+
+![](figures/help.PNG)
+
+---
+
+class: center
+
+.huge[.honey[Some words about functions]]
+
+--
+
+.pull-left[
+![](figures/depreciated.PNG)
+]
+
+.pull-right[
+Has a better alternative available and is scheduled for removal.]
+
+--
+
+.pull-left[
+![](figures/superseded.png)
+]
+
+.pull-right[
+Has a known better alternative, but the function itself is not going away.]
+
+
+
+
+
