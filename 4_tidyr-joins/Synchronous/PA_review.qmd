@@ -298,7 +298,8 @@ Pivoting Longer
 :::
 
 ```{r}
-#| out-width: 75%
+#| out-width: 60%
+#| fig-align: center
 
 knitr::include_graphics("images/pivot_longer_surveys.png")
 ```
