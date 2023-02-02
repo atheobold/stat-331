@@ -1,33 +1,60 @@
 ---
-title: "Untitled"
-format: revealjs
+title: "A bit more about relational data"
+author: "STAT 331"
+format: 
+  revealjs:
+    logo: images/tidyr.png
+    theme: night
+    self-contained: true
 editor: visual
+execute: 
+  warning: false
+  message: false
+  echo: false
 ---
 
+```{r set-up}
+#| include: false
 
-class: center, middle
+library(tidyverse)
+library(kableExtra)
 
-.larger[.rhubarb[Inner Join]]
+surveys <- read_csv("data/surveys.csv")
+plots <- read_csv("data/plots.csv")
+species <- read_csv("data/species.csv")
 
-Matches pairs of observations when "keys" are equal
+```
+
+##
+
+::: {style="font-size: 3em;"}
+Inner Join
+:::
+
+> Matches **all** pairs of observations when "keys" are equal
 
 ```{r, echo = FALSE, out.width = "100%"}
-knitr::include_graphics("figures/inner_join.png")
+knitr::include_graphics("images/inner_join.png")
 ```
 
----
+## 
 
-class: center
+::: {style="font-size: 2em"}
+**Mean Weights**
+:::
 
-.larger[**Mean Weights**]
-
-```
-surveys_weight <- surveys |> 
+```{r}
+#| eval: false
+#| echo: true
+surveys_weight <- surveys |>
+  drop_na(weight) |> 
   group_by(species_id) |> 
   summarize(mean_weight = mean(weight))
 ```
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
+
 surveys_weight <- surveys |> 
   filter(!is.na(weight)) |> 
   group_by(species_id) |> 
@@ -40,125 +67,172 @@ surveys_weight |>
 
 ```
 
----
 
-class: center
+##  {background-color="#D4D4D4"}
 
-.larger[**Adding Information**]
+::: {style="font-size: 3em; color: #000000;"}
+**Adding Information**
+:::
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
+#| echo: true
 surveys_weight |> 
   inner_join(species, by = "species_id")
 ```
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 surveys_weight |> 
   inner_join(species, by = "species_id") |> 
-  head() |> 
+  head(5) |> 
   kable() |> 
   kable_styling()
 ```
 
---
 
-**Would another mutating join resulted in the same dataset?**
+## 
 
----
+::: {style="font-size: 3em; color: #873e23;"}
+Mutating joins
+:::
 
-.pull-left[
-.larger[.honey[Mutating Joins]]
+::: columns
+::: {.column width="45%"}
+-   Left Join: Everything is kept in the dataset **on the left**
 
-- Left Join: Everything is kept in the dataset **on the left**
+-   Right Join: Everything is kept in the dataset **on the right**
 
-- Right Join: Everything is kept in the dataset **on the right**
+-   Full Join: Everything is kept in **both** datasets
+:::
 
-- Full Join: Everything is kept in **both** datasets
+::: {.column width="5%"}
+:::
 
-]
+::: {.column width="45%"}
+![](images/joins.JPG)
+:::
+:::
 
---
+##  {background-color="#D4D4D4"}
 
-.pull-right[
+::: {style="font-size: 3em; color: #000000;"}
+Handy Helpers
+:::
+
+. . .
+
 </br>
-![](figures/joins.JPG)   
-]
+
+::: columns
+::: {.column width="40%"}
+
+::: {style="font-size: 1.5em;"}
+`rename()` 
+:::
+
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="50%"}
+Change names of columns
+:::
+:::
+
+. . .
+
+</br>
+
+::: columns
+::: {.column width="40%"}
+
+::: {style="font-size: 1.5em"}
+`separate()`
+:::
+
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="55%"}
+Separate values of a variable
+:::
+:::
+
+## 
+
+::: {style="font-size: 3em;"}
+Some words about resources
+:::
+
+. . .
+
+<center>
+![](images/stack_overflow.PNG)
+</center>
+
+::: columns
+::: {.column width="45%"}
+
+::: {style="font-size: 2em; color: #873e23;"}
+**Using**
+:::
 
 
-class: center, middle
+:::
 
-.larger[Handy Helpers]
+::: {.column width="5%"}
+:::
 
+::: {.column width="45%"}
 
---
+::: {style="font-size: 2em; color: #873e23;"}
+**Learning**
+:::
 
+:::
+:::
 
-.large[`rename()`] -- Change names of columns
+## A vignette...
 
---
+<center>
+![](images/help.PNG)
+</center>
 
-.large[`separate()`] -- Separate values of a variable
+## 
 
----
+::: {style="font-size: 3em;"}
+Some words about functions
+:::
 
-class: middle, center
+::: columns
+::: {.column width="45%"}
+![](images/depreciated.PNG)
+:::
 
-.larger[Semi- and Anti-Join]
+::: {.column width="5%"}
+:::
 
---
+::: {.column width="45%"}
+Has a better alternative available and is scheduled for removal.
+:::
+:::
 
-.pull-left[ `semi_join()`
-- Keeps values **found** in another dataset
-]
+. . .
 
---
+::: columns
+::: {.column width="45%"}
+![](images/superseded.png)
+:::
 
-.pull-right[ `anti_join()`
-- Keeps values **not found** in another dataset
-]
+::: {.column width="5%"}
+:::
 
----
-
-class: center
-
-.huge[.rhubarb[Some words about resources]]
-
---
-
-![](figures/stack_overflow.PNG)
-
-.pull-left[.larger[**Using**]]
-
-.pull-right[.larger[**Learning**]]
-
----
-
-![](figures/help.PNG)
-
----
-
-class: center
-
-.huge[.honey[Some words about functions]]
-
---
-
-.pull-left[
-![](figures/depreciated.PNG)
-]
-
-.pull-right[
-Has a better alternative available and is scheduled for removal.]
-
---
-
-.pull-left[
-![](figures/superseded.png)
-]
-
-.pull-right[
-Has a known better alternative, but the function itself is not going away.]
-
-
-
-
+::: {.column width="45%"}
+Has a known better alternative, but the function itself is not going away.
+:::
+:::
 
