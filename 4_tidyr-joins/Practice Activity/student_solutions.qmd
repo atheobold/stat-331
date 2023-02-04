@@ -13,8 +13,6 @@ format:
 editor: visual
 execute: 
   echo: true
-  message: false
-  warning: false
 resources: 
   - data/gov_spending_per_capita.xlsx
 ---
@@ -22,34 +20,6 @@ resources:
 Today you will be tidying untidy data to explore the relationship between
 countries of the world and military spending.
 
-## Some Reminders as You Work
-
-::: {.callout-tip collapse="true"}
-
-**Two heads are better than one**
-
-It can be hard to spot bugs in code that you wrote.
-
-Work with those around you - if something goes wrong, ask a friend or team member to take a peek at your code and see if any glaring errors (like *syntax error*) pop out.
-
-**Explain your code out loud**
-
-The best way to troubleshoot a sneaky but is to explain out loud each step of your code, and what you hoped to accomplish.
-
-Schedule a meeting with your team to have everyone talk through their code.
-
-If you are alone, try [Rubber Duck Debugging](https://en.wikipedia.org/wiki/Rubber_duck_debugging)!
-
-**Google is your friend**
-
-The whole of the internet is at your disposal! Use it early, use it often.
-
-Some tricks:
-
--   Copy-paste the exact error message into Google. Chances are, somebody else had a similar problem and got a similar message.
-
--   Include package names in your search terms. For example, "long data in tidyr" is a better search than "long data in R".
-:::
 
 ## Data for Today's Activity
 
@@ -74,10 +44,6 @@ Rather than copying this one sheet into a new Excel file and deleting the first 
 
 The `read_xlsx()` function has a `sheet` argument, where you specify the name of the sheet that you want to use.
 
-::: {.callout-note}
-The name of the `sheet` must be passed in as a string (in quotations)!
-:::
-
 The `read_xlsx()` function also has a `skip` argument, where you specify the
 number of rows you want to be skipped *before* reading in the data.
 
@@ -87,17 +53,17 @@ maximum number of rows of data to read in.
 **1. Modify the code below to read the military expenditures data into your
 work space.**
 
-```{r}
+```{r set-up}
 #| eval: false
 library(readxl) 
 library(tidyverse)
-library(here)
 
-military <- read_xlsx(here("data", 
+military <- read_xlsx(here::here("data", 
                                  "gov_spending_per_capita.xlsx"), 
-                      sheet = , 
-                      skip = , 
-                      nmax = )
+                      sheet = "Share of Govt. spending", 
+                      skip = 6, 
+                      n_max = 191)
+## This is MY path to the data! Yours will look different! 
 ```
 
 ## Data Cleaning
@@ -109,21 +75,28 @@ In addition to `NA`s, missing or unavailable values were coded two ways.
 **2. Find these two methods and write the code to replace these values with
 NAs. Save the mutated dataset into a new object named `military_clean`.**
 
-::: {.callout-tip}
-Notice how you are mutating *every* variable in the dataset? That sounds like 
-a great place for `across()`! Additionally, you might find the `na_if()`
-function helpful. 
-:::
+```{r na-conversion}
+military_clean <- military %>% 
+  mutate(across(.cols = `1988`:`2019`,
+                .fns = ~ na_if(.x , y = ". .")
+                ),
+         across(.cols = `1988`:`2019`,
+                .fns = ~ na_if(.x, y = "xxx")
+                )
+         )
+```
 
 Because of the use of characters to mark missing values, all of the columns 1988 through 2019 were read in a characters.
 
 **3. Mutate these columns to all be numeric data types, instead of a character 
 data type. Save these changes into an updated version of `military_clean`.**
 
-::: {.callout-tip}
-Again, it looks like you want to use the **same** function *across* a set of 
-variables. What function might be helpful???
-:::
+```{r numeric-conversion}
+military_clean <- military_clean %>% 
+  mutate(across(.cols = `1988`:`2019`, 
+                .fns = as.numeric)
+         )
+```
 
 ### Incorrect Regions
 

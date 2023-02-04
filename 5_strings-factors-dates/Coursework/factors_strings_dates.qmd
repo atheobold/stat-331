@@ -1,7 +1,8 @@
 ---
-title: "Factors, Strings, & Dates"
+title: "Factors, Strings, & Dates -- Oh, my!"
 format: 
-  html: 
+  html:
+    css: ../../../youtube_container.css
     theme: minty
     fontsize: 1em
     mainfont: sans-serif
@@ -14,12 +15,9 @@ execute:
   echo: false
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-### change this if icons local
-```
+```{r}
+#| include: false
 
-```{r, include = FALSE}
 library(tidyverse)
 library(flair)
 library(lubridate)
@@ -31,23 +29,41 @@ library(lubridate)
 
 `r emo::ji("book")` Readings: 30-60 minutes
 
-`r emo::ji("computer")` Activities: 45-60 minutes
-
-`r emo::ji("check")` Check-ins: 2
+`r emo::ji("check")` Preview Activities: 3
 
 ------------------------------------------------------------------------
 
 # Factors
 
-`r emo::ji("book")` [Required Reading: *R4DS* -- Factors with forcats](https://r4ds.had.co.nz/factors.html)
+Yes, we are **finally** going to learn about factors! 
 
-`r emo::ji("play button")` [Required Video: Factors with forcats](http://somup.com/crfTrOF3tN)
+![](images/cat_programmer.png)
 
-------------------------------------------------------------------------
+</br>
 
-`r emo::ji("check")` **Check-in: Functions from forcats**
+`r emo::ji("book")` [Required Reading: *R4DS* -- Factors with forcats](https://r4ds.hadley.nz/factors.html)
 
-Answer the questions based on the reading, video, **forcats** [website](https://forcats.tidyverse.org/reference/index.html), or **forcats** [cheat sheet](https://www.rstudio.com/resources/cheatsheets/).
+::: column-margin
+::: youtube-video-container
+<iframe width="100%" height="auto" src="https://www.youtube.com/embed/dAiSYli7tVg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+:::
+:::
+
+::: {.callout-tip collapse="true"}
+# Extra **forcats** resources
+
+Useful functions from the **forcats** package (not an exhaustive list):
+
+- `as_factor()`
+- `fct_relevel()`
+- `fct_reorder()`
+- `fct_collapse()`
+
+Download the [forcats cheatsheet](https://posit.co/wp-content/uploads/2022/10/factors-1.pdf).
+:::
+
+::: {.callout-caution}
+# Preview Activity 12: Functions from forcats
 
 **Q1** Which of the following tasks can `fct_recode()` accomplish?
 
@@ -82,26 +98,114 @@ Answer the questions based on the reading, video, **forcats** [website](https://
 -   alphabetical order
 -   largest to smallest based on counts
 -   largest to smallest based on another variable
-
-*Feel free to share answers with your classmates in the Discord server, to make sure you understand.*
-
-`r emo::ji("check")` **Check-in: Apply your skills**
-
-In your *colleges_clean* dataset ([from Practice Activity 3](https://www.dropbox.com/s/bt5hvctdevhbq6j/colleges.csv?dl=1)), adjust the `REGION` variable to have nicer or clearer labels and/or better categories.
-
-------------------------------------------------------------------------
+:::
 
 # Strings
 
 `r emo::ji("book")` [Required Reading: *R4DS* -- Strings](https://r4ds.had.co.nz/strings.html)
 
-`r emo::ji("play button")` [Required Video -- Strings with stringr](https://www.youtube.com/watch?v=Oo_MtXwpi2Q)
+::: column-margin
+::: youtube-video-container
+<iframe width="100%" height="auto" src="https://www.youtube.com/embed/Oo_MtXwpi2Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+:::
+:::
 
-------------------------------------------------------------------------
+Nearly always, when multiple variables are stored in a single column, they are stored as character variables. There are many different “levels” of working with strings in programming, from simple find-and-replaced of fixed (constant) strings to regular expressions, which are extremely powerful (and extremely complicated).
 
-`r emo::ji("check")` **Check-in: Functions from stringr**
+> Some people, when confronted with a problem, think “I know, I’ll use regular expressions.” Now they have two problems. - Jamie Zawinski
 
-Answer the questions based on the reading, video, **stringr** [website](https://stringr.tidyverse.org/reference/index.html), or **stringr** [cheat sheet](https://www.rstudio.com/resources/cheatsheets/).
+![Alternately, the xkcd version of the above quote](images/perl_problems.png)
+
+::: {.callout-tip collapse="true"}
+# Extra **stringr** resources 
+
+Download the [stringr cheatsheet](https://posit.co/wp-content/uploads/2022/10/strings-1.pdf).
+
+Table of string functions in the **stringr** R package. `x` is the string or vector of strings, `pattern` is a pattern to be found within the string, `a` and `b` are indexes, and encoding is a string encoding, such as UTF8 or ASCII.
+
+::: columns
+::: {.column width="40%"}
+**Task** 
+
+1. Replace `pattern` with `replacement`
+
+</br>
+
+2. Convert case	
+
+3. Strip whitespace from start/end	
+
+4. Pad strings to a specific length	
+
+5. Test if the string contains a pattern	
+
+6. Count how many times a pattern appears in the string	
+
+7. Find the first appearance of the pattern within the string	
+
+8. Find all appearances of the pattern within the string	
+
+9. Detect a match at the start/end of the string	
+
+10. Subset a string from index a to b	
+
+11. Convert string encoding	
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="55%"}
+**stringr**
+
+1. `str_replace(x, pattern, replacement)` and `str_replace_all(x, pattern, replacement)`
+
+2. `str_to_lower(x)`, `str_to_upper(x)`, `str_to_title(x)`
+
+3. `str_trim(x)` , `str_squish(x)`
+
+4. `str_pad(x, ...)`
+
+5. `str_detect(x, pattern)`
+
+6. `str_count(x, pattern)`
+
+</br>
+
+7. `str_locate(x, pattern)`
+
+8. `str_locate_all(x, pattern)`
+
+9. `str_starts(x, pattern) ,str_ends(x, pattern)`
+
+10. `str_sub(x, a, b)`
+
+11. `str_conv(x, encoding)`
+:::
+:::
+:::
+
+
+## Regular Expressions
+
+Matching exact strings is easy - it’s just like using find and replace.
+
+```{r dog-string}
+#| echo: true
+#| eval: true
+human_talk <- "blah, blah, blah. Do you want to go for a walk?"
+dog_hears <- str_extract(human_talk, "walk")
+dog_hears
+
+```
+
+
+But, if you can master even a small amount of regular expression notation, you’ll have exponentially more power to do good (or evil) when working with strings. You can get by without regular expressions if you’re creative, but often they’re much simpler.
+
+`r emo::ji("book")` [Highly Recommended Reading: *R4DS* -- Strings](https://r4ds.hadley.nz/regexps.html)
+
+::: {.callout-caution}
+## Preview Activity 13: Functions from stringr
 
 **Q1** Which of the follow are differences between `length()` and `str_length()`?
 
@@ -134,71 +238,39 @@ Answer the questions based on the reading, video, **stringr** [website](https://
 -   ending position
 -   pattern to search for
 
-**Q6** What does the collapse argument do in str_c()?
+**Q6** What does the `collapse` argument do in `str_c()`?
 
 -   specifies a string to be used when combining inputs into a single string
 -   specifies whether the string should be collapsed
-
-*Feel free to share answers with your classmates in the Discord server, to make sure you understand.*
-
-`r emo::ji("check")` **Check-in: Apply your skills**
-
-Using your *colleges_clean* dataset, answer these questions:
-
-**Question 1:** How *exactly* does Cal Poly's name appear in this dataset?
-
-```{r, include = FALSE, eval = FALSE}
-colleges_clean$INSTNM %>%
-  str_subset("Polytechnic")
-```
-
-**Question 2:** How many colleges have the word "University" in their name?
-
-```{r, include = FALSE, eval = FALSE}
-colleges_clean %>%
-  mutate(
-    is_univ = str_detect(INSTNM, "University")
-  ) %>%
-  count(is_univ)
-
-```
-
-**Question 3:** Which college has the *longest* name? The *shortest* name?
-
-```{r, include = FALSE, eval = FALSE}
-colleges_clean %>%
-  mutate(
-    name_len = str_length(INSTNM)
-  ) %>% 
-  slice_min(name_len) 
-
-colleges_clean %>%
-  mutate(
-    name_len = str_length(INSTNM)
-  ) %>% 
-  slice_max(name_len) 
-
-```
-
-------------------------------------------------------------------------
+:::
 
 # Dates
 
-`r emo::ji("play button")` [Required Video: DateTime Objects with lubridate](http://somup.com/crfTrLF3U3)
+In order to fill in an important part of our toolbox, we need to learn how to work with date variables. These variables feel like they should be simple and intuitive given we all work with schedules and calendars everyday. However, there are little nuances that we will learn to make working with dates and times easier.
 
-`r emo::ji("book")` [Required Reading: *R4DS* -- Dates and Times](https://r4ds.had.co.nz/dates-and-times.html)
+`r emo::ji("book")` [Required Reading: *R4DS* -- Dates and Times](https://r4ds.hadley.nz/datetimes.html)
 
-**Extra Resources**
+::: column-margin
+::: youtube-video-container
+<iframe width="100%" height="auto" src="https://www.youtube.com/embed/SEPjN2AJqbo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+:::
+:::
+
+::: {.callout-tip collapse="true"}
+# Extra resources
+
+- [**lubridate** website](https://lubridate.tidyverse.org/reference/)
+
+- Download the [**lubridate**  cheatsheet](https://posit.co/wp-content/uploads/2022/10/lubridate-1.pdf)
 
 -   [A more in-depth discussion of the POSIXlt and POSIXct data classes.](https://www.cyclismo.org/tutorial/R/time.html)
 
 -   [A tutorial on lubridate](https://data.library.virginia.edu/working-with-dates-and-time-in-r-using-the-lubridate-package/) - scroll down for details on intervals if you have trouble with `%within%` and `%--%`
+:::
 
-------------------------------------------------------------------------
+::: {.callout-caution}
+# Preview Activity 14: Functions from lubridate
 
-`r emo::ji("check")` **Check-in: Functions from lubridate**
-
-Answer the questions based on the reading, video, **lubridate** [website](https://lubridate.tidyverse.org/reference/index.html), or **lubridate** [cheat sheet](https://www.rstudio.com/resources/cheatsheets/).
 
 **Q1** Which of the following is true about the year() function?
 
@@ -206,8 +278,6 @@ Answer the questions based on the reading, video, **lubridate** [website](https:
 -   `year()` creates a duration object to be added to a datetime
 
 **Q3** What `tz` would you use for San Luis Obispo?
-
-<!-- tz = "America/Los_Angeles" -->
 
 **Q3** Which of the following is true about the `%within%` operator?
 
@@ -222,35 +292,4 @@ Answer the questions based on the reading, video, **lubridate** [website](https:
 -   it checks if a date is included in an interval
 
 **Q5** What day does the `make_date()` function use as default if no `day` argument is provided?
-
-*Feel free to share answers with your classmates in the Discord server, to make sure you understand.*
-
-`r emo::ji("check")` **Check-in: Apply your skills**
-
-(Answer the following using code (even if you know the answer already).
-
-First, use the `make_date()` function to save your birthday as a Datetime object in R.
-
-```{r, include = FALSE}
-bday <- make_date(day = 14, month = 1, year = 1989)
-```
-
--   What day of the week does/did your birthday fall on in 2023?
-
-```{r, include = FALSE}
-(bday  + years(34)) %>% 
-  wday(label = TRUE)
-```
-
--   On what day of the week should you plan your 50th birthday party?
-
-```{r, include = FALSE}
-(bday  + years(50)) %>% 
-  wday(label = TRUE)
-```
-
--   Find the date that is exactly 9 months before the day you were born. If it falls on a holiday, think about the implications.
-
-```{r, include = FALSE}
-bday - months(9)
-```
+:::

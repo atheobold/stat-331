@@ -2,19 +2,87 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.0.38">
+<meta name="generator" content="quarto-1.2.335">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Factors, Strings, &amp; Dates</title>
+<title>Factors, Strings, &amp; Dates – Oh, my!</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -30,17 +98,19 @@ ul.task-list{list-style: none;}
 <link href="factors_strings_dates_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
 
+<link rel="stylesheet" href="../../../youtube_container.css">
 </head>
 
-<body class="fullcontent">
+<body>
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
-<main class="content" id="quarto-document-content">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</div>
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Factors, Strings, &amp; Dates</h1>
+<h1 class="title">Factors, Strings, &amp; Dates – Oh, my!</h1>
 </div>
 
 
@@ -48,6 +118,7 @@ ul.task-list{list-style: none;}
 <div class="quarto-title-meta">
 
     
+  
     
   </div>
   
@@ -57,16 +128,53 @@ ul.task-list{list-style: none;}
 <hr>
 <p>▶️ Watch Videos: 25 minutes</p>
 <p>📖 Readings: 30-60 minutes</p>
-<p>💻 Activities: 45-60 minutes</p>
-<p>✅ Check-ins: 2</p>
+<p>✅ Preview Activities: 3</p>
 <hr>
-<section id="factors" class="level1" data-number="1">
+<section id="factors" class="level1 page-columns page-full" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Factors</h1>
-<p>📖 <a href="https://r4ds.had.co.nz/factors.html">Required Reading: <em>R4DS</em> – Factors with forcats</a></p>
-<p>▶️ <a href="http://somup.com/crfTrOF3tN">Required Video: Factors with forcats</a></p>
-<hr>
-<p>✅ <strong>Check-in: Functions from forcats</strong></p>
-<p>Answer the questions based on the reading, video, <strong>forcats</strong> <a href="https://forcats.tidyverse.org/reference/index.html">website</a>, or <strong>forcats</strong> <a href="https://www.rstudio.com/resources/cheatsheets/">cheat sheet</a>.</p>
+<p>Yes, we are <strong>finally</strong> going to learn about factors!</p>
+<p><img src="images/cat_programmer.png" class="img-fluid"></p>
+<p><br></p>
+<p>📖 <a href="https://r4ds.hadley.nz/factors.html">Required Reading: <em>R4DS</em> – Factors with forcats</a></p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="youtube-video-container">
+<iframe width="100%" height="auto" src="https://www.youtube.com/embed/dAiSYli7tVg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="">
+</iframe>
+</div>
+</div></div><div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Extra <strong>forcats</strong> resources
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Useful functions from the <strong>forcats</strong> package (not an exhaustive list):</p>
+<ul>
+<li><code>as_factor()</code></li>
+<li><code>fct_relevel()</code></li>
+<li><code>fct_reorder()</code></li>
+<li><code>fct_collapse()</code></li>
+</ul>
+<p>Download the <a href="https://posit.co/wp-content/uploads/2022/10/factors-1.pdf">forcats cheatsheet</a>.</p>
+</div>
+</div>
+</div>
+<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Preview Activity 12: Functions from forcats
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p><strong>Q1</strong> Which of the following tasks can <code>fct_recode()</code> accomplish?</p>
 <ul>
 <li>changes the values of the factor levels</li>
@@ -101,18 +209,109 @@ ul.task-list{list-style: none;}
 <li>largest to smallest based on counts</li>
 <li>largest to smallest based on another variable</li>
 </ul>
-<p><em>Feel free to share answers with your classmates in the Discord server, to make sure you understand.</em></p>
-<p>✅ <strong>Check-in: Apply your skills</strong></p>
-<p>In your <em>colleges_clean</em> dataset (<a href="https://www.dropbox.com/s/bt5hvctdevhbq6j/colleges.csv?dl=1">from Practice Activity 3</a>), adjust the <code>REGION</code> variable to have nicer or clearer labels and/or better categories.</p>
-<hr>
+</div>
+</div>
 </section>
-<section id="strings" class="level1" data-number="2">
+<section id="strings" class="level1 page-columns page-full" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Strings</h1>
 <p>📖 <a href="https://r4ds.had.co.nz/strings.html">Required Reading: <em>R4DS</em> – Strings</a></p>
-<p>▶️ <a href="https://www.youtube.com/watch?v=Oo_MtXwpi2Q">Required Video – Strings with stringr</a></p>
-<hr>
-<p>✅ <strong>Check-in: Functions from stringr</strong></p>
-<p>Answer the questions based on the reading, video, <strong>stringr</strong> <a href="https://stringr.tidyverse.org/reference/index.html">website</a>, or <strong>stringr</strong> <a href="https://www.rstudio.com/resources/cheatsheets/">cheat sheet</a>.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="youtube-video-container">
+<iframe width="100%" height="auto" src="https://www.youtube.com/embed/Oo_MtXwpi2Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="">
+</iframe>
+</div>
+</div></div><p>Nearly always, when multiple variables are stored in a single column, they are stored as character variables. There are many different “levels” of working with strings in programming, from simple find-and-replaced of fixed (constant) strings to regular expressions, which are extremely powerful (and extremely complicated).</p>
+<blockquote class="blockquote">
+<p>Some people, when confronted with a problem, think “I know, I’ll use regular expressions.” Now they have two problems. - Jamie Zawinski</p>
+</blockquote>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/perl_problems.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Alternately, the xkcd version of the above quote</figcaption><p></p>
+</figure>
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Extra <strong>stringr</strong> resources
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Download the <a href="https://posit.co/wp-content/uploads/2022/10/strings-1.pdf">stringr cheatsheet</a>.</p>
+<p>Table of string functions in the <strong>stringr</strong> R package. <code>x</code> is the string or vector of strings, <code>pattern</code> is a pattern to be found within the string, <code>a</code> and <code>b</code> are indexes, and encoding is a string encoding, such as UTF8 or ASCII.</p>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><strong>Task</strong></p>
+<ol type="1">
+<li>Replace <code>pattern</code> with <code>replacement</code></li>
+</ol>
+<p><br></p>
+<ol start="2" type="1">
+<li><p>Convert case</p></li>
+<li><p>Strip whitespace from start/end</p></li>
+<li><p>Pad strings to a specific length</p></li>
+<li><p>Test if the string contains a pattern</p></li>
+<li><p>Count how many times a pattern appears in the string</p></li>
+<li><p>Find the first appearance of the pattern within the string</p></li>
+<li><p>Find all appearances of the pattern within the string</p></li>
+<li><p>Detect a match at the start/end of the string</p></li>
+<li><p>Subset a string from index a to b</p></li>
+<li><p>Convert string encoding</p></li>
+</ol>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:55%;">
+<p><strong>stringr</strong></p>
+<ol type="1">
+<li><p><code>str_replace(x, pattern, replacement)</code> and <code>str_replace_all(x, pattern, replacement)</code></p></li>
+<li><p><code>str_to_lower(x)</code>, <code>str_to_upper(x)</code>, <code>str_to_title(x)</code></p></li>
+<li><p><code>str_trim(x)</code> , <code>str_squish(x)</code></p></li>
+<li><p><code>str_pad(x, ...)</code></p></li>
+<li><p><code>str_detect(x, pattern)</code></p></li>
+<li><p><code>str_count(x, pattern)</code></p></li>
+</ol>
+<p><br></p>
+<ol start="7" type="1">
+<li><p><code>str_locate(x, pattern)</code></p></li>
+<li><p><code>str_locate_all(x, pattern)</code></p></li>
+<li><p><code>str_starts(x, pattern) ,str_ends(x, pattern)</code></p></li>
+<li><p><code>str_sub(x, a, b)</code></p></li>
+<li><p><code>str_conv(x, encoding)</code></p></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section id="regular-expressions" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="regular-expressions"><span class="header-section-number">2.1</span> Regular Expressions</h2>
+<p>Matching exact strings is easy - it’s just like using find and replace.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>human_talk <span class="ot">&lt;-</span> <span class="st">"blah, blah, blah. Do you want to go for a walk?"</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>dog_hears <span class="ot">&lt;-</span> <span class="fu">str_extract</span>(human_talk, <span class="st">"walk"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>dog_hears</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "walk"</code></pre>
+</div>
+</div>
+<p>But, if you can master even a small amount of regular expression notation, you’ll have exponentially more power to do good (or evil) when working with strings. You can get by without regular expressions if you’re creative, but often they’re much simpler.</p>
+<p>📖 <a href="https://r4ds.hadley.nz/regexps.html">Highly Recommended Reading: <em>R4DS</em> – Strings</a></p>
+<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Preview Activity 13: Functions from stringr
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p><strong>Q1</strong> Which of the follow are differences between <code>length()</code> and <code>str_length()</code>?</p>
 <ul>
 <li><code>length()</code> gives the number of elements in a vector</li>
@@ -144,38 +343,62 @@ ul.task-list{list-style: none;}
 <li>ending position</li>
 <li>pattern to search for</li>
 </ul>
-<p><strong>Q6</strong> What does the collapse argument do in str_c()?</p>
+<p><strong>Q6</strong> What does the <code>collapse</code> argument do in <code>str_c()</code>?</p>
 <ul>
 <li>specifies a string to be used when combining inputs into a single string</li>
 <li>specifies whether the string should be collapsed</li>
 </ul>
-<p><em>Feel free to share answers with your classmates in the Discord server, to make sure you understand.</em></p>
-<p>✅ <strong>Check-in: Apply your skills</strong></p>
-<p>Using your <em>colleges_clean</em> dataset, answer these questions:</p>
-<p><strong>Question 1:</strong> How <em>exactly</em> does Cal Poly’s name appear in this dataset?</p>
-<p><strong>Question 2:</strong> How many colleges have the word “University” in their name?</p>
-<p><strong>Question 3:</strong> Which college has the <em>longest</em> name? The <em>shortest</em> name?</p>
-<hr>
+</div>
+</div>
 </section>
-<section id="dates" class="level1" data-number="3">
+</section>
+<section id="dates" class="level1 page-columns page-full" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Dates</h1>
-<p>▶️ <a href="http://somup.com/crfTrLF3U3">Required Video: DateTime Objects with lubridate</a></p>
-<p>📖 <a href="https://r4ds.had.co.nz/dates-and-times.html">Required Reading: <em>R4DS</em> – Dates and Times</a></p>
-<p><strong>Extra Resources</strong></p>
+<p>In order to fill in an important part of our toolbox, we need to learn how to work with date variables. These variables feel like they should be simple and intuitive given we all work with schedules and calendars everyday. However, there are little nuances that we will learn to make working with dates and times easier.</p>
+<p>📖 <a href="https://r4ds.hadley.nz/datetimes.html">Required Reading: <em>R4DS</em> – Dates and Times</a></p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="youtube-video-container">
+<iframe width="100%" height="auto" src="https://www.youtube.com/embed/SEPjN2AJqbo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="">
+</iframe>
+</div>
+</div></div><div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Extra resources
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <ul>
+<li><p><a href="https://lubridate.tidyverse.org/reference/"><strong>lubridate</strong> website</a></p></li>
+<li><p>Download the <a href="https://posit.co/wp-content/uploads/2022/10/lubridate-1.pdf"><strong>lubridate</strong> cheatsheet</a></p></li>
 <li><p><a href="https://www.cyclismo.org/tutorial/R/time.html">A more in-depth discussion of the POSIXlt and POSIXct data classes.</a></p></li>
 <li><p><a href="https://data.library.virginia.edu/working-with-dates-and-time-in-r-using-the-lubridate-package/">A tutorial on lubridate</a> - scroll down for details on intervals if you have trouble with <code>%within%</code> and <code>%--%</code></p></li>
 </ul>
-<hr>
-<p>✅ <strong>Check-in: Functions from lubridate</strong></p>
-<p>Answer the questions based on the reading, video, <strong>lubridate</strong> <a href="https://lubridate.tidyverse.org/reference/index.html">website</a>, or <strong>lubridate</strong> <a href="https://www.rstudio.com/resources/cheatsheets/">cheat sheet</a>.</p>
+</div>
+</div>
+</div>
+<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Preview Activity 14: Functions from lubridate
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p><strong>Q1</strong> Which of the following is true about the year() function?</p>
 <ul>
 <li><code>year()</code> extracts the year of a datetime object</li>
 <li><code>year()</code> creates a duration object to be added to a datetime</li>
 </ul>
 <p><strong>Q3</strong> What <code>tz</code> would you use for San Luis Obispo?</p>
-<!-- tz = "America/Los_Angeles" -->
 <p><strong>Q3</strong> Which of the following is true about the <code>%within%</code> operator?</p>
 <ul>
 <li>it checks if a date is included in an interval</li>
@@ -189,15 +412,8 @@ ul.task-list{list-style: none;}
 <li>it checks if a date is included in an interval</li>
 </ul>
 <p><strong>Q5</strong> What day does the <code>make_date()</code> function use as default if no <code>day</code> argument is provided?</p>
-<p><em>Feel free to share answers with your classmates in the Discord server, to make sure you understand.</em></p>
-<p>✅ <strong>Check-in: Apply your skills</strong></p>
-<p>(Answer the following using code (even if you know the answer already).</p>
-<p>First, use the <code>make_date()</code> function to save your birthday as a Datetime object in R.</p>
-<ul>
-<li><p>What day of the week does/did your birthday fall on in 2023?</p></li>
-<li><p>On what day of the week should you plan your 50th birthday party?</p></li>
-<li><p>Find the date that is exactly 9 months before the day you were born. If it falls on a holiday, think about the implications.</p></li>
-</ul>
+</div>
+</div>
 </section>
 
 </main>
@@ -243,7 +459,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -271,31 +504,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
     });
   }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
 });
 </script>
