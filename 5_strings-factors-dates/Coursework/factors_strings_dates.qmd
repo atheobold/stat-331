@@ -2,7 +2,8 @@
 title: "Factors, Strings, & Dates -- Oh, my!"
 format: 
   html:
-    css: ../../../youtube_container.css
+    #css: ../../../youtube_container.css
+    self-contained: true
     theme: minty
     fontsize: 1em
     mainfont: sans-serif
@@ -43,11 +44,13 @@ Yes, we are **finally** going to learn about factors!
 
 `r emo::ji("book")` [Required Reading: *R4DS* -- Factors with forcats](https://r4ds.hadley.nz/factors.html)
 
-::: column-margin
-::: youtube-video-container
-<iframe width="100%" height="auto" src="https://www.youtube.com/embed/dAiSYli7tVg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-:::
-:::
+<!-- ::: column-margin -->
+<!-- ::: youtube-video-container -->
+<!-- <iframe width="100%" height="auto" src="https://www.youtube.com/embed/dAiSYli7tVg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->
+<!-- ::: -->
+<!-- ::: -->
+
+`r emo::ji("movie")` [Required Video -- Working with Factors Using forcats](https://www.youtube.com/embed/dAiSYli7tVg)
 
 ::: {.callout-tip collapse="true"}
 # Extra **forcats** resources
@@ -104,11 +107,13 @@ Download the [forcats cheatsheet](https://posit.co/wp-content/uploads/2022/10/fa
 
 `r emo::ji("book")` [Required Reading: *R4DS* -- Strings](https://r4ds.had.co.nz/strings.html)
 
-::: column-margin
-::: youtube-video-container
-<iframe width="100%" height="auto" src="https://www.youtube.com/embed/Oo_MtXwpi2Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-:::
-:::
+<!-- ::: column-margin -->
+<!-- ::: youtube-video-container -->
+<!-- <iframe width="100%" height="auto" src="https://www.youtube.com/embed/Oo_MtXwpi2Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->
+<!-- ::: -->
+<!-- ::: -->
+
+`r emo::ji("movie")` [Required Video -- Strings Strings](https://www.youtube.com/embed/Oo_MtXwpi2Q)
 
 Nearly always, when multiple variables are stored in a single column, they are stored as character variables. There are many different “levels” of working with strings in programming, from simple find-and-replaced of fixed (constant) strings to regular expressions, which are extremely powerful (and extremely complicated).
 
@@ -250,11 +255,13 @@ In order to fill in an important part of our toolbox, we need to learn how to wo
 
 `r emo::ji("book")` [Required Reading: *R4DS* -- Dates and Times](https://r4ds.hadley.nz/datetimes.html)
 
-::: column-margin
-::: youtube-video-container
-<iframe width="100%" height="auto" src="https://www.youtube.com/embed/SEPjN2AJqbo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-:::
-:::
+<!-- ::: column-margin -->
+<!-- ::: youtube-video-container -->
+<!-- <iframe width="100%" height="auto" src="https://www.youtube.com/embed/SEPjN2AJqbo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->
+<!-- ::: -->
+<!-- ::: -->
+
+`r emo::ji("movie")` [Required Video -- Working with Dates Using lubridate](https://www.youtube.com/embed/SEPjN2AJqbo)
 
 ::: {.callout-tip collapse="true"}
 # Extra resources
