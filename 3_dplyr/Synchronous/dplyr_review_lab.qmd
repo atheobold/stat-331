@@ -5,6 +5,7 @@ format:
   revealjs:
     logo: images/dplyr.png
     theme: night
+    auto-stretch: false
     self-contained: true
 editor: visual
 execute: 
@@ -26,26 +27,19 @@ Peer Code Review
 . . .
 
 ::: {style="font-size: 1.25em;"}
-```
-ggplot(data = surveys, mapping = aes(x=hindfoot_length,y= weight)) +  
-  geom_jitter(alpha=.2,color='tomato')+ facet_wrap(~species)+geom_boxplot(outlier.shape = NA)+labs(
-    title ='Weight to hindfoot comparison'
-  )+ xlab('length (mm)')+ylab('Weight(g)')
-```
+    ggplot(data = surveys, mapping = aes(x=hindfoot_length,y= weight)) +  
+      geom_jitter(alpha=.2,color='tomato')+ facet_wrap(~species)+geom_boxplot(outlier.shape = NA)+labs(
+        title ='Weight to hindfoot comparison'
+      )+ xlab('length (mm)')+ylab('Weight(g)')
 :::
 
 . . .
 
-</br>
-</br>
+</br> </br>
 
 ::: {style="font-size: 1.5em;color: #dd5227"}
-
 What feedback would you give?
-
 :::
-
-
 
 ##  {background-color="#D4D4D4"}
 

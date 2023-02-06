@@ -6,6 +6,7 @@ format:
     logo: images/dplyr.png
     theme: night
     self-contained: true
+    auto-stretch: false
 editor: visual
 execute: 
   warning: false
@@ -32,10 +33,7 @@ library(palmerpenguins)
 ::: columns
 ::: {.column width="60%"}
 ::: {style="font-size: 0.75em;"}
-> Serif fonts “have an extra flourish that makes it look pretty for many
->people, but can clutter what is on the page and that’s what makes it
-> harder to distinguish for people with visual disabilities than just
-> having a very clean font with no extra bits and pieces around it.”
+> Serif fonts "have an extra flourish that makes it look pretty for many people, but can clutter what is on the page and that's what makes it harder to distinguish for people with visual disabilities than just having a very clean font with no extra bits and pieces around it."
 :::
 :::
 
@@ -60,7 +58,6 @@ library(palmerpenguins)
 #| code-line-numbers: false
 windowsFonts()
 ```
-
 :::
 
 ::: {.column width="5%"}
@@ -121,7 +118,6 @@ ggplot(data = penguins,
   )
 
 ```
-
 
 ## The tidyverse Philosophy
 

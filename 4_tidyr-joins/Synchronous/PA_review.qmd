@@ -6,6 +6,7 @@ format:
     logo: images/tidyr.png
     theme: night
     self-contained: true
+    auto-stretch: false
 editor: visual
 execute: 
   warning: false
@@ -60,7 +61,6 @@ Filtering joins
 Keys
 :::
 
-
 ::: columns
 ::: {.column width="40%"}
 -   Uniquely identifies an observation in a dataset
@@ -103,14 +103,12 @@ plots |>
   kable() |> 
   kable_styling()
 ```
-
 :::
 
 ::: {.column width="5%"}
 :::
 
 ::: {.column width="45%"}
-
 `species`
 
 ```{r species-head}
@@ -119,11 +117,10 @@ species |>
   kable() |> 
   kable_styling()
 ```
-
 :::
 :::
 
-##
+## 
 
 ::: {style="font-size: 2em"}
 **Mean Weights**
@@ -152,7 +149,6 @@ surveys_weight |>
   kable_styling()
 
 ```
-
 
 ## 
 
@@ -190,8 +186,7 @@ surveys_weight |>
   kable_styling()
 ```
 
-
-##
+## 
 
 ::: {style="font-size: 3em; color: #873e23;"}
 Filtering joins
@@ -229,7 +224,6 @@ species |>
   kable_styling()
 ```
 
-
 ## 
 
 ::: {style="font-size: 3em;"}
@@ -238,8 +232,7 @@ Connecting to Data Cleaning
 
 . . .
 
-
-Including observations with **`%in%`** 
+Including observations with **`%in%`**
 
 ```{r include}
 #| eval: false
@@ -256,7 +249,6 @@ surveys |>
 ::: {style="font-size: 1.5em; color: #154c79;"}
 Similar to **`semi_join()`**!
 :::
-
 
 ## 
 
@@ -290,7 +282,6 @@ Tidy Data
 
 ![](images/tidy-data.png)
 
-
 ##  {background-color="#D4D4D4"}
 
 ::: {style="font-size: 3em; color: #000000;"}
@@ -303,4 +294,3 @@ Pivoting Longer
 
 knitr::include_graphics("images/pivot_longer_surveys.png")
 ```
-

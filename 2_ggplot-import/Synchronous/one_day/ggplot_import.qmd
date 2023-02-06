@@ -5,6 +5,7 @@ format:
   revealjs:
     logo: images/ggplot2.png
     theme: night
+    auto-stretch: false
     self-contained: true
 editor: visual
 execute: 
@@ -366,7 +367,7 @@ ggplot(data = penguins,
 ![Artwork by @allison_horst](images/here.png)
 :::
 
-:::{.column width="50%"}
+::: {.column width="50%"}
 ::: {style="font-size: 0.75em;"}
 -   Self contained
 
@@ -386,9 +387,9 @@ ggplot(data = penguins,
 ![Artwork by @allison_horst](images/setwd_vs_rproj_horst.png)
 :::
 
-:::{.column width="50%"}
+::: {.column width="50%"}
 ::: {style="font-size: 0.75em;"}
-- Never set a relative / full path or change your working directory!!!
+-   Never set a relative / full path or change your working directory!!!
 
 ```{r}
 #| eval: false
@@ -396,8 +397,7 @@ ggplot(data = penguins,
 setwd("/Users/atheobol/Documents/Teaching/Stat 331/stat-331-allison")`
 ```
 
-- Working in R? Rendering a document? `here()` uses the **same** path to load in
-data!
+-   Working in R? Rendering a document? `here()` uses the **same** path to load in data!
 :::
 :::
 :::
@@ -405,4 +405,3 @@ data!
 ## Your turn!
 
 <center>![](images/here_data_load.jpeg)</center>
-

@@ -6,6 +6,7 @@ format:
     logo: images/tidyr.png
     theme: night
     self-contained: true
+    auto-stretch: false
 editor: visual
 execute: 
   warning: false
@@ -25,7 +26,7 @@ species <- read_csv("data/species.csv")
 
 ```
 
-##
+## 
 
 ::: {style="font-size: 3em;"}
 Inner Join
@@ -67,7 +68,6 @@ surveys_weight |>
 
 ```
 
-
 ##  {background-color="#D4D4D4"}
 
 ::: {style="font-size: 3em; color: #000000;"}
@@ -89,7 +89,6 @@ surveys_weight |>
   kable() |> 
   kable_styling()
 ```
-
 
 ## 
 
@@ -126,11 +125,9 @@ Handy Helpers
 
 ::: columns
 ::: {.column width="40%"}
-
 ::: {style="font-size: 1.5em;"}
-`rename()` 
+`rename()`
 :::
-
 :::
 
 ::: {.column width="5%"}
@@ -147,11 +144,9 @@ Change names of columns
 
 ::: columns
 ::: {.column width="40%"}
-
 ::: {style="font-size: 1.5em"}
 `separate()`
 :::
-
 :::
 
 ::: {.column width="5%"}
@@ -170,37 +165,28 @@ Some words about resources
 
 . . .
 
-<center>
-![](images/stack_overflow.PNG)
-</center>
+<center>![](images/stack_overflow.PNG)</center>
 
 ::: columns
 ::: {.column width="45%"}
-
 ::: {style="font-size: 2em; color: #873e23;"}
 **Using**
 :::
-
-
 :::
 
 ::: {.column width="5%"}
 :::
 
 ::: {.column width="45%"}
-
 ::: {style="font-size: 2em; color: #873e23;"}
 **Learning**
 :::
-
 :::
 :::
 
 ## A vignette...
 
-<center>
-![](images/help.PNG)
-</center>
+<center>![](images/help.PNG)</center>
 
 ## 
 
@@ -235,4 +221,3 @@ Has a better alternative available and is scheduled for removal.
 Has a known better alternative, but the function itself is not going away.
 :::
 :::
-
