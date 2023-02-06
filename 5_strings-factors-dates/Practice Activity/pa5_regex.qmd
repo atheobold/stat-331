@@ -17,11 +17,14 @@ execute:
   warning: false
   message: false
   eval: false
+resources: 
+  - scrambled_message.txt
 ---
 
 ## Setup
 
-Run the code below to load the scrambled message:
+Download the [scrambled message data here](scrambled_message.txt). Modify the 
+code below (for your project directory) to load the scrambled message dataset :
 
 ```{r package}
 library(tidyverse)
@@ -34,12 +37,11 @@ message <- read_csv(here::here("5_strings-factors-dates",
                       )
 ```
 
-
 ## Choosing your object structure
 
 In this activity, a "word" is a set of characters with no white space. That is, even though many of elements of the scrambled mess vector are nonsense, and some have punctuation, you can consider each element to be a "word".
 
-You can choose to complete the Practice Activity working with the `messsage` **dataframe** or working with the `Word` **vector**. I've provided a demonstration in #1 and #2 for how you can complete each task using either object type. 
+You can choose to complete the Practice Activity working with the `messsage` **dataframe** or working with the `Word` **vector**. I've provided a demonstration in #1 and #2 for how you can complete each task using either object type.
 
 If you would prefer to work with a vector, you can extract the `Word` column from the `message` dataframe *as a vector*, with the following code:
 
@@ -48,8 +50,8 @@ word <- message %>%
   pull(Word)
 ```
 
-::: {.callout-caution}
-You don't need the above code if you are planning to work with the `message` dataframe! 
+::: callout-caution
+You don't need the above code if you are planning to work with the `message` dataframe!
 :::
 
 ## Warm-up exercises
@@ -57,30 +59,31 @@ You don't need the above code if you are planning to work with the `message` dat
 1.  How many characters are in the scrambled message?
 
 [**Vector Approach:**]{.underline}
+
 ```{r num-chr-vector}
 str_length(word) %>% 
   sum()
 ```
 
 [**Dataframe Approach:**]{.underline}
+
 ```{r num-chr-dataframe}
 message %>% 
-  summarise(total_length = 
-              sum(
-                str_length(Word)
-                )
-            )
+  mutate(length = str_length(Word)) %>% 
+  summarise(total_length = sum(length))
 ```
 
 2.  How many words are in the scrambled message?
 
 [**Vector Approach:**]{.underline}
+
 ```{r num-words-vector}
 str_subset(word, pattern = "\\b") %>% 
   length()
 ```
 
 [**Dataframe Approach:**]{.underline}
+
 ```{r num-words-dataframe}
 message %>% 
   filter(str_detect(Word, pattern = "\\w")) %>% 
@@ -93,10 +96,10 @@ message %>%
 
 5.  Print out every punctuation symbol in the scrambled message.
 
-::: {.callout-tip}
+::: callout-tip
 # Every punctuation symbol!
 
-Careful! There could be multiple punctuation symbols in a word, so `str_extract_all()` seems like the better tool. However, the output of this funtion is a *list*. A helpful function for flattening a list to a regular column is `unnest()`! 
+Careful! There could be multiple punctuation symbols in a word, so `str_extract_all()` seems like the better tool. However, the output of this funtion is a *list*. A helpful function for flattening a list to a regular column is `unnest()`!
 :::
 
 6.  Print out the longest word in the scrambled message.
