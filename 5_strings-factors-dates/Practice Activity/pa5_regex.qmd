@@ -9,13 +9,14 @@ format:
     number-depth: 2
     code-block-bg: "#76b5c5"
     highlight-style: monochrome
+    self-contained: true
+    code-tools: true
 editor: visual
 execute: 
   echo: true
   warning: false
   message: false
-  eval: true
-  include: false
+  eval: false
 ---
 
 ## Setup
@@ -27,54 +28,97 @@ library(tidyverse)
 ```
 
 ```{r data}
-#| include: true
-#| message: false
-message <- read_csv("https://www.dropbox.com/s/lgpn3vmksk3ssdo/scrambled_message.txt?dl=1") %>% 
+message <- read_csv(here::here("5_strings-factors-dates", 
+                                 "Practice Activity", 
+                                 "scrambled_message.txt")
+                      )
+```
+
+
+## Choosing your object structure
+
+In this activity, a "word" is a set of characters with no white space. That is, even though many of elements of the scrambled mess vector are nonsense, and some have punctuation, you can consider each element to be a "word".
+
+You can choose to complete the Practice Activity working with the `messsage` **dataframe** or working with the `Word` **vector**. I've provided a demonstration in #1 and #2 for how you can complete each task using either object type. 
+
+If you would prefer to work with a vector, you can extract the `Word` column from the `message` dataframe *as a vector*, with the following code:
+
+```{r pull-word}
+word <- message %>% 
   pull(Word)
 ```
 
-In this activity, a "word" is a set of characters with no white space.  That is,
-even though many of elements of the scrambled mess vector are nonsense, and some
-have punctuation, you can consider each element to be a "word".
+::: {.callout-caution}
+You don't need the above code if you are planning to work with the `message` dataframe! 
+:::
 
 ## Warm-up exercises
 
-1. How many characters are in the scrambled message?
+1.  How many characters are in the scrambled message?
 
-2. How many words are in the scrambled message?
+[**Vector Approach:**]{.underline}
+```{r num-chr-vector}
+str_length(word) %>% 
+  sum()
+```
 
-3. Print out every piece of a word in the scrambled message that starts with the
-letter "m". 
+[**Dataframe Approach:**]{.underline}
+```{r num-chr-dataframe}
+message %>% 
+  summarise(total_length = 
+              sum(
+                str_length(Word)
+                )
+            )
+```
 
-4. Print out every piece of a word in the scrambled message that ends with the
-letter "z"
+2.  How many words are in the scrambled message?
 
-5. Print out every punctuation symbol in the scrambled message. 
+[**Vector Approach:**]{.underline}
+```{r num-words-vector}
+str_subset(word, pattern = "\\b") %>% 
+  length()
+```
 
-6. Print out the longest word in the scrambled message.
+[**Dataframe Approach:**]{.underline}
+```{r num-words-dataframe}
+message %>% 
+  filter(str_detect(Word, pattern = "\\w")) %>% 
+  count() 
+```
 
----
+3.  Print out every piece of a word in the scrambled message that starts with the letter "m".
+
+4.  Print out every piece of a word in the scrambled message that ends with the letter "z"
+
+5.  Print out every punctuation symbol in the scrambled message.
+
+::: {.callout-tip}
+# Every punctuation symbol!
+
+Careful! There could be multiple punctuation symbols in a word, so `str_extract_all()` seems like the better tool. However, the output of this funtion is a *list*. A helpful function for flattening a list to a regular column is `unnest()`! 
+:::
+
+6.  Print out the longest word in the scrambled message.
 
 ## Decode a message
 
-Complete the following steps to decode the message.  
+Complete the following steps to decode the message.
 
-1. Remove any spaces before or after each word.
+1.  Remove any spaces before or after each word.
 
-2. No word should be longer than 16 characters. Drop all extra characters off
-the end of each word.
+2.  No word should be longer than 16 characters. Drop all extra characters off the end of each word.
 
-3. Any time you see the word "ugh", with any number of h's, followed by a
-punctuation mark, delete this.
+3.  Any time you see the word "ugh", with any number of h's, followed by a punctuation mark, delete this.
 
-4. Replace all instances of exactly 2 a's with exactly 2 e's.
+4.  Replace all instances of exactly 2 a's with exactly 2 e's.
 
-5. Replace all z's with t's.
+5.  Replace all z's with t's.
 
-6. Every word that ends in b, change that to a y.  
+6.  Every word that ends in b, change that to a y.
 
-7. Every word that starts with k, change that to a v.
+7.  Every word that starts with k, change that to a v.
 
-8. Use `str_c()` to recombine all your words into a message.
+8.  Use `str_c()` to recombine all your words into a message.
 
-9. Find the movie this quote is from.
+9.  Find the movie this quote is from.

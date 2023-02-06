@@ -9,11 +9,14 @@ format:
     number-depth: 2
     code-block-bg: "#76b5c5"
     highlight-style: monochrome
+    self-contained: true
 editor: visual
 execute: 
   echo: false
   include: false
   eval: false
+resources: 
+  - suspect_times.csv
 ---
 
 ```{r setup}
@@ -22,13 +25,17 @@ library(tidyverse)
 library(lubridate)
 ```
 
+
 ## Solve the mystery
 
 One of the most famous mysteries in California history is the identity of the so-called "Zodiac Killer", who murdered 7 people in Northern California between 1968 and 1969.
 
-A new murder was committed last year in California, suspected to be the work of a new Zodiac Killer on the loose. Fortunately, a camera was planted at the location where the body was found. The FBI has provided you with a list of people who entered the building last year, and what date and time they entered, in Pacific Standard Time (PST). This dataset is available [here](https://app.box.com/s/3a37j0bvfhk9b5m48w1cqqlv3evp5dug), named `suspects_times.csv`.
+A new murder was committed last year in California, suspected to be the work of a new Zodiac Killer on the loose. Fortunately, a camera was planted at the location where the body was found. 
+Unfortunately, the date and time of the murder is not known. You have been hired to crack the case. 
 
-Unfortunately, the date and time of the murder is not known. You have been hired to crack the case. Use the clues below to discover the murderer's identity.
+## Data
+
+The FBI has provided you with a list of people who entered the building last year, and what date and time they entered, in Pacific Standard Time (PST). This dataset is available [to download here](suspect_times.csv). Use the clues below to discover the murderer's identity.
 
 ```{r}
 # 214 total suspects
