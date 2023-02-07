@@ -2,6 +2,8 @@
 title: "STAT 331"
 title-slide-attributes:
     data-background-image: images/lubridate.png
+    data-background-size: contain
+    data-background-opacity: "0.5"
 format: 
   revealjs:
     self-contained: true
@@ -156,8 +158,6 @@ x
 ```
 
 . . .
-
-</br>
 
 ::: columns
 ::: {.column width="45%"}
