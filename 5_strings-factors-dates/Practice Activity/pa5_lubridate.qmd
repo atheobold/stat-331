@@ -25,13 +25,11 @@ library(tidyverse)
 library(lubridate)
 ```
 
-
 ## Solve the mystery
 
 One of the most famous mysteries in California history is the identity of the so-called "Zodiac Killer", who murdered 7 people in Northern California between 1968 and 1969.
 
-A new murder was committed last year in California, suspected to be the work of a new Zodiac Killer on the loose. Fortunately, a camera was planted at the location where the body was found. 
-Unfortunately, the date and time of the murder is not known. You have been hired to crack the case. 
+A new murder was committed last year in California, suspected to be the work of a new Zodiac Killer on the loose. Fortunately, a camera was planted at the location where the body was found. Unfortunately, the date and time of the murder is not known. You have been hired to crack the case.
 
 ## Data
 
@@ -58,5 +56,12 @@ suspects <- read_csv(here::here("5_strings-factors-dates",
 6.  The Killer is amused by our efforts, and he has sent us a cryptic clue:
 
 > "The number of minutes between Jan 1, 1970 at midnight and the time I arrived on the scene is divisible by 10."
+
+
+::: {.callout-tip}
+# Double hint
+
+The `difftime()` function is crucial for this step! Also, it may appear that the time differences are all divisible by 10, but they are not! They have trailing decimal values!
+:::
 
 Who is the killer? (Only one name should remain.)
