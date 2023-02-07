@@ -1,0 +1,223 @@
+---
+title: "STAT 331"
+title-slide-attributes:
+    data-background-image: images/lubridate.png
+format: 
+  revealjs:
+    self-contained: true
+    auto-stretch: false
+editor: visual
+execute: 
+  echo: true
+---
+
+```{r}
+#| include: false
+#| echo: false
+library(tidyverse)
+library(lubridate)
+```
+
+
+::: {style="font-size: 2em;"}
+Grades
+:::
+
+. . .
+
+```{r nyu}
+#| echo: false
+#| out-width: 80%
+
+knitr::include_graphics("images/nyu_prof.png")
+```
+
+##  {background-color="#B6CADA"}
+
+::: {style="font-size: 3em; color: #000000;"}
+**Dates**
+:::
+
+. . .
+
+::: {style="font-size: 2em; color: #000000;"}
+Come in all varieties
+:::
+
+. . .
+
+- `20150307`
+
+- `2018-03-24 11:07:40`
+
+- `24-03-2018`
+
+##  {background-color="#D4D4D4"} 
+
+::: {style="font-size: 3em; color: #000000;"}
+With functions for each!
+:::
+
+::: columns
+::: {.column width="45%"}
+- `dmy()`
+
+- `ymd()`
+
+- `mdy()`
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="45%"}
+- `ymd_h()`
+
+- `ymd_hm()`
+
+- `ymd_hms()` 
+:::
+:::
+
+##  {background-color="#B6CADA"}
+
+::: {style="font-size: 3em; color: #000000;"}
+What would you do?
+:::
+
+</br>
+</br>
+
+<center>
+::: {style="font-size: 1.5em; color: #000000;"}
+How would you coerce **`20150307`** into a datetime object? 
+:::
+</center>
+
+##  {background-color="#D4D4D4"}
+
+::: {style="font-size: 3em; color: #000000;"}
+**Lots** of Choices
+:::
+
+```{r}
+date <- "20150307"
+```
+
+. . .
+
+</br>
+</br>
+
+::: columns
+::: {.column width="35%"}
+::: {style="font-size: 1.5em; color: #0F4C81;"}
+**Simple**
+:::
+
+```{r}
+#| code-line-numbers: false
+
+ymd(date) 
+```
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="60%"}
+::: {style="font-size: 1.5em; color: #0F4C81;"}
+**Complicated**
+:::
+
+```{r}
+#| code-line-numbers: false
+
+year <- str_sub(date, start = 1, end = 4)
+month <- str_sub(date, start = 5, end = 6)
+day <- str_sub(date, start = 7, end = 8)
+make_date(year, month, day)
+```
+
+:::
+:::
+
+##  {background-color="#D4D4D4"}
+
+::: {style="font-size: 3em; color: #00000;"}
+Time Zones
+:::
+
+```{r}
+#| code-line-numbers: false
+x <- ymd_h("2021-4-25 13", tz = "America/Los_Angeles")
+
+x
+```
+
+. . .
+
+</br>
+
+::: columns
+::: {.column width="45%"}
+`force_tz()` 
+
+  * **same clock time** as input, new time zone
+
+```{r}
+#| code-line-numbers: false
+force_tz(x, tzone = "America/Denver")
+```
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="45%"}
+`with_tz()`
+
+  * **new clock time**, as it would appear in a different time zone
+
+```{r}
+#| code-line-numbers: false
+with_tz(x, tzone = "America/Denver")
+```
+:::
+:::
+
+##  {background-color="#D4D4D4"}
+
+::: {style="font-size: 3em; color: #0F4C81;"}
+Time of Day
+:::
+
+
+```{r}
+#| code-line-numbers: false
+x
+```
+
+. . .
+
+</br>
+
+::: columns
+::: {.column width="40%"}
+- `am()`
+- `pm()`
+
+`TRUE` or `FALSE` values for whether the time occurs in the AM or PM
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="55%"}
+```{r}
+#| code-line-numbers: false
+am(x)
+pm(x)
+```
+:::
+:::
