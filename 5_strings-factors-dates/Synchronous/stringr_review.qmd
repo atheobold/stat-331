@@ -58,11 +58,13 @@ my_vector
 ::: column
 **Common tasks**
 
+::: {style="font-size: 0.85em;"}
 -   Find which strings contain a particular pattern
 
 -   Remove or replace a pattern
 
 -   Edit a string (for example, make it lowercase)
+:::
 :::
 
 ::: column
@@ -75,11 +77,11 @@ knitr::include_graphics("https://github.com/rstudio/hex-stickers/blob/main/PNG/s
 :::
 
 ::: callout-note
-The package `stringr` is very useful for strings!
-
+::: {style="font-size: 0.85em;"}
 -   `stringr` **does** load with the `tidyverse`.
 
 -   all the functions are `str_xxx()`.
+:::
 :::
 
 ## `pattern =`
@@ -121,15 +123,18 @@ str_detect(my_vector, pattern = "Bond")
 
 . . .
 
+::: {style="font-size: 0.85em;"}
 -   Pairs well with `filter()`
 -   Could be used with `summarise()` and `sum()` or `mean()`
+:::
 
 ::: {.callout-note collapse="true"}
 ### Related functions
-
+::: {style="font-size: 0.85em;"}
 `str_subset()` returns just the strings that contain the match
 
 `str_which()` returns the indexes of strings that have a match
+:::
 :::
 
 ## `str_match()`
@@ -333,7 +338,8 @@ str_flatten(my_vector, collapse = " ")
 
 ::: callout-note
 `str_c()` and `glue()` work well with `mutate()` -- their output is the same length as their inputs. 
-`str_flatten()` works well with `summarise()` -- it always returns a single string! 
+
+`str_flatten()` works well with `summarise()` -- it always returns a single string!
 :::
 
 ### `str_glue()`
@@ -382,9 +388,7 @@ knitr::include_graphics("images/regular_expressions.png")
 
 ## Regular Expressions
 
-</br>
-</br>
-</br>
+</br> </br> </br>
 
 > "Regexps are a very terse language that allow you to describe patterns in strings."
 >
@@ -461,10 +465,8 @@ str_subset(toung_twister,
 str_subset(toung_twister, 
            pattern = "s$")
 ```
-
 :::
 :::
-
 
 ### Quantifiers `? + *`
 
@@ -484,7 +486,6 @@ shells_str <- c("shes", "shels", "shells", "shellls", "shelllls")
 str_subset(shells_str, 
            pattern = "shel?s")
 ```
-
 :::
 
 ::: {.column width="33%"}
@@ -510,7 +511,6 @@ str_subset(shells_str,
 :::
 :::
 
-
 ### More Quantifiers `{}`
 
 ```{r}
@@ -529,7 +529,6 @@ shells_str <- c("shes", "shels", "shells", "shellls", "shelllls")
 str_subset(shells_str, 
            pattern = "shel{2}s")
 ```
-
 :::
 
 ::: {.column width="33%"}
@@ -554,12 +553,11 @@ str_subset(shells_str,
 ```
 :::
 :::
-
 :::
 
 ## Groups `()`
 
-+ Similar to our `filter()` statements, `|` means "or"
+-   Similar to our `filter()` statements, `|` means "or"
 
 ```{r}
 #| echo: true
@@ -576,13 +574,13 @@ str_subset(toung_twister2,
            pattern = "p(e|i)ck")
 ```
 
-::: {.callout-tip}
+::: callout-tip
 A lot of the benefit of groups is the ability to back reference positions of a string.
 :::
 
-## Character Classes 
+## Character Classes
 
->  are defined by `[]` and let you match a set of characters
+> are defined by `[]` and let you match a set of characters
 
 ```{r}
 #| echo: true
@@ -602,11 +600,18 @@ str_subset(toung_twister2,
            pattern = "p[ei]ck")
 ```
 
-::: {.callout-note}
+::: callout-note
 Notice how you could have accomplished the same thing with `pattern = "p(e|i)ck"`?
 :::
 
 ## More Character Classes!
+
+```{r}
+#| echo: true
+#| code-line-numbers: false
+toung_twister2
+```
+
 
 `[^ ]` except - think "not"
 
@@ -791,10 +796,10 @@ military_clean <- military |>
 
 military_clean <- military |> 
   mutate(
-         across(matches("[1-9]{4}"), 
+         across(matches("[:digit:]{4}"), 
                 ~ na_if(.x, y = ". .")
                 ),
-         across(matches("[1-9]{4}"), 
+         across(matches("[:digit:]{4}"), 
                 ~ na_if(.x, y = "xxx")
                 )
          )
@@ -819,11 +824,11 @@ Let's see how this works.
 
 In this activity, you will be using regular expressions to decode a message.
 
-For the activity, you are able to choose what type of object you want to work with -- a **vector** or a **dataframe**. 
+For the activity, you are able to choose what type of object you want to work with -- a **vector** or a **dataframe**.
 
 ## Dataframes
 
-If you choose to work with dataframes, remember the `stringr` functions go *inside* `dplyr` verbs like `mutate()` and `filter()`. Think of them as you would `as.factor()`. 
+If you choose to work with dataframes, remember the `stringr` functions go *inside* `dplyr` verbs like `mutate()` and `filter()`. Think of them as you would `as.factor()`.
 
 </br>
 
@@ -837,11 +842,9 @@ cereal |>
   )
 ```
 
-
-
 ## Vectors
 
-If you choose to work with vectors, it is important you remember how to index a vector's contents! 
+If you choose to work with vectors, it is important you remember how to index a vector's contents!
 
 . . .
 
@@ -852,7 +855,6 @@ If you choose to work with vectors, it is important you remember how to index a 
 #| code-line-numbers: false
 toung_twister3[c(3, 6, 10, 13)]
 ```
-
 
 -   If you want to replace those elements or change those elements use the assignment arrow!
 
