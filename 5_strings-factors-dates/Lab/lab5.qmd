@@ -2,6 +2,7 @@
 title: "Lab 5: Factors in Visualizations"
 format: 
   html: 
+    self-contained: true
     theme: minty
     fontsize: 1em
     mainfont: sans-serif
@@ -32,6 +33,10 @@ surveys <- read_csv(
   )
 ```
 
+::: {.column-margin}
+![](glamour_graphics.png)
+:::
+
 The inspiration for this lab comes from the plotting "best practices" that I've learned over the years. My main inspiration is [Will Chase's 2020 RStudio Conference Presentation](https://www.youtube.com/watch?v=h5cTacaWE6I) -- Glamour of Graphics [(slides)](https://www.williamrchase.com/slides/assets/player/KeynoteDHTMLPlayer.html#0).
 
 ::: callout-note
@@ -55,13 +60,18 @@ surveys |>
 
 As you should expect with a character variable, the boxplots go in alphabetical order. This looks rather jumbled, so let's put our factor skills to work!
 
-**1. Reorder the boxplots so the weights go in descending order.**
+**1. Reorder the species so the boxplots for weights go in descending order (largest to smallest).**
 
 ::: callout-caution
 You are required to use functions from `forcats` to complete this task.
 :::
 
 **2. Now that you've reordered, look at your y-axis label. That's long! Let's take Will Chase's advice and move the y-axis label to the top of the plot.**
+
+
+::: {.callout-note}
+Your plot should have **no** y-axis label, only a plot title and x-axis label! 
+:::
 
 ## Time-Series Plot
 
@@ -71,17 +81,21 @@ This week, we focused on learning skills related to working with dates, but we h
 
 Alright, there are a lot of measurements over time! Let's use our dplyr skills to summarize each year and plot the summaries.
 
-**2. Calculate and plot the mean weight for each year (for each genus).**
+**2. Calculate and plot the [mean]{.underline} weight for each genus for each year.**
 
 This should look much less busy! However, you should notice that the legend still goes in alphabetical order.
 
-**3. Reorder the lines so the weights go in descending order.**
+**3. Reorder the lines so the mean weights go in descending order (largest to smallest).**
 
 ::: callout-caution
 You are required to use functions from `forcats` to complete this task.
 :::
 
 **4. Now that you've reordered the lines, look at your legend's label. That's terrible! Let's give the legend a new title *and* move the information from the y-axis to the plot title.**
+
+::: {.callout-note}
+Your plot should have **no** y-axis label! You are permitted to have a plot title, x-axis label, and legend title. 
+:::
 
 ## Caputures over the Week
 
@@ -106,5 +120,7 @@ It should be very clear that there are more rodents captured on the weekend than
 **3. Collapse Monday through Friday into a `"Weekday"` level, and collapse Saturday and Sunday into a `"Weekend"` level. Plot the number of rodents captured between the two groups.**
 
 ::: callout-warning
+You are required to use functions from `forcats` to complete this task.
+
 Your plot **should not** make people tilt their heads to read it! Be mindful in choosing which variable goes on which axis and if / how you use axis labels.
 :::
