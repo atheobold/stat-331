@@ -5,11 +5,9 @@ messy_data <- read_csv(here::here("5_strings-factors-dates",
                                   "practice_data",
                                   "data_2023-Jan-26.csv"))
 
-clean_data <- 
-  
 messy_data |>
   separate_longer_delim(variants, 
-                        delim = ",") |> #requires tidyr 1.3.0
+                        delim = ",") |> 
   separate_wider_delim(col = variants, 
                        delim = ":", 
                        names = c("variable", "value")
@@ -19,13 +17,11 @@ messy_data |>
   ),
   across(.cols = variable:value, 
          .fns = ~str_remove(.x, pattern = "^[:punct:]{1,3}")
-         ),
+         ), 
   across(.cols = variable:value, 
-         .fns = str_remove(.x, pattern = "[:punct:]{1}$")
+         .fns = ~str_remove(.x, pattern = "[\\'\\}\\]]$")
          )
-  ) |> 
-
-
+  ) |>
   pivot_wider(id_cols = areaType:date,
               names_from = variable,
               values_from = value,
@@ -39,6 +35,4 @@ messy_data |>
                 ~as.numeric(.x)
   )
   ) |>
-  arrange(date)
-
-clean_data
+  arrange(desc(date))
