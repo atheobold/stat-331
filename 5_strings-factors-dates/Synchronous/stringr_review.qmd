@@ -54,16 +54,17 @@ my_vector
 
 # `stringr`
 
-:::: columns
+::: columns
 ::: column
 **Common tasks**
 
-+ Find which strings contain a particular pattern
+-   Find which strings contain a particular pattern
 
-+ Remove or replace a pattern
+-   Remove or replace a pattern
 
-+ Edit a string (for example, make it lowercase)
+-   Edit a string (for example, make it lowercase)
 :::
+
 ::: column
 ```{r}
 #| fig-align: center
@@ -71,17 +72,17 @@ my_vector
 knitr::include_graphics("https://github.com/rstudio/hex-stickers/blob/main/PNG/stringr.png?raw=true")
 ```
 :::
-::::
-
-::: callout-note 
-The package `stringr` is very useful for strings!  
-
-+ `stringr` **does** load with the `tidyverse`.
-
-+ all the functions are `str_xxx()`.
 :::
 
-## `pattern = `
+::: callout-note
+The package `stringr` is very useful for strings!
+
+-   `stringr` **does** load with the `tidyverse`.
+
+-   all the functions are `str_xxx()`.
+:::
+
+## `pattern =`
 
 The **pattern argument** in all of the `stringr` functions ...
 
@@ -100,11 +101,10 @@ str_subset(my_vector, "pattern = Bond")
 ::: callout-note
 Discuss with a neighbor. For each of these functions, give:
 
-+ The **object structure** of the output.
-+ The **data type** of the output.
-+ A brief explanation of what they do.
-::::
-
+-   The **object structure** of the output.
+-   The **data type** of the output.
+-   A brief explanation of what they do.
+:::
 
 ## `str_detect()`
 
@@ -121,17 +121,18 @@ str_detect(my_vector, pattern = "Bond")
 
 . . .
 
-+ Pairs well with `filter()`
-+ Could be used with `summarise()` and `sum()` or `mean()`
+-   Pairs well with `filter()`
+-   Could be used with `summarise()` and `sum()` or `mean()`
 
 ::: {.callout-note collapse="true"}
-### Related functions 
+### Related functions
+
 `str_subset()` returns just the strings that contain the match
 
 `str_which()` returns the indexes of strings that have a match
 :::
 
-## `str_match()` 
+## `str_match()`
 
 Returns **character matrix** with either `NA` or the pattern, depending on if the pattern was found.
 
@@ -145,7 +146,7 @@ my_vector <- c("Hello,", "my name is", "Bond", "James Bond")
 str_match(my_vector, pattern = "Bond")
 ```
 
-## `str_extract()` 
+## `str_extract()`
 
 Returns **character vector** with either `NA` or the *pattern*, depending on if the pattern was found.
 
@@ -168,7 +169,7 @@ str_extract(my_vector, pattern = "Bond")
 Use `str_extract_all()` to return **every** pattern match.
 :::
 
-## `str_locate()` 
+## `str_locate()`
 
 Returns a **date frame** with two **numeric variables** for the starting and ending location, giving either `NA` or the start and end position of the pattern.
 
@@ -205,13 +206,12 @@ str_subset(my_vector, pattern = "Bond")
 ## Replace / Remove patterns
 
 ::: panel-tabset
-
 ### `str_replace()`
 
 ::: {style="font-size: 0.75em"}
 Replaces the [first]{.underline} matched pattern
 
-+ Pairs well with `mutate()`
+-   Pairs well with `mutate()`
 :::
 
 </br>
@@ -227,7 +227,7 @@ str_replace(my_vector, pattern = "Bond", replace = "Franco")
 ::: {style="font-size: 0.75em"}
 Removes the [first]{.underline} matched pattern
 
-+ You could think of `str_remove()` as a special case of `str_replace( )`, where the `replace` argument is empty (`""`).
+-   You could think of `str_remove()` as a special case of `str_replace( )`, where the `replace` argument is empty (`""`).
 :::
 
 ```{r}
@@ -236,11 +236,10 @@ Removes the [first]{.underline} matched pattern
 my_vector <- c("Hello,", "my name is", "Bond", "James Bond")
 str_remove(my_vector, pattern = "Bond")
 ```
-
 :::
 
 ::: {.callout-note collapse="true"}
-### Related functions 
+### Related functions
 
 `str_replace_all()` replaces **all** matched patterns
 
@@ -254,8 +253,7 @@ Convert letters in the string to a specific capitalization format.
 :::
 
 ::: panel-tabset
-
-### `str_to_lower()` 
+### `str_to_lower()`
 
 ::: {style="font-size: 0.75em"}
 converts all letters in the strings to lowercase
@@ -270,7 +268,7 @@ my_vector <- c("Hello,", "my name is", "Bond", "James Bond")
 str_to_lower(my_vector)
 ```
 
-### `str_to_upper()` 
+### `str_to_upper()`
 
 ::: {style="font-size: 0.75em"}
 converts all letters in the strings to uppercase
@@ -283,19 +281,17 @@ converts all letters in the strings to uppercase
 str_to_upper(my_vector)
 ```
 
-### `str_to_title()` 
+### `str_to_title()`
 
 ::: {style="font-size: 0.75em"}
 converts the first letter of the strings to uppercase
 :::
-
 
 ```{r}
 #| echo: true
 #| code-line-numbers: false
 str_to_title(my_vector)
 ```
-
 :::
 
 ## Combine Strings
@@ -306,7 +302,7 @@ str_to_title(my_vector)
 ::: {style="font-size: 0.75em"}
 Joins multiple strings into a single string
 
-+ `sep` argument declares how the strings should be separated when pasting
+-   `sep` argument declares how the strings should be separated when pasting
 :::
 
 ```{r}
@@ -336,7 +332,8 @@ str_flatten(my_vector, collapse = " ")
 ```
 
 ::: callout-note
-`str_c()` will do the same thing, but it it is encouraged to use `str_flatten()` instead.
+`str_c()` and `glue()` work well with `mutate()` -- their output is the same length as their inputs. 
+`str_flatten()` works well with `summarise()` -- it always returns a single string! 
 :::
 
 ### `str_glue()`
@@ -354,17 +351,17 @@ str_glue("My name is {last}, {first} {last}")
 ```
 
 ::: callout-tip
-See the R package [`glue`](https://glue.tidyverse.org/)! We will use these tools *a lot* in Week 7!
+We will use the **glue** package *a lot* in Week 7!
 :::
-
 :::
 
 ## Tips for Success
 
-+ Refer to the [`stringr` cheatsheet](https://posit.co/wp-content/uploads/2022/10/strings-1.pdf)
+-   Refer to the [`stringr` cheatsheet](https://posit.co/wp-content/uploads/2022/10/strings-1.pdf)
 
-+ Remember that `str_xxx` functions need the first argument to be a **vector of strings**, not a **data set**.
-  + You might want to use them *inside* functions like `filter()` or `mutate()`.
+-   Remember that `str_xxx` functions need the first argument to be a **vector of strings**, not a **data set**.
+
+    -   You might want to use them *inside* functions like `filter()` or `mutate()`.
 
 ```{r}
 #| echo: true
@@ -385,12 +382,15 @@ knitr::include_graphics("images/regular_expressions.png")
 
 ## Regular Expressions
 
-> "Regexps are a very terse language that allow you to describe patterns in 
-> strings."
+</br>
+</br>
+</br>
+
+> "Regexps are a very terse language that allow you to describe patterns in strings."
 >
 > *R for Data Science*
 
-</br>
+## 
 
 R uses "extended" regular expressions, which are common.
 
@@ -403,26 +403,23 @@ str_detect(string  = my_string_vector,
            )
 ```
 
-</br>
-
 ::: callout-tip
 Regular expressions are a reason to use `stringr`!
 
 You might encounter `gsub()`, `grep()`, etc. from Base R.
 :::
 
-## Meta Characters `.` `^`  `$` `\`  `|` `*` `+` `?` `{` `}` `[` `]` `(` `)`
+## Meta Characters `.` `^` `$` `\` `|` `*` `+` `?` `{` `}` `[` `]` `(` `)`
 
 ::: panel-tabset
-
 ### Wild card `.`
 
 ```{r}
 #| echo: true
+#| code-line-numbers: false
 toung_twister <- c("She", "sells", "seashells", "by", "the", "seashore!")
-toung_twister
 ```
-<br>
+
 `.` Represents any character
 
 ```{r}
@@ -434,128 +431,188 @@ str_subset(toung_twister, pattern = ".ells")
 
 ```{r}
 #| echo: true
+#| code-line-numbers: false
 toung_twister <- c("She", "sells", "seashells", "by", "the", "seashore!")
-toung_twister
 ```
 
-<br>
+</br>
 
-`^` Looks at the beginning  
+::: columns
+::: {.column width="45%"}
+`^` Looks at the beginning
 
 ```{r}
 #| echo: true
-str_subset(toung_twister, pattern = "^s")
+#| code-line-numbers: false
+str_subset(toung_twister, 
+           pattern = "^s")
 ```
+:::
 
-`$` Looks at the end  
+::: {.column width="5%"}
+:::
+
+::: {.column width="45%"}
+`$` Looks at the end
 
 ```{r}
 #| echo: true
-str_subset(toung_twister, pattern = "s$")
+#| code-line-numbers: false
+str_subset(toung_twister, 
+           pattern = "s$")
 ```
+
+:::
+:::
+
 
 ### Quantifiers `? + *`
 
 ```{r}
 #| echo: true
+#| code-line-numbers: false
 shells_str <- c("shes", "shels", "shells", "shellls", "shelllls")
-shells_str
 ```
 
-<br>
-
-`?` Occurs 0 or 1 times  
+::: columns
+::: {.column width="33%"}
+`?` Occurs 0 or 1 times
 
 ```{r}
 #| echo: true
-str_subset(shells_str, pattern = "shel?s")
+#| code-line-numbers: false
+str_subset(shells_str, 
+           pattern = "shel?s")
 ```
 
+:::
+
+::: {.column width="33%"}
 `+` Occurs 1 or more times
 
 ```{r}
 #| echo: true
-str_subset(shells_str, pattern = "shel+s")
+#| code-line-numbers: false
+str_subset(shells_str, 
+           pattern = "shel+s")
 ```
+:::
 
+::: {.column width="33%"}
 `*` Occurs 0 or more times
 
 ```{r}
 #| echo: true
-str_subset(shells_str, pattern = "shel*s")
+#| code-line-numbers: false
+str_subset(shells_str, 
+           pattern = "shel*s")
 ```
+:::
+:::
+
 
 ### More Quantifiers `{}`
 
 ```{r}
 #| echo: true
+#| code-line-numbers: false
 shells_str <- c("shes", "shels", "shells", "shellls", "shelllls")
-shells_str
 ```
 
-<br>
-
+::: columns
+::: {.column width="33%"}
 `{n}` matches exactly n times.
 
 ```{r}
 #| echo: true
-str_subset(shells_str, pattern = "shel{2}s")
+#| code-line-numbers: false
+str_subset(shells_str, 
+           pattern = "shel{2}s")
 ```
 
+:::
+
+::: {.column width="33%"}
 `{n,}` matches at least n times.
 
 ```{r}
 #| echo: true
-str_subset(shells_str, pattern = "shel{2,}s")
+#| code-line-numbers: false
+str_subset(shells_str, 
+           pattern = "shel{2,}s")
 ```
+:::
 
+::: {.column width="33%"}
 `{n,m}` matches between n and m times.
 
 ```{r}
 #| echo: true
-str_subset(shells_str, pattern = "shel{1,3}s")
+#| code-line-numbers: false
+str_subset(shells_str, 
+           pattern = "shel{1,3}s")
 ```
+:::
+:::
+
 :::
 
 ## Groups `()`
 
-Groups can be created with `( )`
++ Similar to our `filter()` statements, `|` means "or"
 
-`|` -- "either" / "or"
-
-<br>
 ```{r}
 #| echo: true
-toung_twister2 <- c("Peter", "Piper", "picked", "a", "peck", "of", "pickled", "peppers!")
-toung_twister2
+#| code-line-numbers: false
+toung_twister2 <- c("Peter", "Piper", "picked", "a",
+                    "peck", "of", "pickled", "peppers!")
+
 ```
 
-<br>
-
 ```{r}
 #| echo: true
-str_subset(toung_twister2, pattern = "p(e|i)ck")
+#| code-line-numbers: false
+str_subset(toung_twister2, 
+           pattern = "p(e|i)ck")
 ```
 
-## Character Classes `[]`
+::: {.callout-tip}
+A lot of the benefit of groups is the ability to back reference positions of a string.
+:::
+
+## Character Classes 
+
+>  are defined by `[]` and let you match a set of characters
 
 ```{r}
 #| echo: true
-toung_twister2 <- c("Peter", "Piper", "picked", "a", "peck", "of", "pickled", "peppers!")
+#| code-line-numbers: false
+toung_twister2 <- c("Peter", "Piper", "picked", "a", 
+                    "peck", "of", "pickled", "peppers!")
 ```
 
 . . .
 
+</br>
+
 ```{r}
 #| echo: true
-str_subset(toung_twister2, pattern = "p[ei]ck")
+#| code-line-numbers: false
+str_subset(toung_twister2, 
+           pattern = "p[ei]ck")
 ```
-. . .
+
+::: {.callout-note}
+Notice how you could have accomplished the same thing with `pattern = "p(e|i)ck"`?
+:::
+
+## More Character Classes!
 
 `[^ ]` except - think "not"
 
 ```{r}
 #| echo: true
+#| code-line-numbers: false
 str_subset(toung_twister2, pattern = "p[^i]ck")
 ```
 
@@ -565,6 +622,7 @@ str_subset(toung_twister2, pattern = "p[^i]ck")
 
 ```{r}
 #| echo: true
+#| code-line-numbers: false
 str_subset(toung_twister2, pattern = "p[ei]ck[a-z]")
 ```
 
@@ -574,47 +632,43 @@ str_subset(toung_twister2, pattern = "p[ei]ck[a-z]")
 
 ```{r}
 #| echo: true
+#| code-line-numbers: false
 str_subset(toung_twister2, pattern = "^p")
 ```
 
 ```{r}
 #| echo: true
+#| code-line-numbers: false
 str_subset(toung_twister2, pattern = "^[Pp]")
 ```
 
-## `[]` Character Classes
+## Even More Character Classes
 
 ::: panel-tabset
 ### Shortcuts
-+ [A-Z] matches any capital letter.
-+ [a-z] matches any lowercase letter.
-+ [A-z] or [:alpha:] matches any letter
-+ [0-9] or [:digit:] matches any number
-+ See the stringr cheatsheet for more shortcuts, like [:punct:]
+
+-   \[A-Z\] matches any capital letter.
+-   \[a-z\] matches any lowercase letter.
+-   \[A-z\] or \[:alpha:\] matches any letter
+-   \[0-9\] or \[:digit:\] matches any number
+-   See the stringr cheatsheet for more shortcuts, like \[:punct:\]
 
 ### More Shortcuts
-`\w` Looks for any **"word"**  (conversely "not" "word" `\W`) 
 
-`\d` Looks for any **digit** (conversely "not" digit `\D`) 
+`\w` Looks for any **"word"** (conversely "not" "word" `\W`)
 
-`\s` Looks for any **whitespace** (conversely "not" whitespace `\S`) 
+`\d` Looks for any **digit** (conversely "not" digit `\D`)
+
+`\s` Looks for any **whitespace** (conversely "not" whitespace `\S`)
 :::
 
 ## Let's try it out!
 
 Discuss with a neighbor which regular expressions would search for words that do the following:
 
-+ end with a vowel
-+ start with x, y, or z
-+ *do not* contain x, y, or z
-+ contain [British spelling](https://www.oxfordinternationalenglish.com/differences-in-british-and-american-spelling/)
-
-Test your answers out on
-
-```{r}
-#| echo: true
-test_vec <- c("zebra", "xray", "apple", "yellow", "color", "colour", "summarize", "summarise")
-```
+-   end with a vowel
+-   start with x, y, or z
+-   *do not* contain x, y, or z
 
 ## Escape `\`
 
@@ -625,14 +679,20 @@ In general, look at punctuation characters with suspicion.
 :::
 
 ```{r}
-toung_twister3 <- c("How", "much", "wood", "could", "a", "woodchuck", "chuck", "if", "a", "woodchuck", "could", "chuck", "wood?")
-toung_twister3 
+#| echo: true
+#| code-line-numbers: false
+toung_twister3 <- c("How", "much", "wood", "could", 
+                    "a", "woodchuck", "chuck", "if", "a", 
+                    "woodchuck", "could", "chuck", "wood?")
 ```
+
 ```{r}
 #| echo: true
 #| error: true
 str_subset(toung_twister3, pattern = "?")
 ```
+
+</br>
 
 ```{r}
 #| echo: true
@@ -640,38 +700,31 @@ str_subset(toung_twister3, pattern = "?")
 str_subset(toung_twister3, pattern = "\\?")
 ```
 
-::: callout-note
-Could also use `[]` character class
-
-```{r}
-#| echo: true
-#| error: true
-str_subset(toung_twister3, pattern = "[?]")
-```
-:::
-
 ## When in Doubt
-<br>
-<br>
+
+<br> <br>
+
 ```{r}
 #| fig-align: center
 #| out-width: 80%
 knitr::include_graphics("images/backslashes.png")
 ```
-Use the [web app to test R regular expressions](https://spannbaueradam.shinyapps.io/r_regex_tester/)
+
+Use this [web app to test R regular expressions](https://spannbaueradam.shinyapps.io/r_regex_tester/)
 
 ## Tips for working with regex
 
-+ Read the regular expressions out loud like a "request"
+-   Read the regular expressions out loud like a "request"
 
 . . .
 
-+ Test out your expressions on small examples first
-  + [Web app to test R regular expressions](https://spannbaueradam.shinyapps.io/r_regex_tester/)
-  + `str_view()` and `str_view_all()`
+-   Test out your expressions on small examples first
+    -   [Web app to test R regular expressions](https://spannbaueradam.shinyapps.io/r_regex_tester/)
+    -   `str_view()` and `str_view_all()`
 
-::: {.callout-note collapse="true"}  
+::: {.callout-note collapse="true"}
 ### `str_view()` and `str_view_all()`
+
 ```{r}
 #| echo: true
 shells_str
@@ -682,17 +735,18 @@ str_view_all(shells_str, "l+")
 
 ## Tips for working with regex
 
-+ Read the regular expressions out loud like a "request"
+-   Read the regular expressions out loud like a "request"
 
-+ Test out your expressions on small examples first
-  + [Web app to test R regular expressions](https://spannbaueradam.shinyapps.io/r_regex_tester/)
-  + `str_view()` and `str_view_all()`
+-   Test out your expressions on small examples first
 
-+ I use the [`stringr` cheatsheet](https://posit.co/wp-content/uploads/2022/10/strings-1.pdf) more than any other package cheatsheet!
+    -   [Web app to test R regular expressions](https://spannbaueradam.shinyapps.io/r_regex_tester/)
+    -   `str_view()` and `str_view_all()`
+
+-   I use the [`stringr` cheatsheet](https://posit.co/wp-content/uploads/2022/10/strings-1.pdf) more than any other package cheatsheet!
 
 . . .
 
-+ Everyone has a love-hate relationship with regular expressions. Be kind to yourself.
+-   Everyone has a love-hate relationship with regular expressions. Be kind to yourself.
 
 # strings in the `tidyverse`
 
@@ -713,11 +767,11 @@ military <- read_xlsx(here::here("4_tidyr-joins",
 
 Selects all variables with a name that matches the supplied pattern
 
-+ pairs well with `select()`, `rename_with()`, and `across()`
+-   pairs well with `select()`, `rename_with()`, and `across()`
 
 ::: panel-tabset
-
 ### Before
+
 ```{r}
 #| echo: true
 military_clean <- military |> 
@@ -731,15 +785,16 @@ military_clean <- military |>
 ```
 
 ### With regex
+
 ```{r}
 #| echo: true
 
 military_clean <- military |> 
   mutate(
-         across(matches("[1-9][1-9][1-9][1-9]"), 
+         across(matches("[1-9]{4}"), 
                 ~ na_if(.x, y = ". .")
                 ),
-         across(matches("[1-9][1-9][1-9][1-9]"), 
+         across(matches("[1-9]{4}"), 
                 ~ na_if(.x, y = "xxx")
                 )
          )
@@ -748,9 +803,9 @@ military_clean <- military |>
 
 ## "Messy" Covid Variants
 
-I received this data from a grad school colleague the other day who asked if I knew how to "clean" it.
+A friend of mine received a dataset the other day from someone who asked if she knew how to "clean" it.
 
-![](images/covid-data-snip.JPG)
+![](images/covid-data-snip.png)
 
 What is that column?! `r emo::ji("wow")`
 
@@ -760,48 +815,49 @@ What is that column?! `r emo::ji("wow")`
 
 Let's see how this works.
 
-## [PA 5.2: Scrambled Message](https://earobinson95.github.io/stat331-calpoly/practice-activities/PA5_2-scrambled-message-regex.html)
+## PA 5.2: Scrambled Message
 
 In this activity, you will be using regular expressions to decode a message.
 
-+ Remember, the `stringr` functions go *inside* `dplyr` verbs like `mutate()` and `filter()`. Think of them as you would `as.factor()`
+For the activity, you are able to choose what type of object you want to work with -- a **vector** or a **dataframe**. 
 
-+ [Reminder about Indexing Vectors](https://earobinson95.github.io/stat331-calpoly-text/00-prereading.html#indexing-by-location)
+## Dataframes
 
-```{r}
-#| echo: true
-toung_twister3
-```
+If you choose to work with dataframes, remember the `stringr` functions go *inside* `dplyr` verbs like `mutate()` and `filter()`. Think of them as you would `as.factor()`. 
 
-  + You can grab the elements out of a vector with [] -- read "where"
+</br>
 
 ```{r}
 #| echo: true
-toung_twister3[c(3,6, 10,13)]
+#| code-line-numbers: false
+
+cereal |> 
+  mutate(
+    is_bran = str_detect(name, "Bran")
+  )
 ```
 
-  + If you want to replace those elements or change those elements use the assignment arrow!
+
+
+## Vectors
+
+If you choose to work with vectors, it is important you remember how to index a vector's contents! 
+
+. . .
+
+-   You can grab the elements out of a vector with \[\] -- read "where"
 
 ```{r}
 #| echo: true
-toung_twister3[c(3,6, 10,13)] <- "WOOD!"
+#| code-line-numbers: false
+toung_twister3[c(3, 6, 10, 13)]
 ```
 
-## To do...
 
-+ **PA 5.2: Scrambled Message**
-  + Due Friday, 2/10 at 8:00am
+-   If you want to replace those elements or change those elements use the assignment arrow!
 
-+ **Lab 5: Factors in Data Visualization**
-  + Due Friday, 2/10 at 11:59pm
-
-+ **Final Project Group Formation Survey**
-  + Due Friday, 2/10 at 11:59pm
-
-+ [**Bonus Challenge: Murder Mystery in SQL City**](https://earobinson95.github.io/stat331-calpoly/bonus-challenges/bonus-challenge-murder-in-sql-city.html)
-  + Due Sunday 2/12 at 11:59pm
-  
-+ **Read Chapter 6: Version Control**
-  + **Concept Check 6.1 + 6.2** due Monday (2/13) at 8:00am
-
-  
+```{r}
+#| echo: true
+#| code-line-numbers: false
+toung_twister3[c(3, 6, 10, 13)] <- "WOOD!"
+```
