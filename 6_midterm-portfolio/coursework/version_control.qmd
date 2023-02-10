@@ -9,10 +9,21 @@ format:
     number-depth: 2
     code-block-bg: "#76b5c5"
     highlight-style: monochrome
+    self-contained: true
 editor: visual
 execute: 
   echo: false
 ---
+
+![Still from [Heaven King video](https://www.youtube.com/watch?v=uBWrpVrazzA)](images/watch-me-diff-watch-me-rebase-smaller.png)
+
+Most of this coursework is either heavily inspired by *Happy Git and Github for the UseR* (Bryan, Hester, and The Stat 545 TAs 2021) or directly links to [that book](https://happygitwithr.com/).
+
+**Learning Goals**
+
+- Recognize the benefits of using version control to improve your coding practices and workflow.
+- Identify git/GitHub as a version control platform (and helper).
+- Register for a GitHub account so you can begin applying version control practices to your workflow.
 
 ```{r}
 #| include: false
@@ -21,94 +32,121 @@ library(flair)
 library(lubridate)
 ```
 
-------------------------------------------------------------------------
+`r emo::ji("book")` Readings: 15-30 minutes
 
-`r emo::ji("book")` Readings: 15 minutes
+`r emo::ji("computer")` Set-up Tasks: 45-60 minutes
 
-`r emo::ji("computer")` Activities: 45-60 minutes
+`r emo::ji("check")` Preview Activities: 2
 
-`r emo::ji("check")` Check-ins: 1
+# What is Version Control?
 
-------------------------------------------------------------------------
+Version control is a system that (1) allows you to store your files in the cloud, (2) track change in those files over time, and (3) share your files with others.
 
-## What is Version Control?
-
+::: {.callout-note}
 If you are unfamiliar with the idea of version control, [this article](https://about.gitlab.com/topics/version-control/) describes what the principles of version control are.
 
-tl;dr -- Version control is a system that (1) allows you to store your files in the cloud, (2) track change in those files over time, and (3) share your files with others.
+:::
 
-## What is Git and GitHub?
+# What is Git?
 
-`r emo::ji("book")` [**Required Reading** -- Why Git? Why GitHub?](https://happygitwithr.com/big-picture.html)
+Git is a **version control system** -- a structured way for tracking changes to files over the course of a project that may also make it easy to have multiple people working on the same files at the same time.
+
+![Look familiar? Version control is the answer to this file naming problem.](images/file_names.gif)
+
+Git manages a collection of files in a structured way -- rather like “track changes” in Microsoft Word or version history in Dropbox, but much more powerful.
+
+If you are working alone, you will benefit from adopting version control because it will remove the need to add `_final.R` or `_final_finalforreal.qmd` to the end of your file names. However, most of us work in collaboration with other people (or will have to work with others eventually), so one of the goals of this program is to teach you how to use git because it is a useful tool that will make you a better collaborator.
+
+In data science programming, we use git for a similar, but slightly different purpose. We use it to keep track of changes not only to code files, but to data files, figures, reports, and other essential bits of information.
+
+Git itself is nice enough, but where git really becomes amazing is when you combine it with GitHub - an online service that makes it easy to use git across many computers, share information with collaborators, publish to the web, and more. Git is great, but GitHub is … essential.
+
+## Git Basics
+
+![If that doesn’t fix it, git.txt contains the phone number of a friend of mine who understands git. Just wait through a few minutes of ‘It’s really pretty simple, just think of branches as…’ and eventually you’ll learn the commands that will fix everything.](images/git.png)
+
+Git tracks changes to each file that it is told to monitor, and as the files change, you provide short labels describing what the changes were and why they exist (called “**commits**”). The log of these changes (along with the file history) is called your **git commit history**.
+
+When writing papers, this means you can cut material out freely, so long as the paper is being tracked by git -- you can always go back and get that paragraph you cut out if you need to. You also don’t have to rename files -- you can confidently save over your old files, so long as you remember to commit frequently.
+
+
+#### `r emo::ji("book")` [**Required Reading** -- Why Git? Why GitHub?](https://happygitwithr.com/big-picture.html)
 
 ## Using Git
 
-### Step 1: Register a GitHub Account
+### Step 1: Install Git
 
-Instructions here: <https://happygitwithr.com/github-acct.html>
+You will be using Git/GitHub to create your portfolios for this class. To be prepared for Tuesday's class, you **must** have Git installed on your computer. 
 
-`r emo::ji("check")` **Check-in: GitHub Account**
+We will be connecting Git to RStudio together during class, but we will not wait for you if you have not installed Git ahead of time. 
 
-Copy and paste the link to your GitHub profile!
+#### `r emo::ji("check")` Preview Activity 15: Install Git
 
-### Step 2: Install Git
+::: {.callout-note}
 
-You can find instructions here: <https://happygitwithr.com/install-git.html>
+- [Install Git for Windows](https://gitforwindows.org/)
+- [Install Git for Macs or Linux](https://git-scm.com/downloads)
 
-::: callout-warning
-You will need to restart RStudio for it to detect Git on your machine!
+If you run into issues, [read more about installing Git](https://happygitwithr.com/install-git.html).
+
+Once you have installed Git, tell me “yes” in the Canvas Quiz. There is no benefit to lying, as you will rob yourself of being able to participate in class and possibly jeopardize submitting your portfolio by the deadline. 
 :::
 
-### Step 4: Setup a Personal Access Token
+# GitHub: Git on the Web
 
-`r emo::ji("book")` [**Required Reading** -- What is a PAT?](https://happygitwithr.com/https-pat.html#https-pat)
+Git is a program that runs on your machine and keeps track of changes to files that you tell it to monitor. GitHub is a website that hosts people’s git repositories. **You can use git without GitHub, but you can’t use GitHub without git**.
 
-Instructions on generating a PAT: <https://happygitwithr.com/https-pat.html#get-a-pat>
+If you want, you can hook Git up to GitHub, and make a copy of your local git repository that lives in the cloud. Then, if you configure things correctly, your local repository will talk to GitHub without too much trouble. Using Github with Git allows you to **easily make a cloud backup of your important code**, so that even if your computer suddenly catches on fire, all of your important code files exist somewhere else.
 
-::: callout-note
-To carry out the process described in this step, you will need to install the **usethis** R package.
+Remember: any data you don’t have in 3 different places is data you don’t care about^[Yes, I’m aware that this sounds paranoid. It’s been a very rare occasion that I’ve needed to restore something from another backup. You don’t want to take chances. I knew a guy who had to retype his entire masters thesis from the printed out version the night before it was due because he had stored it on a network drive that was decommissioned. You don’t want to be that person.].
+
+#### `r emo::ji("check")` Preview Activity 16: Register a GitHub Account
+
+::: {.callout-note}
+Follow the instructions in [Registering a GitHub Account](https://happygitwithr.com/github-acct.html) to create a free GitHub account.
+
+**Copy and paste the link to your GitHub profile into the Canvas assignment.**
+
+Your GitHub profile link should look like – https://github.com/USERNAME
+
+Here is mine! https://github.com/atheobold
+
+(Optional) You may want to check out GitHub Education and sign up for the GitHub Student Developer Pack.
 :::
 
-### Step 5: Store Your PAT
+::: {.callout-caution}
+#### Save your login information!
+Make sure you remember your username and password so you don't have to try to hack into your own account during class this week.
 
-Instructions on storing your PAT: <https://happygitwithr.com/https-pat.html#call-an-r-function-to-store-your-credentials>
-
-::: callout-note
-The **gitcreds** package is required in this step, but it should be automatically installed with the **usethis** package.
+Write your information down somewhere safe.
 :::
 
-#### Did you have errors in Step 5?
+# Optional: Install a git client
 
-If so, see this resources: <https://happygitwithr.com/https-pat.html#pat-troubleshooting>
+[Instructions on installing a git client](https://happygitwithr.com/git-client.html)
 
-### Step 6: Make a Final Portfolio Repository
-
-I've created a template repository for you to use for your final portfolio. You can find the repository [here](https://github.com/atheobold/STAT331_portfolio_template).
-
-You need to create a copy of this repository for yourself. In GitHub, this is called "Forking" a repository. Instructions on forking a repository can be found here: <https://docs.github.com/en/get-started/quickstart/fork-a-repo>
-
-### Step 7: Clone Repository into RStudio
-
-Now that you have a copy of the STAT331 portfolio template, you need to clone the project into RStudio, so you can put your files inside it!
-
-Instructions on cloning the repository into RStudio are here: <https://happygitwithr.com/rstudio-git-github.html#clone-the-test-github-repository-to-your-computer-via-rstudio>
-
-::: callout-note
-Only read section 12.3!
+::: callout-tip
+I personally like to use [GitHub Desktop](https://desktop.github.com/) which allows me to interact with Git using a point-and-click interface.
 :::
 
-### Step 8: Change Your README.md File
+# Using Version Control (with RStudio)
 
-Instructions here: <https://happygitwithr.com/rstudio-git-github.html#make-local-changes-save-commit>
+This course will briefly introduced working with GitHub, but will not provide you with extensive practice using version control. By using version control, you will learn better habits for programming, and you'll get access to a platform for collaboration, hosting your work online, keeping track of features and necessary changes, and more. 
 
-### Step 9: Push Your Changes
+In class this week, we will connect git/GitHub to RStudio so you can use version control for your code. We will then see what a typical git/GitHub workflow looks like.
 
-Instructions here: <https://happygitwithr.com/rstudio-git-github.html#push-your-local-changes-online-to-github>
+# Learn More
 
-### Step 10: Verify the Changes
+#### Extra Resources
 
-Instructions here: <https://happygitwithr.com/rstudio-git-github.html#confirm-the-local-change-propagated-to-the-github-remote-1>
+- [Happy Git and GitHub for the useR](https://happygitwithr.com/index.html) - Guide to using git, R, and RStudio together.
 
-`r emo::ji("check")` **Check-in: Final Portfolio Template**
+- [Git "Hello World" Tutorial on GitHub](https://guides.github.com/activities/hello-world/)
 
-Copy and paste the link to your GitHub repository!
+- [Crash course on git](https://www.youtube.com/watch?v=SWYqp7iY_Tc) (30 minute YouTube video)
+
+- [Git and GitHub for poets](https://www.youtube.com/watch?v=BCQHnlnPusY&list=PLRqwX-V7Uu6ZF9C0YMKuns9sLDzK6zoiV) YouTube playlist (this is supposed to be the best introduction to Git out there...) 
+
+- [More advanced git concepts, in comic form](https://dev.to/erikaheidi/stage-commit-push-a-git-story-comic-a37), by Erika Heidi 
+
+- [A quick guide to the command line (Terminal)](https://towardsdatascience.com/a-quick-guide-to-using-command-line-terminal-96815b97b955)
