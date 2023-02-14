@@ -517,8 +517,6 @@ Fork the [STAT331_portfolio_template](https://github.com/atheobold/STAT331_portf
 :::
 :::
 
-
-
 ## Save Your Project 
 
 **Do not** save your project in the *same* folder as your STAT331.Rproj!!!!
@@ -545,10 +543,20 @@ Here are some options:
 
 ## Making Changes
 
-::: {style="font-size: 3em; color: #B6CADA;"}
+::: {style="font-size: 2em; color: #B6CADA;"}
 Change the `reflection_template.qmd` file!
 :::
 
 ## Committing Your Changes
 
+![](images/commit_changes.png)
+
 ## Pushing Your Changes
+
+Were you unsuccessful? You likely need to configure your git!
+
+```
+git config --global user.name "Laura Smith"
+git config --global user.email lsmith@example.com
+```
+
