@@ -17,16 +17,16 @@ resources:
   - avocado.csv
 ---
 
-::: {.callout-tip}
+::: callout-tip
 I advise you to focus particularly on:
 
-- Setting chunk options carefully.
+-   Setting chunk options carefully.
 
-- Making sure you don’t print out more output than you need to.
+-   Making sure you don't print out more output than you need to.
 
-- Making your code readable and nicely formatted.
+-   Making your code readable and nicely formatted.
 
-- Thinking through your desired result before writing any code.
+-   Thinking through your desired result before writing any code.
 :::
 
 # Getting Started
@@ -43,19 +43,17 @@ In this lab we're going to be looking at avocado prices.
 
 The dataset comes to us from Kaggle and represents weekly retail scan data. A description of the data can be found [here.](https://www.kaggle.com/neuromusic/avocado-prices)
 
-::: {.callout-note}
+::: callout-note
 The data set website is an updated data set from the original published in 2018. Please refer to the [main page](https://www.kaggle.com/datasets/neuromusic/avocado-prices) of the original data set for a description of the columns.
 :::
-
 
 **0.** Create a Quarto file, load the data, and declare your package dependencies.
 
 **1.** Briefly describe the dataset. What information does it contain?
 
-**2.** Clean the data in any way you see fit. 
+**2.** Clean the data in any way you see fit.
 
-::: {.callout-warning}
-
+::: callout-warning
 In particular, look carefully at the `region` variable. Notice that the category `"LosAngeles"` is contained in `"California"`, which is contained in `"West"`, which is contained in `"TotalUS"`. Think about how you want to handle this issue in your analysis.
 
 How many distinct geographical regions are there? Can you categorize them into different types of geographical regions (e.g. major regions, metro regions, etc.)? Will you create a new variable for this? A new data set for each?
@@ -65,20 +63,20 @@ You may also want to consider renaming variables so they make sense intuitively.
 
 # Summarizing Avocado Sales
 
-::: {.callout-note}
-Use your cleaned data set to answer these next three questions. In other words, `avocado_clean` is your starting “main subject” for each of question.
+::: callout-note
+Use your cleaned data set to answer these next three questions. In other words, `avocado_clean` is your starting "main subject" for each of question.
 :::
 
 **3.** Which major region sold the most organic, small Hass avocados in 2017?
 
 **4.** Use the `separate()` function to split the `Date` variable into year, month, and day. In which month is the highest volume of avocado sales?
 
-**5.** Which metro area regions sold the most total avocados? Plot side-by-side boxplots of total volume for only the five regions with the highest averages for the `Total Volume` variable.
+**5.** Which metro area regions sold the most total avocados? Plot density ridges of the total volume for **only the five regions** with the highest averages for the `Total Volume` variable.
 
-::: {.callout-tip}
+::: callout-tip
 You still want each individual observations in your plot, but you will need to somehow identify the average for each metro geographical region.
 
-Hint: One way you might approach this is by creating a new summarized data set and using filtering joins – `semi_join()`.
+Hint: One way you might approach this is by creating a new summarized data set and using filtering joins -- `semi_join()`.
 :::
 
 # Reshaping
@@ -87,13 +85,13 @@ The following four California regions are in this dataset: `"LosAngeles"`, `"San
 
 **6.** In which regions is the price of organic versus conventional avocados most different? Support your answer with a few summary statistics and a visualization.
 
-::: {.callout-tip}
+::: callout-tip
 You do not have to, but you may want to transform your data. Sketch out what you want the data set to look like before you begin to code! Come up with a game plan to answer this question.
 :::
 
 **7.** The following plot shows, for all four California regions, the proportion of the mean Hass avocado sales that are small, large, or extra large; conventional vs. organic. Recreate the plot.
 
-::: {.callout-tip}
+::: callout-tip
 This will require restructuring of your data! Sketch out what you want the data set to look like before you begin to code! I recommend starting with your California data set you create in Q6.
 :::
 
@@ -103,8 +101,8 @@ This will require restructuring of your data! Sketch out what you want the data 
 
 A joke in the media is that Millennials can't afford houses, because they spend all their money buying avocado toast. Let's use this dataset to address that claim.
 
-> Find or make a dataset with house prices for these four California regions. Join this dataset with your California avocado dataset. 
+> Find or make a dataset with house prices for these four California regions. Join this dataset with your California avocado dataset.
 
-> Use your new joined dataset to make an argument about the relationship between house prices and avocado prices/sales. 
+> Use your new joined dataset to make an argument about the relationship between house prices and avocado prices/sales.
 
 > Support your argument with a plot.
