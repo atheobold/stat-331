@@ -25,11 +25,20 @@ A refresher on coding best practices...
 ::: panel-tabset
 ### `mutate()` preserve observations
 
-![](images/mutate-sketch.jpeg)
+```{r}
+#| out-width: 60%
+knitr::include_graphics("images/mutate-sketch.jpeg")
+```
+
+
 
 ### `summarise()` collapse observations
 
-![](images/summarise-sketch.jpeg)
+```{r}
+#| out-width: 60%
+knitr::include_graphics("images/summarise-sketch.jpeg")
+```
+
 :::
 
 ## Better alternatives to bar plots
@@ -72,8 +81,8 @@ organic_price_diff <- avocado_california |>
 *Bar plots are typically reserved for displaying frequencies*
 
 ::: panel-tabset
-
 ### Summary Data
+
 ```{r}
 diff_summary <- organic_price_diff |> 
   group_by(geography) |> 
@@ -89,8 +98,8 @@ diff_summary
 ```{r}
 #| echo: true
 #| code-fold: true
-#| fig-height: 4
-#| fig-width: 6
+#| fig-height: 3
+#| fig-width: 5
 #| fig-align: center
 
 library(RColorBrewer)
@@ -103,7 +112,7 @@ diff_summary  |>
          ) +
   geom_bar(stat = "identity") +
   labs(
-    title = "Difference in Price between Organic and Conventional Avocados",
+    title = "Difference in Price between Organic and \nConventional Avocados",
     y = "") +
   theme_minimal() +
   theme(legend.position = "none") +
@@ -120,8 +129,8 @@ Read more about [Cleveland Dot Plots](https://uc-r.github.io/cleveland-dot-plots
 ```{r}
 #| echo: true
 #| code-fold: true
-#| fig-height: 4
-#| fig-width: 6
+#| fig-height: 3
+#| fig-width: 5
 #| fig-align: center
 
 diff_summary |> 
@@ -134,7 +143,7 @@ diff_summary |>
                    yend = geography)
   ) +
   geom_point() +
-  labs(title = "Difference in Price between Organic and Conventional Avocados",
+  labs(title = "Difference in Price between Organic and \nConventional Avocados",
        y = "") +
   theme_minimal() +
   theme(legend.position = "none") +
@@ -148,7 +157,6 @@ diff_summary |>
 ## Little Bits and Bobs
 
 ::: panel-tabset
-
 ### Function syntax
 
 What is wrong with this code?
@@ -168,8 +176,12 @@ hiphop %>%
 
 ### Superseded functions
 
-![](images/mutate_at.png)
-![](images/top_n.png)
+```{r}
+#| out-height: 80%
+knitr::include_graphics("images/mutate_at.png") 
+knitr::include_graphics("images/top_n.png")
+```
+
 
 ### Multiple function calls
 
@@ -191,9 +203,6 @@ What is the difference between `facet_wrap()` and `facet_grid()`?
 When should you use `facet_grid()`?
 :::
 
-
-
-
 #  {background-color="#B6CADA"}
 
 ::: {style="font-size: 3em; color: #000000;"}
@@ -202,45 +211,51 @@ Version Control
 
 ## Git vs GitHub
 
-:::: columns
-::: column
+::: columns
+::: {.column width="47%"}
 <br>
+
 ```{r}
 #| fig-align: center
 #| out-width: 50%
 knitr::include_graphics("https://bornsql.ca/wp-content/uploads/2022/03/Git-Logo-2Color.png") 
 ```
 
-+ Language for version control
-+ Developed by Linus Torvalds (Linux, Android, Chrome OS)
-+ Uses command line or GUI
+-   Language for version control
+-   Developed by Linus Torvalds (Linux, Android, Chrome OS)
+-   Uses command line or GUI
 :::
-::: column
+
+::: {.column width="3%"}
+:::
+
+::: {.column width="47%"}
 ```{r}
 #| fig-align: center
 #| out-width: 50%
 knitr::include_graphics("https://logos-world.net/wp-content/uploads/2020/11/GitHub-Emblem.png") 
 ```
 
-+ Cloud-based hosting service
-+ Basic services are free
-+ Advanced services are paid (Similar to RStudio) 
+-   Cloud-based hosting service
+-   Basic services are free
+-   Advanced services are paid (Similar to RStudio)
+
 :::
-::::
+:::
+
+:::
 
 ## Why GitHub?
 
-1. A structured way for tracking changes to files over the course of a project.
+1.  A structured way for tracking changes to files over the course of a project.
 
-2. Makes it easy to have multiple people working on the same files at the same time.
+2.  Makes it easy to have multiple people working on the same files at the same time.
 
-3. You can host a URL of fun things (like the class text, these slides, a personal website, etc.) with [GitHub pages](https://pages.github.com/).
+3.  You can host a URL of fun things (like the class assignments, these slides, a personal website, etc.) with [GitHub pages](https://pages.github.com/).
 
 *Think "track-changes" or "drop-box" history, but more structured.*
 
 ## Git Repositories
-
-+ Think of this as a folder-directory for a single project (like your stat-331 folder!)
 
 ```{r}
 #| fig-align: center
@@ -249,20 +264,24 @@ knitr::include_graphics("https://logos-world.net/wp-content/uploads/2020/11/GitH
 knitr::include_graphics("https://miro.medium.com/max/512/1*w07Er4gPg8H2Ew-P0HhxNA.png")
 ```
 
-+ You may have code, documentation, data, TODO lists, and more associated with a project.
+::: {style="font-size: 0.85em;"}
+-   Think of this as a folder-directory for a single project (like your STAT-331 folder!)
 
-+ To create a repository, you can start with your local computer first, or you can start with the remote (online) repository first.
+-   You may have code, documentation, data, TODO lists, and more associated with a project.
+
+-   To create a repository, you can start with your local computer first, or you can start with the remote (online) repository first.
+:::
+
 
 # Actions in Git
 
 ## Cloning a Repo
 
-:::: columns
+::: columns
 ::: column
-
 Clone = create an exact copy locally
-
 :::
+
 ::: column
 ```{r}
 #| fig-align: center
@@ -270,11 +289,13 @@ Clone = create an exact copy locally
 knitr::include_graphics("images/git_clone_diagram.png")
 ```
 :::
-::::
+:::
 
 ## Committing
 
-Git tracks changes to each file that it is told to monitor, and as the files change, you provide short labels describing what the changes were and why they exist (called “commits”).
+::: {style="font-size: 0.85em; color: #000000;"}
+Git tracks changes to each file that it is told to monitor, and as the files change, you provide short labels describing what the changes were and why they exist (called "commits").
+:::
 
 ```{r}
 #| fig-align: center
@@ -283,14 +304,17 @@ Git tracks changes to each file that it is told to monitor, and as the files cha
 knitr::include_graphics("images/git-commit.png")
 ```
 
+::: {style="font-size: 0.85em; color: #000000;"}
 The log of these changes (along with the file history) is called your git commit history. This means you can always go back to old copies!
+:::
 
 ## Pushing
 
-:::: columns
+::: columns
 ::: column
-Updates the copy of the repository on another machine (e.g. on GitHub) so that it has the most recent changes you’ve made to your machine.
+Updates the copy of the repository on another machine (e.g. on GitHub) so that it has the most recent changes you've made to your machine.
 :::
+
 ::: column
 ```{r}
 #| fig-align: center
@@ -298,14 +322,15 @@ Updates the copy of the repository on another machine (e.g. on GitHub) so that i
 knitr::include_graphics("images/git_push_diagram.png")
 ```
 :::
-::::
+:::
 
 ## Pulling
 
-:::: columns
+::: columns
 ::: column
-Updates your local copy of the repository (the copy on your computer) with the files that are “in the cloud” (on GitHub). 
+Updates your local copy of the repository (the copy on your computer) with the files that are "in the cloud" (on GitHub).
 :::
+
 ::: column
 ```{r}
 #| fig-align: center
@@ -313,7 +338,7 @@ Updates your local copy of the repository (the copy on your computer) with the f
 knitr::include_graphics("images/git_pull_diagram.png")
 ```
 :::
-::::
+:::
 
 ## Pushing and Pulling
 
@@ -323,62 +348,84 @@ knitr::include_graphics("images/git_pull_diagram.png")
 knitr::include_graphics("images/git_pushing_and_pulling.jpg")
 ```
 
-
 ## Merge Conflicts
 
-Occur when you make changes to the same line as a collaborator either at the same time, or without starting from the same "state". 
+::: {style="font-size: 0.9em; color: #000000;"}
+Occur when you make changes to the same line as a collaborator either at the same time, or without starting from the same "state".
 
-1. Maybe you are working in real time on the same line of code or text.
-2. Maybe you forgot to push your changes last time you finished working.
-3. Maybe you forgot to pull your changes before you started working this time.
+1.  Maybe you are working in real time on the same line of code or text.
+2.  Maybe you forgot to push your changes last time you finished working.
+3.  Maybe you forgot to pull your changes before you started working this time.
+:::
 
-![](images/same-conflict-pull.jpg)
+```{r}
+#| out-width: 60%
+#| fig-align: center
+knitr::include_graphics("images/same-conflict-pull.jpg")
+```
+
 
 ## Workflow {#git-workflow}
 
-:::: columns
-::: column
+::: columns
+::: {.column width="45%"}
 **Starting a new project/local repo**
 
 ::: incremental
-1. Clone the project or create a new repository
-2. Make some changes
-4. Commit the changes
-5. Pull any changes from the remote repository
-6. Resolve any merge conflicts
-7. Push the changes (and merged files)
+::: {style="font-size: 0.9em; color: #000000;"}
+1.  Clone the project or create a new repository
+2.  Make some changes
+3.  Commit the changes
+4.  Pull any changes from the remote repository
+5.  Resolve any merge conflicts
+6.  Push the changes (and merged files)
 :::
 :::
-::: column
 :::
-::::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="45%"}
+
+:::
+:::
 
 ## Workflow
 
-:::: columns
-::: column
+::: columns
+::: {.column width="45%"}
 **Starting a new project/local repo**
 
-1. Clone the project or create a new repository
-2. Make some changes
-4. Commit the changes
-5. Pull any changes from the remote repository
-6. Resolve any merge conflicts
-7. Push the changes (and merged files)
+::: {style="font-size: 0.9em; color: #000000;"}
+1.  Clone the project or create a new repository
+2.  Make some changes
+3.  Commit the changes
+4.  Pull any changes from the remote repository
+5.  Resolve any merge conflicts
+6.  Push the changes (and merged files)
 :::
-::: column
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="45%"}
 **Working with an existing local repo**
 
 ::: incremental
-1. Pull the repo (especially if collaborating)
-2. Make some changes
-4. Commit the changes
-5. Pull any changes from the remote repository (again!)
-6. Resolve any merge conflicts
-7. Push the changes (and merged files)
+::: {style="font-size: 0.9em; color: #000000;"}
+1.  Pull the repo (especially if collaborating)
+2.  Make some changes
+3.  Commit the changes
+4.  Pull any changes from the remote repository (again!)
+5.  Resolve any merge conflicts
+6.  Push the changes (and merged files)
 :::
 :::
-::::
+:::
+
+:::
 
 #  {background-color="#B6CADA"}
 
@@ -388,9 +435,9 @@ Connect GitHub to RStudio
 
 ## Rpackages we will need
 
-Work in your terminal or an .Rscript for this...
+Work in your console or an .Rscript for this...
 
-1. Install and load the {usethis} Rpackage
+1.  Install and load the {usethis} Rpackage
 
 ```{r}
 #| eval: false
@@ -400,7 +447,7 @@ install.packages(usethis)
 library(usethis)
 ```
 
-2. Install and load {gitcreds} RPackage
+2.  Install and load {gitcreds} RPackage
 
 ```{r}
 #| eval: false
@@ -414,7 +461,7 @@ library(gitcreds)
 
 ::: columns
 ::: {.column width="60%"}
-3. `Generate token`
+3.  `Generate token`
 
 ```{r}
 #| eval: false
@@ -428,7 +475,6 @@ create_github_token()
 #| code-line-numbers: false
 knitr::include_graphics("images/pat-generate.jpg")
 ```
-
 :::
 
 ::: {.column width="5%"}
@@ -443,15 +489,15 @@ GitHub really doesn't like it when you do not have a PAT expiration date... but 
 
 ## Store your PAT
 
-4. Copy your PAT into RStudio
+4.  Copy your PAT into RStudio
 
 ```{r}
 #| fig-align: center
-#| out-width: 70%
+#| out-width: 60%
 knitr::include_graphics("images/pat-copy.jpg")
 ```
 
-5. `Enter password or token:` Paste PAT
+5.  `Enter password or token:` Paste PAT
 
 ```{r}
 #| eval: false
@@ -480,14 +526,17 @@ knitr::include_graphics("images/git_sitrep.png")
 ## Tips for avoiding merge conflicts
 
 ::: incremental
-+ Always **pull** before you start working and always **push** after you are done working!
+::: {style="font-size: 0.9em; color: #000000;"}
+-   Always **pull** before you start working and always **push** after you are done working!
 
-+ In general, if you follow the [workflow for an existing local repo](#git-workflow) exactly, you only have problems if two of you are making local changes to the same line in the same file at the same time.
+-   In general, if you follow the [workflow for an existing local repo](#git-workflow) exactly, you only have problems if two of you are making local changes to the same line in the same file at the same time.
 
-+ If you are working with collaborators in real time, **pull**, **commit**, and **push** often.
+-   If you are working with collaborators in real time, **pull**, **commit**, and **push** often.
 
-+ Git commits **lines** -- lines of code, lines of text, etc.
-  + Practice good code format and and put each sentence on its own line.
+-   Git commits **lines** -- lines of code, lines of text, etc.
+
+    -   Practice good code format and and put each sentence on its own line.
+:::
 :::
 
 #  {background-color="#B6CADA"}
@@ -502,7 +551,7 @@ Fork the [STAT331_portfolio_template](https://github.com/atheobold/STAT331_portf
 
 ![](images/fork.png)
 
-## Create a New RStudio Project 
+## Create a New RStudio Project
 
 ::: columns
 ::: {.column width="45%"}
@@ -517,20 +566,23 @@ Fork the [STAT331_portfolio_template](https://github.com/atheobold/STAT331_portf
 :::
 :::
 
-## Save Your Project 
+## Save Your Project
 
-**Do not** save your project in the *same* folder as your STAT331.Rproj!!!!
+::: {style="font-size: 1.5em; color: #000000;"}
+**Do not save your project in the _same_ folder as your STAT331.Rproj!!!!**
+:::
 
 ::: columns
 ::: {.column width="55%"}
+::: {style="font-size: 0.9em; color: #000000;"}
 Here are some options:
 
-1. Save on your Desktop
-2. Make an "umbrella" STAT 331 folder that has two (2) subfolders
+1.  Save on your Desktop
+2.  Make an "umbrella" STAT 331 folder that has two (2) subfolders
 
-- Your STAT331-portfolio-template
-- Your STAT331 folder (the one you've been working in for five weeks)
-
+-   Your STAT331-portfolio-template
+-   Your STAT331 folder (the one you've been working in for five weeks)
+:::
 :::
 
 ::: {.column width="5%"}
@@ -553,10 +605,13 @@ Change the `reflection_template.qmd` file!
 
 ## Pushing Your Changes
 
+::: {style="font-size: 1.5em; color: #000000;"}
 Were you unsuccessful? You likely need to configure your git!
+:::
+
+</br>
 
 ```
 git config --global user.name "Laura Smith"
 git config --global user.email lsmith@example.com
 ```
-
