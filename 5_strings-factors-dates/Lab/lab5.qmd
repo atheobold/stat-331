@@ -33,7 +33,7 @@ surveys <- read_csv(
   )
 ```
 
-::: {.column-margin}
+::: column-margin
 ![](glamour_graphics.png)
 :::
 
@@ -68,56 +68,57 @@ You are required to use functions from `forcats` to complete this task.
 
 **2. Now that you've reordered, look at your y-axis label. That's long! Let's take Will Chase's advice and move the y-axis label to the top of the plot.**
 
-
-::: {.callout-note}
-Your plot should have **no** y-axis label, only a plot title and x-axis label! 
+::: callout-note
+Your plot should have **no** y-axis label, only a plot title and x-axis label!
 :::
 
 ## Time-Series Plot
 
 This week, we focused on learning skills related to working with dates, but we have yet to make a very common type of plot -- the time-series plot. We'll use this plot to motivate a second type of factor reordering!
 
-**1. Create a visualization how weights vary for each genus over the duration of the study.**
+**3. Create a visualization how weights vary for each genus over the duration of the study.**
 
 Alright, there are a lot of measurements over time! Let's use our dplyr skills to summarize each year and plot the summaries.
 
-**2. Calculate and plot the [mean]{.underline} weight for each genus for each year.**
+**4. Calculate and plot the [mean]{.underline} weight for each genus for each year.**
 
 This should look much less busy! However, you should notice that the legend still goes in alphabetical order.
 
-**3. Reorder the lines so the mean weights go in descending order (largest to smallest).**
+**5. Reorder the colors in the legend, so the label order matches the order of the lines in the plot.**
 
-::: callout-caution
+::: callout-warning
 You are required to use functions from `forcats` to complete this task.
 :::
 
-**4. Now that you've reordered the lines, look at your legend's label. That's terrible! Let's give the legend a new title *and* move the information from the y-axis to the plot title.**
+**6. Now that you've reordered the lines, look at your legend's label. That's terrible! Let's give the legend a new title *and* move the information from the y-axis to the plot title.**
 
-::: {.callout-note}
-Your plot should have **no** y-axis label! You are permitted to have a plot title, x-axis label, and legend title. 
+::: callout-note
+Your plot should have **no** y-axis label! You are permitted to have a plot title, x-axis label, and legend title.
 :::
 
 ## Caputures over the Week
 
 For our final exploration, we will consider the number of rodents captured throughout the week -- transitioning to visualizations of categorical variables.
 
-**1. Create a visualization of the number of rodents captured each day of the week.**
+**7. Create a visualization of the number of rodents captured each day of the week.**
 
 As you might have expected, the ordering of the days of the week is not what we would like.
 
-**2. Change the order of the day of the week to go Monday through Sunday.**
+**8. Change the order of the day of the week to go Monday through Sunday.**
+
+::: callout-warning
+You are required to use functions from `forcats` to complete this task.
+:::
 
 ::: callout-note
 You can choose to keep the days named as they are (e.g., Mon, Sun), or you can choose to rename the days to their full names (e.g., Monday, Sunday).
-:::
 
-::: callout-warning
 Your plot **should not** make people tilt their heads to read it! Be mindful in choosing which variable goes on which axis and if / how you use axis labels.
 :::
 
 It should be very clear that there are more rodents captured on the weekend than during the week. But, let's explore if this is still the case if we use a "Weekday" / "Weekend" classification system instead.
 
-**3. Collapse Monday through Friday into a `"Weekday"` level, and collapse Saturday and Sunday into a `"Weekend"` level. Plot the number of rodents captured between the two groups.**
+**9. Collapse Monday through Friday into a `"Weekday"` level, and collapse Saturday and Sunday into a `"Weekend"` level. Plot the number of rodents captured between the two groups.**
 
 ::: callout-warning
 You are required to use functions from `forcats` to complete this task.
