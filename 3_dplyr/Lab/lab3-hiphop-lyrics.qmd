@@ -132,7 +132,6 @@ Helpful functions: `mutate()`, `if_else()`
 
 **8. It is fairly common for researchers to collapse ethnic or racial categories similar to what you just did. What are some issues with representing the data in this way?**
 
-
 **9. What are the demographics of the people in this study? Investigate the variables `sex`, `age`, and `ethnic` and summarize your findings in 1-3 complete sentences.**
 
 ::: callout-tip
@@ -210,11 +209,9 @@ You will submit **only** your rendered HTML file. Your HTML file is required to 
 -   be self-contained (`self-contained: true`)
 -   include your source code (`code-tools: true`)
 -   include all your code and output (`echo: true`)
--   include **no** messages from loading in packages or the data
-(`messages: false`)
+-   include **no** messages from loading in packages or the data (`messages: false`)
 
 **If any of the options are not included, your Lab 3 or Challenge 3 assignment will receive an "Incomplete" and you will be required to submit a revision.**
-
 
 # Challenge 3: Group Comparisons & Data Ethics
 
@@ -254,8 +251,6 @@ You will submit **only** your rendered HTML file. Your HTML file is required to 
 -   be self-contained (`self-contained: true`)
 -   include your source code (`code-tools: true`)
 -   include all your code and output (`echo: true`)
--   include **no** messages from loading in packages or the data
-(`messages: false`)
+-   include **no** messages (`messages: false`) or warnings (`warnings: false`) from loading in packages or the data
 
 **If any of the options are not included, your Lab 3 or Challenge 3 assignment will receive an "Incomplete" and you will be required to submit a revision.**
-
