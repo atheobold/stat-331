@@ -17,12 +17,11 @@ execute:
 
 This activity will ask you to write several small functions, then use them to unscramble a message.
 
-Many of the functions have been started for you below, but **none** of them are
-complete as-is.
+Many of the functions have been started for you below, but **none** of them are complete as-is.
 
-------------------------------------------------------------------------
+---
 
-**Question 1**
+### Question 1
 
 Write a function called `divide_and_round()`, which takes a number or vector of numbers, divides them all by their smallest value, and rounds the results to the nearest whole number.
 
@@ -35,7 +34,7 @@ divide_and_round <- function(nums){
 }
 ```
 
-Test your function by running the code below. 
+Test your function by running the code below.
 
 ```{r}
 
@@ -44,13 +43,9 @@ test <- c(5:10, NA)
 divide_and_round(test)
 ```
 
-------------------------------------------------------------------------
+### Question 2
 
-**Question 2**
-
-Write a function called `no_nines_or_twelves()`, which takes a number or vector
-of numbers and returns `TRUE` if the number(s) **are not** divisible by 9 or 12,
-and returns `FALSE` otherwise.
+Write a function called `no_nines_or_twelves()`, which takes a number or vector of numbers and returns `TRUE` if the number(s) **are not** divisible by 9 or 12, and returns `FALSE` otherwise.
 
 ```{r}
 no_nines_or_twelves <- function(nums){
@@ -60,7 +55,7 @@ no_nines_or_twelves <- function(nums){
 }
 ```
 
-Test your function by running the code below. 
+Test your function by running the code below.
 
 ```{r}
 test <- c(3:12*5, NA)
@@ -68,15 +63,16 @@ test <- c(3:12*5, NA)
 no_nines_or_twelves(test)
 ```
 
-------------------------------------------------------------------------
-
-**Question 3**
+### Question 3
 
 Write a function called `every_other()` which takes a vector and returns every other value in the vector.
 
-**Do not** use a `for()` loop to do this! Accomplish this with the `seq_along()` function, bracket subsetting (`[]`), and modulus arithmetic (`%%`).
-
 Include an optional argument called "start" which lets you choose where to start skipping; that is, if `start = 1`, the function returns the 1st, 3rd, 5th, etc. values and if `start = 2`, the function returns the 2nd, 4th, 6th, etc. values.
+
+::: {.callout-warning}
+**Do not** use a `for()` loop to do this! Accomplish this with the `seq_along()` function, bracket subsetting (`[]`), and modulus arithmetic (`%%`).
+:::
+
 
 ```{r}
 every_other <- function(vec){
@@ -93,7 +89,7 @@ every_other <- function(vec){
 
 ```
 
-Test your function by running the code below. 
+Test your function by running the code below.
 
 ```{r}
 test <- c(1:10)
@@ -102,13 +98,13 @@ every_other(test)
 every_other(test, start = 2)
 ```
 
-------------------------------------------------------------------------
-
-**Question 4**
+### Question 4
 
 Write a function called `shorten()` which takes a vector, drops the values **before** the cumulative sum is greater than a provided number, and returns the remaining values.
 
+::: {.callout-warning}
 **Do not** use a `while()` loop to do this! Accomplish this with the `cumsum()` function and bracketing.
+:::
 
 Be sure to test your function!
 
@@ -120,9 +116,7 @@ shorten <- function(){
 
 ```
 
-------------------------------------------------------------------------
-
-**Question 5**
+### Question 5
 
 Once you have written your four functions correctly, copy-paste and run the following code:
 
@@ -158,5 +152,4 @@ my_vec <- sort(my_vec)
 my_vec
 ```
 
-If you have done everything correctly, your final vector will be six numbers
-long. Google these six numbers to find a TV show as your final answer.
+If you have done everything correctly, your final vector will be six numbers long. Google these six numbers to find a TV show as your final answer.
