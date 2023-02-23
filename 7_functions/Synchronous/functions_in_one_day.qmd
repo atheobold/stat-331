@@ -1,5 +1,5 @@
 ---
-title: "WEEK 7: WRITING FUNCTIONS"
+title: "Functions `r emo::ji('party')`"
 format: 
   revealjs:
     auto-stretch: false
@@ -11,7 +11,6 @@ self-contained: true
 #| include: false
 #| message: false
 library(tidyverse)
-library(flair)
 library(palmerpenguins)
 ```
 
@@ -113,6 +112,10 @@ add_three <- function(x) {
 :::
 
 ::: {.column width="45%"}
+
+</br>
+</br>
+
 What did you expect?
 
 ```{r}
@@ -164,7 +167,7 @@ We can supply a default argument value -- `something`
 #| echo: true
 add_something <- function(x, something = 2) {
   
-  return(x + something)
+  x + something
   
 }
 ```
@@ -186,7 +189,8 @@ add_something(x = 5)
 ::: {.column width="45%"}
 ```{r}
 #| echo: true
-add_something(x = 5, something = 6)
+add_something(x = 5, 
+              something = 6)
 ```
 
 :::
@@ -218,7 +222,7 @@ The **body** of the function is where the action happens.
 ```{r}
 #| echo: true
 #| eval: false
-#| code-line-numbers: 3
+#| code-line-numbers: "|3"
 add_two <- function(x) {
   
   x + 2
@@ -259,6 +263,8 @@ add_two(7)
 
 ## Explicit `return()`s
 
+. . .
+
 I prefer to have explicit returns in my functions!
 
 ```{r}
@@ -273,8 +279,37 @@ add_two <- function(x) {
 
 . . .
 
-::: {style="font-size: 2em; color: #000000;"}
+</br>
+
+::: columns
+::: {.column width="40%"}
+::: {style="font-size: 1.25em; color: #000000;"}
 **Why?** It makes debugging easier. 
+:::
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="55%"}
+```{r}
+#| echo: true
+add_two <- function(x) {
+  
+  sum <- x + 2
+  
+}
+```
+
+</br>
+
+```{r}
+#| echo: true
+#| eval: true
+add_two(2)
+```
+
+:::
 :::
 
 ## Input validation
@@ -291,7 +326,7 @@ add_something <- function(x, something) {
   
   stopifnot(is.numeric(x))
   
-  x + something
+  return(x + something)
   
 }
 ```
@@ -315,7 +350,7 @@ add_something <- function(x, something) {
     stop("Please provide a numeric input for the x argument.")
   }
   
-  x + something
+  return(x + something)
   
 }
 
@@ -334,12 +369,33 @@ add_something <- function(x, something) {
   
   stopifnot(is.numeric(x), is.numeric(something))
   
-  x + something
+  return(x + something)
   
 }
-
-add_something(x = 2, something = "R")
 ```
+
+::: columns
+::: {.column width="45%"}
+```{r}
+#| echo: true
+#| error: true
+
+add_something(x = 2, 
+              something = "R")
+```
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="45%"}
+```{r}
+#| echo: true
+add_something(x = 2, 
+              something = 4)
+```
+:::
+:::
 
 :::
 
@@ -347,19 +403,25 @@ add_something(x = 2, something = "R")
 
 ## Environments
 
-+ The top right pane of your RStudio shows your **environment**.
-+ This is the "current state" of the objects you've created.
-
 ```{r}
 #| fig-align: center
 #| out-width: 70%
 knitr::include_graphics("images/environment.jpg")
 ```
 
+::: {style="font-size: 0.75em; color: #000000;"}
+
++ The top right pane of your RStudio shows your **environment**.
++ This is the "current state" of the objects you've created.
+:::
+
 . . .
+
+::: {style="font-size: 0.75em; color: #000000;"}
 
 + The code inside the function executes in the **function environment**.
 + **It does not change your global environment**.
+:::
 
 ## Dynamic Lookup
 
@@ -402,7 +464,7 @@ add_two <- function(x) {
   
   my_result <- x + 2
   
-  my_result
+  return(my_result)
   
 }
 ```
@@ -464,12 +526,7 @@ In general...
 ## Example -- `find_car_make()`
 
 ::: {style="font-size: 0.75em; color: #000000;"}
-Write a function called `find_car_make()` that takes as input the name of a car, and returns only the “make”, or the company that created the car.
-:::
-
-
-::: callout-tip
-For example, find_car_make("Toyota Camry") should return "Toyota" and find_car_make("Ford Anglica") should return "Ford".
+Write a function called `find_car_make()` that takes as input the name of a car, and returns only the “make”, or the company that created the car. For example, `find_car_make("Toyota Camry")` should return "Toyota" and `find_car_make("Ford Anglica")` should return "Ford".
 :::
 
 ::: panel-tabset
@@ -543,14 +600,14 @@ mtcars |>
 
 ## Lab 7 & Challenge 7
 
-[Lab 7: Functions & Fish](https://earobinson95.github.io/stat331-calpoly/lab-assignments/lab7/lab7-functions-and-fish.html)
+[Lab 7: Functions & Fish](https://atheobold.github.io/stat-331/7_functions/Lab/lab7_functions.html)
 
-[Challenge 7: Incorporating Multiple Inputs](https://earobinson95.github.io/stat331-calpoly/lab-assignments/lab7/challenge7-functions-and-fish.html)
+[Challenge 7: Incorporating Multiple Inputs](https://atheobold.github.io/stat-331/7_functions/Lab/lab7_functions.html)
 
 ```{r}
 #| fig-align: center
 #| out-width: 60%
-knitr::include_graphics("https://github.com/earobinson95/stat331-calpoly/blob/master/lab-assignments/lab7/images/blackfoot_river.jpg?raw=true")
+knitr::include_graphics("https://github.com/atheobold/stat-331/blob/main/7_functions/Lab/images/blackfoot_river.jpg")
 ```
 
 ## Standardizing Between 0 and 1
@@ -599,7 +656,7 @@ penguins |>
 ## New option: Variables as Arguments!
 
 ::: columns
-::: {.column width="55%"}
+::: {.column width="65%"}
 ```{r stdcol}
 #| echo: true
 #| eval: false
@@ -622,7 +679,7 @@ std_column_01 <- function(data, variable) {
 ::: {.column width="5%"}
 :::
 
-::: {.column width="35%"}
+::: {.column width="25%"}
 ::: callout-note
 Notice how I relied on the existing function `std_to_01()` inside the new
 function, for clarity!
@@ -712,6 +769,10 @@ std_column_01(penguins, "bill_length_mm")
 ::: {style="font-size: 0.75em; color: #000000;"}
 In February 2020 `rlang` introduced the "injection" `{{ }}` operator to
 simplify writing functions around tidyverse pipelines. 
+
+With the `{{ }}` operator you can inject the name of data-variables (i.e. 
+columns from the data frames) into function arguments! 
+
 :::
 :::
 ::: {.column width="30%"}
@@ -723,11 +784,6 @@ knitr::include_graphics("https://github.com/rstudio/hex-stickers/blob/main/thumb
 :::
 ::::
 
-::: {style="font-size: 0.75em; color: #000000;"}
-With the `{{ }}` operator you can inject the name of data-variables (i.e. 
-columns from the data frames) into function arguments! 
-:::
-
 ::: callout-warning
 This only works for `select()` type functions, that use a literal (tidy) name
 of the variable to subset the data.
@@ -736,7 +792,7 @@ of the variable to subset the data.
 ## Recall Our Broken Function
 
 ::: columns
-::: {.column width="55%"}
+::: {.column width="65%"}
 ```{r}
 #| error: true
 #| echo: true
@@ -759,11 +815,13 @@ std_column_01(penguins, body_mass_g)
 ::: {.column width="5%"}
 :::
 
-::: {.column width="35%"}
+::: {.column width="25%"}
+::: {style="font-size: 0.75em; color: #000000;"}
 + The problem here is that `mutate()` defuses the R code it was supplied. 
 + Instead we want it to see `body_mass_g = standardize(body_mass_g)`. 
 
 This is why we need injection!
+:::
 :::
 :::
 
@@ -793,9 +851,16 @@ The left hand side of `=` is also diffused!
 
 ## The "Walrus Operator" `:=`
 
-The "walrus operator" `:=` is an alias of `=`.  
+::: {style="font-size: 0.85em; color: #000000;"}
 
-You can use it to supply names, e.g. a := b is equivalent to a = b. 
+- The "walrus operator" `:=` is an alias of `=` that forces operations on the left hand side to not be diffused.  
+
+- You can use it to supply names, e.g. a := b is equivalent to a = b. 
+
+- While you could use this in an "ordinary" `mutate()` it is not necessary!
+
+:::
+
 
 ```{r}
 #| echo: true
