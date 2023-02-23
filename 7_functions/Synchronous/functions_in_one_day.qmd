@@ -343,7 +343,7 @@ add_something(x = "statistics", something = 5)
 ```{r}
 #| echo: true
 #| error: true
-#| code-line-numbers: 3-5
+#| code-line-numbers: "3-5"
 add_something <- function(x, something) {
   
   if(is.numeric(x) != TRUE){
@@ -364,7 +364,7 @@ Recall DeMorgan's law!
 ```{r}
 #| echo: true
 #| error: true
-#| code-line-numbers: 3-5
+#| code-line-numbers: "3-5"
 add_something <- function(x, something) {
   
   stopifnot(is.numeric(x), is.numeric(something))
@@ -459,7 +459,7 @@ Objects you make in the function don't affect "real life".
 
 ```{r}
 #| echo: true
-#| code-line-numbers: 3
+#| code-line-numbers: "3"
 add_two <- function(x) {
   
   my_result <- x + 2
