@@ -9,25 +9,27 @@ format:
     number-depth: 2
     code-block-bg: "#76b5c5"
     highlight-style: monochrome
+    self-contained: true
 editor: visual
 execute: 
-  echo: false
+  echo: true
+  eval: false
+resources: 
+  - pa8_starter.qmd
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```{r setup}
+#| include: false
+#| eval: true
 
 library(tidyverse)
-
 ```
 
-<center>
-![](christmas_tree.jpg)
-</center>
+<center>![](christmas_tree.jpg)</center>
 
 ## Introduction
 
-The song "12 Days of Christmas", written around 1780, tells the tale of many gifts a person receives in the days leading up to Christmas. ([link to lyrics](https://en.wikipedia.org/wiki/The_Twelve_Days_of_Christmas_(song)%5D(https://en.wikipedia.org/wiki/The_Twelve_Days_of_Christmas_(song)))).
+The song "12 Days of Christmas", written around 1780, tells the tale of many gifts a person receives in the days leading up to Christmas ([link to lyrics](https://en.wikipedia.org/wiki/The_Twelve_Days_of_Christmas_(song)%5D(https://en.wikipedia.org/wiki/The_Twelve_Days_of_Christmas_(song)))).
 
 These gifts repeat and compound; on the first day, the narrator receives
 
@@ -48,28 +50,32 @@ On the twelfth day, they receive
     Two Turtle Doves
     And a Partridge in a Pear Tree
 
-This week, your task will be to write functions that automatically sing this very repetitive song. Today, we will start by writing two helper functions which we will use on Thursday to write a function to sing this 
-song. 
+This week, your task will be to write functions that automatically sing this very repetitive song. Today, we will start by writing two helper functions which we will use on Thursday to write a function to sing this song.
 
-------------------------------------------------------------------------
+::: {.callout-tip}
+Note that your functions can - and should! - reference each other. That is, don't duplicate code; use earlier, smaller functions inside your larger functions.
+:::
 
-## The Dataset
+## Getting Started 
 
-Run the code provided to load in a dataset called `xmas` that contains the crucial information about the gifts in the song. We will use this dataset to test out our functions as we work on them.
+### Starter Quarto File
+
+I have assembled the skeleton code provided in these instructions into a starter Quarto file. You can download the [`pa8_starter.qmd` file here](pa8_starter.qmd). 
+
+### The Dataset
+
+Run the code provided in the Quarto file to load in a dataset called `xmas` that contains the crucial information about the gifts in the song. We will use this dataset to test out our functions as we work on them.
 
 ```{r}
-xmas <- read.csv("https://www.dropbox.com/s/e584pryn8evm1gz/xmas.csv?dl=1")
+xmas <- read_csv("https://www.dropbox.com/s/e584pryn8evm1gz/xmas.csv?dl=1")
 ```
 
-Note that your functions can - and should! - reference each other.
-That is, don't duplicate code; use earlier, smaller functions inside your larger functions.
 
 ### Other packages
 
-The packages `dplyr`, `stringr`, `glue`, and `purrr` are already loaded into the materials for making the `twelvedays` functions. Make sure you have each of these packages installed!
+The functions included in the starter code are included in the `dplyr`, `stringr`, `glue`, and `purrr` packages, so make sure you have these packages installed! If you want to rely on functions from other packages that's fine, but you will need to load them in the set-up chunk.
 
-If you want to rely on functions from other packages that's fine, but you will need to load them in the set-up chunk.
-
+::: {.callout-tip collapse="true"}
 ## Advice
 
 ### Workflow
@@ -82,39 +88,25 @@ Once you feel confident in your function code, use the smaller version of the da
 
 If you have some trouble getting started, I recommend writing a function that works in one case, and then trying to generalize.
 
-For example, in building my `sing_day()` function, I might first write a version called `sing_third_day()` that sings
-
-    On the third day of Christmas, my true love gave to me:
-    three french hens,
-    two turtle doves,
-    and a patridge in a pear tree.
-
 ### Don't sweat the small stuff
 
-There's a lot you can do to polish up the way the song prints.
+There's a lot you can do to polish up the way the song prints. However, the goal of this lab is to practice writing functions and using iteration. Don't get bogged down in details like how the song displays, or small grammar rules (like commas!), until you've finished the main tasks.
+:::
 
-However, the goal of this lab is to practice writing functions and using iteration. Don't get bogged down in details like how the song displays, or small grammar rules (like commas!), until you've finished the main tasks.
-
-<center>
-#### Let's Get Started!
-</center>
-
-------------------------------------------------------------------------
 
 ## Step One: Plurals
 
-Note that the gifts are listed in singular: for example, on day five the narrator receives "five golden rings", but the entry in the dataset for the gift on day five simply says "ring".
+Note that the gifts are listed in singular: for example, on day five the narrator receives "five golden rings", but the entry in the dataset for the gift on day five simply says `"ring"`.
 
 Using the skeleton of the `pluralize_gift()` function, complete the code so that the function takes a gift and returns the appropriate plural.
 
-:::{.callout-tip}
-*Hint 1:* Note that the gifts on days six and nine have unusual pluralization. You may assume that in other datasets, there will be
-**no** additional special cases besides these types.
+::: callout-tip
+*Hint 1:* Note that the gifts on days six and nine have unusual pluralization. You may assume that in other datasets, there will be **no** additional special cases besides these types.
 
 *Hint 2:* The following small example may be useful to you:
-:::
 
-```{r, eval = TRUE}
+```{r}
+#| eval: true
 my_names <- c("Kimberly", "Trini", "Jason", 
               "Billy", "Zach", "Tommy")
 
@@ -122,15 +114,17 @@ my_names |>
   str_c("s", sep = "") |> 
   str_replace("ys$", "ies")
 ```
+:::
 
-:::{.callout-caution}
-**Important:** You should **absolutely not** "hard-code" anything into this function; this function should work in general, not just for the items in the 12 Days of Christmas. For example, the word "rings" should not appear anywhere in the function. I should be able to give it any gift and get back the plural of that gift.
+::: callout-caution
+## No hard coded words! 
+
+You should **absolutely not** "hard-code" anything into this function; this function should work in general, *for the gifts included in the song*. Meaning, the word "goose" should not appear anywhere in the function, but you can assume a "oo" transforms to a "ee" in the context of the 12 days of Christmas song. 
 :::
 
 ### Test Your Function
 
-Try your function out on the smaller and then larger gift dataset.
-Consider: is your function *vectorized*? It does not have to be, but you can try it out if you want!
+Try your function out on the smaller and then larger gift dataset. Consider: is your function *vectorized*? It does not have to be, but you can try it out if you want!
 
 ```{r pluralize-test}
 # Will work if your function is vectorized! 
@@ -140,8 +134,6 @@ pluralize_gift(xmas$Gift.Item)
 map_chr(xmas$Gift.Item, pluralize_gift)
 
 ```
-
-------------------------------------------------------------------------
 
 ## Step Two: Creating sentences
 
@@ -161,23 +153,19 @@ should return
 
 ### Test Your Function
 
-Try your function out on the `xmas` data, by making a new variable containing the daily phrases. Notice I've provided you with the code to iterate through each row of the dataset to create a phrase---all you need to do is provide the necessary inputs into `pmap_chr()`. 
+Try your function out on the `xmas` data, by making a new variable containing the daily phrases. Notice I've provided you with the starter code to use `pmap_chr()` to iterate through each row of the dataset to create a phrase. 
 
-:::{.callout-tip}
-**Hint:** The `Day.in.Words` variable isn't quite what you want! You want `12` to say `"twelve"` **not** `"twelfth"`. I suggest using the **english** package to create numbered days and then use those in your `pmap_chr()`!
+::: {.callout-tip}
+Look up the help file for `pmap_chr()` -- what is specified in the `list()`? How does that translate into what your `make_phrase()` function needs as inputs?
+
+If you are still a bit stuck, take another look at the [mapping over multiple arguments](https://r4ds.had.co.nz/iteration.html#mapping-over-multiple-arguments) section of *R for Data Science*. 
 :::
 
 ```{r}
-xmas <- xmas %>%
-  mutate(day.num = ___, 
-    Full.Phrase = pmap_chr(.l = list(num_word = day.num, 
-                                item = Gift.Item, 
-                                verb = Verb, 
-                                adjective = Adjective, 
-                                location = Location), 
-                           .f = make_phrase)
-  )
-
+xmas2 <- xmas %>%
+  mutate(Full.Phrase = pmap_chr(.l = list(), 
+                                .f = make_phrase)
+         )
 ```
 
 ## Submission
