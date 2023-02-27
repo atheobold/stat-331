@@ -3,6 +3,7 @@ title: "Iteration, Functions & Strings"
 format: 
   revealjs:
     theme: night
+    self-contained: true
 editor: visual
 ---
 
@@ -19,10 +20,10 @@ library(palmerpenguins)
 Iteration
 :::
 
-</br> 
+</br>
 
 ::: {style="font-size: 2em; color: #0F4C81;"}
-**Repeat the _same_ operation multiple times**
+**Repeat the *same* operation multiple times**
 :::
 
 ##  {background-color="#B6CADA"}
@@ -33,14 +34,12 @@ Why not just use loops?
 
 . . .
 
-</br> 
+</br>
 
-::: {style="font-size: 1.5em; color: #000000;"}
+::: {style="font-size: 1.5em; color: #0F4C81;"}
+R is a functional programming language!
 
-R is a functional programming language!  
-
-This makes it possible to wrap up loops into a function and call that function
-instead! 
+This makes it possible to wrap up loops into a function and call that function instead!
 :::
 
 ##  {background-color="#B6CADA"}
@@ -53,11 +52,16 @@ The `map()` family
 
 <center>
 
-![](images/map.png)
+```{r}
+#| out-width: 40%
+
+knitr::include_graphics("images/map.png")
+```
 
 ```{r map-internals}
 #| eval: false
 #| echo: true
+
 simple_map <- function(x, f, ...) {
   out <- vector(mode = "list", length = length(x))
   for (i in seq_along(x)) {
@@ -66,9 +70,10 @@ simple_map <- function(x, f, ...) {
   out
 }
 ```
+
 </center>
 
-##
+## 
 
 ::: {style="font-size: 2em; color: #FFFFFF;"}
 Summary Statistics
@@ -78,7 +83,6 @@ Summary Statistics
 
 ::: columns
 ::: {.column width="49%"}
-
 ::: {style="font-size: 1.5em; color: #0F4C81;"}
 **Familiar**
 :::
@@ -103,7 +107,6 @@ What type of output does this produce?
 :::
 
 ::: {.column width="49%"}
-
 ::: {style="font-size: 1.5em; color: #0F4C81;"}
 **New**
 :::
@@ -118,7 +121,6 @@ penguins %>%
 ```
 
 What type of output does this produce?
-
 :::
 :::
 
@@ -130,14 +132,15 @@ What is `map_dbl()` doing?
 
 . . .
 
-<center>
-![](images/map.png)
-</center>
+<center>![](images/map.png)</center>
+
 . . .
 
+<center>
 ::: {style="font-size: 1em; color: #0F4C81;"}
 **What length of output can `f()` produce?**
 :::
+</center>
 
 ## 
 
@@ -147,7 +150,6 @@ Data Wrangling
 
 ::: columns
 ::: {.column width="45%"}
-
 ::: {style="font-size: 1.5em; color: #0F4C81;"}
 **Familiar**
 :::
@@ -171,8 +173,7 @@ What type of output does this produce?
 ::: {.column width="5%"}
 :::
 
-::: {.column width="55%"}
-
+::: {.column width="45%"}
 ::: {style="font-size: 1.5em; color: #0F4C81;"}
 **New**
 :::
@@ -185,6 +186,7 @@ penguins %>%
 ```
 
 What type of output does this produce?
+
 :::
 :::
 
@@ -194,7 +196,6 @@ What type of output does this produce?
 ::: {style="font-size: 3em; color: #000000;"}
 So why use `map()` and not just use `across()`?
 :::
-
 
 . . .
 
@@ -210,7 +211,7 @@ Not all functions are vectorized!
 Today's Lab
 :::
 
-</br> 
+</br>
 
 . . .
 
@@ -218,10 +219,10 @@ Today's Lab
 **Making a Song!**
 :::
 
-##
+## 
 
 ::: {style="font-size: 2em; color: #FFFFFF;"}
-.larger[A (Boring) Example]
+A (Boring) Example
 :::
 
 ::: columns
@@ -233,18 +234,22 @@ Today's Lab
 :::
 
 ::: {.column width="45%"}
-**_Around the World_**
+
+::: {style="font-size: 2em; color: #0F4C81;"}
+***Around the World***
+:::
 :::
 :::
 
 . . .
 
-</br> 
+</br>
+
 <center>
 
 Repeats "Around the World" for the duration of the song (144 times)
 
-##
+## 
 
 ::: {style="font-size: 2em; color: #FFFFFF;"}
 A Boring `map()`
@@ -268,7 +273,6 @@ around_the_world <- function(n){
 Let's Break it Apart
 :::
 
-
 ```{r map1}
 #| eval: false
 #| echo: true
@@ -284,13 +288,13 @@ A Handy Friend
 :::
 
 ::: columns
-::: {.column width="45%"}
-**glue** -- "interprets string literals that are small, fast, and 
-dependency-free" 
+::: {.column width="50%"}
 
-- glue does this by embedding `R` expressions in curly braces which are then
-evaluated and inserted into the argument string.
+::: {style="font-size: 0.75em; color: #FFFFFF;"}
+**glue** -- "interprets string literals that are small, fast, and dependency-free"
 
+-   glue does this by embedding `R` expressions in curly braces which are then evaluated and inserted into the argument string.
+:::
 :::
 
 ::: {.column width="5%"}
@@ -319,6 +323,7 @@ Around the World
 ```{r glue}
 #| eval: false
 #| code-line-numbers: "|5"
+#| echo: true
 
 around_the_world <- function(n){
   lyrics <- map_chr(.x = 1:n,
@@ -328,48 +333,49 @@ around_the_world <- function(n){
 }
 ```
 
-- Long strings are broken by line and concatenated together.
-
+-   Long strings are broken by line and concatenated together.
 :::
 
 ::: {.column width="5%"}
 :::
 
-::: {.column width="2%"}
+::: {.column width="25%"}
 ```{r}
+#| echo: true
 
 around_the_world(4)
 ```
-
 :::
 :::
 
-##
+## 
 
 ::: {style="font-size: 2em; color: #FFFFFF;"}
 A Better Example
 :::
 
 <center>
-::: {style="font-size: 2em; color: #0F4C81;"}
-**99 Bottles of Beer** 
 
-</br> 
+::: {style="font-size: 2em; color: #0F4C81;"} 
+**99 Bottles of Beer**
+:::
 
-99 bottles of beer on the wall, 99 bottles of beer.
-Take one down, pass it around, 98 bottles of beer on the wall...
+</br>
+
+99 bottles of beer on the wall, 99 bottles of beer. Take one down, pass it around, 98 bottles of beer on the wall...
+
 </center>
 
 ## 
 
 ::: {style="font-size: 2em; color: #FFFFFF;"}
-Making Lyrics
+Step One: Making Lyrics
 :::
 
-
 ```{r}
+#| echo: true
 bottles_lyrics <- function(n){
-  lyrics <- glue::glue("{n} bottles of beer on the wall, {n} bottles of beer \nTake one down, pass it around, {n -1} bottles of beer on the wall")
+  lyrics <- glue::glue("{n} bottles of beer on the wall, {n} bottles of beer \nTake one down, pass it around, {n - 1} bottles of beer on the wall")
   
   return(lyrics)
 }
@@ -381,10 +387,11 @@ bottles_lyrics(3)
 ## 
 
 ::: {style="font-size: 2em; color: #FFFFFF;"}
-Making a Song
+Step Two: Making a Song
 :::
 
 ```{r map-exciting}
+#| echo: true
 bottles_song <- function(n){
   song <- map_chr(.x = n:0, 
                   .f = bottles_lyrics)
@@ -394,6 +401,10 @@ bottles_song <- function(n){
 }
 ```
 
+::: {.callout-tip}
+Notice how I called the `bottles_lyrics()` function inside the `bottles_song()` function -- that's exactly what a "helper" function is!
+:::
+
 ## 
 
 ::: {style="font-size: 2em; color: #FFFFFF;"}
@@ -401,21 +412,22 @@ What we wanted?
 :::
 
 ```{r}
+#| echo: true
 bottles_song(3)
 ```
 
-##
+## 
 
 ::: {style="font-size: 2em; color: #FFFFFF;"}
 But what about the end?
 :::
 
+</br> 
 
 <center>
 
-::: {style="font-size: 2em; color: #000000;"}
-**No more bottles of beer on the wall, no more bottles of beer.  
-Go to the store and buy some more, 99 bottles of beer on the wall...**
+::: {style="font-size: 1.25em; color: #0F4C81;"}
+**No more bottles of beer on the wall, no more bottles of beer. Go to the store and buy some more, 99 bottles of beer on the wall...**
 :::
 
 ## 
@@ -425,6 +437,7 @@ An Alternate Ending
 :::
 
 ```{r}
+#| echo: true
 bottles_lyrics <- function(n){
   
   if(n == 0){
@@ -447,16 +460,38 @@ bottles_song <- function(n){
 }
 ```
 
-
-##
+## 
 
 ::: {style="font-size: 2em; color: #FFFFFF;"}
 A Song!
 :::
 
 ```{r}
+#| echo: true
 bottles_song(4)
 ```
 
+##  {background-color="#B6CADA"}
 
+::: columns
+::: {.column width="45%"}
+::: {style="font-size: 2em; color: #000000;"}
+Your task...
+:::
+:::
 
+::: {.column width="5%"}
+:::
+
+::: {.column width="45%"}
+![](images/christmas_tree.jpg)
+:::
+:::
+
+*Practice Activity 8*
+
+- **Step One**: write a `pluralize_gift()` function
+- **Step Two**: write a `make_phrase()` function
+- **Step Three**: use the `make_phrase()` to generate a set of song phrases
+
+*Lab 8* -- build on these steps to generate the song lyrics
