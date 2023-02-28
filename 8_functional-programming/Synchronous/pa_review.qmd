@@ -36,10 +36,22 @@ Why not just use loops?
 
 </br>
 
-::: {style="font-size: 1.5em; color: #0F4C81;"}
+::: columns
+::: {.column width="45%"}
+::: {style="font-size: 1em; color: #0F4C81;"}
 R is a functional programming language!
 
 This makes it possible to wrap up loops into a function and call that function instead!
+:::
+
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="45%"}
+![](images/bart_for_loop.png)
+:::
 :::
 
 ##  {background-color="#B6CADA"}
@@ -137,9 +149,11 @@ What is `map_dbl()` doing?
 . . .
 
 <center>
+
 ::: {style="font-size: 1em; color: #0F4C81;"}
 **What length of output can `f()` produce?**
 :::
+
 </center>
 
 ## 
@@ -167,7 +181,6 @@ penguins %>%
 ```
 
 What type of output does this produce?
-
 :::
 
 ::: {.column width="5%"}
@@ -186,10 +199,8 @@ penguins %>%
 ```
 
 What type of output does this produce?
-
 :::
 :::
-
 
 ##  {background-color="#B6CADA"}
 
@@ -234,9 +245,8 @@ A (Boring) Example
 :::
 
 ::: {.column width="45%"}
-
 ::: {style="font-size: 2em; color: #0F4C81;"}
-***Around the World***
+[***Around the World***](https://www.youtube.com/watch?v=K0HSD_i2DvA)
 :::
 :::
 :::
@@ -289,7 +299,6 @@ A Handy Friend
 
 ::: columns
 ::: {.column width="50%"}
-
 ::: {style="font-size: 0.75em; color: #FFFFFF;"}
 **glue** -- "interprets string literals that are small, fast, and dependency-free"
 
@@ -356,7 +365,7 @@ A Better Example
 
 <center>
 
-::: {style="font-size: 2em; color: #0F4C81;"} 
+::: {style="font-size: 2em; color: #0F4C81;"}
 **99 Bottles of Beer**
 :::
 
@@ -383,7 +392,6 @@ bottles_lyrics <- function(n){
 bottles_lyrics(3)
 ```
 
-
 ## 
 
 ::: {style="font-size: 2em; color: #FFFFFF;"}
@@ -401,7 +409,7 @@ bottles_song <- function(n){
 }
 ```
 
-::: {.callout-tip}
+::: callout-tip
 Notice how I called the `bottles_lyrics()` function inside the `bottles_song()` function -- that's exactly what a "helper" function is!
 :::
 
@@ -422,7 +430,7 @@ bottles_song(3)
 But what about the end?
 :::
 
-</br> 
+</br>
 
 <center>
 
@@ -490,8 +498,12 @@ Your task...
 
 *Practice Activity 8*
 
-- **Step One**: write a `pluralize_gift()` function
-- **Step Two**: write a `make_phrase()` function
-- **Step Three**: use the `make_phrase()` to generate a set of song phrases
+-   **Step One**: write a `pluralize_gift()` function
+-   **Step Two**: write a `make_phrase()` function
+-   **Step Three**: use the `make_phrase()` to generate a set of song phrases
 
 *Lab 8* -- build on these steps to generate the song lyrics
+
+##  {background-color="#B6CADA"}
+
+![](images/bart_map.png)
