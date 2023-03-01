@@ -43,7 +43,6 @@ R is a functional programming language!
 
 This makes it possible to wrap up loops into a function and call that function instead!
 :::
-
 :::
 
 ::: {.column width="5%"}
