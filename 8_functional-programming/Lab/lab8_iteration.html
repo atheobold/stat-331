@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.2.335">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -2629,17 +2629,18 @@ vertical-align: -.125em;
 <h2 data-number="0.1" class="anchored" data-anchor-id="singing-the-song"><span class="header-section-number">0.1</span> Singing the Song</h2>
 <p>Alright, so you’ve already created two helper functions, <code>pluralize_gift()</code> and <code>make_phrase()</code>, which you used at the end of the Practice Activity to create a column of song phrases / lines.</p>
 <p>Today, you will use these phrases to write a function which sings the lines of song for a given day. We will then use this function to iterate through the 12 days of Christmas to get our song!</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-caution callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-caption-container flex-fill">
-Note
+Danger
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>Note, you will either need to copy over your functions from the Practice Activity into your new Quarto document or continue working in the Quarto file from the Practice Activity.</p>
+<p>Specifically, this stage requires that you generated a <code>Full.Phrase</code> column using <code>pmap_chr()</code>.</p>
 </div>
 </div>
 </section>
@@ -2671,7 +2672,7 @@ Tip
 <div class="callout-body-container callout-body">
 <p><strong>Extracting the phrases</strong> The <code>{{phrase_col}}</code> part, which I provided for you, lets you use column names as arguments to a function. <strong>Do not</strong> delete that line of code!</p>
 <p><strong>Getting the days</strong><br>
-The <code>ordinal()</code> function from the <strong>english</strong> package could be helpful when coverting the <code>line</code> input (e.g., 1) to a word (e.g., “first”).</p>
+The <code>ordinal()</code> function from the <strong>english</strong> package could be helpful when converting the <code>line</code> input (e.g., 1) to a word (e.g., “first”).</p>
 </div>
 </div>
 </div><div class="column" style="width:5%;">
@@ -2688,7 +2689,7 @@ Danger
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>Iteration inside the function</strong> There <strong>should not</strong> be iteration <em>inside</em> your function. We will use iteration <em>outside</em> the function, to sing each day of the song.</p>
-<p><strong>Singing all the gifts</strong><em> Remember, each day, you get the gift for that day </em>and* all the prior days. Also, remember that these gifts go in reverse order! (e.g., two turtle doves and a partridge in a pear tree).</p>
+<p><strong>Singing all the gifts</strong> <em>Remember, each day, you get the gift for that day</em> and* all the prior days. Also, remember that these gifts go in reverse order! (e.g., two turtle doves and a partridge in a pear tree).</p>
 </div>
 </div>
 </div>
@@ -2766,28 +2767,45 @@ What <code>map()</code> function to use?
 </div>
 </div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Reuse your code from the Practice Activity here, so you have the Full.Phrase column</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>xmas2 <span class="ot">&lt;-</span> xmas <span class="sc">%&gt;%</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Full.Phrase =</span> <span class="fu">pmap_chr</span>(<span class="at">.l =</span> <span class="fu">list</span>(), </span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                                <span class="at">.f =</span> make_phrase)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>         )</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Code to iterate your sing_line() function for the 12 days of Christmas</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<section id="revisions" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="revisions"><span class="header-section-number">2.1</span> Revisions</h2>
+<section id="submission" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="submission"><span class="header-section-number">2.1</span> Submission</h2>
+<p>You Lab 8 submission <strong>must</strong> have individual sections (with headers) for each function you’ve written (e.g., Pluralize Gifts, Sing Phrases, Sing Song), with the code for each function visible to the reader.</p>
+<p>As stated for previous Lab &amp; Challenge submissions, your HTML file is required to have the following specifications in the YAML options (at the top of your document):</p>
+<ul>
+<li>be self-contained (<code>self-contained: true</code>)</li>
+<li>include your source code (<code>code-tools: true</code>)</li>
+<li>include all your code and output (<code>echo: true</code>)</li>
+<li>include <strong>no</strong> messages (<code>messages: false</code>) or warnings (<code>warnings: false</code>) from loading in packages or the data</li>
+</ul>
+<p><strong>If any of the options are not included, your Lab 8 or Challenge 8 assignment will receive an “Incomplete” and you will be required to submit a revision for the formatting of your submission.</strong></p>
+</section>
+<section id="revisions" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="revisions"><span class="header-section-number">2.2</span> Revisions</h2>
 <p><strong>You will get an automatic revision for:</strong></p>
 <ul>
 <li><p>Functions that do not work the way they are intended</p></li>
 <li><p>“Hard-Coding” in functions.</p></li>
-<li><p>Not using the <code>map()</code> to iterate your function.</p></li>
+<li><p>Not using <code>pmap_chr()</code> to obtain your phrases</p></li>
+<li><p>Not using a <code>map()</code> function to iterate your function</p></li>
 </ul>
 </section>
 </section>
 <section id="challenge-styling-your-song" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Challenge – Styling Your Song</h1>
 <p>It would be nice if your song output in a visually appealing way. Similar to Lab 2, for this Challenge, you will be provided with three options. You are required to do <strong>at least two</strong>, but are welcome to do more than two.</p>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Build off your Lab 8 submission
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Your Challenge 8 submission can be identical to your Lab 8 submission, with the additional modifications you made to format the appearance of your lyrics.</p>
+</div>
+</div>
 <section id="option-1-removing-whitespace" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="option-1-removing-whitespace"><span class="header-section-number">3.1</span> Option 1 – Removing Whitespace</h2>
 <p>Remove any additional spaces between words, such that there should only be <strong>one</strong> whitespace character between words and <strong>no</strong> whitespace at the beginning or end of each phrase.</p>
