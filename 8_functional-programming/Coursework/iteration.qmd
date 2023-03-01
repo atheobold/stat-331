@@ -36,7 +36,7 @@ library(lubridate)
 
 # Vectorized Functions
 
-Operations in R are typically **vectorized** - that means, by default, the functions operate on *vectors* of values rather than a single value. This is a feature that applies to atomic vectors (and we don’t even think about it):
+Operations in R are typically **vectorized** - that means, by default, the functions operate on *vectors* of values rather than a single value. This is a feature that applies to atomic vectors (and we don't even think about it):
 
 ```{r abs}
 #| echo: true  
@@ -47,7 +47,7 @@ x <- seq(from = -4, to = 12, by = 0.5)
 abs(x)
 ```
 
-Notice how the `abs()` function found the absolute value of each element of `x` without using a for-loop? In programming languages which don’t have implicit support for vectorized computations, this above process might instead look like:
+Notice how the `abs()` function found the absolute value of each element of `x` without using a for-loop? In programming languages which don't have implicit support for vectorized computations, this above process might instead look like:
 
 ```{r abs-loop}
 #| echo: true  
@@ -55,25 +55,26 @@ Notice how the `abs()` function found the absolute value of each element of `x` 
 
 x <- seq(from = -4, to = 12, by = 0.5)
 
-for(i in length(x)){
+for(i in 1:length(x)){
   x[i] <- abs(x[i])
 }
 
 x
 ```
 
-::: {.column-margin}
-::: {.callout-tip}
+::: column-margin
+::: callout-tip
 # `for()`-loop refresher
-If you would like a refresher on how for-loops work, I would recommend watching this video: [iteration with `for()`-loops (10 minutes)](https://www.youtube.com/watch?v=sxIX9lzPjDQ) and / or reading the [`for()`-loops](https://r4ds.had.co.nz/iteration.html#for-loops) section of *R for Data Science*. 
+
+If you would like a refresher on how for-loops work, I would recommend watching this video: [iteration with `for()`-loops (10 minutes)](https://www.youtube.com/watch?v=sxIX9lzPjDQ) and / or reading the [`for()`-loops](https://r4ds.had.co.nz/iteration.html#for-loops) section of *R for Data Science*.
 :::
 :::
 
-That is, we would need to apply the `abs()` function to each entry of `x`. For atomic vectors, this process of applying a function to each element is easy to do this by default; with a list, however, we need to be a bit more explicit (because everything that’s passed into the function may not be the same type).
+That is, we would need to apply the `abs()` function to each entry of `x`. For atomic vectors, this process of applying a function to each element is easy to do this by default; with a list, however, we need to be a bit more explicit (because everything that's passed into the function may not be the same type).
 
 ## Is every function vectorized?
 
-Short answer, no. There exist occasions where you either can't or choose not to write a function that is vectorized. For example, if the function you've written makes use of `if()` statements, your function **cannot** operate on vectors. For example, take the `pos_neg_zero()` function below: 
+Short answer, no. There exist occasions where you either can't or choose not to write a function that is vectorized. For example, if the function you've written makes use of `if()` statements, your function **cannot** operate on vectors. For example, take the `pos_neg_zero()` function below:
 
 ```{r if-function}
 #| echo: true
@@ -119,14 +120,15 @@ for(i in 1:length(x)){
 result
 ```
 
-::: {.column-margin}
-::: {.callout-tip}
+::: column-margin
+::: callout-tip
 # Vector initialization
-Note that I initialized a `result` vector to store the results of calling the `pos_neg_zero()` function for the vector `x`. Similar to C++ and Java, R is an assembly language that requires objects be created **before** they are used, which is why I couldn't initialize `result` inside the `for()`-loop. Second, when I initialized the `result` vector I made it the size I wanted, rather than iteratively making it larger and larger. 
+
+Note that I initialized a `result` vector to store the results of calling the `pos_neg_zero()` function for the vector `x`. Similar to C++ and Java, R is an assembly language that requires objects be created **before** they are used, which is why I couldn't initialize `result` inside the `for()`-loop. Second, when I initialized the `result` vector I made it the size I wanted, rather than iteratively making it larger and larger.
 :::
 :::
 
-Yes, I could have written a "better" function which used a vectorized function (e.g., `case-when()`) instead of a non-vectorized function (e.g., `if()`). 
+Yes, I could have written a "better" function which used a vectorized function (e.g., `case-when()`) instead of a non-vectorized function (e.g., `if()`).
 
 ```{r case-when}
 #| echo: true
@@ -151,7 +153,7 @@ When I call this function on the vector `x`, I no longer receive an error:
 pos_neg_zero(x)
 ```
 
-That's because the `case_when()` is **vectorized**! 
+That's because the `case_when()` is **vectorized**!
 
 ## When can't you vectorize your function?
 
@@ -162,7 +164,7 @@ It is not always the case that we can write a "better" vectorized function. For 
 typeof(penguins$species)
 ```
 
-But, I want the datatype of **every** column in the `penguins` data frame! But applying the `typeof()` function to `penguins` returns the object structure of the `penguins` data frame, not the datatype of its columns. 
+But, I want the datatype of **every** column in the `penguins` data frame! But applying the `typeof()` function to `penguins` returns the object structure of the `penguins` data frame, not the datatype of its columns.
 
 ```{r type-of-df}
 #| echo: true
@@ -192,7 +194,7 @@ tibble(column = names(penguins),
 
 </br>
 
-For loops are not as important in R as they are in other languages because R is a functional programming language. 
+For loops are not as important in R as they are in other languages because R is a functional programming language.
 
 In R, `for()`-loops are not as important as they are in other languages. In fact, we would prefer not to use `for()`-loops as they do not take advantage of its functional programming language. Take for example, our friend `across()`. We have continually called on the `across()` function to reduce repetition in our code, when performing the *same* operation(s) on multiple columns.
 
@@ -217,10 +219,11 @@ for (j in seq_fns) {
   }
 ```
 
-::: {.column-margin}
-::: {.callout-tip}
+::: column-margin
+::: callout-tip
 # Function in a function
-The idea of passing a function to another function is an extremely powerful idea, and it’s one of the behaviors that makes R a functional programming language.
+
+The idea of passing a function to another function is an extremely powerful idea, and it's one of the behaviors that makes R a functional programming language.
 :::
 :::
 
@@ -228,14 +231,17 @@ This shows you that it is possible to include `for()`-loops in a function, and c
 
 # Functional Programming
 
-Yes, it might take some time to get used to the idea of having a `for()`-loop built into a function, but it’s worth the investment. In the rest of this coursework, you’ll learn about and use the **purrr**^[I fully support more R packages being cat themed.] package, which houses functions that eliminate the need for many common `for()`-loops. 
+Yes, it might take some time to get used to the idea of having a `for()`-loop built into a function, but it's worth the investment. In the rest of this coursework, you'll learn about and use the **purrr**[^1] package, which houses functions that eliminate the need for many common `for()`-loops.
 
-The apply family of functions in base R (`apply()`, `lapply()`, `tapply()`, etc.) solve a similar problem, but **purrr** has more consistent behavior, which makes it easier to learn. We **will not** be working with the base functions in this course. 
+[^1]: I fully support more R packages being cat themed.
 
-::: {.column-margin}
-::: {.callout-note}
+The apply family of functions in base R (`apply()`, `lapply()`, `tapply()`, etc.) solve a similar problem, but **purrr** has more consistent behavior, which makes it easier to learn. We **will not** be working with the base functions in this course.
+
+::: column-margin
+::: callout-note
 # Comparison of base R and purrr
-If you are interested, you can find a [side-by-side comparison in this lesson comparing base and purrr functions](https://jennybc.github.io/purrr-tutorial/bk01_base-functions.html). 
+
+If you are interested, you can find a [side-by-side comparison in this lesson comparing base and purrr functions](https://jennybc.github.io/purrr-tutorial/bk01_base-functions.html).
 
 ```{r, echo = FALSE, out.width = "35%"}
 knitr::include_graphics("images/jenny_bryan.png")
@@ -245,26 +251,26 @@ You can find a video on [iteration with the `apply()` family (7 minutes) here](h
 :::
 :::
 
-
 The goal of using purrr functions instead of for loops is to allow you to break common list manipulation challenges into independent pieces:
 
-- How can you solve the problem for a single element of your object (e.g., vector, data frame, list)? 
+-   How can you solve the problem for a single element of your object (e.g., vector, data frame, list)?
 
-- Once you’ve solved that problem, **purrr** takes care of generalizing your solution to every element in the object.
+-   Once you've solved that problem, **purrr** takes care of generalizing your solution to every element in the object.
 
-- If you’re working on a complex problem, how can you break the problem down into bite-sized pieces that each take one step closer to a solution? With purrr, you get lots of small pieces that you can compose together with the pipe.
+-   If you're working on a complex problem, how can you break the problem down into bite-sized pieces that each take one step closer to a solution? With purrr, you get lots of small pieces that you can compose together with the pipe.
 
-I believe this structure makes it easier to solve complex problems, while also making your code easier to understand.  
+I believe this structure makes it easier to solve complex problems, while also making your code easier to understand.
 
 ## Reading, Videos & Tutorial
 
-::: {.column-margin}
-::: {.callout-tip}
+::: column-margin
+::: callout-tip
 # purr cheatsheet
-Cheatsheet for purrr functions can be found [here](https://github.com/rstudio/cheatsheets/blob/master/purrr.pdf). 
+
+Cheatsheet for purrr functions can be found [here](https://github.com/rstudio/cheatsheets/blob/master/purrr.pdf).
 :::
 
-::: {.callout-note}
+::: callout-note
 # Continued reading
 
 A More In-depth Exploration of Functionals -- [*Advanced R*](https://adv-r.hadley.nz/functionals.html)
@@ -281,7 +287,7 @@ A More In-depth Exploration of Functionals -- [*Advanced R*](https://adv-r.hadle
 
 #### Question 1
 
-Suppose we would like to find the median of the measurement variables (`bill_length_mm`, `bill_depth_mm`, `flipper_length_mm`, `body_mass_g`) from the `penguins` dataset (from the **palmerpenguins** package). 
+Suppose we would like to find the median of the measurement variables (`bill_length_mm`, `bill_depth_mm`, `flipper_length_mm`, `body_mass_g`) from the `penguins` dataset (from the **palmerpenguins** package).
 
 Which of the following will produce a [**vector**]{.underline} of the median of every measurement variable? *Select all that apply!*
 
@@ -333,7 +339,6 @@ standardize <- function(vec) {
   return(newdata)
 }
 ```
-
 
 Why does the following return a vector of `NA`s?
 
