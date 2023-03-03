@@ -29,7 +29,7 @@ library(tidyverse)
 
 `r emo::ji("computer")` Activities: 30 minutes
 
-`r emo::ji("check")` Preview Activities: 2 (combined into 1 Canvas assignment)
+`r emo::ji("check")` Preview Activities: 1
 
 ## Simulation in R
 
@@ -39,9 +39,9 @@ library(tidyverse)
 
 ## Preview Activity: The `r`, `p`, `q`, and `d` functions
 
-**Question 1:** What does the output of `pnorm(-4, mean = 2, sd = 4)` mean? 
+**Question 1:** What does the output of `pnorm(-4, mean = 2, sd = 4)` mean?
 
-::: {.callout-tip}
+::: callout-tip
 Drawing pictures of the relevant distribution may help.
 :::
 
@@ -117,9 +117,8 @@ my_samples %>%
   xlim(c(55, 80))
 ```
 
-::: {.callout-note}
+::: callout-note
 # Adding a distribution to a plot
 
-Notice how I'm using `stat_function()` to add a specific function to the plot. Here, I'm using the `dnorm()` function, with a specified `mean` and `sd`. 
+Notice how I'm using `stat_function()` to add a specific function to the plot. Here, I'm using the `dnorm()` function, with a specified `mean` and `sd`.
 :::
-

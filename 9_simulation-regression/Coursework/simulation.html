@@ -2628,7 +2628,7 @@ vertical-align: -.125em;
 </ul>
 <p>📖 Readings: 15-20 minutes</p>
 <p>💻 Activities: 30 minutes</p>
-<p>✅ Preview Activities: 2 (combined into 1 Canvas assignment)</p>
+<p>✅ Preview Activities: 1</p>
 <section id="simulation-in-r" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="simulation-in-r"><span class="header-section-number">1</span> Simulation in R</h2>
 <p>📖 <a href="https://bookdown.org/rdpeng/rprogdatascience/simulation.html">Required Reading – <em>R Programming for Data Science</em> : Simulation</a></p>
@@ -2659,20 +2659,20 @@ Tip
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -1.775626</code></pre>
+<pre><code>[1] -0.4986868</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.4623412</code></pre>
+<pre><code>[1] -0.7449745</code></pre>
 </div>
 </div>
 <p>Fortunately, pseudo-randomness depends on a <strong>seed</strong>, which is an arbitrary number where the randomizing process starts. Normally, R will choose the seed for you, from a pre-generated vector:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(.Random.seed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]       10403           7 -2066099747   742428372  -224022022  1163222341</code></pre>
+<pre><code>[1]       10403           7    -7752466   160521672 -2111446325   519514921</code></pre>
 </div>
 </div>
 <p>However, you can also choose your own seed using the <code>set.seed()</code> function. This guarantees your results will be consistent:</p>
