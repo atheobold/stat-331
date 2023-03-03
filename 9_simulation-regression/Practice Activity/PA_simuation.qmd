@@ -91,6 +91,9 @@ Then, use that function to create random samples of the total weight of 1000 pos
 ```{r}
 #| eval: false
 #| echo: true
+
+set.seed(1957)
+
 music_man <- function(n_tromb, n_cor, n_reed){
   
   trombones <- rnorm(n_tromb, ...)
@@ -101,12 +104,9 @@ music_man <- function(n_tromb, n_cor, n_reed){
   
 }
 
-set.seed(1957)
-
-my_weights <- rerun(.n = 1000, 
-                    music_man(n_tromb = 76, ...)
-                    ) |> 
-  flatten_dbl()
+my_weights <- map_dbl(.x = 1:1000, 
+                      .f = ~ music_man(n_tromb = 76, ...)
+                      ) 
 ```
 
 How many of these samples had a weight less than Prof. Hill's shipment? Do you believe Professor Hill is lying, or not?
