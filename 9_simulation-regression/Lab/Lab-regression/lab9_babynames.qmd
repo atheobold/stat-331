@@ -24,16 +24,11 @@ library(tidyverse)
 
 ## The Data
 
-Our dataset(s) in this lab concerns baby names and their popularity over time. 
-At [this link](https://www.dropbox.com/sh/czm61yzmvzl6xfb/AABEFdpy02aNRhZ_vcxrVAQSa?dl=0), you can find the names for ALL 50 states, in separate datasets organized by
-first letter. For each year, and for each name with at least 50 recorded babies
-born, we are given the counts of how many babies had that name.
+Our dataset(s) in this lab concerns baby names and their popularity over time. At [this link](https://www.dropbox.com/sh/czm61yzmvzl6xfb/AABEFdpy02aNRhZ_vcxrVAQSa?dl=0), you can find the names for ALL 50 states, in separate datasets organized by first letter. For each year, and for each name with at least 50 recorded babies born, we are given the counts of how many babies had that name.
 
 ## Is my name not cool any more?
 
-Let's take a look at how the name "Allison" has changed over time. As my name 
-begins with "A", you should download the `StateNames_A.csv` dataset from the 
-link above. 
+Let's take a look at how the name "Allison" has changed over time. As my name begins with "A", you should download the `StateNames_A.csv` dataset from the link above.
 
 ```{r}
 #| include: false
@@ -45,126 +40,104 @@ babies_a <- read.csv(
   )
 ```
 
-
 ## Summarizing & Visualizing the Number of Allisons
 
-1. Make a summary table of the number of babies named "Allison" for each state 
-and the sex of the baby. Specifically, each state should be its own row and each sex should have its own column. Additionally, if there were no babies born with the name "Allison" for that combination of state & sex the table should
-have a value of 0 (not an `NA`). To be clear, there should be **one** row per
-state, which means you need to `summarize()` all the years for each state.  
+1.  Make a summary table of the number of babies named "Allison" for each state and the sex of the baby. Specifically, the table should have the following qualities:
 
-:::{.callout-caution}
+- each state should be its own row
+- and each sex should have its own column
+- if there were no babies born for that combination of state & sex there should be a 0 (not an `NA`)
+
+::: callout-note
+# Difference between gender and sex
 The dataset has a column titled `Gender`, which contains two values `"F"` and `"M"`, representing "Female" and "Male". The sex someone was assigned at birth is different from their gender identity [(definitions)](https://www.plannedparenthood.org/learn/gender-identity/sex-gender-identity). Thus, this variable should be renamed to `Sex` or `Sex at Birth`.
 :::
 
-2. You should have seen in the table above that "Allison" is a name given
-overwhelmingly to babies assigned "female" at birth. So, `filter` the data to 
-include only babies assigned `F`emale at birth. (No output needed for this question)
+2.  You should have seen in the table above that "Allison" is a name given overwhelmingly to babies assigned "female" at birth. So, create a new dataset named `allison_f` which contains **only** the babies assigned `F`emale at birth. 
 
-3. Make a visualization showing how the popularity of the name "Allison" has
-changed over the years. To be clear, each year should have **one** observation--the total number of Allisons born that year. 
+::: {.callout-caution}
+This should be the dataset you use for the remainder of the assignment! 
+:::
+
+3.  Make a visualization showing how the popularity of the name "Allison" has changed over the years. To be clear, each year should have **one** observation--the total number of Allisons born that year.
 
 ## Modeling the Number of Allisons
 
-4. Create a linear model with the year as the explanatory variable, and the
-number of Allisons as the response. Similar to #4, each year should have **one** observation--the total number of Allisons born that year. 
+4. Fit a linear model with the year as the explanatory variable, and the number of Allisons as the response. Similar to #3, each year should have **one** observation--the total number of Allisons born that year.
 
-5. Visualize the regression model. 
+5.  Write out the estimated regression equation.
 
-6. Write out the estimated regression equation. 
+6.  Plot the *residuals* of the model, that is, the actual values minus the predicted values. Comment on the residuals - do you see any patterns?
 
-7.  Plot the *residuals* of the model, that is, the actual values minus the
-predicted values. Comment on the residuals - do you see any patterns?
-
-::: {.callout-tip}
+::: callout-tip
 The `augment()` function from the **broom** package may be helpful!
 :::
 
-8.  What do you conclude from this model? Is my name not cool anymore? 
+7.  What do you conclude from this model? Is my name not cool anymore?
 
 ## Spelling by State
 
-In middle school I was **so** upset with my parents for not naming me "Allyson".
-Past my pre-teen rebellion, I'm happy with my name and am impressed when
-baristas spell it "Allison" instead of "Alison". But I don't have it as bad as
-my good friend Allan! 
+In middle school I was **so** upset with my parents for not naming me "Allyson". Past my pre-teen rebellion, I'm happy with my name and am impressed when baristas spell it "Allison" instead of "Alison". But I don't have it as bad as my good friend Allan!
 
-1.  Narrow the A name dataset (downloaded previously) down to only male-assigned
-babies named "Allan", "Alan", or "Allen". Make a plot comparing the popularity
-of these names over time.
+8.  Narrow the A name dataset (downloaded previously) down to only male-assigned babies named "Allan", "Alan", or "Allen". Make a plot comparing the popularity of these names over time.
 
-2.  In California, Allan's spelling of his name is the least common of the three
-- but perhaps it's not such an unusual name for his home state of Pennsylvania.
-Compute the total number of babies born with each spelling of "Allan" in 2000,
-in Pennsylvania and in California. Specifically, each spelling should be its own
-column and each state should have its own row. Similar to before, a `0` 
-(not an `NA`) should be used to represent locations where there were no
-instances of these names. 
+::: {.callout-tip}
+# Filtering multiple values
 
-3.  Convert your total counts to overall percents. That is, what was the percent breakdown between the three spellings in CA? What about in PA?
+It looks like you want to filter for a vector of values. What tools have you learned which can help you accomplish this task?
+:::
 
----
+9.  In California, Allan's spelling of his name is the least common of the three but perhaps it's not such an unusual name for his home state of Pennsylvania. Compute the total number of babies born with each spelling of "Allan" in the year 2000, in Pennsylvania and in California. Specifically, the table should have the following qualities:
+
+- each spelling should be its own column
+- each state should have its own row
+- a `0` (not an `NA`) should be used to represent locations where there were no instances of these names
+
+10.  Convert your total counts to overall percents. That is, what was the percent breakdown between the three spellings in CA? What about in PA?
+
+### Submission
+
+Submit you Lab 9 **before** you complete Challenge 9, so I can see what you added to your assignment for the Challenge. 
 
 ## Challenge 9 -- Creating Nice Tables
 
-For this Challenge you will explore how to generate nice looking tables for HTML
-documents. There are many packages for generating tables, but I prefer the 
-`kable()` function from the **knitr** package for *simple* tables and the 
-`datatable()` function from the **DT** package for *more sophisticated* tables.
+For this Challenge you will explore how to generate nice looking tables for HTML documents. There are many packages for generating tables, but I prefer the `kable()` function from the **knitr** package for *simple* tables and the `datatable()` function from the **DT** package for *more sophisticated* tables.
 
-I would recommend you think of tables no different from the visualizations
-you've been making. We want **all** aspects of our tables to be clear to the 
-reader, so the comparisons we want them to make are straightforward. Tables are
-also a great avenue to display creativity! In fact, there is a yearly 
-[RStudio table contest](https://www.rstudio.com/blog/rstudio-table-contest-2022/), and [here](https://community.rstudio.com/c/table-gallery/64) is a gallery of
-the award winning tables! 
+I would recommend you think of tables no different from the visualizations you've been making. We want **every** aspect of our tables to be clear to the reader, so the comparisons we want them to make are straightforward. Tables are also a great avenue to display creativity! In fact, there is a yearly [RStudio table contest](https://www.rstudio.com/blog/rstudio-table-contest-2022/), and [here is a gallery](https://community.rstudio.com/c/table-gallery/64) of the award winning tables!
 
 #### Part 1 -- Formatting Basic Tables
 
-Use the `kable()` function from the [kable package](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html) to create
-nice, basic HTML tables for [**every**]{.underline} table in this lab. 
+Use the `kable()` function from the [kable package](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html) to create nice, basic HTML tables for [**every**]{.underline} table in this lab.
 
-Similar to axis labels in visualizations, **every** column name in a table
-should describe what it contains. For example, a column of `n` is less
-explanatory than `Frequency of Babies`. 
+Similar to axis labels in visualizations, **every** column name in a table should describe what it contains. For example, a column of `n` is less explanatory than `Frequency of Babies`.
 
 #### Part 2 - Formatting Nicer Tables
 
-There are two options for creating nicer tables, (1) the [kableExtra package](https://bookdown.org/yihui/rmarkdown-cookbook/kableextra.html) and the
-[DT Package](https://rstudio.github.io/DT/). This part of the Challenge has two
-tasks:
+There are two options for creating nicer tables, (1) the [kableExtra package](https://bookdown.org/yihui/rmarkdown-cookbook/kableextra.html) and the [DT Package](https://rstudio.github.io/DT/). This part of the Challenge has two tasks:
 
-1. Use either the DT or kableExtra packages to spice up **at least one** of 
-your tables. Some ideas on how to "spice up" a table: change the font and / or
-font size, adding striping and / or cell borders to the table, creating 
-custom formatting of columns, or allowing the user to interact with the table 
-(e.g., filtering columns, editing cells). 
+1. Use the DT package to include an interactive preview of the dataset **at the beginning of your report**.
 
-2. Use the DT package to include an interactive preview of the dataset at the
-beginning of your lab report. 
+2. Use either the DT or kableExtra packages to spice up **at least one** of your tables. Some ideas on how to "spice up" a table: 
 
-#### Part 3 (Optional, but fun!) 
+- change the font and / or font size
+- adding striping and / or cell borders to the table
+- creating custom formatting of columns
+- allowing the user to interact with the table (e.g., filtering columns, editing cells)
 
-For this portion of the Challenge, you are tasked with using $\LaTeX$ to 
-format your regression equation in #6. Keep in mind our estimated regression 
-equation indicates the response ($y$) is estimated with a hat ($\hat{y}$)! 
+#### Part 3 (Optional, but fun!)
 
-$\LaTeX$, which is pronounced Lah-tech or Lay-tech, is a document preparation
-system for high-quality typesetting. It is most often used for medium-to-large
-technical or scientific documents but it can be used for almost any form of
-publishing. Some of the perks of using $\LaTeX$ are:
+For this portion of the Challenge, you are tasked with using $\LaTeX$ to format your regression equation in #6. Keep in mind our estimated regression equation indicates the response ($y$) is estimated with a hat ($\hat{y}$)!
 
-- Typesetting journal articles, technical reports, books, and slide
-presentations 
-- Control over large documents containing sectioning, cross-references, tables
-and figures
-- Typesetting of complex mathematical formulas
-- Advanced typesetting of mathematics with AMS-LaTeX 
-- Automatic generation of bibliographies and indexes
+$\LaTeX$, which is pronounced Lah-tech or Lay-tech, is a document preparation system for high-quality typesetting. It is most often used for medium-to-large technical or scientific documents but it can be used for almost any form of publishing. Some of the perks of using $\LaTeX$ are:
 
-<!-- Link to resources on writing LaTeX -->
-### Resources 
+-   typesetting journal articles, technical reports, books, and slide presentations
+-   control over large documents containing sectioning, cross-references, tables and figures
+-   typesetting of complex mathematical formulas
+-   advanced typesetting of mathematics with AMS-LaTeX
+-   automatic generation of bibliographies and indexes
 
-- [Overleaf Guide on Mathematical Expressions](https://www.overleaf.com/learn/latex/Mathematical_expressions)
+### Resources
 
-- [Dr. Theobold's Repository from a LaTeX workshop](https://github.com/atheobold/IntroLaTeXLesson)
+-   [Overleaf Guide on Mathematical Expressions](https://www.overleaf.com/learn/latex/Mathematical_expressions)
+
+-   [Dr. Theobold's Repository from a LaTeX workshop](https://github.com/atheobold/IntroLaTeXLesson)
