@@ -29,9 +29,7 @@ library(tidyverse)
 
 `r emo::ji("computer")` Activities: 30 minutes
 
-`r emo::ji("check")` Check-ins: 2 (combined into 1 Canvas Check-in)
-
-------------------------------------------------------------------------
+`r emo::ji("check")` Preview Activities: 2 (combined into 1 Canvas assignment)
 
 ## Simulation in R
 
@@ -39,31 +37,15 @@ library(tidyverse)
 
 `r emo::ji("play button")` [Required Video -- Simulating Data in R (17 minutes)](https://www.youtube.com/watch?v=J5XQaxmznNE)
 
-------------------------------------------------------------------------
+## Preview Activity: The `r`, `p`, `q`, and `d` functions
 
-`r emo::ji("check")` **Check-in: The `r`, `p`, `q`, and `d` functions**
+**Question 1:** What does the output of `pnorm(-4, mean = 2, sd = 4)` mean? 
 
-Try to predict what the following outputs will be **WITHOUT** running the code in R. Drawing pictures of the relevant distributions may help.
+::: {.callout-tip}
+Drawing pictures of the relevant distribution may help.
+:::
 
-(Yes, it is very easy to "cheat" on this question. But this is for your practice, and I recommend you give it some thought.)
-
-```{r, eval = FALSE}
-## a
-pnorm(-4, mean = 2, sd = 4)
-
-## b
-qnorm(.975, mean = 2, sd = 4)
-
-## c
-dnorm(1.5, mean = 2, sd = 4)
-
-```
-
-**Question 1:** Explain why each of the functions above produced the output you obtained.
-
-**Question 4:** Why does `rnorm(mean = 0, sd = 1)` give an error?
-
-------------------------------------------------------------------------
+**Question 2:** Why does `rnorm(mean = 0, sd = 1)` give an error?
 
 ## Setting a Random Number Seed
 
@@ -113,16 +95,18 @@ Note, though, that this only guarantees your knitted results will be the same *i
 
 Changing up any part of the code will re-randomize everything that comes after it!
 
-------------------------------------------------------------------------
-
-### Plotting Distributions
+## Plotting Distributions
 
 Here is the code that made one of the plots from the lecture video:
 
-```{r, message = FALSE, warning = FALSE}
+```{r}
+#| message: false
+#| warning: false
+
 my_samples <- tibble(height = rnorm(n = 100, 
                                     mean = 67, 
-                                    sd = 3))
+                                    sd = 3)
+                     )
 
 my_samples %>%
   ggplot(aes(x = height)) +
@@ -133,8 +117,9 @@ my_samples %>%
   xlim(c(55, 80))
 ```
 
-------------------------------------------------------------------------
+::: {.callout-note}
+# Adding a distribution to a plot
 
-`r emo::ji("check")` **Check-in: Plotting Simulations**
+Notice how I'm using `stat_function()` to add a specific function to the plot. Here, I'm using the `dnorm()` function, with a specified `mean` and `sd`. 
+:::
 
-Re-create this plot from the lecture slides: (The two colors are "cornflowerblue" and "deeppink")
