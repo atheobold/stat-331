@@ -45,7 +45,7 @@ The next two weeks...
 :::
 :::
 
-##
+## 
 
 ::: {style="font-size: 3em; color: #FFFFFF;"}
 Linear Regression
@@ -72,15 +72,13 @@ ggplot(data = bdims, aes(y = wgt, x = hgt)) +
         axis.title.y = element_text(size = 18)
         )
 ```
-
 :::
 
 ::: {.column width="5%"}
 :::
 
 ::: {.column width="55%"}
-</br>
-</br>
+</br> </br>
 
 $\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 \cdot x$
 
@@ -88,7 +86,7 @@ $\epsilon_i \sim N(0, \sigma^2)$
 :::
 :::
 
-##
+## 
 
 ::: {style="font-size: 3em; color: #FFFFFF;"}
 Fitting a Linear Regression
@@ -101,38 +99,35 @@ Fitting a Linear Regression
 lm(score ~ age, data = evals)
 ```
 
-##
+## 
 
 ::: {style="font-size: 3em; color: #FFFFFF;"}
 Using the `|>`
 :::
-
 
 ```{r wrong-dot}
 #| eval: false
 #| echo: true
 #| code-line-numbers: false
 evals |>
-  lm(score ~ age, data = .)
+  lm(score ~ age, data = .x)
 ```
 
 . . .
 
-</br> 
+</br>
 
-```
-Error in is.data.frame(data): object '.' not found
-```
+    Error in is.data.frame(data): object '.x' not found
+
 . . .
 
-</br>
-</br>
+</br> </br>
 
 <center>
+
 ::: {style="font-size: 2em; color: #B6CADA;"}
 **What happened???**
 :::
-
 
 ##  {background-color="#B6CADA"}
 
@@ -140,8 +135,7 @@ Error in is.data.frame(data): object '.' not found
 Placeholder
 :::
 
-Piping is an infix operator (e.g., `2 + 2`) that pipes the LHS of the pipe into
-the **first** argument of the function on RHS of the pipe
+Piping is an infix operator (e.g., `2 + 2`) that pipes the LHS of the pipe into the **first** argument of the function on RHS of the pipe
 
 ::: columns
 ::: {.column width="48%"}
@@ -156,8 +150,7 @@ evals %>%
 ```
 
 ::: {style="font-size: 0.75em; color: #000000;"}
-With `%>%`, if the LHS **should not** be used in the **first** argument, a `.`
-can be used to reference where the LHS should go.
+With `%>%`, if the LHS **should not** be used in the **first** argument, a `.` can be used to reference where the LHS should go.
 :::
 :::
 
@@ -176,8 +169,7 @@ evals |>
 ```
 
 ::: {style="font-size: 0.75em; color: #000000;"}
-`|>` **does not** have a placeholder. However, as of R 4.2, `|>` can use `_` as
-a placeholder but only with **named** arguments.
+`|>` **does not** have a placeholder. However, as of R 4.2, `|>` can use `_` as a placeholder but only with **named** arguments.
 :::
 :::
 :::
@@ -200,8 +192,7 @@ evals_lm <- evals |>
 ::: {style="font-size: 0.85em; color: #FFFFFF;"}
 ***Objects in `evals_lm`***
 
-`$fitted.values`
-`$residuals`
+`$fitted.values` `$residuals`
 :::
 :::
 
@@ -209,8 +200,8 @@ evals_lm <- evals |>
 ::: {style="font-size: 0.85em; color: #FFFFFF;"}
 ***Functions to extract elements from `evals_lm`***
 
-- `resid()` 
-- `fitted()`
+-   `resid()`
+-   `fitted()`
 :::
 :::
 
@@ -277,50 +268,52 @@ evals_lm |>
   geom_point()
 ```
 
-
 ##  {background-color="#B6CADA"}
+
 ::: {style="font-size: 5em; #0F4C81;"}
 Simulating Data
 :::
 
-##
+## 
 
 ::: {style="font-size: 3em; color: #FFFFFF;"}
 Functions in R
 :::
 
-
-- `r` stands for for **random sampling**: generate a random value from a 
-specific distribution
-
-. . .
-
-- `p` for **probability** (CDF): i.e. compute the probability of observing a
-value **less than** `x` (cumulative)
+::: {style="font-size: 0.85em; color: #FFFFFF;"}
+-   `r` stands for for **random sampling**: generate a random value from a specific distribution
+:::
 
 . . .
 
-- `q` stands for **quantile**: given a probability `p`, compute the x-value
-such that $P(X < x) = p$
+::: {style="font-size: 0.85em; color: #FFFFFF;"}
+-   `p` for **probability** (CDF): i.e. compute the probability of observing a value **less than** `x` (cumulative)
+:::
 
 . . .
 
-- `d` stands for **density** (PDF): compute the height of distribution curve
-(absolute)
+::: {style="font-size: 0.85em; color: #FFFFFF;"}
+-   `q` stands for **quantile**: given a probability `p`, compute the x-value such that $P(X < x) = p$
+:::
 
-##
+. . .
+
+::: {style="font-size: 0.85em; color: #FFFFFF;"}
+-   `d` stands for **density** (PDF): compute the height of distribution curve (absolute)
+:::
+
+## 
 
 ::: {style="font-size: 3em; color: #FFFFFF;"}
 Distributions in R
 :::
 
-- Uniform -- `unif`
+-   Uniform -- `unif`
 
-- Normal -- `norm`
+-   Normal -- `norm`
 
-- t -- `t`
+-   t -- `t`
 
-- Chi-Squared -- `chisq`
+-   Chi-Squared -- `chisq`
 
-- Binomial -- `binom`
-
+-   Binomial -- `binom`
