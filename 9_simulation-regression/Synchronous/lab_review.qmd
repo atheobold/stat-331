@@ -1,0 +1,450 @@
+---
+title: "Creating & Formatting Tables"
+format: 
+  revealjs:
+    self-contained: true
+editor: visual
+execute: 
+  echo: false
+  message: false
+  warning: false
+---
+
+```{r set-up}
+#| include: false
+
+library(tidyverse)
+library(moderndive)
+library(glue)
+library(broom)
+library(kableExtra)
+library(knitr)
+library(DT)
+library(gt)
+
+my_table <- evals %>% 
+  rename(sex = gender, 
+         minority_status = ethnicity) %>% 
+  group_by(sex, minority_status) %>% 
+  summarize(mean_eval = mean(score), .groups = "drop") %>% 
+  pivot_wider(names_from = sex, 
+              values_from = mean_eval)
+```
+
+::: {style="font-size: 4em; color: #000000;"}
+Data tables are a form of visualization!
+:::
+
+
+##
+
+::: {style="font-size: 3em; color: #000000;"}
+The same principles apply to tables! 
+:::
+
+- Clear titles
+- Mindful arrangement
+- Don't make people tilt their head!
+
+
+## 
+
+::: {style="font-size: 2em; color: #000000;"}
+You can be creative with tables!
+:::
+
+::: {.panel-tabset}
+
+## Tour de France titles
+
+![](images/table_competition.png)
+
+## Award winning beer
+
+![](images/table_competition_dist.png)
+:::
+
+
+##
+
+::: {style="font-size: 3em; color: #000000;"}
+A simple table
+:::
+
+```{r}
+#| echo: true
+#| code-line-numbers: false
+
+evals %>% 
+  rename(sex = gender, 
+         minority_status = ethnicity) %>% 
+  group_by(sex, minority_status) %>% 
+  summarize(mean_eval = mean(score))
+```
+
+##  {background-color="#B6CADA"}
+
+::: {style="font-size: 4em; color: #0F4C81;"}
+Tools for spicing up your table
+:::
+
+
+##
+
+::: {style="font-size: 3em; color: #000000;"}
+Step 1: Get an orientation you want
+:::
+
+. . .
+
+This is a great place to showcase your `pivot_wider()` skills! 
+
+```{r}
+#| echo: true
+#| output-location: column-fragment
+#| code-line-numbers: false
+
+evals %>% 
+  rename(sex = gender, 
+         minority_status = ethnicity) %>% 
+  group_by(sex, minority_status) %>% 
+  summarize(mean_eval = mean(score), 
+            .groups = "drop") %>% 
+  pivot_wider(names_from = sex, 
+              values_from = mean_eval)
+```
+
+##
+
+::: {style="font-size: 3em; color: #000000;"}
+Step 2: Getting a nicer rendered table
+:::
+
+. . .
+
+Some options:
+
+- The `kable()` function from the **knitr** package
+- The **kableExtra** package
+- The **gt** package
+
+##
+
+::: {style="font-size: 2em; color: #000000;"}
+[The `kable()` function](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html)
+:::
+
+```{r}
+#| echo: true
+#| output-location: slide
+
+my_table %>% 
+  knitr::kable(format = "html", 
+               digits = 3, 
+               col.names = 
+                 c("Minority Status", 
+                   "Female Faculty", 
+                   "Male Faculty"),
+               caption = "Mean evaluation scores for a sample of 94 UT Austin professors")
+```
+
+. . .
+
+</br>
+
+::: {style="font-size: 1em; color: #000000;"}
+*Note:* You can also use Quarto options (`#| tbl-cap` and `#| tbl-cap-location`) to include a caption and choose where the caption prints!
+:::
+
+
+##
+
+::: {style="font-size: 2em; color: #000000;"}
+[The **kableExtra** package](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html)
+:::
+
+```{r}
+#| echo: true
+
+my_table %>% 
+  knitr::kable(format = "html", 
+               digits = 3, 
+               col.names = 
+                 c("Minority Status", 
+                   "Female Faculty", 
+                   "Male Faculty"),
+               caption = "Mean evaluation scores for a sample of 94 UT Austin professors") %>% 
+  kableExtra::kable_styling(bootstrap_options = "striped", 
+                            font_size = 28)
+```
+
+## 
+
+::: {style="font-size: 2em; color: #000000;"}
+Additional themes
+:::
+
+::: {.panel-tabset}
+
+## Minimal theme
+
+```{r minimal-code}
+#| echo: true
+#| eval: false
+
+my_table %>% 
+  knitr::kable(format = "html", 
+               digits = 3, 
+               col.names = 
+                 c("Minority Status", 
+                   "Female Faculty", 
+                   "Male Faculty"),
+               caption = "Mean evaluation scores for a sample of 94 UT Austin professors") %>% 
+  kableExtra::kable_minimal(html_font = "Arial")
+```
+
+## Minimal table
+
+```{r minimal-table}
+
+my_table %>% 
+  knitr::kable(format = "html", 
+               digits = 3, 
+               col.names = 
+                 c("Minority Status", 
+                   "Female Faculty", 
+                   "Male Faculty"),
+               caption = "Mean evaluation scores for a sample of 94 UT Austin professors") %>% 
+  kableExtra::kable_minimal(html_font = "Arial")
+```
+
+## Classic theme
+
+```{r classic-code}
+#| echo: true
+#| eval: false
+
+my_table %>% 
+  knitr::kable(format = "html", 
+               digits = 3, 
+               col.names = 
+                 c("Minority Status", 
+                   "Female Faculty", 
+                   "Male Faculty"),
+               caption = "Mean evaluation scores for a sample of 94 UT Austin professors") %>% 
+  kableExtra::kable_classic(html_font = "Arial")
+```
+
+## Classic table
+
+```{r classic-table}
+my_table %>% 
+  knitr::kable(format = "html", 
+               digits = 3, 
+               col.names = 
+                 c("Minority Status", 
+                   "Female Faculty", 
+                   "Male Faculty"),
+               caption = "Mean evaluation scores for a sample of 94 UT Austin professors") %>% 
+  kableExtra::kable_classic(html_font = "Arial")
+```
+
+:::
+
+##
+
+::: {style="font-size: 2em; color: #000000;"}
+[The **gt** package](https://gt.rstudio.com/)
+:::
+
+::: columns
+::: {.column width="70%"}
+![](images/gt_table.png)
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="25%"}
+![](images/gt.svg)
+:::
+:::
+
+##
+
+::: {style="font-size: 2em; color: #000000;"}
+Working with **gt**
+:::
+
+::: columns
+::: {.column width="65%"}
+![](images/gt_workflow.png)
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="30%"}
+```{r gt-code}
+#| echo: true
+#| eval: false
+my_table %>% 
+  gt()
+```
+:::
+:::
+
+```{r gt-table}
+my_table %>% 
+  gt()
+```
+
+
+##
+
+::: {style="font-size: 2em; color: #000000;"}
+Changing column names
+:::
+
+```{r gt-columns}
+#| echo: true
+my_table %>% 
+  gt() %>% 
+  cols_label(minority_status = "Minority Group", 
+             female = "Female Faculty", 
+             male = "Male Faculty")
+```
+
+</br>
+
+::: {style="font-size: 0.75em; color: #000000;"}
+*Note:* You can also use the `md()` function to specify Markdown formatting (e.g., italics or boldface) within the column labels (e.g., `ethnicity = md("**Minority Group**")`).
+:::
+
+##
+
+::: {style="font-size: 2em; color: #000000;"}
+Adding a table header and / or subheader
+:::
+
+```{r gt-header}
+#| echo: true
+#| output-location: slide
+
+samp_size <- nrow(evals)
+
+my_table %>% 
+  gt() %>% 
+  cols_label(minority_status = "Minority Group", 
+             female = "Female Faculty", 
+             male = "Male Faculty") %>% 
+  tab_header(title = "Mean Evaluation Scores",
+             subtitle = glue("for {samp_size} faculty at UT Austin")
+             )
+  
+```
+
+
+##
+
+::: {style="font-size: 2em; color: #000000;"}
+Formatting Values
+:::
+
+```{r}
+#| echo: true
+#| output-location: slide
+
+my_table %>% 
+  gt() %>% 
+    cols_label(minority_status = "Minority Group", 
+             female = "Female Faculty", 
+             male = "Male Faculty") %>% 
+  tab_header(title = "Mean Evaluation Scores",
+             subtitle = glue("for {samp_size} faculty at UT Austin")
+             ) %>% 
+  fmt_number(columns = 2:3, decimals = 3)
+```
+
+
+## 
+
+::: {style="font-size: 2em; color: #000000;"}
+A table with percentages
+:::
+
+
+```{r rename}
+evals <- evals %>% 
+  rename(sex = gender, 
+         minority_status = ethnicity)
+```
+
+::: {.panel-tabset}
+
+## Obtaining percentages
+
+```{r percent-table}
+#| echo: true
+evals %>% 
+  count(sex, minority_status) %>% 
+  group_by(sex) %>% 
+  mutate(prop = n / sum(n)
+         ) 
+```
+
+## Pivoting
+
+```{r}
+#| echo: true
+
+evals %>% 
+  count(sex, minority_status) %>% 
+  group_by(sex) %>% 
+  mutate(prop = n / sum(n)
+         ) %>% 
+  select(-n) %>% 
+  pivot_wider(names_from = sex, 
+              values_from = prop)
+```
+
+:::
+
+
+## 
+
+::: {style="font-size: 2em; color: #000000;"}
+Formatting percentages
+:::
+
+```{r}
+my_percent_table <- evals %>% 
+  count(sex, minority_status) %>% 
+  group_by(sex) %>% 
+  mutate(prop = n / sum(n)
+         ) %>% 
+  select(-n) %>% 
+  pivot_wider(names_from = sex, 
+              values_from = prop)
+```
+
+```{r gt-percent}
+#| echo: true
+
+my_percent_table %>% 
+  gt() %>% 
+  fmt_percent(columns = 2:3, decimals = 2)
+```
+
+
+##
+
+::: {style="font-size: 3em; color: #000000;"}
+[Interactive Tables with `DT`](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html)
+:::
+
+```{r}
+#| echo: true
+DT::datatable(evals)
+```
+
