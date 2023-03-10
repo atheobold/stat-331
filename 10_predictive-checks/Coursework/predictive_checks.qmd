@@ -33,8 +33,7 @@ This week you will learn:
 -   how to make predictions from a linear model
 -   how to include variability into predictions
 -   what is assumed about the data generating process in a linear regression
--   how to assess if the assumed linear model accurately describes the observed
-data
+-   how to assess if the assumed linear model accurately describes the observed data
 
 ------------------------------------------------------------------------
 
@@ -48,126 +47,72 @@ data
 
 ------------------------------------------------------------------------
 
-> It is difficult to include in a \[statistical model\] all of one's knowledge
-about a problem, and so it is wise to investigate what aspects of reality are
-not captured by the model.\
+> It is difficult to include in a \[statistical model\] all of one's knowledge about a problem, and so it is wise to investigate what aspects of reality are not captured by the model.\
 > - Andrew Gelman, *Bayesian Data Analysis*
 
 # Model Checking
 
-In explanatory modeling, it is incredibly important to check if you can make 
-sound inferences from the model that was fit. Whether the model is a "simple"
-difference in means or a more "complex" multiple linear regression, the
-estimated coefficients obtained from the model should not be used for inference
-if the conditions of the model are violated. Typically, model checking for a
-linear regression is taught through a "residual analysis," inspecting different
-visualizations of the residuals from the model. This week, however, we will
-learn a different way to assess our regression model.
+In explanatory modeling, it is incredibly important to check if you can make sound inferences from the model that was fit. Whether the model is a "simple" difference in means or a more "complex" multiple linear regression, the estimated coefficients obtained from the model should not be used for inference if the conditions of the model are violated. Typically, model checking for a linear regression is taught through a "residual analysis," inspecting different visualizations of the residuals from the model. This week, however, we will learn a different way to assess our regression model.
 
 ## Predictive Checks, Bayesian Modeling, and Subjectivity
 
-The idea of ***predictive checks*** for a statistical model are most often seen
-in the context of Bayesian modeling. In Bayesian modeling, rather than obtaining
-a single estimate for a parameter, you obtain a distribution of plausible values
-for that parameter. The distribution suggests which values of that parameter are
-more or less likely, given what was seen in the data and the prior knowledge
-incorporated into the model.
+The idea of ***predictive checks*** for a statistical model are most often seen in the context of Bayesian modeling. In Bayesian modeling, rather than obtaining a single estimate for a parameter, you obtain a distribution of plausible values for that parameter. The distribution suggests which values of that parameter are more or less likely, given what was seen in the data and the prior knowledge incorporated into the model.
 
 ::: columns
-::: {.column width="35%"}
+::: {.column width="40%"}
 ![](snob.gif)
 :::
 
+::: {.column width="5%"}
+:::
+
 ::: {.column width="55%"}
-The prior knowledge about what values we expect for the parameter comes in the
-form of a ***prior distribution***. Different statisticians may choose a
-different prior distributions, much like different statisticians might choose
-different variables to include in their regression. Although there are large
-similarities between the choice of a prior distribution and the choice of a
-statistical model, prior distributions receive a great deal of flack for how the
-interlace "subjectivity" into the statistical modeling process.
+The prior knowledge about what values we expect for the parameter comes in the form of a ***prior distribution***. Different statisticians may choose a different prior distributions, much like different statisticians might choose different variables to include in their regression. Although there are large similarities between the choice of a prior distribution and the choice of a statistical model, prior distributions receive a great deal of flack for how the interlace "subjectivity" into the statistical modeling process.
 :::
 :::
 
-Due in part to these criticisms regarding the choice of a prior distribution, it
-is common in Bayesian analyses to perform predictive checks to assess the fit of
-the model to the data at hand. While we are not fitting Bayesian models, I
-believe there is a great deal we can learn from the concept of using predictive
-checks for **any** statistical model. Any good analysis should include a check
-of the "adequacy of the fit of the model to the data and the plausibility of the
-model for the purposes for which the model will be used" (Gelman et al., 2020,
-p. 141).
+Due in part to these criticisms regarding the choice of a prior distribution, it is common in Bayesian analyses to perform predictive checks to assess the fit of the model to the data at hand. While we are not fitting Bayesian models, I believe there is a great deal we can learn from the concept of using predictive checks for **any** statistical model. Any good analysis should include a check of the "adequacy of the fit of the model to the data and the plausibility of the model for the purposes for which the model will be used" (Gelman et al., 2020, p. 141).
 
 ## Predictive Checks in a Linear Regression
 
-Under a linear simple regression model, we assume that the responses can be
-modeled as a function of the explanatory variable and some error: 
+Under a linear simple regression model, we assume that the responses can be modeled as a linear function of the explanatory variable and some error:
 
 $$
 \text{y} = \beta_0 + \beta_1 \times x_1 + \epsilon
 $$
 
-In a linear model we assume that the errors ($\epsilon$) follow a Normal
-distribution with mean 0 and standard deviation $\sigma$ 
-($\epsilon \sim N(0, \sigma)$).
+In a linear model we assume that the errors ($\epsilon$) follow a Normal distribution with mean 0 and standard deviation $\sigma$ ($\epsilon \sim N(0, \sigma)$).
 
-This implies that we can simulate data that we would expect to come from this
-model, by adding normally distributed errors to the values predicted from the
-linear regression. Moreover, when we randomly generate these errors, we better
-understand what the "normality," "equal variance," and "independence" conditions
-mean in the context of the linear regression model. 
+This implies that we can simulate data that we would expect to come from this model, by adding normally distributed errors to the values predicted from the linear regression. Moreover, when we randomly generate these errors, we better understand what the "normality," "equal variance," and "independence" conditions mean in the context of the linear regression model.
 
 ### Connection to Model Conditions
 
 A linear regression model has four conditions, which follow the LINE acronym:
 
-**L**inear relationship between $x$ and $y$  
-**I**ndependence of observations  
-**N**ormality of residuals  
-**E**qual variance of residuals  
+**L**inear relationship between $x$ and $y$\
+**I**ndependence of observations\
+**N**ormality of residuals\
+**E**qual variance of residuals
 
-The first condition relates to the relationship between the explanatory ($x$)
-and response ($y$) variable. As you might expect, using a line to model a 
-non-linear relationship is a bad choice! Thus, we will only make predictions 
-from a linear regression where there appears to be a linear relationship between
-the variables. 
+The first condition relates to the relationship between the explanatory ($x$) and response ($y$) variable. As you might expect, using a line to model a non-linear relationship is a bad choice! Thus, we will only make predictions from a linear regression where there appears to be a linear relationship between the variables.
 
-The process of adding normally distributed errors to the predictions from the 
-linear regression assumes three things: 
+The process of adding normally distributed errors to the predictions from the linear regression assumes three things:
 
-1. the errors follow a specific distribution, namely $N(0, \sigma)$
-2. the errors all have the same variance ($\sigma$)
-3. the errors are not related to each other
+1.  the errors follow a specific distribution, namely $N(0, \sigma)$
+2.  the errors all have the same variance ($\sigma$)
+3.  the errors are not related to each other
 
-The Normality and equal variance conditions are manifested in using the
-$N(0, \sigma)$ distribution to generate the errors. The independence condition
-is manifested in the assumption that we can draw random errors for each 
-observation (prediction), because the errors are not related to each other. 
+The Normality and equal variance conditions are manifested in using the $N(0, \sigma)$ distribution to generate the errors. The independence condition is manifested in the assumption that we can draw random errors for each observation (prediction), because the errors are not related to each other.
 
-This might feel like a bit of a stretch, especially if you haven't seen 
-linear regression in a bit, so let me break this down a bit more. When we assume
-that observations are independent, we are saying that we shouldn't be able to
-know the $y$ value for one observation just from knowing the $y$ value of
-another observation. If I have repeated observations, like values for the same
-country across multiple years, then it's pretty likely that I can guess the
-value of a variable in 1991 from knowing the same variable's value in 1990. 
-Since we are using a linear regression to model the relationship between the
-explanatory variable(s) and the response, this assumption can be rephrased in
-terms of each observation's residual. Specifically, knowing the residual for one
-observation shouldn't give us perfect information about the residual for another
-observation. Because we are assuming that the observations / residuals are
-independent, we can randomly draw an errors for each observation.
+This might feel like a bit of a stretch, especially if you haven't seen linear regression in a bit, so let me break this down a bit more. When we assume that observations are independent, we are saying that we shouldn't be able to know the $y$ value for one observation just from knowing the $y$ value of another observation. If I have repeated observations, like values for the same country across multiple years, then it's pretty likely that I can guess the value of a variable in 1991 from knowing the same variable's value in 1990. Since we are using a linear regression to model the relationship between the explanatory variable(s) and the response, this assumption can be rephrased in terms of each observation's residual. Specifically, knowing the residual for one observation shouldn't give us perfect information about the residual for another observation. Because we are assuming that the observations / residuals are independent, we can randomly draw an errors for each observation.
 
 ------------------------------------------------------------------------
 
 # Performing a Predicitive Check for a Linear Regression
 
-I will be walking through how to carry out the process of performing a
-predictive check for a simple linear regression model in the context of the
-`penguins` dataset from the **palmerpenguins** package.
+I will be walking through how to carry out the process of performing a predictive check for a simple linear regression model in the context of the `penguins` dataset from the **palmerpenguins** package.
 
-We will start by fitting a simple linear regression model, modeling a penguin's
-`body_mass_g` as a function of their `flipper_length_mm`.
+We will start by fitting a simple linear regression model, modeling a penguin's `body_mass_g` as a function of their `flipper_length_mm`.
 
 ```{r scatterplot}
 penguins |> 
@@ -187,9 +132,7 @@ penguin_lm <- penguins |>
 
 ## Obtaining Predictions
 
-The next step is to obtain the predictions (fitted values) from the regression
-model. There is a handy built-in function for extracting the predicted values
-from a `lm` object -- the `predict()` function.
+The next step is to obtain the predictions (fitted values) from the regression model. There is a handy built-in function for extracting the predicted values from a `lm` object -- the `predict()` function.
 
 ```{r}
 penguin_predict <- predict(penguin_lm)
@@ -221,8 +164,8 @@ Thus, it is useful for us to write a function that adds Normally distributed err
 ```{r}
 noise <- function(x, mean = 0, sd){
   x + rnorm(length(x), 
-            mean, 
-            sd)
+            mean = mean, 
+            sd = sd)
 }
 ```
 
@@ -250,95 +193,83 @@ The best way to assess if / where there are differences between the simulated da
 ```{r}
 #| layout-nrow: 1
 #| fig-align: "center"
+#| fig-cap: 
+#|   - "Simulated Body Mass (g)"
+#|   - "Observed Body Mass (g)"
 
 new_data |> 
   ggplot(aes(x = predict_mass)) +
   geom_histogram(binwidth = 350) +
-  labs(x = "Simulated Body Mass (g)") +
+  labs(x = " ") +
   xlim(2500, 6500)
 
 penguins |> 
   ggplot(aes(x = body_mass_g)) + 
   geom_histogram(binwidth = 350) + 
-  labs(x = "Observed Body Mass (g)") + 
+  labs(x = " ") + 
   xlim(2500, 6500)
 ```
 
 `r emo::ji("check")` **Check-in: Simulated Data Distribution**
 
-Are the simulated bill lengths similar or different from the observed bill
-lengths? Where do you see differences? Where do you see similarities? Would you
-conclude that both distributions could have come from the same data generating
-process?
+Are the simulated bill lengths similar or different from the observed bill lengths? Where do you see differences? Where do you see similarities? Would you conclude that both distributions could have come from the same data generating process?
 
 ## Adding in the Observed x's
 
-If we are interested in seeing if the observed relationships between 
-`flipper_length_mm` and `body_mass_g` are radically different from the simulated
-data, we need to add these variables into our simulated dataset.
+If we are interested in seeing if the observed relationships between `flipper_length_mm` and `body_mass_g` are radically different from the simulated data, we need to add these variables into our simulated dataset.
 
-Remember, by default `lm()` throws out any observations with missing values
-(`NA`) for any of the variables included in the regression. Thus, we will have
-fewer predictions than observations in our dataset. To make sure the predictions
-match up with their corresponding row, we need to filter the missing values out
-of the dataset before we bind the columns together.
+Remember, by default `lm()` throws out any observations with missing values (`NA`) for any of the variables included in the regression. Thus, we will have fewer predictions than observations in our dataset. To make sure the predictions match up with their corresponding row, we need to filter the missing values out of the dataset before we bind the columns together.
 
 ```{r}
 new_data <- penguins |> 
-  filter(!is.na(body_mass_g), 
-         !is.na(flipper_length_mm)
-         ) |> 
+  drop_na(body_mass_g, 
+          flipper_length_mm) |> 
   select(body_mass_g, flipper_length_mm) |> 
   bind_cols(new_data)
 
 ```
 
+::: {.callout-note}
+# `bind_cols()`
+
+Note that I'm using `bind_cols()` instead of a `left_join()` since the vector of predictions (stored in `new_data`) does not have a variable to join the dataset with. 
+:::
+
 ## Scatterplot of Relationships
 
-A scatterplot of the relationships modeled by the linear regression can give a
-more detailed idea for where the simulated data differ from the observed data.
-In the scatterplots below, we see that the data simulated from the regression
-more closely follows a linear relationship, but there are not dramatic 
-differences between the two scatterplots. 
+A scatterplot of the relationships modeled by the linear regression can give a more detailed idea for where the simulated data differ from the observed data. In the scatterplots below, we see that the data simulated from the regression more closely follows a linear relationship, but there are not dramatic differences between the two scatterplots.
 
 ```{r }
 #| layout-nrow: 1
 #| fig-align: "center"
+#| fig-cap: 
+#|   - "Simulated Body Masses"
+#|   - "Observed Body Masses"
 
 new_data |> 
   ggplot(aes(y = predict_mass,
              x = flipper_length_mm)) + 
   geom_point() + 
-   labs(title = "Simulated Body Mass based on Regression Model", 
-       x = "Flipper Length (mm)", 
-       y = "Body Mass (g)" )
-
+  labs(x = "Flipper Length (mm)", 
+       y = "", 
+       title = "Simulated Body Mass (g) based on Regression Model")
 
 penguins |> 
   ggplot(aes(y = body_mass_g,
              x = flipper_length_mm)) + 
   geom_point() + 
-  labs(title = "Observed Body Mass", 
-       x = "Flipper Length (mm)", 
-       y = "Body Mass (g)" )
+    labs(x = "Flipper Length (mm)", 
+       y = "", 
+       title = "Observed Body Mass (g) of Penguins in the Palmer Archipeligo")
 ```
 
------
+------------------------------------------------------------------------
 
 # Assessing Predictions
 
-We would expect that if the regression model is a good model for penguin body
-mass, then the simulated data should look similar to what was observed. We can
-compare the simulated data with the observed data using a scatterplot.
+We would expect that if the regression model is a good model for penguin body mass, then the simulated data should look similar to what was observed. We can compare the simulated data with the observed data using a scatterplot.
 
-If the simulated data were identical to the observed data, they would all fall
-on the $y = x$ line (in red). Values above the $y = x$ line correspond to
-simulated body masses larger than the observed body masses, and 
-values below the line correspond to simulated body masses smaller than the 
-observed body masses. Overall, it appears that there are about as many over
-estimates as underestimates. It appears there is a "moderate" relationship
-between the observed values and simulated values, as the points are fairly
-close to the line, but not extremely close. 
+If the simulated data were identical to the observed data, they would all fall on the $y = x$ line (in red). Values above the $y = x$ line correspond to simulated body masses larger than the observed body masses, and values below the line correspond to simulated body masses smaller than the observed body masses. Overall, it appears that there are about as many over estimates as underestimates. It appears there is a "moderate" relationship between the observed values and simulated values, as the points are fairly close to the line, but not extremely close.
 
 ```{r}
 new_data |> 
@@ -354,13 +285,9 @@ new_data |>
 
 ```
 
-We can use a statistic to summarize how "close" the simulated values and the
-observed values are. Any statistic that captures the residuals from this
-regression would do. I like $R^2,$ since it has an easy reference value for what
-I would expect if my model did a good job ($R^2 \approx 1$).
+We can use a statistic to summarize how "close" the simulated values and the observed values are. Any statistic that captures the residuals from this regression would do. I like $R^2,$ since it has an easy reference value for what I would expect if my model did a good job ($R^2 \approx 1$).
 
-I like the `glance()` function from the **broom** package, since it produces a
-nice table output of the summary measures from a linear regression.
+I like the `glance()` function from the **broom** package, since it produces a nice table output of the summary measures from a linear regression.
 
 ```{r glance-code}
 #| eval: false
@@ -379,7 +306,6 @@ new_data |>
 
 ```
 
-
 I can then use the column names of the table to `select()` the `r.squared` column.
 
 ```{r pull-r-squared}
@@ -393,16 +319,13 @@ new_data |>
 
 `r emo::ji("check")` **Check-in: Interpreting** $R^2$
 
-What does the $R^2$ value for the above regression mean? How would you interpret
-it?
+What does the $R^2$ value for the above regression mean? How would you interpret it?
 
 ------------------------------------------------------------------------
 
 # Iterating!
 
-We are interested in seeing how our model performs for more than one simulated
-dataset. Thus, we need to iterate through the process outlined above.
-Specifically, at each step we will need to:
+We are interested in seeing how our model performs for more than one simulated dataset. Thus, we need to iterate through the process outlined above. Specifically, at each step we will need to:
 
 1.  Simulate new data
 2.  Regress the new data on the observed data
@@ -410,27 +333,18 @@ Specifically, at each step we will need to:
 
 ## Lots of Simulated Observations
 
-Luckily, we have already written the `noise()` function that helps us simulate
-new observations that could have occurred under our model. Since we are not
-changing any input to `noise()`, we can choose between passing an "arbitrary"
-input to `map()` (e.g., `1:100`). This essentially rerun the same process
-multiple times. Since we want for every simulated dataset to be bound together
-as columns, we can use the `map__dfc()` function!
+Luckily, we have already written the `noise()` function that helps us simulate new observations that could have occurred under our model. Since we are not changing any input to `noise()`, we can choose between passing an "arbitrary" input to `map()` (e.g., `1:100`). This essentially rerun the same process multiple times. Since we want for every simulated dataset to be bound together as columns, we can use the `map__dfc()` function!
 
 ```{r}
 nsims <- 100
 
-sims <- map_dfc(1:nsims,
-                ~ tibble(sim = noise(penguin_predict, sd = penguin_sigma)
-                        )
+sims <- map_dfc(.x = 1:nsims,
+                .f = ~ tibble(sim = noise(penguin_predict, sd = penguin_sigma)
+                              )
                 ) 
 ```
 
-Since all of the columns have the same name, **dplyr** automatically adds 
-`...` and a number after each column. So, our column names look like `sim...1`, 
-`sim...2`, etc. It would be nice to replace the `...`s with a `_`, which our
-friend `str_replace_all()` can help us do! Remember, the `.` is a special
-character and needs to be escaped!
+Since all of the columns have the same name, **dplyr** automatically adds `...` and a number after each column. So, our column names look like `sim...1`, `sim...2`, etc. It would be nice to replace the `...`s with a `_`, which our friend `str_replace_all()` can help us do! Remember, the `.` is a special character and needs to be escaped!
 
 ```{r}
 colnames(sims) <- colnames(sims) |> 
@@ -442,33 +356,28 @@ Finally, we can add the observed into our simulated dataset, for ease of modelin
 
 ```{r}
 sims <- penguins |> 
-  filter(!is.na(body_mass_g), 
-         !is.na(flipper_length_mm)) |> 
+  drop_na(body_mass_g, 
+         flipper_length_mm) |> 
   select(body_mass_g) |> 
   bind_cols(sims)
 ```
 
 ## Lots of Regressions & $R^2$ Values
 
-Now, we want to regress each of these simulated `body_mass_g`s on the original,
-observed `body_mass_g`. Again, we will need to iterate through this process.
+Now, we want to regress each of these simulated `body_mass_g`s on the original, observed `body_mass_g`. Again, we will need to iterate through this process.
 
-Before, I fit a linear regression between `body_mass_g` and the simulated data.
-Now, I have 100 different datasets I need to regress on `body_mass_g`. I can use
-`map()` to define a function that will be applied to each column of `sims`. 
-This function regresses `body_mass_g` on each column (`.x`) from the `sims` 
-dataset.
+Before, I fit a linear regression between `body_mass_g` and the simulated data. Now, I have 100 different datasets I need to regress on `body_mass_g`. I can use `map()` to define a function that will be applied to each column of `sims`. This function regresses `body_mass_g` on each column (`.x`) from the `sims` dataset.
 
 ```{r}
 #| eval: false
 sims |> 
-  map(~lm(body_mass_g ~ .x, data = sims))
+  map(.f = ~lm(body_mass_g ~ .x, data = sims)
+      ) 
 ```
 
 `r emo::ji("check")` **Check-in: Mapping Linear Regression**
 
-What is the data structure of the values output after the 
-`map(~lm(body_mass_g ~ .x, data = sims))` step?
+What is the data structure of the values output after the `map(.f = ~lm(body_mass_g ~ .x, data = sims))` step?
 
 (a) list
 (b) vector
@@ -480,13 +389,13 @@ Next, I `map()` the `glance()` function onto each of these 100 regressions.
 ```{r}
 #| eval: false
 sims |> 
-  map(~lm(body_mass_g ~ .x, data = sims)) |> 
-  map(glance)
+  map(.f = ~lm(body_mass_g ~ .x, data = sims)) |> 
+  map(.f = ~glance(.x))
 ```
 
 `r emo::ji("check")` **Check-in: Mapping Linear Regression Summaries**
 
-What is the data structure of the values output after the `map(glance)` step?
+What is the data structure of the values output after the `map(.f = ~glance(.x))` step?
 
 (a) list
 (b) vector
@@ -498,15 +407,14 @@ Finally, I use `map_dbl()` to extract the `r.squared` from each of the model fit
 ```{r}
 #| eval: false
 sims |> 
-  map(~lm(body_mass_g ~ .x, data = sims)) |> 
-  map(glance) |> 
-  map_dbl(~.$r.squared)
+  map(.f = ~lm(body_mass_g ~ .x, data = sims)) |> 
+  map(.f = ~glance(.x)) |> 
+  map_dbl(.f = ~.x$r.squared)
 ```
 
 `r emo::ji("check")` **Check-in: Mapping Regression Summaries**
 
-What is the data structure of the values output after the 
-`map_dbl(~.$r.squared)` step?
+What is the data structure of the values output after the `map_dbl(.f = ~.x$r.squared)` step?
 
 (a) list
 (b) vector
@@ -522,8 +430,7 @@ sim_r_sq <- sims |>
   map_dbl(~.$r.squared)
 ```
 
-If I look at the first six $R^2$ values, I see that the first value corresponds to
-the the following regression: `lm(body_mass_g ~ body_mass_g)`
+If I look at the first six $R^2$ values, I see that the first value corresponds to the the following regression: `lm(body_mass_g ~ body_mass_g)`
 
 All of the values thereafter are the $R^2$ values from the simulated data.
 
@@ -531,9 +438,7 @@ All of the values thereafter are the $R^2$ values from the simulated data.
 head(sim_r_sq)
 ```
 
-I am interested in looking at the distribution of $R^2$ values from the 
-simulated data, so I'm going to remove this unwanted entry of the `sim_r_sq`
-vector.
+I am interested in looking at the distribution of $R^2$ values from the simulated data, so I'm going to remove this unwanted entry of the `sim_r_sq` vector.
 
 ```{r}
 sim_r_sq <- sim_r_sq[names(sim_r_sq) != "body_mass_g"]
@@ -541,10 +446,7 @@ sim_r_sq <- sim_r_sq[names(sim_r_sq) != "body_mass_g"]
 
 ## Plotting the Simulated $R^2$ Values versus the Observed $R^2$
 
-The final stage is to plot the statistics from the simulated data. The
-distribution of these $R^2$ values will tell if our assumed model does a good
-job of producing data similar to what was observed. If the model produces data
-similar to what was observed, we would expect $R^2$ values near 1.
+The final stage is to plot the statistics from the simulated data. The distribution of these $R^2$ values will tell if our assumed model does a good job of producing data similar to what was observed. If the model produces data similar to what was observed, we would expect $R^2$ values near 1.
 
 ```{r}
 tibble(sims = sim_r_sq) |> 
@@ -552,7 +454,4 @@ tibble(sims = sim_r_sq) |>
   geom_histogram(binwidth = 0.025)
 ```
 
-In this plot, we see that the simulated datasets have $R^2$ vales between 0.5
-and 0.65. This indicates the data simulated under this statistical model 
-**are moderately** similar to what was observed. On average, our simulated data
-account for about 50% of the variability in the observed penguin body mass.
+In this plot, we see that the simulated datasets have $R^2$ vales between 0.5 and 0.65. This indicates the data simulated under this statistical model **are moderately** similar to what was observed. On average, our simulated data account for about 50% of the variability in the observed penguin body mass.
