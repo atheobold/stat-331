@@ -2,6 +2,7 @@
 title: "Lab 8: The 12 Days of Christmas"
 format: 
   html: 
+    self-contained: true
     theme: minty
     fontsize: 1em
     mainfont: sans-serif
@@ -24,17 +25,19 @@ library(tidyverse)
 
 <center>![](christmas_tree.jpg)</center>
 
-# Singing the Song
+## Singing the Song
 
 Alright, so you've already created two helper functions, `pluralize_gift()` and `make_phrase()`, which you used at the end of the Practice Activity to create a column of song phrases / lines.
 
 Today, you will use these phrases to write a function which sings the lines of song for a given day. We will then use this function to iterate through the 12 days of Christmas to get our song!
 
-::: callout-note
+::: callout-caution
 Note, you will either need to copy over your functions from the Practice Activity into your new Quarto document or continue working in the Quarto file from the Practice Activity.
+
+Specifically, this stage requires that you generated a `Full.Phrase` column using `pmap_chr()`.
 :::
 
-## Step Three: Iteration.
+# Step Three: Iteration.
 
 Write a function called `sing_day()` that takes as input:
 
@@ -42,7 +45,7 @@ Write a function called `sing_day()` that takes as input:
 
 -   A number indicating which day to sing about (input as an integer)
 
--   The name of a column in the dataset that contains the phrases for each day (input as an tidy name)
+-   The name of a column in the dataset that contains the phrases for each day (input as an **tidy** name)
 
 For example,
 
@@ -54,17 +57,33 @@ should return
     two turtle doves and
     a partridge in a pear tree.
 
+::: columns
+::: {.column width="45%"}
 ::: callout-tip
-*Hint 1:* The `{{phrase_col}}` part, which I provided for you, lets you use column names as arguments to a function. Don't delete that line of code!
+**Extracting the phrases** The `{{phrase_col}}` part, which I provided for you, lets you use column names as arguments to a function. **Do not** delete that line of code!
 
-**Hint 2:** The `ordinal()` function from the **english** package could be helpful when coverting the `line` input (e.g., 1) to a word (e.g., "first").  
+**Getting the days**\
+The `ordinal()` function from the **english** package could be helpful when converting the `line` input (e.g., 1) to a word (e.g., "first").
+:::
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="45%"}
+::: callout-caution
+**Iteration inside the function** There **should not** be iteration *inside* your function. We will use iteration *outside* the function, to sing each day of the song.
+
+**Singing all the gifts** *Remember, each day, you get the gift for that day* and\* all the prior days. Also, remember that these gifts go in reverse order! (e.g., two turtle doves and a partridge in a pear tree).
+:::
+:::
 :::
 
 ```{r sing-day-function}
 # Produces the string for one day of the song.
-# Arguments -- dataset -- A data frame containing information about gifts
-# Arguments -- line -- The number of the line for the day you want to sing about
-# Arguments -- phrase_col -- The variable name for the column in the dataset that contains the song phrases
+# Arguments -- dataset: A data frame containing information about gifts
+# Arguments -- line: The number of the line for the day you want to sing about
+# Arguments -- phrase_col: The variable name for the column in the dataset that contains the song phrases
 # Return -- A string singing the line of the song with all gifts for the given day.
 
 sing_day <- function(dataset, line, phrase_col){
@@ -90,7 +109,7 @@ sing_day <- function(dataset, line, phrase_col){
 
 ```
 
-### A Small Test
+## A Small Test
 
 ```{r}
 xmas2 |>
@@ -98,61 +117,72 @@ sing_line(num = 2, phrase_col = Full.Phrase)
 
 ```
 
-------------------------------------------------------------------------
+# Step Four: Use Your Functions!
 
-## Step Four: Use Your Functions!
+Now that you've written your `sing_line()` function, it is time to use it to sing the entire 12 Days of Christmas song. To do this, you will need to iterate over each day of the 12 days, to obtain the lyrics for that day.
 
-Run the following code to test out your functions! The output should be the lyrics for the entire 12 Days of Christmas song.
+::: columns
+::: {.column width="45%"}
+::: callout-tip
+# What `map()` function to use?
 
-```{r}
-xmas2 <- xmas |>
-  mutate(
-    day.num = as.character(english::english(Day)), 
-    Full.Phrase = pmap_chr(.l = list(num_word = day.num, 
-                                     item = Gift.Item, 
-                                     verb = Verb, 
-                                     adjective = Adjective, 
-                                     location = Location), 
-                           .f = make_phrase)
-  )
+What type of output are you expecting? A vector of numbers? A vector of characters? A dataframe? A list?
 
-map_chr(1:12, ~sing_line(xmas2, .x, Full.Phrase)) |>
-  str_c(collapse = "\n") |>
-  cat()
-
-```
-
-::: callout-note
-Note that `.x` can be used exchangeably with `.`. We've used `.` for functions we've written inside the `across()` function(e.g., `across(.cols = everything(), .fns = ~sum(is.na(.))))`). I've chosen to use `.x` since it looks more like an object that is being input into the function!
+You might find the lecture slides from Tuesday helpful when completing this task! <!-- [lecture slides from Tuesday](../Synchronous/pa_review.html)  -->
+:::
 :::
 
+::: {.column width="5%"}
+:::
 
+::: {.column width="45%"}
+::: callout-caution
+# `for()`-loops
 
-------------------------------------------------------------------------
+You are not permitted to use a `for()`-loop to complete this task.
+:::
+:::
+:::
+
+## Submission 
+
+You Lab 8 submission **must** have individual sections (with headers) for each function you've written (e.g., Pluralize Gifts, Sing Phrases, Sing Song), with the code for each function visible to the reader. 
+
+As stated for previous Lab & Challenge submissions, your HTML file is required to have the following specifications in the YAML options (at the top of your document):
+
+-   be self-contained (`self-contained: true`)
+-   include your source code (`code-tools: true`)
+-   include all your code and output (`echo: true`)
+-   include **no** messages (`messages: false`) or warnings (`warnings: false`) from loading in packages or the data
+
+**If any of the options are not included, your Lab 8 or Challenge 8 assignment will receive an "Incomplete" and you will be required to submit a revision for the formatting of your submission.**
 
 ## Revisions
 
 **You will get an automatic revision for:**
 
--   Functions that do not work the way they are intended
+- Functions that do not work the way they are intended
 
--   "Hard-Coding" in functions.
+- "Hard-Coding" in functions.
 
--   Not using the `map()` code supplied to iterate your function.
+- Not using `pmap_chr()` to obtain your phrases 
 
--   Not singing the full song. Remember, each day, you get the gift for that day *and* all the prior days.
+- Not using a `map()` function to iterate your function
 
-------------------------------------------------------------------------
+# Challenge -- Styling Your Song
 
-## Challenge -- Styling Your Song
+It would be nice if your song output in a visually appealing way. Similar to Lab 2, for this Challenge, you will be provided with three options. You are required to do **at least two**, but are welcome to do more than two.
 
-It would be nice if your song output in a visually appealing way. Similar to Lab 2, for this Challenge, you will be provided with three options. You are required to do **at least two**, but are welcome to do more than one.
+::: {.callout-warning}
+# Build off your Lab 8 submission
+Your Challenge 8 submission can be identical to your Lab 8 submission, with the additional modifications you made to format the appearance of your lyrics. 
+:::
 
-### Option 1
+## Option 1 -- Removing Whitespace
 
-Remove any additional spaces between words, such that there should only be **one** whitespace character between words and **no** whitespace at the beginning or end of each phrase. 
+Remove any additional spaces between words, such that there should only be **one** whitespace character between words and **no** whitespace at the beginning or end of each phrase.
 
-### Option 2
+## Option 2 -- New Lines for Gifts
 
 Ensure each phase (e.g., "two turtle doves") of your song is printed on its own line. For example, your function should output the following for `sing_line(xmas, num = 2, phrase_col = Full.Phrase)`:
 
@@ -160,7 +190,7 @@ Ensure each phase (e.g., "two turtle doves") of your song is printed on its own 
     two turtle doves and 
     a partridge in a pear tree
 
-### Option 3
+## Option 3 -- Spaces Between Days
 
 Ensure there are blank spaces between the different lines of the song. For example, when iterating your function, your output should look like the following:
 
@@ -171,7 +201,7 @@ Ensure there are blank spaces between the different lines of the song. For examp
     On the first day of Christmas, my true love gave to me:
     a partridge in a pear tree
 
-### Option 4
+## Option 4 -- Getting Grammatical
 
 Ensure the lines of your song are grammatically correct. There are three components you should address in making your lines grammatically correct:
 
@@ -187,5 +217,7 @@ For example, your function should output the following for `sing_line(xmas, num 
     a partridge in a pear tree.
 
 ::: callout-note
+# Oxford Comma
+
 While I am a fan of the oxford comma, you do not have to use an oxford comma for the second to last phrase of your song.
 :::

@@ -10,11 +10,14 @@ format:
     number-depth: 2
     code-block-bg: "#76b5c5"
     highlight-style: monochrome
+    self-contained: true
 editor: visual
 execute: 
   echo: false
   warning: false
   message: false
+resources:
+  - BlackfootFish.csv
 ---
 
 The goal of this lab is learn more about exploring missing data and to teach you to write modular code.
@@ -28,7 +31,7 @@ library(ggtext)
 fish <- read.csv(here::here("7_functions", "Lab", "BlackfootFish.csv"))
 ```
 
-## The Data
+# The Data
 
 This lab's dataset concerns mark-recapture data on fish from the Blackfoot River, outside of Helena, Montana.
 
@@ -37,7 +40,8 @@ This lab's dataset concerns mark-recapture data on fish from the Blackfoot River
 Mark-recapture is a common method used by Ecologists to estimate an animal population's size, when it is impossible to conduct a census (count every animal). This method works by "tagging" animals with a tracking device, so scientists can track their movement and / or presence.
 
 <center>
-:::: {.columns}
+
+::: columns
 ::: {.column width="25%"}
 ![](images/grizzly.jpg)
 :::
@@ -49,34 +53,38 @@ Mark-recapture is a common method used by Ecologists to estimate an animal popul
 ::: {.column width="25%"}
 ![](images/fish.PNG)
 :::
-::::
+:::
+
 </center>
 
-You may download the `BlackfootFish.csv` dataset on Canvas.
+You may download the [`BlackfootFish.csv` dataset here](BlackfootFish.csv). 
 
-## Part One: Summaries and Plots (Midterm Review)
+# Part One: Summaries and Plots (Midterm Review)
 
-### Task 1 -- Summarizing Missing Data
+## Summarizing Missing Data
 
 The measurements of each fish captured were taken by a Biologist on a raft. This lack of "laboratory setting" opens the door to the possibility of measurement errors.
 
--   How many observations have missing values?
-
 -   What variable(s) have missing values present?
 
-<center>**Output both pieces of information in *one* table!**</center>
+-   How many observations within each variable have missing values?
 
-</br>
+::: {.callout-note}
+Output both pieces of information in *one* table!
+:::
 
-### Task 2 -- Visualizing Missing Data
+
+## Visualizing Missing Data
 
 Unfortunately, these missing values are not for only one `year`, `trip`, or `section` of river.
 
 Create a thoughtful visualization exploring the frequency of missing values across the different years, sections, and trips.
 
------
+::: {.callout-tip}
+This is a great opportunity to demonstrate what you've learned about visualizations thus far and to show off your creativity!
+:::
 
-## Part Two: Adjusting the Data (Function Writing)
+# Part Two: Adjusting the Data (Function Writing)
 
 If I wanted to rescale every quantitative variable in my dataset so that the variables have values between 0 and 1. I could use the following formula:
 
@@ -106,69 +114,87 @@ This process of duplicating an action multiple times makes it difficult to under
 
 Often you will find yourself in the position of needing to find a function that performs a specific task, but you do not know of a function or a library that would help you. You could spend time Googling for a solution, but in the amount of time it takes you to find something you could have already written your own function!
 
-### Task 1 -- Writing a Function
+## Writing a Function
 
 Let's transform the repeated process above into a `rescale_01()` function.
 
 -   The function should take a single vector as its input.
 -   The function should return the rescaled vector.
 
-*Think about the "efficiency" of your function. Are you calling the **same** function multiple times?*
+::: {.callout-tip}
+Think about the "efficiency" of your function. Are you calling the **same** function multiple times?
+:::
 
-### Task 2 -- Adding Stops
+## Adding Stops
 
 Now, let's incorporate some checks into your function! Modify your previous code to create the following checks:
 
 -   the function should stop if the input vector is not numeric
 -   the function should stop if the length of the vector is not greater than 1
 
-*No need to write code here, simply add these stops to your code from Task 1!*
+::: {.callout-caution}
+## No need to write code here, simply add these stops to your code from Task 1!
+:::
 
-### Task 3 - Performing a Simple Test
+## Performing a Simple Test
 
-First, test your function on the simple vector below. Verify that the maximum of your rescaled vector is 1 and the minimum is 0!
+First, test your function on the simple vector below. **Add code ** that verifies the maximum of your rescaled vector is 1 and the minimum is 0!
 
+::: {.callout-caution}
+## Yes, you need to add code here!
+:::
 ```{r, echo = TRUE}
-x <- c(1:25, NA)
+x <- c(1:85, NA)
 ```
 
-### Task 4 - Performing a More Difficult Test
+## Performing a More Difficult Test
 
 Next, let's test the function on the `length` column of the `BlackfootFish` dataset.
 
-Make plots of the original values of `length` and the rescaled values of `length`. Output your plots side-by-side, so the reader can confirm the only aspect that has changed is the scale.
+Make plots of the original values of `length` and the rescaled values of `length`. Output your plots **stacked vertically**, so the reader can confirm the only aspect that has changed is the scale.
 
-### Task 5 -- Incorportaing Variables
+::: {.callout-tip}
+By stacked vertically, I mean that the x-axis of the two plots should be stacked on top of each other!
+:::
 
-Suppose you would like for your `rescale()` function to perform operations on a variable within a dataset. Ideally, your function would take a dataframe and a variable name as inputs and return a dataframe where the variable has been rescaled.
+## Incorportaing Variables
 
-Create a `rescale_column()` that accepts two arguments, (1) a dataframe, and (2) the name(s) of the variable(s) to be rescaled. The body of the function should call the original `rescale_01()` function you wrote previously.
+Suppose you would like to make a more general `rescale_column()` function that perform operations on any variable within a dataset. Ideally, your function would take a dataframe and a variable name as inputs and return a dataframe where the variable has been rescaled.
 
-*Hint:* If you are struggling with this task, I would recommend reading the [Data frame functions](https://r4ds.hadley.nz/functions.html#data-frame-functions) section from the new R for Data Science book.
+Create a `rescale_column()` that accepts two arguments:
 
-### Task 6 -- Another Function Test
+1. a dataframe
+2. the name(s) of the variable(s) to be rescaled
+
+The body of the function should call the original `rescale_01()` function you wrote previously.
+
+::: {.callout-tip}
+If you are struggling with this task, I would recommend re-reading the [Data frame functions](https://r4ds.hadley.nz/functions.html#data-frame-functions) section from *R for Data Science*.
+:::
+
+## Another Function Test
 
 Alright, now let's put your `rescale_column()` function to work! Use your `rescale_column()` function to rescale **both** the `length` and `weight` columns.
 
-**I expect that you carry out this process by calling the `rescale()` function *one* time!** 
+::: {.callout-caution}
+I expect that you carry out this process by calling the `rescale()` function *one* time!
 
-*Note:* I advise against using functions like `mutate_at()`, which
-have been superseded. 
+I advise against using functions like `mutate_at()`, which have been superseded.
+:::
 
-------------------------------------------------------------------------
-
-## Challenge: Incorporating Multiple Inputs
+# Challenge: Incorporating Multiple Inputs
 
 A frequently used measurement for fish health is a "condition index." [(Wikepedia article)](https://en.wikipedia.org/wiki/Condition_index_in_fish) The following simple equation can be used to calculate the approximate condition index of a fish:
 
 $$\text{condition index} = \frac{weight}{length^3} \times 100$$
 
-### Part 1
+## Part 1
 
 There are specific units required for the calculation of a condition index. Length must be in millimeters, and weight must be in grams. Inspect the `length` and `weight` variables to decide if you believe these are the correct units associated with these measurements---this will likely require Googling what "typical" measurements of trout are.
 
 <center>
-:::: {.columns}
+
+::: columns
 ::: {.column width="25%"}
 ![](images/smallest_trout.jpg)
 :::
@@ -176,28 +202,45 @@ There are specific units required for the calculation of a condition index. Leng
 ::: {.column width="40%"}
 ![](images/largest_trout.png)
 :::
-::::
+:::
+
 </center>
 
-#### Replacing Impossible Measurements with `NA`s
+### Replacing Impossible Measurements with `NA`s
 
 Based on your research, write function(s) to handle the unlikely / impossible measurements included in the dataset. Your function(s) should accept three inputs (1) a vector of measurements, (2) the minimum value you believe is "reasonable," and (3) the maximum value you believe is "reasonable." If a value falls outside these bounds, you should replace it with an `NA`.
 
-*Hint:* If you are struggling with the structure of your function, I would suggest reading the [Mutating Function](https://r4ds.hadley.nz/functions.html#mutate-functions) section from the second edition of R for Data Science.
+::: {.callout-tip}
+If you are struggling with the structure of your function, I would suggest re-reading the [Mutating Function](https://r4ds.hadley.nz/functions.html#mutate-functions) section from *R for Data Science*.
+:::
 
 Use your function to modify the `length` and `weight` columns of the `BlackfootFish` dataset, removing values you believe are "unreasonable."
 
-### Part 2
+## Part 2
 
 Write a function which calculates the condition index of a fish, given inputs of weight and length.
 
-*Consider whether your function will accept vectors as inputs or if it will accept variable names as inputs!*
+::: {.callout-note}
+Consider whether your function will accept vectors as inputs or if it will accept variable names as inputs!
+:::
 
-### Part 3
+## Part 3
 
 Make a thoughtful visualization of how fish conditions have varied over the duration of this study.
 
-### Challenge Submission 
+::: {.callout-tip}
+This is a great opportunity to demonstrate what you've learned about visualizations thus far and to show off your creativity!
+:::
 
-Your Challenge submission should be ***separate*** from your Lab submission, meaning I should see only Parts 1-3 associated with the
-Challenge included in your submission. 
+## Challenge Submission
+
+Your challenge should be submitted as a **separate file**, **not** at the bottom of your Lab 7 file. Please submit your rendered HTML file. You can copy and paste this code into a **new** Quarto file. Your Challenge 7 submission should only included code necessary for completing the Challenge, nothing else.
+
+You will submit **only** your rendered HTML file. Your HTML file is required to have the following specifications in the YAML options (at the top of your document):
+
+-   be self-contained (`self-contained: true`)
+-   include your source code (`code-tools: true`)
+-   include all your code and output (`echo: true`)
+-   include **no** messages (`messages: false`) or warnings (`warnings: false`) from loading in packages or the data 
+
+**If any of the options are not included, your Lab 7 or Challenge 7 assignment will receive an "Incomplete" and you will be required to submit a revision for the formatting of your assignment.**

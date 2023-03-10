@@ -1,0 +1,508 @@
+---
+title: "Iteration, Functions & Strings"
+format: 
+  revealjs:
+    theme: night
+    self-contained: true
+editor: visual
+---
+
+```{r set-up}
+#| include: false
+library(glue)
+library(tidyverse)
+library(palmerpenguins)
+```
+
+##  {background-color="#B6CADA"}
+
+::: {style="font-size: 4em; color: #000000;"}
+Iteration
+:::
+
+</br>
+
+::: {style="font-size: 2em; color: #0F4C81;"}
+**Repeat the *same* operation multiple times**
+:::
+
+##  {background-color="#B6CADA"}
+
+::: {style="font-size: 2em; color: #000000;"}
+Why not just use loops?
+:::
+
+. . .
+
+</br>
+
+::: columns
+::: {.column width="45%"}
+::: {style="font-size: 1em; color: #0F4C81;"}
+R is a functional programming language!
+
+This makes it possible to wrap up loops into a function and call that function instead!
+:::
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="45%"}
+![](images/bart_for_loop.png)
+:::
+:::
+
+##  {background-color="#B6CADA"}
+
+::: {style="font-size: 2em; color: #000000;"}
+The `map()` family
+:::
+
+</br>
+
+<center>
+
+```{r}
+#| out-width: 40%
+
+knitr::include_graphics("images/map.png")
+```
+
+```{r map-internals}
+#| eval: false
+#| echo: true
+
+simple_map <- function(x, f, ...) {
+  out <- vector(mode = "list", length = length(x))
+  for (i in seq_along(x)) {
+    out[[i]] <- f(x[[i]], ...)
+  }
+  out
+}
+```
+
+</center>
+
+## 
+
+::: {style="font-size: 2em; color: #FFFFFF;"}
+Summary Statistics
+:::
+
+. . .
+
+::: columns
+::: {.column width="49%"}
+::: {style="font-size: 1.5em; color: #0F4C81;"}
+**Familiar**
+:::
+
+```{r summarize-across}
+#| echo: true
+#| eval: false
+
+penguins %>% 
+  summarize(
+    across(
+      .cols = where(is.numeric), 
+      .fns = ~mean(.x, na.rm = TRUE)
+      )
+    )
+```
+
+What type of output does this produce?
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+::: {style="font-size: 1.5em; color: #0F4C81;"}
+**New**
+:::
+
+```{r summary-map}
+#| eval: false
+#| echo: true
+penguins %>% 
+  select(where(is.numeric)) %>% 
+  map_dbl(.f = ~mean(.x, na.rm = TRUE)
+          )
+```
+
+What type of output does this produce?
+:::
+:::
+
+##  {background-color="#B6CADA"}
+
+::: {style="font-size: 2em; color: #000000;"}
+What is `map_dbl()` doing?
+:::
+
+. . .
+
+<center>![](images/map.png)</center>
+
+. . .
+
+<center>
+
+::: {style="font-size: 1em; color: #0F4C81;"}
+**What length of output can `f()` produce?**
+:::
+
+</center>
+
+## 
+
+::: {style="font-size: 2em; color: #FFFFFF;"}
+Data Wrangling
+:::
+
+::: columns
+::: {.column width="45%"}
+::: {style="font-size: 1.5em; color: #0F4C81;"}
+**Familiar**
+:::
+
+```{r mutate-across}
+#| eval: false
+#| echo: true
+penguins %>% 
+  mutate(
+    across(
+      .cols = where(is.numeric), 
+      .fns = ~scale(.x)
+    )
+  )
+```
+
+What type of output does this produce?
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="45%"}
+::: {style="font-size: 1.5em; color: #0F4C81;"}
+**New**
+:::
+
+```{r}
+#| eval: false
+#| echo: true
+penguins %>% 
+  map_if(is.numeric, scale)
+```
+
+What type of output does this produce?
+:::
+:::
+
+##  {background-color="#B6CADA"}
+
+::: {style="font-size: 3em; color: #000000;"}
+So why use `map()` and not just use `across()`?
+:::
+
+. . .
+
+</br>
+
+::: {style="font-size: 1.25em; color: #000000;"}
+Not all functions are vectorized!
+:::
+
+##  {background-color="#B6CADA"}
+
+::: {style="font-size: 2em; color: #000000;"}
+Today's Lab
+:::
+
+</br>
+
+. . .
+
+::: {style="font-size: 2em; color: #0F4C81;"}
+**Making a Song!**
+:::
+
+## 
+
+::: {style="font-size: 2em; color: #FFFFFF;"}
+A (Boring) Example
+:::
+
+::: columns
+::: {.column width="45%"}
+![](images/daft_punk.jpg)
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="45%"}
+::: {style="font-size: 2em; color: #0F4C81;"}
+[***Around the World***](https://www.youtube.com/watch?v=K0HSD_i2DvA)
+:::
+:::
+:::
+
+. . .
+
+</br>
+
+<center>
+
+Repeats "Around the World" for the duration of the song (144 times)
+
+## 
+
+::: {style="font-size: 2em; color: #FFFFFF;"}
+A Boring `map()`
+:::
+
+```{r map-bore}
+#| echo: true
+around_the_world <- function(n){
+  lyrics <- map_chr(.x = 1:n, 
+                    .f = ~ "Around the World") 
+  
+  return(
+    glue::glue("{lyrics}") 
+    )
+}
+```
+
+## 
+
+::: {style="font-size: 2em; color: #FFFFFF;"}
+Let's Break it Apart
+:::
+
+```{r map1}
+#| eval: false
+#| echo: true
+
+map_chr(.x = 1:n,
+        .f = ~ "Around the World") 
+```
+
+## 
+
+::: {style="font-size: 2em; color: #FFFFFF;"}
+A Handy Friend
+:::
+
+::: columns
+::: {.column width="50%"}
+::: {style="font-size: 0.75em; color: #FFFFFF;"}
+**glue** -- "interprets string literals that are small, fast, and dependency-free"
+
+-   glue does this by embedding `R` expressions in curly braces which are then evaluated and inserted into the argument string.
+:::
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="45%"}
+![](images/glue.jpg)
+
+```{r}
+#| echo: true
+
+name <- "Fred"
+glue('My name is {name}.')
+```
+:::
+:::
+
+##  {background-color="#B6CADA"}
+
+::: {style="font-size: 2em; color: #000000;"}
+Around the World
+:::
+
+::: columns
+::: {.column width="70%"}
+```{r glue}
+#| eval: false
+#| code-line-numbers: "|5"
+#| echo: true
+
+around_the_world <- function(n){
+  lyrics <- map_chr(.x = 1:n,
+                    .f = ~ "Around the World") 
+  
+  return(glue::glue("{lyrics}") )
+}
+```
+
+-   Long strings are broken by line and concatenated together.
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="25%"}
+```{r}
+#| echo: true
+
+around_the_world(4)
+```
+:::
+:::
+
+## 
+
+::: {style="font-size: 2em; color: #FFFFFF;"}
+A Better Example
+:::
+
+<center>
+
+::: {style="font-size: 2em; color: #0F4C81;"}
+**99 Bottles of Beer**
+:::
+
+</br>
+
+99 bottles of beer on the wall, 99 bottles of beer. Take one down, pass it around, 98 bottles of beer on the wall...
+
+</center>
+
+## 
+
+::: {style="font-size: 2em; color: #FFFFFF;"}
+Step One: Making Lyrics
+:::
+
+```{r}
+#| echo: true
+bottles_lyrics <- function(n){
+  lyrics <- glue::glue("{n} bottles of beer on the wall, {n} bottles of beer \nTake one down, pass it around, {n - 1} bottles of beer on the wall")
+  
+  return(lyrics)
+}
+
+bottles_lyrics(3)
+```
+
+## 
+
+::: {style="font-size: 2em; color: #FFFFFF;"}
+Step Two: Making a Song
+:::
+
+```{r map-exciting}
+#| echo: true
+bottles_song <- function(n){
+  song <- map_chr(.x = n:0, 
+                  .f = bottles_lyrics)
+  return(
+    glue::glue("{song}")
+  )
+}
+```
+
+::: callout-tip
+Notice how I called the `bottles_lyrics()` function inside the `bottles_song()` function -- that's exactly what a "helper" function is!
+:::
+
+## 
+
+::: {style="font-size: 2em; color: #FFFFFF;"}
+What we wanted?
+:::
+
+```{r}
+#| echo: true
+bottles_song(3)
+```
+
+## 
+
+::: {style="font-size: 2em; color: #FFFFFF;"}
+But what about the end?
+:::
+
+</br>
+
+<center>
+
+::: {style="font-size: 1.25em; color: #0F4C81;"}
+**No more bottles of beer on the wall, no more bottles of beer. Go to the store and buy some more, 99 bottles of beer on the wall...**
+:::
+
+## 
+
+::: {style="font-size: 2em; color: #FFFFFF;"}
+An Alternate Ending
+:::
+
+```{r}
+#| echo: true
+bottles_lyrics <- function(n){
+  
+  if(n == 0){
+    lyrics <- glue::glue("No more bottles of beer on the wall, no more bottles of beer. \nGo to the store and buy some more, 99 bottles of beer on the wall")
+  } else{
+  lyrics <- glue::glue("{n} bottles of beer on the wall, {n} bottles of beer \nTake one down, pass it around, {n -1} bottles of beer on the wall")
+  }
+  
+  return(lyrics)
+}
+```
+
+```{r function-refresh}
+#| echo: false
+bottles_song <- function(n){
+  song <- map_chr(n:0, bottles_lyrics)
+  return(
+    glue::glue("{song}")
+  )
+}
+```
+
+## 
+
+::: {style="font-size: 2em; color: #FFFFFF;"}
+A Song!
+:::
+
+```{r}
+#| echo: true
+bottles_song(4)
+```
+
+##  {background-color="#B6CADA"}
+
+::: columns
+::: {.column width="45%"}
+::: {style="font-size: 2em; color: #000000;"}
+Your task...
+:::
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="45%"}
+![](images/christmas_tree.jpg)
+:::
+:::
+
+*Practice Activity 8*
+
+-   **Step One**: write a `pluralize_gift()` function
+-   **Step Two**: write a `make_phrase()` function
+-   **Step Three**: use the `make_phrase()` to generate a set of song phrases
+
+*Lab 8* -- build on these steps to generate the song lyrics
+
+##  {background-color="#B6CADA"}
+
+![](images/bart_map.png)

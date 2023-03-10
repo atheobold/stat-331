@@ -1,0 +1,319 @@
+---
+title: "Linear Regression & Simulation"
+format: 
+  revealjs:
+    self-contained: true
+    theme: dark 
+editor: visual
+execute: 
+  echo: false
+  message: false
+  warning: false
+---
+
+```{r set-up}
+#| include: false
+library(openintro)
+library(broom)
+library(gridExtra)
+library(kableExtra)
+library(png)
+library(tidyverse)
+library(moderndive)
+```
+
+##  {background-color="#B6CADA"}
+
+::: {style="font-size: 4em; color: #000000;"}
+The next two weeks...
+:::
+
+::: columns
+::: {.column width="40%"}
+::: {style="font-size: 2em; color: #0F4C81;"}
+**Regression & Simulation**
+:::
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="55%"}
+::: {style="font-size: 2em; color: #0F4C81;"}
+**Predictive Modeling**
+:::
+:::
+:::
+
+## 
+
+::: {style="font-size: 3em; color: #FFFFFF;"}
+Linear Regression
+:::
+
+$$
+  response = intercept + slope \cdot explanatory + noise
+$$
+
+. . .
+
+::: columns
+::: {.column width="40%"}
+```{r general-scatterplot}
+#| fig-width: 5
+#| fig-height: 4
+#| fig-align: center
+
+ggplot(data = bdims, aes(y = wgt, x = hgt)) + 
+  geom_point() +
+  scale_x_continuous("Explanatory Variable", labels = NULL) + 
+  scale_y_continuous("Response Variable", labels = NULL) + 
+  theme(axis.title.x = element_text(size = 18), 
+        axis.title.y = element_text(size = 18)
+        )
+```
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="55%"}
+</br> </br>
+
+$\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 \cdot x$
+
+$\epsilon_i \sim N(0, \sigma^2)$
+:::
+:::
+
+## 
+
+::: {style="font-size: 3em; color: #FFFFFF;"}
+Fitting a Linear Regression
+:::
+
+```{r slr-example}
+#| echo: true
+#| code-line-numbers: false
+
+lm(score ~ age, data = evals)
+```
+
+## 
+
+::: {style="font-size: 3em; color: #FFFFFF;"}
+Using the `|>`
+:::
+
+```{r wrong-dot}
+#| eval: false
+#| echo: true
+#| code-line-numbers: false
+evals |>
+  lm(score ~ age, data = .x)
+```
+
+. . .
+
+</br>
+
+    Error in is.data.frame(data): object '.x' not found
+
+. . .
+
+</br> </br>
+
+<center>
+
+::: {style="font-size: 2em; color: #B6CADA;"}
+**What happened???**
+:::
+
+##  {background-color="#B6CADA"}
+
+::: {style="font-size: 3em; color: #000000;"}
+Placeholder
+:::
+
+Piping is an infix operator (e.g., `2 + 2`) that pipes the LHS of the pipe into the **first** argument of the function on RHS of the pipe
+
+::: columns
+::: {.column width="48%"}
+```{r dot-notation}
+#| echo: true
+#| eval: false
+#| code-line-numbers: false
+
+evals %>%
+  lm(score ~ age,
+     data = .)
+```
+
+::: {style="font-size: 0.75em; color: #000000;"}
+With `%>%`, if the LHS **should not** be used in the **first** argument, a `.` can be used to reference where the LHS should go.
+:::
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+```{r dash-notation}
+#| echo: true
+#| eval: false
+#| code-line-numbers: false
+
+evals |>
+  lm(score ~ age, 
+     data = _)
+```
+
+::: {style="font-size: 0.75em; color: #000000;"}
+`|>` **does not** have a placeholder. However, as of R 4.2, `|>` can use `_` as a placeholder but only with **named** arguments.
+:::
+:::
+:::
+
+[Interesting blog about differences by Isabella Velásquez](https://towardsdatascience.com/understanding-the-native-r-pipe-98dea6d8b61b)
+
+## 
+
+::: {style="font-size: 3em; color: #FFFFFF;"}
+Accessing Residuals & Fitted Values
+:::
+
+```{r}
+evals_lm <- evals |> 
+  lm(score ~ age, data = _)
+```
+
+::: columns
+::: {.column width="35%"}
+::: {style="font-size: 0.85em; color: #FFFFFF;"}
+***Objects in `evals_lm`***
+
+`$fitted.values` `$residuals`
+:::
+:::
+
+::: {.column width="35%"}
+::: {style="font-size: 0.85em; color: #FFFFFF;"}
+***Functions to extract elements from `evals_lm`***
+
+-   `resid()`
+-   `fitted()`
+:::
+:::
+
+::: {.column width="25%"}
+::: {style="font-size: 0.85em; color: #FFFFFF;"}
+***Function to make a tibble of elements from `evals_lm`***
+
+`broom::augment()`
+:::
+:::
+:::
+
+## 
+
+::: {style="font-size: 3em; color: #FFFFFF;"}
+An Example
+:::
+
+::: columns
+::: {.column width="45%"}
+```{r residuals}
+#| echo: true
+#| code-line-numbers: false
+evals_lm$residuals |> 
+  head(4)
+```
+
+</br>
+
+```{r resid}
+#| echo: true
+#| code-line-numbers: false
+resid(evals_lm) |> 
+  head(4)
+```
+:::
+
+::: {.column width="3%"}
+:::
+
+::: {.column width="50%"}
+```{r broom}
+#| echo: true
+#| code-line-numbers: false
+broom::augment(evals_lm)
+```
+:::
+:::
+
+## 
+
+::: {style="font-size: 3em; color: #FFFFFF;"}
+Plotting Residuals
+:::
+
+```{r residuals-plot}
+#| echo: true
+#| code-line-numbers: false
+#| fig-align: center
+
+evals_lm |> 
+  broom::augment() |> 
+  ggplot(mapping = aes(y = .resid, x = .fitted)) +
+  geom_point()
+```
+
+##  {background-color="#B6CADA"}
+
+::: {style="font-size: 5em; #0F4C81;"}
+Simulating Data
+:::
+
+## 
+
+::: {style="font-size: 3em; color: #FFFFFF;"}
+Functions in R
+:::
+
+::: {style="font-size: 0.85em; color: #FFFFFF;"}
+-   `r` stands for for **random sampling**: generate a random value from a specific distribution
+:::
+
+. . .
+
+::: {style="font-size: 0.85em; color: #FFFFFF;"}
+-   `p` for **probability** (CDF): i.e. compute the probability of observing a value **less than** `x` (cumulative)
+:::
+
+. . .
+
+::: {style="font-size: 0.85em; color: #FFFFFF;"}
+-   `q` stands for **quantile**: given a probability `p`, compute the x-value such that $P(X < x) = p$
+:::
+
+. . .
+
+::: {style="font-size: 0.85em; color: #FFFFFF;"}
+-   `d` stands for **density** (PDF): compute the height of distribution curve (absolute)
+:::
+
+## 
+
+::: {style="font-size: 3em; color: #FFFFFF;"}
+Distributions in R
+:::
+
+-   Uniform -- `unif`
+
+-   Normal -- `norm`
+
+-   t -- `t`
+
+-   Chi-Squared -- `chisq`
+
+-   Binomial -- `binom`

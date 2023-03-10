@@ -1,0 +1,212 @@
+---
+title: "A Plan for the Rest of the Quarter!"
+format: 
+  revealjs:
+    self-contained: true
+    auto-stretch: false
+    theme: dark
+editor: visual
+---
+
+```{r set-up}
+#| include: false
+
+library(tidyverse)
+library(palmerpenguins)
+
+fish <- read_csv(here::here("7_functions", "Lab", "BlackfootFish.csv"))
+```
+
+::: {style="font-size: 3em; color: #FFFFFF;"}
+How the next two weeks look...
+:::
+
+##
+
+::: {style="font-size: 2em; color: #FFFFFF;"}
+Learning Targets
+:::
+
+**Weeks 9 & 10**
+
+- *DSM-1*: I can simulate data from a variety of probability models.
+
+- *DSM-2*: I can fit a linear regression and extract necessary summary measures.
+
+- *DVS-6*: I can create tables which make my summaries clear to the reader.
+
+- *DVS-7*: I show creativity in my tables.
+
+## 
+
+::: {style="font-size: 2em; color: #FFFFFF;"}
+Revisions
+:::
+
+The final round of revisions will be accepted on [**Sunday, March 12**]{.underline}. 
+
+You can revise any Lab Assignment or Challenge one additional time before
+including it in the portfolio.
+
+- You **do not** need to submit the revised Lab / Challenge to Canvas
+- You **do** need to indicate what you are presenting is an
+additional revision done for the portfolio
+- You **will not** receive feedback on revisions done for the portfolio
+
+##  {background-color="#B6CADA"}
+
+::: {style="font-size: 4em; color: #000000;"}
+Lab 7 Recap
+:::
+
+. . .
+
+::: {style="font-size: 2em; color: #0F4C81;"}
+How to get side-by-side plots?
+:::
+
+
+##
+
+::: {style="font-size: 2em; color: #FFFFFF;"}
+Getting Creative...
+:::
+
+```{r fish-plot}
+#| echo: true
+#| output-location: slide
+
+library(forcats)
+library(ggtext)
+
+fish %>% 
+  filter(is.na(weight)) %>% 
+  group_by(year, section, trip) %>% 
+  count() %>% 
+  mutate(trip = as.factor(trip), 
+         year = as.factor(year)) %>% 
+  ggplot(mapping = aes(y = year, x = n, fill = trip)) + 
+  geom_col() + 
+  facet_wrap(~section) + 
+  labs(y = "", 
+       x = "") +
+  scale_fill_brewer(palette = "Paired") +
+  labs(title = str_c("Missing Fish Weights for ",
+      "<span style = 'color:#A6CEE3'>**Trip 1**</span>",
+      " and <span style = 'color:#1F87B4'>**Trip 2**</span>"),
+      subtitle = "by Section of Blackfoot River"
+    ) + 
+  theme(plot.title = element_markdown(size = 24),
+        plot.subtitle = element_markdown(size = 18),
+        legend.position = "none", 
+        axis.text.y = element_text(size = 12), 
+        axis.title = element_text(size = 16)
+        )
+
+```
+
+##
+
+::: {style="font-size: 2em; color: #FFFFFF;"}
+Making your plots clearer
+:::
+
+::: {style="font-size: 2em; color: #0F4C81;"}
+**Some Options**
+:::
+
+- making sure people don't tilt their head
+- adding clarity to where the measurements are / are not
+- changing the font and / or font size
+
+##
+
+::: {style="font-size: 2em; color: #FFFFFF;"}
+Demonstrating creativity 
+:::
+
+::: {style="font-size: 2em; color: #0F4C81;"}
+**Some Options**
+:::
+
+
+- using non-default colors
+- removing your legend using annotations
+- **adding your legend to your title**
+
+```{r}
+#| eval: false
+#| echo: true
+
+labs(title = str_c("Missing Fish Weights for ",
+      "<span style = 'color:#A6CEE3'>**Trip 1**</span>",
+      " and <span style = 'color:#1F87B4'>**Trip 2**</span>"),
+      subtitle = "by Section of Blackfoot River"
+    )
+```
+
+##
+
+::: {style="font-size: 2em; color: #FFFFFF;"}
+How did I figure out the colors???
+:::
+
+. . .
+
+
+```{r}
+#| eval: false
+#| echo: true
+
+library(RColorBrewer)
+brewer.pal(n = 2, name = "Paired")
+```
+
+```
+[1] "#A6CEE3" "#1F78B4"
+```
+
+##  {background-color="#B6CADA"}
+
+::: {style="font-size: 3em; color: #000000;"}
+Back to the 12 Days of Christmas...
+:::
+
+##
+
+::: {style="font-size: 3em; color: #FFFFFF;"}
+What is `pmap()` doing?
+:::
+
+. . .
+
+```{r}
+#| out-width: 60%
+#| fig-align: center
+
+knitr::include_graphics("images/pmap.png")
+```
+
+##  {background-color="#B6CADA"}
+
+::: {style="font-size: 4em; color: #000000;"}
+Where are we going today?
+:::
+
+##
+
+::: {style="font-size: 2em; color: #FFFFFF;"}
+**Step 1** -- Write a `sing_day()` function
+:::
+
+. . .
+
+::: {style="font-size: 2em; color: #FFFFFF;"}
+**Step 2** -- Iterate your `sing_day()` function over a set of days
+:::
+
+. . .
+
+::: {style="font-size: 2em; color: #FFFFFF;"}
+**Step 3** -- Style you output!
+:::
